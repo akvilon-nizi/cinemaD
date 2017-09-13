@@ -1,0 +1,3 @@
+project "cinema.xcodeproj"
+scheme "cinema"
+clean true

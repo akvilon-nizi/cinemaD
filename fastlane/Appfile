@@ -1,0 +1,8 @@
+for_lane :internal do
+	apple_id "anton.maximov@gmail.com"
+	app_identifier "ru.handh.ios.foodle"
+	team_name "Heads and Hands LLC"
+	team_id "X86NQK83T7"
+	itc_team_name "Heads and Hands LLC"
+	itc_team_id "10031890"
+end

@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  foodle
+
+  Created by Александр Масленников on 31.07.17.
+  Copyright © 2017 Heads and Hands. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "Foodle";
+"NSLocationWhenInUseUsageDescription" = "Ищите ближайшие рестораны на карте";
