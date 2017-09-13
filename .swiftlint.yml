@@ -1,0 +1,59 @@
+# swiftlint 0.22.0
+
+excluded:
+  - Carthage
+  - cinema/Classes/Business/Constants/Images.swift
+  - cinema/Classes/Business/Constants/Strings.swift
+
+opt_in_rules:
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - conditional_returns_on_newline
+  - empty_count
+#  - explicit_enum_raw_value
+  - explicit_init
+#  - explicit_top_level_acl
+#  - explicit_type_interface
+#  - extension_access_modifier
+  - fatal_error_message
+#  - file_header
+  - first_where
+  - force_unwrapping
+  - implicit_return
+#  - implicitly_unwrapped_optional
+  - joined_default_parameter
+  - let_var_whitespace
+  - multiline_parameters
+  - nimble_operator
+#  - no_extension_access_modifier
+#  - no_grouping_extension
+  - number_separator
+#  - object_literal
+  - operator_usage_whitespace
+  - overridden_super_call
+  - pattern_matching_keywords
+  - private_outlet
+  - prohibited_super_call
+  - quick_discouraged_call
+  - redundant_nil_coalescing
+  - single_test_class
+#  - sorted_imports
+#  - strict_fileprivate
+  - switch_case_on_newline
+#  - trailing_closure
+  - unneeded_parentheses_in_closure_argument
+  - vertical_parameter_alignment_on_call
+
+line_length: 150
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 24
+    error: 32
+  excluded:
+    - initialViewControllersTypes
+cyclomatic_complexity:
+  error: 30

@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  foodle
+
+  Created by Александр Масленников on 20.07.17.
+  Copyright © 2017 Heads and Hands. All rights reserved.
+*/
+
+// Modules
+
+// Alert
+
+"alert-title-network-error" = "Сетевая ошибка";
+"alert-title-system-error" = "Системная ошибка";
+"alert-button-ok" = "ОК";
+"alert-button-cancel" = "Отменить";
+
+"restaurant-rating-title" = "Рейтинг ресторана";
+"restaurant-price-title" = "Минимальная сумма заказа";
+"restaurant-table-title-able" = "Есть столик";
+"restaurant-table-title-check" = "Проверить столик";
+"restaurant-table-title-pickup" = "Только самовывоз";
+"restaurant-menu-title" = "Меню ресторана";
+"restaurant-favorite-meals-title" = "Любимые блюда";
+"restaurant-favorite-button-title" = "Добавить";
+
+"cart-empty-title" = "Корзина пуста";
+"cart-empty-message" = "Какой-то текст";
+"cart-button-title" = "К РЕСТОРАНАМ";
+"cart-confirm-button-title" = "ОФОРМИТЬ";
+
+"auth-confirm-number" = "Подтвердите номер";
+"auth-change-number" = "Изменить номер";
+"auth-code-send" = "На номер %@ отправлен код";
+"auth-resend-sms" = "Повторить SMS";
+"auth-wait-title" = "Через %@ %@";

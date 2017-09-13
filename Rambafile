@@ -1,0 +1,26 @@
+### Headers settings
+company: Heads and Hands
+
+### Xcode project settings
+project_name: cinema
+xcodeproj_path: cinema.xcodeproj
+
+### Code generation settings section
+# The main project target name
+project_target: cinema
+
+# The file path for new modules
+project_file_path: cinema/Classes/Modules
+
+# The Xcode group path to new modules
+project_group_path: cinema/Classes/Modules
+
+### Dependencies settings section
+cartfile_path: Cartfile
+
+catalogs:
+- 'https://github.com/almas-dev/APMGenerambaCatalog'
+
+### Templates
+templates:
+- {name: apm_viper}

@@ -1,0 +1,66 @@
+fastlane_version "2.0"
+
+default_platform :ios
+
+platform :ios do
+    before_all do
+        ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "120"
+
+        vendors
+    end
+
+    desc "Download binary dependencies"
+    lane :vendors do
+        sh("../scripts/download-binary-dependencies.sh")
+    end
+
+    desc "Perform danger for PR"
+    lane :test do
+        bootstrap_carthage
+        scan(
+            clean: true,
+            skip_slack: true,
+            formatter: "xcpretty-json-formatter",
+            configuration: "Internal",
+            fail_build: false,
+        )
+        danger
+    end
+
+    desc "Submit a new internal build to HockeyApp"
+    lane :internal do
+        build_number = ENV["BUILD_NUMBER"]
+        increment_build_number(
+            build_number: build_number
+        )
+        bootstrap_carthage
+        badge
+        sigh
+        ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
+        gym(
+            configuration: "Internal",
+            export_method: "app-store"
+        )
+        pilot(
+            skip_submission: true,
+            distribute_external: false,
+            beta_app_description: "Build for an internal testing purpose.\nBugsee integration is enabled",
+        )
+        download_dsyms(
+            build_number: build_number
+        )
+        upload_symbols_to_bugsee(
+            app_token: "bd2abcca-3ae5-4954-9273-e7b64ec26b35",
+            build: build_number,
+            version: "1.0"
+        )
+    end
+
+    private_lane :bootstrap_carthage do
+        sh "cd ..; carthage-cache build"
+    end
+
+    error do |lane, exception|
+        clean_build_artifacts
+    end
+end
