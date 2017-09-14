@@ -9,24 +9,16 @@
 import UIKit
 
 struct SlideStruct {
-    let image: UIImage
     let title: String
     let descriprion: String
 
     init(image: UIImage, title: String, descriprion: String) {
-        self.image = image
         self.title = title
         self.descriprion = descriprion
     }
 }
 
 class SlideView: UIView {
-
-    private let mainImage: UIImageView = {
-        let mainImage = UIImageView()
-        mainImage.contentMode = .scaleToFill
-        return mainImage
-    } ()
 
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -46,7 +38,6 @@ class SlideView: UIView {
 
     var slideInfo: SlideStruct? {
         didSet {
-            mainImage.image = slideInfo?.image
             titleLabel.text = slideInfo?.title
             descriptionLabel.text = slideInfo?.descriprion
         }
@@ -55,22 +46,18 @@ class SlideView: UIView {
     override init(frame: CGRect) {
 
         super.init(frame: frame)
-        addSubview(mainImage.prepareForAutoLayout())
-
-        mainImage.centerXAnchor ~= centerXAnchor
-        mainImage.topAnchor ~= topAnchor + 25
 
         addSubview(titleLabel.prepareForAutoLayout())
 
         titleLabel.leadingAnchor ~= leadingAnchor + 40
         titleLabel.trailingAnchor ~= trailingAnchor - 40
-        titleLabel.topAnchor ~= mainImage.bottomAnchor + 25
+        titleLabel.topAnchor ~= topAnchor + 111
 
         addSubview(descriptionLabel.prepareForAutoLayout())
 
         descriptionLabel.leadingAnchor ~= leadingAnchor + 40
         descriptionLabel.trailingAnchor ~= trailingAnchor - 40
-        descriptionLabel.topAnchor ~= titleLabel.bottomAnchor + 13
+        descriptionLabel.topAnchor ~= titleLabel.bottomAnchor + 24
 
     }
 

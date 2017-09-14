@@ -166,6 +166,8 @@ enum L10n {
   static let slideFirstDescription = L10n.tr("Localizable", "slide-first-description")
   /// Наличие столиков
   static let slideFirstTitle = L10n.tr("Localizable", "slide-first-title")
+  /// Поехали !
+  static let slideMainButton = L10n.tr("Localizable", "slide-main-button")
   /// Делайте заказ до того,\nкак прибыли в ресторан,\nэкономьте свое время.
   static let slideSecondDescription = L10n.tr("Localizable", "slide-second-description")
   /// Закажите заранее
@@ -174,6 +176,26 @@ enum L10n {
   static let slideThirdDescription = L10n.tr("Localizable", "slide-third-description")
   /// Оплата без рисков
   static let slideThirdTitle = L10n.tr("Localizable", "slide-third-title")
+  /// Купить билеты
+  static let slide1ButtonText = L10n.tr("Localizable", "slide1-button-text")
+  /// Покупай электронные билеты в кино\nпрямо из приложения
+  static let slide1DescriptionText = L10n.tr("Localizable", "slide1-description-text")
+  /// Покупай билеты
+  static let slide1TitleText = L10n.tr("Localizable", "slide1-title-text")
+  /// Пригласить на фильм
+  static let slide2ButtonText = L10n.tr("Localizable", "slide2-button-text")
+  /// Приглашайте друзей на фильм\nи делитесь впечатлениями
+  static let slide2DescriptionText = L10n.tr("Localizable", "slide2-description-text")
+  /// Создавайте встречи
+  static let slide2TitleText = L10n.tr("Localizable", "slide2-title-text")
+  /// Получайте награды за просмотры\nваших любимых фильмов
+  static let slide3DescriptionText = L10n.tr("Localizable", "slide3-description-text")
+  /// Легенда
+  static let slide3LabelDescriptionText = L10n.tr("Localizable", "slide3-label-description-text")
+  /// Вселенная Marvel
+  static let slide3LabelTitleText = L10n.tr("Localizable", "slide3-label-title-text")
+  /// Получайте награды
+  static let slide3TitleText = L10n.tr("Localizable", "slide3-title-text")
   /// Пропустить
   static let slidesNextButtonTitle = L10n.tr("Localizable", "slides-next-button-title")
   /// ПРИНИМАЮ

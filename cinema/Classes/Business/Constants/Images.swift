@@ -61,6 +61,18 @@ enum Asset {
     static let cartMinus = ImageAsset(name: "cart-minus")
     static let cartPlus = ImageAsset(name: "cart-plus")
   }
+  enum Cinema {
+    enum Slides {
+      static let slide1Image = ImageAsset(name: "slide1-image")
+      static let slide2Image = ImageAsset(name: "slide2-image")
+      static let slide2Play = ImageAsset(name: "slide2-play")
+      static let slide3Image1 = ImageAsset(name: "slide3-image1")
+      static let slide3Image2 = ImageAsset(name: "slide3-image2")
+      static let slide3Image3 = ImageAsset(name: "slide3-image3")
+      static let slide3Image4 = ImageAsset(name: "slide3-image4")
+      static let slide3Image5 = ImageAsset(name: "slide3-image5")
+    }
+  }
   static let fakeRestaurantPhoto = ImageAsset(name: "fake-restaurant-photo")
   enum Indicator {
     static let indicationIconError = ImageAsset(name: "indication-icon-error")
@@ -80,11 +92,36 @@ enum Asset {
     static let navBarMenu = ImageAsset(name: "nav-bar-menu")
   }
   enum Profile {
+    enum Profile {
+      static let profileArrow = ImageAsset(name: "profile-arrow")
+      static let profileCamera = ImageAsset(name: "profile-camera")
+      static let profileEdit = ImageAsset(name: "profile-edit")
+      static let profileHeader = ImageAsset(name: "profile-header")
+      static let profilePlus = ImageAsset(name: "profile-plus")
+    }
     static let profileArrow = ImageAsset(name: "profile-arrow")
     static let profileCamera = ImageAsset(name: "profile-camera")
     static let profileEdit = ImageAsset(name: "profile-edit")
     static let profileHeader = ImageAsset(name: "profile-header")
     static let profilePlus = ImageAsset(name: "profile-plus")
+    enum RatingStar {
+      static let ratingStarSmall = ImageAsset(name: "rating-star-small")
+    }
+    enum Region {
+      static let regionCheckImage = ImageAsset(name: "region-check-image")
+      static let regionMainImage = ImageAsset(name: "region-main-image")
+    }
+    enum Restaurant {
+      static let restaurantInfoRatingStar = ImageAsset(name: "restaurant-info-rating-star")
+      static let restaurantMenuArrow = ImageAsset(name: "restaurant-menu-arrow")
+      static let restaurantMenuCart = ImageAsset(name: "restaurant-menu-cart")
+      static let restaurantSpinner = ImageAsset(name: "restaurant-spinner")
+    }
+    enum Slide {
+      static let slideImageFirst = ImageAsset(name: "slide-image-first")
+      static let slideImageSecond = ImageAsset(name: "slide-image-second")
+      static let slideImageThird = ImageAsset(name: "slide-image-third")
+    }
   }
   enum RatingStar {
     static let ratingStarSmall = ImageAsset(name: "rating-star-small")
@@ -119,6 +156,14 @@ enum Asset {
     Cart.cartEmptyPlaceholder,
     Cart.cartMinus,
     Cart.cartPlus,
+    Cinema.Slides.slide1Image,
+    Cinema.Slides.slide2Image,
+    Cinema.Slides.slide2Play,
+    Cinema.Slides.slide3Image1,
+    Cinema.Slides.slide3Image2,
+    Cinema.Slides.slide3Image3,
+    Cinema.Slides.slide3Image4,
+    Cinema.Slides.slide3Image5,
     fakeRestaurantPhoto,
     Indicator.indicationIconError,
     Indicator.indicationIconLoading,
@@ -131,11 +176,26 @@ enum Asset {
     NavBar.navBarLogo,
     NavBar.navBarMap,
     NavBar.navBarMenu,
+    Profile.Profile.profileArrow,
+    Profile.Profile.profileCamera,
+    Profile.Profile.profileEdit,
+    Profile.Profile.profileHeader,
+    Profile.Profile.profilePlus,
     Profile.profileArrow,
     Profile.profileCamera,
     Profile.profileEdit,
     Profile.profileHeader,
     Profile.profilePlus,
+    Profile.RatingStar.ratingStarSmall,
+    Profile.Region.regionCheckImage,
+    Profile.Region.regionMainImage,
+    Profile.Restaurant.restaurantInfoRatingStar,
+    Profile.Restaurant.restaurantMenuArrow,
+    Profile.Restaurant.restaurantMenuCart,
+    Profile.Restaurant.restaurantSpinner,
+    Profile.Slide.slideImageFirst,
+    Profile.Slide.slideImageSecond,
+    Profile.Slide.slideImageThird,
     RatingStar.ratingStarSmall,
     Region.regionCheckImage,
     Region.regionMainImage,
