@@ -28,4 +28,32 @@ extension UIFont {
         }
         return font
     }
+
+    class func cnmFuturaMedium(size: CGFloat) -> UIFont {
+        guard let font = UIFont(name: "Futura-Medium", size: size) else {
+            fatalError("Futura-Medium font not found")
+        }
+        return font
+    }
+
+    class func cnmFuturaBold(size: CGFloat) -> UIFont {
+        guard let font = UIFont(name: "Futura-Bold", size: size) else {
+            fatalError("Futura-Bold font not found")
+        }
+        return font
+    }
+
+    class func cnmFutura(size: CGFloat) -> UIFont {
+        guard let font = UIFont(name: "Futura", size: size) else {
+            fatalError("Futura font not found")
+        }
+        return font
+    }
+
+    class func cnmFuturaLight(size: CGFloat) -> UIFont {
+        guard let font = UIFont(name: "Futura-Condensed-Medium", size: size) else {
+            fatalError("Futura-Light font not found")
+        }
+        return font
+    }
 }

@@ -15,6 +15,8 @@
 		0410D88B1F600695001F14A7 /* DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0410D88A1F600695001F14A7 /* DateTransform.swift */; };
 		0410D88D1F600B7A001F14A7 /* OrdersTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0410D88C1F600B7A001F14A7 /* OrdersTransforms.swift */; };
 		04221CD29E00A8230427A210 /* ProfileRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA63FCFF1B1C34E6530989 /* ProfileRouterInput.swift */; };
+		043A733C1F80CD4700E1DF43 /* Slide1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A733B1F80CD4700E1DF43 /* Slide1View.swift */; };
+		043A733E1F80CD7500E1DF43 /* Slide2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A733D1F80CD7500E1DF43 /* Slide2View.swift */; };
 		0447949F1F60229B004A3F8C /* OrdersDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447949E1F60229B004A3F8C /* OrdersDataCollector.swift */; };
 		044794A11F602300004A3F8C /* OrdersDisplayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044794A01F602300004A3F8C /* OrdersDisplayItem.swift */; };
 		044794A31F602382004A3F8C /* OrdersItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044794A21F602382004A3F8C /* OrdersItem.swift */; };
@@ -23,6 +25,8 @@
 		0464ACE61F57E5C400D8D49A /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE51F57E5C400D8D49A /* SlideView.swift */; };
 		0464ACE81F58144500D8D49A /* SlidePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE71F58144500D8D49A /* SlidePageControl.swift */; };
 		0468B4C31F62943800A2844E /* MyOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468B4C21F62943800A2844E /* MyOrderViewController.swift */; };
+		04A661971F6B05010032A491 /* Slide3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A661961F6B05010032A491 /* Slide3View.swift */; };
+		04A6619C1F6B89BF0032A491 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */; };
 		0501CB21E6CF8D4A005EDEC5 /* EditProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B11E686B6B15DEA6F0B1E /* EditProfileInteractor.swift */; };
 		052F65E666E4DF7D1464D289 /* CategoryMenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF315B8B1C671142907A14A /* CategoryMenuInteractor.swift */; };
 		0AA44A3CCC3B15AC9A6CC917 /* RestaurantViewInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964B01C8231B07B35323BD30 /* RestaurantViewInputOutput.swift */; };
@@ -369,6 +373,8 @@
 		0410D8861F5FE05E001F14A7 /* OrdersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersResponse.swift; sourceTree = "<group>"; };
 		0410D88A1F600695001F14A7 /* DateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTransform.swift; sourceTree = "<group>"; };
 		0410D88C1F600B7A001F14A7 /* OrdersTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTransforms.swift; sourceTree = "<group>"; };
+		043A733B1F80CD4700E1DF43 /* Slide1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide1View.swift; sourceTree = "<group>"; };
+		043A733D1F80CD7500E1DF43 /* Slide2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide2View.swift; sourceTree = "<group>"; };
 		0447949E1F60229B004A3F8C /* OrdersDataCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersDataCollector.swift; sourceTree = "<group>"; };
 		044794A01F602300004A3F8C /* OrdersDisplayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersDisplayItem.swift; sourceTree = "<group>"; };
 		044794A21F602382004A3F8C /* OrdersItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersItem.swift; sourceTree = "<group>"; };
@@ -377,6 +383,8 @@
 		0464ACE51F57E5C400D8D49A /* SlideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		0464ACE71F58144500D8D49A /* SlidePageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePageControl.swift; sourceTree = "<group>"; };
 		0468B4C21F62943800A2844E /* MyOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyOrderViewController.swift; sourceTree = "<group>"; };
+		04A661961F6B05010032A491 /* Slide3View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide3View.swift; sourceTree = "<group>"; };
+		04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		11BB756FBC4197E7113E95FA /* EditProfileInteractorInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EditProfileInteractorInputOutput.swift; sourceTree = "<group>"; };
 		129054E36BB0840F21C6667F /* ProfileViewInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProfileViewInputOutput.swift; sourceTree = "<group>"; };
 		192AA2C72378DC0F94FF51D9 /* MyOrderInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MyOrderInteractor.swift; sourceTree = "<group>"; };
@@ -680,7 +688,7 @@
 		C0A4AD671F2621DB0035EF69 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		C0A4AD681F2621DB0035EF69 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		C0A4AD691F2621DB0035EF69 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		C0B9D4611F1F8207009A77DD /* cinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0B9D4611F1F8207009A77DD /* CInema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CInema.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B9D4761F1FB8F6009A77DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0EE6EF21F419B6300CB5EB5 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		C0EE6EF31F419B6300CB5EB5 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
@@ -794,6 +802,24 @@
 				0464ACE71F58144500D8D49A /* SlidePageControl.swift */,
 			);
 			path = SlideView;
+			sourceTree = "<group>";
+		};
+		04A661941F6B04130032A491 /* SlidesView */ = {
+			isa = PBXGroup;
+			children = (
+				043A733B1F80CD4700E1DF43 /* Slide1View.swift */,
+				04A661961F6B05010032A491 /* Slide3View.swift */,
+				043A733D1F80CD7500E1DF43 /* Slide2View.swift */,
+			);
+			path = SlidesView;
+			sourceTree = "<group>";
+		};
+		04A661991F6B890A0032A491 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		057E76C485BF04B8A72820EE /* CategoryMenu */ = {
@@ -1784,6 +1810,7 @@
 			isa = PBXGroup;
 			children = (
 				9BB4EE7C65A17F9A5DDCEFE9 /* AppDelegate.swift */,
+				04A661991F6B890A0032A491 /* Common */,
 				9BB4ED4F3E113042E2F71FB8 /* Business */,
 				9BB4E057846637BB4FFED100 /* Modules */,
 				9BB4E826D7FD26246874FBAD /* UI */,
@@ -1927,6 +1954,7 @@
 		9BB4E826D7FD26246874FBAD /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04A661941F6B04130032A491 /* SlidesView */,
 				33BE30271F57FE56007633F3 /* ParallaxHeader */,
 				334301F91F529FEB00C96950 /* ProfileTextView */,
 				332911C01F51647000F22E65 /* ProfileCardsView */,
@@ -2396,7 +2424,7 @@
 		C0B9D4621F1F8207009A77DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C0B9D4611F1F8207009A77DD /* cinema.app */,
+				C0B9D4611F1F8207009A77DD /* CInema.app */,
 				C04B61E41F20EF050042AC92 /* cinemaTests.xctest */,
 			);
 			name = Products;
@@ -2584,8 +2612,7 @@
 			dependencies = (
 			);
 			name = cinema;
-			productName = foodle;
-			productReference = C0B9D4611F1F8207009A77DD /* cinema.app */;
+			productReference = C0B9D4611F1F8207009A77DD /* CInema.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2607,7 +2634,7 @@
 					C0B9D4601F1F8207009A77DD = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = X86NQK83T7;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -2848,6 +2875,7 @@
 				3348DEFD1F402E60002A6E79 /* Category.swift in Sources */,
 				9BB4E38DE975B8F0ED4AE3E5 /* RestaurantsMapViewController.swift in Sources */,
 				33BE1AEB1F46CC67003A42D5 /* CartFooterItemBuilderImplementation.swift in Sources */,
+				04A6619C1F6B89BF0032A491 /* ViewHelpers.swift in Sources */,
 				0410D88B1F600695001F14A7 /* DateTransform.swift in Sources */,
 				9BB4E9B68E4F788D83209358 /* RestaurantsMapViewInputOutput.swift in Sources */,
 				9BB4E44D8DC293D80A5493B4 /* Configurations.swift in Sources */,
@@ -2957,6 +2985,7 @@
 				333173311F4EEDA200C7C88E /* RegionContentManagerDelegate.swift in Sources */,
 				EF093FF666256BA74ADA8AC1 /* CategoryMenuRouter.swift in Sources */,
 				044794A91F61309E004A3F8C /* OrderTableViewCell.swift in Sources */,
+				043A733C1F80CD4700E1DF43 /* Slide1View.swift in Sources */,
 				5E8CAEB83670B35EF6208B9C /* CategoryMenuRouterInput.swift in Sources */,
 				FCA5B6B88E364873A8D0DC01 /* CategoryMenuViewController.swift in Sources */,
 				BCAA27F9CB8C671E457A3392 /* CategoryMenuViewInputOutput.swift in Sources */,
@@ -2992,12 +3021,14 @@
 				E6CD34FDC1B212DFC60C594C /* ProfileRouter.swift in Sources */,
 				04221CD29E00A8230427A210 /* ProfileRouterInput.swift in Sources */,
 				1A87308A57FAD61780EB274B /* ProfileViewController.swift in Sources */,
+				04A661971F6B05010032A491 /* Slide3View.swift in Sources */,
 				B06D5DB3B69F4EE1FB8F5EB7 /* ProfileViewInputOutput.swift in Sources */,
 				8688CDDD63DC131053BF2F05 /* EditProfileConfigurator.swift in Sources */,
 				0501CB21E6CF8D4A005EDEC5 /* EditProfileInteractor.swift in Sources */,
 				2D9240C0C1A2BD591DFD479C /* EditProfileInteractorInputOutput.swift in Sources */,
 				D4A3FF872B08F76D0EDA213E /* EditProfileModuleInputOutput.swift in Sources */,
 				338AD1A71F5554C800717F3A /* LogoutManager.swift in Sources */,
+				043A733E1F80CD7500E1DF43 /* Slide2View.swift in Sources */,
 				2D345F895C7EAE3634ACB9C6 /* EditProfilePresenter.swift in Sources */,
 				4E0BFE05A956A03A0435BAC9 /* EditProfileRouter.swift in Sources */,
 				72A405C02C0CEBF8B6E3EEF2 /* EditProfileRouterInput.swift in Sources */,
@@ -3118,6 +3149,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-D PRERELEASE";
+				PRODUCT_NAME = cinema;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -3130,20 +3162,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = X86NQK83T7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Vendor/Bugsee",
 					"$(PROJECT_DIR)/Vendor/GoogleMaps",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.foodle;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "078862ac-97a2-41f6-9226-9e3877b70b73";
-				PROVISIONING_PROFILE_SPECIFIER = "Foodle-AdHoc";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.cinema;
+				PRODUCT_NAME = CInema;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Prerelease;
@@ -3189,6 +3223,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
+				PRODUCT_NAME = cinema;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -3201,20 +3236,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = X86NQK83T7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Vendor/Bugsee",
 					"$(PROJECT_DIR)/Vendor/GoogleMaps",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.foodle;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "16117896-f61d-4fbb-8870-20a691b42ae8";
-				PROVISIONING_PROFILE_SPECIFIER = "Foodle-AdHoc";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.cinema;
+				PRODUCT_NAME = CInema;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -3343,6 +3380,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				PRODUCT_NAME = cinema;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3403,7 +3441,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = X86NQK83T7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -3413,10 +3453,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.foodle;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5b7d70c7-e5e7-4e00-aeef-8bf227dc28de";
-				PROVISIONING_PROFILE_SPECIFIER = "Foodle-Dev";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.cinema;
+				PRODUCT_NAME = CInema;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -3426,20 +3466,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = X86NQK83T7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Vendor/Bugsee",
 					"$(PROJECT_DIR)/Vendor/GoogleMaps",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.foodle;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dc2202e5-d6e2-4cbe-9a6f-cf0e8a494616";
-				PROVISIONING_PROFILE_SPECIFIER = "Foodle-AdHoc";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.handh.ios.cinema;
+				PRODUCT_NAME = CInema;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Internal;

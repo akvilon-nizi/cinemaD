@@ -62,4 +62,20 @@ extension UIColor {
     class var fdlSilver: UIColor {
         return UIColor(red: 185.0 / 255.0, green: 187.0 / 255.0, blue: 188.0 / 255.0, alpha: 1.0)
     }
+
+    class var cnmGreyLight: UIColor {
+        return UIColor(red: 63.0 / 255.0, green: 63.0 / 255.0, blue: 63.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmGreyDark: UIColor {
+        return UIColor(red: 46.0 / 255.0, green: 46.0 / 255.0, blue: 46.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmBlueLight: UIColor {
+        return UIColor(red: 83.0 / 255.0, green: 162.0 / 255.0, blue: 228.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmMainOrange: UIColor {
+        return UIColor(red: 250.0 / 255.0, green: 177.0 / 255.0, blue: 61.0 / 255.0, alpha: 1.0)
+    }
 }

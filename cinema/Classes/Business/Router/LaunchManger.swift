@@ -75,18 +75,18 @@ extension LaunchManager: LaunchManagerProtocol {
                 self.animateRootControllerChange(in: window, viewController: flowController.rootViewController)
             }
 
-            if !self.firstLaunchManager.isNotFirstLaunch {
+//            if !self.firstLaunchManager.isNotFirstLaunch {
 
                 invokeSlidesModule(window, observer)
 
-            } else if self.authTokenManager.apiToken == nil {
-
-                invokeAuthModule(window, observer)
-
-            } else {
-
-                invokeStartModule(window, observer)
-            }
+//            } else if self.authTokenManager.apiToken == nil {
+//
+//                invokeAuthModule(window, observer)
+//
+//            } else {
+//
+//                invokeStartModule(window, observer)
+//            }
 
             return Disposables.create()
         }
