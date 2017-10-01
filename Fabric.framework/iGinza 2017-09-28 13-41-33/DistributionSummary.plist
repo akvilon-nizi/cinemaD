@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>iGinza.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>CF743B2B284F0C670A0BD26FAF44BC79752E5105</string>
+				<key>dateExpires</key>
+				<string>10.12.17</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>X86NQK83T7.ru.handh.iginza</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>X86NQK83T7</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>iGinza.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>decfd444-562a-4d54-b513-95629acaada3</string>
+				<key>name</key>
+				<string>Ginza-adhoc-190917</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>X86NQK83T7</string>
+				<key>name</key>
+				<string>Heads and Hands LLC</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
