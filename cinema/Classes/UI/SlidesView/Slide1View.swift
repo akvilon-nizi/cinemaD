@@ -40,11 +40,11 @@ class Slide1View: UIView {
         let imageView = UIImageView(image:Asset.Cinema.Slides.slide1Image.image).setSize(width: 144, height: 191)
         contentView.addSubview(imageView.prepareForAutoLayout())
         imageView.centerXAnchor ~= contentView.centerXAnchor - 4
-        imageView.topAnchor ~= contentView.topAnchor
+        imageView.topAnchor ~= contentView.topAnchor - 30
 
         contentView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.centerXAnchor ~= contentView.centerXAnchor
-        titleLabel.topAnchor ~= imageView.bottomAnchor + 25
+        titleLabel.topAnchor ~= imageView.bottomAnchor + 10
         titleLabel.heightAnchor ~= 27
         titleLabel.widthAnchor ~= 100
         titleLabel.bottomAnchor ~= contentView.bottomAnchor

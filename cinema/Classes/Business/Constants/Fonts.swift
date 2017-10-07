@@ -51,7 +51,7 @@ extension UIFont {
     }
 
     class func cnmFuturaLight(size: CGFloat) -> UIFont {
-        guard let font = UIFont(name: "Futura-Condensed-Medium", size: size) else {
+        guard let font = UIFont(name: "Futura", size: size) else {
             fatalError("Futura-Light font not found")
         }
         return font

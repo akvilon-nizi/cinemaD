@@ -141,6 +141,21 @@ enum Asset {
     static let slideImageSecond = ImageAsset(name: "slide-image-second")
     static let slideImageThird = ImageAsset(name: "slide-image-third")
   }
+  enum StartViews {
+    static let auth = ImageAsset(name: "auth")
+    enum Confirmation {
+      static let lock = ImageAsset(name: "lock")
+    }
+    enum Help {
+      static let phone = ImageAsset(name: "phone")
+      static let post = ImageAsset(name: "post")
+    }
+    enum Start {
+      static let background = ImageAsset(name: "background")
+      static let forma = ImageAsset(name: "forma")
+      static let shape = ImageAsset(name: "shape")
+    }
+  }
 
   // swiftlint:disable trailing_comma
   static let allColors: [ColorAsset] = [
@@ -206,6 +221,13 @@ enum Asset {
     Slide.slideImageFirst,
     Slide.slideImageSecond,
     Slide.slideImageThird,
+    StartViews.auth,
+    StartViews.Confirmation.lock,
+    StartViews.Help.phone,
+    StartViews.Help.post,
+    StartViews.Start.background,
+    StartViews.Start.forma,
+    StartViews.Start.shape,
   ]
   // swiftlint:enable trailing_comma
   @available(*, deprecated, renamed: "allImages")

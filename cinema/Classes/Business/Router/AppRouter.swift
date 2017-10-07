@@ -31,6 +31,17 @@ enum AppRouterDestination {
     case slides
     case cardOfProduct(productID: Int)
     case myOrder
+    case start
+    case authCinema
+    case registration
+    case newPassword
+    case helpAuth
+    case confirmation
+    case phone
+    case films
+    case actors
+    case film
+    case kinobase
 
     var isPresent: Bool {
         switch self {
@@ -80,6 +91,28 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: CardOfProductConfigurator.tag, arguments: productID)
             case .myOrder:
                 return try factory.resolve(tag: MyOrderConfigurator.tag)
+            case .start:
+                return try factory.resolve(tag: StartConfigurator.tag)
+            case .authCinema:
+                return try factory.resolve(tag: AuthCinemaConfigurator.tag)
+            case .registration:
+                return try factory.resolve(tag: RegistrationConfigurator.tag)
+            case .newPassword:
+                return try factory.resolve(tag: NewPasswordConfigurator.tag)
+            case .helpAuth:
+                return try factory.resolve(tag: HelpAuthConfigurator.tag)
+            case .confirmation:
+                return try factory.resolve(tag: ConfirmationConfigurator.tag)
+            case .phone:
+                return try factory.resolve(tag: PhoneConfigurator.tag)
+            case .films:
+                return try factory.resolve(tag: FilmsConfigurator.tag)
+            case .actors:
+                return try factory.resolve(tag: ActorsConfigurator.tag)
+            case .film:
+                return try factory.resolve(tag: FilmConfigurator.tag)
+            case .kinobase:
+                return try factory.resolve(tag: KinobaseConfigurator.tag)
             }
         } catch {
             fatalError("can't resolve module from factory")
@@ -168,7 +201,7 @@ class AppRouter: AppRouterProtocol {
 
     func dropAll() {
 
-        let authViewController = moduleCreator.createModule(for: .authPhone)
+        let authViewController = moduleCreator.createModule(for: .authCinema)
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
 

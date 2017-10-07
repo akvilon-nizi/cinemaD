@@ -82,7 +82,7 @@ class SlidesViewController: ParentViewController {
 
         view.addSubview(nextButton.prepareForAutoLayout())
         nextButton.centerXAnchor ~= view.centerXAnchor
-        nextButton.bottomAnchor ~= view.bottomAnchor - 75
+        nextButton.bottomAnchor ~= view.bottomAnchor - 45
         nextButton.heightAnchor ~= 49
         nextButton.widthAnchor ~= 177
 
@@ -90,7 +90,7 @@ class SlidesViewController: ParentViewController {
 
         view.addSubview(slidePageControl.prepareForAutoLayout())
         slidePageControl.centerXAnchor ~= view.centerXAnchor
-        slidePageControl.bottomAnchor ~= nextButton.topAnchor - 31
+        slidePageControl.bottomAnchor ~= nextButton.topAnchor - 21
         slidePageControl.topAnchor ~= scrollView.bottomAnchor
         slidePageControl.countPage = count
     }
