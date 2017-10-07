@@ -9,22 +9,15 @@ class SlidesViewController: ParentViewController {
 
     var output: SlidesViewOutput!
 
-    fileprivate let nextButton: GradientButton = {
+    fileprivate let nextButton: UIButton = {
 
-        let nextButton = GradientButton()
-        nextButton.setTitle(L10n.regionButtonTitle, for: .normal)
+        let nextButton = UIButton()
+        nextButton.setTitle(L10n.slideMainButton, for: .normal)
+        nextButton.backgroundColor = UIColor.cnmMainOrange
+        nextButton.layer.cornerRadius = 6.0
+        nextButton.isHidden = true
 
         return nextButton
-    }()
-
-    fileprivate let continueButton: UIButton = {
-
-        let continueButton = UIButton()
-        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        continueButton.setTitleColor(UIColor.fdlGreyishBrown, for: .normal)
-        continueButton.setTitle(L10n.slidesNextButtonTitle, for: .normal)
-
-        return continueButton
     }()
 
     fileprivate let slidePageControl: SlidePageControl = SlidePageControl()
@@ -74,37 +67,30 @@ class SlidesViewController: ParentViewController {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * CGFloat(slidesArrayInfo.count), height: 320)
+        scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * CGFloat(slidesArrayInfo.count), height: 520)
 
         scrollView.addSubview(scrollSubview.prepareForAutoLayout())
         scrollSubview.centerYAnchor ~= scrollView.centerYAnchor
         scrollSubview.widthAnchor ~= self.scrollView.frame.size.width * CGFloat(slidesArrayInfo.count)
-        scrollSubview.heightAnchor ~= 320
+        scrollSubview.heightAnchor ~= 520
         scrollSubview.centerXAnchor ~= scrollView.centerXAnchor + self.scrollView.frame.size.width
 
         addBottomSubview(slidesArrayInfo.count)
     }
 
     private func addBottomSubview(_ count: Int) {
-        view.addSubview(continueButton.prepareForAutoLayout())
-        continueButton.leadingAnchor ~= view.leadingAnchor + 25
-        continueButton.bottomAnchor ~= view.bottomAnchor - 25
-        continueButton.heightAnchor ~= 40
-
-        continueButton.addTarget(self, action: #selector(handleTapContinueButton), for: .touchUpInside)
 
         view.addSubview(nextButton.prepareForAutoLayout())
-        nextButton.leadingAnchor ~= continueButton.trailingAnchor + 25
-        nextButton.trailingAnchor ~= view.trailingAnchor - 25
-        nextButton.bottomAnchor ~= view.bottomAnchor - 25
-        nextButton.heightAnchor ~= 40
-        nextButton.widthAnchor ~= continueButton.widthAnchor
+        nextButton.centerXAnchor ~= view.centerXAnchor
+        nextButton.bottomAnchor ~= view.bottomAnchor - 45
+        nextButton.heightAnchor ~= 49
+        nextButton.widthAnchor ~= 177
 
         nextButton.addTarget(self, action: #selector(handleTapNextButton), for: .touchUpInside)
 
         view.addSubview(slidePageControl.prepareForAutoLayout())
         slidePageControl.centerXAnchor ~= view.centerXAnchor
-        slidePageControl.bottomAnchor ~= nextButton.topAnchor - 74
+        slidePageControl.bottomAnchor ~= nextButton.topAnchor - 21
         slidePageControl.topAnchor ~= scrollView.bottomAnchor
         slidePageControl.countPage = count
     }
@@ -132,7 +118,6 @@ class SlidesViewController: ParentViewController {
 extension SlidesViewController: SlidesViewInput {
 
     func setupInitialState() {
-
     }
 }
 
@@ -147,6 +132,7 @@ extension SlidesViewController: UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+        nextButton.isHidden = Int(pageNumber) != 2
         slidePageControl.setSlide(Int(pageNumber))
     }
 }

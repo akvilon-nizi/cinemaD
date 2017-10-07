@@ -9,68 +9,71 @@
 import UIKit
 
 struct SlideStruct {
-    let image: UIImage
     let title: String
     let descriprion: String
+    let mainView: UIView
 
-    init(image: UIImage, title: String, descriprion: String) {
-        self.image = image
+    init(image: UIImage, title: String, descriprion: String, mainView: UIView) {
         self.title = title
         self.descriprion = descriprion
+        self.mainView = mainView
     }
 }
 
 class SlideView: UIView {
 
-    private let mainImage: UIImageView = {
-        let mainImage = UIImageView()
-        mainImage.contentMode = .scaleToFill
-        return mainImage
-    } ()
-
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.fdlGreyishBrown
-        titleLabel.font = UIFont.fdlGothamProMedium(size: 20)
+        titleLabel.font = UIFont.cnmFuturaMedium(size: 17)
         titleLabel.textAlignment = .center
         return titleLabel
     } ()
     private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.textColor = UIColor.fdlGreyishBrown
-        descriptionLabel.font = UIFont.systemFont(ofSize: 15)
+        descriptionLabel.font = UIFont.cnmFutura(size: 14)
         descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
         return descriptionLabel
     } ()
 
+    private let mainView: UIView = UIView()
+
     var slideInfo: SlideStruct? {
         didSet {
-            mainImage.image = slideInfo?.image
             titleLabel.text = slideInfo?.title
             descriptionLabel.text = slideInfo?.descriprion
+            if let view = slideInfo?.mainView {
+                mainView.addSubview(view.prepareForAutoLayout())
+                view.pinEdgesToSuperviewEdges()
+            }
         }
     }
 
     override init(frame: CGRect) {
 
         super.init(frame: frame)
-        addSubview(mainImage.prepareForAutoLayout())
-
-        mainImage.centerXAnchor ~= centerXAnchor
-        mainImage.topAnchor ~= topAnchor + 25
 
         addSubview(titleLabel.prepareForAutoLayout())
 
         titleLabel.leadingAnchor ~= leadingAnchor + 40
         titleLabel.trailingAnchor ~= trailingAnchor - 40
-        titleLabel.topAnchor ~= mainImage.bottomAnchor + 25
+        titleLabel.topAnchor ~= topAnchor + 111
 
         addSubview(descriptionLabel.prepareForAutoLayout())
 
         descriptionLabel.leadingAnchor ~= leadingAnchor + 40
         descriptionLabel.trailingAnchor ~= trailingAnchor - 40
-        descriptionLabel.topAnchor ~= titleLabel.bottomAnchor + 13
+        descriptionLabel.topAnchor ~= titleLabel.bottomAnchor + 24
+
+        addSubview(mainView.prepareForAutoLayout())
+
+        mainView.leadingAnchor ~= leadingAnchor + 40
+        mainView.trailingAnchor ~= trailingAnchor - 40
+        mainView.topAnchor ~= descriptionLabel.bottomAnchor
+//        mainView.bottomAnchor ~= bottomAnchor - 24
+        mainView.heightAnchor ~= 293
 
     }
 

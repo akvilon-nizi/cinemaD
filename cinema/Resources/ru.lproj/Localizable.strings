@@ -101,3 +101,73 @@
 "alert-title-system-error" = "Системная ошибка";
 "alert-button-ok" = "ОК";
 "alert-button-cancel" = "Отменить";
+
+//Slides
+"slide1-title-text" = "Покупай билеты";
+"slide2-title-text" = "Создавайте встречи";
+"slide3-title-text" = "Получайте награды";
+
+"slide1-description-text" = "Покупай электронные билеты в кино\nпрямо из приложения";
+"slide2-description-text" = "Приглашайте друзей на фильм\nи делитесь впечатлениями";
+"slide3-description-text" = "Получайте награды за просмотры\nваших любимых фильмов";
+
+"slide1-button-text" = "Купить билеты";
+"slide2-button-text" = "Пригласить на фильм";
+"slide3-label-title-text" = "Вселенная Marvel";
+"slide3-label-description-text" = "Легенда";
+
+"slide-main-button" = "Поехали !";
+
+//Start
+"start-title-text" = "CINEMAD";
+"start-facebook-text" = "Войти через Facebook";
+"start-vkontakte-text" = "Войти через Vkontakte";
+"start-registration-text" = "Регистрация";
+"start-have-auth-text" = "У вас уже есть аккаунт?";
+"start-button-auth-text" = "Войдите";
+
+//Registration
+"reg-title-text" = "Регистрация";
+"reg-name-placeholder" = "Имя";
+"reg-phone-placeholder" = "Телефон";
+"reg-password-placeholder" = "Пароль";
+"reg-button-text" = "Свет, Камера, Мотор!";
+"reg-info-text" = "Регистрируясь, вы принимаете наши";
+"reg-conditions-button-text" = "Условия";
+"reg-regulations-button-text" = "Политика конфиденциальности";
+"reg-and-text" = "и";
+
+//Auth
+"auth-title-text" = "Вход";
+"auth-phone-placeholder" = "Телефон";
+"auth-password-placeholder" = "Пароль";
+"auth-button-text" = "Свет, Камера, Мотор!";
+"auth-remember-text" = "Забыли данные для входа?";
+"auth-help-button-text" = "Помощь со входом в систему";
+
+//AuthHelp
+"authHelp-title-text" = "Помощь при входе";
+"authHelp-sms-button-text" = "Отправить SMS код";
+"authHelp-post-button-text" = "Отправить на Эл. почту";
+"authHelp-center-text" = "Справочный центр CinemaD";
+
+//Phone
+"phone-title-text" = "Номер телефона";
+"phone-info-text" = "На указанный номер телефона будет\nотправлено сообщение с кодом\nподтврждения";
+"phone-phone-placeholder" = "Ваш номер";
+"phone-next-button-text" = "Далее";
+
+//Confirmation
+"confirmation-title-text" = "Подтверждение";
+"confirmation-info-text" = "Введите 6-значный код, который\nбыл отпрпавлен на номер\n%@";
+"confirmation-code-text" = "Код";
+"confirmation-new-password-button" = "Запросить новый";
+"confirmation-next-button-text" = "Далее";
+"confirmation-have-auth-text" = "У вас уже есть аккаунт?";
+"confirmation-button-auth-text" = "Войдите";
+
+//NewPassword
+"newPassword-title-text" = "Новый пароль";
+"newPassword-password-placeholder" = "Новый пароль";
+"newPassword-confirm-placeholder" = "Подтверждение";
+"newPassword-ready-button-text" = "Готово";

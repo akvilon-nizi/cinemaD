@@ -20,7 +20,6 @@ extension TermsRouter: TermsRouterInput {
     }
 
     func close() {
-
         appRouter.backTransition()
     }
 }

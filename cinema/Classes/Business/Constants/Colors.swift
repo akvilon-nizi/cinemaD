@@ -62,4 +62,40 @@ extension UIColor {
     class var fdlSilver: UIColor {
         return UIColor(red: 185.0 / 255.0, green: 187.0 / 255.0, blue: 188.0 / 255.0, alpha: 1.0)
     }
+
+    class var cnmGreyLight: UIColor {
+        return UIColor(red: 63.0 / 255.0, green: 63.0 / 255.0, blue: 63.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmGreyDark: UIColor {
+        return UIColor(red: 46.0 / 255.0, green: 46.0 / 255.0, blue: 46.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmBlueLight: UIColor {
+        return UIColor(red: 83.0 / 255.0, green: 162.0 / 255.0, blue: 228.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmMainOrange: UIColor {
+        return UIColor(red: 250.0 / 255.0, green: 177.0 / 255.0, blue: 61.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmVkColor: UIColor {
+        return UIColor(red: 79.0 / 255.0, green: 114.0 / 255.0, blue: 153.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmFbColor: UIColor {
+        return UIColor(red: 59.0 / 255.0, green: 89.0 / 255.0, blue: 152.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmGreyColor: UIColor {
+        return UIColor(red: 72.0 / 255.0, green: 72.0 / 255.0, blue: 72.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmGreyTextColor: UIColor {
+        return UIColor(red: 101.0 / 255.0, green: 101.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmSeparatorColor: UIColor {
+        return UIColor(red: 239.0 / 255.0, green: 239.0 / 255.0, blue: 239.0 / 255.0, alpha: 1.0)
+    }
 }

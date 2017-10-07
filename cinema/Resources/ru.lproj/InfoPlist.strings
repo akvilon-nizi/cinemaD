@@ -6,5 +6,4 @@
   Copyright © 2017 Heads and Hands. All rights reserved.
 */
 
-"CFBundleDisplayName" = "Foodle";
-"NSLocationWhenInUseUsageDescription" = "Ищите ближайшие рестораны на карте";
+"CFBundleDisplayName" = "Cinema";

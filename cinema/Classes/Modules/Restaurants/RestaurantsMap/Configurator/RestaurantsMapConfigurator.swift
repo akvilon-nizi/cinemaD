@@ -25,7 +25,7 @@ class RestaurantsMapConfigurator {
         interactor.output = presenter
 
         let viewController = RestaurantsMapViewController()
-        viewController.output = presenter
+        //viewController.output = presenter
 
         presenter.interactor = interactor
         presenter.view = viewController

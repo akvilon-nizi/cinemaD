@@ -147,6 +147,90 @@ enum Containers {
             return configurator.configureModule()
         }
 
+        container.register(tag: StartConfigurator.tag) { () -> UIViewController in
+            let configurator = StartConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: RegistrationConfigurator.tag) { () -> UIViewController in
+            let configurator = RegistrationConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: AuthCinemaConfigurator.tag) { () -> UIViewController in
+            let configurator = AuthCinemaConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: NewPasswordConfigurator.tag) { () -> UIViewController in
+            let configurator = NewPasswordConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: HelpAuthConfigurator.tag) { () -> UIViewController in
+            let configurator = HelpAuthConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: ConfirmationConfigurator.tag) { () -> UIViewController in
+            let configurator = ConfirmationConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: PhoneConfigurator.tag) { () -> UIViewController in
+            let configurator = PhoneConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: MainConfigurator.tag) { () -> UIViewController in
+            let configurator = MainConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: FilmsConfigurator.tag) { () -> UIViewController in
+            let configurator = FilmsConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: FilmConfigurator.tag) { () -> UIViewController in
+            let configurator = FilmConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: ActorsConfigurator.tag) { () -> UIViewController in
+            let configurator = ActorsConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: KinobaseConfigurator.tag) { () -> UIViewController in
+            let configurator = KinobaseConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
         return container
     }()
 
