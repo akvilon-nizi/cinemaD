@@ -50,7 +50,7 @@ platform :ios do
             build_number: build_number
         )
         upload_symbols_to_bugsee(
-            app_token: "bd2abcca-3ae5-4954-9273-e7b64ec26b35",
+            app_token: "bd2abcca-3ae5-4954-9273-e7b64ec26b3d5",
             build: build_number,
             version: "1.0"
         )

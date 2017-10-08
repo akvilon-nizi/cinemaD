@@ -21,12 +21,12 @@ class YoutubeViewCell: UICollectionViewCell {
 
         clipsToBounds = true
         layer.cornerRadius = 3
-        layer.borderColor = UIColor.insDodgerBlue.cgColor
+        //layer.borderColor = UIColor.insDodgerBlue.cgColor
         layer.borderWidth = 1
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.ubuntuRegular(size: 13)
-        titleLabel.textColor = .insDodgerBlue
+//        titleLabel.font = UIFont.ubuntuRegular(size: 13)
+//        titleLabel.textColor = .insDodgerBlue
         titleLabel.textAlignment = .center
         contentView.addSubview(titleLabel)
 
