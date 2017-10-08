@@ -15,11 +15,20 @@ class ParentViewController: UIViewController {
         return label
     }()
 
+    let mainTabView = MainTabView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
         navigationItem.titleView = titleViewLabel
+
+        view.addSubview(mainTabView.prepareForAutoLayout())
+        mainTabView.widthAnchor ~= view.widthAnchor
+        mainTabView.heightAnchor ~= 80
+        mainTabView.leadingAnchor ~= view.leadingAnchor
+        mainTabView.bottomAnchor ~= view.bottomAnchor + 4
+        mainTabView.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {

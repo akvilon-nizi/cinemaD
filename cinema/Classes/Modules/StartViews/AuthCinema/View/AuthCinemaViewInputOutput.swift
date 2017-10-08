@@ -17,4 +17,6 @@ protocol AuthCinemaViewOutput {
     func backTap()
 
     func helpAuth()
+
+    func auth()
 }

@@ -8,4 +8,5 @@ import Foundation
 protocol AuthCinemaRouterInput: BaseRouterInput {
     func close()
     func transitionToHelpAuth()
+    func transitionToMain()
 }

@@ -5,6 +5,4 @@ github "Hearst-DD/ObjectMapper" ~> 2.2.8
 github "kishikawakatsumi/KeychainAccess" ~> 3.0.2
 github "onevcat/Kingfisher" ~> 3.10.4
 github "RedMadRobot/input-mask-ios.git" ~> 2.2.6
-binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Fabric.json"
-binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Crashlytics.json"
-binary "https://raw.githubusercontent.com/Building42/Specs/master/Carthage/Answers.json"
+github "youtube/youtube-ios-player-helper" ~> 0.1.4

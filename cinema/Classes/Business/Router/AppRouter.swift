@@ -42,6 +42,7 @@ enum AppRouterDestination {
     case actors
     case film
     case kinobase
+    case main
 
     var isPresent: Bool {
         switch self {
@@ -113,6 +114,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: FilmConfigurator.tag)
             case .kinobase:
                 return try factory.resolve(tag: KinobaseConfigurator.tag)
+            case .main:
+                return try factory.resolve(tag: MainConfigurator.tag)
             }
         } catch {
             fatalError("can't resolve module from factory")
@@ -132,6 +135,8 @@ protocol AppRouterProtocol {
     func openSideMenu()
 
     func dropAll()
+
+    func mainView()
 }
 
 protocol AppRouterFlowControllerDataSource: class {
@@ -204,6 +209,15 @@ class AppRouter: AppRouterProtocol {
         let authViewController = moduleCreator.createModule(for: .authCinema)
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
+
+        application.keyWindow?.rootViewController = flowController.rootViewController
+    }
+
+    func mainView() {
+
+        let mainViewController = moduleCreator.createModule(for: .main)
+
+        let flowController = moduleCreator.createNavigationFlowController(viewController: mainViewController)
 
         application.keyWindow?.rootViewController = flowController.rootViewController
     }

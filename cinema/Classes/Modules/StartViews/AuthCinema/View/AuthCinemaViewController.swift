@@ -70,6 +70,7 @@ class AuthCinemaViewController: ParentViewController {
         contentView.addSubview(nextButton.prepareForAutoLayout())
         nextButton.topAnchor ~= stackView.bottomAnchor + 28
         nextButton.centerXAnchor ~= contentView.centerXAnchor
+        nextButton.addTarget(self, action: #selector(didTapAuthButton), for: .touchUpInside)
     }
 
     private func addBottomView() {
@@ -101,6 +102,11 @@ class AuthCinemaViewController: ParentViewController {
     func didTapHelpAuthButton() {
         output?.helpAuth()
     }
+
+    func didTapAuthButton() {
+        output?.auth()
+    }
+
 }
 
 // MARK: - AuthCinemaViewInput

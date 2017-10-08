@@ -28,6 +28,10 @@ extension AuthCinemaPresenter: AuthCinemaViewOutput {
     func helpAuth() {
         router.transitionToHelpAuth()
     }
+
+    func auth() {
+        router.transitionToMain()
+    }
 }
 
 // MARK: - AuthCinemaInteractorOutput

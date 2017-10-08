@@ -423,11 +423,13 @@
 		CD12746200FA0BEB67E53A37 /* HelpAuthModuleInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87480BB5B93FAA9A49150A42 /* HelpAuthModuleInputOutput.swift */; };
 		CD5EA006F803A4DD195EC957 /* ActorsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A03807065FC07D2870FF13 /* ActorsConfigurator.swift */; };
 		CDEDDBC3C2C8E5AAEB909462 /* RestaurantInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E12263225B27504DC7311E /* RestaurantInteractor.swift */; };
+		CE4DA9511F8AC56000F371E4 /* YoutubeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DA9501F8AC56000F371E4 /* YoutubeViewCell.swift */; };
 		CE7EEBF4087EEFC7558255BF /* CardOfProductPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC72D16323CB52FC40E137 /* CardOfProductPresenter.swift */; };
 		CEB86C451F87B8D0003F07FC /* TextFieldWithSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB86C441F87B8D0003F07FC /* TextFieldWithSeparator.swift */; };
 		CEB86C471F87C565003F07FC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB86C461F87C565003F07FC /* Extensions.swift */; };
 		CEB86C4A1F88A850003F07FC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB86C491F88A84F003F07FC /* Fabric.framework */; };
 		CEB86C4C1F88AB43003F07FC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB86C4B1F88AB42003F07FC /* Crashlytics.framework */; };
+		CEFEE0E81F8A96CB00F0A65A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEE0E71F8A96CB00F0A65A /* MainTabView.swift */; };
 		D1289C1C805A4D1EE856B792 /* FilmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E6560B04FAC859BE975F4 /* FilmPresenter.swift */; };
 		D164DFE0E76FF403C6448845 /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE636519652480C3F21036C /* StartPresenter.swift */; };
 		D2E636E791B7A8602AF93C65 /* AuthCinemaRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457380F6486E9F663523FE2 /* AuthCinemaRouter.swift */; };
@@ -914,12 +916,14 @@
 		CA312F2F0C6CC56BC06EF1D4 /* MainViewInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainViewInputOutput.swift; sourceTree = "<group>"; };
 		CD395F278C10C69DD7776E28 /* FilmRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilmRouterInput.swift; sourceTree = "<group>"; };
 		CDD487C8DD2BC9F77C10FCA5 /* KinobaseConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KinobaseConfigurator.swift; sourceTree = "<group>"; };
+		CE4DA9501F8AC56000F371E4 /* YoutubeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewCell.swift; sourceTree = "<group>"; };
 		CE6B86A8B2685837B84B5549 /* PhoneViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
 		CE84316DBE05856180A542BA /* SlidesModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SlidesModuleInputOutput.swift; sourceTree = "<group>"; };
 		CEB86C441F87B8D0003F07FC /* TextFieldWithSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithSeparator.swift; sourceTree = "<group>"; };
 		CEB86C461F87C565003F07FC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEB86C491F88A84F003F07FC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CEB86C4B1F88AB42003F07FC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CEFEE0E71F8A96CB00F0A65A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		D053E4656D87F547232D339B /* KinobaseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KinobaseViewController.swift; sourceTree = "<group>"; };
 		D193208BCC374565C84905E4 /* NewPasswordInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewPasswordInteractor.swift; sourceTree = "<group>"; };
 		D2BA57C3874A206AD6F3CB6B /* NewPasswordViewInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewPasswordViewInputOutput.swift; sourceTree = "<group>"; };
@@ -2571,6 +2575,7 @@
 		9BB4E826D7FD26246874FBAD /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				CEFEE0E61F8A966600F0A65A /* MainTabView */,
 				CEB86C431F87B89A003F07FC /* StartsView */,
 				04A661941F6B04130032A491 /* SlidesView */,
 				33BE30271F57FE56007633F3 /* ParallaxHeader */,
@@ -3255,6 +3260,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		CEFEE0E61F8A966600F0A65A /* MainTabView */ = {
+			isa = PBXGroup;
+			children = (
+				CEFEE0E71F8A96CB00F0A65A /* MainTabView.swift */,
+				CE4DA9501F8AC56000F371E4 /* YoutubeViewCell.swift */,
+			);
+			path = MainTabView;
+			sourceTree = "<group>";
+		};
 		D1136FA24C454373DC844FFA /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -3833,6 +3847,7 @@
 				9BB4EA288D89F4DD7740E27E /* RestaurantsListConfigurator.swift in Sources */,
 				33B37BD61F459679000838F2 /* RestaurantMenuRouterInput.swift in Sources */,
 				3335A73D1F45EAEF001C9228 /* CartView.swift in Sources */,
+				CEFEE0E81F8A96CB00F0A65A /* MainTabView.swift in Sources */,
 				9BB4EDE57A64002AAE50DDD0 /* RestaurantsListInteractor.swift in Sources */,
 				3361E4881F5416B800ECF276 /* ProfileHeaderViewDelegate.swift in Sources */,
 				9BB4E3055959AA0687B77058 /* RestaurantsListInteractorInputOutput.swift in Sources */,
@@ -4175,6 +4190,7 @@
 				0D7EE7CC7BF9F9B0AD20657F /* KinobaseConfigurator.swift in Sources */,
 				333F81FD1A715339296F4638 /* KinobaseInteractor.swift in Sources */,
 				DE4C7D01BD1192D507E89B4A /* KinobaseInteractorInputOutput.swift in Sources */,
+				CE4DA9511F8AC56000F371E4 /* YoutubeViewCell.swift in Sources */,
 				947BE8C889B8786ADE0D4BE6 /* KinobaseModuleInputOutput.swift in Sources */,
 				C613937089BA72D53ECA3D46 /* KinobasePresenter.swift in Sources */,
 				4C6A0904B8ADBF796F94FC58 /* KinobaseRouter.swift in Sources */,
