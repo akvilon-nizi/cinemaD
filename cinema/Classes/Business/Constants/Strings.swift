@@ -10,6 +10,10 @@ enum L10n {
   static let alertButtonCancel = L10n.tr("Localizable", "alert-button-cancel")
   /// ОК
   static let alertButtonOk = L10n.tr("Localizable", "alert-button-ok")
+  /// Проверьте корректность введеных данных
+  static let alertCinemaCorrectErrror = L10n.tr("Localizable", "alert-cinema-correct-errror")
+  /// Сетевая ошибка
+  static let alertCinemaNetworkErrror = L10n.tr("Localizable", "alert-cinema-network-errror")
   /// Сетевая ошибка
   static let alertTitleNetworkError = L10n.tr("Localizable", "alert-title-network-error")
   /// Системная ошибка

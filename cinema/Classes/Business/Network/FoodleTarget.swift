@@ -1,5 +1,5 @@
 //
-// Created by Александр Масленников on 03.08.17.
+// Created by User on 03.08.17.
 // Copyright (c) 2017 Heads and Hands. All rights reserved.
 //
 
@@ -7,6 +7,11 @@ import Moya
 import CoreLocation
 
 enum FoodleTarget {
+    case registration(password: String, name: String, phone: String)
+    case getTokenFromUid(uid: String, code: String)
+    case auth(phone: String, password: String)
+    case restore(phone: String)
+    case restoreFromUid(uid: String, code: String)
     case sendCode(phone: String)
     case checkCode(phone: String, code: String)
     case restaurant(restaurantID: Int)
@@ -49,6 +54,10 @@ extension FoodleTarget: TargetType {
 
     var path: String {
         switch self {
+        case .registration:
+            return "registration"
+        case .auth:
+            return "login"
         case .sendCode:
             return "auth/send-code"
         case .checkCode:
@@ -57,6 +66,12 @@ extension FoodleTarget: TargetType {
             return "restaurants"
         case let .restaurant(restaurantID):
             return "restaurants/\(restaurantID)"
+        case let .getTokenFromUid(uid, _):
+            return "registration/\(uid))"
+        case .restore:
+            return "restore"
+        case let .restoreFromUid(uid, _):
+            return "restore/\(uid))"
         case .products:
             return "products"
         case let .product(productID):
@@ -113,6 +128,20 @@ extension FoodleTarget: TargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case let .registration(password, name, phone):
+            return ["password": password, "phone": phone, "name": name]
+        case let .restore(phone):
+            return ["phone": phone]
+        case let .restoreFromUid(_, code):
+            var parameters: [String: Any] = [:]
+            parameters["sms_token"] = code
+            return parameters
+        case let .auth(phone, password):
+            return ["password": password, "phone": phone]
+        case let .getTokenFromUid(_, code):
+            var parameters: [String: Any] = [:]
+                parameters["sms_token"] = code
+            return parameters
         case let .sendCode(phone):
             return ["phone": phone]
         case let .checkCode(phone, code):

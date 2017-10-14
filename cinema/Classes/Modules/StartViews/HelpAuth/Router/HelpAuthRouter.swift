@@ -18,7 +18,7 @@ extension HelpAuthRouter: HelpAuthRouterInput {
     }
 
     func transitionToConfirmation() {
-        appRouter.transition(to: .phone)
+        appRouter.transition(to: .phone(phone: "", uid: ""))
     }
 
     func transitionToNewPassword() {

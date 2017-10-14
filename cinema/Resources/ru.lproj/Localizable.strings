@@ -102,6 +102,11 @@
 "alert-button-ok" = "ОК";
 "alert-button-cancel" = "Отменить";
 
+//Cinema alert
+
+"alert-cinema-correct-errror" = "Проверьте корректность введеных данных";
+"alert-cinema-network-errror" = "Сетевая ошибка";
+
 //Slides
 "slide1-title-text" = "Покупай билеты";
 "slide2-title-text" = "Создавайте встречи";

@@ -15,6 +15,8 @@ class ParentViewController: UIViewController {
         return label
     }()
 
+    let activityVC = UIActivityIndicatorView()
+
     let mainTabView = MainTabView()
 
     override func viewDidLoad() {
@@ -29,6 +31,14 @@ class ParentViewController: UIViewController {
         mainTabView.leadingAnchor ~= view.leadingAnchor
         mainTabView.bottomAnchor ~= view.bottomAnchor + 4
         mainTabView.isHidden = true
+
+        view.addSubview(activityVC.prepareForAutoLayout())
+        activityVC.centerXAnchor ~= view.centerXAnchor
+        activityVC.centerYAnchor ~= view.centerYAnchor
+        activityVC.activityIndicatorViewStyle = .whiteLarge
+        activityVC.color = UIColor.cnmGreyDark
+
+        activityVC.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,5 +49,19 @@ class ParentViewController: UIViewController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
+    }
+
+    func showAlert(message: String) {
+
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+
+        let cancelAction = UIAlertAction(title: "OK",
+                                         style: .cancel, handler: nil)
+
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+
     }
 }

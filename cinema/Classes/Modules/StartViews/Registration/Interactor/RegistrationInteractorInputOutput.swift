@@ -6,9 +6,11 @@
 import Foundation
 
 protocol RegistrationInteractorInput {
-
+    func sendRegInfo(password: String, name: String, phone: String, phoneIn: String)
 }
 
 protocol RegistrationInteractorOutput: class {
+    func getUid(uid: String, phone: String)
 
+    func getError()
 }

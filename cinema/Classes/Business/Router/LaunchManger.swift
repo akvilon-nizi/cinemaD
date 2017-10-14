@@ -47,46 +47,31 @@ extension LaunchManager: LaunchManagerProtocol {
             }
 
             let invokeAuthModule = { [unowned self] (window: UIWindow, observer: AnyObserver<FlowControllerProtocol>) in
-                let module = self.moduleCreator.createModule(for: .authPhone)
+                let module = self.moduleCreator.createModule(for: .start)
                 let flowController = self.moduleCreator.createNavigationFlowController(viewController: module)
                 observer.onNext(flowController)
                 self.animateRootControllerChange(in: window, viewController: flowController.rootViewController)
-            }
-
-            let destination: AppRouterDestination
-
-            if self.regionManager.region == nil {
-
-                destination = .region(selectedRegion: nil, needToReturn: false)
-
-            } else if !self.termsManager.confirmed {
-
-                destination = .terms
-
-            } else {
-
-                destination = .restaurants
             }
 
             let invokeStartModule = { [unowned self] (window: UIWindow, observer: AnyObserver<FlowControllerProtocol>) in
-                let module = self.moduleCreator.createModule(for: destination)
+                let module = self.moduleCreator.createModule(for: .main)
                 let flowController = self.moduleCreator.createNavigationFlowController(viewController: module)
                 observer.onNext(flowController)
                 self.animateRootControllerChange(in: window, viewController: flowController.rootViewController)
             }
 
-//            if !self.firstLaunchManager.isNotFirstLaunch {
+            if !self.firstLaunchManager.isNotFirstLaunch {
 
                 invokeSlidesModule(window, observer)
 
-//            } else if self.authTokenManager.apiToken == nil {
-//
-//                invokeAuthModule(window, observer)
-//
-//            } else {
-//
-//                invokeStartModule(window, observer)
-//            }
+            } else if self.authTokenManager.apiToken == nil {
+
+                invokeAuthModule(window, observer)
+
+            } else {
+
+                invokeStartModule(window, observer)
+            }
 
             return Disposables.create()
         }

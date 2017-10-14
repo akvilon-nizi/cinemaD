@@ -21,7 +21,7 @@ extension ConfirmationRouter: ConfirmationRouterInput {
         appRouter.transition(to: .authCinema)
     }
 
-    func transitionToNewPassword() {
-        appRouter.transition(to: .newPassword)
+    func transitionToMain() {
+        appRouter.transition(to: .main)
     }
 }

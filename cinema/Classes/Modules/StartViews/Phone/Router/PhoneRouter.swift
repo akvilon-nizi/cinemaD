@@ -17,7 +17,7 @@ extension PhoneRouter: PhoneRouterInput {
         appRouter.backTransition()
     }
 
-    func transitionToConfirmation() {
-        appRouter.transition(to: .confirmation)
+    func transitionToConfirmation(phone: String, uid: String, isRestore: Bool) {
+        appRouter.transition(to: .confirmation(phone: phone, uid: uid, isRestore: isRestore))
     }
 }

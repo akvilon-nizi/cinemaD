@@ -36,8 +36,8 @@ enum AppRouterDestination {
     case registration
     case newPassword
     case helpAuth
-    case confirmation
-    case phone
+    case confirmation(phone: String, uid: String, isRestore: Bool)
+    case phone(phone: String, uid: String)
     case films
     case actors
     case film
@@ -102,10 +102,10 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: NewPasswordConfigurator.tag)
             case .helpAuth:
                 return try factory.resolve(tag: HelpAuthConfigurator.tag)
-            case .confirmation:
-                return try factory.resolve(tag: ConfirmationConfigurator.tag)
-            case .phone:
-                return try factory.resolve(tag: PhoneConfigurator.tag)
+            case let .confirmation(phone, uid, isRestore):
+                return try factory.resolve(tag: ConfirmationConfigurator.tag, arguments: phone, uid, isRestore)
+            case let .phone(phone, uid):
+                return try factory.resolve(tag: PhoneConfigurator.tag, arguments: phone, uid)
             case .films:
                 return try factory.resolve(tag: FilmsConfigurator.tag)
             case .actors:

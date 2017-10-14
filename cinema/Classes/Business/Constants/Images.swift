@@ -62,12 +62,18 @@ enum Asset {
     static let cartPlus = ImageAsset(name: "cart-plus")
   }
   enum Cinema {
+    static let aqqa = ImageAsset(name: "aqqa")
+    static let assa = ImageAsset(name: "assa")
     enum MainTab {
       static let chat = ImageAsset(name: "chat")
       static let kinobase = ImageAsset(name: "kinobase")
       static let reward = ImageAsset(name: "reward")
       static let tabBackground = ImageAsset(name: "tabBackground")
       static let tickets = ImageAsset(name: "tickets")
+    }
+    enum MainView {
+      static let isClose = ImageAsset(name: "isClose")
+      static let isOpen = ImageAsset(name: "isOpen")
     }
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
@@ -178,11 +184,15 @@ enum Asset {
     Cart.cartEmptyPlaceholder,
     Cart.cartMinus,
     Cart.cartPlus,
+    Cinema.aqqa,
+    Cinema.assa,
     Cinema.MainTab.chat,
     Cinema.MainTab.kinobase,
     Cinema.MainTab.reward,
     Cinema.MainTab.tabBackground,
     Cinema.MainTab.tickets,
+    Cinema.MainView.isClose,
+    Cinema.MainView.isOpen,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
     Cinema.Slides.slide2Play,

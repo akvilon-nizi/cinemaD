@@ -25,13 +25,22 @@ extension PhonePresenter: PhoneViewOutput {
         router.close()
     }
 
-    func next() {
-        router.transitionToConfirmation()
+    func next(phone: String, uid: String?, phoneCorrect: String?) {
+        if let userId = uid {
+            router.transitionToConfirmation(phone: phone, uid: userId, isRestore: false)
+        } else if let phoneCor = phoneCorrect {
+            interactor.sendSms(phone: phone, phoneCorrect: phoneCor)
+        }
     }
 }
 
 // MARK: - PhoneInteractorOutput
 
 extension PhonePresenter: PhoneInteractorOutput {
-
+    func getUid(phone: String, uid: String) {
+        router.transitionToConfirmation(phone: phone, uid: uid, isRestore: true)
+    }
+    func showError() {
+        view.showNetworkError()
+    }
 }

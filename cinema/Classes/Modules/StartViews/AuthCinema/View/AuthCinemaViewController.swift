@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import InputMask
 
 class AuthCinemaViewController: ParentViewController {
 
@@ -15,6 +16,8 @@ class AuthCinemaViewController: ParentViewController {
     let passwordField = TextFieldWithSeparator()
     let nextButton = UIButton(type: .system).setTitleWithColor(title: L10n.regButtonText, color: UIColor.cnmMainOrange)
 
+    var maskedDelegate: MaskedTextFieldDelegate?
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -22,6 +25,7 @@ class AuthCinemaViewController: ParentViewController {
     }
 
     init() {
+        maskedDelegate = MaskedTextFieldDelegate(format: "{+7} ([000]) [000] [00] [00]")
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,6 +44,11 @@ class AuthCinemaViewController: ParentViewController {
         addTopView()
         addStackView()
         addBottomView()
+
+        maskedDelegate?.listener = self
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     private func addTopView() {
@@ -59,7 +68,11 @@ class AuthCinemaViewController: ParentViewController {
     private func addStackView() {
         let stackView = createStackView(.vertical, .fill, .fill, 29.0, with: [phoneField, passwordField])
         phoneField.textField.placeholder = L10n.authPhonePlaceholder
+        phoneField.textField.delegate = maskedDelegate
         passwordField.textField.placeholder = L10n.authPasswordPlaceholder
+        passwordField.textField.delegate = self
+        passwordField.textField.isSecureTextEntry = true
+        passwordField.textField.tag = 1
 
         contentView.addSubview(stackView.prepareForAutoLayout())
         stackView.topAnchor ~= imageView.bottomAnchor + 38
@@ -94,6 +107,10 @@ class AuthCinemaViewController: ParentViewController {
         conditions.centerXAnchor ~= contentView.centerXAnchor
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - Actions
     func didTapLeftButton() {
         output?.backTap()
@@ -104,9 +121,50 @@ class AuthCinemaViewController: ParentViewController {
     }
 
     func didTapAuthButton() {
-        output?.auth()
+        if let phone = phoneField.textField.text?.replacingOccurrences(
+            of: "(", with: "",
+            options: NSString.CompareOptions.literal,
+            range:nil).replacingOccurrences(
+                of: ")",
+                with: "",
+                options: NSString.CompareOptions.literal,
+                range:nil).replacingOccurrences(
+                    of: " ",
+                    with:"",
+                    options: NSString.CompareOptions.literal,
+                    range:nil),
+            phone.characters.count == 12,
+            let password = passwordField.textField.text,
+            password.characters.count > 3
+             {
+            output?.auth(phone: phone, password: password)
+            view.bringSubview(toFront: activityVC)
+            activityVC.isHidden = false
+            activityVC.startAnimating()
+        } else {
+            showAlert(message: L10n.alertCinemaCorrectErrror)
+        }
     }
 
+    func keyboardWillShow(notification: NSNotification) {
+
+        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 100
+        }
+        //        }
+
+    }
+
+    func keyboardWillHide(notification: NSNotification) {
+
+        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += 100
+
+        }
+        //        }
+    }
 }
 
 // MARK: - AuthCinemaViewInput
@@ -116,4 +174,29 @@ extension AuthCinemaViewController: AuthCinemaViewInput {
     func setupInitialState() {
 
     }
+
+    func showNetworkError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
+}
+
+// MARK: - UITextFieldDelegate
+
+extension AuthCinemaViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField.tag {
+        case 0:
+            passwordField.textField.becomeFirstResponder()
+        default:
+            view.endEditing(true)
+        }
+        return true
+    }
+}
+
+extension AuthCinemaViewController: MaskedTextFieldDelegateListener {
 }

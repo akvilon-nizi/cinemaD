@@ -8,6 +8,8 @@ import Foundation
 protocol ConfirmationViewInput: class {
 
     func setupInitialState()
+
+    func showNetworkError()
 }
 
 protocol ConfirmationViewOutput {
@@ -21,4 +23,6 @@ protocol ConfirmationViewOutput {
     func next()
 
     func auth()
+
+    func sendCode(code: String)
 }

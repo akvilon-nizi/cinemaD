@@ -11,20 +11,36 @@ class ConfirmationConfigurator {
     static let tag: String = "ConfirmationTag"
 
     var provider: RxMoyaProvider<FoodleTarget>!
+    var authTokenManager: AuthTokenManagerProtocol!
 
     var appRouter: AppRouterProtocol!
+
+    let uid: String
+
+    let phone: String
+
+    let isRestore: Bool
+
+    init(uid: String, phone: String, isRestore: Bool) {
+        self.uid = uid
+        self.phone = phone
+        self.isRestore = isRestore
+    }
 
     func configureModule() -> UIViewController {
         let router = ConfirmationRouter()
         router.appRouter = appRouter
 
-        let presenter = ConfirmationPresenter()
+        let presenter = ConfirmationPresenter(uid: uid)
         presenter.router = router
 
         let interactor = ConfirmationInteractor()
         interactor.output = presenter
+        interactor.provider = provider
+        interactor.authTokenManager = authTokenManager
+        interactor.isRestore = isRestore
 
-        let viewController = ConfirmationViewController()
+        let viewController = ConfirmationViewController(phone)
         viewController.output = presenter
 
         presenter.interactor = interactor

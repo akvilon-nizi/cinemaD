@@ -22,15 +22,17 @@ enum Configurations {
     }
 
     var apiBaseURL: URL {
-        switch self {
-        case .debug, .internal:
-            guard let url = URL(string: "https://api.foodle.handh.ru/v1/") else {
-                fatalError("Wrong api base url")
-            }
-            return url
-        case .prerelease, .release:
-            // TODO: Find production url
-            fatalError("Need production url")
+        guard let url = URL(string: "https://cinemad.pr-solution.ru/api/") else {
+            fatalError("Wrong api base url")
         }
+     return url
+//        switch self {
+//        case .debug, .internal:
+//
+//            return url
+//        case .prerelease, .release:
+//            // TODO: Find production url
+//            fatalError("Need production url")
+//        }
     }
 }

@@ -6,9 +6,11 @@
 import Foundation
 
 protocol PhoneInteractorInput {
-
+    func sendSms(phone: String, phoneCorrect: String)
+    func sendUid(uid: String)
 }
 
 protocol PhoneInteractorOutput: class {
-
+    func getUid(phone: String, uid: String)
+    func showError()
 }

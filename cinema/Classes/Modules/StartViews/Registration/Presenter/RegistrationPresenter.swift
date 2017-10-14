@@ -24,10 +24,20 @@ extension RegistrationPresenter: RegistrationViewOutput {
     func backTap() {
         router.close()
     }
+
+    func nextButtonTap(password: String, name: String, phone: String, phoneIn: String) {
+        interactor.sendRegInfo(password: password, name: name, phone: phone, phoneIn: phoneIn)
+    }
 }
 
 // MARK: - RegistrationInteractorOutput
 
 extension RegistrationPresenter: RegistrationInteractorOutput {
+    func getUid(uid: String, phone: String) {
+        router.transitionToPhone(phone: phone, uid: uid)
+    }
 
+    func getError() {
+        view.showNetworkError()
+    }
 }

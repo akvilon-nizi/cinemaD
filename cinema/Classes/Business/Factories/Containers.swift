@@ -165,6 +165,7 @@ enum Containers {
             let configurator = AuthCinemaConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
@@ -182,15 +183,16 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: ConfirmationConfigurator.tag) { () -> UIViewController in
-            let configurator = ConfirmationConfigurator()
+        container.register(tag: ConfirmationConfigurator.tag) { (phone: String, uid: String, isRestore: Bool) -> UIViewController in
+            let configurator = ConfirmationConfigurator(uid: uid, phone: phone, isRestore: isRestore)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
-        container.register(tag: PhoneConfigurator.tag) { () -> UIViewController in
-            let configurator = PhoneConfigurator()
+        container.register(tag: PhoneConfigurator.tag) { (phone: String, uid: String) -> UIViewController in
+            let configurator = PhoneConfigurator(uid: uid, phone: phone)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()
@@ -350,7 +352,7 @@ enum Containers {
                         log.warning("Api token not found")
                         return endpoint
                     }
-                    newHTTPHeaderFields["Auth-Token"] = apiToken
+                    newHTTPHeaderFields["Authorization"] = apiToken
                     return endpoint.adding(newHTTPHeaderFields: newHTTPHeaderFields)
                 },
                 stubClosure: { (target: FoodleTarget) -> Moya.StubBehavior in

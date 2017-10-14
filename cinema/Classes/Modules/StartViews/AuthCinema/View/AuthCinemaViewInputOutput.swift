@@ -8,6 +8,8 @@ import Foundation
 protocol AuthCinemaViewInput: class {
 
     func setupInitialState()
+
+    func showNetworkError()
 }
 
 protocol AuthCinemaViewOutput {
@@ -18,5 +20,5 @@ protocol AuthCinemaViewOutput {
 
     func helpAuth()
 
-    func auth()
+    func auth(phone: String, password: String)
 }

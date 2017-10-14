@@ -6,9 +6,11 @@
 import Foundation
 
 protocol ConfirmationInteractorInput {
-
+    func getToken(code: String, uid: String)
+    func getCode(uid: String)
 }
 
 protocol ConfirmationInteractorOutput: class {
-
+    func successGetToken()
+    func faulireGetToken()
 }

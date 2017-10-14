@@ -17,8 +17,7 @@ class PhoneProfileTextView: ProfileTextView {
     let format: String
 
     init(format: String) {
-
-        self.format = format
+    self.format = format
         maskedDelegate = MaskedTextFieldDelegate(format: format)
 
         super.init(frame: .zero)

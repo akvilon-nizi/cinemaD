@@ -23,6 +23,7 @@ class RegistrationConfigurator {
 
         let interactor = RegistrationInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = RegistrationViewController()
         viewController.output = presenter

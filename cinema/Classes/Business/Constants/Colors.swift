@@ -91,11 +91,19 @@ extension UIColor {
         return UIColor(red: 72.0 / 255.0, green: 72.0 / 255.0, blue: 72.0 / 255.0, alpha: 1.0)
     }
 
+    class var cnmGreyColor1: UIColor {
+        return UIColor(red: 79.0 / 255.0, green: 79.0 / 255.0, blue: 79.0 / 255.0, alpha: 1.0)
+    }
+
     class var cnmGreyTextColor: UIColor {
         return UIColor(red: 101.0 / 255.0, green: 101.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
     }
 
     class var cnmSeparatorColor: UIColor {
         return UIColor(red: 239.0 / 255.0, green: 239.0 / 255.0, blue: 239.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmDadada: UIColor {
+        return UIColor(red: 218.0 / 255.0, green: 218.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
     }
 }
