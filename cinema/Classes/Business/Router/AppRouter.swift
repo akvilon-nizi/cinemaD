@@ -1,5 +1,4 @@
 //
-// Created by Александр Масленников on 24.07.17.
 // Copyright (c) 2017 Heads and Hands. All rights reserved.
 //
 
@@ -15,22 +14,7 @@ struct AlertControllerData {
 
 enum AppRouterDestination {
     case systemAlert(data: AlertControllerData)
-    case authPhone
-    case restaurants
-    case restaurantsMap(output: RestaurantsMapModuleOutput?)
-    case restaurantsList(output: RestaurantsListModuleOutput?)
-    case restaurant(id: Int)
-    case restaurantMenu(selectedCategoryID: Int, restaurant: FullRestaurant)
-    case cart
-    case authCode(phone: String, needToDismiss: Bool)
-    case categoryMenu(categoryID: Int, restaurant: FullRestaurant)
-    case region(selectedRegion: Region?, needToReturn: Bool)
-    case terms
-    case profile
-    case editProfile(profile: Profile, output: EditProfileModuleOutput)
     case slides
-    case cardOfProduct(productID: Int)
-    case myOrder
     case start
     case authCinema
     case registration
@@ -48,8 +32,8 @@ enum AppRouterDestination {
         switch self {
         case .systemAlert:
             return true
-        case let .authCode(_, needToDismiss):
-            return needToDismiss
+//        case let .authCode(_, needToDismiss):
+//            return needToDismiss
         default:
             return false
         }
@@ -60,38 +44,8 @@ enum AppRouterDestination {
             switch self {
             case let .systemAlert(data):
                 return try factory.resolve(tag: Containers.ViewControllerType.systemAlert, arguments: data)
-            case .authPhone:
-                return try factory.resolve(tag: AuthPhoneConfigurator.tag)
-            case .restaurants:
-                return try factory.resolve(tag: RestaurantsConfigurator.tag)
-            case let .restaurantsMap(output):
-                return try factory.resolve(tag: RestaurantsMapConfigurator.tag, arguments: output)
-            case let .restaurantsList(output):
-                return try factory.resolve(tag: RestaurantsListConfigurator.tag, arguments: output)
-            case let .restaurant(id):
-                return try factory.resolve(tag: RestaurantConfigurator.tag, arguments: id)
-            case let .restaurantMenu(selectedCategoryID, restaurant):
-                return try factory.resolve(tag: RestaurantMenuConfigurator.tag, arguments: selectedCategoryID, restaurant)
-            case .cart:
-                return try factory.resolve(tag: CartConfigurator.tag)
-            case let .authCode(phone, needToDismiss):
-                return try factory.resolve(tag: AuthCodeConfigurator.tag, arguments: phone, needToDismiss)
-            case let .categoryMenu(categoryID, restaurant):
-                return try factory.resolve(tag: CategoryMenuConfigurator.tag, arguments: categoryID, restaurant)
-            case let .region(region, needToReturn):
-                return try factory.resolve(tag: RegionConfigurator.tag, arguments: region, needToReturn)
-            case .terms:
-                return try factory.resolve(tag: TermsConfigurator.tag)
-            case .profile:
-                return try factory.resolve(tag: ProfileConfigurator.tag)
-            case let .editProfile(profile, output):
-                return try factory.resolve(tag: EditProfileConfigurator.tag, arguments: profile, output)
             case .slides:
                 return try factory.resolve(tag: SlidesConfigurator.tag)
-            case let .cardOfProduct(productID):
-                return try factory.resolve(tag: CardOfProductConfigurator.tag, arguments: productID)
-            case .myOrder:
-                return try factory.resolve(tag: MyOrderConfigurator.tag)
             case .start:
                 return try factory.resolve(tag: StartConfigurator.tag)
             case .authCinema:

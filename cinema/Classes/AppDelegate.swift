@@ -1,8 +1,7 @@
 //
 //  AppDelegate.swift
-//  foodle
+//  cinema
 //
-//  Created by Александр Масленников on 19.07.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.
 //
 

@@ -1,5 +1,4 @@
 //
-// Created by Александр Масленников on 31.07.17.
 // Copyright (c) 2017 Heads and Hands. All rights reserved.
 //
 

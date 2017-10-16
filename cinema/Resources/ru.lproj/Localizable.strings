@@ -1,99 +1,10 @@
 /* 
   Localizable.strings
-  foodle
+  cinema
 
-  Created by Александр Масленников on 20.07.17.
+  Created by User on 20.07.17.
   Copyright © 2017 Heads and Hands. All rights reserved.
 */
-
-// Modules
-
-"restaurant-rating-title" = "Рейтинг ресторана";
-"restaurant-price-title" = "Минимальная сумма заказа";
-"restaurant-table-title-able" = "Есть столик";
-"restaurant-table-title-check" = "Проверить столик";
-"restaurant-table-title-pickup" = "Только самовывоз";
-"restaurant-menu-title" = "Меню ресторана";
-"restaurant-favorite-meals-title" = "Любимые блюда";
-"restaurant-favorite-button-title" = "Добавить";
-
-"cart-empty-title" = "Корзина пуста";
-"cart-empty-message" = "Какой-то текст";
-"cart-button-title" = "К РЕСТОРАНАМ";
-"cart-confirm-button-title" = "ОФОРМИТЬ";
-"cart-clear-title" = "Очистить";
-
-"auth-confirm-number" = "Подтвердите номер";
-"auth-change-number" = "Изменить номер";
-"auth-code-send" = "На номер %@ отправлен код";
-"auth-resend-sms" = "Повторить SMS";
-"auth-wait-title" = "Через %@";
-"auth-retry-sms" = "Отправить потворно";
-"auth-title" = "Авторизируйтесь";
-"auth-description" = "Пожалуйста, введите номер своего телефона, чтоб авторизироваться";
-
-"region-main-title" = "Ваш регион";
-"region-main-description" = "Укажите ваше место расположения, от этого зависит список ресторанов.";
-"region-button-title" = "ДАЛЕЕ";
-"region-choose-button-title" = "ВЫБРАТЬ";
-
-"terms-main-title" = "Условия использования";
-"terms-button-title" = "ПРИНИМАЮ";
-
-"profile-save-button-title" = "СОХРАНИТЬ";
-"profile-name-placeholder" = "Имя";
-"profile-phone-placeholder" = "Телефон";
-"profile-city-placeholder" = "Ваш регион";
-"profile-email-placeholder" = "Электронная почта";
-"profile-gallery-title" = "Галерея";
-"profile-camera-title" = "Камера";
-"profile-cancel-title" = "Отмена";
-"profile-remove-title" = "Удалить";
-"profile-info-name-placeholder" = "Имя";
-"profile-info-phone-placeholder" = "Телефон";
-"profile-info-city-placeholder" = "Ваш регион";
-"profile-info-email-placeholder" = "E-mail";
-"profile-info-pre-placeholder" = "Введите";
-"profile-push-notifications-placeholder" = "Получать push-уведомления";
-"profile-name-validation-text" = "Некорректное имя";
-"profile-phone-validation-text" = "Некорректный номер";
-"profile-city-validation-text" = "Город не может быть пустым";
-"profile-email-validation-text" = "Некорректный email";
-"profile-camera-access-denied" = "Для открытия камеры необходимо разрешить доступ в настройках";
-"profile-gallery-access-denied" = "Для открытия галереи необходимо разрешить доступ в настройках";
-"profile-settings-title" = "Настройки";
-
-"slides-next-button-title" = "Пропустить";
-
-"card-product-fake-description" = "Тесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красный Тесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красныйТесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красныйТесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красный Тесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красныйТесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красныйТесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красный Тесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красныйТесто, пицца соус, сыр моцарелла, свинина, ветчина, кура, пепперони, помидоры, шампиньоны, огурцы маринованные, лук красный";
-"card-product-button-add" = "Добавить";
-"card-product-info" = "%@ г\n%@ кКал/100 г";
-"card-product-price" = "%@ ₽";
-
-"my-orders-main-title" = "Мои заказы";
-"my-orders-today" = "Сегодня";
-"my-orders-tomorrow" = "Завтра";
-"my-orders-booking" = "Бронь № %@";
-"my-orders-export" = "Самовывоз № %@";
-"my-orders-price" = "%@ ₽";
-"my-orders-in-time" = "в %@";
-"my-orders-on-persons" = "на %@";
-"my-orders-current" = "Текущие";
-"my-orders-upcoming" = "Предстоящие";
-"my-orders-past" = "Прошедшие";
-
-// Views
-
-"indication-title-loading" = "Загружается...";
-"indication-title-error" = "Что-то пошло не так";
-"indication-button-reload" = "Обновить";
-
-"slide-first-title" = "Наличие столиков";
-"slide-first-description" = "Вы всегда сможете проверить\nналичие свободных столиков\nв любом из ресторанов";
-"slide-second-title" = "Закажите заранее";
-"slide-second-description" = "Делайте заказ до того,\nкак прибыли в ресторан,\nэкономьте свое время.";
-"slide-third-title" = "Оплата без рисков";
-"slide-third-description" = "Оплачивайте заказ\nчерез приложение.\nЭто удобно и безопасно.";
 
 // Alert
 

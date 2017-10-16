@@ -13,13 +13,13 @@ class SlidesPresenter {
     var router: SlidesRouterInput!
     weak var output: SlidesModuleOutput?
     let slidesArrayInfo: [SlideStruct] = [
-        SlideStruct(image: Asset.Slide.slideImageFirst.image,
+        SlideStruct(image: Asset.Cinema.assa.image,
                     title: L10n.slide1TitleText,
                     descriprion: L10n.slide1DescriptionText, mainView: Slide1View()),
-        SlideStruct(image: Asset.Slide.slideImageSecond.image,
+        SlideStruct(image: Asset.Cinema.assa.image,
                     title: L10n.slide2TitleText,
                     descriprion: L10n.slide2DescriptionText, mainView: Slide2View()),
-        SlideStruct(image: Asset.Slide.slideImageThird.image,
+        SlideStruct(image: Asset.Cinema.assa.image,
                     title: L10n.slide3TitleText,
                     descriprion: L10n.slide3DescriptionText, mainView: Slide3View())
     ]

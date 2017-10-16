@@ -59,8 +59,7 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = CartCell()
+        let cell = UITableViewCell()
 
 //        cell.setData(products[indexPath.row])
 //        cell.delegate = self

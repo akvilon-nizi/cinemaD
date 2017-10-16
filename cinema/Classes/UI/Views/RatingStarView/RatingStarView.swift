@@ -1,5 +1,4 @@
 //
-// Created by Александр Масленников on 15.08.17.
 // Copyright (c) 2017 Heads and Hands. All rights reserved.
 //
 
@@ -20,7 +19,7 @@ class RatingStarView: UIView {
     }
 
     private let ratingLabel = UILabel()
-    private let starImageView = UIImageView(image: Asset.RatingStar.ratingStarSmall.image)
+    private let starImageView = UIImageView()
 
     required init(coder _: NSCoder) {
         fatalError("NSCoding not supported")
