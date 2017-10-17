@@ -71,12 +71,17 @@ class PhoneViewController: ParentViewController {
         } else {
             maskedDelegate?.listener = self
             phoneField.textField.delegate = maskedDelegate
+            phoneField.textField.text = "+7 ("
+            phoneField.textField.keyboardType = .phonePad
         }
 
         nextButton.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
         contentView.addSubview(nextButton.prepareForAutoLayout())
         nextButton.centerXAnchor ~= contentView.centerXAnchor
         nextButton.topAnchor ~= phoneField.bottomAnchor + 49
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
     }
 
     // MARK: - Actions
@@ -101,15 +106,19 @@ class PhoneViewController: ParentViewController {
         return phone.replacingOccurrences(
             of: "(", with: "",
             options: NSString.CompareOptions.literal,
-            range:nil).replacingOccurrences(
+            range: nil).replacingOccurrences(
                 of: ")",
                 with: "",
                 options: NSString.CompareOptions.literal,
-                range:nil).replacingOccurrences(
+                range: nil).replacingOccurrences(
                     of: " ",
-                    with:"",
+                    with: "",
                     options: NSString.CompareOptions.literal,
-                    range:nil)
+                    range: nil)
+    }
+
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
 }
 

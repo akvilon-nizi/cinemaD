@@ -41,6 +41,7 @@ enum Containers {
             let configurator = SlidesConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.firstLaunchManager = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 

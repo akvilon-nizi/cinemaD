@@ -19,6 +19,7 @@ extension MainPresenter: MainViewOutput {
 
     func viewIsReady() {
         log.verbose("Main is ready")
+        interactor.getTrailers()
     }
 }
 

@@ -40,6 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         Fabric.with([Crashlytics.self])
 
+        UIApplication.shared.statusBarStyle = .lightContent
+        UINavigationBar.appearance().clipsToBounds = true
+        if let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+            statusBar.backgroundColor = UIColor.white
+        }
+
         return true
     }
 

@@ -62,11 +62,16 @@ class MainTabView: UIView {
         kinobaseButton.addTarget(self, action: #selector(kinobaseTapped), for: .touchUpInside)
 
         let backgroundImage = UIImageView(image: Asset.Cinema.MainTab.tabBackground.image)
+        backgroundImage.contentMode = .scaleToFill
+        backgroundImage.layer.masksToBounds = true
         addSubview(backgroundImage.prepareForAutoLayout())
-        backgroundImage.pinEdgesToSuperviewEdges()
+        backgroundImage.topAnchor ~= topAnchor - 6
+        backgroundImage.bottomAnchor ~= bottomAnchor + 6
+        backgroundImage.leadingAnchor ~= leadingAnchor
+        backgroundImage.trailingAnchor ~= trailingAnchor
 
         let stackView = createStackView(.horizontal, .center, .fillEqually, 20.0,
-                                        with:[ticketsButton, rewardsButton, profileButton, chatButton, kinobaseButton])
+                                        with: [ticketsButton, rewardsButton, profileButton, chatButton, kinobaseButton])
 
         addSubview(stackView.prepareForAutoLayout())
         stackView.pinEdgesToSuperviewEdges()

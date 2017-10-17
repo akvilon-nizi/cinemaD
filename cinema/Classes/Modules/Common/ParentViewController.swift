@@ -23,12 +23,13 @@ class ParentViewController: UIViewController {
 
         view.backgroundColor = .white
         navigationItem.titleView = titleViewLabel
+        navigationController?.navigationBar.backgroundColor = .white
 
         view.addSubview(mainTabView.prepareForAutoLayout())
         mainTabView.widthAnchor ~= view.widthAnchor
         mainTabView.heightAnchor ~= 80
         mainTabView.leadingAnchor ~= view.leadingAnchor
-        mainTabView.bottomAnchor ~= view.bottomAnchor + 4
+        mainTabView.bottomAnchor ~= view.bottomAnchor
         mainTabView.isHidden = true
 
         view.addSubview(activityVC.prepareForAutoLayout())

@@ -49,6 +49,9 @@ class AuthCinemaViewController: ParentViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
     }
 
     private func addTopView() {
@@ -69,6 +72,8 @@ class AuthCinemaViewController: ParentViewController {
         let stackView = createStackView(.vertical, .fill, .fill, 29.0, with: [phoneField, passwordField])
         phoneField.textField.placeholder = L10n.authPhonePlaceholder
         phoneField.textField.delegate = maskedDelegate
+        phoneField.textField.text = "+7 ("
+        phoneField.textField.keyboardType = .phonePad
         passwordField.textField.placeholder = L10n.authPasswordPlaceholder
         passwordField.textField.delegate = self
         passwordField.textField.isSecureTextEntry = true
@@ -164,6 +169,10 @@ class AuthCinemaViewController: ParentViewController {
 
         }
         //        }
+    }
+
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
 }
 

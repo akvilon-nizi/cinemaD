@@ -38,10 +38,10 @@ class YoutubeViewCell: UICollectionViewCell {
     private func loadYT() {
         youtubeView.load(withVideoId: "", playerVars: [
             "playsinline": 1,
-            "showinfo": 0,
             "disablekb": 1,
             "iv_load_policy": 3,
-            "rel": 0
+            "rel": 0,
+            "modestbranding": 1
             ])
     }
 

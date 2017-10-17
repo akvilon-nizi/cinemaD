@@ -6,7 +6,7 @@
 import Foundation
 
 protocol MainInteractorInput {
-
+    func getTrailers()
 }
 
 protocol MainInteractorOutput: class {

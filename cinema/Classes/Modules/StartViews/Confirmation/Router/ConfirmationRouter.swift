@@ -22,6 +22,8 @@ extension ConfirmationRouter: ConfirmationRouterInput {
     }
 
     func transitionToMain() {
-        appRouter.transition(to: .main)
+        OperationQueue.main.addOperation {
+            self.appRouter.mainView()
+        }
     }
 }

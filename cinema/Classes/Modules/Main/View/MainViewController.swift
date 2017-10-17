@@ -43,7 +43,10 @@ class MainViewController: ParentViewController {
         tableView.dataSource = self
 
         view.addSubview(tableView.prepareForAutoLayout())
-        tableView.pin(to: view, edgesInsets: UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0))
+        tableView.topAnchor ~= view.topAnchor
+        tableView.leadingAnchor ~= view.leadingAnchor
+        tableView.trailingAnchor ~= view.trailingAnchor
+        tableView.bottomAnchor ~= mainTabView.topAnchor
 
         mainTabView.delegate = self
     }

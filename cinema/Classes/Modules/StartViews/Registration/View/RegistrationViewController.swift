@@ -50,6 +50,9 @@ class RegistrationViewController: ParentViewController {
         addTopView()
         addStackView()
         addBottomView()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
     }
 
     private func addTopView() {
@@ -75,6 +78,8 @@ class RegistrationViewController: ParentViewController {
         nameField.textField.delegate = self
         phoneField.textField.delegate = maskedDelegate
         phoneField.textField.tag = 1
+        phoneField.textField.text = "+7 ("
+        phoneField.textField.keyboardType = .phonePad
         passwordField.textField.delegate = self
         passwordField.textField.tag = 2
 
@@ -183,6 +188,10 @@ class RegistrationViewController: ParentViewController {
         super.viewWillAppear(animated)
         activityVC.isHidden = true
         activityVC.stopAnimating()
+    }
+
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
 }
 

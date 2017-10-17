@@ -14,6 +14,10 @@ enum FoodleTarget {
     case restoreFromUid(uid: String, code: String)
     case sendCode(phone: String)
     case checkCode(phone: String, code: String)
+    case films
+    case film(filmID: String)
+    case persons
+    case person(personID: String)
     case restaurant(restaurantID: Int)
     case product(productID: Int)
     case products(restaurantID: Int, categoryID: Int, count: Int, page: Int)
@@ -25,6 +29,7 @@ enum FoodleTarget {
     case clearCart
     case cities
     case terms
+    case trailersFilms
     case users(id: Int)
     case updateProfile(profile: Profile)
     case updateRegion(cityID: Int)
@@ -62,6 +67,16 @@ extension FoodleTarget: TargetType {
             return "auth/send-code"
         case .checkCode:
             return "auth/check-code"
+        case .trailersFilms:
+            return "trailers"
+        case .films:
+            return "films"
+        case let .film(filmID):
+            return "films/\(filmID)"
+        case .persons:
+            return "persons"
+        case let .person(personID):
+            return "persons/\(personID)"
         case .restaurants:
             return "restaurants"
         case let .restaurant(restaurantID):
@@ -110,7 +125,7 @@ extension FoodleTarget: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .restaurants, .restaurant, .products, .cart, .cities, .terms, .users, .product, .orders:
+    case .restaurants, .restaurant, .products, .cart, .cities, .terms, .users, .product, .orders, .trailersFilms, .films, .film, .persons,.person:
             return .get
         case .decrementProductCount, .clearCart, .removeAvatar:
             return .delete
@@ -214,7 +229,7 @@ extension FoodleTarget: TargetType {
     var task: Task {
         switch self {
         case let .uploadData(data):
-            return .upload(.multipart([MultipartFormData(provider: .data(data), name: "body", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+        return .upload(.multipart([MultipartFormData(provider: .data(data), name: "body", fileName: "photo.jpg", mimeType: "image/jpeg")]))
         default:
             return .request
         }
