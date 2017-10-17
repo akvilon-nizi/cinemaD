@@ -65,8 +65,8 @@ class MainTabView: UIView {
         backgroundImage.contentMode = .scaleToFill
         backgroundImage.layer.masksToBounds = true
         addSubview(backgroundImage.prepareForAutoLayout())
-        backgroundImage.topAnchor ~= topAnchor - 6
-        backgroundImage.bottomAnchor ~= bottomAnchor + 6
+        backgroundImage.topAnchor ~= topAnchor - 50
+        backgroundImage.bottomAnchor ~= bottomAnchor + 50
         backgroundImage.leadingAnchor ~= leadingAnchor
         backgroundImage.trailingAnchor ~= trailingAnchor
 

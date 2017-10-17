@@ -42,6 +42,12 @@ class MainViewController: ParentViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
+        view.addSubview(mainTabView.prepareForAutoLayout())
+        mainTabView.widthAnchor ~= view.widthAnchor
+        mainTabView.heightAnchor ~= 80
+        mainTabView.leadingAnchor ~= view.leadingAnchor
+        mainTabView.bottomAnchor ~= view.bottomAnchor
+
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.topAnchor ~= view.topAnchor
         tableView.leadingAnchor ~= view.leadingAnchor
