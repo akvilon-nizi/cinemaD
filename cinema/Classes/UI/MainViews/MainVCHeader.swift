@@ -12,7 +12,7 @@ class MainVCHeader: UITableViewHeaderFooterView {
     let titleLabel: UILabel = UILabel()
 
     var trailers: [String] = [] {
-        didSet{
+        didSet {
              collectionView.reloadData()
         }
     }
@@ -46,7 +46,9 @@ class MainVCHeader: UITableViewHeaderFooterView {
         collectionView.pinEdgesToSuperviewEdges()
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.allowsSelection = true
         collectionView.reloadData()
+
     }
 }
 
@@ -61,7 +63,9 @@ extension MainVCHeader: UICollectionViewDelegateFlowLayout {
 
 extension MainVCHeader: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        if let cell = collectionView.cellForItem(at: indexPath) as? YoutubeViewCell {
+            cell.playVideo()
+        }
     }
 }
 

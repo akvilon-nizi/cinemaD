@@ -13,24 +13,26 @@ class YoutubeViewCell: UICollectionViewCell {
     fileprivate let youtubeView = YTPlayerView()
     fileprivate let isShowYoutube = false
     fileprivate let previewImageView = UIImageView()
-    fileprivate let playButton = UIButton(type: .system)
+    fileprivate let playButton = UIImageView(image: Asset.Cinema.play.image)
 
     var isLoad: Bool = false
     var isPlay: Bool = true
 
-    var idVideo: String = ""
-//    {
-//        didSet {
-//            if let url = URL(string: idVideo),
-//                url.absoluteString.contains("youtube.com/embed/") {
-//
-//                let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
-//                if path != "" {
-//                     previewImageView.kf.setImage(with: URL(string: String(format: "https://img.youtube.com/vi/%@/maxresdefault.jpg", path)))
-//                }
-//            }
-//        }
-//    }
+    let activityVC = UIActivityIndicatorView()
+
+    var idVideo: String = "" {
+        didSet {
+            if let url = URL(string: idVideo),
+                url.absoluteString.contains("youtube.com/embed/") {
+
+                let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
+                if path != "" {
+                     previewImageView.kf.setImage(with: URL(string: String(format: "https://img.youtube.com/vi/%@/maxresdefault.jpg", path)))
+//                  youtubeView.frame = previewImageView.frame
+                }
+            }
+        }
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -45,37 +47,47 @@ class YoutubeViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        addSubview(youtubeView.prepareForAutoLayout())
+        contentView.addSubview(youtubeView.prepareForAutoLayout())
         youtubeView.pinEdgesToSuperviewEdges()
         youtubeView.layer.cornerRadius = 5.0
         youtubeView.layer.masksToBounds = true
-
+        youtubeView.isUserInteractionEnabled = false
         youtubeView.delegate = self
 
-//        addSubview(previewImageView.prepareForAutoLayout())
-//        previewImageView.pinEdgesToSuperviewEdges()
-//        previewImageView.kf.indicatorType = .activity
-//        previewImageView.layer.cornerRadius = 5.0
-//        previewImageView.layer.masksToBounds = true
+        contentView.addSubview(previewImageView.prepareForAutoLayout())
+        previewImageView.pinEdgesToSuperviewEdges()
+        previewImageView.kf.indicatorType = .activity
+        previewImageView.layer.cornerRadius = 5.0
+        previewImageView.layer.masksToBounds = true
 
-//        playButton.setImage(Asset.Cinema.play.image, for: .normal)
-//        previewImageView.addSubview(playButton.prepareForAutoLayout())
-//        playButton.centerXAnchor ~= previewImageView.centerXAnchor
-//        playButton.centerYAnchor ~= previewImageView.centerYAnchor
-//        playButton.heightAnchor ~= 51
-//        playButton.widthAnchor ~= 51
+        previewImageView.addSubview(playButton.prepareForAutoLayout())
+        playButton.centerXAnchor ~= previewImageView.centerXAnchor
+        playButton.centerYAnchor ~= previewImageView.centerYAnchor
+        playButton.heightAnchor ~= 51
+        playButton.widthAnchor ~= 51
 
-//        playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+        previewImageView.addSubview(activityVC.prepareForAutoLayout())
+        activityVC.centerXAnchor ~= previewImageView.centerXAnchor
+        activityVC.centerYAnchor ~= previewImageView.centerYAnchor
+        activityVC.activityIndicatorViewStyle = .whiteLarge
+        activityVC.color = UIColor.cnmGreyDark
+
+        activityVC.isHidden = true
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(playVideo))
-//        tap.delegate = self
         previewImageView.addGestureRecognizer(tap)
-//        loadPlayer()
+        loadPlayer()
+
     }
 
     func playVideo() {
+
         youtubeView.playVideo()
-        bringSubview(toFront: youtubeView)
+        youtubeView.isUserInteractionEnabled = true
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        playButton.isHidden = true
+
     }
     func loadYT() {
         youtubeView.load(withVideoId: "", playerVars: [
@@ -101,6 +113,11 @@ class YoutubeViewCell: UICollectionViewCell {
 
                     let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
                     if path != "" {
+                        youtubeView.pauseVideo()
+                        contentView.bringSubview(toFront: previewImageView)
+                        contentView.sendSubview(toBack: youtubeView)
+                        youtubeView.isUserInteractionEnabled = false
+                        playButton.isHidden = false
                         youtubeView.cueVideo(
                             byId: path,
                             startSeconds: self.youtubeView.currentTime(),
@@ -122,8 +139,11 @@ class YoutubeViewCell: UICollectionViewCell {
 extension YoutubeViewCell: YTPlayerViewDelegate {
 
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
-        if state == .queued {
-//            youtubeView.playVideo()
+        if state == .playing {
+            activityVC.isHidden = true
+            activityVC.stopAnimating()
+            contentView.sendSubview(toBack: previewImageView)
+            contentView.bringSubview(toFront: youtubeView)
         }
     }
 
