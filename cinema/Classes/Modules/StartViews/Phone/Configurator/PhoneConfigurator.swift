@@ -14,6 +14,15 @@ class PhoneConfigurator {
 
     var appRouter: AppRouterProtocol!
 
+    let phone: String
+
+    let uid: String
+
+    init(uid: String, phone: String) {
+        self.uid = uid
+        self.phone = phone
+    }
+
     func configureModule() -> UIViewController {
         let router = PhoneRouter()
         router.appRouter = appRouter
@@ -23,9 +32,12 @@ class PhoneConfigurator {
 
         let interactor = PhoneInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = PhoneViewController()
         viewController.output = presenter
+        viewController.phone = phone
+        viewController.uid = uid
 
         presenter.interactor = interactor
         presenter.view = viewController

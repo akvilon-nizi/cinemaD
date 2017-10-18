@@ -14,6 +14,8 @@ class AuthCinemaConfigurator {
 
     var provider: RxMoyaProvider<FoodleTarget>!
 
+    var authTokenManager: AuthTokenManagerProtocol!
+
     func configureModule() -> UIViewController {
         let router = AuthCinemaRouter()
         router.appRouter = appRouter
@@ -23,6 +25,8 @@ class AuthCinemaConfigurator {
 
         let interactor = AuthCinemaInteractor()
         interactor.output = presenter
+        interactor.provider = provider
+        interactor.authTokenManager = authTokenManager
 
         let viewController = AuthCinemaViewController()
         viewController.output = presenter

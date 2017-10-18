@@ -8,6 +8,8 @@ import Foundation
 protocol PhoneViewInput: class {
 
     func setupInitialState()
+
+    func showNetworkError()
 }
 
 protocol PhoneViewOutput {
@@ -16,6 +18,6 @@ protocol PhoneViewOutput {
 
     func backTap()
 
-    func next()
+    func next(phone: String, uid: String?, phoneCorrect: String?)
 
 }

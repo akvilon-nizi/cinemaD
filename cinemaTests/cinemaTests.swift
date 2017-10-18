@@ -1,8 +1,7 @@
 //
-//  foodleTests.swift
-//  foodleTests
+//  cinemaTests.swift
+//  cinemaTests
 //
-//  Created by Александр Масленников on 20.07.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.
 //
 

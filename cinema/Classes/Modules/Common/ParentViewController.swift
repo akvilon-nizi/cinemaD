@@ -1,5 +1,4 @@
 //
-// Created by Александр Масленников on 25.07.17.
 // Copyright (c) 2017 Heads and Hands. All rights reserved.
 //
 
@@ -15,11 +14,24 @@ class ParentViewController: UIViewController {
         return label
     }()
 
+    let activityVC = UIActivityIndicatorView()
+
+    let mainTabView = MainTabView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
         navigationItem.titleView = titleViewLabel
+        navigationController?.navigationBar.backgroundColor = .white
+
+        view.addSubview(activityVC.prepareForAutoLayout())
+        activityVC.centerXAnchor ~= view.centerXAnchor
+        activityVC.centerYAnchor ~= view.centerYAnchor
+        activityVC.activityIndicatorViewStyle = .whiteLarge
+        activityVC.color = UIColor.cnmGreyDark
+
+        activityVC.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,5 +42,19 @@ class ParentViewController: UIViewController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
+    }
+
+    func showAlert(message: String) {
+
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: UIAlertControllerStyle.alert)
+
+        let cancelAction = UIAlertAction(title: "OK",
+                                         style: .cancel, handler: nil)
+
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+
     }
 }

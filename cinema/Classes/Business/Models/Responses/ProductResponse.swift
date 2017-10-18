@@ -1,6 +1,6 @@
 //
 //  ProductResponse.swift
-//  foodle
+//  cinema
 //
 //  Created by Mac on 04.09.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.

@@ -10,5 +10,5 @@ protocol ConfirmationRouterInput: BaseRouterInput {
 
     func transitionToAuth()
 
-    func transitionToNewPassword()
+    func transitionToMain()
 }

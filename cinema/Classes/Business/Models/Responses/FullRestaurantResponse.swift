@@ -1,6 +1,6 @@
 //
 //  FullRestaurantResponse.swift
-//  foodle
+//  cinema
 //
 //  Created by incetro on 17/08/2017.
 //  Copyright © 2017 Heads and Hands. All rights reserved.

@@ -7,4 +7,5 @@ import Foundation
 
 protocol RegistrationRouterInput: BaseRouterInput {
     func close()
+    func transitionToPhone(phone: String, uid: String)
 }

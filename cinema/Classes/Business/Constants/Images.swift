@@ -45,23 +45,21 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
-  enum Auth {
-    static let authClock = ImageAsset(name: "auth-clock")
-    static let authClose = ImageAsset(name: "auth-close")
-    static let authConfirmationImage = ImageAsset(name: "auth-confirmation-image")
-    static let authImage = ImageAsset(name: "auth-image")
-  }
-  enum CardProduct {
-    static let cardMinus = ImageAsset(name: "card-minus")
-    static let cardPlus = ImageAsset(name: "card-plus")
-    static let cardProductClose = ImageAsset(name: "card-product-close")
-  }
-  enum Cart {
-    static let cartEmptyPlaceholder = ImageAsset(name: "cart-empty-placeholder")
-    static let cartMinus = ImageAsset(name: "cart-minus")
-    static let cartPlus = ImageAsset(name: "cart-plus")
-  }
   enum Cinema {
+    static let aqqa = ImageAsset(name: "aqqa")
+    static let assa = ImageAsset(name: "assa")
+    enum MainTab {
+      static let chat = ImageAsset(name: "chat")
+      static let kinobase = ImageAsset(name: "kinobase")
+      static let reward = ImageAsset(name: "reward")
+      static let tabBackground = ImageAsset(name: "tabBackground")
+      static let tickets = ImageAsset(name: "tickets")
+    }
+    enum MainView {
+      static let isClose = ImageAsset(name: "isClose")
+      static let isOpen = ImageAsset(name: "isOpen")
+    }
+    static let play = ImageAsset(name: "play")
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
       static let slide2Image = ImageAsset(name: "slide2-image")
@@ -73,73 +71,12 @@ enum Asset {
       static let slide3Image5 = ImageAsset(name: "slide3-image5")
     }
   }
-  static let fakeRestaurantPhoto = ImageAsset(name: "fake-restaurant-photo")
-  enum Indicator {
-    static let indicationIconError = ImageAsset(name: "indication-icon-error")
-    static let indicationIconLoading = ImageAsset(name: "indication-icon-loading")
-  }
-  enum Map {
-    static let mapButtonMyGeo = ImageAsset(name: "map-button-my-geo")
-    static let mapPinIconMyGeo = ImageAsset(name: "map-pin-icon-my-geo")
-    static let mapPinIconSelected = ImageAsset(name: "map-pin-icon-selected")
-    static let mapPinIcon = ImageAsset(name: "map-pin-icon")
-  }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
     static let navBarList = ImageAsset(name: "nav-bar-list")
     static let navBarLogo = ImageAsset(name: "nav-bar-logo")
     static let navBarMap = ImageAsset(name: "nav-bar-map")
     static let navBarMenu = ImageAsset(name: "nav-bar-menu")
-  }
-  enum Profile {
-    enum Profile {
-      static let profileArrow = ImageAsset(name: "profile-arrow")
-      static let profileCamera = ImageAsset(name: "profile-camera")
-      static let profileEdit = ImageAsset(name: "profile-edit")
-      static let profileHeader = ImageAsset(name: "profile-header")
-      static let profilePlus = ImageAsset(name: "profile-plus")
-    }
-    static let profileArrow = ImageAsset(name: "profile-arrow")
-    static let profileCamera = ImageAsset(name: "profile-camera")
-    static let profileEdit = ImageAsset(name: "profile-edit")
-    static let profileHeader = ImageAsset(name: "profile-header")
-    static let profilePlus = ImageAsset(name: "profile-plus")
-    enum RatingStar {
-      static let ratingStarSmall = ImageAsset(name: "rating-star-small")
-    }
-    enum Region {
-      static let regionCheckImage = ImageAsset(name: "region-check-image")
-      static let regionMainImage = ImageAsset(name: "region-main-image")
-    }
-    enum Restaurant {
-      static let restaurantInfoRatingStar = ImageAsset(name: "restaurant-info-rating-star")
-      static let restaurantMenuArrow = ImageAsset(name: "restaurant-menu-arrow")
-      static let restaurantMenuCart = ImageAsset(name: "restaurant-menu-cart")
-      static let restaurantSpinner = ImageAsset(name: "restaurant-spinner")
-    }
-    enum Slide {
-      static let slideImageFirst = ImageAsset(name: "slide-image-first")
-      static let slideImageSecond = ImageAsset(name: "slide-image-second")
-      static let slideImageThird = ImageAsset(name: "slide-image-third")
-    }
-  }
-  enum RatingStar {
-    static let ratingStarSmall = ImageAsset(name: "rating-star-small")
-  }
-  enum Region {
-    static let regionCheckImage = ImageAsset(name: "region-check-image")
-    static let regionMainImage = ImageAsset(name: "region-main-image")
-  }
-  enum Restaurant {
-    static let restaurantInfoRatingStar = ImageAsset(name: "restaurant-info-rating-star")
-    static let restaurantMenuArrow = ImageAsset(name: "restaurant-menu-arrow")
-    static let restaurantMenuCart = ImageAsset(name: "restaurant-menu-cart")
-    static let restaurantSpinner = ImageAsset(name: "restaurant-spinner")
-  }
-  enum Slide {
-    static let slideImageFirst = ImageAsset(name: "slide-image-first")
-    static let slideImageSecond = ImageAsset(name: "slide-image-second")
-    static let slideImageThird = ImageAsset(name: "slide-image-third")
   }
   enum StartViews {
     static let auth = ImageAsset(name: "auth")
@@ -161,16 +98,16 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
-    Auth.authClock,
-    Auth.authClose,
-    Auth.authConfirmationImage,
-    Auth.authImage,
-    CardProduct.cardMinus,
-    CardProduct.cardPlus,
-    CardProduct.cardProductClose,
-    Cart.cartEmptyPlaceholder,
-    Cart.cartMinus,
-    Cart.cartPlus,
+    Cinema.aqqa,
+    Cinema.assa,
+    Cinema.MainTab.chat,
+    Cinema.MainTab.kinobase,
+    Cinema.MainTab.reward,
+    Cinema.MainTab.tabBackground,
+    Cinema.MainTab.tickets,
+    Cinema.MainView.isClose,
+    Cinema.MainView.isOpen,
+    Cinema.play,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
     Cinema.Slides.slide2Play,
@@ -179,48 +116,11 @@ enum Asset {
     Cinema.Slides.slide3Image3,
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
-    fakeRestaurantPhoto,
-    Indicator.indicationIconError,
-    Indicator.indicationIconLoading,
-    Map.mapButtonMyGeo,
-    Map.mapPinIconMyGeo,
-    Map.mapPinIconSelected,
-    Map.mapPinIcon,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,
     NavBar.navBarMap,
     NavBar.navBarMenu,
-    Profile.Profile.profileArrow,
-    Profile.Profile.profileCamera,
-    Profile.Profile.profileEdit,
-    Profile.Profile.profileHeader,
-    Profile.Profile.profilePlus,
-    Profile.profileArrow,
-    Profile.profileCamera,
-    Profile.profileEdit,
-    Profile.profileHeader,
-    Profile.profilePlus,
-    Profile.RatingStar.ratingStarSmall,
-    Profile.Region.regionCheckImage,
-    Profile.Region.regionMainImage,
-    Profile.Restaurant.restaurantInfoRatingStar,
-    Profile.Restaurant.restaurantMenuArrow,
-    Profile.Restaurant.restaurantMenuCart,
-    Profile.Restaurant.restaurantSpinner,
-    Profile.Slide.slideImageFirst,
-    Profile.Slide.slideImageSecond,
-    Profile.Slide.slideImageThird,
-    RatingStar.ratingStarSmall,
-    Region.regionCheckImage,
-    Region.regionMainImage,
-    Restaurant.restaurantInfoRatingStar,
-    Restaurant.restaurantMenuArrow,
-    Restaurant.restaurantMenuCart,
-    Restaurant.restaurantSpinner,
-    Slide.slideImageFirst,
-    Slide.slideImageSecond,
-    Slide.slideImageThird,
     StartViews.auth,
     StartViews.Confirmation.lock,
     StartViews.Help.phone,

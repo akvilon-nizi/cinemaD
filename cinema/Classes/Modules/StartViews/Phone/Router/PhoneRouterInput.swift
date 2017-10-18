@@ -7,5 +7,5 @@ import Foundation
 
 protocol PhoneRouterInput: BaseRouterInput {
     func close()
-    func transitionToConfirmation()
+    func transitionToConfirmation(phone: String, uid: String, isRestore: Bool)
 }

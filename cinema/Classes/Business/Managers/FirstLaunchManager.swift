@@ -1,6 +1,6 @@
 //
 //  FirstLaunchManager.swift
-//  foodle
+//  cinema
 //
 //  Created by Mac on 30.08.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.

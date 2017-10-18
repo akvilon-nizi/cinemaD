@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import InputMask
 
 class PhoneViewController: ParentViewController {
 
@@ -13,6 +14,10 @@ class PhoneViewController: ParentViewController {
     let titleLabel = UILabel()
     let phoneField = TextFieldWithSeparator()
     let nextButton = UIButton(type: .system).setTitleWithColor(title: L10n.phoneNextButtonText, color: UIColor.cnmMainOrange)
+    var phone: String = ""
+    var uid: String = ""
+
+    var maskedDelegate: MaskedTextFieldDelegate?
 
     // MARK: - Life cycle
 
@@ -21,6 +26,7 @@ class PhoneViewController: ParentViewController {
     }
 
     init() {
+        maskedDelegate = MaskedTextFieldDelegate(format: "{+7} ([000]) [000] [00] [00]")
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -54,12 +60,28 @@ class PhoneViewController: ParentViewController {
         phoneField.textField.placeholder = L10n.phonePhonePlaceholder
         contentView.addSubview(phoneField.prepareForAutoLayout())
         phoneField.centerXAnchor ~= contentView.centerXAnchor
+        phoneField.leadingAnchor ~= contentView.leadingAnchor
+        phoneField.trailingAnchor ~= contentView.trailingAnchor
         phoneField.topAnchor ~= titleLabel.bottomAnchor + 32
+
+        if !phone.isEmpty {
+            phoneField.textField.text = phone
+            phoneField.textField.isUserInteractionEnabled = false
+            phoneField.textField.delegate = self
+        } else {
+            maskedDelegate?.listener = self
+            phoneField.textField.delegate = maskedDelegate
+            phoneField.textField.text = "+7 ("
+            phoneField.textField.keyboardType = .phonePad
+        }
 
         nextButton.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
         contentView.addSubview(nextButton.prepareForAutoLayout())
         nextButton.centerXAnchor ~= contentView.centerXAnchor
         nextButton.topAnchor ~= phoneField.bottomAnchor + 49
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
     }
 
     // MARK: - Actions
@@ -68,7 +90,35 @@ class PhoneViewController: ParentViewController {
     }
 
     func didTapNextButton() {
-        output?.next()
+        if !phone.isEmpty {
+            output?.next(phone: phone, uid: uid, phoneCorrect: nil)
+        } else {
+            if let phoneCorrect = phoneField.textField.text,
+                phoneCorrecting(phone: phoneCorrect).characters.count == 12 {
+                output?.next(phone: phone, uid: nil, phoneCorrect: phoneCorrecting(phone: phoneCorrect))
+            } else {
+                showAlert(message: L10n.alertCinemaCorrectErrror)
+            }
+        }
+    }
+
+    private func phoneCorrecting(phone: String) -> String {
+        return phone.replacingOccurrences(
+            of: "(", with: "",
+            options: NSString.CompareOptions.literal,
+            range: nil).replacingOccurrences(
+                of: ")",
+                with: "",
+                options: NSString.CompareOptions.literal,
+                range: nil).replacingOccurrences(
+                    of: " ",
+                    with: "",
+                    options: NSString.CompareOptions.literal,
+                    range: nil)
+    }
+
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
 }
 
@@ -79,4 +129,23 @@ extension PhoneViewController: PhoneViewInput {
     func setupInitialState() {
 
     }
+
+    func showNetworkError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension PhoneViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+}
+
+extension PhoneViewController: MaskedTextFieldDelegateListener {
 }

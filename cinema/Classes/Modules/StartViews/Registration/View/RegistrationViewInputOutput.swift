@@ -8,6 +8,8 @@ import Foundation
 protocol RegistrationViewInput: class {
 
     func setupInitialState()
+
+    func showNetworkError()
 }
 
 protocol RegistrationViewOutput {
@@ -15,4 +17,6 @@ protocol RegistrationViewOutput {
     func viewIsReady()
 
     func backTap()
+
+    func nextButtonTap(password: String, name: String, phone: String, phoneIn: String)
 }

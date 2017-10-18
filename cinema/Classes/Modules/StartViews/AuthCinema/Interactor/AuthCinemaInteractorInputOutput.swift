@@ -6,9 +6,10 @@
 import Foundation
 
 protocol AuthCinemaInteractorInput {
-
+    func sendData(password: String, phone: String)
 }
 
 protocol AuthCinemaInteractorOutput: class {
-
+    func authSeccess()
+    func faulireAuth()
 }

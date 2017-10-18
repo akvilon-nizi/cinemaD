@@ -6,9 +6,10 @@
 import Foundation
 
 protocol MainInteractorInput {
-
+    func getData()
 }
 
 protocol MainInteractorOutput: class {
-
+    func getError()
+    func getData(mainData: MainData)
 }

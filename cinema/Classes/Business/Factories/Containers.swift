@@ -1,5 +1,4 @@
 //
-// Created by Александр Масленников on 24.07.17.
 // Copyright (c) 2017 Heads and Hands. All rights reserved.
 //
 
@@ -37,113 +36,12 @@ enum Containers {
             }
             return alertController
         }
-        container.register(tag: AuthPhoneConfigurator.tag) { () -> UIViewController in
-            let configurator = AuthPhoneConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: RestaurantsConfigurator.tag) { () -> UIViewController in
-            let configurator = RestaurantsConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.moduleCreator = try managersContainer.resolve()
-            configurator.locationManager = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: RestaurantsMapConfigurator.tag) { (output: RestaurantsMapModuleOutput?) -> UIViewController in
-            let configurator = RestaurantsMapConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.output = output
-            return configurator.configureModule()
-        }
-        container.register(tag: RestaurantsListConfigurator.tag) { (output: RestaurantsListModuleOutput?) -> UIViewController in
-            let configurator = RestaurantsListConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.output = output
-            return configurator.configureModule()
-        }
-        container.register(tag: RestaurantConfigurator.tag) { (id: Int) -> UIViewController in
-            let configurator = RestaurantConfigurator(id: id)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: RestaurantMenuConfigurator.tag) { (selectedCategoryID: Int, restaurant: FullRestaurant) -> UIViewController in
-            let configurator = RestaurantMenuConfigurator(selectedCategoryID: selectedCategoryID, restaurant: restaurant)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.moduleCreator = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: CartConfigurator.tag) { () -> UIViewController in
-            let configurator = CartConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: AuthCodeConfigurator.tag) { (phone: String, needToDismiss: Bool) -> UIViewController in
-            let configurator = AuthCodeConfigurator(phone: phone, needToDismiss: needToDismiss)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.authTokenManager = try managersContainer.resolve()
-            configurator.regionManager = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: CategoryMenuConfigurator.tag) { (categoryID: Int, restaurant: FullRestaurant) -> UIViewController in
-            let configurator = CategoryMenuConfigurator(categoryID: categoryID, restaurant: restaurant)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: RegionConfigurator.tag) { (selectedRegion: Region?, needToReturn: Bool) -> UIViewController in
 
-            let configurator = RegionConfigurator(selectedRegion: selectedRegion)
-
-            configurator.needToReturn = needToReturn
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.regionManager = try managersContainer.resolve()
-
-            return configurator.configureModule()
-        }
-        container.register(tag: TermsConfigurator.tag) { () -> UIViewController in
-            let configurator = TermsConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.termsManager = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: ProfileConfigurator.tag) { () -> UIViewController in
-            let configurator = ProfileConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.logoutManager = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: EditProfileConfigurator.tag) { (profile: Profile, output: EditProfileModuleOutput) -> UIViewController in
-            let configurator = EditProfileConfigurator(profile: profile, output: output)
-	    configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
         container.register(tag: SlidesConfigurator.tag) { () -> UIViewController in
             let configurator = SlidesConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.firstLaunchManager = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-        container.register(tag: CardOfProductConfigurator.tag) { (productID: Int) -> UIViewController in
-            let configurator = CardOfProductConfigurator(productID: productID)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-
-        container.register(tag: MyOrderConfigurator.tag) { () -> UIViewController in
-            let configurator = MyOrderConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
@@ -165,6 +63,7 @@ enum Containers {
             let configurator = AuthCinemaConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
@@ -182,15 +81,16 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: ConfirmationConfigurator.tag) { () -> UIViewController in
-            let configurator = ConfirmationConfigurator()
+        container.register(tag: ConfirmationConfigurator.tag) { (phone: String, uid: String, isRestore: Bool) -> UIViewController in
+            let configurator = ConfirmationConfigurator(uid: uid, phone: phone, isRestore: isRestore)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
-        container.register(tag: PhoneConfigurator.tag) { () -> UIViewController in
-            let configurator = PhoneConfigurator()
+        container.register(tag: PhoneConfigurator.tag) { (phone: String, uid: String) -> UIViewController in
+            let configurator = PhoneConfigurator(uid: uid, phone: phone)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()
@@ -226,6 +126,13 @@ enum Containers {
 
         container.register(tag: KinobaseConfigurator.tag) { () -> UIViewController in
             let configurator = KinobaseConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: MainConfigurator.tag) { () -> UIViewController in
+            let configurator = MainConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()
@@ -343,7 +250,7 @@ enum Containers {
                         log.warning("Api token not found")
                         return endpoint
                     }
-                    newHTTPHeaderFields["Auth-Token"] = apiToken
+                    newHTTPHeaderFields["Authorization"] = apiToken
                     return endpoint.adding(newHTTPHeaderFields: newHTTPHeaderFields)
                 },
                 stubClosure: { (target: FoodleTarget) -> Moya.StubBehavior in

@@ -1,5 +1,4 @@
 //
-// Created by Александр Масленников on 20.07.17.
 // Copyright (c) 2017 Heads and Hands. All rights reserved.
 //
 
@@ -22,15 +21,34 @@ enum Configurations {
     }
 
     var apiBaseURL: URL {
-        switch self {
-        case .debug, .internal:
-            guard let url = URL(string: "https://api.foodle.handh.ru/v1/") else {
-                fatalError("Wrong api base url")
-            }
-            return url
-        case .prerelease, .release:
-            // TODO: Find production url
-            fatalError("Need production url")
+        guard let url = URL(string: "https://cinemad.pr-solution.ru/api/") else {
+            fatalError("Wrong api base url")
         }
+     return url
+//        switch self {
+//        case .debug, .internal:
+//
+//            return url
+//        case .prerelease, .release:
+//            // TODO: Find production url
+//            fatalError("Need production url")
+//        }
     }
+
+    var youtubeURL: URL {
+        guard let url = URL(string: "https://www.googleapis.com/youtube/v3") else {
+            fatalError("Wrong api base url")
+        }
+        return url
+        //        switch self {
+        //        case .debug, .internal:
+        //
+        //            return url
+        //        case .prerelease, .release:
+        //            // TODO: Find production url
+        //            fatalError("Need production url")
+        //        }
+    }
+
+    static let googleApi: String = "AIzaSyB11962AzbjV9dEk4sQH2nZhFbVWIicrYA"
 }

@@ -1,8 +1,7 @@
 //
 //  AppDelegate.swift
-//  foodle
+//  cinema
 //
-//  Created by Александр Масленников on 19.07.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.
 //
 
@@ -40,6 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         self.window = window
         Fabric.with([Crashlytics.self])
+
+        UIApplication.shared.statusBarStyle = .lightContent
+        UINavigationBar.appearance().clipsToBounds = true
+        if let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+            statusBar.backgroundColor = UIColor.white
+        }
 
         return true
     }

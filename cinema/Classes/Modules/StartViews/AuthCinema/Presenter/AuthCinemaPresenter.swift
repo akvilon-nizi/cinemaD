@@ -28,10 +28,19 @@ extension AuthCinemaPresenter: AuthCinemaViewOutput {
     func helpAuth() {
         router.transitionToHelpAuth()
     }
+
+    func auth(phone: String, password: String) {
+        interactor.sendData(password: password, phone: phone)
+    }
 }
 
 // MARK: - AuthCinemaInteractorOutput
 
 extension AuthCinemaPresenter: AuthCinemaInteractorOutput {
-
+    func authSeccess() {
+        router.transitionToMain()
+    }
+    func faulireAuth() {
+        view.showNetworkError()
+    }
 }

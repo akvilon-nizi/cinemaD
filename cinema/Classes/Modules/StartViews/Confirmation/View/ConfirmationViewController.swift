@@ -15,14 +15,15 @@ class ConfirmationViewController: ParentViewController {
     let codeField = TextFieldWithSeparator()
     let newCodeButton = UIButton(type: .system)
     let nextButton = UIButton(type: .system).setTitleWithColor(title: L10n.confirmationNextButtonText, color: UIColor.cnmMainOrange)
-
+    let phone: String
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
-    init() {
+    init(_ phone: String) {
+        self.phone = phone
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -41,6 +42,9 @@ class ConfirmationViewController: ParentViewController {
         addTopView()
         addStackView()
         addBottomView()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
     }
 
     private func addTopView() {
@@ -59,7 +63,7 @@ class ConfirmationViewController: ParentViewController {
 
     private func addStackView() {
 
-        infoLabel.text = L10n.confirmationInfoText("+7(916)345-23-23")
+        infoLabel.text = L10n.confirmationInfoText(phone)
         infoLabel.numberOfLines = 0
         infoLabel.textAlignment = .center
         infoLabel.textColor = UIColor.cnmGreyTextColor
@@ -72,6 +76,9 @@ class ConfirmationViewController: ParentViewController {
         contentView.addSubview(codeField.prepareForAutoLayout())
         codeField.centerXAnchor ~= contentView.centerXAnchor
         codeField.topAnchor ~= infoLabel.bottomAnchor + 32
+        codeField.trailingAnchor ~= contentView.trailingAnchor
+        codeField.leadingAnchor ~= contentView.leadingAnchor
+        codeField.textField.keyboardType = .numberPad
 
         newCodeButton.addTarget(self, action: #selector(handleRepeatButton), for: .touchUpInside)
         newCodeButton.setTitle(L10n.confirmationNewPasswordButton, for: .normal)
@@ -106,6 +113,10 @@ class ConfirmationViewController: ParentViewController {
         bottomStackView.topAnchor ~= nextButton.bottomAnchor + 26
     }
 
+    deinit {
+        view.endEditing(true)
+    }
+
     // MARK: - Actions
     func didTapLeftButton() {
         output?.back()
@@ -120,7 +131,16 @@ class ConfirmationViewController: ParentViewController {
     }
 
     func handleNextButton() {
-        output?.next()
+        if let code = codeField.textField.text, code.characters.count > 5 {
+            output?.sendCode(code: code)
+        } else {
+            showAlert(message: L10n.alertCinemaCorrectErrror)
+        }
+//        output?.next()
+    }
+
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        view.endEditing(true)
     }
 }
 
@@ -129,6 +149,12 @@ class ConfirmationViewController: ParentViewController {
 extension ConfirmationViewController: ConfirmationViewInput {
 
     func setupInitialState() {
+        
+    }
 
+    func showNetworkError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+//        activityVC.isHidden = true
+//        activityVC.stopAnimating()
     }
 }

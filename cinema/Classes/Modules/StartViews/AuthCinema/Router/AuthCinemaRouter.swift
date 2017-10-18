@@ -20,4 +20,9 @@ extension AuthCinemaRouter: AuthCinemaRouterInput {
     func transitionToHelpAuth() {
         appRouter.transition(to: .helpAuth)
     }
+
+    func transitionToMain() {
+        appRouter.mainView()
+    }
+
 }

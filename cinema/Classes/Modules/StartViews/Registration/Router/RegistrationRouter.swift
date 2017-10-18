@@ -16,4 +16,8 @@ extension RegistrationRouter: RegistrationRouterInput {
     func close() {
         appRouter.backTransition()
     }
+
+    func transitionToPhone(phone: String, uid: String) {
+        appRouter.transition(to: .phone(phone:phone, uid:uid))
+    }
 }

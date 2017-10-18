@@ -1,6 +1,6 @@
 //
 //  CartResponse.swift
-//  foodle
+//  cinema
 //
 //  Created by incetro on 16/08/2017.
 //  Copyright © 2017 Heads and Hands. All rights reserved.

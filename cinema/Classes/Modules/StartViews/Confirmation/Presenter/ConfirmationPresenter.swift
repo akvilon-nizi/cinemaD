@@ -11,6 +11,11 @@ class ConfirmationPresenter {
     var interactor: ConfirmationInteractorInput!
     var router: ConfirmationRouterInput!
     weak var output: ConfirmationModuleOutput?
+    let uid: String
+
+    init(uid: String) {
+        self.uid = uid
+    }
 }
 
 // MARK: - ConfirmationViewOutput
@@ -26,20 +31,29 @@ extension ConfirmationPresenter: ConfirmationViewOutput {
     }
 
     func repeatCode() {
-
+        
     }
 
     func next() {
-        router.transitionToNewPassword()
+//        router.transitionToNewPassword()
     }
 
     func auth() {
         router.transitionToAuth()
+    }
+
+    func sendCode(code: String) {
+        interactor.getToken(code: code, uid: uid)
     }
 }
 
 // MARK: - ConfirmationInteractorOutput
 
 extension ConfirmationPresenter: ConfirmationInteractorOutput {
-
+    func successGetToken() {
+        router.transitionToMain()
+    }
+    func faulireGetToken() {
+        view.showNetworkError()
+    }
 }

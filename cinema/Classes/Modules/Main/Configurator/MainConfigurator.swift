@@ -23,6 +23,7 @@ class MainConfigurator {
 
         let interactor = MainInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = MainViewController()
         viewController.output = presenter
