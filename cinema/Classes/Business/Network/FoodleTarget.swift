@@ -18,6 +18,9 @@ enum FoodleTarget {
     case film(filmID: String)
     case persons
     case person(personID: String)
+    case now
+    case recommendations
+    case youtubeVideo(videoId: String)
     case restaurant(restaurantID: Int)
     case product(productID: Int)
     case products(restaurantID: Int, categoryID: Int, count: Int, page: Int)
@@ -54,7 +57,12 @@ enum FoodleTarget {
 extension FoodleTarget: TargetType {
 
     var baseURL: URL {
-        return Configurations.current.apiBaseURL
+        switch self {
+        case .sendCode, .checkCode:
+            return Configurations.current.youtubeURL
+        default:
+            return Configurations.current.apiBaseURL
+        }
     }
 
     var path: String {
@@ -77,8 +85,14 @@ extension FoodleTarget: TargetType {
             return "persons"
         case let .person(personID):
             return "persons/\(personID)"
+        case .now:
+            return "films/now"
+        case .recommendations:
+            return "films/recommendations"
         case .restaurants:
             return "restaurants"
+        case .youtubeVideo:
+            return "videos"
         case let .restaurant(restaurantID):
             return "restaurants/\(restaurantID)"
         case let .getTokenFromUid(uid, _):
@@ -125,7 +139,7 @@ extension FoodleTarget: TargetType {
 
     var method: Moya.Method {
         switch self {
-    case .restaurants, .restaurant, .products, .cart, .cities, .terms, .users, .product, .orders, .trailersFilms, .films, .film, .persons,.person:
+        case .restaurants, .restaurant, .products, .cart, .cities, .terms, .users, .product, .orders, .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo:
             return .get
         case .decrementProductCount, .clearCart, .removeAvatar:
             return .delete
@@ -161,6 +175,8 @@ extension FoodleTarget: TargetType {
             return ["phone": phone]
         case let .checkCode(phone, code):
             return ["phone": phone, "code": code]
+        case let .youtubeVideo(videoId):
+            return ["key": Configurations.googleApi, "part": "snippet", "id": videoId]
         case let .products(restaurantID, categoryID, count, page):
             return ["restaurant_id": restaurantID, "category_id": categoryID, "per-page": count, "page": page]
         case let .likedProducts(restaurantID, count, page):

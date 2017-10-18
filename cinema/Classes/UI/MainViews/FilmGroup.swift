@@ -8,12 +8,24 @@
 
 import UIKit
 
+protocol FilmGroupDelegate: class {
+    func openFilmID(_ filmID: String)
+}
+
 class FilmGroup: UITableViewHeaderFooterView {
     let titleLabel: UILabel = UILabel()
 
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
+
+    var films: [Film] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+
+    weak var delegate: FilmGroupDelegate?
 
     let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 60) / 2
 
@@ -55,19 +67,19 @@ extension FilmGroup: UICollectionViewDelegateFlowLayout {
 
 extension FilmGroup: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        delegate?.openFilmID(films[indexPath.row].id)
     }
 }
 
 extension FilmGroup: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return films.count
     }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmsCollectionCell.reuseIdentifier, for: indexPath)
 
         if let tagCell = cell as? FilmsCollectionCell {
-            tagCell.linkUrlImage = indexPath.row % 2 == 0
+            tagCell.linkUrlImage = films[indexPath.row].imageUrl
         }
         return cell
     }

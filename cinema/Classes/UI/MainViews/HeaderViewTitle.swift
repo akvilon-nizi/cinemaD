@@ -55,9 +55,9 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
         let centerView = UIView()
 
         centerView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.leadingAnchor ~= centerView.leadingAnchor
-        titleLabel.trailingAnchor ~= centerView.trailingAnchor
-        titleLabel.centerYAnchor ~= centerView.centerYAnchor
+        titleLabel.pinEdgesToSuperviewEdges()
+//        titleLabel.trailingAnchor ~= centerView.trailingAnchor
+//        titleLabel.centerYAnchor ~= centerView.centerYAnchor
 
         addSubview(centerView.prepareForAutoLayout())
         centerView.centerXAnchor ~= centerXAnchor

@@ -8,6 +8,10 @@ import Foundation
 protocol MainViewInput: class {
 
     func setupInitialState()
+
+    func getError()
+
+    func getData(_ mainData: MainData)
 }
 
 protocol MainViewOutput {

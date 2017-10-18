@@ -19,12 +19,17 @@ extension MainPresenter: MainViewOutput {
 
     func viewIsReady() {
         log.verbose("Main is ready")
-        interactor.getTrailers()
+        interactor.getData()
     }
 }
 
 // MARK: - MainInteractorOutput
 
 extension MainPresenter: MainInteractorOutput {
-
+    func getError() {
+        view.getError()
+    }
+    func getData(mainData: MainData) {
+        view.getData(mainData)
+    }
 }

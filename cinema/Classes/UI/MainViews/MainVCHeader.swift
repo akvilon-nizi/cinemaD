@@ -11,6 +11,12 @@ import UIKit
 class MainVCHeader: UITableViewHeaderFooterView {
     let titleLabel: UILabel = UILabel()
 
+    var trailers: [String] = [] {
+        didSet{
+             collectionView.reloadData()
+        }
+    }
+
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -61,13 +67,14 @@ extension MainVCHeader: UICollectionViewDelegate {
 
 extension MainVCHeader: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return trailers.count
     }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: YoutubeViewCell.reuseIdentifier, for: indexPath)
 
         if let tagCell = cell as? YoutubeViewCell {
-            tagCell.idVideo = "p8yzbuU6f_U"
+            tagCell.idVideo = trailers[indexPath.row]
+//            print("assa", indexPath.row, trailers[indexPath.row] )
             tagCell.loadPlayer()
         }
         return cell

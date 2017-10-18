@@ -243,6 +243,14 @@
 		CEB86C471F87C565003F07FC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB86C461F87C565003F07FC /* Extensions.swift */; };
 		CEB86C4A1F88A850003F07FC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB86C491F88A84F003F07FC /* Fabric.framework */; };
 		CEB86C4C1F88AB43003F07FC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB86C4B1F88AB42003F07FC /* Crashlytics.framework */; };
+		CED2590E1F969908009C0262 /* RecommendationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2590D1F969908009C0262 /* RecommendationsResponse.swift */; };
+		CED259101F96992B009C0262 /* NowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2590F1F96992B009C0262 /* NowResponse.swift */; };
+		CED259121F969B39009C0262 /* MainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED259111F969B39009C0262 /* MainData.swift */; };
+		CEDCF2091F9713830082BCD0 /* YoutubeSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF2081F9713820082BCD0 /* YoutubeSnippet.swift */; };
+		CEDCF20E1F9713940082BCD0 /* YoutubeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF20A1F9713930082BCD0 /* YoutubeImage.swift */; };
+		CEDCF20F1F9713940082BCD0 /* YoutubeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF20B1F9713930082BCD0 /* YoutubeItem.swift */; };
+		CEDCF2101F9713940082BCD0 /* YoutubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF20C1F9713930082BCD0 /* YoutubeModel.swift */; };
+		CEDCF2111F9713940082BCD0 /* YoutubeThumbnails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF20D1F9713940082BCD0 /* YoutubeThumbnails.swift */; };
 		CEE4A34F1F8DA0AA00A64179 /* RegistrationUIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4A34E1F8DA0A900A64179 /* RegistrationUIDResponse.swift */; };
 		CEFEE0E81F8A96CB00F0A65A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEE0E71F8A96CB00F0A65A /* MainTabView.swift */; };
 		D1289C1C805A4D1EE856B792 /* FilmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E6560B04FAC859BE975F4 /* FilmPresenter.swift */; };
@@ -539,6 +547,14 @@
 		CEB86C461F87C565003F07FC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEB86C491F88A84F003F07FC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CEB86C4B1F88AB42003F07FC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CED2590D1F969908009C0262 /* RecommendationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsResponse.swift; sourceTree = "<group>"; };
+		CED2590F1F96992B009C0262 /* NowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowResponse.swift; sourceTree = "<group>"; };
+		CED259111F969B39009C0262 /* MainData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainData.swift; sourceTree = "<group>"; };
+		CEDCF2081F9713820082BCD0 /* YoutubeSnippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeSnippet.swift; sourceTree = "<group>"; };
+		CEDCF20A1F9713930082BCD0 /* YoutubeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeImage.swift; sourceTree = "<group>"; };
+		CEDCF20B1F9713930082BCD0 /* YoutubeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeItem.swift; sourceTree = "<group>"; };
+		CEDCF20C1F9713930082BCD0 /* YoutubeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeModel.swift; sourceTree = "<group>"; };
+		CEDCF20D1F9713940082BCD0 /* YoutubeThumbnails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeThumbnails.swift; sourceTree = "<group>"; };
 		CEE4A34E1F8DA0A900A64179 /* RegistrationUIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationUIDResponse.swift; sourceTree = "<group>"; };
 		CEFEE0E71F8A96CB00F0A65A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		D053E4656D87F547232D339B /* KinobaseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KinobaseViewController.swift; sourceTree = "<group>"; };
@@ -1192,6 +1208,7 @@
 		9BB4E8FFCE9D6E3E3ED2B0DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CEDCF2071F9713250082BCD0 /* Youtube */,
 				9BB4E9EBE0947D83E6592724 /* Responses */,
 				9BB4E6805806AD51A6AB5599 /* Restaurant.swift */,
 				CE09FEA91F954E2F00D49351 /* Film.swift */,
@@ -1214,6 +1231,7 @@
 				040CE5171F5D912C001DF59C /* Ingredient.swift */,
 				0410D8841F5FDE24001F14A7 /* Order.swift */,
 				0410D8881F600627001F14A7 /* Transforms */,
+				CED259111F969B39009C0262 /* MainData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1253,6 +1271,8 @@
 				0410D8861F5FE05E001F14A7 /* OrdersResponse.swift */,
 				CEB01E901F8DD18A003B67B9 /* AuthResponse.swift */,
 				CEAB467C1F96142200432F70 /* TrailersResponse.swift */,
+				CED2590D1F969908009C0262 /* RecommendationsResponse.swift */,
+				CED2590F1F96992B009C0262 /* NowResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1658,6 +1678,18 @@
 				CD395F278C10C69DD7776E28 /* FilmRouterInput.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		CEDCF2071F9713250082BCD0 /* Youtube */ = {
+			isa = PBXGroup;
+			children = (
+				CEDCF20A1F9713930082BCD0 /* YoutubeImage.swift */,
+				CEDCF20B1F9713930082BCD0 /* YoutubeItem.swift */,
+				CEDCF20C1F9713930082BCD0 /* YoutubeModel.swift */,
+				CEDCF20D1F9713940082BCD0 /* YoutubeThumbnails.swift */,
+				CEDCF2081F9713820082BCD0 /* YoutubeSnippet.swift */,
+			);
+			path = Youtube;
 			sourceTree = "<group>";
 		};
 		CEFEE0E61F8A966600F0A65A /* MainTabView */ = {
@@ -2128,6 +2160,7 @@
 				9BB4E44D8DC293D80A5493B4 /* Configurations.swift in Sources */,
 				CE1A5B971F8BFDE5001AC04F /* MainVCHeader.swift in Sources */,
 				CEB0457E1F8E159D0090E3EC /* FilmGroup.swift in Sources */,
+				CED2590E1F969908009C0262 /* RecommendationsResponse.swift in Sources */,
 				040CE5181F5D912C001DF59C /* Ingredient.swift in Sources */,
 				3386D47D1F4437F7009D9A42 /* CartResponse.swift in Sources */,
 				9BB4E26D89A31E79BAFE6B36 /* Images.swift in Sources */,
@@ -2177,6 +2210,7 @@
 				04A661971F6B05010032A491 /* Slide3View.swift in Sources */,
 				CEB86C451F87B8D0003F07FC /* TextFieldWithSeparator.swift in Sources */,
 				338AD1A71F5554C800717F3A /* LogoutManager.swift in Sources */,
+				CEDCF20E1F9713940082BCD0 /* YoutubeImage.swift in Sources */,
 				043A733E1F80CD7500E1DF43 /* Slide2View.swift in Sources */,
 				9BB4E3AC8CC054013E48F2C5 /* Responses.swift in Sources */,
 				A2CFB534CD2FF487A333F3C5 /* SlidesConfigurator.swift in Sources */,
@@ -2184,6 +2218,7 @@
 				8B7C59BAB967C2B0001C257A /* SlidesInteractorInputOutput.swift in Sources */,
 				3753EE88776194D74AC0CFF2 /* SlidesModuleInputOutput.swift in Sources */,
 				02232DFB64002CBD3ADAF88D /* SlidesPresenter.swift in Sources */,
+				CEDCF20F1F9713940082BCD0 /* YoutubeItem.swift in Sources */,
 				7F5DB5844092F4066624E68D /* SlidesRouter.swift in Sources */,
 				1B198E19545A502267CF9386 /* SlidesRouterInput.swift in Sources */,
 				CE09FEAE1F95714700D49351 /* FilmFromPerson.swift in Sources */,
@@ -2196,6 +2231,7 @@
 				12134B2E9BCE09799FAF222D /* StartModuleInputOutput.swift in Sources */,
 				D164DFE0E76FF403C6448845 /* StartPresenter.swift in Sources */,
 				303FB3FAC32FDB7D41A8F095 /* StartRouter.swift in Sources */,
+				CED259121F969B39009C0262 /* MainData.swift in Sources */,
 				9E26B66C204073EE2B0FA69B /* StartRouterInput.swift in Sources */,
 				AC20850608C915E9DB463AF1 /* StartViewController.swift in Sources */,
 				DCDC2E27C80AD9614A95E682 /* StartViewInputOutput.swift in Sources */,
@@ -2212,8 +2248,10 @@
 				FF9A28F824F6C1398144D6C6 /* RegistrationConfigurator.swift in Sources */,
 				B5F6C1EC19F723D12E9A8205 /* RegistrationInteractor.swift in Sources */,
 				9FECD607C1AC130795817A67 /* RegistrationInteractorInputOutput.swift in Sources */,
+				CEDCF2101F9713940082BCD0 /* YoutubeModel.swift in Sources */,
 				21DE468F2D8E8B35A9D29DBC /* RegistrationModuleInputOutput.swift in Sources */,
 				15D6211D1495209F38776A9C /* RegistrationPresenter.swift in Sources */,
+				CEDCF2111F9713940082BCD0 /* YoutubeThumbnails.swift in Sources */,
 				3FC50ADB85C47497DE2EE51B /* RegistrationRouter.swift in Sources */,
 				A7F8D88A0128F275FBA3AB84 /* RegistrationRouterInput.swift in Sources */,
 				25D499678E4808BE54FC18A9 /* RegistrationViewController.swift in Sources */,
@@ -2252,6 +2290,7 @@
 				CAD68A80950E3BD0DFEEFDC6 /* ConfirmationInteractorInputOutput.swift in Sources */,
 				77ED34AC93ACF2155C5A72DE /* ConfirmationModuleInputOutput.swift in Sources */,
 				41D37399332D1C87CD384DDC /* ConfirmationPresenter.swift in Sources */,
+				CED259101F96992B009C0262 /* NowResponse.swift in Sources */,
 				5E1679AFF563A40558EFC94B /* ConfirmationRouter.swift in Sources */,
 				36CF0ED40645D305BD4A40EE /* ConfirmationRouterInput.swift in Sources */,
 				E4C77E0A31733AC6C4BA9B83 /* ConfirmationViewController.swift in Sources */,
@@ -2269,6 +2308,7 @@
 				B1DB16BB68AF60B1FBB8885A /* MainConfigurator.swift in Sources */,
 				E902ABECB95340F7583D0A2D /* MainInteractor.swift in Sources */,
 				6B54838DF4DC44C32260131E /* MainInteractorInputOutput.swift in Sources */,
+				CEDCF2091F9713830082BCD0 /* YoutubeSnippet.swift in Sources */,
 				DF6C2631E2466235200D4007 /* MainModuleInputOutput.swift in Sources */,
 				FF586C748AD771B96910D5F4 /* MainPresenter.swift in Sources */,
 				63BCE71F378300D96D985B3B /* MainRouter.swift in Sources */,

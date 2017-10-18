@@ -129,19 +129,18 @@ class AuthCinemaViewController: ParentViewController {
         if let phone = phoneField.textField.text?.replacingOccurrences(
             of: "(", with: "",
             options: NSString.CompareOptions.literal,
-            range:nil).replacingOccurrences(
+            range: nil).replacingOccurrences(
                 of: ")",
                 with: "",
                 options: NSString.CompareOptions.literal,
-                range:nil).replacingOccurrences(
+                range: nil).replacingOccurrences(
                     of: " ",
-                    with:"",
+                    with: "",
                     options: NSString.CompareOptions.literal,
-                    range:nil),
+                    range: nil),
             phone.characters.count == 12,
             let password = passwordField.textField.text,
-            password.characters.count > 3
-             {
+            password.characters.count > 3 {
             output?.auth(phone: phone, password: password)
             view.bringSubview(toFront: activityVC)
             activityVC.isHidden = false

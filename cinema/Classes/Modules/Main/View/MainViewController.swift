@@ -13,6 +13,9 @@ class MainViewController: ParentViewController {
 
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
 
+    let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
+
+    var mainData = MainData()
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -55,6 +58,10 @@ class MainViewController: ParentViewController {
         tableView.bottomAnchor ~= mainTabView.topAnchor
 
         mainTabView.delegate = self
+
+        view.bringSubview(toFront: activityVC)
+        activityVC.isHidden = false
+        activityVC.startAnimating()
     }
 }
 
@@ -87,40 +94,77 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 0
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
+            if mainData.trailers.isEmpty {
+                return nil
+            }
+            header.trailers = mainData.trailers
             return header
         case 1:
+            if mainData.now.isEmpty {
+                return nil
+            }
             let view = HeaderViewTitle()
             view.title = "Сейчас в кино"
             return view
         case 2:
-            return FilmGroup()
+            if mainData.now.isEmpty {
+                return nil
+            }
+            let view = FilmGroup()
+            view.films = mainData.now
+            view.delegate = self
+            return view
         case 3:
+            if mainData.recomend.isEmpty {
+                return nil
+            }
             let view = HeaderViewTitle()
             view.title = "Рекомендации"
             return view
         default:
-            return FilmGroup()
+            if mainData.recomend.isEmpty {
+                return nil
+            }
+            let view = FilmGroup()
+            view.films = mainData.recomend
+            view.delegate = self
+            return view
         }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            return 280
+            if mainData.trailers.isEmpty {
+                return 0
+            }
+            return windowWidth / 4 * 3 + 20
         case 1:
-            return 55
+            if mainData.now.isEmpty {
+                return 0
+            }
+            return 3
         case 2:
-            return 240
+            if mainData.now.isEmpty {
+                return 0
+            }
+            return windowWidth / 4 * 3
         case 3:
-            return 55
+            if mainData.recomend.isEmpty {
+                return 0
+            }
+            return 3
         default:
-            return 240
+            if mainData.recomend.isEmpty {
+                return 0
+            }
+            return windowWidth / 4 * 3
         }
     }
 
@@ -135,6 +179,19 @@ extension MainViewController: MainViewInput {
 
     func setupInitialState() {
 
+    }
+
+    func getError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+    func getData(_ mainData: MainData) {
+        self.mainData = mainData
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+        tableView.reloadData()
+//        view.getData(mainData)
     }
 }
 
@@ -159,5 +216,12 @@ extension MainViewController: MainTabViewDelegate {
 
     func kinobaseTapped() {
         print("kinobaseTapped")
+    }
+}
+
+// MARK: - FilmGroupDelegate
+extension MainViewController: FilmGroupDelegate {
+    func openFilmID(_ filmID: String) {
+        
     }
 }

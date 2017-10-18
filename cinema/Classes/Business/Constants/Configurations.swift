@@ -34,4 +34,21 @@ enum Configurations {
 //            fatalError("Need production url")
 //        }
     }
+
+    var youtubeURL: URL {
+        guard let url = URL(string: "https://www.googleapis.com/youtube/v3") else {
+            fatalError("Wrong api base url")
+        }
+        return url
+        //        switch self {
+        //        case .debug, .internal:
+        //
+        //            return url
+        //        case .prerelease, .release:
+        //            // TODO: Find production url
+        //            fatalError("Need production url")
+        //        }
+    }
+
+    static let googleApi: String = "AIzaSyB11962AzbjV9dEk4sQH2nZhFbVWIicrYA"
 }

@@ -59,6 +59,7 @@ enum Asset {
       static let isClose = ImageAsset(name: "isClose")
       static let isOpen = ImageAsset(name: "isOpen")
     }
+    static let play = ImageAsset(name: "play")
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
       static let slide2Image = ImageAsset(name: "slide2-image")
@@ -106,6 +107,7 @@ enum Asset {
     Cinema.MainTab.tickets,
     Cinema.MainView.isClose,
     Cinema.MainView.isOpen,
+    Cinema.play,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
     Cinema.Slides.slide2Play,

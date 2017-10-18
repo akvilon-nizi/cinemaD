@@ -18,13 +18,10 @@ class FilmsCollectionCell: UICollectionViewCell {
         fatalError("NSCoding not supported")
     }
 
-    var linkUrlImage: Bool = false {
+    var linkUrlImage: String = "" {
         didSet {
-            if linkUrlImage {
-                posterView.image = Asset.Cinema.assa.image
-            } else {
-                posterView.image = Asset.Cinema.aqqa.image
-            }
+            posterView.kf.indicatorType = .activity
+            posterView.kf.setImage(with: URL(string: linkUrlImage))
         }
     }
 
@@ -32,10 +29,10 @@ class FilmsCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
 
         addSubview(posterView.prepareForAutoLayout())
-        posterView.image = Asset.Cinema.aqqa.image
+        posterView.backgroundColor = UIColor.lightGray
         posterView.pinEdgesToSuperviewEdges()
-        //        youtubeView.layer.cornerRadius = 5.0
-        //        youtubeView.layer.masksToBounds = true
+        posterView.layer.cornerRadius = 5.0
+        posterView.layer.masksToBounds = true
     }
 
     static var reuseIdentifier: String {
