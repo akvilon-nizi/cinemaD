@@ -66,6 +66,10 @@ extension UIColor {
         return UIColor(red: 63.0 / 255.0, green: 63.0 / 255.0, blue: 63.0 / 255.0, alpha: 1.0)
     }
 
+    class var cnm3a3a3a: UIColor {
+        return UIColor(red: 58.0 / 255.0, green: 58.0 / 255.0, blue: 58.0 / 255.0, alpha: 1.0)
+    }
+
     class var cnmGreyDark: UIColor {
         return UIColor(red: 46.0 / 255.0, green: 46.0 / 255.0, blue: 46.0 / 255.0, alpha: 1.0)
     }
@@ -104,5 +108,9 @@ extension UIColor {
 
     class var cnmDadada: UIColor {
         return UIColor(red: 218.0 / 255.0, green: 218.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
+    }
+
+    class var cnmAfafaf: UIColor {
+        return UIColor(red: 175.0 / 255.0, green: 175.0 / 255.0, blue: 175.0 / 255.0, alpha: 1.0)
     }
 }

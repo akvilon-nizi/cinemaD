@@ -12,7 +12,7 @@ class PersonFromFilm: ImmutableMappable {
 
     let id: String
     let name: String
-    let imageUrl: String
+    let imageUrl: String?
     let relation: String
 
     private let idKey = "id"
@@ -23,7 +23,7 @@ class PersonFromFilm: ImmutableMappable {
     required init(map: Map) throws {
         id = try map.value(idKey)
         name = try map.value(nameKey)
-        imageUrl = try map.value(imageUrlKey)
+        imageUrl = try? map.value(imageUrlKey)
         relation = try map.value(relationKey)
     }
 

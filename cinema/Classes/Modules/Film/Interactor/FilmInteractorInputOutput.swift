@@ -6,9 +6,10 @@
 import Foundation
 
 protocol FilmInteractorInput {
-
+    func getInfoFilm(videoID: String)
 }
 
 protocol FilmInteractorOutput: class {
-
+    func getError()
+    func getFilmInfo(_ filmInfo: FullFilm)
 }

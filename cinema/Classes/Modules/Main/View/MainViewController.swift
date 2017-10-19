@@ -221,7 +221,7 @@ extension MainViewController: MainTabViewDelegate {
 
 // MARK: - FilmGroupDelegate
 extension MainViewController: FilmGroupDelegate {
-    func openFilmID(_ filmID: String) {
-        
+    func openFilmID(_ filmID: String, name: String) {
+        output.openFilm(videoID: filmID, name: name)
     }
 }

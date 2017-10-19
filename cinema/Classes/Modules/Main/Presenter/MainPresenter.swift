@@ -21,6 +21,11 @@ extension MainPresenter: MainViewOutput {
         log.verbose("Main is ready")
         interactor.getData()
     }
+
+    func openFilm(videoID: String, name: String) {
+        router.openFilm(videoId: videoID, name: name)
+    }
+
 }
 
 // MARK: - MainInteractorOutput

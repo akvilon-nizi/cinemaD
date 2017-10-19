@@ -251,6 +251,10 @@
 		CEDCF20F1F9713940082BCD0 /* YoutubeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF20B1F9713930082BCD0 /* YoutubeItem.swift */; };
 		CEDCF2101F9713940082BCD0 /* YoutubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF20C1F9713930082BCD0 /* YoutubeModel.swift */; };
 		CEDCF2111F9713940082BCD0 /* YoutubeThumbnails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDCF20D1F9713940082BCD0 /* YoutubeThumbnails.swift */; };
+		CEE0A9431F987405006E6D9B /* ReadMoreTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0A9411F987404006E6D9B /* ReadMoreTextView.swift */; };
+		CEE0A9441F987405006E6D9B /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0A9421F987404006E6D9B /* UITextView+Extensions.swift */; };
+		CEE0A9471F9884B7006E6D9B /* RolesCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0A9461F9884B7006E6D9B /* RolesCV.swift */; };
+		CEE0A9491F988546006E6D9B /* RolesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0A9481F988546006E6D9B /* RolesCell.swift */; };
 		CEE4A34F1F8DA0AA00A64179 /* RegistrationUIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4A34E1F8DA0A900A64179 /* RegistrationUIDResponse.swift */; };
 		CEFEE0E81F8A96CB00F0A65A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEE0E71F8A96CB00F0A65A /* MainTabView.swift */; };
 		D1289C1C805A4D1EE856B792 /* FilmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E6560B04FAC859BE975F4 /* FilmPresenter.swift */; };
@@ -555,6 +559,10 @@
 		CEDCF20B1F9713930082BCD0 /* YoutubeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeItem.swift; sourceTree = "<group>"; };
 		CEDCF20C1F9713930082BCD0 /* YoutubeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeModel.swift; sourceTree = "<group>"; };
 		CEDCF20D1F9713940082BCD0 /* YoutubeThumbnails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeThumbnails.swift; sourceTree = "<group>"; };
+		CEE0A9411F987404006E6D9B /* ReadMoreTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadMoreTextView.swift; sourceTree = "<group>"; };
+		CEE0A9421F987404006E6D9B /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
+		CEE0A9461F9884B7006E6D9B /* RolesCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesCV.swift; sourceTree = "<group>"; };
+		CEE0A9481F988546006E6D9B /* RolesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesCell.swift; sourceTree = "<group>"; };
 		CEE4A34E1F8DA0A900A64179 /* RegistrationUIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationUIDResponse.swift; sourceTree = "<group>"; };
 		CEFEE0E71F8A96CB00F0A65A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		D053E4656D87F547232D339B /* KinobaseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KinobaseViewController.swift; sourceTree = "<group>"; };
@@ -658,6 +666,8 @@
 		04A661991F6B890A0032A491 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CEE0A9411F987404006E6D9B /* ReadMoreTextView.swift */,
+				CEE0A9421F987404006E6D9B /* UITextView+Extensions.swift */,
 				04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */,
 			);
 			path = Common;
@@ -1193,6 +1203,7 @@
 		9BB4E826D7FD26246874FBAD /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				CEE0A9451F98844B006E6D9B /* FilmView */,
 				CE1A5B951F8BFD64001AC04F /* MainViews */,
 				CEFEE0E61F8A966600F0A65A /* MainTabView */,
 				CEB86C431F87B89A003F07FC /* StartsView */,
@@ -1692,6 +1703,15 @@
 			path = Youtube;
 			sourceTree = "<group>";
 		};
+		CEE0A9451F98844B006E6D9B /* FilmView */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0A9461F9884B7006E6D9B /* RolesCV.swift */,
+				CEE0A9481F988546006E6D9B /* RolesCell.swift */,
+			);
+			path = FilmView;
+			sourceTree = "<group>";
+		};
 		CEFEE0E61F8A966600F0A65A /* MainTabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2127,6 +2147,7 @@
 			files = (
 				CE1A5BA11F8CCFF4001AC04F /* HeaderViewTitle.swift in Sources */,
 				0464ACE81F58144500D8D49A /* SlidePageControl.swift in Sources */,
+				CEE0A9431F987405006E6D9B /* ReadMoreTextView.swift in Sources */,
 				9BB4EE643D7AB8FF33E4C138 /* AppDelegate.swift in Sources */,
 				9BB4EF4A84B7977863DF8BC1 /* CrashReportManager.swift in Sources */,
 				9BB4EDA09342D38FD63BC04C /* FlowControllerProtocol.swift in Sources */,
@@ -2146,6 +2167,7 @@
 				3386D47F1F443C8B009D9A42 /* CartProduct.swift in Sources */,
 				CEAB467B1F96097300432F70 /* Genre.swift in Sources */,
 				0464ACE61F57E5C400D8D49A /* SlideView.swift in Sources */,
+				CEE0A9441F987405006E6D9B /* UITextView+Extensions.swift in Sources */,
 				3348DEFF1F403112002A6E79 /* CategoriesResponse.swift in Sources */,
 				0410D8851F5FDE24001F14A7 /* Order.swift in Sources */,
 				0464ACE31F56F5A000D8D49A /* FirstLaunchManager.swift in Sources */,
@@ -2201,6 +2223,7 @@
 				9BB4EFD94AF2A23E96B0BF90 /* LocationManager.swift in Sources */,
 				9BB4E94B355A032C3C17F138 /* ReusableView.swift in Sources */,
 				9BB4E3581028DDB78F2B2A7A /* RatingStarView.swift in Sources */,
+				CEE0A9471F9884B7006E6D9B /* RolesCV.swift in Sources */,
 				9BB4E83463B88093AD36D771 /* ShadowView.swift in Sources */,
 				9BB4E402AB446D9B5FACB640 /* ImageView.swift in Sources */,
 				CEAB467D1F96142200432F70 /* TrailersResponse.swift in Sources */,
@@ -2274,6 +2297,7 @@
 				1BCA7DE4B60AD817928FBEAF /* HelpAuthPresenter.swift in Sources */,
 				193474E89F813155663351DA /* HelpAuthRouter.swift in Sources */,
 				A278C4E21D68B95BE0FF1E26 /* HelpAuthRouterInput.swift in Sources */,
+				CEE0A9491F988546006E6D9B /* RolesCell.swift in Sources */,
 				600EEC4FC93ECE7F8E0000B1 /* HelpAuthViewController.swift in Sources */,
 				E58066E882B5398409188E51 /* HelpAuthViewInputOutput.swift in Sources */,
 				BC2A77AC2034A1FC4B7556A0 /* NewPasswordConfigurator.swift in Sources */,
