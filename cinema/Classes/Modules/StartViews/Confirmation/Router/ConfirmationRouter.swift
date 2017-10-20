@@ -22,8 +22,12 @@ extension ConfirmationRouter: ConfirmationRouterInput {
     }
 
     func transitionToMain() {
+//        appRouter.transition(to: .main)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+//            self.appRouter.mainView()
+//        }
         OperationQueue.main.addOperation {
-            self.appRouter.mainView()
+            self.appRouter.transition(to: .main)
         }
     }
 }

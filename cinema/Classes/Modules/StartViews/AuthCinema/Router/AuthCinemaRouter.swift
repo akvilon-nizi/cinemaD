@@ -22,7 +22,10 @@ extension AuthCinemaRouter: AuthCinemaRouterInput {
     }
 
     func transitionToMain() {
-        appRouter.mainView()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+//            self.appRouter.mainView()
+//        }
+        appRouter.transition(to: .main)
     }
 
 }

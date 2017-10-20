@@ -149,7 +149,7 @@ extension MainViewController: UITableViewDelegate {
             if mainData.now.isEmpty {
                 return 0
             }
-            return 3
+            return 27
         case 2:
             if mainData.now.isEmpty {
                 return 0
@@ -159,7 +159,7 @@ extension MainViewController: UITableViewDelegate {
             if mainData.recomend.isEmpty {
                 return 0
             }
-            return 3
+            return 27
         default:
             if mainData.recomend.isEmpty {
                 return 0

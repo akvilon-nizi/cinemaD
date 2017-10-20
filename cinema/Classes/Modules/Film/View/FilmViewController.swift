@@ -152,12 +152,12 @@ class FilmViewController: ParentViewController {
             imageView.widthAnchor ~= windowWidth
             imageView.heightAnchor ~= windowWidth / 3 * 4
 
-            let playButton = UIImageView(image: Asset.Cinema.play.image)
-            imageView.addSubview(playButton.prepareForAutoLayout())
-            playButton.centerXAnchor ~= imageView.centerXAnchor
-            playButton.centerYAnchor ~= imageView.centerYAnchor
-            playButton.heightAnchor ~= 51
-            playButton.widthAnchor ~= 51
+//            let playButton = UIImageView(image: Asset.Cinema.play.image)
+//            imageView.addSubview(playButton.prepareForAutoLayout())
+//            playButton.centerXAnchor ~= imageView.centerXAnchor
+//            playButton.centerYAnchor ~= imageView.centerYAnchor
+//            playButton.heightAnchor ~= 51
+//            playButton.widthAnchor ~= 51
 
             let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [watchedButton, separatorView, willWatchButton])
             contentView.addSubview(buttonsStack.prepareForAutoLayout())
