@@ -14,29 +14,29 @@ import UIKit
  */
 @IBDesignable
 public class ReadMoreTextView: UITextView {
-    
+
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
         readMoreTextPadding = .zero
         readLessTextPadding = .zero
         super.init(frame: frame, textContainer: textContainer)
         setupDefaults()
     }
-    
+
     public convenience init(frame: CGRect) {
         self.init(frame: frame, textContainer: nil)
     }
-    
+
     public convenience init() {
         self.init(frame: CGRect.zero, textContainer: nil)
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         readMoreTextPadding = .zero
         readLessTextPadding = .zero
         super.init(coder: aDecoder)
         setupDefaults()
     }
-    
+
     func setupDefaults() {
         let defaultReadMoreText = NSLocalizedString("ReadMoreTextView.readMore", value: "more", comment: "")
         let attributedReadMoreText = NSMutableAttributedString(string: "... ")
@@ -45,13 +45,13 @@ public class ReadMoreTextView: UITextView {
         readLessTextPadding = .zero
         isScrollEnabled = false
         isEditable = false
-        
+
         let attributedDefaultReadMoreText = NSAttributedString(string: defaultReadMoreText, attributes: [
             NSForegroundColorAttributeName: UIColor.blue,
             NSFontAttributeName: UIFont.cnmFutura(size: 14)
         ])
         attributedReadMoreText.append(attributedDefaultReadMoreText)
-        self.attributedReadMoreText = attributedReadMoreText
+        self.attributedReadMoreText = attributedDefaultReadMoreText
     }
     
     /**Block to be invoked when text view changes its content size.*/
@@ -137,7 +137,7 @@ public class ReadMoreTextView: UITextView {
             setNeedsLayout()
         }
     }
-    
+
     /**
      Force to update trimming on the next layout pass. To update right away call `layoutIfNeeded` right after.
     */

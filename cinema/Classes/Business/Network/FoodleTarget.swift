@@ -16,6 +16,8 @@ enum FoodleTarget {
     case checkCode(phone: String, code: String)
     case films
     case film(filmID: String)
+    case filmWatched(filmID: String, rate: Int)
+    case filmWillWatch(filmID: String)
     case persons
     case person(personID: String)
     case now
@@ -81,6 +83,10 @@ extension FoodleTarget: TargetType {
             return "films"
         case let .film(filmID):
             return "films/\(filmID)"
+        case let .filmWatched(filmID, _):
+            return "films/\(filmID)/action/watched"
+        case let .filmWillWatch(filmID):
+            return "films/\(filmID)/action/will_watch"
         case .persons:
             return "persons"
         case let .person(personID):
@@ -167,6 +173,8 @@ extension FoodleTarget: TargetType {
             return parameters
         case let .auth(phone, password):
             return ["password": password, "phone": phone]
+        case let .filmWatched(_, rate):
+            return ["rate": rate]
         case let .getTokenFromUid(_, code):
             var parameters: [String: Any] = [:]
                 parameters["sms_token"] = code

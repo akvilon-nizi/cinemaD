@@ -31,4 +31,46 @@ extension FilmInteractor: FilmInteractorInput {
             }
             .addDisposableTo(disposeBag)
     }
+
+    func filmWatched(videoID: String, rate: Int) {
+        provider.requestModel(.filmWatched(filmID: videoID, rate: rate))
+            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                switch response {
+                case let .next(model):
+
+                    if model.message.first == L10n.filmResponseWatched {
+                        print()
+                    } else {
+                        print()
+                    }
+//                    self.output.getFilmInfo(model)
+                case let .error(error as ProviderError):
+                    print()
+//                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func filmWillWatch(videoID: String) {
+        provider.requestModel(.filmWillWatch(filmID: videoID))
+            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                switch response {
+                case let .next(model):
+                    if model.message.first == L10n.filmResponseWillWatch {
+                        print()
+                    } else {
+                        print()
+                    }
+                case let .error(error as ProviderError):
+                    print()
+//                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
 }

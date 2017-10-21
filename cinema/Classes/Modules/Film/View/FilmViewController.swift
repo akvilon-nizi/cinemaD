@@ -39,14 +39,6 @@ class FilmViewController: ParentViewController {
         return button
     }()
 
-    let separatorView: UIView = {
-        let view = UIView()
-        view.heightAnchor ~= 33
-        view.widthAnchor ~= 1
-        view.backgroundColor = UIColor.cnmAfafaf
-        return view
-    }()
-
     let buyButton: UIButton = {
         let button = UIButton()
         button.setTitle(L10n.filmPayTicket, for: .normal)
@@ -73,6 +65,10 @@ class FilmViewController: ParentViewController {
         return button
     }()
 
+    let starsLabel = UILabel()
+
+    let starsView = UIView()
+
     var starsButons: [UIButton] = []
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 160
@@ -91,10 +87,16 @@ class FilmViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.sizeToFit()
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        var frame = backButton.frame
+        frame.size = CGSize(width: 30, height: 100)
+        backButton.frame = frame
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         titleViewLabel.text = name
@@ -115,6 +117,15 @@ class FilmViewController: ParentViewController {
 
     func setInfo() {
         if let filmInfo = filmInformation {
+
+            if filmInfo.iWatched {
+                watchedButton.isSelected = true
+            }
+
+            if  filmInfo.iWillWatch {
+                willWatchButton.isSelected = true
+            }
+
             let titleLabel = UILabel()
             titleLabel.font = UIFont.cnmFuturaLight(size: 14)
             titleLabel.textColor = UIColor.cnmAfafaf
@@ -137,8 +148,7 @@ class FilmViewController: ParentViewController {
 
             scrollView.addSubview(contentView.prepareForAutoLayout())
             contentView.pinEdgesToSuperviewEdges(top: 0, left: 0, right: 0, bottom: 10)
-//            contentView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: 1_700)
-//            scrollView.contentSize = CGSize(width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: 1_700)
+            contentView.widthAnchor ~= view.widthAnchor
             scrollView.showsHorizontalScrollIndicator = false
             scrollView.showsVerticalScrollIndicator = false
 
@@ -152,36 +162,30 @@ class FilmViewController: ParentViewController {
             imageView.widthAnchor ~= windowWidth
             imageView.heightAnchor ~= windowWidth / 3 * 4
 
-//            let playButton = UIImageView(image: Asset.Cinema.play.image)
-//            imageView.addSubview(playButton.prepareForAutoLayout())
-//            playButton.centerXAnchor ~= imageView.centerXAnchor
-//            playButton.centerYAnchor ~= imageView.centerYAnchor
-//            playButton.heightAnchor ~= 51
-//            playButton.widthAnchor ~= 51
+            let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [watchedButton, UIView().separator(), willWatchButton])
 
-            let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [watchedButton, separatorView, willWatchButton])
-            contentView.addSubview(buttonsStack.prepareForAutoLayout())
-            buttonsStack.heightAnchor ~= 33
-            buttonsStack.topAnchor ~= imageView.bottomAnchor + 26
-            buttonsStack.leadingAnchor ~= contentView.leadingAnchor
-            buttonsStack.trailingAnchor ~= contentView.trailingAnchor
-
-            let starsLabel = UILabel()
             starsLabel.font = UIFont.cnmFuturaLight(size: 16)
             starsLabel.textColor = UIColor.cnmAfafaf
             starsLabel.text = L10n.filmYourStar
-            contentView.addSubview(starsLabel.prepareForAutoLayout())
-            starsLabel.centerXAnchor ~= contentView.centerXAnchor
-            starsLabel.topAnchor ~= buttonsStack.bottomAnchor + 28
+            starsLabel.textAlignment = .center
+            starsLabel.isHidden = true
 
             let starsStack = createStackView(.horizontal, .fill, .fill, 8, with: starsButons)
-            contentView.addSubview(starsStack.prepareForAutoLayout())
+            starsView.addSubview(starsStack.prepareForAutoLayout())
             starsStack.heightAnchor ~= 17
-            starsStack.topAnchor ~= starsLabel.bottomAnchor + 20
-            starsStack.centerXAnchor ~= contentView.centerXAnchor
+            starsStack.topAnchor ~= starsView.topAnchor
+            starsStack.bottomAnchor ~= starsView.bottomAnchor
+            starsStack.centerXAnchor ~= starsView.centerXAnchor
+            starsView.isHidden = true
+
+            let willStack = createStackView(.vertical, .fill, .fill, 20.0, with: [buttonsStack, starsLabel, starsView])
+            contentView.addSubview(willStack.prepareForAutoLayout())
+            willStack.topAnchor ~= imageView.bottomAnchor + 26
+            willStack.leadingAnchor ~= contentView.leadingAnchor
+            willStack.trailingAnchor ~= contentView.trailingAnchor
 
             contentView.addSubview(buyButton.prepareForAutoLayout())
-            buyButton.topAnchor ~= starsStack.bottomAnchor + 36
+            buyButton.topAnchor ~= willStack.bottomAnchor + 36
             buyButton.centerXAnchor ~= contentView.centerXAnchor
 
             contentView.addSubview(inviteButton.prepareForAutoLayout())
@@ -189,13 +193,20 @@ class FilmViewController: ParentViewController {
             inviteButton.centerXAnchor ~= contentView.centerXAnchor
 
             let infoStack = createStackView(.horizontal, .fill, .fill, 0, with: [
-                UIView().setParameters(topLabelText: String(filmInfo.rateTmdb), bottomLabelText: L10n.filmTmdbText),
-                                                 UIView().setParameters(topLabelText: String(filmInfo.duration) + "мин", bottomLabelText: L10n.filmDurationText), UIView().setParameters(topLabelText: "0+", bottomLabelText: L10n.filmAgeText)])
+                UIView().setParameters(
+                    topLabelText: String(filmInfo.rateTmdb),
+                    bottomLabelText: L10n.filmTmdbText),
+                UIView().setParameters(
+                    topLabelText: String(filmInfo.duration) + " мин",
+                    bottomLabelText: L10n.filmDurationText),
+                UIView().setParameters(
+                    topLabelText: filmInfo.ageLimit == nil ? "0+" : String(format: "%@ +", (filmInfo.ageLimit)!),
+                    bottomLabelText: L10n.filmAgeText)
+                ])
             contentView.addSubview(infoStack.prepareForAutoLayout())
             infoStack.heightAnchor ~= 50
             infoStack.topAnchor ~= inviteButton.bottomAnchor + 35
             infoStack.centerXAnchor ~= contentView.centerXAnchor
-
 
             desriptionLabel.textColor = UIColor.cnm3a3a3a
             desriptionLabel.text = L10n.filmDescriptionText
@@ -219,7 +230,10 @@ class FilmViewController: ParentViewController {
         textView.textAlignment = .justified
         textView.shouldTrim = true
         textView.maximumNumberOfLines = 4
-        textView.attributedReadMoreText = NSAttributedString(string: L10n.filmMoreButton)
+        textView.attributedReadMoreText = NSAttributedString(string: L10n.filmMoreButton, attributes: [
+            NSForegroundColorAttributeName: UIColor.cnmBlueLight,
+            NSFontAttributeName: UIFont.cnmFutura(size: 14)
+            ])
 
         contentView.addSubview(textView.prepareForAutoLayout())
         textView.topAnchor ~= desriptionLabel.bottomAnchor + 12
@@ -252,8 +266,8 @@ class FilmViewController: ParentViewController {
         sepView.heightAnchor ~= 1
 
         let infoStack = createStackView(.horizontal, .fill, .fill, 1, with: [
-            UIView().setParameters2(topLabelText: "11700000 " + "$", bottomLabelText: L10n.filmBudjetText), separatorView,
-            UIView().setParameters2(topLabelText: "5600000 " + "$", bottomLabelText: L10n.filmCashText)])
+            UIView().setParameters2(topLabelText: String(filmInfo.budget) + " $", bottomLabelText: L10n.filmBudjetText), UIView().separator(),
+            UIView().setParameters2(topLabelText: String(filmInfo.gross) + " $", bottomLabelText: L10n.filmCashText)])
         contentView.addSubview(infoStack.prepareForAutoLayout())
         infoStack.heightAnchor ~= 50
         infoStack.topAnchor ~= sepView.bottomAnchor + 10
@@ -269,12 +283,18 @@ class FilmViewController: ParentViewController {
 
     func didTapWatchedButton() {
         watchedButton.isSelected = !watchedButton.isSelected
+        starsLabel.isHidden = !watchedButton.isSelected
+        starsView.isHidden = !watchedButton.isSelected
         willWatchButton.isSelected = false
     }
 
     func didTapWillWatchButton() {
         willWatchButton.isSelected = !willWatchButton.isSelected
+        starsLabel.isHidden = !watchedButton.isSelected
+        starsView.isHidden = !watchedButton.isSelected
         watchedButton.isSelected = false
+
+        output.willWatchTap()
     }
 
     func didTapStarButton(button: UIButton) {
@@ -285,6 +305,7 @@ class FilmViewController: ParentViewController {
                 buttonStar.isSelected = false
             }
         }
+        output.watchedTap(rate: button.tag + 1)
     }
 }
 
@@ -296,8 +317,16 @@ extension FilmViewController: FilmViewInput {
 
     }
 
+    func showNetworkError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
     func setFilmInfo(_ filmInfo: FullFilm) {
         self.filmInformation = filmInfo
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
         setInfo()
     }
 }
@@ -308,6 +337,15 @@ private extension UIButton {
         self.setImage(Asset.Cinema.selectStar.image, for: .selected)
         self.widthAnchor ~= 19
         self.heightAnchor ~= 17
+        return self
+    }
+}
+
+private extension UIView {
+    func separator() -> UIView {
+        self.heightAnchor ~= 33
+        self.widthAnchor ~= 1
+        self.backgroundColor = UIColor.cnmAfafaf
         return self
     }
 }

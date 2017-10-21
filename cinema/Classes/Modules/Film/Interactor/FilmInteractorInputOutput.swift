@@ -7,6 +7,8 @@ import Foundation
 
 protocol FilmInteractorInput {
     func getInfoFilm(videoID: String)
+    func filmWatched(videoID: String, rate: Int)
+    func filmWillWatch(videoID: String)
 }
 
 protocol FilmInteractorOutput: class {

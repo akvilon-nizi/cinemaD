@@ -21,6 +21,7 @@
 		0464ACE31F56F5A000D8D49A /* FirstLaunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE21F56F5A000D8D49A /* FirstLaunchManager.swift */; };
 		0464ACE61F57E5C400D8D49A /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE51F57E5C400D8D49A /* SlideView.swift */; };
 		0464ACE81F58144500D8D49A /* SlidePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE71F58144500D8D49A /* SlidePageControl.swift */; };
+		0465E4941F9BEEAB0078306A /* FilmResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465E4931F9BEEAB0078306A /* FilmResponse.swift */; };
 		04A661971F6B05010032A491 /* Slide3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A661961F6B05010032A491 /* Slide3View.swift */; };
 		04A6619C1F6B89BF0032A491 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */; };
 		0563140F3103825CBCA7FB2D /* NewPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C9ECED9CF3FE06429B4E8 /* NewPasswordPresenter.swift */; };
@@ -318,6 +319,7 @@
 		0464ACE21F56F5A000D8D49A /* FirstLaunchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunchManager.swift; sourceTree = "<group>"; };
 		0464ACE51F57E5C400D8D49A /* SlideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		0464ACE71F58144500D8D49A /* SlidePageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePageControl.swift; sourceTree = "<group>"; };
+		0465E4931F9BEEAB0078306A /* FilmResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmResponse.swift; sourceTree = "<group>"; };
 		04A661961F6B05010032A491 /* Slide3View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide3View.swift; sourceTree = "<group>"; };
 		04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		055877F3D63AE274CBB26407 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
@@ -1284,6 +1286,7 @@
 				CEAB467C1F96142200432F70 /* TrailersResponse.swift */,
 				CED2590D1F969908009C0262 /* RecommendationsResponse.swift */,
 				CED2590F1F96992B009C0262 /* NowResponse.swift */,
+				0465E4931F9BEEAB0078306A /* FilmResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1997,8 +2000,8 @@
 					};
 					C0B9D4601F1F8207009A77DD = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = R82X32X6B7;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = X86NQK83T7;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -2377,6 +2380,7 @@
 				4C6A0904B8ADBF796F94FC58 /* KinobaseRouter.swift in Sources */,
 				204352CE0440F816EE8157D6 /* KinobaseRouterInput.swift in Sources */,
 				9067492D42AEA861C37BBE1D /* KinobaseViewController.swift in Sources */,
+				0465E4941F9BEEAB0078306A /* FilmResponse.swift in Sources */,
 				6EF95081C7359A8979E73340 /* KinobaseViewInputOutput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2465,9 +2469,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R82X32X6B7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X86NQK83T7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2480,8 +2484,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.prsolution.cinemad;
 				PRODUCT_NAME = CInema;
-				PROVISIONING_PROFILE = "64f71f9e-9eda-4be1-bb72-ef6b2bddad95";
-				PROVISIONING_PROFILE_SPECIFIER = cinemad;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Prerelease;
@@ -2540,9 +2544,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R82X32X6B7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X86NQK83T7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2555,8 +2559,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.prsolution.cinemad;
 				PRODUCT_NAME = CInema;
-				PROVISIONING_PROFILE = "64f71f9e-9eda-4be1-bb72-ef6b2bddad95";
-				PROVISIONING_PROFILE_SPECIFIER = cinemad;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -2747,9 +2751,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R82X32X6B7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X86NQK83T7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2763,8 +2767,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.prsolution.cinemad;
 				PRODUCT_NAME = CInema;
-				PROVISIONING_PROFILE = "64f71f9e-9eda-4be1-bb72-ef6b2bddad95";
-				PROVISIONING_PROFILE_SPECIFIER = cinemad;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -2774,9 +2778,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R82X32X6B7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X86NQK83T7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2789,8 +2793,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.prsolution.cinemad;
 				PRODUCT_NAME = CInema;
-				PROVISIONING_PROFILE = "64f71f9e-9eda-4be1-bb72-ef6b2bddad95";
-				PROVISIONING_PROFILE_SPECIFIER = cinemad;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Internal;

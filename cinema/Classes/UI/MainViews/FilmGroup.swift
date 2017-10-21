@@ -27,14 +27,14 @@ class FilmGroup: UITableViewHeaderFooterView {
 
     weak var delegate: FilmGroupDelegate?
 
-    let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 60) / 2
+    let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 3
 
     fileprivate let collectionView: UICollectionView = {
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 30
-        layout.minimumLineSpacing = 30
+        layout.minimumInteritemSpacing = 13
+        layout.minimumLineSpacing = 13
         layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

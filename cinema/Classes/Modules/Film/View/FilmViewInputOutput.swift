@@ -10,6 +10,9 @@ protocol FilmViewInput: class {
     func setupInitialState()
 
     func setFilmInfo(_ filmInfo: FullFilm)
+
+    func showNetworkError()
+
 }
 
 protocol FilmViewOutput {
@@ -17,4 +20,8 @@ protocol FilmViewOutput {
     func viewIsReady()
 
     func backTap()
+
+    func willWatchTap()
+
+    func watchedTap(rate: Int)
 }

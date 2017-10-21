@@ -74,6 +74,10 @@ enum L10n {
   static let filmMoreButton = L10n.tr("Localizable", "film-more-button")
   /// Купить билеты
   static let filmPayTicket = L10n.tr("Localizable", "film-pay-ticket")
+  /// film append to the 'watched'
+  static let filmResponseWatched = L10n.tr("Localizable", "film-response-watched")
+  /// film append to the 'will_watch'
+  static let filmResponseWillWatch = L10n.tr("Localizable", "film-response-will_watch")
   /// tMDB
   static let filmTmdbText = L10n.tr("Localizable", "film-tmdb-text")
   /// Смотрел

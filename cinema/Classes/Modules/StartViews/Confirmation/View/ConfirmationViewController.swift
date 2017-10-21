@@ -34,7 +34,10 @@ class ConfirmationViewController: ParentViewController {
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.sizeToFit()
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        var frame = backButton.frame
+        frame.size = CGSize(width: 30, height: 100)
+        backButton.frame = frame
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         titleViewLabel.text = L10n.confirmationTitleText
@@ -79,6 +82,7 @@ class ConfirmationViewController: ParentViewController {
         codeField.trailingAnchor ~= contentView.trailingAnchor
         codeField.leadingAnchor ~= contentView.leadingAnchor
         codeField.textField.keyboardType = .numberPad
+        codeField.textField.delegate = self
 
         newCodeButton.addTarget(self, action: #selector(handleRepeatButton), for: .touchUpInside)
         newCodeButton.setTitle(L10n.confirmationNewPasswordButton, for: .normal)
@@ -149,12 +153,21 @@ class ConfirmationViewController: ParentViewController {
 extension ConfirmationViewController: ConfirmationViewInput {
 
     func setupInitialState() {
-        
     }
 
     func showNetworkError() {
         showAlert(message: L10n.alertCinemaNetworkErrror)
 //        activityVC.isHidden = true
 //        activityVC.stopAnimating()
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension ConfirmationViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= 6 // Bool
     }
 }

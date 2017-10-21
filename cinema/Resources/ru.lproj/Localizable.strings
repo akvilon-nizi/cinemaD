@@ -103,3 +103,7 @@
 "film-cash-text" = "Сборы";
 "film-adwards-text" = "Награды и премии";
 "film-more-button" = "  Читать дальше >";
+
+//Film respons
+"film-response-watched" = "film append to the 'watched'";
+"film-response-will_watch" = "film append to the 'will_watch'";

@@ -36,7 +36,10 @@ class AuthCinemaViewController: ParentViewController {
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.sizeToFit()
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        var frame = backButton.frame
+        frame.size = CGSize(width: 30, height: 100)
+        backButton.frame = frame
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         titleViewLabel.text = L10n.authTitleText
@@ -74,6 +77,7 @@ class AuthCinemaViewController: ParentViewController {
         phoneField.textField.delegate = maskedDelegate
         phoneField.textField.text = "+7 ("
         phoneField.textField.keyboardType = .phonePad
+//        phoneField.sizeToFit()
         passwordField.textField.placeholder = L10n.authPasswordPlaceholder
         passwordField.textField.delegate = self
         passwordField.textField.isSecureTextEntry = true

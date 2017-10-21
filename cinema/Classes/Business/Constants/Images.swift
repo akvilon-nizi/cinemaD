@@ -48,6 +48,7 @@ enum Asset {
   enum Cinema {
     static let aqqa = ImageAsset(name: "aqqa")
     static let assa = ImageAsset(name: "assa")
+    static let background = ImageAsset(name: "background")
     enum MainTab {
       static let chat = ImageAsset(name: "chat")
       static let kinobase = ImageAsset(name: "kinobase")
@@ -102,6 +103,7 @@ enum Asset {
   static let allImages: [ImageAsset] = [
     Cinema.aqqa,
     Cinema.assa,
+    Cinema.background,
     Cinema.MainTab.chat,
     Cinema.MainTab.kinobase,
     Cinema.MainTab.reward,

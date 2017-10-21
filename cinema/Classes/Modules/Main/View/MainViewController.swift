@@ -15,6 +15,8 @@ class MainViewController: ParentViewController {
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
+    let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
+
     var mainData = MainData()
     // MARK: - Life cycle
 
@@ -154,7 +156,7 @@ extension MainViewController: UITableViewDelegate {
             if mainData.now.isEmpty {
                 return 0
             }
-            return windowWidth / 4 * 3
+            return windowWidth2
         case 3:
             if mainData.recomend.isEmpty {
                 return 0
@@ -164,7 +166,7 @@ extension MainViewController: UITableViewDelegate {
             if mainData.recomend.isEmpty {
                 return 0
             }
-            return windowWidth / 4 * 3
+            return windowWidth2
         }
     }
 
