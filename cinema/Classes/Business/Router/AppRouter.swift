@@ -24,7 +24,7 @@ enum AppRouterDestination {
     case phone(phone: String, uid: String)
     case films
     case actors
-    case film
+    case film(videoID: String, name: String)
     case kinobase
     case main
 
@@ -64,8 +64,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: FilmsConfigurator.tag)
             case .actors:
                 return try factory.resolve(tag: ActorsConfigurator.tag)
-            case .film:
-                return try factory.resolve(tag: FilmConfigurator.tag)
+            case let .film(videoID, name):
+                return try factory.resolve(tag: FilmConfigurator.tag, arguments: videoID, name)
             case .kinobase:
                 return try factory.resolve(tag: KinobaseConfigurator.tag)
             case .main:

@@ -54,6 +54,38 @@ enum L10n {
   static let confirmationNextButtonText = L10n.tr("Localizable", "confirmation-next-button-text")
   /// Подтверждение
   static let confirmationTitleText = L10n.tr("Localizable", "confirmation-title-text")
+  /// Награды и премии
+  static let filmAdwardsText = L10n.tr("Localizable", "film-adwards-text")
+  /// Возраст
+  static let filmAgeText = L10n.tr("Localizable", "film-age-text")
+  /// Бюджет
+  static let filmBudjetText = L10n.tr("Localizable", "film-budjet-text")
+  /// Сборы
+  static let filmCashText = L10n.tr("Localizable", "film-cash-text")
+  /// Сюжет:
+  static let filmDescriptionText = L10n.tr("Localizable", "film-description-text")
+  /// Длительность
+  static let filmDurationText = L10n.tr("Localizable", "film-duration-text")
+  /// Приласить на фильм
+  static let filmInviteFilm = L10n.tr("Localizable", "film-invite-film")
+  /// Актёры и режиссёры:
+  static let filmMansText = L10n.tr("Localizable", "film-mans-text")
+  ///   Читать дальше >
+  static let filmMoreButton = L10n.tr("Localizable", "film-more-button")
+  /// Купить билеты
+  static let filmPayTicket = L10n.tr("Localizable", "film-pay-ticket")
+  /// film append to the 'watched'
+  static let filmResponseWatched = L10n.tr("Localizable", "film-response-watched")
+  /// film append to the 'will_watch'
+  static let filmResponseWillWatch = L10n.tr("Localizable", "film-response-will_watch")
+  /// tMDB
+  static let filmTmdbText = L10n.tr("Localizable", "film-tmdb-text")
+  /// Смотрел
+  static let filmWatchedButton = L10n.tr("Localizable", "film-watched-button")
+  /// Посмотрю
+  static let filmWillWatchButton = L10n.tr("Localizable", "film-willWatch-button")
+  /// Ваша оценка:
+  static let filmYourStar = L10n.tr("Localizable", "film-your-star")
   /// Подтверждение
   static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "newPassword-confirm-placeholder")
   /// Новый пароль

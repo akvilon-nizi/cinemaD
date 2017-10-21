@@ -17,4 +17,6 @@ protocol MainViewInput: class {
 protocol MainViewOutput {
 
     func viewIsReady()
+
+    func openFilm(videoID: String, name: String)
 }

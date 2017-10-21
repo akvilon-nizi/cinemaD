@@ -15,6 +15,8 @@ class MainViewController: ParentViewController {
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
+    let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
+
     var mainData = MainData()
     // MARK: - Life cycle
 
@@ -149,22 +151,22 @@ extension MainViewController: UITableViewDelegate {
             if mainData.now.isEmpty {
                 return 0
             }
-            return 3
+            return 27
         case 2:
             if mainData.now.isEmpty {
                 return 0
             }
-            return windowWidth / 4 * 3
+            return windowWidth2
         case 3:
             if mainData.recomend.isEmpty {
                 return 0
             }
-            return 3
+            return 27
         default:
             if mainData.recomend.isEmpty {
                 return 0
             }
-            return windowWidth / 4 * 3
+            return windowWidth2
         }
     }
 
@@ -221,7 +223,7 @@ extension MainViewController: MainTabViewDelegate {
 
 // MARK: - FilmGroupDelegate
 extension MainViewController: FilmGroupDelegate {
-    func openFilmID(_ filmID: String) {
-        
+    func openFilmID(_ filmID: String, name: String) {
+        output.openFilm(videoID: filmID, name: name)
     }
 }

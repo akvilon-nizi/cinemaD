@@ -11,14 +11,14 @@ import ObjectMapper
 class Genre: ImmutableMappable {
 
     let id: String
-    let name: String
+    let name: String?
 
     private let idKey = "id"
     private let nameKey = "name"
 
     required init(map: Map) throws {
         id = try map.value(idKey)
-        name = try map.value(nameKey)
+        name = try? map.value(nameKey)
     }
 
     func mapping(map: Map) {

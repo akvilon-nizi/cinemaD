@@ -110,8 +110,8 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: FilmConfigurator.tag) { () -> UIViewController in
-            let configurator = FilmConfigurator()
+        container.register(tag: FilmConfigurator.tag) { (videoID: String, name: String) -> UIViewController in
+            let configurator = FilmConfigurator(videoID: videoID, name: name)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()

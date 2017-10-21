@@ -6,5 +6,5 @@
 import Foundation
 
 protocol FilmRouterInput: BaseRouterInput {
-
+    func close()
 }

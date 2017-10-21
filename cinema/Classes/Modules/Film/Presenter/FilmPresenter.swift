@@ -11,6 +11,11 @@ class FilmPresenter {
     var interactor: FilmInteractorInput!
     var router: FilmRouterInput!
     weak var output: FilmModuleOutput?
+    let videoID: String
+
+    init(videoID: String) {
+        self.videoID = videoID
+    }
 }
 
 // MARK: - FilmViewOutput
@@ -19,11 +24,30 @@ extension FilmPresenter: FilmViewOutput {
 
     func viewIsReady() {
         log.verbose("Film is ready")
+        interactor.getInfoFilm(videoID: videoID)
     }
+
+    func backTap() {
+        router.close()
+    }
+
+    func willWatchTap() {
+        interactor.filmWillWatch(videoID: videoID)
+    }
+
+    func watchedTap(rate: Int) {
+        interactor.filmWatched(videoID: videoID, rate: rate)
+    }
+
 }
 
 // MARK: - FilmInteractorOutput
 
 extension FilmPresenter: FilmInteractorOutput {
-
+    func getError() {
+        view.showNetworkError()
+    }
+    func getFilmInfo(_ filmInfo: FullFilm) {
+        view.setFilmInfo(filmInfo)
+    }
 }

@@ -14,18 +14,28 @@ class FilmConfigurator {
 
     var appRouter: AppRouterProtocol!
 
+    let videoID: String
+    let name: String
+
+    init(videoID: String, name: String) {
+        self.videoID = videoID
+        self.name = name
+    }
+
     func configureModule() -> UIViewController {
         let router = FilmRouter()
         router.appRouter = appRouter
 
-        let presenter = FilmPresenter()
+        let presenter = FilmPresenter(videoID: videoID)
         presenter.router = router
 
         let interactor = FilmInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = FilmViewController()
         viewController.output = presenter
+        viewController.name = name
 
         presenter.interactor = interactor
         presenter.view = viewController

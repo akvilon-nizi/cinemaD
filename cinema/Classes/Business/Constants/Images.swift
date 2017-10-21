@@ -61,6 +61,7 @@ enum Asset {
       static let isOpen = ImageAsset(name: "isOpen")
     }
     static let play = ImageAsset(name: "play")
+    static let selectStar = ImageAsset(name: "selectStar")
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
       static let slide2Image = ImageAsset(name: "slide2-image")
@@ -71,6 +72,7 @@ enum Asset {
       static let slide3Image4 = ImageAsset(name: "slide3-image4")
       static let slide3Image5 = ImageAsset(name: "slide3-image5")
     }
+    static let unselectStar = ImageAsset(name: "unselectStar")
   }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -110,6 +112,7 @@ enum Asset {
     Cinema.MainView.isClose,
     Cinema.MainView.isOpen,
     Cinema.play,
+    Cinema.selectStar,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
     Cinema.Slides.slide2Play,
@@ -118,6 +121,7 @@ enum Asset {
     Cinema.Slides.slide3Image3,
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
+    Cinema.unselectStar,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,
