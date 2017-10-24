@@ -217,7 +217,7 @@ extension MainViewController: MainTabViewDelegate {
     }
 
     func kinobaseTapped() {
-        print("kinobaseTapped")
+        output.openKinobase()
     }
 }
 

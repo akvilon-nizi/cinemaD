@@ -236,12 +236,6 @@ enum Containers {
                     )*/
                     let endpoint = MoyaProvider.defaultEndpointMapping(for: target)
                     var newHTTPHeaderFields: [String: String] = [:]
-                    switch target {
-                    case .restaurants:
-                        newHTTPHeaderFields["CityId"] = "1"
-                    default:
-                        break
-                    }
                     guard target.isRequiredAuth else {
                         log.debug("Auth token not needed")
                         return endpoint

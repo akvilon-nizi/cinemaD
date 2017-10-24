@@ -22,6 +22,8 @@
 		0464ACE61F57E5C400D8D49A /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE51F57E5C400D8D49A /* SlideView.swift */; };
 		0464ACE81F58144500D8D49A /* SlidePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE71F58144500D8D49A /* SlidePageControl.swift */; };
 		0465E4941F9BEEAB0078306A /* FilmResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465E4931F9BEEAB0078306A /* FilmResponse.swift */; };
+		0465E4971F9DDAB00078306A /* WillWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465E4961F9DDAB00078306A /* WillWatchView.swift */; };
+		0465E4991F9DDAC00078306A /* WatchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465E4981F9DDAC00078306A /* WatchedView.swift */; };
 		04A661971F6B05010032A491 /* Slide3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A661961F6B05010032A491 /* Slide3View.swift */; };
 		04A6619C1F6B89BF0032A491 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */; };
 		0563140F3103825CBCA7FB2D /* NewPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C9ECED9CF3FE06429B4E8 /* NewPasswordPresenter.swift */; };
@@ -320,6 +322,8 @@
 		0464ACE51F57E5C400D8D49A /* SlideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		0464ACE71F58144500D8D49A /* SlidePageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePageControl.swift; sourceTree = "<group>"; };
 		0465E4931F9BEEAB0078306A /* FilmResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmResponse.swift; sourceTree = "<group>"; };
+		0465E4961F9DDAB00078306A /* WillWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillWatchView.swift; sourceTree = "<group>"; };
+		0465E4981F9DDAC00078306A /* WatchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedView.swift; sourceTree = "<group>"; };
 		04A661961F6B05010032A491 /* Slide3View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide3View.swift; sourceTree = "<group>"; };
 		04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		055877F3D63AE274CBB26407 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
@@ -653,6 +657,15 @@
 				0464ACE71F58144500D8D49A /* SlidePageControl.swift */,
 			);
 			path = SlideView;
+			sourceTree = "<group>";
+		};
+		0465E4951F9DDA5A0078306A /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				0465E4961F9DDAB00078306A /* WillWatchView.swift */,
+				0465E4981F9DDAC00078306A /* WatchedView.swift */,
+			);
+			path = UIView;
 			sourceTree = "<group>";
 		};
 		04A661941F6B04130032A491 /* SlidesView */ = {
@@ -1464,6 +1477,7 @@
 		A874581805B6A5A5CE6BD188 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0465E4951F9DDA5A0078306A /* UIView */,
 				D053E4656D87F547232D339B /* KinobaseViewController.swift */,
 				8B3C771A28F22028517F818D /* KinobaseViewInputOutput.swift */,
 			);
@@ -2155,6 +2169,7 @@
 				9BB4EF4A84B7977863DF8BC1 /* CrashReportManager.swift in Sources */,
 				9BB4EDA09342D38FD63BC04C /* FlowControllerProtocol.swift in Sources */,
 				2DBA1619AFA28CC3A2C7FEE8 /* LogManager.swift in Sources */,
+				0465E4991F9DDAC00078306A /* WatchedView.swift in Sources */,
 				9BB4EA49B4F4141A984F198B /* Containers.swift in Sources */,
 				9BB4E675BCCB7BC81ED7568B /* AppRouter.swift in Sources */,
 				9BB4EF0976EFF84ED230CDC0 /* LaunchManger.swift in Sources */,
@@ -2179,6 +2194,7 @@
 				CEFEE0E81F8A96CB00F0A65A /* MainTabView.swift in Sources */,
 				CEB01E911F8DD18A003B67B9 /* AuthResponse.swift in Sources */,
 				0410D8871F5FE05E001F14A7 /* OrdersResponse.swift in Sources */,
+				0465E4971F9DDAB00078306A /* WillWatchView.swift in Sources */,
 				3348DEFD1F402E60002A6E79 /* Category.swift in Sources */,
 				04A6619C1F6B89BF0032A491 /* ViewHelpers.swift in Sources */,
 				0410D88B1F600695001F14A7 /* DateTransform.swift in Sources */,

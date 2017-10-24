@@ -26,6 +26,10 @@ extension MainPresenter: MainViewOutput {
         router.openFilm(videoId: videoID, name: name)
     }
 
+    func openKinobase() {
+        router.openKinobase()
+    }
+
 }
 
 // MARK: - MainInteractorOutput

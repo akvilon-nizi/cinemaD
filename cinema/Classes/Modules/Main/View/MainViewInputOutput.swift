@@ -19,4 +19,6 @@ protocol MainViewOutput {
     func viewIsReady()
 
     func openFilm(videoID: String, name: String)
+
+    func openKinobase()
 }

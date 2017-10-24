@@ -86,6 +86,22 @@ enum L10n {
   static let filmWillWatchButton = L10n.tr("Localizable", "film-willWatch-button")
   /// Ваша оценка:
   static let filmYourStar = L10n.tr("Localizable", "film-your-star")
+  /// Полный список
+  static let kinobaseCollectionText = L10n.tr("Localizable", "kinobase-collection-text")
+  /// + Создать коллекцию
+  static let kinobaseFavoritesTitle = L10n.tr("Localizable", "kinobase-favorites-title")
+  /// Полный список
+  static let kinobaseFullList = L10n.tr("Localizable", "kinobase-full-list")
+  /// Полный список
+  static let kinobaseMakeCollection = L10n.tr("Localizable", "kinobase-make-collection")
+  /// Поиск
+  static let kinobaseSearchText = L10n.tr("Localizable", "kinobase-search-text")
+  /// Кинобаза
+  static let kinobaseTitleText = L10n.tr("Localizable", "kinobase-title-text")
+  /// Смотрел
+  static let kinobaseWatchedButton = L10n.tr("Localizable", "kinobase-watched-button")
+  /// Посмотрю
+  static let kinobaseWillWatchButton = L10n.tr("Localizable", "kinobase-willWatch-button")
   /// Подтверждение
   static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "newPassword-confirm-placeholder")
   /// Новый пароль

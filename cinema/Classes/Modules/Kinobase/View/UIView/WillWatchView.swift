@@ -1,16 +1,16 @@
 //
-//  Slide1View.swift
+//  WillWatch.swift
 //  cinema
 //
-//  Created by Mac on 01.10.17.
+//  Created by Mac on 23.10.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.
 //
 
 import UIKit
 
-// MARK: - Slide3View
+// MARK: - WillWatch
 
-class Slide1View: UIView {
+class WillWatch: UIView {
 
     private let contentView = UIView()
 
@@ -48,6 +48,7 @@ class Slide1View: UIView {
         titleLabel.heightAnchor ~= 27
         titleLabel.widthAnchor ~= 100
         titleLabel.bottomAnchor ~= contentView.bottomAnchor
+
 
     }
 
