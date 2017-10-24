@@ -9,6 +9,36 @@ class KinobaseViewController: ParentViewController {
 
     var output: KinobaseViewOutput!
 
+    let willWatchButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(L10n.filmWillWatchButton, for: .normal)
+        button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
+        button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
+        button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
+        button.heightAnchor ~= 33
+        button.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
+        return button
+    }()
+
+    let watchedButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(L10n.filmWatchedButton, for: .normal)
+        button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
+        button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
+        button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
+        button.heightAnchor ~= 33
+        button.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
+        return button
+    }()
+
+    let separatorView: UIView = {
+        let view = UIView()
+        view.heightAnchor ~= 33
+        view.widthAnchor ~= 1
+        view.backgroundColor = UIColor.cnmAfafaf
+        return view
+    }()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -22,6 +52,8 @@ class KinobaseViewController: ParentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
+
+        let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [watchedButton, separatorView, willWatchButton])
     }
 }
 

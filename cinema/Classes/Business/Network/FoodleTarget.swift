@@ -18,33 +18,12 @@ enum FoodleTarget {
     case film(filmID: String)
     case filmWatched(filmID: String, rate: Int)
     case filmWillWatch(filmID: String)
+    case trailersFilms
     case persons
     case person(personID: String)
     case now
     case recommendations
     case youtubeVideo(videoId: String)
-    case restaurant(restaurantID: Int)
-    case product(productID: Int)
-    case products(restaurantID: Int, categoryID: Int, count: Int, page: Int)
-    case likedProducts(restaurantID: Int, count: Int, page: Int)
-    case incrementProductCount(productID: Int)
-    case decrementProductCount(productID: Int)
-    case restaurants(coordinate: CLLocationCoordinate2D?)
-    case cart
-    case clearCart
-    case cities
-    case terms
-    case trailersFilms
-    case users(id: Int)
-    case updateProfile(profile: Profile)
-    case updateRegion(cityID: Int)
-    case uploadData(data: Data)
-    case updateAvatar(id: Int)
-    case turnNotifications(enabled: Bool)
-    case confirm(code: String)
-    case logout
-    case removeAvatar
-    case orders(count: Int, page: Int)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -95,67 +74,27 @@ extension FoodleTarget: TargetType {
             return "films/now"
         case .recommendations:
             return "films/recommendations"
-        case .restaurants:
-            return "restaurants"
         case .youtubeVideo:
             return "videos"
-        case let .restaurant(restaurantID):
-            return "restaurants/\(restaurantID)"
         case let .getTokenFromUid(uid, _):
             return "registration/\(uid))"
         case .restore:
             return "restore"
         case let .restoreFromUid(uid, _):
             return "restore/\(uid))"
-        case .products:
-            return "products"
-        case let .product(productID):
-            return "products/\(productID)"
-        case .likedProducts:
-            return "products/liked"
-        case .incrementProductCount,
-             .cart,
-             .clearCart:
-            return "cart"
-        case .decrementProductCount(productID: let productID):
-            return "cart/\(productID)"
-        case .cities:
-            return "cities"
-        case .terms:
-            return "terms"
-        case .users(id: let id):
-            return "users/\(id)"
-        case .updateProfile,
-             .updateRegion,
-             .turnNotifications,
-             .updateAvatar:
-            return "users/0"
-        case .uploadData:
-            return "upload"
-        case .confirm:
-            return "users/0/confirm"
-        case .logout:
-            return "users/0/logout"
-        case .removeAvatar:
-            return "users/0/avatar"
-        case .orders:
-            return "orders"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .restaurants, .restaurant, .products, .cart, .cities, .terms, .users, .product, .orders, .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo:
             return .get
-        case .decrementProductCount, .clearCart, .removeAvatar:
-            return .delete
-        case .updateProfile,
-             .updateRegion,
-             .updateAvatar,
-             .turnNotifications:
-            return .patch
-        case .logout:
-            return .put
+//        case :
+//            return .delete
+//        case :
+//            return .patch
+//        case :
+//            return .put
         default:
             return .post
         }
@@ -185,78 +124,26 @@ extension FoodleTarget: TargetType {
             return ["phone": phone, "code": code]
         case let .youtubeVideo(videoId):
             return ["key": Configurations.googleApi, "part": "snippet", "id": videoId]
-        case let .products(restaurantID, categoryID, count, page):
-            return ["restaurant_id": restaurantID, "category_id": categoryID, "per-page": count, "page": page]
-        case let .likedProducts(restaurantID, count, page):
-            return ["restaurant_id": restaurantID, "per-page": count, "page": page]
-        case let .incrementProductCount(productID):
-            return ["product_id": productID]
-        case let .restaurants(coordinate):
-            var parameters: [String: Any] = [:]
-            if let coord = coordinate {
-                parameters["lat"] = coord.latitude
-                parameters["long"] = coord.longitude
-            }
-            return parameters
-        case let .updateProfile(profile):
-
-            var parameters: [String: Any] = [:]
-
-            if let region = profile.city {
-
-                parameters["city_id"] = region.id
-            }
-
-            parameters["name"] = profile.name
-            parameters["phone"] = profile.phone
-            parameters["email"] = profile.email
-
-            return parameters
-        case let .updateRegion(cityID):
-            return ["city_id": cityID]
-        case let .turnNotifications(enabled):
-            return ["push_notifications": enabled]
-        case let .updateAvatar(id):
-            return ["avatar_id": id]
-        case let .confirm(code):
-            return ["code": code]
-        case let .orders(count, page):
-            return ["per-page": count, "page": page]
         default:
             return nil
         }
     }
 
     var parameterEncoding: ParameterEncoding {
-
-        switch self {
-        case .uploadData(data: _):
-            return URLEncoding(destination: .httpBody)
-        default:
-            return URLEncoding()
-        }
+        return URLEncoding()
     }
 
     var sampleData: Data {
-        switch self {
-        case .sendCode:
-            return Data()
-        case .checkCode:
-            return Data()
-        case .restaurants:
-            return loadDataFromBundle(with: "restaurants")
-        default:
-            return Data()
-        }
+        return Data()
     }
 
     var task: Task {
-        switch self {
-        case let .uploadData(data):
-        return .upload(.multipart([MultipartFormData(provider: .data(data), name: "body", fileName: "photo.jpg", mimeType: "image/jpeg")]))
-        default:
+//        switch self {
+//        case let .uploadData(data):
+//        return .upload(.multipart([MultipartFormData(provider: .data(data), name: "body", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+//        default:
             return .request
-        }
+//        }
     }
 }
 

@@ -16,4 +16,8 @@ extension MainRouter: MainRouterInput {
     func openFilm(videoId: String, name: String) {
         appRouter.transition(to: .film(videoID: videoId, name: name))
     }
+
+    func openKinobase() {
+        appRouter.transition(to: .kinobase)
+    }
 }

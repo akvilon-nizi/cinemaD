@@ -107,3 +107,15 @@
 //Film respons
 "film-response-watched" = "film append to the 'watched'";
 "film-response-will_watch" = "film append to the 'will_watch'";
+
+//Kinobase
+"kinobase-title-text" = "Кинобаза";
+"kinobase-willWatch-button" = "Посмотрю";
+"kinobase-watched-button" = "Смотрел";
+"kinobase-search-text" = "Поиск";
+"kinobase-full-list" = "Полный список";
+"kinobase-collection-text" = "Полный список";
+"kinobase-make-collection" = "Полный список";
+"kinobase-favorites-title" = "+ Создать коллекцию";
+
+
