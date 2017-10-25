@@ -6,5 +6,5 @@
 import Foundation
 
 protocol KinobaseRouterInput: BaseRouterInput {
-
+    func close()
 }

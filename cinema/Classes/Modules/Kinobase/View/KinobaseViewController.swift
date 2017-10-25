@@ -53,7 +53,53 @@ class KinobaseViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        activityVC.startAnimating()
+        activityVC.isHidden = false
+
+        let backButton = UIButton()
+        backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
+        backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        var frame = backButton.frame
+        frame.size = CGSize(width: 30, height: 100)
+        backButton.frame = frame
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+
+        titleViewLabel.text = "Кинобаза"
+        titleViewLabel.font = UIFont.cnmFutura(size: 20)
+
+        watchedButton.isSelected = true
+
+//        watchedButton.addTarget(self, action: #selector(didTapWatchedButton), for: .touchUpInside)
+//
+//        willWatchButton.addTarget(self, action: #selector(didTapWillWatchButton), for: .touchUpInside)
+
         let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [watchedButton, separatorView, willWatchButton])
+        view.addSubview(buttonsStack.prepareForAutoLayout())
+        buttonsStack.centerXAnchor ~= view.centerXAnchor
+        buttonsStack.topAnchor ~= view.topAnchor + 40
+
+    }
+
+    // MARK: - Actions
+    func didTapLeftButton() {
+        output?.backButtonTap()
+    }
+
+    func didTapWatchedButton() {
+//        watchedButton.isSelected = !watchedButton.isSelected
+//        starsLabel.isHidden = !watchedButton.isSelected
+//        starsView.isHidden = !watchedButton.isSelected
+//        willWatchButton.isSelected = false
+    }
+
+    func didTapWillWatchButton() {
+//        willWatchButton.isSelected = !willWatchButton.isSelected
+//        starsLabel.isHidden = !watchedButton.isSelected
+//        starsView.isHidden = !watchedButton.isSelected
+//        watchedButton.isSelected = false
+//
+//        output.willWatchTap()
     }
 }
 

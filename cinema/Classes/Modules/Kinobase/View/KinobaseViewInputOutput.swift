@@ -13,4 +13,6 @@ protocol KinobaseViewInput: class {
 protocol KinobaseViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
 }

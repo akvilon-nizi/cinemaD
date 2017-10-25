@@ -13,5 +13,7 @@ class KinobaseRouter {
 // MARK: - KinobaseRouterInput
 
 extension KinobaseRouter: KinobaseRouterInput {
-
+    func close() {
+        appRouter.backTransition()
+    }
 }
