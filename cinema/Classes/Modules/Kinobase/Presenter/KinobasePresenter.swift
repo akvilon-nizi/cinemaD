@@ -20,6 +20,10 @@ extension KinobasePresenter: KinobaseViewOutput {
     func viewIsReady() {
         log.verbose("Kinobase is ready")
     }
+
+    func backButtonTap() {
+        router.close()
+    }
 }
 
 // MARK: - KinobaseInteractorOutput
