@@ -15,9 +15,12 @@ class KinobaseViewController: ParentViewController {
         options: nil
     )
 
+    let willWatchVC = WillWatchVC()
+    let willWatchVC2 = WillWatchVC()
+
     let controllers: [UIViewController]
 
-    var container = SearchView()
+    var container = UIView()
 
     let willWatchButton: UIButton = {
         let button = UIButton()
@@ -58,16 +61,13 @@ class KinobaseViewController: ParentViewController {
     }
 
     init(controllers: [UIViewController]) {
-        self.controllers = controllers
+        self.controllers = [willWatchVC2, willWatchVC]
         super.init(nibName: nil, bundle: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
-
-        activityVC.startAnimating()
-        activityVC.isHidden = false
 
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
@@ -88,6 +88,10 @@ class KinobaseViewController: ParentViewController {
         willWatchButton.addTarget(self, action: #selector(didTapWillWatchButton), for: .touchUpInside)
 
         setPageVC()
+
+        activityVC.startAnimating()
+        activityVC.isHidden = false
+        view.bringSubview(toFront: activityVC)
     }
 
     private func setPageVC() {
@@ -107,14 +111,14 @@ class KinobaseViewController: ParentViewController {
 //        pageViewController.dataSource = self
 //        pageViewController.delegate = self
 
-//        container = pageViewController.view
-        container = SearchView()
-        container.setInfo(placeholder: "assa", titles: ["assa", "assa1", "asdadsa"])
+        container = pageViewController.view
+//        container = SearchView()
+//        container.setInfo(placeholder: "assa", titles: ["assa", "assa1", "asdadsa"])
         view.addSubview(container.prepareForAutoLayout())
         container.topAnchor ~= buttonsStack.bottomAnchor + 10
         container.leadingAnchor ~= view.leadingAnchor
         container.trailingAnchor ~= view.trailingAnchor
-//        container.bottomAnchor ~= view.bottomAnchor
+        container.bottomAnchor ~= view.bottomAnchor
 
     }
 
@@ -194,6 +198,21 @@ extension KinobaseViewController: UIPageViewControllerDelegate {
 extension KinobaseViewController: KinobaseViewInput {
 
     func setupInitialState() {
+    }
 
+    func getError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+    func getData(_ kbData: KinobaseData) {
+        var willWatched: [Film] = []
+        for filmCol in kbData.willWatched {
+            let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
+            willWatched.append(film)
+        }
+        willWatchVC.setFilms(willWatched)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
     }
 }

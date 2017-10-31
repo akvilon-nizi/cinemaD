@@ -74,6 +74,9 @@ enum Asset {
     }
     static let unselectStar = ImageAsset(name: "unselectStar")
   }
+  enum Kinobase {
+    static let forward = ImageAsset(name: "forward")
+  }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
     static let navBarList = ImageAsset(name: "nav-bar-list")
@@ -126,6 +129,7 @@ enum Asset {
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
     Cinema.unselectStar,
+    Kinobase.forward,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,
