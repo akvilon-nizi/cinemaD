@@ -23,8 +23,11 @@ extension KinobasePresenter: KinobaseViewOutput {
     }
 
     func backButtonTap() {
+        router.close()
+    }
+
+    func openFullFilm() {
         router.openAllFilms()
-//        router.close()
     }
 }
 

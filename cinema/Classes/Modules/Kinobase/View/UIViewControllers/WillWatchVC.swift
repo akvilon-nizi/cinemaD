@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol WillWatchVCDelegate: class {
+    func openFullList()
+}
+
 class WillWatchVC: ParentViewController {
 
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -17,6 +21,9 @@ class WillWatchVC: ParentViewController {
     let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
 
     var films: [Film] = []
+
+    weak var delegate: WillWatchVCDelegate?
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -66,7 +73,7 @@ extension WillWatchVC: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
 }
@@ -85,12 +92,24 @@ extension WillWatchVC: UITableViewDelegate {
             if films.isEmpty {
                 return nil
             }
-            let view = FilmGroup()
-            view.films = films
-//            view.delegate = self
+            let view = HeaderViewTitle()
+            view.title = "Посмотрю"
             return view
         case 1:
-            return FullListFilms()
+            if films.isEmpty {
+                return nil
+            }
+            let view = FullListFilms()
+            view.delegate = self
+            return view
+        case 2:
+            if films.isEmpty {
+                return nil
+            }
+            let view = FilmGroup()
+            view.films = films
+            //            view.delegate = self
+            return view
         default:
             return nil
         }
@@ -99,12 +118,14 @@ extension WillWatchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
+            return 22
+        case 1:
+            return 22
+        case 2:
             if films.isEmpty {
                 return 0
             }
-            return windowWidth / 4 * 3 + 20
-        case 1:
-            return 55
+            return windowWidth / 4 * 3 - 80
         default:
             return 0
         }
@@ -112,5 +133,11 @@ extension WillWatchVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
+    }
+}
+
+extension WillWatchVC: FullListFilmsDelegate {
+    func openFullList() {
+        delegate?.openFullList()
     }
 }

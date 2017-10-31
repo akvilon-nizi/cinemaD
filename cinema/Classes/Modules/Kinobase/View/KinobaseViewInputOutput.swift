@@ -18,4 +18,5 @@ protocol KinobaseViewOutput {
 
     func backButtonTap()
 
+    func openFullFilm()
 }

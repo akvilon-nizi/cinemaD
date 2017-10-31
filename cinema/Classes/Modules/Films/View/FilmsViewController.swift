@@ -63,6 +63,10 @@ class FilmsViewController: ParentViewController {
         collectionView.pinEdgesToSuperviewEdges()
         collectionView.delegate = self
         collectionView.dataSource = self
+
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        view.bringSubview(toFront: activityVC)
     }
 
     // MARK: - Actions
@@ -80,6 +84,8 @@ extension FilmsViewController: FilmsViewInput {
         self.films = films
         activityVC.stopAnimating()
         activityVC.isHidden = true
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
         self.collectionView.reloadData()
     }
 }

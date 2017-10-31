@@ -69,6 +69,8 @@ class KinobaseViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        willWatchVC.delegate = self
+
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
@@ -214,5 +216,11 @@ extension KinobaseViewController: KinobaseViewInput {
         willWatchVC.setFilms(willWatched)
         activityVC.isHidden = true
         activityVC.stopAnimating()
+    }
+}
+
+extension KinobaseViewController: WillWatchVCDelegate {
+    func openFullList() {
+        output?.openFullFilm()
     }
 }
