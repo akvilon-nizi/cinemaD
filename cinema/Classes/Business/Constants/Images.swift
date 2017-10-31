@@ -81,6 +81,10 @@ enum Asset {
     static let navBarMap = ImageAsset(name: "nav-bar-map")
     static let navBarMenu = ImageAsset(name: "nav-bar-menu")
   }
+  enum Search {
+    static let search = ImageAsset(name: "search")
+    static let type = ImageAsset(name: "type")
+  }
   enum StartViews {
     static let auth = ImageAsset(name: "auth")
     enum Confirmation {
@@ -127,6 +131,8 @@ enum Asset {
     NavBar.navBarLogo,
     NavBar.navBarMap,
     NavBar.navBarMenu,
+    Search.search,
+    Search.type,
     StartViews.auth,
     StartViews.Confirmation.lock,
     StartViews.Help.phone,

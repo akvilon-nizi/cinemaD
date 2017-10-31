@@ -18,12 +18,19 @@
 		042512DDFBF08C824F6D2092 /* ActorsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EC8DFFC71933FC5CC1B8E /* ActorsRouterInput.swift */; };
 		043A733C1F80CD4700E1DF43 /* Slide1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A733B1F80CD4700E1DF43 /* Slide1View.swift */; };
 		043A733E1F80CD7500E1DF43 /* Slide2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A733D1F80CD7500E1DF43 /* Slide2View.swift */; };
+		0459280A1FA6107E00DE137E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045928091FA6107E00DE137E /* SearchView.swift */; };
+		0459280C1FA6445300DE137E /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459280B1FA6445300DE137E /* SearchCell.swift */; };
+		045928121FA7B45000DE137E /* FilmCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045928111FA7B45000DE137E /* FilmCollections.swift */; };
 		0464ACE31F56F5A000D8D49A /* FirstLaunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE21F56F5A000D8D49A /* FirstLaunchManager.swift */; };
 		0464ACE61F57E5C400D8D49A /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE51F57E5C400D8D49A /* SlideView.swift */; };
 		0464ACE81F58144500D8D49A /* SlidePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464ACE71F58144500D8D49A /* SlidePageControl.swift */; };
 		0465E4941F9BEEAB0078306A /* FilmResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465E4931F9BEEAB0078306A /* FilmResponse.swift */; };
 		0465E4971F9DDAB00078306A /* WillWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465E4961F9DDAB00078306A /* WillWatchView.swift */; };
 		0465E4991F9DDAC00078306A /* WatchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465E4981F9DDAC00078306A /* WatchedView.swift */; };
+		049030421FA7B930000B7C08 /* KinobaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049030411FA7B930000B7C08 /* KinobaseData.swift */; };
+		049030441FA7BAD1000B7C08 /* WatchedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049030431FA7BAD1000B7C08 /* WatchedResponse.swift */; };
+		049030461FA7BB8B000B7C08 /* WillWatchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049030451FA7BB8B000B7C08 /* WillWatchResponse.swift */; };
+		049030481FA86720000B7C08 /* AllFilms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049030471FA86720000B7C08 /* AllFilms.swift */; };
 		04A661971F6B05010032A491 /* Slide3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A661961F6B05010032A491 /* Slide3View.swift */; };
 		04A6619C1F6B89BF0032A491 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */; };
 		0563140F3103825CBCA7FB2D /* NewPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C9ECED9CF3FE06429B4E8 /* NewPasswordPresenter.swift */; };
@@ -318,12 +325,19 @@
 		0410D88C1F600B7A001F14A7 /* OrdersTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTransforms.swift; sourceTree = "<group>"; };
 		043A733B1F80CD4700E1DF43 /* Slide1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide1View.swift; sourceTree = "<group>"; };
 		043A733D1F80CD7500E1DF43 /* Slide2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide2View.swift; sourceTree = "<group>"; };
+		045928091FA6107E00DE137E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchView.swift; path = cinema/Classes/Modules/Kinobase/View/SearchView.swift; sourceTree = SOURCE_ROOT; };
+		0459280B1FA6445300DE137E /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		045928111FA7B45000DE137E /* FilmCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCollections.swift; sourceTree = "<group>"; };
 		0464ACE21F56F5A000D8D49A /* FirstLaunchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunchManager.swift; sourceTree = "<group>"; };
 		0464ACE51F57E5C400D8D49A /* SlideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		0464ACE71F58144500D8D49A /* SlidePageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePageControl.swift; sourceTree = "<group>"; };
 		0465E4931F9BEEAB0078306A /* FilmResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmResponse.swift; sourceTree = "<group>"; };
 		0465E4961F9DDAB00078306A /* WillWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillWatchView.swift; sourceTree = "<group>"; };
 		0465E4981F9DDAC00078306A /* WatchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedView.swift; sourceTree = "<group>"; };
+		049030411FA7B930000B7C08 /* KinobaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinobaseData.swift; sourceTree = "<group>"; };
+		049030431FA7BAD1000B7C08 /* WatchedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedResponse.swift; sourceTree = "<group>"; };
+		049030451FA7BB8B000B7C08 /* WillWatchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillWatchResponse.swift; sourceTree = "<group>"; };
+		049030471FA86720000B7C08 /* AllFilms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilms.swift; sourceTree = "<group>"; };
 		04A661961F6B05010032A491 /* Slide3View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide3View.swift; sourceTree = "<group>"; };
 		04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		055877F3D63AE274CBB26407 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
@@ -664,6 +678,8 @@
 			children = (
 				0465E4961F9DDAB00078306A /* WillWatchView.swift */,
 				0465E4981F9DDAC00078306A /* WatchedView.swift */,
+				045928091FA6107E00DE137E /* SearchView.swift */,
+				0459280B1FA6445300DE137E /* SearchCell.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -1241,6 +1257,7 @@
 				CE09FEB11F95792A00D49351 /* FullFilm.swift */,
 				CE09FEAF1F95735900D49351 /* FullPerson.swift */,
 				CE09FEAD1F95714700D49351 /* FilmFromPerson.swift */,
+				045928111FA7B45000DE137E /* FilmCollections.swift */,
 				CE09FEAB1F955F5200D49351 /* Person.swift */,
 				CEAB46781F96076D00432F70 /* PersonFromFilm.swift */,
 				CEAB467A1F96097300432F70 /* Genre.swift */,
@@ -1258,6 +1275,7 @@
 				0410D8841F5FDE24001F14A7 /* Order.swift */,
 				0410D8881F600627001F14A7 /* Transforms */,
 				CED259111F969B39009C0262 /* MainData.swift */,
+				049030411FA7B930000B7C08 /* KinobaseData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1300,6 +1318,9 @@
 				CED2590D1F969908009C0262 /* RecommendationsResponse.swift */,
 				CED2590F1F96992B009C0262 /* NowResponse.swift */,
 				0465E4931F9BEEAB0078306A /* FilmResponse.swift */,
+				049030431FA7BAD1000B7C08 /* WatchedResponse.swift */,
+				049030451FA7BB8B000B7C08 /* WillWatchResponse.swift */,
+				049030471FA86720000B7C08 /* AllFilms.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2183,6 +2204,7 @@
 				3331732C1F4EE61500C7C88E /* RegionResponse.swift in Sources */,
 				3386D47F1F443C8B009D9A42 /* CartProduct.swift in Sources */,
 				CEAB467B1F96097300432F70 /* Genre.swift in Sources */,
+				049030441FA7BAD1000B7C08 /* WatchedResponse.swift in Sources */,
 				0464ACE61F57E5C400D8D49A /* SlideView.swift in Sources */,
 				CEE0A9441F987405006E6D9B /* UITextView+Extensions.swift in Sources */,
 				3348DEFF1F403112002A6E79 /* CategoriesResponse.swift in Sources */,
@@ -2204,6 +2226,7 @@
 				040CE5181F5D912C001DF59C /* Ingredient.swift in Sources */,
 				3386D47D1F4437F7009D9A42 /* CartResponse.swift in Sources */,
 				9BB4E26D89A31E79BAFE6B36 /* Images.swift in Sources */,
+				0459280A1FA6107E00DE137E /* SearchView.swift in Sources */,
 				3361E48A1F54347200ECF276 /* Upload.swift in Sources */,
 				9BB4EC2F956B30A4509642DE /* Strings.swift in Sources */,
 				9BB4E3F0DBB64B9E1751C4B5 /* Colors.swift in Sources */,
@@ -2255,6 +2278,7 @@
 				043A733E1F80CD7500E1DF43 /* Slide2View.swift in Sources */,
 				9BB4E3AC8CC054013E48F2C5 /* Responses.swift in Sources */,
 				A2CFB534CD2FF487A333F3C5 /* SlidesConfigurator.swift in Sources */,
+				049030461FA7BB8B000B7C08 /* WillWatchResponse.swift in Sources */,
 				0B1989EB360B9E889E0AB5C7 /* SlidesInteractor.swift in Sources */,
 				8B7C59BAB967C2B0001C257A /* SlidesInteractorInputOutput.swift in Sources */,
 				3753EE88776194D74AC0CFF2 /* SlidesModuleInputOutput.swift in Sources */,
@@ -2268,6 +2292,7 @@
 				9BB4E2D2E17EA5E6ED5DB0BF /* Formatters.swift in Sources */,
 				71138B20F5581E9243DAB2BD /* StartConfigurator.swift in Sources */,
 				9057AC2F9825D7DAA8F262FA /* StartInteractor.swift in Sources */,
+				0459280C1FA6445300DE137E /* SearchCell.swift in Sources */,
 				FD252672666F33FB5997E098 /* StartInteractorInputOutput.swift in Sources */,
 				12134B2E9BCE09799FAF222D /* StartModuleInputOutput.swift in Sources */,
 				D164DFE0E76FF403C6448845 /* StartPresenter.swift in Sources */,
@@ -2277,6 +2302,7 @@
 				AC20850608C915E9DB463AF1 /* StartViewController.swift in Sources */,
 				DCDC2E27C80AD9614A95E682 /* StartViewInputOutput.swift in Sources */,
 				5A5FBD93BFF118037C5D3AE1 /* AuthCinemaConfigurator.swift in Sources */,
+				045928121FA7B45000DE137E /* FilmCollections.swift in Sources */,
 				6482E5A363727326BAD48BF3 /* AuthCinemaInteractor.swift in Sources */,
 				07B9C38CA6EF5666FC616EBD /* AuthCinemaInteractorInputOutput.swift in Sources */,
 				5C20CC925BA9425684CB44AB /* AuthCinemaModuleInputOutput.swift in Sources */,
@@ -2337,6 +2363,7 @@
 				36CF0ED40645D305BD4A40EE /* ConfirmationRouterInput.swift in Sources */,
 				E4C77E0A31733AC6C4BA9B83 /* ConfirmationViewController.swift in Sources */,
 				40F85D1EEAF923B95EF8C72A /* ConfirmationViewInputOutput.swift in Sources */,
+				049030421FA7B930000B7C08 /* KinobaseData.swift in Sources */,
 				A7BB5F1D402A144B24A7FE50 /* PhoneConfigurator.swift in Sources */,
 				2CFC6B26B2A67E1538723762 /* PhoneInteractor.swift in Sources */,
 				6D8ADB0FA1F24AF6686E639B /* PhoneInteractorInputOutput.swift in Sources */,
@@ -2361,6 +2388,7 @@
 				82D64A84C65E403820581028 /* FilmsInteractor.swift in Sources */,
 				7E5016F956A4F5C65338F54F /* FilmsInteractorInputOutput.swift in Sources */,
 				6A23321188F195E4FF9A3385 /* FilmsModuleInputOutput.swift in Sources */,
+				049030481FA86720000B7C08 /* AllFilms.swift in Sources */,
 				86B1D69BC720E7DA28FE2C69 /* FilmsPresenter.swift in Sources */,
 				2182D6EA864E915DD756F086 /* FilmsRouter.swift in Sources */,
 				4E437DE52C3F90EB7883DCF2 /* FilmsRouterInput.swift in Sources */,

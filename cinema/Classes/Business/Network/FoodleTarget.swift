@@ -24,6 +24,8 @@ enum FoodleTarget {
     case now
     case recommendations
     case youtubeVideo(videoId: String)
+    case meFilmWatched
+    case meFilmWillWatched
 
     var isRequiredAuth: Bool {
         switch self {
@@ -66,6 +68,10 @@ extension FoodleTarget: TargetType {
             return "films/\(filmID)/action/watched"
         case let .filmWillWatch(filmID):
             return "films/\(filmID)/action/will_watch"
+        case .meFilmWatched:
+            return "me/watched"
+        case .meFilmWillWatched:
+            return "me/will_watch"
         case .persons:
             return "persons"
         case let .person(personID):
@@ -87,7 +93,7 @@ extension FoodleTarget: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched:
             return .get
 //        case :
 //            return .delete

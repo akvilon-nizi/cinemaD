@@ -16,4 +16,8 @@ extension KinobaseRouter: KinobaseRouterInput {
     func close() {
         appRouter.backTransition()
     }
+
+    func openAllFilms() {
+        appRouter.transition(to: .films)
+    }
 }

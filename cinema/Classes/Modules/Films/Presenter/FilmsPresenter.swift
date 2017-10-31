@@ -19,11 +19,25 @@ extension FilmsPresenter: FilmsViewOutput {
 
     func viewIsReady() {
         log.verbose("Films is ready")
+        interactor.getAllFilms()
+    }
+
+    func backButtonTap() {
+        router.close()
+    }
+
+    func openFilmID(_ filmId: String, name: String) {
+        router.openFilm(videoId: filmId, name: name)
     }
 }
 
 // MARK: - FilmsInteractorOutput
 
 extension FilmsPresenter: FilmsInteractorOutput {
+    func getError() {
 
+    }
+    func getFilms(films: [Film]) {
+        view.setupInitialState(films)
+    }
 }

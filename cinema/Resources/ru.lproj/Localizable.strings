@@ -118,4 +118,8 @@
 "kinobase-make-collection" = "Полный список";
 "kinobase-favorites-title" = "+ Создать коллекцию";
 
+//Films
+"films-title-text" = "Полный список";
+"kinobase-willWatch-button" = "Посмотрю";
+
 

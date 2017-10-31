@@ -9,6 +9,16 @@ class KinobaseViewController: ParentViewController {
 
     var output: KinobaseViewOutput!
 
+    let pageViewController = UIPageViewController(
+        transitionStyle: .pageCurl,
+        navigationOrientation: .horizontal,
+        options: nil
+    )
+
+    let controllers: [UIViewController]
+
+    var container = SearchView()
+
     let willWatchButton: UIButton = {
         let button = UIButton()
         button.setTitle(L10n.filmWillWatchButton, for: .normal)
@@ -39,13 +49,16 @@ class KinobaseViewController: ParentViewController {
         return view
     }()
 
+    var currentIndex: Int = 0
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
-    init() {
+    init(controllers: [UIViewController]) {
+        self.controllers = controllers
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -70,14 +83,38 @@ class KinobaseViewController: ParentViewController {
 
         watchedButton.isSelected = true
 
-//        watchedButton.addTarget(self, action: #selector(didTapWatchedButton), for: .touchUpInside)
-//
-//        willWatchButton.addTarget(self, action: #selector(didTapWillWatchButton), for: .touchUpInside)
+        watchedButton.addTarget(self, action: #selector(didTapWatchedButton), for: .touchUpInside)
+
+        willWatchButton.addTarget(self, action: #selector(didTapWillWatchButton), for: .touchUpInside)
+
+        setPageVC()
+    }
+
+    private func setPageVC() {
+        pageViewController.setViewControllers(
+            [controllers[0]],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
 
         let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [watchedButton, separatorView, willWatchButton])
         view.addSubview(buttonsStack.prepareForAutoLayout())
         buttonsStack.centerXAnchor ~= view.centerXAnchor
         buttonsStack.topAnchor ~= view.topAnchor + 40
+
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
+//        pageViewController.dataSource = self
+//        pageViewController.delegate = self
+
+//        container = pageViewController.view
+        container = SearchView()
+        container.setInfo(placeholder: "assa", titles: ["assa", "assa1", "asdadsa"])
+        view.addSubview(container.prepareForAutoLayout())
+        container.topAnchor ~= buttonsStack.bottomAnchor + 10
+        container.leadingAnchor ~= view.leadingAnchor
+        container.trailingAnchor ~= view.trailingAnchor
+//        container.bottomAnchor ~= view.bottomAnchor
 
     }
 
@@ -87,20 +124,69 @@ class KinobaseViewController: ParentViewController {
     }
 
     func didTapWatchedButton() {
-//        watchedButton.isSelected = !watchedButton.isSelected
-//        starsLabel.isHidden = !watchedButton.isSelected
-//        starsView.isHidden = !watchedButton.isSelected
-//        willWatchButton.isSelected = false
+        if currentIndex != 0 {
+            watchedButton.isSelected = true
+            willWatchButton.isSelected = false
+            pageViewController.setViewControllers(
+                [controllers[0]],
+                direction: .forward,
+                animated: false,
+                completion: nil)
+            currentIndex = 0
+        }
     }
 
     func didTapWillWatchButton() {
-//        willWatchButton.isSelected = !willWatchButton.isSelected
-//        starsLabel.isHidden = !watchedButton.isSelected
-//        starsView.isHidden = !watchedButton.isSelected
-//        watchedButton.isSelected = false
-//
-//        output.willWatchTap()
+        if currentIndex != 1 {
+            willWatchButton.isSelected = true
+            watchedButton.isSelected = false
+            pageViewController.setViewControllers(
+                [controllers[1]],
+                direction: .forward,
+                animated: false,
+                completion: nil)
+            currentIndex = 1
+        }
     }
+}
+// MARK: - UIPageViewControllerDataSource
+
+extension KinobaseViewController: UIPageViewControllerDataSource {
+
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+        ) -> UIViewController? {
+        guard let index = controllers.index(of: viewController), index != 0 else {
+            return nil
+        }
+        return controllers[index - 1]
+    }
+
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+        ) -> UIViewController? {
+        guard let index = controllers.index(of: viewController), index != controllers.count - 1 else {
+            return nil
+        }
+        return controllers[index + 1]
+    }
+
+}
+
+// MARK: - UIPageViewControllerDelegate
+
+extension KinobaseViewController: UIPageViewControllerDelegate {
+
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+//        if let vc = pendingViewControllers.last,
+////            let index = controllers.index(of: vc),
+////            let tab = ProfileTabType(rawValue: index) {
+////            tabBar.set(tab: tab)
+//        }
+    }
+
 }
 
 // MARK: - KinobaseViewInput

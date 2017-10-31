@@ -7,10 +7,14 @@ import Foundation
 
 protocol FilmsViewInput: class {
 
-    func setupInitialState()
+    func setupInitialState(_ films: [Film])
 }
 
 protocol FilmsViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
+
+    func openFilmID(_ filmId: String, name: String)
 }
