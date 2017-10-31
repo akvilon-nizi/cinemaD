@@ -8,6 +8,8 @@ import Foundation
 protocol KinobaseViewInput: class {
 
     func setupInitialState()
+    func getError()
+    func getData(_ kbData: KinobaseData)
 }
 
 protocol KinobaseViewOutput {
@@ -15,4 +17,5 @@ protocol KinobaseViewOutput {
     func viewIsReady()
 
     func backButtonTap()
+
 }

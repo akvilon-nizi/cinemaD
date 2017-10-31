@@ -23,18 +23,6 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
         }
     }
 
-    let buttonImage = UIImageView(image: Asset.Cinema.MainView.isOpen.image)
-
-    var isOpen: Bool = false {
-        didSet {
-            if isOpen {
-                buttonImage.image = Asset.Cinema.MainView.isOpen.image
-            } else {
-                buttonImage.image = Asset.Cinema.MainView.isClose.image
-            }
-        }
-    }
-
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }

@@ -15,6 +15,7 @@
 		0410D8871F5FE05E001F14A7 /* OrdersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0410D8861F5FE05E001F14A7 /* OrdersResponse.swift */; };
 		0410D88B1F600695001F14A7 /* DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0410D88A1F600695001F14A7 /* DateTransform.swift */; };
 		0410D88D1F600B7A001F14A7 /* OrdersTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0410D88C1F600B7A001F14A7 /* OrdersTransforms.swift */; };
+		041786CC1FA8AC090059C065 /* FullListFilms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041786CB1FA8AC090059C065 /* FullListFilms.swift */; };
 		042512DDFBF08C824F6D2092 /* ActorsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EC8DFFC71933FC5CC1B8E /* ActorsRouterInput.swift */; };
 		043A733C1F80CD4700E1DF43 /* Slide1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A733B1F80CD4700E1DF43 /* Slide1View.swift */; };
 		043A733E1F80CD7500E1DF43 /* Slide2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A733D1F80CD7500E1DF43 /* Slide2View.swift */; };
@@ -31,6 +32,7 @@
 		049030441FA7BAD1000B7C08 /* WatchedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049030431FA7BAD1000B7C08 /* WatchedResponse.swift */; };
 		049030461FA7BB8B000B7C08 /* WillWatchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049030451FA7BB8B000B7C08 /* WillWatchResponse.swift */; };
 		049030481FA86720000B7C08 /* AllFilms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049030471FA86720000B7C08 /* AllFilms.swift */; };
+		0490304B1FA89666000B7C08 /* WillWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490304A1FA89666000B7C08 /* WillWatchVC.swift */; };
 		04A661971F6B05010032A491 /* Slide3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A661961F6B05010032A491 /* Slide3View.swift */; };
 		04A6619C1F6B89BF0032A491 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */; };
 		0563140F3103825CBCA7FB2D /* NewPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C9ECED9CF3FE06429B4E8 /* NewPasswordPresenter.swift */; };
@@ -323,6 +325,7 @@
 		0410D8861F5FE05E001F14A7 /* OrdersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersResponse.swift; sourceTree = "<group>"; };
 		0410D88A1F600695001F14A7 /* DateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTransform.swift; sourceTree = "<group>"; };
 		0410D88C1F600B7A001F14A7 /* OrdersTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTransforms.swift; sourceTree = "<group>"; };
+		041786CB1FA8AC090059C065 /* FullListFilms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullListFilms.swift; sourceTree = "<group>"; };
 		043A733B1F80CD4700E1DF43 /* Slide1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide1View.swift; sourceTree = "<group>"; };
 		043A733D1F80CD7500E1DF43 /* Slide2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide2View.swift; sourceTree = "<group>"; };
 		045928091FA6107E00DE137E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchView.swift; path = cinema/Classes/Modules/Kinobase/View/SearchView.swift; sourceTree = SOURCE_ROOT; };
@@ -338,6 +341,7 @@
 		049030431FA7BAD1000B7C08 /* WatchedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedResponse.swift; sourceTree = "<group>"; };
 		049030451FA7BB8B000B7C08 /* WillWatchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillWatchResponse.swift; sourceTree = "<group>"; };
 		049030471FA86720000B7C08 /* AllFilms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilms.swift; sourceTree = "<group>"; };
+		0490304A1FA89666000B7C08 /* WillWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillWatchVC.swift; sourceTree = "<group>"; };
 		04A661961F6B05010032A491 /* Slide3View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide3View.swift; sourceTree = "<group>"; };
 		04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		055877F3D63AE274CBB26407 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
@@ -664,6 +668,14 @@
 			path = Transforms;
 			sourceTree = "<group>";
 		};
+		041786CA1FA8AB4E0059C065 /* FilmsView */ = {
+			isa = PBXGroup;
+			children = (
+				041786CB1FA8AC090059C065 /* FullListFilms.swift */,
+			);
+			path = FilmsView;
+			sourceTree = "<group>";
+		};
 		0464ACE41F57E50F00D8D49A /* SlideView */ = {
 			isa = PBXGroup;
 			children = (
@@ -682,6 +694,14 @@
 				0459280B1FA6445300DE137E /* SearchCell.swift */,
 			);
 			path = UIView;
+			sourceTree = "<group>";
+		};
+		049030491FA895F1000B7C08 /* UIViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0490304A1FA89666000B7C08 /* WillWatchVC.swift */,
+			);
+			path = UIViewControllers;
 			sourceTree = "<group>";
 		};
 		04A661941F6B04130032A491 /* SlidesView */ = {
@@ -1234,6 +1254,7 @@
 		9BB4E826D7FD26246874FBAD /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				041786CA1FA8AB4E0059C065 /* FilmsView */,
 				CEE0A9451F98844B006E6D9B /* FilmView */,
 				CE1A5B951F8BFD64001AC04F /* MainViews */,
 				CEFEE0E61F8A966600F0A65A /* MainTabView */,
@@ -1498,9 +1519,10 @@
 		A874581805B6A5A5CE6BD188 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0465E4951F9DDA5A0078306A /* UIView */,
-				D053E4656D87F547232D339B /* KinobaseViewController.swift */,
 				8B3C771A28F22028517F818D /* KinobaseViewInputOutput.swift */,
+				D053E4656D87F547232D339B /* KinobaseViewController.swift */,
+				049030491FA895F1000B7C08 /* UIViewControllers */,
+				0465E4951F9DDA5A0078306A /* UIView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2314,6 +2336,7 @@
 				8402133E0EB2D8A236213147 /* AuthCinemaViewInputOutput.swift in Sources */,
 				FF9A28F824F6C1398144D6C6 /* RegistrationConfigurator.swift in Sources */,
 				B5F6C1EC19F723D12E9A8205 /* RegistrationInteractor.swift in Sources */,
+				0490304B1FA89666000B7C08 /* WillWatchVC.swift in Sources */,
 				9FECD607C1AC130795817A67 /* RegistrationInteractorInputOutput.swift in Sources */,
 				CEDCF2101F9713940082BCD0 /* YoutubeModel.swift in Sources */,
 				21DE468F2D8E8B35A9D29DBC /* RegistrationModuleInputOutput.swift in Sources */,
@@ -2421,6 +2444,7 @@
 				947BE8C889B8786ADE0D4BE6 /* KinobaseModuleInputOutput.swift in Sources */,
 				C613937089BA72D53ECA3D46 /* KinobasePresenter.swift in Sources */,
 				4C6A0904B8ADBF796F94FC58 /* KinobaseRouter.swift in Sources */,
+				041786CC1FA8AC090059C065 /* FullListFilms.swift in Sources */,
 				204352CE0440F816EE8157D6 /* KinobaseRouterInput.swift in Sources */,
 				9067492D42AEA861C37BBE1D /* KinobaseViewController.swift in Sources */,
 				0465E4941F9BEEAB0078306A /* FilmResponse.swift in Sources */,

@@ -30,6 +30,14 @@ class Film: ImmutableMappable {
         imageUrl = try map.value(imageUrlKey)
     }
 
+    init(id: String, name: String, imageUrl: String) {
+        self.id = id
+        self.name = name
+        iWatched = false
+        iWillWatch = false
+        self.imageUrl = imageUrl
+    }
+
     func mapping(map: Map) {
         id >>> map[idKey]
         name >>> map[nameKey]

@@ -10,5 +10,6 @@ protocol KinobaseInteractorInput {
 }
 
 protocol KinobaseInteractorOutput: class {
-
+    func getError()
+    func getData(_ kbData: KinobaseData)
 }

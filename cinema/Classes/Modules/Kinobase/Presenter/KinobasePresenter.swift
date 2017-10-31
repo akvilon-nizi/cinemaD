@@ -19,7 +19,7 @@ extension KinobasePresenter: KinobaseViewOutput {
 
     func viewIsReady() {
         log.verbose("Kinobase is ready")
-//        interactor.getWatched()
+        interactor.getWatched()
     }
 
     func backButtonTap() {
@@ -31,5 +31,10 @@ extension KinobasePresenter: KinobaseViewOutput {
 // MARK: - KinobaseInteractorOutput
 
 extension KinobasePresenter: KinobaseInteractorOutput {
-
+    func getError() {
+        view.getError()
+    }
+    func getData(_ kbData: KinobaseData) {
+        view.getData(kbData)
+    }
 }
