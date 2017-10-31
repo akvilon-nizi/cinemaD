@@ -6,7 +6,7 @@
 import Foundation
 
 protocol KinobaseInteractorInput {
-
+    func getWatched()
 }
 
 protocol KinobaseInteractorOutput: class {

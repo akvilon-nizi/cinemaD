@@ -23,8 +23,14 @@ class KinobaseConfigurator {
 
         let interactor = KinobaseInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
-        let viewController = KinobaseViewController()
+        let controller1 = UIViewController()
+        controller1.view.backgroundColor = .red
+        let controller2 = UIViewController()
+        controller2.view.backgroundColor = .blue
+        let controllers: [UIViewController] = [controller1, controller2]
+        let viewController = KinobaseViewController(controllers: controllers)
         viewController.output = presenter
 
         presenter.interactor = interactor

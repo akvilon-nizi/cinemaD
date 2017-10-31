@@ -7,4 +7,5 @@ import Foundation
 
 protocol KinobaseRouterInput: BaseRouterInput {
     func close()
+    func openAllFilms()
 }

@@ -48,8 +48,6 @@ class WatchedView: UIView {
         titleLabel.heightAnchor ~= 27
         titleLabel.widthAnchor ~= 100
         titleLabel.bottomAnchor ~= contentView.bottomAnchor
-
-
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -6,9 +6,10 @@
 import Foundation
 
 protocol FilmsInteractorInput {
-
+    func getAllFilms()
 }
 
 protocol FilmsInteractorOutput: class {
-
+    func getError()
+    func getFilms(films: [Film])
 }

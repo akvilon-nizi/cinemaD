@@ -13,5 +13,11 @@ class FilmsRouter {
 // MARK: - FilmsRouterInput
 
 extension FilmsRouter: FilmsRouterInput {
+    func close() {
+        appRouter.backTransition()
+    }
 
+    func openFilm(videoId: String, name: String) {
+        appRouter.transition(to: .film(videoID: videoId, name: name))
+    }
 }

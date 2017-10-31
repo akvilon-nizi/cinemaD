@@ -87,6 +87,8 @@ enum L10n {
   /// Ваша оценка:
   static let filmYourStar = L10n.tr("Localizable", "film-your-star")
   /// Полный список
+  static let filmsTitleText = L10n.tr("Localizable", "films-title-text")
+  /// Полный список
   static let kinobaseCollectionText = L10n.tr("Localizable", "kinobase-collection-text")
   /// + Создать коллекцию
   static let kinobaseFavoritesTitle = L10n.tr("Localizable", "kinobase-favorites-title")

@@ -23,6 +23,7 @@ class FilmsConfigurator {
 
         let interactor = FilmsInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = FilmsViewController()
         viewController.output = presenter

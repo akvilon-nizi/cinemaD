@@ -19,10 +19,12 @@ extension KinobasePresenter: KinobaseViewOutput {
 
     func viewIsReady() {
         log.verbose("Kinobase is ready")
+//        interactor.getWatched()
     }
 
     func backButtonTap() {
-        router.close()
+        router.openAllFilms()
+//        router.close()
     }
 }
 

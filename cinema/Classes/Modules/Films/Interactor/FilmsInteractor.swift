@@ -4,14 +4,31 @@
 //
 
 import Foundation
+import RxMoya
+import RxSwift
 
 class FilmsInteractor {
 
+    var provider: RxMoyaProvider<FoodleTarget>!
+    fileprivate let disposeBag = DisposeBag()
     weak var output: FilmsInteractorOutput!
 }
 
 // MARK: - FilmsInteractorInput
 
 extension FilmsInteractor: FilmsInteractorInput {
-
+    func getAllFilms() {
+        provider.requestModel(.films)
+            .subscribe { [unowned self] (response: Event<AllFilms>) in
+                switch response {
+                case let .next(model):
+                    self.output.getFilms(films: model.films)
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
 }
