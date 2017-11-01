@@ -27,6 +27,7 @@ enum AppRouterDestination {
     case film(videoID: String, name: String)
     case kinobase
     case main
+    case newCollections(id: String, name: String, watched: [Film])
 
     var isPresent: Bool {
         switch self {
@@ -66,6 +67,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: ActorsConfigurator.tag)
             case let .film(videoID, name):
                 return try factory.resolve(tag: FilmConfigurator.tag, arguments: videoID, name)
+            case let .newCollections(id, name, watched):
+                return try factory.resolve(tag: NewCollectionsConfigurator.tag, arguments: id, name, watched)
             case .kinobase:
                 return try factory.resolve(tag: KinobaseConfigurator.tag)
             case .main:

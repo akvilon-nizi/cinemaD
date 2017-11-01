@@ -20,4 +20,8 @@ extension KinobaseRouter: KinobaseRouterInput {
     func openAllFilms() {
         appRouter.transition(to: .films)
     }
+
+    func openCollections(id: String, name: String, watched: [Film]) {
+        appRouter.transition(to: .newCollections(id: id, name: name, watched: watched))
+    }
 }

@@ -16,11 +16,13 @@ class KinobaseViewController: ParentViewController {
     )
 
     let willWatchVC = WillWatchVC()
-    let willWatchVC2 = WillWatchVC()
+    let watchedVC = WatchedVC()
 
     let controllers: [UIViewController]
 
     var container = UIView()
+
+    var watched: [Film] = []
 
     let willWatchButton: UIButton = {
         let button = UIButton()
@@ -61,7 +63,7 @@ class KinobaseViewController: ParentViewController {
     }
 
     init(controllers: [UIViewController]) {
-        self.controllers = [willWatchVC2, willWatchVC]
+        self.controllers = [watchedVC, willWatchVC]
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -126,7 +128,8 @@ class KinobaseViewController: ParentViewController {
 
     // MARK: - Actions
     func didTapLeftButton() {
-        output?.backButtonTap()
+//        output?.backButtonTap()
+        output?.openCollections(id: "", name: "", watched: watched)
     }
 
     func didTapWatchedButton() {
@@ -208,12 +211,21 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.stopAnimating()
     }
     func getData(_ kbData: KinobaseData) {
-        var willWatched: [Film] = []
+        var willWatch: [Film] = []
         for filmCol in kbData.willWatched {
             let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
-            willWatched.append(film)
+            willWatch.append(film)
         }
-        willWatchVC.setFilms(willWatched)
+        willWatchVC.setFilms(willWatch)
+
+        watched = []
+
+        for filmColW in kbData.watched {
+            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+            watched.append(film)
+        }
+        watchedVC.setFilms(watched)
+
         activityVC.isHidden = true
         activityVC.stopAnimating()
     }

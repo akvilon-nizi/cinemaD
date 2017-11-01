@@ -29,6 +29,10 @@ extension KinobasePresenter: KinobaseViewOutput {
     func openFullFilm() {
         router.openAllFilms()
     }
+
+    func openCollections(id: String, name: String, watched: [Film]) {
+        router.openCollections(id: id, name: name, watched: watched)
+    }
 }
 
 // MARK: - KinobaseInteractorOutput

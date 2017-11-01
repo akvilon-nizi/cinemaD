@@ -15,6 +15,8 @@ class Film: ImmutableMappable {
     let iWatched: Bool
     let iWillWatch: Bool
     let imageUrl: String
+    var add: Bool = false
+    var delete: Bool = false
 
     private let idKey = "id"
     private let nameKey = "name"

@@ -19,4 +19,6 @@ protocol KinobaseViewOutput {
     func backButtonTap()
 
     func openFullFilm()
+
+    func openCollections(id: String, name: String, watched: [Film])
 }

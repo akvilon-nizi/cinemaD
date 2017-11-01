@@ -26,6 +26,12 @@ enum FoodleTarget {
     case youtubeVideo(videoId: String)
     case meFilmWatched
     case meFilmWillWatched
+    case getCollections
+    case putCollections(name: String)
+    case deleteFilm(idFilm: String, idCollections: String)
+    case putFilm(idFilm: String, idCollections: String)
+    case deleteCollections(idCollections: String)
+    case getFilmsFromCollections(idCollections: String)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -88,19 +94,31 @@ extension FoodleTarget: TargetType {
             return "restore"
         case let .restoreFromUid(uid, _):
             return "restore/\(uid))"
+        case .getCollections:
+            return "me/collections"
+        case .putCollections:
+            return "me/collections"
+        case let .deleteFilm(idFilm, _):
+            return "films/\(idFilm)/user_collection"
+        case let .putFilm(idFilm, _):
+            return "films/\(idFilm)/user_collection"
+        case let .deleteCollections(idCollections):
+            return "me/collections/\(idCollections)"
+        case let .getFilmsFromCollections(idCollections):
+            return "me/collections/\(idCollections)"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections:
             return .get
-//        case :
-//            return .delete
+        case .deleteFilm, .deleteCollections:
+            return .delete
 //        case :
 //            return .patch
-//        case :
-//            return .put
+        case .putCollections, .putFilm:
+            return .put
         default:
             return .post
         }
@@ -130,6 +148,12 @@ extension FoodleTarget: TargetType {
             return ["phone": phone, "code": code]
         case let .youtubeVideo(videoId):
             return ["key": Configurations.googleApi, "part": "snippet", "id": videoId]
+        case let .putCollections(name):
+            return ["name": name]
+        case let .deleteFilm(_, idCollections):
+           return ["id": idCollections]
+        case let .putFilm(_, idCollections):
+           return ["id": idCollections]
         default:
             return nil
         }
