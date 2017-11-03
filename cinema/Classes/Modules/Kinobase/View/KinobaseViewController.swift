@@ -72,6 +72,7 @@ class KinobaseViewController: ParentViewController {
         output.viewIsReady()
 
         willWatchVC.delegate = self
+        watchedVC.delegate = self
 
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
@@ -128,8 +129,7 @@ class KinobaseViewController: ParentViewController {
 
     // MARK: - Actions
     func didTapLeftButton() {
-//        output?.backButtonTap()
-        output?.openCollections(id: "", name: "", watched: watched)
+        output?.backButtonTap()
     }
 
     func didTapWatchedButton() {
@@ -224,8 +224,15 @@ extension KinobaseViewController: KinobaseViewInput {
             let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
             watched.append(film)
         }
-        watchedVC.setFilms(watched)
+        watchedVC.refreshControl.endRefreshing()
+        watchedVC.setFilmsAndCol(watched, col: kbData.collections)
 
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
+    func getCollection(_ collection: Collection) {
+        watchedVC.openCollection(collection)
         activityVC.isHidden = true
         activityVC.stopAnimating()
     }
@@ -234,5 +241,33 @@ extension KinobaseViewController: KinobaseViewInput {
 extension KinobaseViewController: WillWatchVCDelegate {
     func openFullList() {
         output?.openFullFilm()
+    }
+}
+
+extension KinobaseViewController: WatchedFilmDelegate {
+    func openFullAlls() {
+        output?.openFullFilm()
+    }
+    func openCollectionFromId(id: String) {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        output?.openCollecttion(id: id)
+    }
+    func newCollection() {
+        output?.openCollections(id: "", name: "", watched: watched)
+    }
+
+    func settingsCollection(id: String, name: String) {
+        output.openCollections(id: id, name: name, watched: watched)
+    }
+
+    func openFilmID(_ filmID: String, name: String) {
+        output?.openFilm(videoID: filmID, name: name)
+    }
+
+    func refresh() {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        output?.refresh()
     }
 }

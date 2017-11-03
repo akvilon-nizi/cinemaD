@@ -32,14 +32,19 @@ class NewCollectionsConfigurator {
 
         let presenter = NewCollectionsPresenter()
         presenter.router = router
+        presenter.id = id
 
         let interactor = NewCollectionsInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = NewCollectionsViewController()
         viewController.output = presenter
         viewController.nameCollections = nameCol
-        viewController.watched = watched
+        for film in watched {
+            let filmVC = Film(id: film.id, name: film.name, imageUrl: film.imageUrl)
+            viewController.watched.append(filmVC)
+        }
 
         presenter.interactor = interactor
         presenter.view = viewController

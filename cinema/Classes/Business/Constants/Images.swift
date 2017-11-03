@@ -76,6 +76,8 @@ enum Asset {
     static let checkMini = ImageAsset(name: "checkMini")
     static let forward = ImageAsset(name: "forward")
     static let remove = ImageAsset(name: "remove")
+    static let settings = ImageAsset(name: "settings")
+    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -130,6 +132,8 @@ enum Asset {
     Kinobase.checkMini,
     Kinobase.forward,
     Kinobase.remove,
+    Kinobase.settings,
+    Kinobase.settingsUnselect,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,

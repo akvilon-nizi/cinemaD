@@ -61,4 +61,10 @@ class FilmsCollectionCell: UICollectionViewCell {
     static var reuseIdentifier: String {
         return "FilmsCollectionCell"
     }
+
+    override func layoutSubviews() {
+
+        super.layoutSubviews()
+
+    }
 }

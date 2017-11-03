@@ -13,12 +13,15 @@ class NewCollectionsViewController: ParentViewController {
 
     var watched: [Film] = []
 
+    var collections: [Film] = []
+
     let headerCollectionsView = HeaderCollectionsView()
 
-    private let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
+    let saveButton = UIButton()
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -44,7 +47,6 @@ class NewCollectionsViewController: ParentViewController {
         backButton.frame = frame
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
-        let saveButton = UIButton()
         saveButton.setImage(Asset.Kinobase.checkMini.image, for: .normal)
         saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
         saveButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
@@ -62,6 +64,10 @@ class NewCollectionsViewController: ParentViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
+
+//        activityVC.isHidden = false
+//        activityVC.startAnimating()
+//        view.bringSubview(toFront: activityVC)
     }
 
     // MARK: - Actions
@@ -71,7 +77,19 @@ class NewCollectionsViewController: ParentViewController {
 
     func didTapSaveButton() {
         if headerCollectionsView.returnTitle().characters.count > 3 {
-
+            let filteredWatched = watched.filter() { $0.add == true }
+            if nameCollections.isEmpty {
+                if filteredWatched.isEmpty {
+                     showAlert(message: "Выберете фильмы")
+                } else {
+                     output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)
+                    saveButton.isEnabled = false
+                    activityVC.isHidden = false
+                    activityVC.startAnimating()
+                    view.isUserInteractionEnabled = false
+                    view.bringSubview(toFront: activityVC)
+                }
+            }
         } else {
             showAlert(message: "Имя коллекции должно быть больше 3 символов")
         }
@@ -119,40 +137,35 @@ extension NewCollectionsViewController: UITableViewDelegate {
 //            }
             if !nameCollections.isEmpty {
                 headerCollectionsView.title = nameCollections
+                headerCollectionsView.isUserInteractionEnabled = false
             }
             return headerCollectionsView
         case 1:
-//            if films.isEmpty {
-//                return nil
-//            }
+            if collections.isEmpty {
+                return nil
+            }
             let view = HeaderViewTitle()
             view.title = "Коллекция"
             return view
         case 2:
-//            if films.isEmpty {
-//                return nil
-//            }
+            if collections.isEmpty {
+                return nil
+            }
             let view = FilmGroup()
-//            view.films = films
-            //            view.delegate = self
+            view.films = collections
+            view.isCollections = true
+            view.isAdd = false
             return view
         case 3:
-            //            if films.isEmpty {
-            //                return nil
-            //            }
             let view = HeaderViewTitle()
             view.title = "Избранное"
             return view
 
         case 4:
-            //            if films.isEmpty {
-            //                return nil
-            //            }
             let view = FilmGroup()
             view.films = watched
             view.isCollections = true
             view.isAdd = true
-            //            view.delegate = self
             return view
         default:
             return nil
@@ -164,11 +177,14 @@ extension NewCollectionsViewController: UITableViewDelegate {
         case 0:
             return 88
         case 1:
+            if collections.isEmpty {
+                return 0
+            }
             return 22
         case 2:
-//            if films.isEmpty {
-//                return 0
-//            }
+            if collections.isEmpty {
+                return 0
+            }
             return windowWidth / 4 * 3 - 80
         case 3:
             //            if films.isEmpty {
@@ -196,5 +212,29 @@ extension NewCollectionsViewController: NewCollectionsViewInput {
 
     func setupInitialState() {
 
+    }
+
+    func getError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+         view.isUserInteractionEnabled = true
+        saveButton.isEnabled = true
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
+    func setCollections(collections: [Film]) {
+        self.collections = collections
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integersIn: 1...2), with: UITableViewRowAnimation.none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+        view.sendSubview(toBack: activityVC)
+    }
+
+    func getSeccess() {
+        showAlert(message: "Коллекция добавлена")
     }
 }

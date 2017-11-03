@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MakeNewCollDelegate: class {
-    func openFullList()
+    func newCollections()
 }
 
 class MakeNewCollections: UITableViewHeaderFooterView {
@@ -29,20 +29,27 @@ class MakeNewCollections: UITableViewHeaderFooterView {
         button.titleLabel?.font = UIFont.cnmFutura(size: 16)
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
 
-        button.setImage(Asset.Kinobase.forward.image, for: .normal)
         addSubview(button.prepareForAutoLayout())
-        button.semanticContentAttribute = .forceRightToLeft
         button.heightAnchor ~= 33
         button.centerYAnchor ~= centerYAnchor
         button.leadingAnchor ~= leadingAnchor + 33
 
         let separatorView = UIView()
+        separatorView.backgroundColor = .cnmDadada
+        contentView.addSubview(separatorView.prepareForAutoLayout())
+        separatorView.bottomAnchor ~= bottomAnchor
+        separatorView.trailingAnchor ~= trailingAnchor - 24
+        separatorView.leadingAnchor ~= leadingAnchor + 24
         separatorView.heightAnchor ~= 1
-        separatorView.topAnchor ~= button.bottomAnchor + 13
+
+        contentView.backgroundColor = .white
+//        let separatorView = UIView()
+//        separatorView.heightAnchor ~= 1
+//        separatorView.topAnchor ~= button.bottomAnchor + 13
         //ASSA
     }
 
     func tapButton() {
-        delegate?.openFullList()
+        delegate?.newCollections()
     }
 }

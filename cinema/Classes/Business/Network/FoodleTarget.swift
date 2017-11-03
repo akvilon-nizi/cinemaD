@@ -151,7 +151,9 @@ extension FoodleTarget: TargetType {
         case let .putCollections(name):
             return ["name": name]
         case let .deleteFilm(_, idCollections):
-           return ["id": idCollections]
+            var parameters: [String: Any] = [:]
+            parameters["id"] = idCollections
+            return parameters
         case let .putFilm(_, idCollections):
            return ["id": idCollections]
         default:
@@ -160,7 +162,7 @@ extension FoodleTarget: TargetType {
     }
 
     var parameterEncoding: ParameterEncoding {
-        return URLEncoding()
+        return URLEncoding(destination: .queryString)
     }
 
     var sampleData: Data {

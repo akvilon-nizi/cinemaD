@@ -17,6 +17,9 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
         return label
     }()
 
+    let leftView = UIView()
+    let rightView = UIView()
+
     var title: String = "Новости" {
         didSet {
             titleLabel.text = title
@@ -34,10 +37,8 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
 
         backgroundColor = .red
 
-        let leftView = UIView()
         leftView.backgroundColor = .cnmDadada
 
-        let rightView = UIView()
         rightView.backgroundColor = .cnmDadada
 
         let centerView = UIView()
@@ -62,5 +63,10 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
         rightView.centerYAnchor ~= centerYAnchor
         rightView.trailingAnchor ~= trailingAnchor - 30
         rightView.leadingAnchor ~= centerView.trailingAnchor + 20
+    }
+
+    func withoutLine() {
+        leftView.isHidden = true
+        rightView.isHidden = true
     }
 }

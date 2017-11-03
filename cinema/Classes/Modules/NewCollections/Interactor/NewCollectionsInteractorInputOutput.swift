@@ -6,9 +6,14 @@
 import Foundation
 
 protocol NewCollectionsInteractorInput {
-
+    func putNewColWithFilm(name: String, films: [Film])
+    func deleteFilmsIntoCol(idCol: String, filmsID: [String])
+    func putFilmsIntoCol(idCol: String, films: [Film])
+    func getFilmsIntoCol(idCol: String)
 }
 
 protocol NewCollectionsInteractorOutput: class {
-
+    func getCollection(collection: Collection)
+    func getError()
+    func getSeccess()
 }

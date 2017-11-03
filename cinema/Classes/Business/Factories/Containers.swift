@@ -252,6 +252,7 @@ enum Containers {
                         return endpoint
                     }
                     newHTTPHeaderFields["Authorization"] = apiToken
+                    newHTTPHeaderFields["Content-Type"] = "application/x-www-form-urlencoded"
                     return endpoint.adding(newHTTPHeaderFields: newHTTPHeaderFields)
                 },
                 stubClosure: { (target: FoodleTarget) -> Moya.StubBehavior in

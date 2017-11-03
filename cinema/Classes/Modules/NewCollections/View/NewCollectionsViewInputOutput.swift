@@ -8,6 +8,12 @@ import Foundation
 protocol NewCollectionsViewInput: class {
 
     func setupInitialState()
+
+    func setCollections(collections: [Film])
+
+    func getError()
+
+    func getSeccess()
 }
 
 protocol NewCollectionsViewOutput {
@@ -15,4 +21,6 @@ protocol NewCollectionsViewOutput {
     func viewIsReady()
 
     func backButtonTap()
+
+    func addNewFilm(name: String, films: [Film])
 }

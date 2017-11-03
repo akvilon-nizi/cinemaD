@@ -8,7 +8,18 @@
 
 import UIKit
 
+protocol WatchedFilmDelegate: class {
+    func openFullAlls()
+    func openCollectionFromId(id: String)
+    func newCollection()
+    func settingsCollection(id: String, name: String)
+    func openFilmID(_ filmID: String, name: String)
+    func refresh()
+}
+
 class WatchedVC: ParentViewController {
+
+    let refreshControl = UIRefreshControl()
 
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
 
@@ -16,9 +27,14 @@ class WatchedVC: ParentViewController {
 
     let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
 
-    var films: [Film] = []
+    var colHeaderTitle: String = ""
+    var colFilms: [Film] = []
 
-    weak var delegate: WillWatchVCDelegate?
+    var films: [Film] = []
+    var collections: [Collection] = []
+    var selectedIndex: Int?
+
+    weak var delegate: WatchedFilmDelegate?
 
     // MARK: - Life cycle
 
@@ -42,11 +58,39 @@ class WatchedVC: ParentViewController {
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
+        tableView.separatorStyle = .none
+        tableView.allowsMultipleSelection = false
+
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+
+        tableView.register(CollectionCell.self, forCellReuseIdentifier: CollectionCell.reuseIdentifier)
     }
 
-    func setFilms(_ films: [Film]) {
+    func setFilmsAndCol(_ films: [Film], col: [Collection]) {
         self.films = films
+        self.collections = col
         tableView.reloadData()
+    }
+
+    func openCollection(_ collection: Collection) {
+        colHeaderTitle = collection.name
+        colFilms = []
+        if let colFilmsArray = collection.films {
+            for filmColW in colFilmsArray {
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+                colFilms.append(film)
+            }
+        }
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integersIn: 2...3), with: UITableViewRowAnimation.none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+    }
+
+    func refresh() {
+        delegate?.refresh()
     }
 }
 
@@ -55,11 +99,27 @@ class WatchedVC: ParentViewController {
 extension WatchedVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        if section == 1 {
+            return collections.count
+        }
         return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CollectionCell.reuseIdentifier, for: indexPath)
+            if let collCel = cell as? CollectionCell {
+                collCel.indexPath = indexPath.row
+                collCel.title = collections[indexPath.row].name
+                collCel.delegate = self
+//                if let index = selectedIndex, index == indexPath.row {
+//                    collCel.isSelected = true
+//                }
+            }
+            return cell
+        }
+
         let cell = UITableViewCell()
 
         //        cell.setData(products[indexPath.row])
@@ -68,8 +128,15 @@ extension WatchedVC: UITableViewDataSource {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let collectionCell = tableView.cellForRow(at: indexPath) as? CollectionCell, selectedIndex != indexPath.row {
+            selectedIndex = indexPath.row
+            delegate?.openCollectionFromId(id: collections[indexPath.row].id)
+        }
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 7
     }
 
 }
@@ -79,6 +146,9 @@ extension WatchedVC: UITableViewDataSource {
 extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 44
+        }
         return 0
     }
 
@@ -89,22 +159,52 @@ extension WatchedVC: UITableViewDelegate {
                 return nil
             }
             let view = HeaderViewTitle()
-            view.title = "Посмотрю"
+            view.title = "Коллекции"
             return view
         case 1:
+            if films.isEmpty {
+                return nil
+            }
+            let view = MakeNewCollections()
+            view.delegate = self
+            return view
+        case 2:
+            if colFilms.isEmpty {
+                return nil
+            }
+            let view = HeaderViewTitle()
+            view.title = colHeaderTitle
+            view.withoutLine()
+            return view
+        case 3:
+            if colFilms.isEmpty {
+                return nil
+            }
+            let view = FilmGroup()
+            view.films = colFilms
+            view.delegate = self
+            return view
+        case 4:
+            if films.isEmpty {
+                return nil
+            }
+            let view = HeaderViewTitle()
+            view.title = "Избранное"
+            return view
+        case 5:
             if films.isEmpty {
                 return nil
             }
             let view = FullListFilms()
             view.delegate = self
             return view
-        case 2:
+        case 6:
             if films.isEmpty {
                 return nil
             }
             let view = FilmGroup()
             view.films = films
-            //            view.delegate = self
+            view.delegate = self
             return view
         default:
             return nil
@@ -116,12 +216,30 @@ extension WatchedVC: UITableViewDelegate {
         case 0:
             return 22
         case 1:
-            return 22
+            return 55
         case 2:
+            if colFilms.isEmpty {
+                return 0
+            }
+            return 22
+        case 3:
+            if colFilms.isEmpty {
+                return 0
+            }
+            return windowWidth / 4 * 3 - 80
+        case 4:
+            if films.isEmpty {
+                return 0
+            }
+            return 22
+        case 5:
+            return 22
+        case 6:
             if films.isEmpty {
                 return 0
             }
             return windowWidth / 4 * 3 - 80
+
         default:
             return 0
         }
@@ -134,6 +252,25 @@ extension WatchedVC: UITableViewDelegate {
 
 extension WatchedVC: FullListFilmsDelegate {
     func openFullList() {
-        delegate?.openFullList()
+        delegate?.openFullAlls()
+    }
+}
+
+extension WatchedVC: MakeNewCollDelegate {
+    func newCollections() {
+        delegate?.newCollection()
+    }
+}
+
+// MARK: - FilmGroupDelegate
+extension WatchedVC: FilmGroupDelegate {
+    func openFilmID(_ filmID: String, name: String) {
+        delegate?.openFilmID(filmID, name: name)
+    }
+}
+
+extension WatchedVC: CollectionCellDelegate {
+    func tapButtonSetting(_ index: Int) {
+        delegate?.settingsCollection(id: collections[index].id, name: collections[index].name)
     }
 }

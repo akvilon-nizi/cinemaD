@@ -33,6 +33,18 @@ extension KinobasePresenter: KinobaseViewOutput {
     func openCollections(id: String, name: String, watched: [Film]) {
         router.openCollections(id: id, name: name, watched: watched)
     }
+
+    func openCollecttion(id: String) {
+        interactor.getFilmsIntoCol(idCol: id)
+    }
+
+    func openFilm(videoID: String, name: String) {
+        router.openFilm(videoId: videoID, name: name)
+    }
+
+    func refresh() {
+        interactor.getWatched()
+    }
 }
 
 // MARK: - KinobaseInteractorOutput
@@ -44,4 +56,8 @@ extension KinobasePresenter: KinobaseInteractorOutput {
     func getData(_ kbData: KinobaseData) {
         view.getData(kbData)
     }
+    func getCollection(_ collection: Collection) {
+        view.getCollection(collection)
+    }
+
 }
