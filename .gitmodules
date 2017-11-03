@@ -1,0 +1,30 @@
+[submodule "Carthage/Checkouts/ObjectMapper"]
+	path = Carthage/Checkouts/ObjectMapper
+	url = https://github.com/Hearst-DD/ObjectMapper.git
+[submodule "Carthage/Checkouts/Kingfisher"]
+	path = Carthage/Checkouts/Kingfisher
+	url = https://github.com/onevcat/Kingfisher.git
+[submodule "Carthage/Checkouts/KeychainAccess"]
+	path = Carthage/Checkouts/KeychainAccess
+	url = https://github.com/kishikawakatsumi/KeychainAccess.git
+[submodule "Carthage/Checkouts/Result"]
+	path = Carthage/Checkouts/Result
+	url = https://github.com/antitypical/Result.git
+[submodule "Carthage/Checkouts/Moya"]
+	path = Carthage/Checkouts/Moya
+	url = https://github.com/Moya/Moya.git
+[submodule "Carthage/Checkouts/RxSwift"]
+	path = Carthage/Checkouts/RxSwift
+	url = https://github.com/ReactiveX/RxSwift.git
+[submodule "Carthage/Checkouts/Dip"]
+	path = Carthage/Checkouts/Dip
+	url = https://github.com/AliSoftware/Dip.git
+[submodule "Carthage/Checkouts/Alamofire"]
+	path = Carthage/Checkouts/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
+[submodule "Carthage/Checkouts/ReactiveSwift"]
+	path = Carthage/Checkouts/ReactiveSwift
+	url = https://github.com/ReactiveCocoa/ReactiveSwift.git
+[submodule "Carthage/Checkouts/XCGLogger"]
+	path = Carthage/Checkouts/XCGLogger
+	url = https://github.com/DaveWoodCom/XCGLogger.git

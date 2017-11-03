@@ -30,7 +30,6 @@ enum Configurations {
 //
 //            return url
 //        case .prerelease, .release:
-//            // TODO: Find production url
 //            fatalError("Need production url")
 //        }
     }
@@ -45,7 +44,6 @@ enum Configurations {
         //
         //            return url
         //        case .prerelease, .release:
-        //            // TODO: Find production url
         //            fatalError("Need production url")
         //        }
     }

@@ -8,11 +8,11 @@ import UIKit
 extension UIFont {
 
     class func fdlSystemRegular(size: CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: size, weight: UIFontWeightRegular)
+        return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.regular)
     }
 
     class func fdlSystemMedium(size: CGFloat) -> UIFont {
-        return UIFont.systemFont(ofSize: size, weight: UIFontWeightMedium)
+        return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.medium)
     }
 
     class func fdlGothamProMedium(size: CGFloat) -> UIFont {
