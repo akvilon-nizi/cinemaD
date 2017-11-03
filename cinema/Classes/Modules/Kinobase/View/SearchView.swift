@@ -80,7 +80,7 @@ class SearchView: UIView {
 
     // MARK: Actions
 
-    @objc func titleButtonTap(button: UIButton) {
+    func titleButtonTap(button: UIButton) {
         button.isSelected = !button.isSelected
         if button.isSelected {
             button.backgroundColor = .clear
@@ -89,7 +89,7 @@ class SearchView: UIView {
         }
     }
 
-    @objc func typeButtonTap() {
+    func typeButtonTap() {
         if let stackView = buttonsStack {
             stackView.isHidden = !stackView.isHidden
         }

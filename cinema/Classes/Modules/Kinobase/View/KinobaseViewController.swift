@@ -128,11 +128,11 @@ class KinobaseViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    @objc func didTapLeftButton() {
+    func didTapLeftButton() {
         output?.backButtonTap()
     }
 
-    @objc func didTapWatchedButton() {
+    func didTapWatchedButton() {
         if currentIndex != 0 {
             watchedButton.isSelected = true
             willWatchButton.isSelected = false
@@ -145,7 +145,7 @@ class KinobaseViewController: ParentViewController {
         }
     }
 
-    @objc func didTapWillWatchButton() {
+    func didTapWillWatchButton() {
         if currentIndex != 1 {
             willWatchButton.isSelected = true
             watchedButton.isSelected = false

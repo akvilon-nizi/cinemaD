@@ -4,12 +4,16 @@
 //
 
 import UIKit
+import RxMoya
+import RxSwift
 
 class MainViewController: ParentViewController {
 
     var output: MainViewOutput!
 
     let header = MainVCHeader()
+
+    var provider: RxMoyaProvider<FoodleTarget>!
 
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
 

@@ -47,12 +47,14 @@ struct ColorAsset {
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Kinobase {
+    static let check = ImageAsset(name: "check")
+    static let checkMini = ImageAsset(name: "checkMini")
     static let forward = ImageAsset(name: "forward")
+    static let remove = ImageAsset(name: "remove")
+    static let settings = ImageAsset(name: "settings")
+    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
   enum Cinema {
-    static let aqqa = ImageAsset(name: "aqqa")
-    static let assa = ImageAsset(name: "assa")
-    static let background = ImageAsset(name: "background")
     enum MainTab {
       static let chat = ImageAsset(name: "chat")
       static let kinobase = ImageAsset(name: "kinobase")
@@ -109,10 +111,12 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Kinobase.check,
+    Kinobase.checkMini,
     Kinobase.forward,
-    Cinema.aqqa,
-    Cinema.assa,
-    Cinema.background,
+    Kinobase.remove,
+    Kinobase.settings,
+    Kinobase.settingsUnselect,
     Cinema.MainTab.chat,
     Cinema.MainTab.kinobase,
     Cinema.MainTab.reward,

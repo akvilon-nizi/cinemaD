@@ -31,11 +31,11 @@ class RatingStarView: UIView {
         ratingLabel.font = .fdlSystemMedium(size: 15)
         ratingLabel.textColor = .fdlGreyishBrown
         addSubview(ratingLabel.prepareForAutoLayout())
-        ratingLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 800), for: .horizontal)
+        ratingLabel.setContentCompressionResistancePriority(800, for: .horizontal)
         ratingLabel.pinEdgesToSuperviewEdges(excluding: .right)
 
         addSubview(starImageView.prepareForAutoLayout())
-        starImageView.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 900), for: .horizontal)
+        starImageView.setContentCompressionResistancePriority(900, for: .horizontal)
         starImageView.centerYAnchor ~= ratingLabel.centerYAnchor - 1
         starImageView.leadingAnchor ~= ratingLabel.trailingAnchor + 3
         starImageView.trailingAnchor ~= trailingAnchor
