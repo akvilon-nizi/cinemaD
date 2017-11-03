@@ -88,16 +88,16 @@ class PhoneViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    func didTapLeftButton() {
+    @objc func didTapLeftButton() {
         output?.backTap()
     }
 
-    func didTapNextButton() {
+    @objc func didTapNextButton() {
         if !phone.isEmpty {
             output?.next(phone: phone, uid: uid, phoneCorrect: nil)
         } else {
             if let phoneCorrect = phoneField.textField.text,
-                phoneCorrecting(phone: phoneCorrect).characters.count == 12 {
+                phoneCorrecting(phone: phoneCorrect).count == 12 {
                 output?.next(phone: phone, uid: nil, phoneCorrect: phoneCorrecting(phone: phoneCorrect))
             } else {
                 showAlert(message: L10n.alertCinemaCorrectErrror)
@@ -120,7 +120,7 @@ class PhoneViewController: ParentViewController {
                     range: nil)
     }
 
-    func handleTap(sender: UITapGestureRecognizer? = nil) {
+    @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
         view.endEditing(true)
     }
 }

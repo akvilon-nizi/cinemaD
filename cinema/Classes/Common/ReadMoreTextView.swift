@@ -47,8 +47,8 @@ public class ReadMoreTextView: UITextView {
         isEditable = false
 
         let attributedDefaultReadMoreText = NSAttributedString(string: defaultReadMoreText, attributes: [
-            NSForegroundColorAttributeName: UIColor.blue,
-            NSFontAttributeName: UIFont.cnmFutura(size: 14)
+            NSAttributedStringKey.foregroundColor: UIColor.blue,
+            NSAttributedStringKey.font: UIFont.cnmFutura(size: 14)
         ])
         attributedReadMoreText.append(attributedDefaultReadMoreText)
         self.attributedReadMoreText = attributedDefaultReadMoreText
@@ -239,9 +239,9 @@ public class ReadMoreTextView: UITextView {
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.justified
         return NSAttributedString(string: text, attributes: [
-            NSFontAttributeName: UIFont.cnmFutura(size: 14),
-            NSForegroundColorAttributeName: UIColor.cnmGreyLight,
-            NSParagraphStyleAttributeName: style
+            NSAttributedStringKey.font: UIFont.cnmFutura(size: 14),
+            NSAttributedStringKey.foregroundColor: UIColor.cnmGreyLight,
+            NSAttributedStringKey.paragraphStyle: style
         ])
     }
     
@@ -279,7 +279,7 @@ public class ReadMoreTextView: UITextView {
 
         if let originalAttributedText = _originalAttributedText?.mutableCopy() as? NSMutableAttributedString {
             attributedText = _originalAttributedText
-            let range = NSRange(location: 0, length: text.length)
+            let range = NSRange(location: 0, length: text.count)
             if let attributedReadLessText = attributedReadLessText {
                 originalAttributedText.append(attributedReadLessText)
             }
@@ -321,14 +321,14 @@ public class ReadMoreTextView: UITextView {
     private func characterIndexBeforeTrim(range rangeThatFits: NSRange) -> Int {
         if let text = attributedReadMoreText {
             let readMoreBoundingRect = attributedReadMoreText(text: text, boundingRectThatFits: textContainer.size)
-            let lastCharacterRect = layoutManager.boundingRectForCharacterRange(range: NSMakeRange(NSMaxRange(rangeThatFits)-1, 1), inTextContainer: textContainer)
+            let lastCharacterRect = layoutManager.boundingRectForCharacterRange(range: NSMakeRange(NSMaxRange(rangeThatFits) - 1, 1), inTextContainer: textContainer)
             var point = lastCharacterRect.origin
             point.x = textContainer.size.width - ceil(readMoreBoundingRect.size.width)
             let glyphIndex = layoutManager.glyphIndex(for: point, in: textContainer, fractionOfDistanceThroughGlyph: nil)
             let characterIndex = layoutManager.characterIndexForGlyph(at: glyphIndex)
             return characterIndex - 1
         } else {
-            return NSMaxRange(rangeThatFits) - readMoreText!.length
+            return NSMaxRange(rangeThatFits) - readMoreText!.count
         }
     }
     
@@ -338,20 +338,20 @@ public class ReadMoreTextView: UITextView {
         let layoutManager = NSLayoutManager()
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
-        let readMoreBoundingRect = layoutManager.boundingRectForCharacterRange(range: NSMakeRange(0, text.length), inTextContainer: textContainer)
+        let readMoreBoundingRect = layoutManager.boundingRectForCharacterRange(range: NSMakeRange(0, text.count), inTextContainer: textContainer)
         return readMoreBoundingRect
     }
     
     private func readMoreTextRange() -> NSRange {
         var readMoreTextRange = rangeToReplaceWithReadMoreText()
         if readMoreTextRange.location != NSNotFound {
-            readMoreTextRange.length = readMoreText!.length + 1
+            readMoreTextRange.length = readMoreText!.count + 1
         }
         return readMoreTextRange
     }
     
     private func readLessTextRange() -> NSRange {
-        return NSRange(location: _originalTextLength, length: readLessText!.length + 1)
+        return NSRange(location: _originalTextLength, length: readLessText!.count + 1)
     }
 
     private func pointIsInReadMoreOrReadLessTextRange(point aPoint: CGPoint) -> Bool? {
@@ -363,10 +363,4 @@ public class ReadMoreTextView: UITextView {
         return nil
     }
 
-}
-
-extension String {
-    var length: Int {
-        return characters.count
-    }
 }

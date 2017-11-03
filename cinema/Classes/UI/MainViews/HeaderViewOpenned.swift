@@ -85,7 +85,7 @@ class HeaderViewOpenned: UITableViewHeaderFooterView {
         addGestureRecognizer(tap)
     }
 
-    func handleTap() {
+    @objc func handleTap() {
         isOpen = !isOpen
     }
 }

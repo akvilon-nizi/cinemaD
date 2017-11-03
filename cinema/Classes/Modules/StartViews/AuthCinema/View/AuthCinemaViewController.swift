@@ -121,15 +121,15 @@ class AuthCinemaViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    func didTapLeftButton() {
+    @objc func didTapLeftButton() {
         output?.backTap()
     }
 
-    func didTapHelpAuthButton() {
+    @objc func didTapHelpAuthButton() {
         output?.helpAuth()
     }
 
-    func didTapAuthButton() {
+    @objc func didTapAuthButton() {
         if let phone = phoneField.textField.text?.replacingOccurrences(
             of: "(", with: "",
             options: NSString.CompareOptions.literal,
@@ -142,9 +142,9 @@ class AuthCinemaViewController: ParentViewController {
                     with: "",
                     options: NSString.CompareOptions.literal,
                     range: nil),
-            phone.characters.count == 12,
+            phone.count == 12,
             let password = passwordField.textField.text,
-            password.characters.count > 3 {
+            password.count > 3 {
             output?.auth(phone: phone, password: password)
             view.bringSubview(toFront: activityVC)
             activityVC.isHidden = false
@@ -154,7 +154,7 @@ class AuthCinemaViewController: ParentViewController {
         }
     }
 
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
 
         //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
         if self.view.frame.origin.y == 0 {
@@ -164,7 +164,7 @@ class AuthCinemaViewController: ParentViewController {
 
     }
 
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
 
         //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
         if self.view.frame.origin.y != 0 {
@@ -174,7 +174,7 @@ class AuthCinemaViewController: ParentViewController {
         //        }
     }
 
-    func handleTap(sender: UITapGestureRecognizer? = nil) {
+    @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
         view.endEditing(true)
     }
 }
