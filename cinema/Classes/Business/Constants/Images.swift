@@ -10,6 +10,7 @@
   typealias Image = UIImage
 #endif
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
@@ -45,6 +46,9 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
+  enum Kinobase {
+    static let forward = ImageAsset(name: "forward")
+  }
   enum Cinema {
     static let aqqa = ImageAsset(name: "aqqa")
     static let assa = ImageAsset(name: "assa")
@@ -73,9 +77,6 @@ enum Asset {
       static let slide3Image5 = ImageAsset(name: "slide3-image5")
     }
     static let unselectStar = ImageAsset(name: "unselectStar")
-  }
-  enum Kinobase {
-    static let forward = ImageAsset(name: "forward")
   }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -108,6 +109,7 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Kinobase.forward,
     Cinema.aqqa,
     Cinema.assa,
     Cinema.background,
@@ -129,7 +131,6 @@ enum Asset {
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
     Cinema.unselectStar,
-    Kinobase.forward,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,

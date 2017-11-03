@@ -80,7 +80,7 @@ class YoutubeViewCell: UICollectionViewCell {
 
     }
 
-    func playVideo() {
+    @objc func playVideo() {
 
         youtubeView.playVideo()
         youtubeView.isUserInteractionEnabled = true

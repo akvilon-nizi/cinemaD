@@ -97,12 +97,12 @@ class SlidesViewController: ParentViewController {
 
     // MARK: - Actions 
 
-    func handleTapNextButton() {
+    @objc func handleTapNextButton() {
         if slidePageControl.currentPage != 2 {
             let currentPage = slidePageControl.currentPage + 1
             slidePageControl.setSlide(currentPage)
             let x = CGFloat(currentPage) * scrollView.frame.size.width
-            scrollView.setContentOffset(CGPoint(x: x, y :0), animated: true)
+            scrollView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
         } else {
             output.nextActions()
         }
