@@ -122,19 +122,19 @@ class ConfirmationViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    @objc func didTapLeftButton() {
+    func didTapLeftButton() {
         output?.back()
     }
 
-    @objc func handleRepeatButton() {
+    func handleRepeatButton() {
         output?.repeatCode()
     }
 
-    @objc func handleAuthButton() {
+    func handleAuthButton() {
         output?.auth()
     }
 
-    @objc func handleNextButton() {
+    func handleNextButton() {
         if let code = codeField.textField.text, code.characters.count > 5 {
             output?.sendCode(code: code)
         } else {
@@ -143,7 +143,7 @@ class ConfirmationViewController: ParentViewController {
 //        output?.next()
     }
 
-    @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
         view.endEditing(true)
     }
 }

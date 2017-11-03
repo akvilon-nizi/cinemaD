@@ -77,23 +77,23 @@ class MainTabView: UIView {
         stackView.pinEdgesToSuperviewEdges()
     }
 
-    @objc func ticketsTapped() {
+    func ticketsTapped() {
         delegate?.ticketsTapped()
     }
 
-    @objc func rewardsTapped() {
+    func rewardsTapped() {
         delegate?.rewardsTapped()
     }
 
-    @objc func profileTapped() {
+    func profileTapped() {
         delegate?.profileTapped()
     }
 
-    @objc func chatTapped() {
+    func chatTapped() {
         delegate?.chatTapped()
     }
 
-    @objc func kinobaseTapped() {
+    func kinobaseTapped() {
         delegate?.kinobaseTapped()
     }
 

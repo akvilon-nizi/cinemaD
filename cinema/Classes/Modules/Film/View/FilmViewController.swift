@@ -231,8 +231,8 @@ class FilmViewController: ParentViewController {
         textView.shouldTrim = true
         textView.maximumNumberOfLines = 4
         textView.attributedReadMoreText = NSAttributedString(string: L10n.filmMoreButton, attributes: [
-            NSAttributedStringKey.foregroundColor: UIColor.cnmBlueLight,
-            NSAttributedStringKey.font: UIFont.cnmFutura(size: 14)
+            NSForegroundColorAttributeName: UIColor.cnmBlueLight,
+            NSFontAttributeName: UIFont.cnmFutura(size: 14)
             ])
 
         contentView.addSubview(textView.prepareForAutoLayout())
@@ -277,18 +277,18 @@ class FilmViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    @objc func didTapLeftButton() {
+    func didTapLeftButton() {
         output?.backTap()
     }
 
-    @objc func didTapWatchedButton() {
+    func didTapWatchedButton() {
         watchedButton.isSelected = !watchedButton.isSelected
         starsLabel.isHidden = !watchedButton.isSelected
         starsView.isHidden = !watchedButton.isSelected
         willWatchButton.isSelected = false
     }
 
-    @objc func didTapWillWatchButton() {
+    func didTapWillWatchButton() {
         willWatchButton.isSelected = !willWatchButton.isSelected
         starsLabel.isHidden = true
         starsView.isHidden = true
@@ -297,7 +297,7 @@ class FilmViewController: ParentViewController {
         output.willWatchTap()
     }
 
-    @objc func didTapStarButton(button: UIButton) {
+    func didTapStarButton(button: UIButton) {
         for buttonStar in starsButons {
             if buttonStar.tag <= button.tag {
                 buttonStar.isSelected = true

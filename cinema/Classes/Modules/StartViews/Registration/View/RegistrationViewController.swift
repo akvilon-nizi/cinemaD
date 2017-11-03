@@ -130,7 +130,7 @@ class RegistrationViewController: ParentViewController {
         stackView.centerXAnchor ~= contentView.centerXAnchor
     }
 
-    @objc func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(notification: NSNotification) {
 
 //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -140,7 +140,7 @@ class RegistrationViewController: ParentViewController {
 
     }
 
-    @objc func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(notification: NSNotification) {
 
 //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0 {
@@ -155,12 +155,12 @@ class RegistrationViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    @objc func didTapLeftButton() {
+    func didTapLeftButton() {
         output?.backTap()
     }
 
     // MARK: - Actions
-    @objc func didTapNextButton() {
+    func didTapNextButton() {
         if let phone = phoneField.textField.text?.replacingOccurrences(
             of: "(", with: "",
             options: NSString.CompareOptions.literal,
@@ -173,11 +173,11 @@ class RegistrationViewController: ParentViewController {
                     with:"",
                     options: NSString.CompareOptions.literal,
                     range:nil),
-            phone.count == 12,
+            phone.characters.count == 12,
             let password = passwordField.textField.text,
-            password.count > 3,
+            password.characters.count > 3,
             let name = nameField.textField.text,
-            name.count > 3, let phoneIn = phoneField.textField.text {
+            name.characters.count > 3, let phoneIn = phoneField.textField.text {
             output?.nextButtonTap(password: password, name: name, phone: phone, phoneIn: phoneIn)
             view.bringSubview(toFront: activityVC)
             activityVC.isHidden = false
@@ -193,7 +193,7 @@ class RegistrationViewController: ParentViewController {
         activityVC.stopAnimating()
     }
 
-    @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
         view.endEditing(true)
     }
 }

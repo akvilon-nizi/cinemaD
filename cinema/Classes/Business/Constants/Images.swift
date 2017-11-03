@@ -53,12 +53,8 @@ enum Asset {
     static let remove = ImageAsset(name: "remove")
     static let settings = ImageAsset(name: "settings")
     static let settingsUnselect = ImageAsset(name: "settingsUnselect")
-
   }
   enum Cinema {
-    static let aqqa = ImageAsset(name: "aqqa")
-    static let assa = ImageAsset(name: "assa")
-    static let background = ImageAsset(name: "background")
     enum MainTab {
       static let chat = ImageAsset(name: "chat")
       static let kinobase = ImageAsset(name: "kinobase")

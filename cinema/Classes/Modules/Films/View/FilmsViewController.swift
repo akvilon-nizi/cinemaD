@@ -70,7 +70,7 @@ class FilmsViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    @objc func didTapLeftButton() {
+    func didTapLeftButton() {
         output?.backButtonTap()
     }
 
