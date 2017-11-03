@@ -16,11 +16,13 @@ class KinobaseViewController: ParentViewController {
     )
 
     let willWatchVC = WillWatchVC()
-    let willWatchVC2 = WillWatchVC()
+    let watchedVC = WatchedVC()
 
     let controllers: [UIViewController]
 
     var container = UIView()
+
+    var watched: [Film] = []
 
     let willWatchButton: UIButton = {
         let button = UIButton()
@@ -61,13 +63,16 @@ class KinobaseViewController: ParentViewController {
     }
 
     init(controllers: [UIViewController]) {
-        self.controllers = [willWatchVC2, willWatchVC]
+        self.controllers = [watchedVC, willWatchVC]
         super.init(nibName: nil, bundle: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
+
+        willWatchVC.delegate = self
+        watchedVC.delegate = self
 
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
@@ -206,13 +211,63 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.stopAnimating()
     }
     func getData(_ kbData: KinobaseData) {
-        var willWatched: [Film] = []
+        var willWatch: [Film] = []
         for filmCol in kbData.willWatched {
             let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
-            willWatched.append(film)
+            willWatch.append(film)
         }
-        willWatchVC.setFilms(willWatched)
+        willWatchVC.setFilms(willWatch)
+
+        watched = []
+
+        for filmColW in kbData.watched {
+            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+            watched.append(film)
+        }
+        watchedVC.refreshControl.endRefreshing()
+        watchedVC.setFilmsAndCol(watched, col: kbData.collections)
+
         activityVC.isHidden = true
         activityVC.stopAnimating()
+    }
+
+    func getCollection(_ collection: Collection) {
+        watchedVC.openCollection(collection)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+}
+
+extension KinobaseViewController: WillWatchVCDelegate {
+    func openFullList() {
+        output?.openFullFilm()
+    }
+}
+
+extension KinobaseViewController: WatchedFilmDelegate {
+    func openFullAlls() {
+        output?.openFullFilm()
+    }
+    func openCollectionFromId(id: String) {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        output?.openCollecttion(id: id)
+    }
+    func newCollection() {
+        output?.openCollections(id: "", name: "", watched: watched)
+    }
+
+    func settingsCollection(id: String, name: String) {
+        output.openCollections(id: id, name: name, watched: watched)
+    }
+
+    func openFilmID(_ filmID: String, name: String) {
+        output?.openFilm(videoID: filmID, name: name)
+    }
+
+    func refresh() {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        output?.refresh()
     }
 }

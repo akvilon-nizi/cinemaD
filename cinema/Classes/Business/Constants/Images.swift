@@ -46,9 +46,6 @@ struct ColorAsset {
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
   enum Cinema {
-    static let aqqa = ImageAsset(name: "aqqa")
-    static let assa = ImageAsset(name: "assa")
-    static let background = ImageAsset(name: "background")
     enum MainTab {
       static let chat = ImageAsset(name: "chat")
       static let kinobase = ImageAsset(name: "kinobase")
@@ -75,7 +72,12 @@ enum Asset {
     static let unselectStar = ImageAsset(name: "unselectStar")
   }
   enum Kinobase {
+    static let check = ImageAsset(name: "check")
+    static let checkMini = ImageAsset(name: "checkMini")
     static let forward = ImageAsset(name: "forward")
+    static let remove = ImageAsset(name: "remove")
+    static let settings = ImageAsset(name: "settings")
+    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -108,9 +110,6 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
-    Cinema.aqqa,
-    Cinema.assa,
-    Cinema.background,
     Cinema.MainTab.chat,
     Cinema.MainTab.kinobase,
     Cinema.MainTab.reward,
@@ -129,7 +128,12 @@ enum Asset {
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
     Cinema.unselectStar,
+    Kinobase.check,
+    Kinobase.checkMini,
     Kinobase.forward,
+    Kinobase.remove,
+    Kinobase.settings,
+    Kinobase.settingsUnselect,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,

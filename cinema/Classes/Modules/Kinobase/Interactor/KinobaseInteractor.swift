@@ -41,7 +41,38 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 switch response {
                 case let .next(model):
                     self.kbData.willWatched = model.willWatch
+                    self.getCollections()
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getCollections() {
+        provider.requestModel(.getCollections)
+            .subscribe { [unowned self] (response: Event<GetColResponse>) in
+                switch response {
+                case let .next(model):
+                    self.kbData.collections = model.collections
                     self.output.getData(self.kbData)
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getFilmsIntoCol(idCol: String) {
+        provider.requestModel(.getFilmsFromCollections(idCollections: idCol))
+            .subscribe { [unowned self] (response: Event<Collection>) in
+                switch response {
+                case let .next(model):
+                    self.output.getCollection(model)
                 case let .error(error as ProviderError):
                     self.output.getError()
                 default:

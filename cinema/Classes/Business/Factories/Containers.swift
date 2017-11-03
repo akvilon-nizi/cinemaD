@@ -138,6 +138,13 @@ enum Containers {
             return configurator.configureModule()
         }
 
+        container.register(tag: NewCollectionsConfigurator.tag) { (id: String, name: String, watched:[Film]) -> UIViewController in
+            let configurator = NewCollectionsConfigurator(id: id, nameCol: name, watched: watched)
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
         return container
     }()
 
@@ -245,6 +252,7 @@ enum Containers {
                         return endpoint
                     }
                     newHTTPHeaderFields["Authorization"] = apiToken
+                    newHTTPHeaderFields["Content-Type"] = "application/x-www-form-urlencoded"
                     return endpoint.adding(newHTTPHeaderFields: newHTTPHeaderFields)
                 },
                 stubClosure: { (target: FoodleTarget) -> Moya.StubBehavior in

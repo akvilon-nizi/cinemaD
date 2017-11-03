@@ -107,6 +107,9 @@
 //Film respons
 "film-response-watched" = "film append to the 'watched'";
 "film-response-will_watch" = "film append to the 'will_watch'";
+"film-response-put-collection" = "film append to this collection";
+"film-response-delete-collection" = "collection removed";
+"film-response-delete-film-collection" = "film removed from this collection";
 
 //Kinobase
 "kinobase-title-text" = "Кинобаза";
