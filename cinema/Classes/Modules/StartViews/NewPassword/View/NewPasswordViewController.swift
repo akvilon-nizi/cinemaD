@@ -60,7 +60,7 @@ class NewPasswordViewController: ParentViewController {
         nextButton.topAnchor ~= confirmField.bottomAnchor + 38
     }
     // MARK: - Actions
-    @objc func didTapLeftButton() {
+    func didTapLeftButton() {
 //        output?.backTap()
     }
 //

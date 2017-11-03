@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITextView {
-
+    
     /**
      Calls provided `test` block if point is in gliph range and there is no link detected at this point.
      Will pass in to `test` a character index that corresponds to `point`.
@@ -19,7 +19,7 @@ extension UITextView {
         guard let charIndex = charIndexForPointInGlyphRect(point: aPoint) else {
                 return super.hitTest(aPoint, with: event)
         }
-      guard textStorage.attribute(NSAttributedStringKey.link, at: charIndex, effectiveRange: nil) == nil else {
+      guard textStorage.attribute(NSLinkAttributeName, at: charIndex, effectiveRange: nil) == nil else {
             return super.hitTest(aPoint, with: event)
         }
         return test(charIndex)
@@ -35,7 +35,7 @@ extension UITextView {
         boundingRect = boundingRect.insetBy(dx: -(padding.left + padding.right), dy: -(padding.top + padding.bottom))
         return boundingRect.contains(aPoint)
     }
-
+    
     /**
      Returns index of character for glyph at provided point. Returns `nil` if point is out of any glyph.
      */
@@ -49,11 +49,11 @@ extension UITextView {
             return nil
         }
     }
-
+    
 }
 
 extension NSLayoutManager {
-
+    
     /**
      Returns characters range that completely fits into container.
      */
@@ -62,7 +62,7 @@ extension NSLayoutManager {
         rangeThatFits = self.characterRange(forGlyphRange: rangeThatFits, actualGlyphRange: nil)
         return rangeThatFits
     }
-
+    
     /**
      Returns bounding rect in provided container for characters in provided range.
      */
@@ -71,5 +71,5 @@ extension NSLayoutManager {
         let boundingRect = self.boundingRect(forGlyphRange: glyphRange, in: container)
         return boundingRect
     }
-
+    
 }

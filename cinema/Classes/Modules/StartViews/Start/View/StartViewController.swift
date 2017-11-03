@@ -106,11 +106,11 @@ class StartViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    @objc func handleTapRegButton() {
+    func handleTapRegButton() {
         output?.registration()
     }
 
-    @objc func handleTapAuthButton() {
+    func handleTapAuthButton() {
         output?.auth()
     }
 }

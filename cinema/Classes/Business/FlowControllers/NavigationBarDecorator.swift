@@ -19,8 +19,8 @@ extension WhiteNavigationBarDecorator: NavigationBarDecorator {
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.darkGray,
-            NSAttributedStringKey.font: UIFont.fdlSystemRegular(size: 15)
+            NSForegroundColorAttributeName: UIColor.darkGray,
+            NSFontAttributeName: UIFont.fdlSystemRegular(size: 15)
         ]
     }
 }

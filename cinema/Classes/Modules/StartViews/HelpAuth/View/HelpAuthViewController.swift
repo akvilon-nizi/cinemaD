@@ -91,15 +91,15 @@ class HelpAuthViewController: ParentViewController {
     }
 
     // MARK: - Actions
-    @objc func didTapLeftButton() {
+    func didTapLeftButton() {
         output?.backTap()
     }
 
-    @objc func didTapSMSButton() {
+    func didTapSMSButton() {
         output?.smsTap()
     }
 
-    @objc func didTapPostButton() {
+    func didTapPostButton() {
         output?.postTap()
     }
 }
