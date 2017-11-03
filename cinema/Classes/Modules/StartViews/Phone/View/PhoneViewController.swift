@@ -74,7 +74,7 @@ class PhoneViewController: ParentViewController {
         } else {
             maskedDelegate?.listener = self
             phoneField.textField.delegate = maskedDelegate
-            phoneField.textField.text = "+7 ("
+            phoneField.textField.text = "+7"
             phoneField.textField.keyboardType = .phonePad
         }
 

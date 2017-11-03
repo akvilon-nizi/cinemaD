@@ -9,7 +9,8 @@
 import UIKit
 
 protocol WillWatchVCDelegate: class {
-    func openFullList()
+    func openFullList(_ films: [Film])
+    func openFilmId(_ filmID: String, name: String)
 }
 
 class WillWatchVC: ParentViewController {
@@ -93,7 +94,7 @@ extension WillWatchVC: UITableViewDelegate {
                 return nil
             }
             let view = HeaderViewTitle()
-            view.title = "Посмотрю"
+            view.title = "Фильмы"
             return view
         case 1:
             if films.isEmpty {
@@ -108,7 +109,7 @@ extension WillWatchVC: UITableViewDelegate {
             }
             let view = FilmGroup()
             view.films = films
-            //            view.delegate = self
+            view.delegate = self
             return view
         default:
             return nil
@@ -138,6 +139,13 @@ extension WillWatchVC: UITableViewDelegate {
 
 extension WillWatchVC: FullListFilmsDelegate {
     func openFullList() {
-        delegate?.openFullList()
+        delegate?.openFullList(films)
+    }
+}
+
+// MARK: - FilmGroupDelegate
+extension WillWatchVC: FilmGroupDelegate {
+    func openFilmID(_ filmID: String, name: String) {
+        delegate?.openFilmId(filmID, name: name)
     }
 }

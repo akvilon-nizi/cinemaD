@@ -41,7 +41,6 @@ enum Containers {
             let configurator = SlidesConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.firstLaunchManager = try managersContainer.resolve()
-            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
@@ -49,6 +48,7 @@ enum Containers {
             let configurator = StartConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
@@ -103,10 +103,11 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: FilmsConfigurator.tag) { () -> UIViewController in
+        container.register(tag: FilmsConfigurator.tag) { (films: [Film]) -> UIViewController in
             let configurator = FilmsConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
+            configurator.films = films
             return configurator.configureModule()
         }
 
@@ -138,7 +139,7 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: NewCollectionsConfigurator.tag) { (id: String, name: String, watched:[Film]) -> UIViewController in
+        container.register(tag: NewCollectionsConfigurator.tag) { (id: String, name: String, watched: [Film]) -> UIViewController in
             let configurator = NewCollectionsConfigurator(id: id, nameCol: name, watched: watched)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()

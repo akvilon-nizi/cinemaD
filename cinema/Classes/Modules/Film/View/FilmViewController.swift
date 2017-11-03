@@ -253,7 +253,7 @@ class FilmViewController: ParentViewController {
         rolesCV.persons = filmInfo.persons
         contentView.addSubview(rolesCV.prepareForAutoLayout())
         rolesCV.topAnchor ~= rolesLabel.bottomAnchor + 14
-        rolesCV.heightAnchor ~= 150
+        rolesCV.heightAnchor ~= 110
         rolesCV.leadingAnchor ~= contentView.leadingAnchor
         rolesCV.trailingAnchor ~= contentView.trailingAnchor
 

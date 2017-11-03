@@ -75,7 +75,7 @@ class AuthCinemaViewController: ParentViewController {
         let stackView = createStackView(.vertical, .fill, .fill, 29.0, with: [phoneField, passwordField])
         phoneField.textField.placeholder = L10n.authPhonePlaceholder
         phoneField.textField.delegate = maskedDelegate
-        phoneField.textField.text = "+7 ("
+        phoneField.textField.text = "+7"
         phoneField.textField.keyboardType = .phonePad
 //        phoneField.sizeToFit()
         passwordField.textField.placeholder = L10n.authPasswordPlaceholder

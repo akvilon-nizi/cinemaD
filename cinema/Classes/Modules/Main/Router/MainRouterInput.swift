@@ -8,4 +8,5 @@ import Foundation
 protocol MainRouterInput: BaseRouterInput {
     func openFilm(videoId: String, name: String)
     func openKinobase()
+    func openStart()
 }

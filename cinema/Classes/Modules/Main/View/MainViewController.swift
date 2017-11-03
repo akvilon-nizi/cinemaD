@@ -20,6 +20,8 @@ class MainViewController: ParentViewController {
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
     let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
+    
+    var isFirstLoaded = false
 
     var mainData = MainData()
     // MARK: - Life cycle
@@ -46,28 +48,30 @@ class MainViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        view.bringSubview(toFront: activityVC)
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+    }
+    
+    func addView() {
         mainTabView.isHidden = false
         tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         view.addSubview(mainTabView.prepareForAutoLayout())
         mainTabView.widthAnchor ~= view.widthAnchor
         mainTabView.heightAnchor ~= 80
         mainTabView.leadingAnchor ~= view.leadingAnchor
         mainTabView.bottomAnchor ~= view.bottomAnchor
-
+        
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.topAnchor ~= view.topAnchor
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= mainTabView.topAnchor
-
+        
         mainTabView.delegate = self
-
-        view.bringSubview(toFront: activityVC)
-        activityVC.isHidden = false
-        activityVC.startAnimating()
     }
 }
 
@@ -193,6 +197,12 @@ extension MainViewController: MainViewInput {
         activityVC.stopAnimating()
     }
     func getData(_ mainData: MainData) {
+
+        if !isFirstLoaded {
+            addView()
+            isFirstLoaded = true
+        }
+
         self.mainData = mainData
         activityVC.isHidden = true
         activityVC.stopAnimating()

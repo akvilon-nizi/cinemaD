@@ -76,25 +76,20 @@ class NewCollectionsViewController: ParentViewController {
     }
 
     func didTapSaveButton() {
-        if headerCollectionsView.returnTitle().characters.count > 3 {
-            let filteredWatched = watched.filter() { $0.add == true }
-            if nameCollections.isEmpty {
-                if filteredWatched.isEmpty {
-                     showAlert(message: "Выберете фильмы")
-                } else {
-                     output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)
-                    saveButton.isEnabled = false
-                    activityVC.isHidden = false
-                    activityVC.startAnimating()
-                    view.isUserInteractionEnabled = false
-                    view.bringSubview(toFront: activityVC)
-                }
+        let filteredWatched = watched.filter() { $0.add == true }
+        if nameCollections.isEmpty {
+            if filteredWatched.isEmpty {
+                 showAlert(message: "Выберете фильмы")
+            } else {
+                 output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)
+                saveButton.isEnabled = false
+                activityVC.isHidden = false
+                activityVC.startAnimating()
+                view.isUserInteractionEnabled = false
+                view.bringSubview(toFront: activityVC)
             }
-        } else {
-            showAlert(message: "Имя коллекции должно быть больше 3 символов")
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource
@@ -158,7 +153,7 @@ extension NewCollectionsViewController: UITableViewDelegate {
             return view
         case 3:
             let view = HeaderViewTitle()
-            view.title = "Избранное"
+            view.title = "Фильмы"
             return view
 
         case 4:

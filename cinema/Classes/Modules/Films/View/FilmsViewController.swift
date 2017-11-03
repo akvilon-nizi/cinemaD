@@ -44,8 +44,8 @@ class FilmsViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
-        activityVC.startAnimating()
-        activityVC.isHidden = false
+//        activityVC.startAnimating()
+//        activityVC.isHidden = false
 
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
@@ -64,9 +64,9 @@ class FilmsViewController: ParentViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
 
-        activityVC.isHidden = false
-        activityVC.startAnimating()
-        view.bringSubview(toFront: activityVC)
+//        activityVC.isHidden = false
+//        activityVC.startAnimating()
+//        view.bringSubview(toFront: activityVC)
     }
 
     // MARK: - Actions
@@ -82,10 +82,9 @@ extension FilmsViewController: FilmsViewInput {
 
     func setupInitialState(_ films: [Film]) {
         self.films = films
-        activityVC.stopAnimating()
-        activityVC.isHidden = true
-        activityVC.isHidden = true
-        activityVC.stopAnimating()
+//        activityVC.stopAnimating()
+//        activityVC.isHidden = true
+//        activityVC.stopAnimating()
         self.collectionView.reloadData()
     }
 }

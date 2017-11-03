@@ -14,11 +14,11 @@ class RolesCell: UICollectionViewCell {
     fileprivate let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaBold(size: 13)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.textColor = UIColor.cnm3a3a3a
-        label.widthAnchor ~= 56
+        label.widthAnchor ~= 88
         label.textAlignment = .center
-        label.lineBreakMode = .byClipping
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     fileprivate let roleLabel: UILabel = {
@@ -28,6 +28,7 @@ class RolesCell: UICollectionViewCell {
         label.textColor = UIColor.cnmAfafaf
         label.widthAnchor ~= 58
         label.textAlignment = .center
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
 
@@ -67,7 +68,7 @@ class RolesCell: UICollectionViewCell {
         posterView.layer.cornerRadius = 28.0
         posterView.layer.masksToBounds = true
         posterView.heightAnchor ~= 56
-        posterView.contentMode = .scaleAspectFit
+        posterView.contentMode = .scaleAspectFill
         posterView.widthAnchor ~= 56
 
         addSubview(nameLabel.prepareForAutoLayout())

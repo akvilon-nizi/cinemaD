@@ -35,6 +35,10 @@ extension MainPresenter: MainViewOutput {
 // MARK: - MainInteractorOutput
 
 extension MainPresenter: MainInteractorOutput {
+    func tokenError() {
+        router.openStart()
+    }
+
     func getError() {
         view.getError()
     }

@@ -48,9 +48,11 @@ struct ColorAsset {
 enum Asset {
   enum Kinobase {
     static let check = ImageAsset(name: "check")
+    static let check28 = ImageAsset(name: "check28")
     static let checkMini = ImageAsset(name: "checkMini")
     static let forward = ImageAsset(name: "forward")
     static let remove = ImageAsset(name: "remove")
+    static let remove28 = ImageAsset(name: "remove28")
     static let settings = ImageAsset(name: "settings")
     static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
@@ -112,9 +114,11 @@ enum Asset {
   ]
   static let allImages: [ImageAsset] = [
     Kinobase.check,
+    Kinobase.check28,
     Kinobase.checkMini,
     Kinobase.forward,
     Kinobase.remove,
+    Kinobase.remove28,
     Kinobase.settings,
     Kinobase.settingsUnselect,
     Cinema.MainTab.chat,

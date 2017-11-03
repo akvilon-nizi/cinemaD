@@ -11,11 +11,8 @@ class SlidesConfigurator {
 
     var firstLaunchManager: FirstLaunchManagerProtocol!
     var appRouter: AppRouterProtocol!
-    var authTokenManager: AuthTokenManagerProtocol!
 
     func configureModule() -> UIViewController {
-
-        authTokenManager.removeApiToken()
 
         let router = SlidesRouter()
         router.appRouter = appRouter

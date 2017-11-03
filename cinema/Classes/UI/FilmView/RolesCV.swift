@@ -59,7 +59,7 @@ extension RolesCV: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: 56, height: 150)
+        return CGSize(width: 88, height: 110)
     }
 }
 

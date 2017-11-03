@@ -22,7 +22,7 @@ enum AppRouterDestination {
     case helpAuth
     case confirmation(phone: String, uid: String, isRestore: Bool)
     case phone(phone: String, uid: String)
-    case films
+    case films(films: [Film])
     case actors
     case film(videoID: String, name: String)
     case kinobase
@@ -61,8 +61,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: ConfirmationConfigurator.tag, arguments: phone, uid, isRestore)
             case let .phone(phone, uid):
                 return try factory.resolve(tag: PhoneConfigurator.tag, arguments: phone, uid)
-            case .films:
-                return try factory.resolve(tag: FilmsConfigurator.tag)
+            case let .films(films):
+                return try factory.resolve(tag: FilmsConfigurator.tag, arguments: films)
             case .actors:
                 return try factory.resolve(tag: ActorsConfigurator.tag)
             case let .film(videoID, name):
@@ -94,6 +94,8 @@ protocol AppRouterProtocol {
     func dropAll()
 
     func mainView()
+
+    func starting()
 }
 
 protocol AppRouterFlowControllerDataSource: class {
@@ -170,13 +172,28 @@ class AppRouter: AppRouterProtocol {
         application.keyWindow?.rootViewController = flowController.rootViewController
     }
 
+    func starting() {
+
+        let authViewController = moduleCreator.createModule(for: .start)
+
+        let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
+
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+            appDelegate.window?.rootViewController = flowController.rootViewController
+        }
+    }
+
     func mainView() {
 
         let mainViewController = moduleCreator.createModule(for: .main)
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: mainViewController)
 
-        application.keyWindow?.rootViewController = flowController.rootViewController
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+            appDelegate.window?.rootViewController = flowController.rootViewController
+        }
     }
 
     func backTransition() {

@@ -17,7 +17,6 @@ class KinobaseViewController: ParentViewController {
 
     let willWatchVC = WillWatchVC()
     let watchedVC = WatchedVC()
-    
 
     let controllers: [UIViewController]
 
@@ -240,14 +239,18 @@ extension KinobaseViewController: KinobaseViewInput {
 }
 
 extension KinobaseViewController: WillWatchVCDelegate {
-    func openFullList() {
-        output?.openFullFilm()
+    func openFullList(_ films: [Film]) {
+        output?.openFullFilm(films)
+    }
+
+    func openFilmId(_ filmID: String, name: String) {
+        output?.openFilm(videoID: filmID, name: name)
     }
 }
 
 extension KinobaseViewController: WatchedFilmDelegate {
-    func openFullAlls() {
-        output?.openFullFilm()
+    func openFullAlls(_ films: [Film]) {
+        output?.openFullFilm(films)
     }
     func openCollectionFromId(id: String) {
         activityVC.isHidden = false

@@ -27,7 +27,7 @@ extension ConfirmationRouter: ConfirmationRouterInput {
 //            self.appRouter.mainView()
 //        }
         OperationQueue.main.addOperation {
-            self.appRouter.transition(to: .main)
+            self.appRouter.mainView()
         }
     }
 }

@@ -68,7 +68,7 @@ class SearchView: UIView {
         titleField.rightViewMode = .always
 
         if let stackView = buttonsStack {
-            let mainStack = createStackView(.vertical, .fill, .fill, 20.0, with:[titleField, stackView])
+            let mainStack = createStackView(.vertical, .fill, .fill, 20.0, with: [titleField, stackView])
             addSubview(mainStack.prepareForAutoLayout())
             mainStack.pinEdgesToSuperviewEdges()
         }
