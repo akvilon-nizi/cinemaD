@@ -10,4 +10,5 @@ struct KinobaseData {
 
     var watched: [FilmCollections] = []
     var willWatched: [FilmCollections] = []
+    var collections: [Collection] = []
 }

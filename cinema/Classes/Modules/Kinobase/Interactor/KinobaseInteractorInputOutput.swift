@@ -7,9 +7,11 @@ import Foundation
 
 protocol KinobaseInteractorInput {
     func getWatched()
+    func getFilmsIntoCol(idCol: String)
 }
 
 protocol KinobaseInteractorOutput: class {
     func getError()
     func getData(_ kbData: KinobaseData)
+    func getCollection(_ collection: Collection)
 }

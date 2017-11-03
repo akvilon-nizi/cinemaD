@@ -10,6 +10,8 @@ protocol KinobaseViewInput: class {
     func setupInitialState()
     func getError()
     func getData(_ kbData: KinobaseData)
+    func getCollection(_ collection: Collection)
+
 }
 
 protocol KinobaseViewOutput {
@@ -18,4 +20,13 @@ protocol KinobaseViewOutput {
 
     func backButtonTap()
 
+    func openFullFilm()
+
+    func openCollections(id: String, name: String, watched: [Film])
+
+    func openCollecttion(id: String)
+
+    func openFilm(videoID: String, name: String)
+
+    func refresh()
 }

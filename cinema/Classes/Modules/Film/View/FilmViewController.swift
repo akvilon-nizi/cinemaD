@@ -131,7 +131,7 @@ class FilmViewController: ParentViewController {
             titleLabel.textColor = UIColor.cnmAfafaf
             var textsArray: [String] = []
             for genres in filmInfo.genres {
-                if let text = genres.name {
+                if let text = genres.name, !text.characters.isEmpty {
                     textsArray.append(text)
                 }
             }
@@ -194,13 +194,13 @@ class FilmViewController: ParentViewController {
 
             let infoStack = createStackView(.horizontal, .fill, .fill, 0, with: [
                 UIView().setParameters(
-                    topLabelText: String(filmInfo.rateTmdb),
+                    topLabelText: filmInfo.rateTmdb == 0 ? " " : String(filmInfo.rateTmdb),
                     bottomLabelText: L10n.filmTmdbText),
                 UIView().setParameters(
-                    topLabelText: String(filmInfo.duration) + " мин",
+                    topLabelText: filmInfo.duration == 0 ? " " : String(filmInfo.duration) + " мин",
                     bottomLabelText: L10n.filmDurationText),
                 UIView().setParameters(
-                    topLabelText: filmInfo.ageLimit == nil ? "0+" : String(format: "%@ +", (filmInfo.ageLimit)!),
+                    topLabelText: filmInfo.ageLimit == nil ? " " : String(format: "%@ +", (filmInfo.ageLimit)!),
                     bottomLabelText: L10n.filmAgeText)
                 ])
             contentView.addSubview(infoStack.prepareForAutoLayout())
@@ -266,8 +266,8 @@ class FilmViewController: ParentViewController {
         sepView.heightAnchor ~= 1
 
         let infoStack = createStackView(.horizontal, .fill, .fill, 1, with: [
-            UIView().setParameters2(topLabelText: String(filmInfo.budget) + " $", bottomLabelText: L10n.filmBudjetText), UIView().separator(),
-            UIView().setParameters2(topLabelText: String(filmInfo.gross) + " $", bottomLabelText: L10n.filmCashText)])
+            UIView().setParameters2(topLabelText: filmInfo.budget > 0 ? String(filmInfo.budget).setPriceMask() + " $" : " ", bottomLabelText: L10n.filmBudjetText), UIView().separator(),
+            UIView().setParameters2(topLabelText: filmInfo.gross > 0 ?String(filmInfo.gross).setPriceMask() + " $" : " ", bottomLabelText: L10n.filmCashText)])
         contentView.addSubview(infoStack.prepareForAutoLayout())
         infoStack.heightAnchor ~= 50
         infoStack.topAnchor ~= sepView.bottomAnchor + 10
@@ -290,8 +290,8 @@ class FilmViewController: ParentViewController {
 
     @objc func didTapWillWatchButton() {
         willWatchButton.isSelected = !willWatchButton.isSelected
-        starsLabel.isHidden = !watchedButton.isSelected
-        starsView.isHidden = !watchedButton.isSelected
+        starsLabel.isHidden = true
+        starsView.isHidden = true
         watchedButton.isSelected = false
 
         output.willWatchTap()
@@ -397,5 +397,21 @@ private extension UIView {
         self.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
 
         return self
+    }
+}
+
+extension String {
+    func setPriceMask() -> String {
+        var resultString = String()
+        self.characters.enumerated().forEach { (index, character) in
+
+            // Add space every 4 characters
+
+            if (self.characters.count - index) % 3 == 0 && index > 0 {
+                resultString += " "
+            }
+            resultString.append(character)
+        }
+        return resultString
     }
 }

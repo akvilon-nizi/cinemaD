@@ -18,6 +18,7 @@ class RolesCell: UICollectionViewCell {
         label.textColor = UIColor.cnm3a3a3a
         label.widthAnchor ~= 56
         label.textAlignment = .center
+        label.lineBreakMode = .byClipping
         return label
     }()
     fileprivate let roleLabel: UILabel = {
@@ -25,7 +26,7 @@ class RolesCell: UICollectionViewCell {
         label.font = UIFont.cnmFuturaLight(size: 12)
         label.numberOfLines = 0
         label.textColor = UIColor.cnmAfafaf
-        label.widthAnchor ~= 56
+        label.widthAnchor ~= 58
         label.textAlignment = .center
         return label
     }()

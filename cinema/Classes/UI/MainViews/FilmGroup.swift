@@ -15,6 +15,9 @@ protocol FilmGroupDelegate: class {
 class FilmGroup: UITableViewHeaderFooterView {
     let titleLabel: UILabel = UILabel()
 
+    var isCollections: Bool = false
+    var isAdd: Bool = false
+
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -67,7 +70,20 @@ extension FilmGroup: UICollectionViewDelegateFlowLayout {
 
 extension FilmGroup: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.openFilmID(films[indexPath.row].id, name: films[indexPath.row].name)
+        if isCollections {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmsCollectionCell.reuseIdentifier, for: indexPath)
+
+            if let tagCell = cell as? FilmsCollectionCell {
+                if isAdd {
+                    films[indexPath.row].add = !films[indexPath.row].add
+                } else {
+                    films[indexPath.row].delete = !films[indexPath.row].delete
+                }
+               collectionView.reloadItems(at: [indexPath])
+            }
+        } else {
+            delegate?.openFilmID(films[indexPath.row].id, name: films[indexPath.row].name)
+        }
     }
 }
 
@@ -80,6 +96,13 @@ extension FilmGroup: UICollectionViewDataSource {
 
         if let tagCell = cell as? FilmsCollectionCell {
             tagCell.linkUrlImage = films[indexPath.row].imageUrl
+            if isCollections {
+                tagCell.isCollections()
+                tagCell.isAdd = isAdd
+                if films[indexPath.row].delete || films[indexPath.row].add {
+                    tagCell.isCheck = true
+                }
+            }
         }
         return cell
     }
