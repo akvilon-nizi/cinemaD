@@ -18,6 +18,8 @@ enum FoodleTarget {
     case film(filmID: String)
     case filmWatched(filmID: String, rate: Int)
     case filmWillWatch(filmID: String)
+    case filmWatchedDelete(filmID: String)
+    case filmWillWatchDelete(filmID: String)
     case trailersFilms
     case persons
     case person(personID: String)
@@ -74,6 +76,10 @@ extension FoodleTarget: TargetType {
             return "films/\(filmID)/action/watched"
         case let .filmWillWatch(filmID):
             return "films/\(filmID)/action/will_watch"
+        case let .filmWatchedDelete(filmID):
+            return "films/\(filmID)/action/watched"
+        case let .filmWillWatchDelete(filmID):
+            return "films/\(filmID)/action/will_watch"
         case .meFilmWatched:
             return "me/watched"
         case .meFilmWillWatched:
@@ -113,7 +119,7 @@ extension FoodleTarget: TargetType {
         switch self {
         case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections:
             return .get
-        case .deleteFilm, .deleteCollections:
+        case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
 //        case :
 //            return .patch

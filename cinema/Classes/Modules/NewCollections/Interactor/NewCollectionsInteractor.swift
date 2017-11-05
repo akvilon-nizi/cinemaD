@@ -12,7 +12,7 @@ class NewCollectionsInteractor {
 
     weak var output: NewCollectionsInteractorOutput!
     var provider: RxMoyaProvider<FoodleTarget>!
-    fileprivate let disposeBag = DisposeBag()
+    fileprivate var disposeBag = DisposeBag()
 
 }
 

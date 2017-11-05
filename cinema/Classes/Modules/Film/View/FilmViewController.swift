@@ -118,8 +118,16 @@ class FilmViewController: ParentViewController {
     func setInfo() {
         if let filmInfo = filmInformation {
 
+            starsLabel.isHidden = true
+            starsView.isHidden = true
+
             if filmInfo.iWatched {
                 watchedButton.isSelected = true
+                starsLabel.isHidden = false
+                starsLabel.text = L10n.filmSetStatusRate
+                starsView.isHidden = false
+                starsView.isUserInteractionEnabled = false
+                setStars(Int(filmInfo.rate.rounded()) - 1)
             }
 
             if  filmInfo.iWillWatch {
@@ -132,10 +140,10 @@ class FilmViewController: ParentViewController {
             var textsArray: [String] = []
             for genres in filmInfo.genres {
                 if let text = genres.name, !text.characters.isEmpty {
-                    textsArray.append(text)
+                    textsArray.append(text.capitalized)
                 }
             }
-            titleLabel.text = textsArray.joined(separator: "/") + "(" + String(filmInfo.yearFirstRelease) + ")"
+            titleLabel.text = textsArray.joined(separator: "/") + " (" + String(filmInfo.yearFirstRelease) + ")"
             view.addSubview(titleLabel.prepareForAutoLayout())
             titleLabel.centerXAnchor ~= view.centerXAnchor
             titleLabel.topAnchor ~= titleViewLabel.bottomAnchor
@@ -166,9 +174,7 @@ class FilmViewController: ParentViewController {
 
             starsLabel.font = UIFont.cnmFuturaLight(size: 16)
             starsLabel.textColor = UIColor.cnmAfafaf
-            starsLabel.text = L10n.filmYourStar
             starsLabel.textAlignment = .center
-            starsLabel.isHidden = true
 
             let starsStack = createStackView(.horizontal, .fill, .fill, 8, with: starsButons)
             starsView.addSubview(starsStack.prepareForAutoLayout())
@@ -176,7 +182,6 @@ class FilmViewController: ParentViewController {
             starsStack.topAnchor ~= starsView.topAnchor
             starsStack.bottomAnchor ~= starsView.bottomAnchor
             starsStack.centerXAnchor ~= starsView.centerXAnchor
-            starsView.isHidden = true
 
             let willStack = createStackView(.vertical, .fill, .fill, 20.0, with: [buttonsStack, starsLabel, starsView])
             contentView.addSubview(willStack.prepareForAutoLayout())
@@ -266,8 +271,12 @@ class FilmViewController: ParentViewController {
         sepView.heightAnchor ~= 1
 
         let infoStack = createStackView(.horizontal, .fill, .fill, 1, with: [
-            UIView().setParameters2(topLabelText: filmInfo.budget > 0 ? String(filmInfo.budget).setPriceMask() + " $" : " ", bottomLabelText: L10n.filmBudjetText), UIView().separator(),
-            UIView().setParameters2(topLabelText: filmInfo.gross > 0 ?String(filmInfo.gross).setPriceMask() + " $" : " ", bottomLabelText: L10n.filmCashText)])
+            UIView().setParameters2(topLabelText: filmInfo.budget > 0 ?
+                String(filmInfo.budget).setPriceMask() + " $" :
+                " ", bottomLabelText: L10n.filmBudjetText), UIView().separator(),
+            UIView().setParameters2(topLabelText: filmInfo.gross > 0
+                ? String(filmInfo.gross).setPriceMask() + " $"
+                : " ", bottomLabelText: L10n.filmCashText)])
         contentView.addSubview(infoStack.prepareForAutoLayout())
         infoStack.heightAnchor ~= 50
         infoStack.topAnchor ~= sepView.bottomAnchor + 10
@@ -282,30 +291,57 @@ class FilmViewController: ParentViewController {
     }
 
     func didTapWatchedButton() {
+
         watchedButton.isSelected = !watchedButton.isSelected
         starsLabel.isHidden = !watchedButton.isSelected
         starsView.isHidden = !watchedButton.isSelected
         willWatchButton.isSelected = false
+
+        if !watchedButton.isSelected {
+            activityVC.isHidden = false
+            activityVC.startAnimating()
+            output.watchedTapDelete()
+        } else {
+            starsLabel.text = L10n.filmYourStar
+            setStars(0)
+            starsView.isUserInteractionEnabled = true
+        }
     }
 
     func didTapWillWatchButton() {
+
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        view.bringSubview(toFront: activityVC)
+
         willWatchButton.isSelected = !willWatchButton.isSelected
         starsLabel.isHidden = true
         starsView.isHidden = true
         watchedButton.isSelected = false
 
-        output.willWatchTap()
+        if willWatchButton.isSelected {
+            output.willWatchTap()
+        } else {
+            output.willWatchTapDelete()
+        }
+
     }
 
     func didTapStarButton(button: UIButton) {
+        setStars(button.tag)
+        output.watchedTap(rate: button.tag + 1)
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+    }
+
+    func setStars(_ tag: Int) {
         for buttonStar in starsButons {
-            if buttonStar.tag <= button.tag {
+            if buttonStar.tag <= tag {
                 buttonStar.isSelected = true
             } else {
                 buttonStar.isSelected = false
             }
         }
-        output.watchedTap(rate: button.tag + 1)
     }
 }
 
@@ -327,7 +363,21 @@ extension FilmViewController: FilmViewInput {
         self.filmInformation = filmInfo
         activityVC.isHidden = true
         activityVC.stopAnimating()
+        activityVC.color = UIColor.cnmMainOrange
         setInfo()
+    }
+
+    func statusChange() {
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
+    func setStatus(_ rate: Double) {
+        setStars(Int(rate.rounded()) - 1)
+        starsLabel.text = L10n.filmSetStatusRate
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+        starsView.isUserInteractionEnabled = false
     }
 }
 

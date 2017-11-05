@@ -264,6 +264,7 @@
 		CEB86C4C1F88AB43003F07FC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB86C4B1F88AB42003F07FC /* Crashlytics.framework */; };
 		CEBE86511FA90FB000129163 /* WatchedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBE86501FA90FB000129163 /* WatchedVC.swift */; };
 		CEBE86531FA99D3A00129163 /* MakeNewCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBE86521FA99D3A00129163 /* MakeNewCollections.swift */; };
+		CED2497A1FAF29FA00FE389A /* FilmWatchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED249791FAF29FA00FE389A /* FilmWatchResponse.swift */; };
 		CED2590E1F969908009C0262 /* RecommendationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2590D1F969908009C0262 /* RecommendationsResponse.swift */; };
 		CED259101F96992B009C0262 /* NowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2590F1F96992B009C0262 /* NowResponse.swift */; };
 		CED259121F969B39009C0262 /* MainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED259111F969B39009C0262 /* MainData.swift */; };
@@ -605,6 +606,7 @@
 		CEB86C4B1F88AB42003F07FC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		CEBE86501FA90FB000129163 /* WatchedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedVC.swift; sourceTree = "<group>"; };
 		CEBE86521FA99D3A00129163 /* MakeNewCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewCollections.swift; sourceTree = "<group>"; };
+		CED249791FAF29FA00FE389A /* FilmWatchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmWatchResponse.swift; sourceTree = "<group>"; };
 		CED2590D1F969908009C0262 /* RecommendationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsResponse.swift; sourceTree = "<group>"; };
 		CED2590F1F96992B009C0262 /* NowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowResponse.swift; sourceTree = "<group>"; };
 		CED259111F969B39009C0262 /* MainData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainData.swift; sourceTree = "<group>"; };
@@ -1426,6 +1428,7 @@
 				049030431FA7BAD1000B7C08 /* WatchedResponse.swift */,
 				049030451FA7BB8B000B7C08 /* WillWatchResponse.swift */,
 				049030471FA86720000B7C08 /* AllFilms.swift */,
+				CED249791FAF29FA00FE389A /* FilmWatchResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2418,6 +2421,7 @@
 				8B7C59BAB967C2B0001C257A /* SlidesInteractorInputOutput.swift in Sources */,
 				3753EE88776194D74AC0CFF2 /* SlidesModuleInputOutput.swift in Sources */,
 				02232DFB64002CBD3ADAF88D /* SlidesPresenter.swift in Sources */,
+				CED2497A1FAF29FA00FE389A /* FilmWatchResponse.swift in Sources */,
 				CEDCF20F1F9713940082BCD0 /* YoutubeItem.swift in Sources */,
 				7F5DB5844092F4066624E68D /* SlidesRouter.swift in Sources */,
 				1B198E19545A502267CF9386 /* SlidesRouterInput.swift in Sources */,

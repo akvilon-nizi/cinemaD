@@ -13,6 +13,10 @@ protocol FilmViewInput: class {
 
     func showNetworkError()
 
+    func statusChange()
+
+    func setStatus(_ rate: Double)
+
 }
 
 protocol FilmViewOutput {
@@ -24,4 +28,8 @@ protocol FilmViewOutput {
     func willWatchTap()
 
     func watchedTap(rate: Int)
+
+    func willWatchTapDelete()
+
+    func watchedTapDelete()
 }

@@ -103,10 +103,14 @@
 "film-cash-text" = "Сборы";
 "film-adwards-text" = "Награды и премии";
 "film-more-button" = "  Читать дальше >";
+"film-change-status-watch" = "Изменения сохранены";
+"film-set-status-rate" = "Рейтинг фильма:";
 
 //Film respons
 "film-response-watched" = "film append to the 'watched'";
+"film-response-watched-delete" = "film remove from the 'watched'";
 "film-response-will_watch" = "film append to the 'will_watch'";
+"film-response-will_watch-delete" = "film remove from the 'will_watch'";
 "film-response-put-collection" = "film append to this collection";
 "film-response-delete-collection" = "collection removed";
 "film-response-delete-film-collection" = "film removed from this collection";

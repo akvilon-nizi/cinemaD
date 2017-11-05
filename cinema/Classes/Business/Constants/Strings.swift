@@ -2,7 +2,6 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -63,6 +62,8 @@ enum L10n {
   static let filmBudjetText = L10n.tr("Localizable", "film-budjet-text")
   /// Сборы
   static let filmCashText = L10n.tr("Localizable", "film-cash-text")
+  /// Изменения сохранены
+  static let filmChangeStatusWatch = L10n.tr("Localizable", "film-change-status-watch")
   /// Сюжет:
   static let filmDescriptionText = L10n.tr("Localizable", "film-description-text")
   /// Длительность
@@ -83,8 +84,14 @@ enum L10n {
   static let filmResponsePutCollection = L10n.tr("Localizable", "film-response-put-collection")
   /// film append to the 'watched'
   static let filmResponseWatched = L10n.tr("Localizable", "film-response-watched")
+  /// film remove from the 'watched'
+  static let filmResponseWatchedDelete = L10n.tr("Localizable", "film-response-watched-delete")
   /// film append to the 'will_watch'
   static let filmResponseWillWatch = L10n.tr("Localizable", "film-response-will_watch")
+  /// film remove from the 'will_watch'
+  static let filmResponseWillWatchDelete = L10n.tr("Localizable", "film-response-will_watch-delete")
+  /// Рейтинг фильма:
+  static let filmSetStatusRate = L10n.tr("Localizable", "film-set-status-rate")
   /// tMDB
   static let filmTmdbText = L10n.tr("Localizable", "film-tmdb-text")
   /// Смотрел
