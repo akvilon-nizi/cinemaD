@@ -105,6 +105,7 @@
 "film-more-button" = "  Читать дальше >";
 "film-change-status-watch" = "Изменения сохранены";
 "film-set-status-rate" = "Рейтинг фильма:";
+"film-search-placeholder" = "Поиск";
 
 //Film respons
 "film-response-watched" = "film append to the 'watched'";

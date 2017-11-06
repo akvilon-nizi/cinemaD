@@ -45,7 +45,7 @@ class SearchView: UIView {
             view.titleLabel.text = title
             buttonsArray.append(view)
         }
-        buttonsStack = createStackView(.vertical, .fill, .fill, 1.0, with:buttonsArray)
+        buttonsStack = createStackView(.vertical, .fill, .fill, 1.0, with: buttonsArray)
         let titleField = UITextField()
         titleField.placeholder = placeholder
 

@@ -74,7 +74,7 @@ extension WillWatchVC: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
 
 }
@@ -111,6 +111,8 @@ extension WillWatchVC: UITableViewDelegate {
             view.films = films
             view.delegate = self
             return view
+        case 3:
+            return HeaderSearchView()
         default:
             return nil
         }
@@ -127,6 +129,8 @@ extension WillWatchVC: UITableViewDelegate {
                 return 0
             }
             return windowWidth / 4 * 3 - 80
+        case 3:
+            return 44
         default:
             return 0
         }

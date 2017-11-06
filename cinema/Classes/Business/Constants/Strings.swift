@@ -90,6 +90,8 @@ enum L10n {
   static let filmResponseWillWatch = L10n.tr("Localizable", "film-response-will_watch")
   /// film remove from the 'will_watch'
   static let filmResponseWillWatchDelete = L10n.tr("Localizable", "film-response-will_watch-delete")
+  /// Поиск
+  static let filmSearchPlaceholder = L10n.tr("Localizable", "film-search-placeholder")
   /// Рейтинг фильма:
   static let filmSetStatusRate = L10n.tr("Localizable", "film-set-status-rate")
   /// tMDB
