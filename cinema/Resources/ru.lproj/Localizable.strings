@@ -130,4 +130,9 @@
 "films-title-text" = "Полный список";
 "kinobase-willWatch-button" = "Посмотрю";
 
+//Filter
+"filter-title-text" = "Фильтр";
+"filter-filter1-title" = "Год";
+"filter-filter2-title" = "Жанр";
+
 

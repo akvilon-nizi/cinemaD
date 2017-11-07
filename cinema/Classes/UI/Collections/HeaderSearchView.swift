@@ -7,6 +7,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
+protocol HeaderSearchDelegate: class {
+    func changeText(_ text: String)
+    func tapFilter()
+}
 
 class HeaderSearchView: UITableViewHeaderFooterView {
 
@@ -14,7 +21,11 @@ class HeaderSearchView: UITableViewHeaderFooterView {
         fatalError("NSCoding not supported")
     }
 
-    let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
+    fileprivate let disposeBag = DisposeBag()
+
+    fileprivate let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
+
+    weak var delegate: HeaderSearchDelegate?
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -43,10 +54,20 @@ class HeaderSearchView: UITableViewHeaderFooterView {
         rightView.addSubview(rightButton)
         titleField.rightView = rightView
         titleField.rightViewMode = .always
+
+        titleField.rx.text.orEmpty
+            .skip(1)
+            .throttle(3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
+                self?.getVideoID(query)
+                }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
     }
 
     func typeButtonTap() {
+        delegate?.tapFilter()
+    }
 
+    func getVideoID(_ query: String) {
+        delegate?.changeText(query)
     }
 
 }

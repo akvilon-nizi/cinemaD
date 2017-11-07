@@ -2,6 +2,7 @@
 
 import Foundation
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -104,6 +105,12 @@ enum L10n {
   static let filmYourStar = L10n.tr("Localizable", "film-your-star")
   /// Полный список
   static let filmsTitleText = L10n.tr("Localizable", "films-title-text")
+  /// Год
+  static let filterFilter1Title = L10n.tr("Localizable", "filter-filter1-title")
+  /// Жанр
+  static let filterFilter2Title = L10n.tr("Localizable", "filter-filter2-title")
+  /// Фильтр
+  static let filterTitleText = L10n.tr("Localizable", "filter-title-text")
   /// Полный список
   static let kinobaseCollectionText = L10n.tr("Localizable", "kinobase-collection-text")
   /// + Создать коллекцию

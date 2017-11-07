@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate let disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        GoogleMapsManager.configureMaps()
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         do {

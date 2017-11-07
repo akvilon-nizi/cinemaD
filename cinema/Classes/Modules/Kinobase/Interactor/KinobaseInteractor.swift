@@ -26,6 +26,7 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 switch response {
                 case let .next(model):
                     self.kbData.watched = model.watched
+                    self.kbData.genresWatched = model.genres
                     self.getWillWatch()
                 case let .error(error as ProviderError):
                     self.output.getError()
@@ -41,6 +42,7 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 switch response {
                 case let .next(model):
                     self.kbData.willWatched = model.willWatch
+                    self.kbData.genresWillWatch = model.genres
                     self.getCollections()
                 case let .error(error as ProviderError):
                     self.output.getError()

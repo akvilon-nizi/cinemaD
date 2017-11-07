@@ -146,6 +146,23 @@ enum Containers {
             return configurator.configureModule()
         }
 
+        container.register(tag: FilterConfigurator.tag) {(output: FilterModuleOutput,
+            genres: [String],
+            years: [Int],
+            filterParameters: FilterParameters,
+            isWatched: Bool
+            ) -> UIViewController in
+            let configurator = FilterConfigurator(
+                output: output,
+                genres: genres,
+                years: years,
+                filterParameters: filterParameters,
+                isWatched: isWatched)
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
         return container
     }()
 

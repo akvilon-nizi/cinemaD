@@ -168,6 +168,6 @@ extension ConfirmationViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
-        return newLength <= 6 // Bool
+        return newLength <= 6 // Boolzzzz
     }
 }

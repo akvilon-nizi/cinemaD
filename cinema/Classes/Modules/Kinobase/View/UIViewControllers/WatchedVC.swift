@@ -15,6 +15,8 @@ protocol WatchedFilmDelegate: class {
     func settingsCollection(id: String, name: String)
     func openFilmID(_ filmID: String, name: String)
     func refresh()
+    func getQueryWatched(_ query: String)
+    func tapFilterWatched()
 }
 
 class WatchedVC: ParentViewController {
@@ -33,6 +35,16 @@ class WatchedVC: ParentViewController {
     var films: [Film] = []
     var collections: [Collection] = []
     var selectedIndex: Int?
+
+//    let sectionHeaers: [HeaderSectionStruct] = [
+//        HeaderSectionStruct(view: UIView(), height: 0.0),
+//        HeaderSectionStruct(view: UIView(), height: 0.0),
+//        HeaderSectionStruct(view: UIView(), height: 0.0),
+//        HeaderSectionStruct(view: UIView(), height: 0.0),
+//        HeaderSectionStruct(view: UIView(), height: 0.0),
+//        HeaderSectionStruct(view: UIView(), height: 0.0),
+//        HeaderSectionStruct(view: UIView(), height: 0.0),
+//        ]
 
     weak var delegate: WatchedFilmDelegate?
 
@@ -158,21 +170,21 @@ extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 3:
+        case 4:
             if films.isEmpty {
                 return nil
             }
             let view = HeaderViewTitle()
             view.title = "Коллекции"
             return view
-        case 4:
+        case 5:
             if films.isEmpty {
                 return nil
             }
             let view = MakeNewCollections()
             view.delegate = self
             return view
-        case 5:
+        case 6:
             if colFilms.isEmpty {
                 return nil
             }
@@ -180,7 +192,7 @@ extension WatchedVC: UITableViewDelegate {
             view.title = colHeaderTitle
             view.withoutLine()
             return view
-        case 6:
+        case 7:
             if colFilms.isEmpty {
                 return nil
             }
@@ -202,12 +214,19 @@ extension WatchedVC: UITableViewDelegate {
             let view = FullListFilms()
             view.delegate = self
             return view
-        case 2:
+        case 3:
             if films.isEmpty {
                 return nil
             }
             let view = FilmGroup()
             view.films = films
+            view.delegate = self
+            return view
+        case 2:
+            if films.isEmpty {
+                return nil
+            }
+            let view = HeaderSearchView()
             view.delegate = self
             return view
         default:
@@ -217,16 +236,16 @@ extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 3:
-            return 22
         case 4:
-            return 55
+            return 22
         case 5:
+            return 55
+        case 6:
             if colFilms.isEmpty {
                 return 0
             }
             return 22
-        case 6:
+        case 7:
             if colFilms.isEmpty {
                 return 0
             }
@@ -239,6 +258,8 @@ extension WatchedVC: UITableViewDelegate {
         case 1:
             return 22
         case 2:
+            return 44
+        case 3:
             if films.isEmpty {
                 return 0
             }
@@ -276,5 +297,16 @@ extension WatchedVC: FilmGroupDelegate {
 extension WatchedVC: CollectionCellDelegate {
     func tapButtonSetting(_ index: Int) {
         delegate?.settingsCollection(id: collections[index].id, name: collections[index].name)
+    }
+}
+
+// MARK: - FilmGroupDelegate
+
+extension WatchedVC: HeaderSearchDelegate {
+    func changeText(_ text: String) {
+        delegate?.getQueryWatched(text)
+    }
+    func tapFilter() {
+        delegate?.tapFilterWatched()
     }
 }

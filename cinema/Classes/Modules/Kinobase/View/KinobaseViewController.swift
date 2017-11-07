@@ -24,6 +24,8 @@ class KinobaseViewController: ParentViewController {
 
     var watched: [Film] = []
 
+    var kbData: KinobaseData = KinobaseData()
+
     let willWatchButton: UIButton = {
         let button = UIButton()
         button.setTitle(L10n.filmWillWatchButton, for: .normal)
@@ -211,6 +213,9 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.stopAnimating()
     }
     func getData(_ kbData: KinobaseData) {
+
+        self.kbData = kbData
+
         var willWatch: [Film] = []
         for filmCol in kbData.willWatched {
             let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
@@ -246,6 +251,13 @@ extension KinobaseViewController: WillWatchVCDelegate {
     func openFilmId(_ filmID: String, name: String) {
         output?.openFilm(videoID: filmID, name: name)
     }
+
+    func getQuery(_ query: String) {
+        output?.searchWithText(query, isWatched: false)
+    }
+    func tapFilter() {
+        output?.tapFilter(isWatched: false, genres: kbData.genresWillWatch, years: kbData.yearsWillWatch)
+    }
 }
 
 extension KinobaseViewController: WatchedFilmDelegate {
@@ -273,5 +285,12 @@ extension KinobaseViewController: WatchedFilmDelegate {
         activityVC.isHidden = false
         activityVC.startAnimating()
         output?.refresh()
+    }
+
+    func getQueryWatched(_ query: String) {
+        output?.searchWithText(query, isWatched: true)
+    }
+    func tapFilterWatched() {
+        output?.tapFilter(isWatched: true, genres: kbData.genresWatched, years: kbData.yearsWatched)
     }
 }

@@ -11,6 +11,8 @@ import UIKit
 protocol WillWatchVCDelegate: class {
     func openFullList(_ films: [Film])
     func openFilmId(_ filmID: String, name: String)
+    func getQuery(_ query: String)
+    func tapFilter()
 }
 
 class WillWatchVC: ParentViewController {
@@ -103,7 +105,7 @@ extension WillWatchVC: UITableViewDelegate {
             let view = FullListFilms()
             view.delegate = self
             return view
-        case 2:
+        case 3:
             if films.isEmpty {
                 return nil
             }
@@ -111,8 +113,13 @@ extension WillWatchVC: UITableViewDelegate {
             view.films = films
             view.delegate = self
             return view
-        case 3:
-            return HeaderSearchView()
+        case 2:
+            if films.isEmpty {
+                return nil
+            }
+            let view = HeaderSearchView()
+            view.delegate = self
+            return view
         default:
             return nil
         }
@@ -124,12 +131,12 @@ extension WillWatchVC: UITableViewDelegate {
             return 22
         case 1:
             return 22
-        case 2:
+        case 3:
             if films.isEmpty {
                 return 0
             }
             return windowWidth / 4 * 3 - 80
-        case 3:
+        case 2:
             return 44
         default:
             return 0
@@ -151,5 +158,16 @@ extension WillWatchVC: FullListFilmsDelegate {
 extension WillWatchVC: FilmGroupDelegate {
     func openFilmID(_ filmID: String, name: String) {
         delegate?.openFilmId(filmID, name: name)
+    }
+}
+
+// MARK: - FilmGroupDelegate
+
+extension WillWatchVC: HeaderSearchDelegate {
+    func changeText(_ text: String) {
+        delegate?.getQuery(text)
+    }
+    func tapFilter() {
+        delegate?.tapFilter()
     }
 }

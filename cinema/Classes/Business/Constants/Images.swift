@@ -10,6 +10,7 @@
   typealias Image = UIImage
 #endif
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
@@ -45,6 +46,16 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
+  enum Kinobase {
+    static let check = ImageAsset(name: "check")
+    static let check28 = ImageAsset(name: "check28")
+    static let checkMini = ImageAsset(name: "checkMini")
+    static let forward = ImageAsset(name: "forward")
+    static let remove = ImageAsset(name: "remove")
+    static let remove28 = ImageAsset(name: "remove28")
+    static let settings = ImageAsset(name: "settings")
+    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
+  }
   enum Cinema {
     enum MainTab {
       static let chat = ImageAsset(name: "chat")
@@ -70,16 +81,6 @@ enum Asset {
       static let slide3Image5 = ImageAsset(name: "slide3-image5")
     }
     static let unselectStar = ImageAsset(name: "unselectStar")
-  }
-  enum Kinobase {
-    static let check = ImageAsset(name: "check")
-    static let check28 = ImageAsset(name: "check28")
-    static let checkMini = ImageAsset(name: "checkMini")
-    static let forward = ImageAsset(name: "forward")
-    static let remove = ImageAsset(name: "remove")
-    static let remove28 = ImageAsset(name: "remove28")
-    static let settings = ImageAsset(name: "settings")
-    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -112,6 +113,14 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Kinobase.check,
+    Kinobase.check28,
+    Kinobase.checkMini,
+    Kinobase.forward,
+    Kinobase.remove,
+    Kinobase.remove28,
+    Kinobase.settings,
+    Kinobase.settingsUnselect,
     Cinema.MainTab.chat,
     Cinema.MainTab.kinobase,
     Cinema.MainTab.reward,
@@ -130,14 +139,6 @@ enum Asset {
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
     Cinema.unselectStar,
-    Kinobase.check,
-    Kinobase.check28,
-    Kinobase.checkMini,
-    Kinobase.forward,
-    Kinobase.remove,
-    Kinobase.remove28,
-    Kinobase.settings,
-    Kinobase.settingsUnselect,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,

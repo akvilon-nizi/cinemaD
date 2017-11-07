@@ -28,4 +28,17 @@ extension KinobaseRouter: KinobaseRouterInput {
     func openFilm(videoId: String, name: String) {
         appRouter.transition(to: .film(videoID: videoId, name: name))
     }
+
+    func openFilter(output: FilterModuleOutput,
+                    genres: [String],
+                    years: [Int],
+                    filterParameters: FilterParameters,
+                    isWatched: Bool) {
+        appRouter.transition(to: .filter(output: output,
+                                         genres: genres,
+                                         years: years,
+                                         filterParameters: filterParameters,
+                                         isWatched: isWatched
+            ))
+    }
 }

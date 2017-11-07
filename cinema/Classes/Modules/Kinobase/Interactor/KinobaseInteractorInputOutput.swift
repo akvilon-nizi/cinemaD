@@ -8,6 +8,7 @@ import Foundation
 protocol KinobaseInteractorInput {
     func getWatched()
     func getFilmsIntoCol(idCol: String)
+    
 }
 
 protocol KinobaseInteractorOutput: class {

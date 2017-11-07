@@ -11,14 +11,18 @@ import ObjectMapper
 class WatchedResponse: ImmutableMappable {
 
     let watched: [FilmCollections]
+    let genres: [String]
 
     private let watchedKey = "watched"
+    private let genresKey = "genres"
 
     required init(map: Map) throws {
         watched = try map.value(watchedKey)
+        genres = try map.value(genresKey)
     }
 
     func mapping(map: Map) {
         watched >>> map[watchedKey]
+        genres >>> map[genresKey]
     }
 }
