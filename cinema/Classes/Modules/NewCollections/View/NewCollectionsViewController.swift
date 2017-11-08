@@ -77,6 +77,7 @@ class NewCollectionsViewController: ParentViewController {
 
     func didTapSaveButton() {
         let filteredWatched = watched.filter() { $0.add == true }
+        let filteredAnWatched = collections.filter() { $0.delete == true }
         if nameCollections.isEmpty {
             if filteredWatched.isEmpty {
                  showAlert(message: "Выберете фильмы")
@@ -87,6 +88,12 @@ class NewCollectionsViewController: ParentViewController {
                 activityVC.startAnimating()
                 view.isUserInteractionEnabled = false
                 view.bringSubview(toFront: activityVC)
+            }
+        } else {
+            if filteredWatched.isEmpty && filteredAnWatched.count == collections.count {
+                showAlert(message: "Коллекция не может быть пустой")
+            } else {
+                output?.putDeleteFilms(filmsAdd: filteredWatched, filmsDelete: filteredAnWatched)
             }
         }
     }
@@ -158,6 +165,15 @@ extension NewCollectionsViewController: UITableViewDelegate {
 
         case 4:
             let view = FilmGroup()
+            for film in collections {
+                var i: Int = 0
+                for wFilm in watched {
+                    if film.id == wFilm.id {
+                        watched.remove(at: i)
+                    }
+                    i += 1
+                }
+            }
             view.films = watched
             view.isCollections = true
             view.isAdd = true
@@ -221,7 +237,7 @@ extension NewCollectionsViewController: NewCollectionsViewInput {
         self.collections = collections
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 1...2), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 1...4), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
         activityVC.isHidden = true

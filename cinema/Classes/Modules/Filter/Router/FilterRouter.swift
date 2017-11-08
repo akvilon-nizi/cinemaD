@@ -13,5 +13,7 @@ class FilterRouter {
 // MARK: - FilterRouterInput
 
 extension FilterRouter: FilterRouterInput {
-
+    func close() {
+        appRouter.backTransition()
+    }
 }

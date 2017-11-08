@@ -35,6 +35,11 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
     func addNewFilm(name: String, films: [Film]) {
         interactor.putNewColWithFilm(name: name, films: films)
     }
+
+    func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film]) {
+        interactor.putDeleteFilms(idCol: id, filmsAdd: filmsAdd, filmsDelete: filmsDelete)
+    }
+
 }
 
 // MARK: - NewCollectionsInteractorOutput

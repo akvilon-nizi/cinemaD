@@ -1,37 +1,35 @@
 //
-//  CollectionCell.swift
+//  Filter.swift
 //  cinema
 //
-//  Created by User on 02.11.17.
+//  Created by User on 07.11.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.
 //
 
 import UIKit
 
-protocol CollectionCellDelegate: class {
-    func tapButtonSetting(_ index: Int)
+protocol FilterCellDelegate: class {
+    func tapButtonSetting(_ index: IndexPath)
 }
 
-// MARK: - CollectionCell
+// MARK: - FilterCell
 
-class CollectionCell: UITableViewCell {
-
-//    let selectColor = UIColor(white: 87.0 / 255.0, alpha: 1.0)
-//    let unSelectColor = UIColor.cnmAfafaf
+class FilterCell: UITableViewCell {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
         label.textColor = UIColor.cnmAfafaf
-//        label.text = "sdofnkalsfna"
         return label
     }()
 
+    let selectImage = Asset.Kinobase.check28.image
+
     private let button = UIButton()
 
-    var indexPath: Int = 0
+    var indexPath: IndexPath = IndexPath(row: 0, section: 0)
 
-    weak var delegate: CollectionCellDelegate?
+    weak var delegate: FilterCellDelegate?
 
     var title: String = "" {
         didSet {
@@ -43,6 +41,14 @@ class CollectionCell: UITableViewCell {
         fatalError("NSCoding not supported")
     }
 
+    var isDidSelect = false {
+        didSet {
+            titleLabel.textColor = !isDidSelect ? UIColor.cnmAfafaf : UIColor.cnmMainOrange
+            let image = !isDidSelect ? nil : Asset.Kinobase.check28.image
+            button.setImage(image, for: .normal)
+        }
+    }
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -52,7 +58,6 @@ class CollectionCell: UITableViewCell {
         titleLabel.centerYAnchor ~= centerYAnchor
         titleLabel.leadingAnchor ~= leadingAnchor + 34
 
-        button.setImage(Asset.Kinobase.settingsUnselect.image, for: .normal)
         contentView.addSubview(button.prepareForAutoLayout())
         button.centerYAnchor ~= centerYAnchor
         button.trailingAnchor ~= trailingAnchor - 40
@@ -73,14 +78,12 @@ class CollectionCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        titleLabel.textColor = !selected ? UIColor.cnmAfafaf : UIColor(white: 87.0 / 255.0, alpha: 1.0)
-
-        if selected {
-            button.setImage(Asset.Kinobase.settings.image, for: .normal)
-        } else {
-            button.setImage(Asset.Kinobase.settingsUnselect.image, for: .normal)
-        }
+  //      button.isSelected = false
+//        if selected {
+//            button.setImage(Asset.Kinobase.settings.image, for: .normal)
+//        } else {
+//            button.setImage(Asset.Kinobase.settingsUnselect.image, for: .normal)
+//        }
 
         contentView.backgroundColor = .white
     }
@@ -91,6 +94,6 @@ class CollectionCell: UITableViewCell {
     }
 
     static var reuseIdentifier: String {
-        return "CollectionCell"
+        return "FilterCell"
     }
 }

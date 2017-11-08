@@ -7,9 +7,10 @@ import Foundation
 
 protocol NewCollectionsInteractorInput {
     func putNewColWithFilm(name: String, films: [Film])
-    func deleteFilmsIntoCol(idCol: String, filmsID: [String])
+    func deleteFilmsIntoCol(idCol: String, filmsID: [Film])
     func putFilmsIntoCol(idCol: String, films: [Film])
     func getFilmsIntoCol(idCol: String)
+    func putDeleteFilms(idCol: String, filmsAdd: [Film], filmsDelete: [Film])
 }
 
 protocol NewCollectionsInteractorOutput: class {

@@ -96,17 +96,26 @@ class WatchedVC: ParentViewController {
         }
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 5...6), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 6...7), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
 
         var offset = tableView.contentOffset
-        offset.y = tableView.contentSize.height - tableView.frame.size.height + 100 + 44
+        offset.y = tableView.contentSize.height - tableView.frame.size.height
         tableView.setContentOffset(offset, animated: true)
     }
 
     func refresh() {
         delegate?.refresh()
+    }
+
+    func getSearch(_ films: [Film]) {
+        self.films = films
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
 }
 
@@ -152,7 +161,7 @@ extension WatchedVC: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 8
     }
 
 }
@@ -258,7 +267,7 @@ extension WatchedVC: UITableViewDelegate {
         case 1:
             return 22
         case 2:
-            return 44
+            return 33
         case 3:
             if films.isEmpty {
                 return 0

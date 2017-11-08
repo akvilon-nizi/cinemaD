@@ -60,6 +60,14 @@ class HeaderSearchView: UITableViewHeaderFooterView {
             .throttle(3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
                 self?.getVideoID(query)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
+
+        let separatorView = UIView()
+        separatorView.backgroundColor = .cnmDadada
+        contentView.addSubview(separatorView.prepareForAutoLayout())
+        separatorView.bottomAnchor ~= bottomAnchor
+        separatorView.trailingAnchor ~= trailingAnchor - 24
+        separatorView.leadingAnchor ~= leadingAnchor + 24
+        separatorView.heightAnchor ~= 1
     }
 
     func typeButtonTap() {

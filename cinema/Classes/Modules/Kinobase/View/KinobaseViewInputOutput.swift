@@ -11,6 +11,8 @@ protocol KinobaseViewInput: class {
     func getError()
     func getData(_ kbData: KinobaseData)
     func getCollection(_ collection: Collection)
+    func startTrober()
+    func getSearch(_ kbData: KinobaseData, isWatched: Bool)
 }
 
 protocol KinobaseViewOutput {
@@ -31,7 +33,7 @@ protocol KinobaseViewOutput {
 
     func searchWithText(_ query: String, isWatched: Bool)
 
-    func search(query: String, genres: [String], years: [Int], isWatched: Bool)
+    func search(query: String, genres: [String], years: [String], isWatched: Bool)
 
-    func tapFilter(isWatched: Bool, genres: [String], years: [Int])
+    func tapFilter(isWatched: Bool, genres: [String], years: [String])
 }

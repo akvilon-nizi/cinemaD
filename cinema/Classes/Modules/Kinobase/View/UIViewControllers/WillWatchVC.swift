@@ -55,6 +55,15 @@ class WillWatchVC: ParentViewController {
         self.films = films
         tableView.reloadData()
     }
+
+    func getSearch(_ films: [Film]) {
+        self.films = films
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -137,7 +146,7 @@ extension WillWatchVC: UITableViewDelegate {
             }
             return windowWidth / 4 * 3 - 80
         case 2:
-            return 44
+            return 33
         default:
             return 0
         }

@@ -148,7 +148,7 @@ enum Containers {
 
         container.register(tag: FilterConfigurator.tag) {(output: FilterModuleOutput,
             genres: [String],
-            years: [Int],
+            years: [String],
             filterParameters: FilterParameters,
             isWatched: Bool
             ) -> UIViewController in

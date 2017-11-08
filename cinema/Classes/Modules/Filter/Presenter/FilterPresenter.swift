@@ -20,6 +20,15 @@ extension FilterPresenter: FilterViewOutput {
     func viewIsReady() {
         log.verbose("Filter is ready")
     }
+
+    func backButtonTap() {
+        router.close()
+    }
+
+    func addFilter(genresInd: [Int], yearsInd: [Int]) {
+        output?.setFilters(genresInds: genresInd, yearsInds: yearsInd)
+        router.close()
+    }
 }
 
 // MARK: - FilterInteractorOutput

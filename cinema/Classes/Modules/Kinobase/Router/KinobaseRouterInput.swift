@@ -12,7 +12,7 @@ protocol KinobaseRouterInput: BaseRouterInput {
     func openFilm(videoId: String, name: String)
     func openFilter(output: FilterModuleOutput,
     genres: [String],
-    years: [Int],
+    years: [String],
     filterParameters: FilterParameters,
     isWatched: Bool)
 }

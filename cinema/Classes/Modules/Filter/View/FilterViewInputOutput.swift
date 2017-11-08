@@ -13,4 +13,8 @@ protocol FilterViewInput: class {
 protocol FilterViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
+
+    func addFilter(genresInd: [Int], yearsInd: [Int])
 }

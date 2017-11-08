@@ -18,8 +18,8 @@ enum FoodleTarget {
     case film(filmID: String)
     case filmWatched(filmID: String, rate: Int)
     case filmWillWatch(filmID: String)
-    case filmWatchedPost(filmID: String, query: String, genres: [String], years: [Int])
-    case filmWillWatchPost(filmID: String, query: String, genres: [String], years: [Int])
+    case filmWatchedPost(query: String, genres: [String], years: [String])
+    case filmWillWatchPost(query: String, genres: [String], years: [String])
     case filmWatchedDelete(filmID: String)
     case filmWillWatchDelete(filmID: String)
     case trailersFilms
@@ -78,10 +78,10 @@ extension FoodleTarget: TargetType {
             return "films/\(filmID)/action/watched"
         case let .filmWillWatch(filmID):
             return "films/\(filmID)/action/will_watch"
-        case let .filmWatchedPost(filmID, _, _, _):
-            return "films/\(filmID)/action/watched"
-        case let .filmWillWatchPost(filmID, _, _, _):
-            return "films/\(filmID)/action/will_watch"
+        case .filmWatchedPost:
+            return "me/watched"
+        case .filmWillWatchPost:
+            return "me/will_watch"
         case let .filmWatchedDelete(filmID):
             return "films/\(filmID)/action/watched"
         case let .filmWillWatchDelete(filmID):
@@ -168,28 +168,28 @@ extension FoodleTarget: TargetType {
             return parameters
         case let .putFilm(_, idCollections):
            return ["id": idCollections]
-        case let .filmWatchedPost(_, query, genres, years):
+        case let .filmWatchedPost(query, genres, years):
             var parameters: [String: Any] = [:]
             if !query.isEmpty {
                 parameters["query"] = query
             }
             if !genres.isEmpty {
-                parameters["genres"] = query
+                parameters["genres"] = genres
             }
             if !years.isEmpty {
-                parameters["years"] = query
+                parameters["years"] = years
             }
             return parameters
-        case let .filmWillWatchPost(_, query, genres, years):
+        case let .filmWillWatchPost(query, genres, years):
             var parameters: [String: Any] = [:]
             if !query.isEmpty {
             parameters["query"] = query
             }
             if !genres.isEmpty {
-            parameters["genres"] = query
+            parameters["genres"] = genres
             }
             if !years.isEmpty {
-            parameters["years"] = query
+            parameters["years"] = years
             }
             return parameters
         default:

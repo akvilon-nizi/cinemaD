@@ -241,6 +241,32 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.isHidden = true
         activityVC.stopAnimating()
     }
+
+    func startTrober() {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+    }
+    func getSearch(_ kbData: KinobaseData, isWatched: Bool) {
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+        self.kbData = kbData
+        if isWatched {
+            watched = []
+            for filmColW in kbData.watched {
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+                watched.append(film)
+            }
+            watchedVC.getSearch(watched)
+        } else {
+            var willWatch: [Film] = []
+            for filmCol in kbData.willWatched {
+                let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
+                willWatch.append(film)
+            }
+            willWatchVC.getSearch(willWatch)
+        }
+    }
+
 }
 
 extension KinobaseViewController: WillWatchVCDelegate {
