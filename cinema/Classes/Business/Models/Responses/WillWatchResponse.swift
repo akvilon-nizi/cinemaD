@@ -12,17 +12,21 @@ class WillWatchResponse: ImmutableMappable {
 
     let willWatch: [FilmCollections]
     let genres: [String]
+    let years: [Int]
 
     private let willWatchKey = "will_watch"
     private let genresKey = "genres"
+    private let yearsKey = "years"
 
     required init(map: Map) throws {
         willWatch = try map.value(willWatchKey)
         genres = try map.value(genresKey)
+        years = try map.value(yearsKey)
     }
 
     func mapping(map: Map) {
         willWatch >>> map[willWatchKey]
         genres >>> map[genresKey]
+        years >>> map[yearsKey]
     }
 }

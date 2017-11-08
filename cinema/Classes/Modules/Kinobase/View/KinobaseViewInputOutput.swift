@@ -33,7 +33,7 @@ protocol KinobaseViewOutput {
 
     func searchWithText(_ query: String, isWatched: Bool)
 
-    func search(query: String, genres: [String], years: [String], isWatched: Bool)
+    func search(query: String, genres: [String], years: [Int], isWatched: Bool)
 
-    func tapFilter(isWatched: Bool, genres: [String], years: [String])
+    func tapFilter(isWatched: Bool, genres: [String], years: [Int])
 }

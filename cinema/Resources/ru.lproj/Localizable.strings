@@ -12,6 +12,10 @@
 "alert-title-system-error" = "Системная ошибка";
 "alert-button-ok" = "ОК";
 "alert-button-cancel" = "Отменить";
+"alert-collections-add" = "";
+"alert-collections-remove" = "Коллекция удалена";
+"alert-collections-add" = "Коллекция добавлена";
+"alert-collections-change" = "Коллекция изменена";
 
 //Cinema alert
 

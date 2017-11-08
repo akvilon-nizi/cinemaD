@@ -61,7 +61,7 @@ extension KinobasePresenter: KinobaseViewOutput {
 //            return
 //        }
         var genres: [String] = []
-        var years: [String] = []
+        var years: [Int] = []
         if isWatched {
             if !filterParameters.watchedGenres.isEmpty {
                 genres = [kbData.genresWatched[filterParameters.watchedGenres[0]]]
@@ -80,12 +80,12 @@ extension KinobasePresenter: KinobaseViewOutput {
         interactor.searchFilms(query: query, genres: genres, years: years, isWatched: isWatched)
     }
 
-    func search(query: String, genres: [String], years: [String], isWatched: Bool) {
+    func search(query: String, genres: [String], years: [Int], isWatched: Bool) {
         if !query.isEmpty {
             return
         }
         var genres: [String] = []
-        var years: [String] = []
+        var years: [Int] = []
         if isWatched {
             if !filterParameters.watchedGenres.isEmpty {
                 genres = [kbData.genresWatched[filterParameters.watchedGenres[0]]]
@@ -104,7 +104,7 @@ extension KinobasePresenter: KinobaseViewOutput {
         interactor.searchFilms(query: query, genres: genres, years: years, isWatched: isWatched)
     }
 
-    func tapFilter(isWatched: Bool, genres: [String], years: [String]) {
+    func tapFilter(isWatched: Bool, genres: [String], years: [Int]) {
         self.isWatched = isWatched
         router.openFilter(output: self, genres: genres, years: years, filterParameters: filterParameters, isWatched: isWatched)
     }
@@ -131,25 +131,34 @@ extension KinobasePresenter: KinobaseInteractorOutput {
 
 extension KinobasePresenter: FilterModuleOutput {
     func setFilters(genresInds: [Int], yearsInds: [Int]) {
+        view.startTrober()
         var genres: [String] = []
-        var years: [String] = []
+        var years: [Int] = []
         if isWatched {
             if !genresInds.isEmpty {
                 filterParameters.watchedGenres = genresInds
-                genres = [kbData.genresWatched[genresInds[0]]]
+                for ind in genresInds {
+                    genres.append(kbData.genresWatched[ind])
+                }
             }
             if !yearsInds.isEmpty {
                 filterParameters.watchedYears = yearsInds
-               years = [kbData.yearsWatched[yearsInds[0]]]
+                for ind in yearsInds {
+                    years.append(kbData.yearsWatched[ind])
+                }
             }
         } else {
             if !genresInds.isEmpty {
                 filterParameters.willWatchGenresIndex = genresInds
-                genres = [kbData.genresWillWatch[genresInds[0]]]
+                for ind in genresInds {
+                    genres.append(kbData.genresWatched[ind])
+                }
             }
             if !yearsInds.isEmpty {
                 filterParameters.willWatchYears = yearsInds
-                years = [kbData.yearsWillWatch[yearsInds[0]]]
+                for ind in yearsInds {
+                    years.append(kbData.yearsWatched[ind])
+                }
             }
         }
         interactor.searchFilms(query: "", genres: genres, years: years, isWatched: isWatched)

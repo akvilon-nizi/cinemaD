@@ -15,13 +15,12 @@ class FilterViewController: ParentViewController {
 
     let genres: [String]
 
-    let years: [String]
-
-    var genresInd: [Int]
-
-    var yearsInd: [Int]
+    let years: [Int]
 
     var sectionsOpen: [Bool] = [false, false]
+
+    var yearsOpen: [Bool] = []
+    var genresOpen: [Bool] = []
 
     // MARK: - Life cycle
 
@@ -29,11 +28,24 @@ class FilterViewController: ParentViewController {
         fatalError("NSCoding not supported")
     }
 
-    init(genres: [String], years: [String], genresInd: [Int], yearsInd: [Int]) {
+    init(genres: [String], years: [Int], genresInd: [Int], yearsInd: [Int]) {
         self.genres = genres
         self.years = years
-        self.genresInd = genresInd
-        self.yearsInd = yearsInd
+
+        for i in 0..<self.years.count {
+            if yearsInd.contains(i) {
+                yearsOpen.append(true)
+            } else {
+                yearsOpen.append(false)
+            }
+        }
+        for i in 0..<genres.count {
+            if genresInd.contains(i) {
+                genresOpen.append(true)
+            } else {
+                genresOpen.append(false)
+            }
+        }
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -69,6 +81,7 @@ class FilterViewController: ParentViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
+        tableView.separatorStyle = .none
 
         tableView.register(FilterCell.self, forCellReuseIdentifier: FilterCell.reuseIdentifier)
     }
@@ -79,6 +92,18 @@ class FilterViewController: ParentViewController {
     }
 
     func didTapSaveButton() {
+        var yearsInd: [Int] = []
+        var genresInd: [Int] = []
+        for i in 0..<genresOpen.count {
+            if genresOpen[i] {
+                genresInd.append(i)
+            }
+        }
+        for i in 0..<yearsOpen.count {
+            if yearsOpen[i] {
+                yearsInd.append(i)
+            }
+        }
         output?.addFilter(genresInd: genresInd, yearsInd: yearsInd)
     }
 
@@ -91,7 +116,7 @@ extension FilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sectionsOpen[section] {
             if section == 0 {
-                return 1
+                return years.count
             } else {
                 return genres.count
             }
@@ -103,28 +128,12 @@ extension FilterViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilterCell.reuseIdentifier, for: indexPath)
         if let collCel = cell as? FilterCell {
             collCel.indexPath = indexPath
-            collCel.title = indexPath.section == 0 ? "2017" : genres[indexPath.row]
+            collCel.title = indexPath.section == 0 ? String(years[indexPath.row]) : genres[indexPath.row]
             if indexPath.section == 1 {
-                if !genresInd.isEmpty {
-                    if indexPath.row == genresInd[0] {
-                        collCel.isDidSelect = true
-                    } else {
-                        collCel.isDidSelect = false
-                    }
-                } else {
-                    collCel.isDidSelect = false
-                }
+                collCel.isDidSelect = genresOpen[indexPath.row]
             }
             if indexPath.section == 0 {
-                if !yearsInd.isEmpty {
-                    if indexPath.row == yearsInd[0] {
-                        collCel.isDidSelect = true
-                    } else {
-                        collCel.isDidSelect = false
-                    }
-                } else {
-                    collCel.isDidSelect = false
-                }
+                collCel.isDidSelect = yearsOpen[indexPath.row]
             }
         }
         return cell
@@ -137,18 +146,11 @@ extension FilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let collectionCell = tableView.cellForRow(at: indexPath) as? FilterCell {
             collectionCell.isDidSelect = !collectionCell.isDidSelect
+
             if indexPath.section == 0 {
-                if !yearsInd.isEmpty && indexPath.row == yearsInd[0] {
-                    yearsInd = []
-                } else {
-                    yearsInd = [indexPath.row]
-                }
+                yearsOpen[indexPath.row] = collectionCell.isDidSelect
             } else {
-                if !genresInd.isEmpty && indexPath.row == yearsInd[0] {
-                    genresInd = []
-                } else {
-                     genresInd = [indexPath.row]
-                }
+                genresOpen[indexPath.row] = collectionCell.isDidSelect
             }
             tableView.beginUpdates()
             tableView.reloadSections(IndexSet(integersIn: indexPath.section...indexPath.section), with: UITableViewRowAnimation.none)

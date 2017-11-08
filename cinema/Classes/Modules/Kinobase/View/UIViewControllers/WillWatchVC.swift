@@ -49,6 +49,11 @@ class WillWatchVC: ParentViewController {
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
+
+        tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
+
+        tableView.separatorStyle = .none
+        tableView.allowsMultipleSelection = false
     }
 
     func setFilms(_ films: [Film]) {

@@ -16,11 +16,11 @@ class FilterConfigurator {
 
     let output: FilterModuleOutput
     let genres: [String]
-    let years: [String]
+    let years: [Int]
     let filterParameters: FilterParameters
     let isWatched: Bool
 
-    init(output: FilterModuleOutput, genres: [String], years: [String], filterParameters: FilterParameters, isWatched: Bool) {
+    init(output: FilterModuleOutput, genres: [String], years: [Int], filterParameters: FilterParameters, isWatched: Bool) {
         self.output = output
         self.years = years
         self.genres = genres

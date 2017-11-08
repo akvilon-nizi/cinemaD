@@ -2,6 +2,7 @@
 
 import Foundation
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -14,6 +15,12 @@ enum L10n {
   static let alertCinemaCorrectErrror = L10n.tr("Localizable", "alert-cinema-correct-errror")
   /// Сетевая ошибка
   static let alertCinemaNetworkErrror = L10n.tr("Localizable", "alert-cinema-network-errror")
+  /// Коллекция добавлена
+  static let alertCollectionsAdd = L10n.tr("Localizable", "alert-collections-add")
+  /// Коллекция изменена
+  static let alertCollectionsChange = L10n.tr("Localizable", "alert-collections-change")
+  /// Коллекция удалена
+  static let alertCollectionsRemove = L10n.tr("Localizable", "alert-collections-remove")
   /// Сетевая ошибка
   static let alertTitleNetworkError = L10n.tr("Localizable", "alert-title-network-error")
   /// Системная ошибка

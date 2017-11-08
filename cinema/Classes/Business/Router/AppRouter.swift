@@ -30,7 +30,7 @@ enum AppRouterDestination {
     case newCollections(id: String, name: String, watched: [Film])
     case filter(output: FilterModuleOutput,
         genres: [String],
-        years: [String],
+        years: [Int],
         filterParameters: FilterParameters,
         isWatched: Bool
     )

@@ -65,9 +65,9 @@ class NewCollectionsViewController: ParentViewController {
         tableView.dataSource = self
         tableView.reloadData()
 
-//        activityVC.isHidden = false
-//        activityVC.startAnimating()
-//        view.bringSubview(toFront: activityVC)
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        view.bringSubview(toFront: activityVC)
     }
 
     // MARK: - Actions
@@ -143,14 +143,14 @@ extension NewCollectionsViewController: UITableViewDelegate {
             }
             return headerCollectionsView
         case 1:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return nil
             }
             let view = HeaderViewTitle()
             view.title = "Коллекция"
             return view
         case 2:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return nil
             }
             let view = FilmGroup()
@@ -188,12 +188,12 @@ extension NewCollectionsViewController: UITableViewDelegate {
         case 0:
             return 88
         case 1:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return 0
             }
             return 22
         case 2:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return 0
             }
             return windowWidth / 4 * 3 - 80

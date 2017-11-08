@@ -10,8 +10,8 @@ struct KinobaseData {
 
     var watched: [FilmCollections] = []
     var genresWillWatch: [String] = []
-    var yearsWillWatch: [String] = []
-    var yearsWatched: [String] = []
+    var yearsWillWatch: [Int] = []
+    var yearsWatched: [Int] = []
     var genresWatched: [String] = []
     var willWatched: [FilmCollections] = []
     var collections: [Collection] = []

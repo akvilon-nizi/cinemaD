@@ -5,6 +5,7 @@
 
 import Moya
 import CoreLocation
+import Alamofire
 
 enum FoodleTarget {
     case registration(password: String, name: String, phone: String)
@@ -18,8 +19,8 @@ enum FoodleTarget {
     case film(filmID: String)
     case filmWatched(filmID: String, rate: Int)
     case filmWillWatch(filmID: String)
-    case filmWatchedPost(query: String, genres: [String], years: [String])
-    case filmWillWatchPost(query: String, genres: [String], years: [String])
+    case filmWatchedPost(query: String, genres: [String], years: [Int])
+    case filmWillWatchPost(query: String, genres: [String], years: [Int])
     case filmWatchedDelete(filmID: String)
     case filmWillWatchDelete(filmID: String)
     case trailersFilms
@@ -174,22 +175,20 @@ extension FoodleTarget: TargetType {
                 parameters["query"] = query
             }
             if !genres.isEmpty {
-                parameters["genres"] = genres
+                parameters["genre"] = genres
             }
             if !years.isEmpty {
-                parameters["years"] = years
+                parameters["year"] = years
             }
             return parameters
         case let .filmWillWatchPost(query, genres, years):
             var parameters: [String: Any] = [:]
-            if !query.isEmpty {
             parameters["query"] = query
-            }
             if !genres.isEmpty {
-            parameters["genres"] = genres
+            parameters["genre"] = genres
             }
             if !years.isEmpty {
-            parameters["years"] = years
+            parameters["year"] = years
             }
             return parameters
         default:
@@ -198,9 +197,13 @@ extension FoodleTarget: TargetType {
     }
 
     var parameterEncoding: ParameterEncoding {
-        return URLEncoding(destination: .queryString)
+        switch self {
+        case  .filmWatchedPost, .filmWillWatchPost:
+            return JsonArrayEncoding.default
+        default:
+            return URLEncoding(destination: .queryString)
+        }
     }
-
     var sampleData: Data {
         return Data()
     }
@@ -213,6 +216,29 @@ extension FoodleTarget: TargetType {
             return .request
 //        }
     }
+}
+
+struct JsonArrayEncoding: Moya.ParameterEncoding {
+    public static var `default`: JsonArrayEncoding { return JsonArrayEncoding() }
+
+    /// Creates a URL request by encoding parameters and applying them onto an existing request.
+    ///
+    /// - parameter urlRequest: The request to have parameters applied.
+    /// - parameter parameters: The parameters to apply.
+    ///
+    /// - throws: An `AFError.parameterEncodingFailed` error if encoding fails.
+    ///
+    /// - returns: The encoded request.
+    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+        var req = try urlRequest.asURLRequest()
+        if let dic = parameters {
+            let json = try JSONSerialization.data(withJSONObject: dic, options: JSONSerialization.WritingOptions.prettyPrinted)
+            req.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            req.httpBody = json
+        }
+        return req
+    }
+
 }
 
 private func loadDataFromBundle(with name: String) -> Data {

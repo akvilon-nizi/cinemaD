@@ -27,6 +27,7 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 case let .next(model):
                     self.kbData.watched = model.watched
                     self.kbData.genresWatched = model.genres
+                    self.kbData.yearsWatched = model.years
                     self.getWillWatch()
                 case let .error(error as ProviderError):
                     self.output.getError()
@@ -43,6 +44,7 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 case let .next(model):
                     self.kbData.willWatched = model.willWatch
                     self.kbData.genresWillWatch = model.genres
+                    self.kbData.yearsWillWatch = model.years
                     self.getCollections()
                 case let .error(error as ProviderError):
                     self.output.getError()
@@ -84,7 +86,7 @@ extension KinobaseInteractor: KinobaseInteractorInput {
             .addDisposableTo(disposeBag)
     }
 
-    func searchFilms(query: String, genres: [String], years: [String], isWatched: Bool) {
+    func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {
         if isWatched {
             provider.requestModel(.filmWatchedPost(query: query, genres: genres, years: years))
                 .subscribe { [unowned self] (response: Event<WatchedResponse>) in

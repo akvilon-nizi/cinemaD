@@ -31,7 +31,7 @@ extension KinobaseRouter: KinobaseRouterInput {
 
     func openFilter(output: FilterModuleOutput,
                     genres: [String],
-                    years: [String],
+                    years: [Int],
                     filterParameters: FilterParameters,
                     isWatched: Bool) {
         appRouter.transition(to: .filter(output: output,

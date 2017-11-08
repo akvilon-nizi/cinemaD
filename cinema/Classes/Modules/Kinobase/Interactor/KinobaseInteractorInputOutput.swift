@@ -8,7 +8,7 @@ import Foundation
 protocol KinobaseInteractorInput {
     func getWatched()
     func getFilmsIntoCol(idCol: String)
-    func searchFilms(query: String, genres: [String], years: [String], isWatched: Bool)
+    func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool)
 }
 
 protocol KinobaseInteractorOutput: class {
