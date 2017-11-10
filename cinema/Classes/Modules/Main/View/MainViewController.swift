@@ -20,7 +20,7 @@ class MainViewController: ParentViewController {
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
     let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
-    
+
     var isFirstLoaded = false
 
     var mainData = MainData()
@@ -52,25 +52,28 @@ class MainViewController: ParentViewController {
         activityVC.isHidden = false
         activityVC.startAnimating()
     }
-    
+
     func addView() {
         mainTabView.isHidden = false
         tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         view.addSubview(mainTabView.prepareForAutoLayout())
         mainTabView.widthAnchor ~= view.widthAnchor
         mainTabView.heightAnchor ~= 80
         mainTabView.leadingAnchor ~= view.leadingAnchor
         mainTabView.bottomAnchor ~= view.bottomAnchor
-        
+
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.topAnchor ~= view.topAnchor
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= mainTabView.topAnchor
-        
+        tableView.showsVerticalScrollIndicator = false
+
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+
         mainTabView.delegate = self
     }
 }
@@ -154,7 +157,7 @@ extension MainViewController: UITableViewDelegate {
             if mainData.trailers.isEmpty {
                 return 0
             }
-            return windowWidth / 4 * 3 + 20
+            return windowWidth / 16 * 9 + 20
         case 1:
             if mainData.now.isEmpty {
                 return 0

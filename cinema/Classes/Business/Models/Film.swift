@@ -17,6 +17,7 @@ class Film: ImmutableMappable {
     let imageUrl: String
     var add: Bool = false
     var delete: Bool = false
+    var rate: Int? = 0
 
     private let idKey = "id"
     private let nameKey = "name"
@@ -32,12 +33,13 @@ class Film: ImmutableMappable {
         imageUrl = try map.value(imageUrlKey)
     }
 
-    init(id: String, name: String, imageUrl: String) {
+    init(id: String, name: String, imageUrl: String, rate: Int = 0) {
         self.id = id
         self.name = name
         iWatched = false
         iWillWatch = false
         self.imageUrl = imageUrl
+        self.rate = rate
     }
 
     func mapping(map: Map) {

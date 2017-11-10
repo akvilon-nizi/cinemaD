@@ -49,7 +49,6 @@ class WillWatch: UIView {
         titleLabel.widthAnchor ~= 100
         titleLabel.bottomAnchor ~= contentView.bottomAnchor
 
-
     }
 
     required init?(coder aDecoder: NSCoder) {

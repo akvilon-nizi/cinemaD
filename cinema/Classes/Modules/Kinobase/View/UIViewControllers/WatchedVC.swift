@@ -90,7 +90,7 @@ class WatchedVC: ParentViewController {
         colFilms = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
                 colFilms.append(film)
             }
         }
@@ -124,7 +124,7 @@ class WatchedVC: ParentViewController {
 extension WatchedVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 4 {
+        if section == 5 {
             return collections.count
         }
         return 0
@@ -132,7 +132,7 @@ extension WatchedVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CollectionCell.reuseIdentifier, for: indexPath)
             if let collCel = cell as? CollectionCell {
                 collCel.indexPath = indexPath.row
@@ -171,7 +171,7 @@ extension WatchedVC: UITableViewDataSource {
 extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             return 44
         }
         return 0

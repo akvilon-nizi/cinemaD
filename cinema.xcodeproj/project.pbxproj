@@ -138,6 +138,7 @@
 		8402133E0EB2D8A236213147 /* AuthCinemaViewInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA5D0F0996A4CD5C4DBED66 /* AuthCinemaViewInputOutput.swift */; };
 		86B1D69BC720E7DA28FE2C69 /* FilmsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2062C3385938C40438AC930 /* FilmsPresenter.swift */; };
 		8839D12F626965283B2DF36F /* PhonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F26A2B0F60E22C93FA553EC /* PhonePresenter.swift */; };
+		885DC66A1FB43DBA00D694C5 /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885DC6691FB43DBA00D694C5 /* StarView.swift */; };
 		88EFD0F61FB1C81400473640 /* HeaderSectionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EFD0F51FB1C81300473640 /* HeaderSectionStruct.swift */; };
 		8A43849506A5A92735D6992D /* ActorsViewInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422497184FB4E7008CDD0A4F /* ActorsViewInputOutput.swift */; };
 		8B7C59BAB967C2B0001C257A /* SlidesInteractorInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D6DEE21AAE6A7EBCC94F64 /* SlidesInteractorInputOutput.swift */; };
@@ -485,6 +486,7 @@
 		830E22AD81A809F8D3A89C20 /* HelpAuthRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HelpAuthRouterInput.swift; sourceTree = "<group>"; };
 		847C776660B909D3D8492AD2 /* NewCollectionsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewCollectionsRouterInput.swift; sourceTree = "<group>"; };
 		87480BB5B93FAA9A49150A42 /* HelpAuthModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HelpAuthModuleInputOutput.swift; sourceTree = "<group>"; };
+		885DC6691FB43DBA00D694C5 /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
 		88EFD0F51FB1C81300473640 /* HeaderSectionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSectionStruct.swift; sourceTree = "<group>"; };
 		8B3C771A28F22028517F818D /* KinobaseViewInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KinobaseViewInputOutput.swift; sourceTree = "<group>"; };
 		8DFA274C756075AD9C077731 /* AuthCinemaViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthCinemaViewController.swift; sourceTree = "<group>"; };
@@ -1286,6 +1288,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		885DC6681FB43D9A00D694C5 /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				885DC6691FB43DBA00D694C5 /* StarView.swift */,
+			);
+			path = Subview;
+			sourceTree = "<group>";
+		};
 		8EA2983F8CA1EDBE8EA84FD5 /* Start */ = {
 			isa = PBXGroup;
 			children = (
@@ -1972,6 +1982,7 @@
 		D2B4AFF2A4BD045C2E68AAA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				885DC6681FB43D9A00D694C5 /* Subview */,
 				668C095DEB37EC0D31CD45B2 /* FilmViewController.swift */,
 				2330B006689435D67DF4D173 /* FilmViewInputOutput.swift */,
 			);
@@ -2534,6 +2545,7 @@
 				CEB86C471F87C565003F07FC /* Extensions.swift in Sources */,
 				C76F7A72E8BA2628030C51F8 /* AuthCinemaPresenter.swift in Sources */,
 				D2E636E791B7A8602AF93C65 /* AuthCinemaRouter.swift in Sources */,
+				885DC66A1FB43DBA00D694C5 /* StarView.swift in Sources */,
 				E870E820EC045EF29C425A6E /* AuthCinemaRouterInput.swift in Sources */,
 				BCC30CE26300C648534EA17F /* AuthCinemaViewController.swift in Sources */,
 				8402133E0EB2D8A236213147 /* AuthCinemaViewInputOutput.swift in Sources */,

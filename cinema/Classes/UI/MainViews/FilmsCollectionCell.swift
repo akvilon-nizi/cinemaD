@@ -11,14 +11,23 @@ import Kingfisher
 
 class FilmsCollectionCell: UICollectionViewCell {
     fileprivate let posterView = UIImageView()
+    fileprivate let rateView = UIView()
+
+    fileprivate let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.cnmFuturaMedium(size: 9)
+        label.textColor = UIColor.cnmBlueLight
+        return label
+    }()
 
     var isLoad: Bool = false
-    let actionsImage: UIImageView = {
+    fileprivate let actionsImage: UIImageView = {
         let imageView = UIImageView()
         imageView.heightAnchor ~= 28
         imageView.widthAnchor ~= 28
         return imageView
     }()
+
     var isAdd: Bool = false
     var isCheck: Bool = false {
         didSet {
@@ -50,12 +59,38 @@ class FilmsCollectionCell: UICollectionViewCell {
         posterView.layer.cornerRadius = 5.0
         posterView.layer.masksToBounds = true
 
+        let starView = UIImageView(image: Asset.Cinema.selectStar.image)
+        rateView.addSubview(starView.prepareForAutoLayout())
+        starView.centerYAnchor ~= rateView.centerYAnchor
+        starView.leadingAnchor ~= rateView.leadingAnchor + 3
+        starView.heightAnchor ~= 17 / 2
+        starView.widthAnchor ~= 19 / 2
+
+        rateView.addSubview(titleLabel.prepareForAutoLayout())
+        titleLabel.centerYAnchor ~= rateView.centerYAnchor
+        titleLabel.leadingAnchor ~= starView.trailingAnchor + 2
+        titleLabel.trailingAnchor ~= rateView.trailingAnchor - 3
+        titleLabel.text = String(8)
+
+        rateView.heightAnchor ~= 15
+        rateView.layer.cornerRadius = 7.5
+        rateView.backgroundColor = .white
+        posterView.addSubview(rateView.prepareForAutoLayout())
+        rateView.leadingAnchor ~= posterView.leadingAnchor + 5
+        rateView.topAnchor ~= posterView.topAnchor + 5
+
+        rateView.isHidden = true
     }
 
     func isCollections() {
         posterView.addSubview(actionsImage.prepareForAutoLayout())
         actionsImage.trailingAnchor ~= posterView.trailingAnchor - 3
         actionsImage.topAnchor ~= posterView.topAnchor + 3
+    }
+
+    func setRating(_ rate: Int) {
+        titleLabel.text = String(rate)
+        rateView.isHidden = false
     }
 
     static var reuseIdentifier: String {

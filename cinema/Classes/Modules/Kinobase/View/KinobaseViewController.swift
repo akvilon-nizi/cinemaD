@@ -226,7 +226,7 @@ extension KinobaseViewController: KinobaseViewInput {
         watched = []
 
         for filmColW in kbData.watched {
-            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
             watched.append(film)
         }
         watchedVC.refreshControl.endRefreshing()
@@ -253,7 +253,7 @@ extension KinobaseViewController: KinobaseViewInput {
         if isWatched {
             watched = []
             for filmColW in kbData.watched {
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
                 watched.append(film)
             }
             watchedVC.getSearch(watched)

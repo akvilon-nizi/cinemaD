@@ -24,9 +24,9 @@ class RolesCell: UICollectionViewCell {
     fileprivate let roleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaLight(size: 12)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.textColor = UIColor.cnmAfafaf
-        label.widthAnchor ~= 58
+        label.widthAnchor ~= 98
         label.textAlignment = .center
         label.lineBreakMode = .byTruncatingTail
         return label

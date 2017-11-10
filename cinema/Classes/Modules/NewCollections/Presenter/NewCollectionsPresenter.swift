@@ -49,7 +49,7 @@ extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
         var colFilms: [Film] = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
                 colFilms.append(film)
             }
         }
