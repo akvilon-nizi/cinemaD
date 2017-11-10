@@ -76,8 +76,15 @@ class NewCollectionsViewController: ParentViewController {
     }
 
     func didTapSaveButton() {
-        let filteredWatched = watched.filter() { $0.add == true }
-        let filteredAnWatched = collections.filter() { $0.delete == true }
+        let filteredWatched = watched.filter {
+            $0.add == true
+        }
+        let filteredAnWatched = collections.filter {
+            $0.delete == false
+        }
+
+        let films = filteredWatched + filteredAnWatched
+
         if nameCollections.isEmpty {
             if filteredWatched.isEmpty {
                  showAlert(message: "Выберете фильмы")
@@ -86,15 +93,26 @@ class NewCollectionsViewController: ParentViewController {
                 saveButton.isEnabled = false
                 activityVC.isHidden = false
                 activityVC.startAnimating()
-                view.isUserInteractionEnabled = false
                 view.bringSubview(toFront: activityVC)
             }
         } else {
-            if filteredWatched.isEmpty && filteredAnWatched.count == collections.count {
-                showAlert(message: "Коллекция не может быть пустой")
-            } else {
-                output?.putDeleteFilms(filmsAdd: filteredWatched, filmsDelete: filteredAnWatched)
-            }
+//            if filteredWatched.isEmpty && filteredAnWatched.count == collections.count {
+//                showAlert(message: "Коллекция не может быть пустой")
+//            } else {
+//                output?.putDeleteFilms(filmsAdd: filteredWatched, filmsDelete: filteredAnWatched)
+                if films.isEmpty {
+                    showAlert(message: "Коллекция не может быть пустой")
+                } else {
+                    if  !headerCollectionsView.returnTitle().isEmpty {
+                        saveButton.isEnabled = false
+                        activityVC.isHidden = false
+                        activityVC.startAnimating()
+                        output?.patchCollections(name: headerCollectionsView.returnTitle(), films: films)
+                    } else {
+                        showAlert(message: "Название не может быть пустым")
+                    }
+                }
+//            }
         }
     }
 }
@@ -139,7 +157,6 @@ extension NewCollectionsViewController: UITableViewDelegate {
 //            }
             if !nameCollections.isEmpty {
                 headerCollectionsView.title = nameCollections
-                headerCollectionsView.isUserInteractionEnabled = false
             }
             return headerCollectionsView
         case 1:
@@ -245,7 +262,7 @@ extension NewCollectionsViewController: NewCollectionsViewInput {
         view.sendSubview(toBack: activityVC)
     }
 
-    func getSeccess() {
-        showAlert(message: "Коллекция добавлена")
+    func getSeccess(message: String) {
+        showAlert(message: message)
     }
 }

@@ -49,6 +49,8 @@ class HeaderCollectionsView: UITableViewHeaderFooterView {
         textField.topAnchor ~= titleLabel.bottomAnchor + 15
         textField.trailingAnchor ~= trailingAnchor - 30
         textField.leadingAnchor ~= leadingAnchor + 30
+
+        textField.delegate = self
     }
 
     func returnTitle() -> String {
@@ -57,5 +59,12 @@ class HeaderCollectionsView: UITableViewHeaderFooterView {
         } else {
             return ""
         }
+    }
+}
+
+extension HeaderCollectionsView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return true
     }
 }

@@ -108,6 +108,10 @@ extension KinobasePresenter: KinobaseViewOutput {
         self.isWatched = isWatched
         router.openFilter(output: self, genres: genres, years: years, filterParameters: filterParameters, isWatched: isWatched)
     }
+
+    func deleteCollections(id: String) {
+        interactor.deleteCollection(idCol: id)
+    }
 }
 
 // MARK: - KinobaseInteractorOutput
