@@ -81,7 +81,7 @@ class RegistrationViewController: ParentViewController {
         nameField.textField.delegate = self
         phoneField.textField.delegate = maskedDelegate
         phoneField.textField.tag = 1
-        phoneField.textField.text = "+7 ("
+        phoneField.textField.text = "+7"
         phoneField.textField.keyboardType = .phonePad
         passwordField.textField.delegate = self
         passwordField.textField.tag = 2

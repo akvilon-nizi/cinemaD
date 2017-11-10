@@ -17,13 +17,14 @@ class KinobaseViewController: ParentViewController {
 
     let willWatchVC = WillWatchVC()
     let watchedVC = WatchedVC()
-    
 
     let controllers: [UIViewController]
 
     var container = UIView()
 
     var watched: [Film] = []
+
+    var kbData: KinobaseData = KinobaseData()
 
     let willWatchButton: UIButton = {
         let button = UIButton()
@@ -212,6 +213,9 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.stopAnimating()
     }
     func getData(_ kbData: KinobaseData) {
+
+        self.kbData = kbData
+
         var willWatch: [Film] = []
         for filmCol in kbData.willWatched {
             let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
@@ -222,7 +226,7 @@ extension KinobaseViewController: KinobaseViewInput {
         watched = []
 
         for filmColW in kbData.watched {
-            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
             watched.append(film)
         }
         watchedVC.refreshControl.endRefreshing()
@@ -237,17 +241,54 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.isHidden = true
         activityVC.stopAnimating()
     }
+
+    func startTrober() {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+    }
+    func getSearch(_ kbData: KinobaseData, isWatched: Bool) {
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+        self.kbData = kbData
+        if isWatched {
+            watched = []
+            for filmColW in kbData.watched {
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
+                watched.append(film)
+            }
+            watchedVC.getSearch(watched)
+        } else {
+            var willWatch: [Film] = []
+            for filmCol in kbData.willWatched {
+                let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
+                willWatch.append(film)
+            }
+            willWatchVC.getSearch(willWatch)
+        }
+    }
+
 }
 
 extension KinobaseViewController: WillWatchVCDelegate {
-    func openFullList() {
-        output?.openFullFilm()
+    func openFullList(_ films: [Film]) {
+        output?.openFullFilm(films)
+    }
+
+    func openFilmId(_ filmID: String, name: String) {
+        output?.openFilm(videoID: filmID, name: name)
+    }
+
+    func getQuery(_ query: String) {
+        output?.searchWithText(query, isWatched: false)
+    }
+    func tapFilter() {
+        output?.tapFilter(isWatched: false, genres: kbData.genresWillWatch, years: kbData.yearsWillWatch)
     }
 }
 
 extension KinobaseViewController: WatchedFilmDelegate {
-    func openFullAlls() {
-        output?.openFullFilm()
+    func openFullAlls(_ films: [Film]) {
+        output?.openFullFilm(films)
     }
     func openCollectionFromId(id: String) {
         activityVC.isHidden = false
@@ -270,5 +311,12 @@ extension KinobaseViewController: WatchedFilmDelegate {
         activityVC.isHidden = false
         activityVC.startAnimating()
         output?.refresh()
+    }
+
+    func getQueryWatched(_ query: String) {
+        output?.searchWithText(query, isWatched: true)
+    }
+    func tapFilterWatched() {
+        output?.tapFilter(isWatched: true, genres: kbData.genresWatched, years: kbData.yearsWatched)
     }
 }

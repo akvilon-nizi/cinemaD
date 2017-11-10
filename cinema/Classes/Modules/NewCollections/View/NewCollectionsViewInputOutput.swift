@@ -23,4 +23,6 @@ protocol NewCollectionsViewOutput {
     func backButtonTap()
 
     func addNewFilm(name: String, films: [Film])
+
+    func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film])
 }

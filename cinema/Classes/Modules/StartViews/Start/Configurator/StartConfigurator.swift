@@ -14,7 +14,12 @@ class StartConfigurator {
 
     var provider: RxMoyaProvider<FoodleTarget>!
 
+    var authTokenManager: AuthTokenManagerProtocol!
+
     func configureModule() -> UIViewController {
+
+        authTokenManager.removeApiToken()
+
         let router = StartRouter()
         router.appRouter = appRouter
 

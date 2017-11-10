@@ -65,9 +65,9 @@ class NewCollectionsViewController: ParentViewController {
         tableView.dataSource = self
         tableView.reloadData()
 
-//        activityVC.isHidden = false
-//        activityVC.startAnimating()
-//        view.bringSubview(toFront: activityVC)
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        view.bringSubview(toFront: activityVC)
     }
 
     // MARK: - Actions
@@ -76,25 +76,27 @@ class NewCollectionsViewController: ParentViewController {
     }
 
     func didTapSaveButton() {
-        if headerCollectionsView.returnTitle().characters.count > 3 {
-            let filteredWatched = watched.filter() { $0.add == true }
-            if nameCollections.isEmpty {
-                if filteredWatched.isEmpty {
-                     showAlert(message: "Выберете фильмы")
-                } else {
-                     output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)
-                    saveButton.isEnabled = false
-                    activityVC.isHidden = false
-                    activityVC.startAnimating()
-                    view.isUserInteractionEnabled = false
-                    view.bringSubview(toFront: activityVC)
-                }
+        let filteredWatched = watched.filter() { $0.add == true }
+        let filteredAnWatched = collections.filter() { $0.delete == true }
+        if nameCollections.isEmpty {
+            if filteredWatched.isEmpty {
+                 showAlert(message: "Выберете фильмы")
+            } else {
+                 output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)
+                saveButton.isEnabled = false
+                activityVC.isHidden = false
+                activityVC.startAnimating()
+                view.isUserInteractionEnabled = false
+                view.bringSubview(toFront: activityVC)
             }
         } else {
-            showAlert(message: "Имя коллекции должно быть больше 3 символов")
+            if filteredWatched.isEmpty && filteredAnWatched.count == collections.count {
+                showAlert(message: "Коллекция не может быть пустой")
+            } else {
+                output?.putDeleteFilms(filmsAdd: filteredWatched, filmsDelete: filteredAnWatched)
+            }
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource
@@ -141,14 +143,14 @@ extension NewCollectionsViewController: UITableViewDelegate {
             }
             return headerCollectionsView
         case 1:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return nil
             }
             let view = HeaderViewTitle()
             view.title = "Коллекция"
             return view
         case 2:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return nil
             }
             let view = FilmGroup()
@@ -158,11 +160,20 @@ extension NewCollectionsViewController: UITableViewDelegate {
             return view
         case 3:
             let view = HeaderViewTitle()
-            view.title = "Избранное"
+            view.title = "Фильмы"
             return view
 
         case 4:
             let view = FilmGroup()
+            for film in collections {
+                var i: Int = 0
+                for wFilm in watched {
+                    if film.id == wFilm.id {
+                        watched.remove(at: i)
+                    }
+                    i += 1
+                }
+            }
             view.films = watched
             view.isCollections = true
             view.isAdd = true
@@ -177,12 +188,12 @@ extension NewCollectionsViewController: UITableViewDelegate {
         case 0:
             return 88
         case 1:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return 0
             }
             return 22
         case 2:
-            if collections.isEmpty {
+            if nameCollections == "" {
                 return 0
             }
             return windowWidth / 4 * 3 - 80
@@ -226,7 +237,7 @@ extension NewCollectionsViewController: NewCollectionsViewInput {
         self.collections = collections
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 1...2), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 1...4), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
         activityVC.isHidden = true

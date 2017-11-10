@@ -30,19 +30,13 @@ extension MainInteractor: MainInteractorInput {
                 switch response {
                 case let .next(model):
                     self.mainData.trailers = model.trailers
-//                    for idVideo in model.trailers {
-//                        if let url = URL(string: idVideo),
-//                            url.absoluteString.contains("youtube.com/embed/") {
-//
-//                            let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
-//                            if path != "" {
-//                                
-//                            }
-//                        }
-//                    }
-                    self.getNow()
+                    self.getNow() 
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

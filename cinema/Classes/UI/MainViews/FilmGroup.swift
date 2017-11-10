@@ -96,6 +96,9 @@ extension FilmGroup: UICollectionViewDataSource {
 
         if let tagCell = cell as? FilmsCollectionCell {
             tagCell.linkUrlImage = films[indexPath.row].imageUrl
+            if let rate = films[indexPath.row].rate, rate > 0 {
+                tagCell.setRating(rate)
+            }
             if isCollections {
                 tagCell.isCollections()
                 tagCell.isAdd = isAdd

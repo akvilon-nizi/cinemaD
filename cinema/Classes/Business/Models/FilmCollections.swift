@@ -15,12 +15,14 @@ class FilmCollections: ImmutableMappable {
     let imageUrl: String
     let nameOriginal: String?
     let userCollections: [Collection]?
+    let rate: Double?
 
     private let idKey = "id"
     private let nameKey = "name"
     private let imageUrlKey = "image_url"
     private let nameOriginalKey = "name_original"
     private let userCollectionsKey = "user_collections"
+    private let rateKey = "rate"
 
     required init(map: Map) throws {
         id = try map.value(idKey)
@@ -28,6 +30,7 @@ class FilmCollections: ImmutableMappable {
         nameOriginal = try? map.value(nameOriginalKey)
         imageUrl = try map.value(imageUrlKey)
         userCollections = try? map.value(userCollectionsKey)
+        rate = try? map.value(rateKey)
     }
 
     func mapping(map: Map) {
@@ -36,5 +39,6 @@ class FilmCollections: ImmutableMappable {
         nameOriginal >>> map[nameOriginalKey]
         imageUrl >>> map[imageUrlKey]
         userCollections >>> map[userCollectionsKey]
+        rate >>> map[rateKey]
     }
 }

@@ -17,8 +17,8 @@ extension KinobaseRouter: KinobaseRouterInput {
         appRouter.backTransition()
     }
 
-    func openAllFilms() {
-        appRouter.transition(to: .films)
+    func openAllFilms(_ films: [Film]) {
+        appRouter.transition(to: .films(films: films))
     }
 
     func openCollections(id: String, name: String, watched: [Film]) {
@@ -27,5 +27,18 @@ extension KinobaseRouter: KinobaseRouterInput {
 
     func openFilm(videoId: String, name: String) {
         appRouter.transition(to: .film(videoID: videoId, name: name))
+    }
+
+    func openFilter(output: FilterModuleOutput,
+                    genres: [String],
+                    years: [Int],
+                    filterParameters: FilterParameters,
+                    isWatched: Bool) {
+        appRouter.transition(to: .filter(output: output,
+                                         genres: genres,
+                                         years: years,
+                                         filterParameters: filterParameters,
+                                         isWatched: isWatched
+            ))
     }
 }

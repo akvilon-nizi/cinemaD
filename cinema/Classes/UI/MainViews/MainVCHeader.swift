@@ -21,6 +21,11 @@ class MainVCHeader: UITableViewHeaderFooterView {
         fatalError("NSCoding not supported")
     }
 
+    var scrollItem: Int = 0
+
+    var beginContentOffsetX: CGFloat = -30.0
+
+    let windowY = UIWindow(frame: UIScreen.main.bounds).frame.width - 30
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
     fileprivate let collectionView: UICollectionView = {
@@ -57,7 +62,7 @@ extension MainVCHeader: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: windowWidth, height: windowWidth / 4 * 3)
+        return CGSize(width: windowWidth, height: windowWidth / 16 * 9)
     }
 }
 
@@ -78,9 +83,40 @@ extension MainVCHeader: UICollectionViewDataSource {
 
         if let tagCell = cell as? YoutubeViewCell {
             tagCell.idVideo = trailers[indexPath.row]
-//            print("assa", indexPath.row, trailers[indexPath.row] )
             tagCell.loadPlayer()
         }
         return cell
+    }
+}
+
+extension MainVCHeader: UIScrollViewDelegate {
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        collectionView.isScrollEnabled = false
+        beginContentOffsetX = CGFloat(scrollItem) * windowY
+            scrollView.setContentOffset(CGPoint(x: CGFloat(scrollItem) * windowY, y: 0), animated: true)
+        collectionView.isScrollEnabled = true
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+
+        var isScroll = false
+
+        if actualPosition.x > 0 && scrollView.contentOffset.x != 0 {
+            let newItem = scrollItem - 1
+            scrollItem = newItem >= 0 ? newItem : scrollItem
+            isScroll = true
+        } else {
+            isScroll = true
+            let newItem = scrollItem + 1
+            scrollItem = newItem < trailers.count ? newItem : scrollItem
+        }
+
+        collectionView.isScrollEnabled = false
+        beginContentOffsetX = CGFloat(scrollItem) * windowY
+        if isScroll {
+            scrollView.setContentOffset(CGPoint(x: CGFloat(scrollItem) * windowY, y: 0), animated: true)
+        }
+        collectionView.isScrollEnabled = true
     }
 }

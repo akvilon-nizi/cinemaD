@@ -11,5 +11,6 @@ protocol MainInteractorInput {
 
 protocol MainInteractorOutput: class {
     func getError()
+    func tokenError()
     func getData(mainData: MainData)
 }

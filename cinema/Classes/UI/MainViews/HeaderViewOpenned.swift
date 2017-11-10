@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol HeaderViewOpennedDelegate: class {
+    func open(isOpen: Bool, section: Int)
+}
+
 class HeaderViewOpenned: UITableViewHeaderFooterView {
+
+    weak var delegate: HeaderViewOpennedDelegate?
+
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
@@ -87,5 +94,6 @@ class HeaderViewOpenned: UITableViewHeaderFooterView {
 
     func handleTap() {
         isOpen = !isOpen
+        delegate?.open(isOpen: isOpen, section: tag)
     }
 }

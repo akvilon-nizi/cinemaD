@@ -15,6 +15,12 @@ enum L10n {
   static let alertCinemaCorrectErrror = L10n.tr("Localizable", "alert-cinema-correct-errror")
   /// Сетевая ошибка
   static let alertCinemaNetworkErrror = L10n.tr("Localizable", "alert-cinema-network-errror")
+  /// Коллекция добавлена
+  static let alertCollectionsAdd = L10n.tr("Localizable", "alert-collections-add")
+  /// Коллекция изменена
+  static let alertCollectionsChange = L10n.tr("Localizable", "alert-collections-change")
+  /// Коллекция удалена
+  static let alertCollectionsRemove = L10n.tr("Localizable", "alert-collections-remove")
   /// Сетевая ошибка
   static let alertTitleNetworkError = L10n.tr("Localizable", "alert-title-network-error")
   /// Системная ошибка
@@ -63,6 +69,8 @@ enum L10n {
   static let filmBudjetText = L10n.tr("Localizable", "film-budjet-text")
   /// Сборы
   static let filmCashText = L10n.tr("Localizable", "film-cash-text")
+  /// Изменения сохранены
+  static let filmChangeStatusWatch = L10n.tr("Localizable", "film-change-status-watch")
   /// Сюжет:
   static let filmDescriptionText = L10n.tr("Localizable", "film-description-text")
   /// Длительность
@@ -83,10 +91,20 @@ enum L10n {
   static let filmResponsePutCollection = L10n.tr("Localizable", "film-response-put-collection")
   /// film append to the 'watched'
   static let filmResponseWatched = L10n.tr("Localizable", "film-response-watched")
+  /// film remove from the 'watched'
+  static let filmResponseWatchedDelete = L10n.tr("Localizable", "film-response-watched-delete")
   /// film append to the 'will_watch'
   static let filmResponseWillWatch = L10n.tr("Localizable", "film-response-will_watch")
+  /// film remove from the 'will_watch'
+  static let filmResponseWillWatchDelete = L10n.tr("Localizable", "film-response-will_watch-delete")
+  /// Поиск
+  static let filmSearchPlaceholder = L10n.tr("Localizable", "film-search-placeholder")
+  /// Рейтинг фильма:
+  static let filmSetStatusRate = L10n.tr("Localizable", "film-set-status-rate")
   /// tMDB
   static let filmTmdbText = L10n.tr("Localizable", "film-tmdb-text")
+  /// Поставьте оценку, и фильм появится в Кинобазе!
+  static let filmWatchAlert = L10n.tr("Localizable", "film-watch-alert")
   /// Смотрел
   static let filmWatchedButton = L10n.tr("Localizable", "film-watched-button")
   /// Посмотрю
@@ -95,6 +113,12 @@ enum L10n {
   static let filmYourStar = L10n.tr("Localizable", "film-your-star")
   /// Полный список
   static let filmsTitleText = L10n.tr("Localizable", "films-title-text")
+  /// Год
+  static let filterFilter1Title = L10n.tr("Localizable", "filter-filter1-title")
+  /// Жанр
+  static let filterFilter2Title = L10n.tr("Localizable", "filter-filter2-title")
+  /// Фильтр
+  static let filterTitleText = L10n.tr("Localizable", "filter-title-text")
   /// Полный список
   static let kinobaseCollectionText = L10n.tr("Localizable", "kinobase-collection-text")
   /// + Создать коллекцию

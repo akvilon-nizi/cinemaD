@@ -54,23 +54,6 @@ extension LaunchManager: LaunchManagerProtocol {
 
             let invokeStartModule = { [unowned self] (window: UIWindow, observer: AnyObserver<FlowControllerProtocol>) in
                 let module = self.moduleCreator.createModule(for: .main)
-//                if let assa = module as? MainViewController {
-//                    assa.provider.requestModel(.now)
-//                        .subscribe { [unowned self] (response: Event<NowResponse>) in
-//                            switch response {
-//                            case let .next(model):
-//                                print()
-////                                self.mainData.now = model.now
-////                                self.getRecommendations()
-//                            case let .error(error as ProviderError):
-//                                print()
-////                                self.output.getError()
-//                            default:
-//                                break
-//                            }
-//                        }
-//                        .addDisposableTo(disposeBag)
-//                }
                 let flowController = self.moduleCreator.createNavigationFlowController(viewController: module)
                 observer.onNext(flowController)
                 self.animateRootControllerChange(in: window, viewController: flowController.rootViewController)

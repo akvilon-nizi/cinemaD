@@ -14,12 +14,15 @@ class FilmsConfigurator {
 
     var appRouter: AppRouterProtocol!
 
+    var films: [Film]!
+
     func configureModule() -> UIViewController {
         let router = FilmsRouter()
         router.appRouter = appRouter
 
         let presenter = FilmsPresenter()
         presenter.router = router
+        presenter.films = films
 
         let interactor = FilmsInteractor()
         interactor.output = presenter

@@ -20,4 +20,8 @@ extension MainRouter: MainRouterInput {
     func openKinobase() {
         appRouter.transition(to: .kinobase)
     }
+
+    func openStart() {
+        appRouter.starting()
+    }
 }

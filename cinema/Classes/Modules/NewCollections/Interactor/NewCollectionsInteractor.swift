@@ -12,7 +12,7 @@ class NewCollectionsInteractor {
 
     weak var output: NewCollectionsInteractorOutput!
     var provider: RxMoyaProvider<FoodleTarget>!
-    fileprivate let disposeBag = DisposeBag()
+    fileprivate var disposeBag = DisposeBag()
 
 }
 
@@ -79,20 +79,58 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .addDisposableTo(disposeBag)
     }
 
-    //6c429205-f19c-4442-a960-d2b4a142ad04
+    func putDeleteFilms(idCol: String, filmsAdd: [Film], filmsDelete: [Film]) {
+        if filmsAdd.isEmpty {
+            deleteFilmsIntoCol(idCol: idCol, filmsID: filmsDelete)
+        } else {
+            var filmsCol = filmsAdd
+            provider.requestModel(.putFilm(idFilm: filmsAdd[0].id, idCollections: idCol))
+                .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                    switch response {
+                    case let .next(model):
+                        if model.message.first == L10n.filmResponsePutCollection {
+                            filmsCol.remove(at: 0)
+                            if filmsCol.isEmpty {
+                                if !filmsDelete.isEmpty {
+                                    self.deleteFilmsIntoCol(idCol: idCol, filmsID: filmsDelete)
+                                } else {
+                                    self.output.getSeccess()
+                                }
+                            } else {
+                                self.putDeleteFilms(idCol: idCol, filmsAdd: filmsCol, filmsDelete: filmsDelete)
+                            }
+                        } else {
+                            self.output.getError()
+                        }
+                    case let .error(error as ProviderError):
+                        self.output.getError()
+                    default:
+                        break
+                    }
+                }
+                .addDisposableTo(disposeBag)
+        }
+    }
 
-    func deleteFilmsIntoCol(idCol: String, filmsID: [String]) {
-        provider.requestModel(.deleteFilm(idFilm: "1a45428d-4a05-4f22-a22b-0c6fe63b9784", idCollections: "9ee4b176-f11c-4d97-aa1b-92495675c18a"))
+    func deleteFilmsIntoCol(idCol: String, filmsID: [Film]) {
+        var filmsCol = filmsID
+        provider.requestModel(.deleteFilm(idFilm: filmsID[0].id, idCollections: idCol))
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseDeleteCollection {
-                        print()
+                    if model.message.first == L10n.filmResponseDeleteFilmCollection {
+                        filmsCol.remove(at: 0)
+                        if filmsCol.isEmpty {
+                            self.output.getSeccess()
+                        } else {
+                            self.deleteFilmsIntoCol(idCol: idCol, filmsID: filmsCol)
+                        }
                     } else {
-                        print()
+                        self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.getFilmsIntoCol(idCol: "String")
+//                    self.getFilmsIntoCol(idCol: "String")
+                    self.output.getError()
                 default:
                     break
                 }

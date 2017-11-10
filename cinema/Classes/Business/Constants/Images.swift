@@ -48,13 +48,16 @@ struct ColorAsset {
 enum Asset {
   enum Kinobase {
     static let check = ImageAsset(name: "check")
+    static let check28 = ImageAsset(name: "check28")
     static let checkMini = ImageAsset(name: "checkMini")
     static let forward = ImageAsset(name: "forward")
     static let remove = ImageAsset(name: "remove")
+    static let remove28 = ImageAsset(name: "remove28")
     static let settings = ImageAsset(name: "settings")
     static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
   enum Cinema {
+    static let chatIcon = ImageAsset(name: "chatIcon")
     enum MainTab {
       static let chat = ImageAsset(name: "chat")
       static let kinobase = ImageAsset(name: "kinobase")
@@ -68,6 +71,7 @@ enum Asset {
     }
     static let play = ImageAsset(name: "play")
     static let selectStar = ImageAsset(name: "selectStar")
+    static let sharing = ImageAsset(name: "sharing")
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
       static let slide2Image = ImageAsset(name: "slide2-image")
@@ -112,11 +116,14 @@ enum Asset {
   ]
   static let allImages: [ImageAsset] = [
     Kinobase.check,
+    Kinobase.check28,
     Kinobase.checkMini,
     Kinobase.forward,
     Kinobase.remove,
+    Kinobase.remove28,
     Kinobase.settings,
     Kinobase.settingsUnselect,
+    Cinema.chatIcon,
     Cinema.MainTab.chat,
     Cinema.MainTab.kinobase,
     Cinema.MainTab.reward,
@@ -126,6 +133,7 @@ enum Asset {
     Cinema.MainView.isOpen,
     Cinema.play,
     Cinema.selectStar,
+    Cinema.sharing,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
     Cinema.Slides.slide2Play,

@@ -10,7 +10,7 @@ import RxSwift
 class FilmInteractor {
 
     weak var output: FilmInteractorOutput!
-    fileprivate let disposeBag = DisposeBag()
+    fileprivate var disposeBag = DisposeBag()
     var provider: RxMoyaProvider<FoodleTarget>!
 }
 
@@ -33,20 +33,19 @@ extension FilmInteractor: FilmInteractorInput {
     }
 
     func filmWatched(videoID: String, rate: Int) {
+        disposeBag = DisposeBag()
         provider.requestModel(.filmWatched(filmID: videoID, rate: rate))
-            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+            .subscribe { [unowned self] (response: Event<FilmWatchResponse>) in
                 switch response {
                 case let .next(model):
-
                     if model.message.first == L10n.filmResponseWatched {
-                        print()
+                        self.output.getRate(model.rate)
                     } else {
-                        print()
+                        self.output.getError()
                     }
-//                    self.output.getFilmInfo(model)
                 case let .error(error as ProviderError):
                     print()
-//                    self.output.getError()
+                    self.output.getError()
                 default:
                     break
                 }
@@ -55,18 +54,58 @@ extension FilmInteractor: FilmInteractorInput {
     }
 
     func filmWillWatch(videoID: String) {
+        disposeBag = DisposeBag()
         provider.requestModel(.filmWillWatch(filmID: videoID))
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
                     if model.message.first == L10n.filmResponseWillWatch {
-                        print()
+                        self.output.changeStatus()
                     } else {
-                        print()
+                        self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    print()
-//                    self.output.getError()
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func filmWatchedDelete(videoID: String) {
+        disposeBag = DisposeBag()
+        provider.requestModel(.filmWatchedDelete(filmID: videoID))
+            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                switch response {
+                case let .next(model):
+                    if model.message.first == L10n.filmResponseWatchedDelete {
+                        self.output.changeStatus()
+                    } else {
+                        self.output.getError()
+                    }
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func filmWillWatchDelete(videoID: String) {
+        disposeBag = DisposeBag()
+        provider.requestModel(.filmWillWatchDelete(filmID: videoID))
+            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                switch response {
+                case let .next(model):
+                    if model.message.first == L10n.filmResponseWillWatchDelete {
+                        self.output.changeStatus()
+                    } else {
+                        self.output.getError()
+                    }
+                case let .error(error as ProviderError):
+                    self.output.getError()
                 default:
                     break
                 }

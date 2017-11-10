@@ -21,6 +21,8 @@ class MainViewController: ParentViewController {
 
     let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
 
+    var isFirstLoaded = false
+
     var mainData = MainData()
     // MARK: - Life cycle
 
@@ -46,6 +48,12 @@ class MainViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        view.bringSubview(toFront: activityVC)
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+    }
+
+    func addView() {
         mainTabView.isHidden = false
         tableView.backgroundColor = .white
         tableView.delegate = self
@@ -62,12 +70,11 @@ class MainViewController: ParentViewController {
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= mainTabView.topAnchor
+        tableView.showsVerticalScrollIndicator = false
+
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
         mainTabView.delegate = self
-
-        view.bringSubview(toFront: activityVC)
-        activityVC.isHidden = false
-        activityVC.startAnimating()
     }
 }
 
@@ -150,7 +157,7 @@ extension MainViewController: UITableViewDelegate {
             if mainData.trailers.isEmpty {
                 return 0
             }
-            return windowWidth / 4 * 3 + 20
+            return windowWidth / 16 * 9 + 20
         case 1:
             if mainData.now.isEmpty {
                 return 0
@@ -193,6 +200,12 @@ extension MainViewController: MainViewInput {
         activityVC.stopAnimating()
     }
     func getData(_ mainData: MainData) {
+
+        if !isFirstLoaded {
+            addView()
+            isFirstLoaded = true
+        }
+
         self.mainData = mainData
         activityVC.isHidden = true
         activityVC.stopAnimating()

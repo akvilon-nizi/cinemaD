@@ -22,12 +22,18 @@ enum AppRouterDestination {
     case helpAuth
     case confirmation(phone: String, uid: String, isRestore: Bool)
     case phone(phone: String, uid: String)
-    case films
+    case films(films: [Film])
     case actors
     case film(videoID: String, name: String)
     case kinobase
     case main
     case newCollections(id: String, name: String, watched: [Film])
+    case filter(output: FilterModuleOutput,
+        genres: [String],
+        years: [Int],
+        filterParameters: FilterParameters,
+        isWatched: Bool
+    )
 
     var isPresent: Bool {
         switch self {
@@ -61,8 +67,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: ConfirmationConfigurator.tag, arguments: phone, uid, isRestore)
             case let .phone(phone, uid):
                 return try factory.resolve(tag: PhoneConfigurator.tag, arguments: phone, uid)
-            case .films:
-                return try factory.resolve(tag: FilmsConfigurator.tag)
+            case let .films(films):
+                return try factory.resolve(tag: FilmsConfigurator.tag, arguments: films)
             case .actors:
                 return try factory.resolve(tag: ActorsConfigurator.tag)
             case let .film(videoID, name):
@@ -73,6 +79,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: KinobaseConfigurator.tag)
             case .main:
                 return try factory.resolve(tag: MainConfigurator.tag)
+            case let .filter(output, genres, years, filterParameters, isWatched):
+                return try factory.resolve(tag: FilterConfigurator.tag, arguments: output, genres, years, filterParameters, isWatched)
             }
         } catch {
             fatalError("can't resolve module from factory")
@@ -94,6 +102,8 @@ protocol AppRouterProtocol {
     func dropAll()
 
     func mainView()
+
+    func starting()
 }
 
 protocol AppRouterFlowControllerDataSource: class {
@@ -170,13 +180,28 @@ class AppRouter: AppRouterProtocol {
         application.keyWindow?.rootViewController = flowController.rootViewController
     }
 
+    func starting() {
+
+        let authViewController = moduleCreator.createModule(for: .start)
+
+        let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
+
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+            appDelegate.window?.rootViewController = flowController.rootViewController
+        }
+    }
+
     func mainView() {
 
         let mainViewController = moduleCreator.createModule(for: .main)
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: mainViewController)
 
-        application.keyWindow?.rootViewController = flowController.rootViewController
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+            appDelegate.window?.rootViewController = flowController.rootViewController
+        }
     }
 
     func backTransition() {

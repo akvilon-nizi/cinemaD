@@ -39,6 +39,13 @@ extension FilmPresenter: FilmViewOutput {
         interactor.filmWatched(videoID: videoID, rate: rate)
     }
 
+    func willWatchTapDelete() {
+        interactor.filmWillWatchDelete(videoID: videoID)
+    }
+
+    func watchedTapDelete() {
+        interactor.filmWatchedDelete(videoID: videoID)
+    }
 }
 
 // MARK: - FilmInteractorOutput
@@ -49,5 +56,13 @@ extension FilmPresenter: FilmInteractorOutput {
     }
     func getFilmInfo(_ filmInfo: FullFilm) {
         view.setFilmInfo(filmInfo)
+    }
+
+    func changeStatus() {
+        view.statusChange()
+    }
+
+    func getRate(_ rate: Double) {
+        view.setStatus(rate)
     }
 }

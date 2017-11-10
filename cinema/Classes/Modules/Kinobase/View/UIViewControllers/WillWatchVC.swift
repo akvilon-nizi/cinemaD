@@ -9,7 +9,10 @@
 import UIKit
 
 protocol WillWatchVCDelegate: class {
-    func openFullList()
+    func openFullList(_ films: [Film])
+    func openFilmId(_ filmID: String, name: String)
+    func getQuery(_ query: String)
+    func tapFilter()
 }
 
 class WillWatchVC: ParentViewController {
@@ -46,11 +49,25 @@ class WillWatchVC: ParentViewController {
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
+
+        tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
+
+        tableView.separatorStyle = .none
+        tableView.allowsMultipleSelection = false
     }
 
     func setFilms(_ films: [Film]) {
         self.films = films
         tableView.reloadData()
+    }
+
+    func getSearch(_ films: [Film]) {
+        self.films = films
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
 }
 
@@ -73,7 +90,7 @@ extension WillWatchVC: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
 
 }
@@ -93,7 +110,7 @@ extension WillWatchVC: UITableViewDelegate {
                 return nil
             }
             let view = HeaderViewTitle()
-            view.title = "Посмотрю"
+            view.title = "Фильмы"
             return view
         case 1:
             if films.isEmpty {
@@ -102,13 +119,20 @@ extension WillWatchVC: UITableViewDelegate {
             let view = FullListFilms()
             view.delegate = self
             return view
-        case 2:
+        case 3:
             if films.isEmpty {
                 return nil
             }
             let view = FilmGroup()
             view.films = films
-            //            view.delegate = self
+            view.delegate = self
+            return view
+        case 2:
+            if films.isEmpty {
+                return nil
+            }
+            let view = HeaderSearchView()
+            view.delegate = self
             return view
         default:
             return nil
@@ -121,11 +145,13 @@ extension WillWatchVC: UITableViewDelegate {
             return 22
         case 1:
             return 22
-        case 2:
+        case 3:
             if films.isEmpty {
                 return 0
             }
             return windowWidth / 4 * 3 - 80
+        case 2:
+            return 33
         default:
             return 0
         }
@@ -138,6 +164,24 @@ extension WillWatchVC: UITableViewDelegate {
 
 extension WillWatchVC: FullListFilmsDelegate {
     func openFullList() {
-        delegate?.openFullList()
+        delegate?.openFullList(films)
+    }
+}
+
+// MARK: - FilmGroupDelegate
+extension WillWatchVC: FilmGroupDelegate {
+    func openFilmID(_ filmID: String, name: String) {
+        delegate?.openFilmId(filmID, name: name)
+    }
+}
+
+// MARK: - FilmGroupDelegate
+
+extension WillWatchVC: HeaderSearchDelegate {
+    func changeText(_ text: String) {
+        delegate?.getQuery(text)
+    }
+    func tapFilter() {
+        delegate?.tapFilter()
     }
 }

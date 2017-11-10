@@ -11,6 +11,7 @@ class FilmsPresenter {
     var interactor: FilmsInteractorInput!
     var router: FilmsRouterInput!
     weak var output: FilmsModuleOutput?
+    var films: [Film]!
 }
 
 // MARK: - FilmsViewOutput
@@ -19,7 +20,7 @@ extension FilmsPresenter: FilmsViewOutput {
 
     func viewIsReady() {
         log.verbose("Films is ready")
-        interactor.getAllFilms()
+        view.setupInitialState(films)
     }
 
     func backButtonTap() {
@@ -38,6 +39,6 @@ extension FilmsPresenter: FilmsInteractorOutput {
 
     }
     func getFilms(films: [Film]) {
-        view.setupInitialState(films)
+//        view.setupInitialState(films)
     }
 }

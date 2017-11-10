@@ -11,7 +11,8 @@ protocol KinobaseViewInput: class {
     func getError()
     func getData(_ kbData: KinobaseData)
     func getCollection(_ collection: Collection)
-
+    func startTrober()
+    func getSearch(_ kbData: KinobaseData, isWatched: Bool)
 }
 
 protocol KinobaseViewOutput {
@@ -20,7 +21,7 @@ protocol KinobaseViewOutput {
 
     func backButtonTap()
 
-    func openFullFilm()
+    func openFullFilm(_ films: [Film])
 
     func openCollections(id: String, name: String, watched: [Film])
 
@@ -29,4 +30,10 @@ protocol KinobaseViewOutput {
     func openFilm(videoID: String, name: String)
 
     func refresh()
+
+    func searchWithText(_ query: String, isWatched: Bool)
+
+    func search(query: String, genres: [String], years: [Int], isWatched: Bool)
+
+    func tapFilter(isWatched: Bool, genres: [String], years: [Int])
 }

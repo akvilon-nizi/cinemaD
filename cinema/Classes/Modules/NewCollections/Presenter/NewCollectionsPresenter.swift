@@ -35,6 +35,11 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
     func addNewFilm(name: String, films: [Film]) {
         interactor.putNewColWithFilm(name: name, films: films)
     }
+
+    func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film]) {
+        interactor.putDeleteFilms(idCol: id, filmsAdd: filmsAdd, filmsDelete: filmsDelete)
+    }
+
 }
 
 // MARK: - NewCollectionsInteractorOutput
@@ -44,7 +49,7 @@ extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
         var colFilms: [Film] = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl)
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
                 colFilms.append(film)
             }
         }
