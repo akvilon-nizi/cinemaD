@@ -33,6 +33,7 @@ enum FoodleTarget {
     case meFilmWillWatched
     case getCollections
     case putCollections(name: String)
+    case patchCollections(idCol:String, name: String, filmsID: [String])
     case deleteFilm(idFilm: String, idCollections: String)
     case putFilm(idFilm: String, idCollections: String)
     case deleteCollections(idCollections: String)
@@ -119,6 +120,8 @@ extension FoodleTarget: TargetType {
             return "me/collections/\(idCollections)"
         case let .getFilmsFromCollections(idCollections):
             return "me/collections/\(idCollections)"
+        case let .patchCollections(idCol, _, _) :
+            return "me/collections/\(idCol)"
         }
     }
 
@@ -128,8 +131,8 @@ extension FoodleTarget: TargetType {
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
-//        case :
-//            return .patch
+        case .patchCollections:
+            return .patch
         case .putCollections, .putFilm:
             return .put
         default:
@@ -191,6 +194,11 @@ extension FoodleTarget: TargetType {
             parameters["year"] = years
             }
             return parameters
+        case let .patchCollections(_, name, filmsID):
+            var parameters: [String: Any] = [:]
+            parameters["name"] = name
+            parameters["film_ids"] = filmsID
+            return parameters
         default:
             return nil
         }
@@ -198,7 +206,7 @@ extension FoodleTarget: TargetType {
 
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case  .filmWatchedPost, .filmWillWatchPost:
+        case  .filmWatchedPost, .filmWillWatchPost, .patchCollections:
             return JsonArrayEncoding.default
         default:
             return URLEncoding(destination: .queryString)

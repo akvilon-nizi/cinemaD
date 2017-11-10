@@ -11,6 +11,7 @@ import UIKit
 protocol WatchedFilmDelegate: class {
     func openFullAlls(_ films: [Film])
     func openCollectionFromId(id: String)
+    func removeCollectionFromId(id: String)
     func newCollection()
     func settingsCollection(id: String, name: String)
     func openFilmID(_ filmID: String, name: String)
@@ -82,6 +83,8 @@ class WatchedVC: ParentViewController {
     func setFilmsAndCol(_ films: [Film], col: [Collection]) {
         self.films = films
         self.collections = col
+        colFilms = []
+        selectedIndex = nil
         tableView.reloadData()
     }
 
@@ -90,7 +93,8 @@ class WatchedVC: ParentViewController {
         colFilms = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
+                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
                 colFilms.append(film)
             }
         }
@@ -162,6 +166,21 @@ extension WatchedVC: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 8
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            delegate?.removeCollectionFromId(id: collections[indexPath.row].id)
+            collections.remove(at: indexPath.row)
+            if selectedIndex == indexPath.row {
+                colFilms = []
+            }
+            tableView.reloadData()
+        }
     }
 
 }
