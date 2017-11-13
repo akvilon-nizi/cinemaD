@@ -98,6 +98,7 @@ class KinobaseViewController: ParentViewController {
 
         activityVC.startAnimating()
         activityVC.isHidden = false
+        activityVC.color = UIColor.cnmMainOrange
         view.bringSubview(toFront: activityVC)
     }
 

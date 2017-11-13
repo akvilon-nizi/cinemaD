@@ -47,6 +47,10 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
         }
         interactor.patchCollections(idCol: id, name: name, filmsId: filmsId)
     }
+
+    func deleteCollections() {
+        interactor.deleteCollection(idCol: id)
+    }
 }
 
 // MARK: - NewCollectionsInteractorOutput
@@ -70,5 +74,6 @@ extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
     func getSeccess(message: String) {
         router.close()
         view.getSeccess(message: message)
+        output?.reloadData()
     }
 }

@@ -168,20 +168,20 @@ extension WatchedVC: UITableViewDataSource {
         return 8
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            delegate?.removeCollectionFromId(id: collections[indexPath.row].id)
-            collections.remove(at: indexPath.row)
-            if selectedIndex == indexPath.row {
-                colFilms = []
-            }
-            tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == UITableViewCellEditingStyle.delete {
+//            delegate?.removeCollectionFromId(id: collections[indexPath.row].id)
+//            collections.remove(at: indexPath.row)
+//            if selectedIndex == indexPath.row {
+//                colFilms = []
+//            }
+//            tableView.reloadData()
+//        }
+//    }
 
 }
 
