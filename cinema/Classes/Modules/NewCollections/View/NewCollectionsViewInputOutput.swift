@@ -27,4 +27,6 @@ protocol NewCollectionsViewOutput {
     func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film])
 
     func patchCollections(name: String, films: [Film])
+
+    func deleteCollections()
 }

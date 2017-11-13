@@ -171,4 +171,20 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .addDisposableTo(disposeBag)
     }
 
+    func deleteCollection(idCol: String) {
+        provider.requestModel(.deleteCollections(idCollections: idCol))
+            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                switch response {
+                case let .next(model):
+                    self.output.getSeccess(message: L10n.alertCollectionsRemove)
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+
 }
