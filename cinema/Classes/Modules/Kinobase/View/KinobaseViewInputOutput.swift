@@ -36,4 +36,6 @@ protocol KinobaseViewOutput {
     func search(query: String, genres: [String], years: [Int], isWatched: Bool)
 
     func tapFilter(isWatched: Bool, genres: [String], years: [Int])
+
+    func deleteCollections(id: String)
 }

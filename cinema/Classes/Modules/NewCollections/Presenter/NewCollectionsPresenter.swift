@@ -40,6 +40,17 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
         interactor.putDeleteFilms(idCol: id, filmsAdd: filmsAdd, filmsDelete: filmsDelete)
     }
 
+    func patchCollections(name: String, films: [Film]) {
+        var filmsId: [String] = []
+        for film in films {
+            filmsId.append(film.id)
+        }
+        interactor.patchCollections(idCol: id, name: name, filmsId: filmsId)
+    }
+
+    func deleteCollections() {
+        interactor.deleteCollection(idCol: id)
+    }
 }
 
 // MARK: - NewCollectionsInteractorOutput
@@ -49,7 +60,8 @@ extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
         var colFilms: [Film] = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Int(filmColW.rate!))
+                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
                 colFilms.append(film)
             }
         }
@@ -59,8 +71,9 @@ extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
         view.getError()
     }
 
-    func getSeccess() {
+    func getSeccess(message: String) {
         router.close()
-        view.getSeccess()
+        view.getSeccess(message: message)
+        output?.reloadData()
     }
 }

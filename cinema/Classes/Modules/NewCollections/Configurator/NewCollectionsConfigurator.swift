@@ -20,10 +20,13 @@ class NewCollectionsConfigurator {
 
     let watched: [Film]
 
-    init(id: String, nameCol: String, watched: [Film]) {
+    let output: NewCollectionsModuleOutput
+
+    init(output: NewCollectionsModuleOutput, id: String, nameCol: String, watched: [Film]) {
         self.id = id
         self.nameCol = nameCol
         self.watched = watched
+        self.output = output
     }
 
     func configureModule() -> UIViewController {
@@ -33,6 +36,7 @@ class NewCollectionsConfigurator {
         let presenter = NewCollectionsPresenter()
         presenter.router = router
         presenter.id = id
+        presenter.output = output
 
         let interactor = NewCollectionsInteractor()
         interactor.output = presenter

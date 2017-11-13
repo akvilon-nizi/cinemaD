@@ -140,4 +140,7 @@
 "filter-filter1-title" = "Год";
 "filter-filter2-title" = "Жанр";
 
+//CollectionsResponse
+"collections-update-message" = "collection updated";
+
 

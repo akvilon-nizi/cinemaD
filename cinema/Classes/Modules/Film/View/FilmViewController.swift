@@ -15,7 +15,7 @@ class FilmViewController: ParentViewController {
     var myRate: Int = 0
 
     let contentView = UIView()
-
+    let imageView = UIImageView()
     let scrollView = UIScrollView()
 
     let willWatchButton: UIButton = {
@@ -165,7 +165,6 @@ class FilmViewController: ParentViewController {
             scrollView.showsHorizontalScrollIndicator = false
             scrollView.showsVerticalScrollIndicator = false
 
-            let imageView = UIImageView()
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: URL(string: filmInfo.imageUrl))
 
@@ -382,10 +381,10 @@ class FilmViewController: ParentViewController {
     }
 
     func didTapSharingButton() {
-        let textToShare = "Swift is awesome!  Check out this website about it!"
+        let textToShare = "CinemaD"
 
-        if let myWebsite = NSURL(string: "http://www.codingexplorer.com/") {
-            let objectsToShare = [textToShare, myWebsite] as [Any]
+        if let image = imageView.image {
+            let objectsToShare = [textToShare, image] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
 
             //activityVC.popoverPresentationController?.sourceView = sender

@@ -6,5 +6,5 @@
 import Foundation
 
 protocol NewCollectionsModuleOutput: class {
-
+    func reloadData()
 }

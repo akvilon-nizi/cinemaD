@@ -2,7 +2,6 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -45,6 +44,8 @@ enum L10n {
   static let authHelpSmsButtonText = L10n.tr("Localizable", "authHelp-sms-button-text")
   /// Помощь при входе
   static let authHelpTitleText = L10n.tr("Localizable", "authHelp-title-text")
+  /// collection updated
+  static let collectionsUpdateMessage = L10n.tr("Localizable", "collections-update-message")
   /// Войдите
   static let confirmationButtonAuthText = L10n.tr("Localizable", "confirmation-button-auth-text")
   /// Код

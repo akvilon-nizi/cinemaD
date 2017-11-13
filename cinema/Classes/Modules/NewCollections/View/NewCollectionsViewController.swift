@@ -65,8 +65,10 @@ class NewCollectionsViewController: ParentViewController {
         tableView.dataSource = self
         tableView.reloadData()
 
-        activityVC.isHidden = false
-        activityVC.startAnimating()
+        if nameCollections != "" {
+            activityVC.isHidden = false
+            activityVC.startAnimating()
+        }
         view.bringSubview(toFront: activityVC)
     }
 
@@ -76,8 +78,15 @@ class NewCollectionsViewController: ParentViewController {
     }
 
     func didTapSaveButton() {
-        let filteredWatched = watched.filter() { $0.add == true }
-        let filteredAnWatched = collections.filter() { $0.delete == true }
+        let filteredWatched = watched.filter {
+            $0.add == true
+        }
+        let filteredAnWatched = collections.filter {
+            $0.delete == false
+        }
+
+        let films = filteredWatched + filteredAnWatched
+
         if nameCollections.isEmpty {
             if filteredWatched.isEmpty {
                  showAlert(message: "Выберете фильмы")
@@ -86,16 +95,26 @@ class NewCollectionsViewController: ParentViewController {
                 saveButton.isEnabled = false
                 activityVC.isHidden = false
                 activityVC.startAnimating()
-                view.isUserInteractionEnabled = false
                 view.bringSubview(toFront: activityVC)
             }
         } else {
-            if filteredWatched.isEmpty && filteredAnWatched.count == collections.count {
-                showAlert(message: "Коллекция не может быть пустой")
-            } else {
-                output?.putDeleteFilms(filmsAdd: filteredWatched, filmsDelete: filteredAnWatched)
-            }
+                if films.isEmpty {
+                    showAlert(message: "Коллекция не может быть пустой")
+                } else {
+                    if  !headerCollectionsView.returnTitle().isEmpty {
+                        saveButton.isEnabled = false
+                        activityVC.isHidden = false
+                        activityVC.startAnimating()
+                        output?.patchCollections(name: headerCollectionsView.returnTitle(), films: films)
+                    } else {
+                        showAlert(message: "Название не может быть пустым")
+                    }
+                }
         }
+    }
+
+    func didTapDeleteButton() {
+        output?.deleteCollections()
     }
 }
 
@@ -109,16 +128,12 @@ extension NewCollectionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
 
-        //        cell.setData(products[indexPath.row])
-        //        cell.delegate = self
-
-        return cell
+        return UITableViewCell()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
 
 }
@@ -139,7 +154,6 @@ extension NewCollectionsViewController: UITableViewDelegate {
 //            }
             if !nameCollections.isEmpty {
                 headerCollectionsView.title = nameCollections
-                headerCollectionsView.isUserInteractionEnabled = false
             }
             return headerCollectionsView
         case 1:
@@ -159,6 +173,9 @@ extension NewCollectionsViewController: UITableViewDelegate {
             view.isAdd = false
             return view
         case 3:
+            if watched.isEmpty {
+                return nil
+            }
             let view = HeaderViewTitle()
             view.title = "Фильмы"
             return view
@@ -174,9 +191,24 @@ extension NewCollectionsViewController: UITableViewDelegate {
                     i += 1
                 }
             }
+//            if watched.isEmpty {
+//                UIView.setAnimationsEnabled(false)
+//                tableView.beginUpdates()
+//                tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
+//                tableView.endUpdates()
+//                UIView.setAnimationsEnabled(true)
+//                return nil
+//            }
             view.films = watched
             view.isCollections = true
             view.isAdd = true
+            return view
+        case 5:
+            if nameCollections == "" {
+                return nil
+            }
+            let view = DeleteFooter()
+            view.deleteButton.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
             return view
         default:
             return nil
@@ -207,6 +239,11 @@ extension NewCollectionsViewController: UITableViewDelegate {
             //                return 0
             //            }
             return windowWidth / 4 * 3 - 80
+        case 5:
+            if nameCollections == "" {
+                return 0
+            }
+            return 66
         default:
             return 0
         }
@@ -245,7 +282,7 @@ extension NewCollectionsViewController: NewCollectionsViewInput {
         view.sendSubview(toBack: activityVC)
     }
 
-    func getSeccess() {
-        showAlert(message: "Коллекция добавлена")
+    func getSeccess(message: String) {
+        showAlert(message: message)
     }
 }

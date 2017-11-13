@@ -41,7 +41,7 @@ extension KinobasePresenter: KinobaseViewOutput {
     }
 
     func openCollections(id: String, name: String, watched: [Film]) {
-        router.openCollections(id: id, name: name, watched: watched)
+        router.openCollections(output: self, id: id, name: name, watched: watched)
     }
 
     func openCollecttion(id: String) {
@@ -108,6 +108,10 @@ extension KinobasePresenter: KinobaseViewOutput {
         self.isWatched = isWatched
         router.openFilter(output: self, genres: genres, years: years, filterParameters: filterParameters, isWatched: isWatched)
     }
+
+    func deleteCollections(id: String) {
+        interactor.deleteCollection(idCol: id)
+    }
 }
 
 // MARK: - KinobaseInteractorOutput
@@ -162,5 +166,12 @@ extension KinobasePresenter: FilterModuleOutput {
             }
         }
         interactor.searchFilms(query: "", genres: genres, years: years, isWatched: isWatched)
+    }
+}
+
+extension KinobasePresenter: NewCollectionsModuleOutput {
+    func reloadData() {
+         view.startTrober()
+         interactor.getWatched()
     }
 }

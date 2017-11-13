@@ -11,10 +11,12 @@ protocol NewCollectionsInteractorInput {
     func putFilmsIntoCol(idCol: String, films: [Film])
     func getFilmsIntoCol(idCol: String)
     func putDeleteFilms(idCol: String, filmsAdd: [Film], filmsDelete: [Film])
+    func patchCollections(idCol: String, name: String, filmsId: [String])
+    func deleteCollection(idCol: String)
 }
 
 protocol NewCollectionsInteractorOutput: class {
     func getCollection(collection: Collection)
     func getError()
-    func getSeccess()
+    func getSeccess(message: String)
 }

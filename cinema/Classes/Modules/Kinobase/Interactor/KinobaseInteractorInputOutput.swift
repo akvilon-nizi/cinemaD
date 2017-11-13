@@ -9,6 +9,7 @@ protocol KinobaseInteractorInput {
     func getWatched()
     func getFilmsIntoCol(idCol: String)
     func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool)
+    func deleteCollection(idCol: String)
 }
 
 protocol KinobaseInteractorOutput: class {

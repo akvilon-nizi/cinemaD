@@ -13,7 +13,7 @@ protocol NewCollectionsViewInput: class {
 
     func getError()
 
-    func getSeccess()
+    func getSeccess(message: String)
 }
 
 protocol NewCollectionsViewOutput {
@@ -25,4 +25,8 @@ protocol NewCollectionsViewOutput {
     func addNewFilm(name: String, films: [Film])
 
     func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film])
+
+    func patchCollections(name: String, films: [Film])
+
+    func deleteCollections()
 }

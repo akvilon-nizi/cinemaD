@@ -86,6 +86,21 @@ extension KinobaseInteractor: KinobaseInteractorInput {
             .addDisposableTo(disposeBag)
     }
 
+    func deleteCollection(idCol: String) {
+        provider.requestModel(.deleteCollections(idCollections: idCol))
+            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                switch response {
+                case let .next(model):
+                    print()
+                case let .error(error as ProviderError):
+                    print()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
     func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {
         if isWatched {
             provider.requestModel(.filmWatchedPost(query: query, genres: genres, years: years))
