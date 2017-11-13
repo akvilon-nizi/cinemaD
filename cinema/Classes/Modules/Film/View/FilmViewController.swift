@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import FacebookShare
 
 class FilmViewController: ParentViewController {
 
@@ -356,7 +357,28 @@ class FilmViewController: ParentViewController {
     }
 
     func didTapChatButton() {
-        print()
+        fbClick()
+    }
+
+    func showShareDialog<C: ContentProtocol>(_ content: C, mode: ShareDialogMode = .automatic) {
+        let dialog = ShareDialog(content: content)
+        dialog.presentingViewController = self
+        dialog.mode = mode
+
+        do {
+            try dialog.show()
+        } catch (let error) {
+            print()
+        }
+    }
+
+    func fbClick() {
+        var content = LinkShareContent(url: URL(string: "http://ya.ru")!,
+                                       title: "Title",
+                                       description: "Description",
+                                       imageURL: URL(string: "https://www.google.ru/imgres?imgurl=http%3A%2F%2Fmirpozitiva.ru%2Fuploads%2Fposts%2F2016-08%2F1472058088_05.jpg&imgrefurl=http%3A%2F%2Fmirpozitiva.ru%2Fphoto%2F1253-kartinki-na-rabochii-stol.html&docid=6sZU3ZHD1A361M&tbnid=52HObwjKnwe_wM%3A&vet=1&w=1920&h=1080&bih=1096&biw=1647&ved=0ahUKEwjwg9vJgbTXAhXLJJoKHXBaB_cQMwhbKAAwAA&iact=c&ictx=1")!)
+
+        showShareDialog(content, mode: .native)
     }
 
     func didTapSharingButton() {
