@@ -37,16 +37,6 @@ class WatchedVC: ParentViewController {
     var collections: [Collection] = []
     var selectedIndex: Int?
 
-//    let sectionHeaers: [HeaderSectionStruct] = [
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        ]
-
     weak var delegate: WatchedFilmDelegate?
 
     // MARK: - Life cycle
