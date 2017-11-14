@@ -143,4 +143,10 @@
 //CollectionsResponse
 "collections-update-message" = "collection updated";
 
+//Main
+"main-news-title" = "Новости";
+"main-news-new" = "Новинки";
+"main-news-message-actors" = "События о актерах";
+"main-news-drawing" = "Розыгрыши";
+"main-news-free" = "Бесплатные сеансы";
 

@@ -5,6 +5,8 @@
 
 import UIKit
 import FacebookShare
+import FBSDKShareKit
+import VKSdkFramework
 
 class FilmViewController: ParentViewController {
 
@@ -30,6 +32,8 @@ class FilmViewController: ParentViewController {
     }()
 
     let desriptionLabel = UILabel()
+
+    let titleLabel = UILabel()
 
     let watchedButton: UIButton = {
         let button = UIButton()
@@ -90,6 +94,10 @@ class FilmViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        let sdk = VKSdk.initialize(withAppId: "6258240")
+        sdk?.register(self)
+        //sdk.ui
+
         activityVC.isHidden = false
         activityVC.startAnimating()
 
@@ -139,7 +147,6 @@ class FilmViewController: ParentViewController {
                 willWatchButton.isSelected = true
             }
 
-            let titleLabel = UILabel()
             titleLabel.font = UIFont.cnmFuturaLight(size: 14)
             titleLabel.textColor = UIColor.cnmAfafaf
             var textsArray: [String] = []
@@ -359,7 +366,7 @@ class FilmViewController: ParentViewController {
         fbClick()
     }
 
-    func showShareDialog<C: ContentProtocol>(_ content: C, mode: ShareDialogMode = .automatic) {
+    func showDialog<C: ContentProtocol>(_ content: C, mode: ShareDialogMode = .automatic) {
         let dialog = ShareDialog(content: content)
         dialog.presentingViewController = self
         dialog.mode = mode
@@ -372,13 +379,121 @@ class FilmViewController: ParentViewController {
     }
 
     func fbClick() {
-        var content = LinkShareContent(url: URL(string: "http://ya.ru")!,
-                                       title: "Title",
-                                       description: "Description",
-                                       imageURL: URL(string: "https://www.google.ru/imgres?imgurl=http%3A%2F%2Fmirpozitiva.ru%2Fuploads%2Fposts%2F2016-08%2F1472058088_05.jpg&imgrefurl=http%3A%2F%2Fmirpozitiva.ru%2Fphoto%2F1253-kartinki-na-rabochii-stol.html&docid=6sZU3ZHD1A361M&tbnid=52HObwjKnwe_wM%3A&vet=1&w=1920&h=1080&bih=1096&biw=1647&ved=0ahUKEwjwg9vJgbTXAhXLJJoKHXBaB_cQMwhbKAAwAA&iact=c&ictx=1")!)
 
-        showShareDialog(content, mode: .native)
+//        let loginManager = LoginManager()
+//        loginManager.logIn(readPermissions: [ .publicProfile], viewController: self) { loginResult in
+//            switch loginResult {
+//            case .failed(let error):
+//              //  self.activityView.stopAnimating()
+//                print(error)
+//            case .cancelled:
+//                //self.activityView.stopAnimating()
+//                print("User cancelled login.")
+//            case .success(let grantedPermissions, let declinedPermissions, let token):
+//                 print("User cancelled login.")
+//               // self.loginService.loginByFB(with: token.authenticationToken, deviceId: token.userId!)
+//            }
+//        }
+
+        // Create an object
+//        let object: OpenGraphObject = [
+//            "og:type": "books.book",
+//            "og:title": "A Game of Thrones",
+//            "og:description": "In the frozen wastes to the north of Winterfell, sinister and supernatural forces are mustering.",
+//            "books:isbn": "0-553-57340-3"
+//        ]
+
+        //let object: OpenGraphObject = OpenGraphObject(dictionaryLiteral: ( "og:type", "books.book"))
+
+        // Create an action
+        if let image = imageView.image {
+
+           // FBSDKShareMediaContent 
+
+//            let content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+//            content.contentURL = URL(string: "http://developers.facebook.com")
+//            FBSDKShareDialog.show(from: self, with: content, delegate: nil)
+
+            let title = "FacebookSdk GOVNO!"
+
+            let photo: FBSDKSharePhoto = FBSDKSharePhoto()
+            photo.image = image
+            photo.isUserGenerated = true
+
+            var properties: [AnyHashable: Any] = [
+                "og:type": "article",
+                "og:title": title,
+                "og:image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCalqoke09R7bu90lK8LYMLVeZ4KBqap0xZohNSJG3sCva_auMbw"
+            ]
+//            @"og:description":contentDesc
+        // Create an object
+
+            let object: FBSDKShareOpenGraphObject = FBSDKShareOpenGraphObject(properties: properties)
+
+        // Create an action
+
+
+            let action: FBSDKShareOpenGraphAction = FBSDKShareOpenGraphAction()
+            action.actionType = "news.publishes"
+            action.setObject(object, forKey: "article")
+
+
+        // Create the content
+        let content: FBSDKShareOpenGraphContent = FBSDKShareOpenGraphContent()
+        content.action = action
+        content.previewPropertyName = "article"
+
+      // FBSDKShareDialog.show(from: self, with: content, delegate: nil)
+
+        }
+//        var action = OpenGraphAction(type: "book.reads")
+//        action["books:book"] = OpenGraphObject(dictionaryLiteral: ( "og:type", "books.book"))
+//
+//        // Create the content
+//        var content = OpenGraphShareContent()
+//        content.action = action
+//        content.previewPropertyName = "books:book"
+//
+//        // let dialog = ShareDialog(content: content)
+//
+////        do {
+////            try ShareDialog.show(content: content)
+////        } catch (let error) {
+////            print()
+////        }
+//
+        if let image = imageView.image {
+//            let photo: Photo = Photo(image: image, userGenerated: true)
+//            var content = PhotoShareContent(photos: [photo])
+//            content.hashtag = Hashtag("#cinemad #ffdsfdadfa")
+//            showDialog(content)
+            let vkShare = VKShareDialogController()
+            if let info = titleLabel.text {
+                vkShare.text = name + ". " + info
+            }
+
+            let img = VKUploadImage(image: image, andParams: nil)
+            let link = URL(string: "https://itunes.apple.com/us/app/keynote/id361285480?mt=8")
+            vkShare.shareLink = VKShareLink(title: "Cinemad", link: link)
+            vkShare.uploadImages = [img as Any]
+
+            vkShare.completionHandler = { result, str  in
+                self.dismiss(animated: true, completion: nil)
+            }
+
+            present(vkShare, animated: true, completion: nil)
+        }
+
     }
+
+//    func fbClick() {
+//        var content = LinkShareContent(url: URL(string: "http://ya.ru")!,
+//                                       title: "Title",
+//                                       description: "Description",
+//                                       imageURL: URL(string: "https://www.google.ru/imgres?imgurl=http%3A%2F%2Fmirpozitiva.ru%2Fuploads%2Fposts%2F2016-08%2F1472058088_05.jpg&imgrefurl=http%3A%2F%2Fmirpozitiva.ru%2Fphoto%2F1253-kartinki-na-rabochii-stol.html&docid=6sZU3ZHD1A361M&tbnid=52HObwjKnwe_wM%3A&vet=1&w=1920&h=1080&bih=1096&biw=1647&ved=0ahUKEwjwg9vJgbTXAhXLJJoKHXBaB_cQMwhbKAAwAA&iact=c&ictx=1")!)
+//
+//        showShareDialog(content, mode: .native)
+//    }
 
     func didTapSharingButton() {
         let textToShare = "CinemaD"
@@ -526,5 +641,15 @@ extension String {
             resultString.append(character)
         }
         return resultString
+    }
+}
+
+extension FilmViewController: VKSdkDelegate {
+    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
+        print()
+    }
+
+    func vkSdkUserAuthorizationFailed() {
+        print()
     }
 }

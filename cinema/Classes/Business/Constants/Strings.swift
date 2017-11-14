@@ -2,6 +2,7 @@
 
 import Foundation
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -136,6 +137,16 @@ enum L10n {
   static let kinobaseWatchedButton = L10n.tr("Localizable", "kinobase-watched-button")
   /// Посмотрю
   static let kinobaseWillWatchButton = L10n.tr("Localizable", "kinobase-willWatch-button")
+  /// Розыгрыши
+  static let mainNewsDrawing = L10n.tr("Localizable", "main-news-drawing")
+  /// Бесплатные сеансы
+  static let mainNewsFree = L10n.tr("Localizable", "main-news-free")
+  /// События о актерах
+  static let mainNewsMessageActors = L10n.tr("Localizable", "main-news-message-actors")
+  /// Новинки
+  static let mainNewsNew = L10n.tr("Localizable", "main-news-new")
+  /// Новости
+  static let mainNewsTitle = L10n.tr("Localizable", "main-news-title")
   /// Подтверждение
   static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "newPassword-confirm-placeholder")
   /// Новый пароль

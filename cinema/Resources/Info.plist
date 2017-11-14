@@ -2,26 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbapi</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-    </array>
-    <key>CFBundleURLTypes</key>
-    <array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
         <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb366498413796939</string>
-            </array>
+            <key>vk.com</key>
+            <dict>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
         </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>366498413796939</string>
-    <key>FacebookDisplayName</key>
-    <string>CinemaD</string>
+    </dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ru</string>
 	<key>CFBundleDisplayName</key>
@@ -40,6 +35,23 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb366498413796939</string>
+			</array>
+		</dict>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>vk6258240</string>
+            </array>
+        </dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>18</string>
 	<key>Fabric</key>
@@ -56,12 +68,23 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>366498413796939</string>
+	<key>FacebookDisplayName</key>
+	<string>CinemaD</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
 		<string>comgooglemaps</string>
+		<string>fbauth2</string>
+		<string>fbapi</string>
+		<string>fbshareextension</string>
+		<string>fb-messenger-api</string>
+        <string>vk</string>
+        <string>vk-share</string>
+        <string>vkauthorize</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

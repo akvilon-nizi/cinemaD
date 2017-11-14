@@ -24,6 +24,15 @@ class MainViewController: ParentViewController {
     var isFirstLoaded = false
 
     var mainData = MainData()
+
+    var isNewsFilterOpen = false
+
+    var newsHeader: HeaderViewOpenned = {
+        let view = HeaderViewOpenned()
+        view.title = L10n.mainNewsTitle
+        return view
+    } ()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -84,6 +93,9 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
+        if section == 5 {
+            return 4
+        }
         return 0
     }
 
@@ -97,7 +109,7 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
 
 }
@@ -107,6 +119,9 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 5 && isNewsFilterOpen {
+            return 44
+        }
         return 0
     }
 
@@ -140,6 +155,11 @@ extension MainViewController: UITableViewDelegate {
             let view = HeaderViewTitle()
             view.title = "Рекомендации"
             return view
+        case 5:
+            newsHeader.tag = section
+            newsHeader.isOpen = isNewsFilterOpen
+            newsHeader.delegate = self
+            return newsHeader
         default:
             if mainData.recomend.isEmpty {
                 return nil
@@ -173,6 +193,8 @@ extension MainViewController: UITableViewDelegate {
                 return 0
             }
             return 27
+        case 5:
+            return 44
         default:
             if mainData.recomend.isEmpty {
                 return 0
@@ -242,5 +264,19 @@ extension MainViewController: MainTabViewDelegate {
 extension MainViewController: FilmGroupDelegate {
     func openFilmID(_ filmID: String, name: String) {
         output.openFilm(videoID: filmID, name: name)
+    }
+}
+
+// MARK: - HeaderViewOpennedDelegate
+
+extension MainViewController: HeaderViewOpennedDelegate {
+
+    func open(isOpen: Bool, section: Int) {
+        isNewsFilterOpen = isOpen
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integersIn: section...section), with: UITableViewRowAnimation.none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
 }
