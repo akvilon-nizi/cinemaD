@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MainViewInput: class {
 
@@ -21,4 +22,6 @@ protocol MainViewOutput {
     func openFilm(videoID: String, name: String)
 
     func openKinobase()
+
+    func setRootVC(_ rootVC: UINavigationController) 
 }

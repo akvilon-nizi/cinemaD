@@ -7,11 +7,22 @@ import UIKit
 import RxMoya
 import RxSwift
 
+struct NewsFilter {
+    let title: String
+    var isSwitch: Bool
+}
+
 class MainViewController: ParentViewController {
 
     var output: MainViewOutput!
 
     let header = MainVCHeader()
+
+    let childController = UIViewController()
+
+    var navController = UINavigationController()
+
+    let contentView = UIView()
 
     var provider: RxMoyaProvider<FoodleTarget>!
 
@@ -26,6 +37,13 @@ class MainViewController: ParentViewController {
     var mainData = MainData()
 
     var isNewsFilterOpen = false
+
+    var newsFilterArray: [NewsFilter] = [
+        NewsFilter(title: L10n.mainNewsNew, isSwitch: false),
+        NewsFilter(title: L10n.mainNewsMessageActors, isSwitch: false),
+        NewsFilter(title: L10n.mainNewsDrawing, isSwitch: false),
+        NewsFilter(title: L10n.mainNewsFree, isSwitch: false)
+    ]
 
     var newsHeader: HeaderViewOpenned = {
         let view = HeaderViewOpenned()
@@ -46,6 +64,7 @@ class MainViewController: ParentViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        navController.navigationBar.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,16 +93,48 @@ class MainViewController: ParentViewController {
         mainTabView.leadingAnchor ~= view.leadingAnchor
         mainTabView.bottomAnchor ~= view.bottomAnchor
 
-        view.addSubview(tableView.prepareForAutoLayout())
-        tableView.topAnchor ~= view.topAnchor
-        tableView.leadingAnchor ~= view.leadingAnchor
-        tableView.trailingAnchor ~= view.trailingAnchor
-        tableView.bottomAnchor ~= mainTabView.topAnchor
+        view.addSubview(contentView.prepareForAutoLayout())
+        contentView.topAnchor ~= view.topAnchor
+        contentView.leadingAnchor ~= view.leadingAnchor
+        contentView.trailingAnchor ~= view.trailingAnchor
+        contentView.bottomAnchor ~= mainTabView.topAnchor
+
+        navController = UINavigationController(rootViewController: self.childController)
+
+        navController.willMove(toParentViewController: self)
+        navController.view.frame = contentView.bounds
+        childController.view.backgroundColor = .red
+        contentView.addSubview(navController.view)
+        addChildViewController(navController)
+        navController.didMove(toParentViewController: self)
+        navController.navigationBar.isHidden = true
+        let decorator = WhiteNavigationBarDecorator()
+        decorator.configure(navController.navigationBar)
+
+        output?.setRootVC(navController)
+
+        navController.delegate = self
+
+//        [myNav willMoveToParentViewController:self];
+//        myNav.view.frame = navFrame;  //Set a frame or constraints
+//        [self.view addSubview:myNav.view];
+//        [self addChildViewController:myNav];
+//        [myNav didMoveToParentViewController:self];
+
+        childController.view.addSubview(tableView.prepareForAutoLayout())
+        tableView.pinEdgesToSuperviewEdges()
         tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
 
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
         mainTabView.delegate = self
+
+        tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
+
+        newsHeader.tag = 5
+        newsHeader.isOpen = isNewsFilterOpen
+        newsHeader.delegate = self
     }
 }
 
@@ -93,23 +144,48 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if section == 5 {
+        if section == 5 && isNewsFilterOpen {
             return 4
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
 
-//        cell.setData(products[indexPath.row])
-//        cell.delegate = self
+        if indexPath.section == 5 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewsFilterCell.reuseIdentifier, for: indexPath)
+            if let collCel = cell as? NewsFilterCell {
+                collCel.indexPath = indexPath
+                collCel.title = newsFilterArray[indexPath.row].title
+                collCel.isDidSelect = newsFilterArray[indexPath.row].isSwitch
+            }
+
+            return cell
+        }
+
+        let cell = UITableViewCell()
 
         return cell
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 5 {
+            let cell = tableView.cellForRow(at: indexPath)
+            if let collectionCell = cell as? NewsFilterCell {
+                collectionCell.isDidSelect = !collectionCell.isDidSelect
+                newsFilterArray[indexPath.row].isSwitch = collectionCell.isDidSelect
+                UIView.setAnimationsEnabled(false)
+                tableView.beginUpdates()
+                tableView.reloadSections(IndexSet(integersIn: indexPath.section...indexPath.section), with: UITableViewRowAnimation.none)
+                tableView.endUpdates()
+                UIView.setAnimationsEnabled(true)
+            }
+        }
+
     }
 
 }
@@ -156,9 +232,6 @@ extension MainViewController: UITableViewDelegate {
             view.title = "Рекомендации"
             return view
         case 5:
-            newsHeader.tag = section
-            newsHeader.isOpen = isNewsFilterOpen
-            newsHeader.delegate = self
             return newsHeader
         default:
             if mainData.recomend.isEmpty {
@@ -252,7 +325,7 @@ extension MainViewController: MainTabViewDelegate {
     }
 
     func chatTapped() {
-        print("chatTapped")
+        output.openKinobase()
     }
 
     func kinobaseTapped() {
@@ -264,6 +337,7 @@ extension MainViewController: MainTabViewDelegate {
 extension MainViewController: FilmGroupDelegate {
     func openFilmID(_ filmID: String, name: String) {
         output.openFilm(videoID: filmID, name: name)
+        navController.navigationBar.isHidden = true
     }
 }
 
@@ -275,8 +349,18 @@ extension MainViewController: HeaderViewOpennedDelegate {
         isNewsFilterOpen = isOpen
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: section...section), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 4...5), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
+    }
+}
+
+// MARK: - HeaderViewOpennedDelegate
+
+extension MainViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if navigationController.childViewControllers.count == 1 {
+            mainTabView.reloadData()
+        }
     }
 }

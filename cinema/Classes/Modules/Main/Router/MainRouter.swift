@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MainRouter {
 
@@ -23,5 +24,9 @@ extension MainRouter: MainRouterInput {
 
     func openStart() {
         appRouter.starting()
+    }
+
+    func setRootVC(_ rootVC: UINavigationController) {
+        appRouter.setRootViewController(viewControler: rootVC)
     }
 }

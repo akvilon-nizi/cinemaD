@@ -46,7 +46,25 @@ extension NavigationFlowController: FlowControllerProtocol {
         }
     }
 
+    func performTransitionFromMain(to viewController: UIViewController, animated: Bool = true) -> FlowControllerResult {
+        return Observable.create { (observer: AnyObserver<UIViewController?>) in
+            guard let navigationController = self.rootViewController as? UINavigationController else {
+                observer.onError(NavigationFlowControllerError.wrongRootViewController)
+                return Disposables.create()
+            }
+            navigationController.setViewControllers([self.rootViewController.childViewControllers[0], viewController], animated: true) {
+                observer.onNext(viewController)
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+
     func performTransition(to destination: AppRouterDestination) -> FlowControllerResult {
+        return performTransition(to: destination, animated: true)
+    }
+
+    func performTransition(to destination: AppRouterDestination, animated: Bool) -> FlowControllerResult {
         return Observable.create { observer in
             guard let navigationController = self.rootViewController as? UINavigationController else {
                 observer.onError(NavigationFlowControllerError.wrongRootViewController)
@@ -56,11 +74,11 @@ extension NavigationFlowController: FlowControllerProtocol {
             viewController.hidesBottomBarWhenPushed = true
             observer.on(Event.next(viewController))
             if destination.isPresent {
-                navigationController.present(viewController, animated: true, completion: {
+                navigationController.present(viewController, animated: animated, completion: {
                     observer.on(Event.completed)
                 })
             } else {
-                navigationController.push(viewController: viewController, animated: true, completion: {
+                navigationController.push(viewController: viewController, animated: animated, completion: {
                     observer.on(Event.completed)
                 })
             }
@@ -96,6 +114,13 @@ fileprivate extension UINavigationController {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         popViewController(animated: animated)
+        CATransaction.commit()
+    }
+
+    func setViewControllers(_ viewControllers: [UIViewController], animated: Bool, completion: @escaping () -> Void) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        setViewControllers(viewControllers, animated: animated)
         CATransaction.commit()
     }
 }

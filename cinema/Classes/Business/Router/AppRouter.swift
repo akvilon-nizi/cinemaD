@@ -46,6 +46,17 @@ enum AppRouterDestination {
         }
     }
 
+    var isTabView: Bool {
+        switch self {
+        case .kinobase:
+            return true
+            //        case let .authCode(_, needToDismiss):
+        //            return needToDismiss
+        default:
+            return false
+        }
+    }
+
     fileprivate func constructModule(in factory: DependencyContainer) -> UIViewController {
         do {
             switch self {
@@ -104,6 +115,8 @@ protocol AppRouterProtocol {
     func mainView()
 
     func starting()
+
+    func setRootViewController(viewControler: UINavigationController)
 }
 
 protocol AppRouterFlowControllerDataSource: class {
@@ -159,6 +172,10 @@ class AppRouter: AppRouterProtocol {
         if destination.isPresent {
             let childFlowController = moduleCreator.createNavigationFlowController(viewController: viewController)
             flowController.present(childFlowController: childFlowController, animated: true)
+                .subscribe()
+                .addDisposableTo(disposeBag)
+        } else if destination.isTabView {
+            flowController.performTransitionFromMain(to: viewController, animated: true)
                 .subscribe()
                 .addDisposableTo(disposeBag)
         } else {
@@ -224,6 +241,19 @@ class AppRouter: AppRouterProtocol {
         flowController.dismissChildFlowController(animated: true)
             .subscribe()
             .addDisposableTo(disposeBag)
+    }
+
+    func setRootViewController(viewControler: UINavigationController) {
+        guard let flowController = dataSource?.flowControllerForTransition() else {
+            log.warning("can't receive flow controller for transition")
+            return
+        }
+//        let navigationController = UINavigationController(rootViewController: viewControler)
+        flowController.rootViewController = viewControler
+        
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+        }
     }
 }
 

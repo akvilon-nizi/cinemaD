@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol NewsFilterCellDelegate: class {
-    func tapButtonSetting(_ index: IndexPath)
-}
-
 // MARK: - FilterCell
 
 class NewsFilterCell: UITableViewCell {
@@ -29,8 +25,6 @@ class NewsFilterCell: UITableViewCell {
 
     var indexPath: IndexPath = IndexPath(row: 0, section: 0)
 
-    weak var delegate: NewsFilterCellDelegate?
-
     var title: String = "" {
         didSet {
             titleLabel.text = title
@@ -44,7 +38,7 @@ class NewsFilterCell: UITableViewCell {
     var isDidSelect = false {
         didSet {
             titleLabel.textColor = !isDidSelect ? UIColor.cnmAfafaf : UIColor.cnmMainOrange
-            let image = !isDidSelect ? nil : Asset.Kinobase.check28.image
+            let image = !isDidSelect ? Asset.Kinobase.cicle.image : Asset.Kinobase.check28.image
             button.setImage(image, for: .normal)
         }
     }
@@ -54,6 +48,8 @@ class NewsFilterCell: UITableViewCell {
 
         selectionStyle = .none
 
+        contentView.backgroundColor = .white
+
         contentView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.centerYAnchor ~= centerYAnchor
         titleLabel.leadingAnchor ~= leadingAnchor + 34
@@ -61,15 +57,7 @@ class NewsFilterCell: UITableViewCell {
         contentView.addSubview(button.prepareForAutoLayout())
         button.centerYAnchor ~= centerYAnchor
         button.trailingAnchor ~= trailingAnchor - 40
-        button.addTarget(self, action: #selector(tapSettings), for: .touchUpInside)
-
-        let separatorView = UIView()
-        separatorView.backgroundColor = .cnmDadada
-        contentView.addSubview(separatorView.prepareForAutoLayout())
-        separatorView.bottomAnchor ~= bottomAnchor
-        separatorView.trailingAnchor ~= trailingAnchor - 24
-        separatorView.leadingAnchor ~= leadingAnchor + 24
-        separatorView.heightAnchor ~= 1
+        button.isUserInteractionEnabled = false
     }
 
     override func layoutSubviews() {
@@ -88,12 +76,7 @@ class NewsFilterCell: UITableViewCell {
         contentView.backgroundColor = .white
     }
 
-    // MARK: Actions
-    func tapSettings() {
-        delegate?.tapButtonSetting(indexPath)
-    }
-
     static var reuseIdentifier: String {
-        return "FilterCell"
+        return "NewsFilterCell"
     }
 }

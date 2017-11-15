@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MainPresenter {
 
@@ -16,6 +17,9 @@ class MainPresenter {
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
+    func setRootVC(_ rootVC: UINavigationController) {
+        router.setRootVC(rootVC)
+    }
 
     func viewIsReady() {
         log.verbose("Main is ready")

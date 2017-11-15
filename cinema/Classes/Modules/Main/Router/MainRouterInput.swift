@@ -4,9 +4,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MainRouterInput: BaseRouterInput {
     func openFilm(videoId: String, name: String)
     func openKinobase()
     func openStart()
+    func setRootVC(_ rootVC: UINavigationController)
 }

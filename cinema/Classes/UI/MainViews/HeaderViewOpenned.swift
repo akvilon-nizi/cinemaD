@@ -51,8 +51,6 @@ class HeaderViewOpenned: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = .red
-
         let leftView = UIView()
         leftView.backgroundColor = .cnmDadada
 
