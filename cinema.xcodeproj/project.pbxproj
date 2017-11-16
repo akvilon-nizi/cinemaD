@@ -289,6 +289,7 @@
 		CE1A5BA31F8CE1A2001AC04F /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1A5BA21F8CE1A2001AC04F /* RegistrationResponse.swift */; };
 		CE2A50ED1FB254F100EA3405 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A50EC1FB254F100EA3405 /* FilterCell.swift */; };
 		CE4DA9511F8AC56000F371E4 /* YoutubeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DA9501F8AC56000F371E4 /* YoutubeViewCell.swift */; };
+		CE9C39391FBD69FA00EF8AA5 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C39381FBD69FA00EF8AA5 /* NewsCell.swift */; };
 		CEA0A8561FB5DC9E00471566 /* DeleteFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA0A8551FB5DC9E00471566 /* DeleteFooter.swift */; };
 		CEA51E3A1FAF5ACB00EB0782 /* HeaderSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA51E391FAF5ACB00EB0782 /* HeaderSearchView.swift */; };
 		CEAB46791F96076D00432F70 /* PersonFromFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB46781F96076D00432F70 /* PersonFromFilm.swift */; };
@@ -664,6 +665,7 @@
 		CE4DA9501F8AC56000F371E4 /* YoutubeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewCell.swift; sourceTree = "<group>"; };
 		CE6B86A8B2685837B84B5549 /* PhoneViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
 		CE84316DBE05856180A542BA /* SlidesModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SlidesModuleInputOutput.swift; sourceTree = "<group>"; };
+		CE9C39381FBD69FA00EF8AA5 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		CEA0A8551FB5DC9E00471566 /* DeleteFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFooter.swift; sourceTree = "<group>"; };
 		CEA51E391FAF5ACB00EB0782 /* HeaderSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSearchView.swift; sourceTree = "<group>"; };
 		CEAB46781F96076D00432F70 /* PersonFromFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonFromFilm.swift; sourceTree = "<group>"; };
@@ -1485,6 +1487,7 @@
 		9BB4E826D7FD26246874FBAD /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				CE9C39371FBD696800EF8AA5 /* TableViewCell */,
 				CEF831C21FA9B267002CBAD3 /* Collections */,
 				041786CA1FA8AB4E0059C065 /* FilmsView */,
 				CEE0A9451F98844B006E6D9B /* FilmView */,
@@ -1980,6 +1983,16 @@
 			path = StartViews;
 			sourceTree = "<group>";
 		};
+		CE9C39371FBD696800EF8AA5 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE2A50EC1FB254F100EA3405 /* FilterCell.swift */,
+				8899A8381FBAEE3B00B86454 /* NewsFilterCell.swift */,
+				CE9C39381FBD69FA00EF8AA5 /* NewsCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
 		CEA0A8541FB5DC3F00471566 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -2030,11 +2043,9 @@
 		CEF831C21FA9B267002CBAD3 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
-				CE2A50EC1FB254F100EA3405 /* FilterCell.swift */,
 				CEF831C31FA9B297002CBAD3 /* HeaderCollectionsView.swift */,
 				CED4EA031FAAF8D500E7F58B /* CollectionCell.swift */,
 				CEA51E391FAF5ACB00EB0782 /* HeaderSearchView.swift */,
-				8899A8381FBAEE3B00B86454 /* NewsFilterCell.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -2592,6 +2603,7 @@
 				043A733C1F80CD4700E1DF43 /* Slide1View.swift in Sources */,
 				331CA1F61F500446000BA43E /* TermsManagerImplementation.swift in Sources */,
 				04A661971F6B05010032A491 /* Slide3View.swift in Sources */,
+				CE9C39391FBD69FA00EF8AA5 /* NewsCell.swift in Sources */,
 				CEB86C451F87B8D0003F07FC /* TextFieldWithSeparator.swift in Sources */,
 				338AD1A71F5554C800717F3A /* LogoutManager.swift in Sources */,
 				CEDCF20E1F9713940082BCD0 /* YoutubeImage.swift in Sources */,

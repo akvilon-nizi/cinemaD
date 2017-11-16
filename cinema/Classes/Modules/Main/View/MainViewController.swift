@@ -86,6 +86,8 @@ class MainViewController: ParentViewController {
         tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
 
         view.addSubview(mainTabView.prepareForAutoLayout())
         mainTabView.widthAnchor ~= view.widthAnchor
@@ -130,11 +132,16 @@ class MainViewController: ParentViewController {
 
         mainTabView.delegate = self
 
-        tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
+        tableViewRegister()
 
         newsHeader.tag = 5
         newsHeader.isOpen = isNewsFilterOpen
         newsHeader.delegate = self
+    }
+
+    private func tableViewRegister() {
+        tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
+        tableView.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseIdentifier)
     }
 }
 
@@ -146,6 +153,9 @@ extension MainViewController: UITableViewDataSource {
 
         if section == 5 && isNewsFilterOpen {
             return 4
+        }
+        if section == 6 {
+            return 26
         }
         return 0
     }
@@ -163,13 +173,22 @@ extension MainViewController: UITableViewDataSource {
             return cell
         }
 
+        if indexPath.section == 6 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseIdentifier, for: indexPath)
+            if let collCel = cell as? NewsCell {
+                collCel.title = indexPath.row % 2 == 0 ? "saf" : "dsfjaskfhasjdfb ewuq weh fuwe   wfqw f w  oqw qw s  sa ahsd jshash  asdh asdjkh as sd as  asdh adsfasas dfoah fah a"
+            }
+
+            return cell
+        }
+
         let cell = UITableViewCell()
 
         return cell
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -197,6 +216,10 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 5 && isNewsFilterOpen {
             return 44
+        }
+
+        if indexPath.section == 6 {
+            return UITableViewAutomaticDimension
         }
         return 0
     }
@@ -231,9 +254,7 @@ extension MainViewController: UITableViewDelegate {
             let view = HeaderViewTitle()
             view.title = "Рекомендации"
             return view
-        case 5:
-            return newsHeader
-        default:
+        case 4:
             if mainData.recomend.isEmpty {
                 return nil
             }
@@ -241,6 +262,10 @@ extension MainViewController: UITableViewDelegate {
             view.films = mainData.recomend
             view.delegate = self
             return view
+        case 5:
+            return newsHeader
+        default:
+            return nil
         }
     }
 
@@ -266,13 +291,15 @@ extension MainViewController: UITableViewDelegate {
                 return 0
             }
             return 27
+        case 4:
+            if mainData.recomend.isEmpty {
+            return 0
+            }
+            return windowWidth2
         case 5:
             return 44
         default:
-            if mainData.recomend.isEmpty {
-                return 0
-            }
-            return windowWidth2
+            return 0
         }
     }
 

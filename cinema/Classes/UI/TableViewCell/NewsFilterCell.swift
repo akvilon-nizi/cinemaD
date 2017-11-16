@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: - FilterCell
+// MARK: - NewsFilterCell
 
 class NewsFilterCell: UITableViewCell {
 
