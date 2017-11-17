@@ -13,6 +13,8 @@ protocol MainViewInput: class {
     func getError()
 
     func getData(_ mainData: MainData)
+
+    func getNews(_ mainData: MainData)
 }
 
 protocol MainViewOutput {
@@ -23,5 +25,9 @@ protocol MainViewOutput {
 
     func openKinobase()
 
-    func setRootVC(_ rootVC: UINavigationController) 
+    func setRootVC(_ rootVC: UINavigationController)
+
+    func changeFilter(_ filters: [String])
+
+    func tapNews(newsID: String)
 }

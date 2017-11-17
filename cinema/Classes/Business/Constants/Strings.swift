@@ -120,6 +120,14 @@ enum L10n {
   static let filterFilter2Title = L10n.tr("Localizable", "filter-filter2-title")
   /// Фильтр
   static let filterTitleText = L10n.tr("Localizable", "filter-title-text")
+  /// contest
+  static let filtersNewsDrawing = L10n.tr("Localizable", "filters-news-drawing")
+  /// free_cinema_session
+  static let filtersNewsFree = L10n.tr("Localizable", "filters-news-free")
+  /// events_about_the_actors
+  static let filtersNewsMessageActors = L10n.tr("Localizable", "filters-news-message-actors")
+  /// novelties
+  static let filtersNewsNew = L10n.tr("Localizable", "filters-news-new")
   /// Полный список
   static let kinobaseCollectionText = L10n.tr("Localizable", "kinobase-collection-text")
   /// + Создать коллекцию
@@ -154,6 +162,8 @@ enum L10n {
   static let newPasswordReadyButtonText = L10n.tr("Localizable", "newPassword-ready-button-text")
   /// Новый пароль
   static let newPasswordTitleText = L10n.tr("Localizable", "newPassword-title-text")
+  /// Новость
+  static let newsTitleText = L10n.tr("Localizable", "news-title-text")
   /// На указанный номер телефона будет\nотправлено сообщение с кодом\nподтврждения
   static let phoneInfoText = L10n.tr("Localizable", "phone-info-text")
   /// Далее

@@ -6,9 +6,11 @@
 import Foundation
 
 protocol NewsInteractorInput {
-
+    func getNews(newsID: String)
 }
 
 protocol NewsInteractorOutput: class {
+    func getError()
 
+    func getNews(_ news: News)
 }

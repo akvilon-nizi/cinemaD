@@ -10,6 +10,7 @@ class NewsPresenter {
     weak var view: NewsViewInput!
     var interactor: NewsInteractorInput!
     var router: NewsRouterInput!
+    var newsID: String!
     weak var output: NewsModuleOutput?
 }
 
@@ -19,11 +20,23 @@ extension NewsPresenter: NewsViewOutput {
 
     func viewIsReady() {
         log.verbose("News is ready")
+        interactor.getNews(newsID: newsID)
+    }
+
+    func backButtonTap() {
+        router.close()
     }
 }
 
 // MARK: - NewsInteractorOutput
 
 extension NewsPresenter: NewsInteractorOutput {
+    func getError() {
+        view.showNetworkError()
+    }
+
+    func getNews(_ news: News) {
+        view.openNews(news)
+    }
 
 }

@@ -91,4 +91,20 @@ extension MainInteractor: MainInteractorInput {
             }
             .addDisposableTo(disposeBag)
     }
+
+    func getNewsWithFilters(filters: [String]) {
+        provider.requestModel(.newsFiltred(filters: filters))
+            .subscribe { [unowned self] (response: Event<NewsResponse>) in
+                switch response {
+                case let .next(model):
+                    self.mainData.news = model.news
+                    self.output.getNews(mainData: self.mainData)
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
 }

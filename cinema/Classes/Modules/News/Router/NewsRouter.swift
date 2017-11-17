@@ -13,5 +13,7 @@ class NewsRouter {
 // MARK: - NewsRouterInput
 
 extension NewsRouter: NewsRouterInput {
-
+    func close() {
+        appRouter.backTransition()
+    }
 }

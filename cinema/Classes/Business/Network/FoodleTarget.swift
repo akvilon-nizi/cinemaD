@@ -39,6 +39,8 @@ enum FoodleTarget {
     case deleteCollections(idCollections: String)
     case getFilmsFromCollections(idCollections: String)
     case news
+    case newsFiltred(filters: [String])
+    case newsInfo(newsID: String)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -125,12 +127,16 @@ extension FoodleTarget: TargetType {
             return "me/collections/\(idCol)"
         case .news:
             return "news"
+        case .newsFiltred:
+            return "news"
+        case let .newsInfo(newsID):
+            return "news/\(newsID)"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo:
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
@@ -201,6 +207,13 @@ extension FoodleTarget: TargetType {
             var parameters: [String: Any] = [:]
             parameters["name"] = name
             parameters["film_ids"] = filmsID
+            return parameters
+        case let .newsFiltred(filters):
+            var parameters: [String: Any] = [:]
+            for filter in filters {
+                parameters["filter"] = filter
+            }
+//            parameters["filter"] = filters
             return parameters
         default:
             return nil

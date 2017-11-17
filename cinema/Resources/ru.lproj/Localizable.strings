@@ -150,3 +150,12 @@
 "main-news-drawing" = "Розыгрыши";
 "main-news-free" = "Бесплатные сеансы";
 
+//Filters
+"filters-news-new" = "novelties";
+"filters-news-message-actors" = "events_about_the_actors";
+"filters-news-drawing" = "contest";
+"filters-news-free" = "free_cinema_session";
+
+//News
+"news-title-text" = "Новость";
+

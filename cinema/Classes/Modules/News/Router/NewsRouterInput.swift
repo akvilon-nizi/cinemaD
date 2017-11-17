@@ -6,5 +6,5 @@
 import Foundation
 
 protocol NewsRouterInput: BaseRouterInput {
-
+    func close()
 }

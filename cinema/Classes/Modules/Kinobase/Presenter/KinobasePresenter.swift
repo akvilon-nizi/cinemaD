@@ -155,13 +155,13 @@ extension KinobasePresenter: FilterModuleOutput {
             if !genresInds.isEmpty {
                 filterParameters.willWatchGenresIndex = genresInds
                 for ind in genresInds {
-                    genres.append(kbData.genresWatched[ind])
+                    genres.append(kbData.genresWillWatch[ind])
                 }
             }
             if !yearsInds.isEmpty {
                 filterParameters.willWatchYears = yearsInds
                 for ind in yearsInds {
-                    years.append(kbData.yearsWatched[ind])
+                    years.append(kbData.yearsWillWatch[ind])
                 }
             }
         }

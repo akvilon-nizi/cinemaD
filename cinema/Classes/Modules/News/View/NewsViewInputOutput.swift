@@ -8,9 +8,15 @@ import Foundation
 protocol NewsViewInput: class {
 
     func setupInitialState()
+
+    func openNews(_ news: News)
+
+    func showNetworkError()
 }
 
 protocol NewsViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
 }

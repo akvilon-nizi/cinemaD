@@ -17,6 +17,10 @@ class MainPresenter {
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
+    func tapNews(newsID: String) {
+        router.openNews(newsID: newsID)
+    }
+
     func setRootVC(_ rootVC: UINavigationController) {
         router.setRootVC(rootVC)
     }
@@ -34,6 +38,10 @@ extension MainPresenter: MainViewOutput {
         router.openKinobase()
     }
 
+    func changeFilter(_ filters: [String]) {
+        interactor.getNewsWithFilters(filters: filters)
+    }
+
 }
 
 // MARK: - MainInteractorOutput
@@ -48,5 +56,9 @@ extension MainPresenter: MainInteractorOutput {
     }
     func getData(mainData: MainData) {
         view.getData(mainData)
+    }
+
+    func getNews(mainData: MainData) {
+        view.getNews(mainData)
     }
 }

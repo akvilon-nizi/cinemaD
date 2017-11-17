@@ -146,8 +146,33 @@ class MainViewController: ParentViewController {
         tableView.register(NewsVideoCell.self, forCellReuseIdentifier: NewsVideoCell.reuseIdentifier)
     }
 
-    func reloadNews() {
-        ewqf[pjwqefioj]
+    func reloadNewsFilter() {
+        var filters: [String] = []
+        for filterNews in newsFilterArray where filterNews.isSwitch == true {
+            filters = switchNewsFilter(title: filterNews.title, filters: filters)
+        }
+        output?.changeFilter(filters)
+    }
+
+    private func switchNewsFilter(title: String, filters: [String]) -> [String] {
+        var newsFilter: [String] = []
+        newsFilter.append(contentsOf: filters)
+        switch title {
+        case L10n.mainNewsNew:
+            newsFilter.append(L10n.filtersNewsNew)
+            return newsFilter
+        case L10n.mainNewsMessageActors:
+            newsFilter.append(L10n.filtersNewsMessageActors)
+            return newsFilter
+        case L10n.mainNewsDrawing:
+            newsFilter.append(L10n.filtersNewsDrawing)
+            return newsFilter
+        case L10n.mainNewsFree:
+            newsFilter.append(L10n.filtersNewsFree)
+            return newsFilter
+        default:
+            return filters
+        }
     }
 }
 
@@ -212,12 +237,19 @@ extension MainViewController: UITableViewDataSource {
                 newsFilterArray[indexPath.row].isSwitch = collectionCell.isDidSelect
                 UIView.setAnimationsEnabled(false)
                 tableView.beginUpdates()
-                tableView.reloadSections(IndexSet(integersIn: indexPath.section...indexPath.section), with: UITableViewRowAnimation.none)
+                mainData.news = []
+                tableView.reloadSections(IndexSet(integersIn: indexPath.section...indexPath.section + 1), with: UITableViewRowAnimation.none)
                 tableView.endUpdates()
                 UIView.setAnimationsEnabled(true)
+                activityVC.startAnimating()
+                activityVC.isHidden = false
+                view.bringSubview(toFront: activityVC)
+                reloadNewsFilter()
             }
         }
-
+        if indexPath.section == 6 {
+            output?.tapNews(newsID: mainData.news[indexPath.row].id)
+        }
     }
 
 }
@@ -345,9 +377,20 @@ extension MainViewController: MainViewInput {
         self.mainData = mainData
         activityVC.isHidden = true
         activityVC.stopAnimating()
-        tableView.reloadData()
-//        view.getData(mainData)
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integersIn: 6...6), with: UITableViewRowAnimation.none)
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
+
+    func getNews(_ mainData: MainData) {
+        self.mainData = mainData
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+        tableView.reloadData()
+    }
+
 }
 
 // MARK: - MainViewDelegate

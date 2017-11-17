@@ -4,12 +4,21 @@
 //
 
 import UIKit
+import RxMoya
 
 class NewsConfigurator {
 
     static let tag: String = "NewsTag"
 
+    var provider: RxMoyaProvider<FoodleTarget>!
+
     var appRouter: AppRouterProtocol!
+
+    let newsID: String
+
+    init(newsID: String) {
+        self.newsID = newsID
+    }
 
     func configureModule() -> UIViewController {
         let router = NewsRouter()
@@ -17,9 +26,11 @@ class NewsConfigurator {
 
         let presenter = NewsPresenter()
         presenter.router = router
+        presenter.newsID = newsID
 
         let interactor = NewsInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = NewsViewController()
         viewController.output = presenter

@@ -29,4 +29,8 @@ extension MainRouter: MainRouterInput {
     func setRootVC(_ rootVC: UINavigationController) {
         appRouter.setRootViewController(viewControler: rootVC)
     }
+
+    func openNews(newsID: String) {
+        appRouter.transition(to: .news(newsID: newsID))
+    }
 }
