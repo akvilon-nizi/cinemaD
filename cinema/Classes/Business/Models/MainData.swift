@@ -12,4 +12,5 @@ struct MainData {
     var now: [Film] = []
     var recomend: [Film] = []
     var imagePreview: [String] = []
+    var news: [News] = []
 }

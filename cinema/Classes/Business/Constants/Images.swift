@@ -69,6 +69,7 @@ enum Asset {
     static let play = ImageAsset(name: "play")
     static let selectStar = ImageAsset(name: "selectStar")
     static let sharing = ImageAsset(name: "sharing")
+    static let sharingOrange = ImageAsset(name: "sharingOrange")
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
       static let slide2Image = ImageAsset(name: "slide2-image")
@@ -79,6 +80,7 @@ enum Asset {
       static let slide3Image4 = ImageAsset(name: "slide3-image4")
       static let slide3Image5 = ImageAsset(name: "slide3-image5")
     }
+    static let timeOrange = ImageAsset(name: "timeOrange")
     static let unselectStar = ImageAsset(name: "unselectStar")
   }
   enum Kinobase {
@@ -138,6 +140,7 @@ enum Asset {
     Cinema.play,
     Cinema.selectStar,
     Cinema.sharing,
+    Cinema.sharingOrange,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
     Cinema.Slides.slide2Play,
@@ -146,6 +149,7 @@ enum Asset {
     Cinema.Slides.slide3Image3,
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
+    Cinema.timeOrange,
     Cinema.unselectStar,
     Kinobase.check,
     Kinobase.check28,

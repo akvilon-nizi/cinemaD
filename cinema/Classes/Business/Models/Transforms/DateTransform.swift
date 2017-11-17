@@ -14,7 +14,10 @@ class DateTransform: TransformType {
 
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm"
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+//        formatter.timeZone = TimeZone(identifier: "ru_RU")
+//        formatter.timeZone = TimeZone(secondsFromGMT: 60 * 60 * 3)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         return formatter
     }()
 
@@ -22,7 +25,7 @@ class DateTransform: TransformType {
 
     func transformFromJSON(_ value: Any?) -> Date? {
         if let dateString = value as? String {
-            return dateFormatter.date(from: "2017-09-09 16:45")
+            return dateFormatter.date(from: dateString)
         }
         return nil
     }
@@ -45,7 +48,7 @@ extension Formatter {
 
     static let hourMinutes: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm"
+        formatter.dateFormat = "HH:mm"
         return formatter
     }()
 

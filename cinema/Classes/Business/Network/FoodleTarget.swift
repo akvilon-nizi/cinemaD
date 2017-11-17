@@ -38,6 +38,7 @@ enum FoodleTarget {
     case putFilm(idFilm: String, idCollections: String)
     case deleteCollections(idCollections: String)
     case getFilmsFromCollections(idCollections: String)
+    case news
 
     var isRequiredAuth: Bool {
         switch self {
@@ -122,12 +123,14 @@ extension FoodleTarget: TargetType {
             return "me/collections/\(idCollections)"
         case let .patchCollections(idCol, _, _) :
             return "me/collections/\(idCol)"
+        case .news:
+            return "news"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news:
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete

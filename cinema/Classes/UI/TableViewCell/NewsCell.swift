@@ -15,7 +15,7 @@ class NewsCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
-        label.textColor = UIColor.cnmAfafaf
+        label.textColor = UIColor.cnmBlueLight
         label.numberOfLines = 1
         return label
     }()
@@ -23,7 +23,7 @@ class NewsCell: UITableViewCell {
     private let newsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaLight(size: 14)
-        label.textColor = UIColor.cnmBlueLight
+        label.textColor = UIColor.cnmAfafaf
         label.numberOfLines = 0
         return label
     }()
@@ -49,20 +49,9 @@ class NewsCell: UITableViewCell {
         imageView.heightAnchor ~= 23
         imageView.widthAnchor ~= 23
         imageView.backgroundColor = UIColor.cnm3a3a3a
+        imageView.layer.cornerRadius = 23 / 2
         return imageView
     }()
-
-    var title: String = "" {
-        didSet {
-            titleLabel.text = "Какой-то заголовок"
-            infoLabel.text = "sakdflsa, sdsadf,, sdf"
-            newsLabel.text = title
-            countLabel.text = "3"
-//            newsLabel.layoutIfNeeded()
-//            layoutIfNeeded()
-//            layoutSubviews()
-        }
-    }
 
     required init?(coder _: NSCoder) {
         fatalError("NSCoding not supported")
@@ -129,11 +118,13 @@ class NewsCell: UITableViewCell {
         super.layoutSubviews()
     }
 
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        contentView.backgroundColor = .white
-//    }
+    func setNews(_ news: News) {
+        infoLabel.text = news.creator.name + ", " + news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
+        userImage.kf.setImage(with: URL(string: news.creator.avatar))
+        titleLabel.text = news.name
+        newsLabel.text = news.description
+        countLabel.text = String(news.shared)
+    }
 
     func tapSharedButton() {
 

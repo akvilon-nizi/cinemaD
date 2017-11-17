@@ -10,3 +10,4 @@ github "youtube/youtube-ios-player-helper" ~> 0.1.4
 github "VKCOM/VK-ios-sdk"
 github "facebook/facebook-sdk-swift"
 github "facebook/facebook-ios-sdk"
+github "bwide/CollectionNode"

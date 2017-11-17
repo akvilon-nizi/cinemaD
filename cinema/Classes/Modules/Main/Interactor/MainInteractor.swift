@@ -66,6 +66,22 @@ extension MainInteractor: MainInteractorInput {
                 switch response {
                 case let .next(model):
                     self.mainData.recomend = model.recommendations
+                    self.getNews()
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getNews() {
+        provider.requestModel(.news)
+            .subscribe { [unowned self] (response: Event<NewsResponse>) in
+                switch response {
+                case let .next(model):
+                    self.mainData.news = model.news
                     self.output.getData(mainData: self.mainData)
                 case let .error(error as ProviderError):
                     self.output.getError()

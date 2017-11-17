@@ -142,6 +142,12 @@ class MainViewController: ParentViewController {
     private func tableViewRegister() {
         tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
         tableView.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseIdentifier)
+        tableView.register(NewsImageCell.self, forCellReuseIdentifier: NewsImageCell.reuseIdentifier)
+        tableView.register(NewsVideoCell.self, forCellReuseIdentifier: NewsVideoCell.reuseIdentifier)
+    }
+
+    func reloadNews() {
+        ewqf[pjwqefioj]
     }
 }
 
@@ -155,7 +161,7 @@ extension MainViewController: UITableViewDataSource {
             return 4
         }
         if section == 6 {
-            return 26
+            return mainData.news.count
         }
         return 0
     }
@@ -174,12 +180,19 @@ extension MainViewController: UITableViewDataSource {
         }
 
         if indexPath.section == 6 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseIdentifier, for: indexPath)
-            if let collCel = cell as? NewsCell {
-                collCel.title = indexPath.row % 2 == 0 ? "saf" : "dsfjaskfhasjdfb ewuq weh fuwe   wfqw f w  oqw qw s  sa ahsd jshash  asdh asdjkh as sd as  asdh adsfasas dfoah fah a"
+            if mainData.news[indexPath.row].type == "common" {
+                let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseIdentifier, for: indexPath)
+                if let collCel = cell as? NewsCell {
+                    collCel.setNews(mainData.news[indexPath.row])
+                }
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: NewsImageCell.reuseIdentifier, for: indexPath)
+                if let collCel = cell as? NewsImageCell {
+                    collCel.setNews(mainData.news[indexPath.row])
+                }
+                return cell
             }
-
-            return cell
         }
 
         let cell = UITableViewCell()
@@ -306,6 +319,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
+
 }
 
 // MARK: - MainViewInput
