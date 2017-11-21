@@ -50,5 +50,7 @@ enum Configurations {
         //        }
     }
 
+    static let linkShare: String = "https://itunes.apple.com/us/app/keynote/id361285480?mt=8"
+
     static let googleApi: String = "AIzaSyB11962AzbjV9dEk4sQH2nZhFbVWIicrYA"
 }

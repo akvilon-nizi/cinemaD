@@ -210,10 +210,10 @@ extension FoodleTarget: TargetType {
             return parameters
         case let .newsFiltred(filters):
             var parameters: [String: Any] = [:]
-            for filter in filters {
-                parameters["filter"] = filter
-            }
-//            parameters["filter"] = filters
+//            for filter in filters {
+//                parameters["filter"] = filter
+//            }
+            parameters["filter"] = filters
             return parameters
         default:
             return nil
@@ -222,7 +222,7 @@ extension FoodleTarget: TargetType {
 
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case  .filmWatchedPost, .filmWillWatchPost, .patchCollections:
+        case  .filmWatchedPost, .filmWillWatchPost, .patchCollections, .newsFiltred:
             return JsonArrayEncoding.default
         default:
             return URLEncoding(destination: .queryString)

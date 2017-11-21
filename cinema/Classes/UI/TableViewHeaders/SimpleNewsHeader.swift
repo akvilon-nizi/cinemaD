@@ -1,24 +1,20 @@
 //
-//  NewsCell.swift
+//  SimpleNewsHeader.swift
 //  cinema
 //
-//  Created by User on 16.11.17.
+//  Created by User on 17.11.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.
 //
 
 import UIKit
 
-// MARK: - NewsFilterCell
-
-protocol NewsCellDelegate: class {
-    func openShareSimple(news: News)
+protocol SimpleNewsHeaderDelegate: class {
+    func openShareSimple()
 }
 
-class NewsCell: UITableViewCell {
+class SimpleNewsHeader: UITableViewHeaderFooterView {
 
-    var news: News?
-
-    weak var delegate: NewsCellDelegate?
+    weak var delegate: SimpleNewsHeaderDelegate?
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -61,14 +57,12 @@ class NewsCell: UITableViewCell {
         return imageView
     }()
 
-    required init?(coder _: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        selectionStyle = .none
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
 
         contentView.backgroundColor = .white
 
@@ -80,16 +74,12 @@ class NewsCell: UITableViewCell {
         mainView.leadingAnchor ~= contentView.leadingAnchor + 34
         mainView.trailingAnchor ~= contentView.trailingAnchor - 27
 
-        mainView.addSubview(userImage.prepareForAutoLayout())
-        userImage.topAnchor ~= mainView.topAnchor
-        userImage.leadingAnchor ~= mainView.leadingAnchor
-
         mainView.addSubview(infoLabel.prepareForAutoLayout())
-        infoLabel.centerYAnchor ~= userImage.centerYAnchor
-        infoLabel.leadingAnchor ~= userImage.trailingAnchor + 11
+        infoLabel.topAnchor ~= mainView.topAnchor
+        infoLabel.leadingAnchor ~= mainView.leadingAnchor
 
         mainView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.topAnchor ~= userImage.bottomAnchor + 9
+        titleLabel.topAnchor ~= infoLabel.bottomAnchor + 12
         titleLabel.leadingAnchor ~= mainView.leadingAnchor
 
         mainView.addSubview(newsLabel.prepareForAutoLayout())
@@ -122,13 +112,8 @@ class NewsCell: UITableViewCell {
         separatorView.topAnchor ~= mainView.bottomAnchor + 20
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-
     func setNews(_ news: News) {
-        self.news = news
-        infoLabel.text = news.creator.name + ", " + news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
+        infoLabel.text = news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
         userImage.kf.setImage(with: URL(string: news.creator.avatar))
         titleLabel.text = news.name
         newsLabel.text = news.description
@@ -136,12 +121,6 @@ class NewsCell: UITableViewCell {
     }
 
     func tapSharedButton() {
-        if let newShare = news {
-            delegate?.openShareSimple(news: newShare)
-        }
-    }
-
-    static var reuseIdentifier: String {
-        return "NewsCell"
+        delegate?.openShareSimple()
     }
 }

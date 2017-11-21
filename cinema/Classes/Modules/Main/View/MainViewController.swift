@@ -6,6 +6,7 @@
 import UIKit
 import RxMoya
 import RxSwift
+import VKSdkFramework
 
 struct NewsFilter {
     let title: String
@@ -174,6 +175,27 @@ class MainViewController: ParentViewController {
             return filters
         }
     }
+
+    func shareNews(imageShare: UIImage?, news: News?) {
+        if let newsShare = news {
+            let vkShare = VKShareDialogController()
+            //            var text = newsShare.description.components(separatedBy: ".")
+            let string: String = newsShare.name + ". " + newsShare.description
+            vkShare.text = string
+            if let image = imageShare {
+                let img = VKUploadImage(image: image, andParams: nil)
+                vkShare.uploadImages = [img as Any]
+            }
+            let link = URL(string: Configurations.linkShare)
+            vkShare.shareLink = VKShareLink(title: "Cinemad", link: link)
+
+            vkShare.completionHandler = { result, str  in
+                self.dismiss(animated: true, completion: nil)
+            }
+
+            present(vkShare, animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -209,12 +231,14 @@ extension MainViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseIdentifier, for: indexPath)
                 if let collCel = cell as? NewsCell {
                     collCel.setNews(mainData.news[indexPath.row])
+                    collCel.delegate = self
                 }
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: NewsImageCell.reuseIdentifier, for: indexPath)
                 if let collCel = cell as? NewsImageCell {
                     collCel.setNews(mainData.news[indexPath.row])
+                    collCel.delegate = self
                 }
                 return cell
             }
@@ -391,6 +415,8 @@ extension MainViewController: MainViewInput {
         tableView.reloadData()
     }
 
+
+
 }
 
 // MARK: - MainViewDelegate
@@ -409,7 +435,7 @@ extension MainViewController: MainTabViewDelegate {
     }
 
     func chatTapped() {
-        output.openKinobase()
+//        output.openKinobase()
     }
 
     func kinobaseTapped() {
@@ -446,5 +472,17 @@ extension MainViewController: UINavigationControllerDelegate {
         if navigationController.childViewControllers.count == 1 {
             mainTabView.reloadData()
         }
+    }
+}
+
+extension MainViewController: NewsImageCellDelegate {
+    func openShare(image: UIImage?, news: News) {
+        shareNews(imageShare: image, news: news)
+    }
+}
+
+extension MainViewController: NewsCellDelegate {
+    func openShareSimple(news: News) {
+        shareNews(imageShare: nil, news: news)
     }
 }

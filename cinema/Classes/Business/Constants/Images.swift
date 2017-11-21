@@ -67,6 +67,7 @@ enum Asset {
       static let isOpen = ImageAsset(name: "isOpen")
     }
     static let play = ImageAsset(name: "play")
+    static let plus = ImageAsset(name: "plus")
     static let selectStar = ImageAsset(name: "selectStar")
     static let sharing = ImageAsset(name: "sharing")
     static let sharingOrange = ImageAsset(name: "sharingOrange")
@@ -138,6 +139,7 @@ enum Asset {
     Cinema.MainView.isClose,
     Cinema.MainView.isOpen,
     Cinema.play,
+    Cinema.plus,
     Cinema.selectStar,
     Cinema.sharing,
     Cinema.sharingOrange,

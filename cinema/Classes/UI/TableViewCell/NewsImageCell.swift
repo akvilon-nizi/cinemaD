@@ -10,13 +10,22 @@ import UIKit
 
 // MARK: - NewsImageCell
 
+protocol NewsImageCellDelegate: class {
+    func openShare(image: UIImage?, news: News)
+}
+
 class NewsImageCell: UITableViewCell {
+
+    var news: News?
+
+    weak var delegate: NewsImageCellDelegate?
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.cnmFutura(size: 20)
+        label.font = UIFont.cnmFutura(size: 19)
         label.textColor = .white
         label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
 
@@ -86,29 +95,33 @@ class NewsImageCell: UITableViewCell {
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharingOrange.image, for: .normal)
-        shareButton.addTarget(self, action: #selector(tapSharedButton), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(tapSharedButtons), for: .touchUpInside)
 
-        newsImage.addSubview(shareButton.prepareForAutoLayout())
-        shareButton.leadingAnchor ~= newsImage.leadingAnchor + 5
+        mainView.addSubview(shareButton.prepareForAutoLayout())
+        shareButton.leadingAnchor ~= mainView.leadingAnchor + 5
         shareButton.widthAnchor ~= 20
         shareButton.heightAnchor ~= 22
         shareButton.bottomAnchor ~= newsImage.bottomAnchor - 5
 
-        newsImage.addSubview(countLabel.prepareForAutoLayout())
+        mainView.addSubview(countLabel.prepareForAutoLayout())
         countLabel.centerYAnchor ~= shareButton.centerYAnchor
         countLabel.leadingAnchor ~= shareButton.trailingAnchor + 6
 
         let imageTime = UIImageView(image: Asset.Cinema.timeOrange.image)
-        newsImage.addSubview(imageTime.prepareForAutoLayout())
+        mainView.addSubview(imageTime.prepareForAutoLayout())
 
         imageTime.centerYAnchor ~= shareButton.centerYAnchor
         imageTime.leadingAnchor ~= countLabel.trailingAnchor + 15
         imageTime.heightAnchor ~= 21
         imageTime.widthAnchor ~= 21
 
-        newsImage.addSubview(infoLabel.prepareForAutoLayout())
+        mainView.addSubview(infoLabel.prepareForAutoLayout())
         infoLabel.centerYAnchor ~= shareButton.centerYAnchor
         infoLabel.leadingAnchor ~= imageTime.trailingAnchor + 9
+
+        mainView.addSubview(titleLabel.prepareForAutoLayout())
+        titleLabel.bottomAnchor ~= shareButton.topAnchor - 9
+        titleLabel.leadingAnchor ~= shareButton.leadingAnchor
 //        let separatorView = UIView()
 //        separatorView.backgroundColor = .cnmDadada
 //        contentView.addSubview(separatorView.prepareForAutoLayout())
@@ -124,6 +137,7 @@ class NewsImageCell: UITableViewCell {
     }
 
     func setNews(_ news: News) {
+        self.news = news
         infoLabel.text = news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
         titleLabel.text = news.name
         countLabel.text = String(news.shared)
@@ -135,8 +149,10 @@ class NewsImageCell: UITableViewCell {
         }
     }
 
-    func tapSharedButton() {
-
+    func tapSharedButtons() {
+        if let newShare = news {
+            delegate?.openShare(image: newsImage.image, news: newShare)
+        }
     }
 
     static var reuseIdentifier: String {

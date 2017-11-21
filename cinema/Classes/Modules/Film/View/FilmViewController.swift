@@ -31,7 +31,11 @@ class FilmViewController: ParentViewController {
         return button
     }()
 
+    let textView = ReadMoreTextView()
+
     let desriptionLabel = UILabel()
+
+    var descriptions: String = ""
 
     let titleLabel = UILabel()
 
@@ -265,9 +269,9 @@ class FilmViewController: ParentViewController {
     }
 
     func setInfo2(_ filmInfo: FullFilm) {
-        let textView = ReadMoreTextView()
 
         textView.text = filmInfo.description
+        descriptions = filmInfo.description
 
         textView.font = UIFont.cnmFutura(size: 14)
         textView.textColor = UIColor.cnmGreyLight
@@ -373,7 +377,7 @@ class FilmViewController: ParentViewController {
     }
 
     func didTapChatButton() {
-        fbClick()
+//        fbClick()
     }
 
     func showDialog<C: ContentProtocol>(_ content: C, mode: ShareDialogMode = .automatic) {
@@ -479,11 +483,11 @@ class FilmViewController: ParentViewController {
 //            showDialog(content)
             let vkShare = VKShareDialogController()
             if let info = titleLabel.text {
-                vkShare.text = name + ". " + info
+                vkShare.text = name + ". " + info + " " + descriptions
             }
 
             let img = VKUploadImage(image: image, andParams: nil)
-            let link = URL(string: "https://itunes.apple.com/us/app/keynote/id361285480?mt=8")
+            let link = URL(string: Configurations.linkShare)
             vkShare.shareLink = VKShareLink(title: "Cinemad", link: link)
             vkShare.uploadImages = [img as Any]
 
@@ -506,15 +510,16 @@ class FilmViewController: ParentViewController {
 //    }
 
     func didTapSharingButton() {
-        let textToShare = "CinemaD"
-
-        if let image = imageView.image {
-            let objectsToShare = [textToShare, image] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-
-            //activityVC.popoverPresentationController?.sourceView = sender
-            present(activityVC, animated: true, completion: nil)
-        }
+        fbClick()
+//        let textToShare = "CinemaD"
+//
+//        if let image = imageView.image {
+//            let objectsToShare = [textToShare, image] as [Any]
+//            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//
+//            //activityVC.popoverPresentationController?.sourceView = sender
+//            present(activityVC, animated: true, completion: nil)
+//        }
     }
 
     func setStars(_ tag: Int) {

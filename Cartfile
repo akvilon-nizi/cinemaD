@@ -11,3 +11,4 @@ github "VKCOM/VK-ios-sdk"
 github "facebook/facebook-sdk-swift"
 github "facebook/facebook-ios-sdk"
 github "bwide/CollectionNode"
+github "zvonicek/ImageSlideshow" ~> 1.4
