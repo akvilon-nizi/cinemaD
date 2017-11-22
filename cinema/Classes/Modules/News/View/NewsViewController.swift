@@ -25,6 +25,14 @@ class NewsViewController: ParentViewController {
 
     let bottomView = UIView()
 
+    let addView = UIView()
+
+    let textView = UITextView()
+
+    let addButton = UIButton()
+
+    var constraintAddView: NSLayoutConstraint?
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -69,7 +77,8 @@ class NewsViewController: ParentViewController {
         tableView.reloadData()
         tableView.separatorStyle = .none
 
-        let addButton = UIButton()
+        addAddView()
+
         addButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
         addButton.setImage(Asset.Cinema.plus.image, for: .normal)
         addButton.heightAnchor ~= 69
@@ -91,6 +100,19 @@ class NewsViewController: ParentViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    private func addAddView() {
+        view.addSubview(addView.prepareForAutoLayout())
+        addView.heightAnchor ~= 55
+        addView.widthAnchor ~= view.widthAnchor
+        addView.backgroundColor = .red
+        constraintAddView = addView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        constraintAddView?.isActive = true
+
+        textView.delegate = self
+        addView.addSubview(textView.prepareForAutoLayout())
+        textView.pin(to: addView, top: 3, left: 30, right: 30, bottom: 3)
     }
 
     func loadData(_ news: News) {
@@ -139,22 +161,38 @@ class NewsViewController: ParentViewController {
 
     func keyboardWillShow(notification: NSNotification) {
 
-        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-        if self.view.frame.origin.y == 0 {
-            self.view.frame.origin.y -= 100
-        }
-        //        }
+//        if let keyboardSize1 = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
+//
+//            print()
+//        }
+
+                if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                    if constraintAddView?.constant == 0 {
+                        constraintAddView?.constant = -keyboardSize.size.height + 80
+                        UIView.animate(withDuration: 0.5) {
+                            self.view.layoutIfNeeded()
+                        }
+                    }
+//        if self.view.frame.origin.y == 0 {
+//            self.view.frame.origin.y -= 100
+//        }
+                }
 
     }
 
     func keyboardWillHide(notification: NSNotification) {
 
-        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y += 100
-
-        }
-        //        }
+                    if constraintAddView?.constant != 0 {
+                        constraintAddView?.constant = 0
+                        UIView.animate(withDuration: 0.5) {
+                            self.view.layoutIfNeeded()
+                        }
+                    }
+//        if self.view.frame.origin.y != 0 {
+//            self.view.frame.origin.y += 100
+//
+//        }
+       // }
     }
 }
 
@@ -252,5 +290,17 @@ extension NewsViewController: NewsViewInput {
 
     func setupInitialState() {
 
+    }
+}
+
+// MARK: - UITextViewDelegate
+
+extension NewsViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
 }
