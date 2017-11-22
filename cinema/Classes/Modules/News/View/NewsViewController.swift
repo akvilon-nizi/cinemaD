@@ -79,6 +79,15 @@ class NewsViewController: ParentViewController {
 
         addAddView()
 
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    private func addAddView() {
+
         addButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
         addButton.setImage(Asset.Cinema.plus.image, for: .normal)
         addButton.heightAnchor ~= 69
@@ -92,23 +101,13 @@ class NewsViewController: ParentViewController {
         addButton.layer.borderColor = UIColor(white: 0, alpha: 0.1).cgColor
         addButton.layer.borderWidth = 1
 
-        addButton.layoutSubviews()
-        addButton.layoutIfNeeded()
-
-        activityVC.isHidden = false
-        activityVC.startAnimating()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-
-    private func addAddView() {
         view.addSubview(addView.prepareForAutoLayout())
         addView.heightAnchor ~= 55
         addView.widthAnchor ~= view.widthAnchor
-        addView.backgroundColor = .red
+        addView.backgroundColor = UIColor.cnmGreyLight
         constraintAddView = addView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         constraintAddView?.isActive = true
+        addView.isHidden = true
 
         textView.delegate = self
         addView.addSubview(textView.prepareForAutoLayout())
@@ -128,7 +127,6 @@ class NewsViewController: ParentViewController {
     func shareNews(imageShare: UIImage?) {
         if let newsShare = news {
             let vkShare = VKShareDialogController()
-//            var text = newsShare.description.components(separatedBy: ".")
             let string: String = newsShare.name + ". " + newsShare.description
             vkShare.text = string
             if let image = imageShare {
@@ -156,43 +154,28 @@ class NewsViewController: ParentViewController {
     }
 
     func didTapAddButton() {
-        print()
+        addButton.isHidden = true
+        addView.isHidden = false
     }
 
     func keyboardWillShow(notification: NSNotification) {
-
-//        if let keyboardSize1 = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
-//
-//            print()
-//        }
-
-                if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                    if constraintAddView?.constant == 0 {
-                        constraintAddView?.constant = -keyboardSize.size.height + 80
-                        UIView.animate(withDuration: 0.5) {
-                            self.view.layoutIfNeeded()
-                        }
-                    }
-//        if self.view.frame.origin.y == 0 {
-//            self.view.frame.origin.y -= 100
-//        }
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if constraintAddView?.constant == 0 {
+                constraintAddView?.constant = -keyboardSize.size.height + 80
+                UIView.animate(withDuration: 0) {
+                    self.view.layoutIfNeeded()
                 }
-
+            }
+        }
     }
 
     func keyboardWillHide(notification: NSNotification) {
-
-                    if constraintAddView?.constant != 0 {
-                        constraintAddView?.constant = 0
-                        UIView.animate(withDuration: 0.5) {
-                            self.view.layoutIfNeeded()
-                        }
-                    }
-//        if self.view.frame.origin.y != 0 {
-//            self.view.frame.origin.y += 100
-//
-//        }
-       // }
+        if constraintAddView?.constant != 0 {
+            constraintAddView?.constant = 0
+            UIView.animate(withDuration: 0) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }
 
@@ -297,7 +280,7 @@ extension NewsViewController: NewsViewInput {
 
 extension NewsViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if (text == "\n") {
+        if text == "\n" {
             textView.resignFirstResponder()
             return false
         }
