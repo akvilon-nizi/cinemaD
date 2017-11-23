@@ -158,4 +158,10 @@
 
 //News
 "news-title-text" = "Новость";
+"news-message-placeholder" = "Написать комментарий";
+
+//Rewards
+"rewards-title-text" = "Награды";
+"rewards-reviews-title" = "За просмотры";
+"rewards-location-title" = "По геолокации";
 

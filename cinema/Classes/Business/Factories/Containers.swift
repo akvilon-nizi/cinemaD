@@ -132,6 +132,14 @@ enum Containers {
             return configurator.configureModule()
         }
 
+        container.register(tag: RewardsConfigurator.tag) { () -> UIViewController in
+            let configurator = RewardsConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            configurator.locationManager = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
         container.register(tag: MainConfigurator.tag) { () -> UIViewController in
             let configurator = MainConfigurator()
             configurator.appRouter = try managersContainer.resolve()

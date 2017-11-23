@@ -22,6 +22,10 @@ extension MainRouter: MainRouterInput {
         appRouter.transition(to: .kinobase)
     }
 
+    func openRewards() {
+        appRouter.transition(to: .rewards)
+    }
+
     func openStart() {
         appRouter.starting()
     }

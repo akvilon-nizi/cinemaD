@@ -9,7 +9,7 @@ protocol NewsViewInput: class {
 
     func setupInitialState()
 
-    func openNews(_ news: News)
+    func openNews(_ newsData: NewsData)
 
     func showNetworkError()
 }
@@ -19,4 +19,6 @@ protocol NewsViewOutput {
     func viewIsReady()
 
     func backButtonTap()
+
+    func sendMessage(message: String)
 }

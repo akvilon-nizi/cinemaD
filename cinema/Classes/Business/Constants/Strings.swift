@@ -2,7 +2,6 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -163,6 +162,8 @@ enum L10n {
   static let newPasswordReadyButtonText = L10n.tr("Localizable", "newPassword-ready-button-text")
   /// Новый пароль
   static let newPasswordTitleText = L10n.tr("Localizable", "newPassword-title-text")
+  /// Написать комментарий
+  static let newsMessagePlaceholder = L10n.tr("Localizable", "news-message-placeholder")
   /// Новость
   static let newsTitleText = L10n.tr("Localizable", "news-title-text")
   /// На указанный номер телефона будет\nотправлено сообщение с кодом\nподтврждения
@@ -191,6 +192,12 @@ enum L10n {
   static let regRegulationsButtonText = L10n.tr("Localizable", "reg-regulations-button-text")
   /// Регистрация
   static let regTitleText = L10n.tr("Localizable", "reg-title-text")
+  /// По геолокации
+  static let rewardsLocationTitle = L10n.tr("Localizable", "rewards-location-title")
+  /// За просмотры
+  static let rewardsReviewsTitle = L10n.tr("Localizable", "rewards-reviews-title")
+  /// Награды
+  static let rewardsTitleText = L10n.tr("Localizable", "rewards-title-text")
   /// Поехали !
   static let slideMainButton = L10n.tr("Localizable", "slide-main-button")
   /// Купить билеты

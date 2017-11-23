@@ -13,4 +13,6 @@ protocol RewardsViewInput: class {
 protocol RewardsViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
 }

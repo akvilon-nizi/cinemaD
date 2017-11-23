@@ -16,6 +16,9 @@ class RewardsPresenter {
 // MARK: - RewardsViewOutput
 
 extension RewardsPresenter: RewardsViewOutput {
+    func backButtonTap() {
+        router.close()
+    }
 
     func viewIsReady() {
         log.verbose("Rewards is ready")

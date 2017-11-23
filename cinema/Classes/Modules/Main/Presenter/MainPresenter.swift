@@ -17,6 +17,10 @@ class MainPresenter {
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
+    func openRewards() {
+        router.openRewards()
+    }
+
     func tapNews(newsID: String) {
         router.openNews(newsID: newsID)
     }

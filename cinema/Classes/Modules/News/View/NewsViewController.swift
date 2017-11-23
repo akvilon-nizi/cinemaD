@@ -7,6 +7,11 @@ import UIKit
 import RxMoya
 import VKSdkFramework
 
+struct NewsData {
+    var news: News?
+    var comments: [Comment] = []
+}
+
 enum NewsType {
     case common
     case images
@@ -21,13 +26,11 @@ class NewsViewController: ParentViewController {
 
     var newsType: NewsType = .common
 
-    var news: News?
+    var newsData = NewsData()
 
     let bottomView = UIView()
 
-    let addView = UIView()
-
-    let textView = UITextView()
+    let messageView = MessageView()
 
     let addButton = UIButton()
 
@@ -74,16 +77,21 @@ class NewsViewController: ParentViewController {
         tableView.pinEdgesToSuperviewEdges()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.reloadData()
         tableView.separatorStyle = .none
+        tableViewRegister()
 
         addAddView()
 
         activityVC.isHidden = false
         activityVC.startAnimating()
+        view.bringSubview(toFront: activityVC)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    private func tableViewRegister() {
+        tableView.register(CommentCell.self, forCellReuseIdentifier: CommentCell.reuseIdentifier)
     }
 
     private func addAddView() {
@@ -100,32 +108,29 @@ class NewsViewController: ParentViewController {
 
         addButton.layer.borderColor = UIColor(white: 0, alpha: 0.1).cgColor
         addButton.layer.borderWidth = 1
+        addButton.isHidden = true
 
-        view.addSubview(addView.prepareForAutoLayout())
-        addView.heightAnchor ~= 55
-        addView.widthAnchor ~= view.widthAnchor
-        addView.backgroundColor = UIColor.cnmGreyLight
-        constraintAddView = addView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        messageView.delegate = self
+        view.addSubview(messageView.prepareForAutoLayout())
+        messageView.heightAnchor ~= 55
+        messageView.widthAnchor ~= view.widthAnchor
+        constraintAddView = messageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         constraintAddView?.isActive = true
-        addView.isHidden = true
-
-        textView.delegate = self
-        addView.addSubview(textView.prepareForAutoLayout())
-        textView.pin(to: addView, top: 3, left: 30, right: 30, bottom: 3)
+        messageView.isHidden = true
     }
 
     func loadData(_ news: News) {
-        self.news = news
         if news.type == "common" {
             newsType = .common
         } else {
             newsType = .images
         }
+        addButton.isHidden = false
         tableView.reloadData()
     }
 
     func shareNews(imageShare: UIImage?) {
-        if let newsShare = news {
+        if let newsShare = newsData.news {
             let vkShare = VKShareDialogController()
             let string: String = newsShare.name + ". " + newsShare.description
             vkShare.text = string
@@ -155,7 +160,7 @@ class NewsViewController: ParentViewController {
 
     func didTapAddButton() {
         addButton.isHidden = true
-        addView.isHidden = false
+        messageView.isHidden = false
     }
 
     func keyboardWillShow(notification: NSNotification) {
@@ -184,15 +189,15 @@ class NewsViewController: ParentViewController {
 extension NewsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return newsData.comments.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-//        let cell = tableView.dequeueReusableCell(withIdentifier: FilterCell.reuseIdentifier, for: indexPath)
-//        if let collCel = cell as? FilterCell {
-//
-//        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: CommentCell.reuseIdentifier, for: indexPath)
+        if let collCel = cell as? CommentCell {
+            collCel.setComment(newsData.comments[indexPath.row])
+            return collCel
+        }
         return cell
     }
 
@@ -231,7 +236,7 @@ extension NewsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let newsA = news {
+        if let newsA = newsData.news {
             if newsType == .common {
                 let view = SimpleNewsHeader()
                 view.setNews(newsA)
@@ -259,10 +264,13 @@ extension NewsViewController: UITableViewDelegate {
 // MARK: - NewsViewInput
 
 extension NewsViewController: NewsViewInput {
-    func openNews(_ news: News) {
+    func openNews(_ newsData: NewsData) {
         activityVC.isHidden = true
         activityVC.stopAnimating()
-        loadData(news)
+        self.newsData = newsData
+        if let news = newsData.news {
+            loadData(news)
+        }
     }
 
     func showNetworkError() {
@@ -285,5 +293,26 @@ extension NewsViewController: UITextViewDelegate {
             return false
         }
         return true
+    }
+}
+
+// MARK: - MessageViewDelegate
+
+extension NewsViewController: MessageViewDelegate {
+    func sendMessage(_ message: String) {
+        closeMessageView()
+        output?.sendMessage(message: message)
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+    }
+
+    func close() {
+        closeMessageView()
+    }
+
+    func closeMessageView() {
+        view.endEditing(true)
+        messageView.isHidden = true
+        addButton.isHidden = false
     }
 }

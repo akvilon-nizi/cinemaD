@@ -25,6 +25,8 @@ protocol MainViewOutput {
 
     func openKinobase()
 
+    func openRewards()
+
     func setRootVC(_ rootVC: UINavigationController)
 
     func changeFilter(_ filters: [String])

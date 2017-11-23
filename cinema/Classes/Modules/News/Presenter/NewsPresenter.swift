@@ -17,6 +17,9 @@ class NewsPresenter {
 // MARK: - NewsViewOutput
 
 extension NewsPresenter: NewsViewOutput {
+    func sendMessage(message: String) {
+        interactor.putComment(newsID: newsID, message: message)
+    }
 
     func viewIsReady() {
         log.verbose("News is ready")
@@ -31,12 +34,16 @@ extension NewsPresenter: NewsViewOutput {
 // MARK: - NewsInteractorOutput
 
 extension NewsPresenter: NewsInteractorOutput {
+    func loadComment(_ id: String) {
+        print()
+    }
+
     func getError() {
         view.showNetworkError()
     }
 
-    func getNews(_ news: News) {
-        view.openNews(news)
+    func getNews(_ newsData: NewsData) {
+        view.openNews(newsData)
     }
 
 }

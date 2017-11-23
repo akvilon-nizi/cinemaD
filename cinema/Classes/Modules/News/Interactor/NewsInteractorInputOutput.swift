@@ -7,10 +7,14 @@ import Foundation
 
 protocol NewsInteractorInput {
     func getNews(newsID: String)
+    func putComment(newsID: String, message: String)
+    func getComment(newsID: String)
 }
 
 protocol NewsInteractorOutput: class {
     func getError()
 
-    func getNews(_ news: News)
+    func getNews(_ newsData: NewsData)
+
+    func loadComment(_ id: String)
 }

@@ -4,12 +4,17 @@
 //
 
 import UIKit
+import RxMoya
 
 class RewardsConfigurator {
 
     static let tag: String = "RewardsTag"
 
     var appRouter: AppRouterProtocol!
+
+    var locationManager: LocationManagerProtocol!
+
+    var provider: RxMoyaProvider<FoodleTarget>!
 
     func configureModule() -> UIViewController {
         let router = RewardsRouter()

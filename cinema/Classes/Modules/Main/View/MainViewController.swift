@@ -427,7 +427,7 @@ extension MainViewController: MainTabViewDelegate {
     }
 
     func rewardsTapped() {
-        print("rewardsTapped")
+        output.openRewards()
     }
 
     func profileTapped() {

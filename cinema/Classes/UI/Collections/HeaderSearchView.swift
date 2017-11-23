@@ -25,6 +25,8 @@ class HeaderSearchView: UITableViewHeaderFooterView {
 
     fileprivate let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
+    fileprivate let rightButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
+
     weak var delegate: HeaderSearchDelegate?
 
     override init(reuseIdentifier: String?) {
@@ -46,7 +48,6 @@ class HeaderSearchView: UITableViewHeaderFooterView {
         titleField.leftView = leftView
         titleField.leftViewMode = .always
 
-        let rightButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
         rightButton.setImage(Asset.Search.type.image, for: .normal)
         rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
         let rightView = UIView()
@@ -68,6 +69,10 @@ class HeaderSearchView: UITableViewHeaderFooterView {
         separatorView.trailingAnchor ~= trailingAnchor - 24
         separatorView.leadingAnchor ~= leadingAnchor + 24
         separatorView.heightAnchor ~= 1
+    }
+
+    func hiddenRightButton() {
+        rightButton.isHidden = true
     }
 
     func typeButtonTap() {

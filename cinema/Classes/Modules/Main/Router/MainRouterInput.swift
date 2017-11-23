@@ -9,6 +9,7 @@ import UIKit
 protocol MainRouterInput: BaseRouterInput {
     func openFilm(videoId: String, name: String)
     func openKinobase()
+    func openRewards()
     func openStart()
     func setRootVC(_ rootVC: UINavigationController)
     func openNews(newsID: String)

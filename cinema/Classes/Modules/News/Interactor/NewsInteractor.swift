@@ -12,6 +12,7 @@ class NewsInteractor {
     weak var output: NewsInteractorOutput!
     fileprivate var disposeBag = DisposeBag()
     var provider: RxMoyaProvider<FoodleTarget>!
+    var newsData = NewsData()
 }
 
 // MARK: - NewsInteractorInput
@@ -22,8 +23,40 @@ extension NewsInteractor: NewsInteractorInput {
             .subscribe { [unowned self] (response: Event<News>) in
                 switch response {
                 case let .next(model):
-                    self.output.getNews(model)
+                    self.newsData.news = model
+                    self.getComment(newsID: newsID)
                 case let .error(error as ProviderError):                    print()
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getComment(newsID: String) {
+        provider.requestModel(.newsComments(newsID: newsID) )
+            .subscribe { [unowned self] (response: Event<CommentsResponse>) in
+                switch response {
+                case let .next(model):
+                    self.newsData.comments = model.comments
+                    self.output.getNews(self.newsData)
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func putComment(newsID: String, message: String) {
+        provider.requestModel(.putNewsComment(newsID: newsID, message: message) )
+            .subscribe { [unowned self] (response: Event<PutCommentResponse>) in
+                switch response {
+                case let .next(model):
+                    self.output.loadComment(model.id)
+                case let .error(error as ProviderError):
                     self.output.getError()
                 default:
                     break

@@ -41,6 +41,8 @@ enum FoodleTarget {
     case news
     case newsFiltred(filters: [String])
     case newsInfo(newsID: String)
+    case newsComments(newsID: String)
+    case putNewsComment(newsID: String, message: String)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -131,18 +133,22 @@ extension FoodleTarget: TargetType {
             return "news"
         case let .newsInfo(newsID):
             return "news/\(newsID)"
+        case let .newsComments(newsID):
+            return "news/\(newsID)/comments"
+        case let .putNewsComment(newsID, _):
+            return "news/\(newsID)/comments"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments:
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
         case .patchCollections:
             return .patch
-        case .putCollections, .putFilm:
+        case .putCollections, .putFilm, .putNewsComment:
             return .put
         default:
             return .post
@@ -215,6 +221,8 @@ extension FoodleTarget: TargetType {
 //            }
             parameters["filter"] = filters
             return parameters
+        case let .putNewsComment(_, message):
+            return ["description": message]
         default:
             return nil
         }

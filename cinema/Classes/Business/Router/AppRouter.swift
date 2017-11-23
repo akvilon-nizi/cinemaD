@@ -27,6 +27,7 @@ enum AppRouterDestination {
     case film(videoID: String, name: String)
     case kinobase
     case main
+    case rewards
     case newCollections(output: NewCollectionsModuleOutput, id: String, name: String, watched: [Film])
     case filter(output: FilterModuleOutput,
         genres: [String],
@@ -95,6 +96,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: FilterConfigurator.tag, arguments: output, genres, years, filterParameters, isWatched)
             case let .news(newsID):
                 return try factory.resolve(tag: NewsConfigurator.tag, arguments: newsID)
+            case .rewards:
+                return try factory.resolve(tag: RewardsConfigurator.tag)
             }
         } catch {
             fatalError("can't resolve module from factory")
