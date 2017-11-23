@@ -18,6 +18,14 @@ class RewardsCell: UITableViewCell {
 
     let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 80) / 2
 
+    let windowWidthMain = UIWindow(frame: UIScreen.main.bounds).bounds.width - 30
+
+    var beginInset: CGFloat = 0
+
+    var lastOffset: CGFloat = 0
+
+    let size: CGFloat = 92
+
     private let titleLabel: UILabel = {
 
         let titleLabel = UILabel()
@@ -66,7 +74,6 @@ class RewardsCell: UITableViewCell {
         collectionView.scrollsToTop = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .white
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 160, bottom: 0, right: 160)
 
         return collectionView
     }()
@@ -92,13 +99,20 @@ class RewardsCell: UITableViewCell {
 
         autoresizesSubviews = true
 
-//        contentView.addSubview(titleLabel.prepareForAutoLayout())
-//        titleLabel.centerXAnchor ~= contentView.centerXAnchor
-//        titleLabel.topAnchor ~= contentView.topAnchor
-//
-//        contentView.addSubview(nameLabel.prepareForAutoLayout())
-//        nameLabel.centerXAnchor ~= contentView.centerXAnchor
-//        nameLabel.topAnchor ~= titleLabel.bottomAnchor + 10
+        let inset = windowWidthMain / 2 - 40
+
+        beginInset = -inset
+        lastOffset = -inset
+
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+
+        contentView.addSubview(titleLabel.prepareForAutoLayout())
+        titleLabel.centerXAnchor ~= contentView.centerXAnchor
+        titleLabel.topAnchor ~= contentView.topAnchor
+
+        contentView.addSubview(nameLabel.prepareForAutoLayout())
+        nameLabel.centerXAnchor ~= contentView.centerXAnchor
+        nameLabel.topAnchor ~= titleLabel.bottomAnchor + 10
 //
 //        let stackView = createStackView(.horizontal, .center, .fillProportionally, 32, with: imagesArray)
 //        contentView.addSubview(stackView.prepareForAutoLayout())
@@ -106,13 +120,32 @@ class RewardsCell: UITableViewCell {
 //        stackView.topAnchor ~= nameLabel.bottomAnchor + 17
 
         contentView.addSubview(collectionView.prepareForAutoLayout())
-        collectionView.pin(to: contentView, top: 0, left: 0, right: 0, bottom: 0)
+        collectionView.leadingAnchor ~= contentView.leadingAnchor
+        collectionView.trailingAnchor ~= contentView.trailingAnchor
+        collectionView.topAnchor ~= nameLabel.bottomAnchor + 17
+        collectionView.heightAnchor ~= 90
         collectionView.delegate = self
         collectionView.dataSource = self
 
-//        contentView.addSubview(descriptionLabel.prepareForAutoLayout())
-//        descriptionLabel.centerXAnchor ~= contentView.centerXAnchor
-//        descriptionLabel.topAnchor ~= stackView.bottomAnchor + 23
+        let leftView = UIView()
+        leftView.backgroundColor = .white
+        contentView.addSubview(leftView.prepareForAutoLayout())
+        leftView.leadingAnchor ~= collectionView.leadingAnchor
+        leftView.topAnchor ~= collectionView.topAnchor
+        leftView.heightAnchor ~= collectionView.heightAnchor
+        leftView.widthAnchor ~= 30
+
+        let rightView = UIView()
+        rightView.backgroundColor = .white
+        contentView.addSubview(rightView.prepareForAutoLayout())
+        rightView.trailingAnchor ~= collectionView.trailingAnchor
+        rightView.topAnchor ~= collectionView.topAnchor
+        rightView.heightAnchor ~= collectionView.heightAnchor
+        rightView.widthAnchor ~= 30
+
+        contentView.addSubview(descriptionLabel.prepareForAutoLayout())
+        descriptionLabel.centerXAnchor ~= contentView.centerXAnchor
+        descriptionLabel.topAnchor ~= collectionView.bottomAnchor + 23
 //        descriptionLabel.bottomAnchor ~= contentView.bottomAnchor
     }
 
@@ -129,7 +162,7 @@ class RewardsCell: UITableViewCell {
 //        countLabel.text = String(news.shared)
 //    }
 //
-//    func tapSharedButton() {
+//    func tiewapSharedButton() {
 //        if let newShare = news {
 //            delegate?.openShareSimple(news: newShare)
 //        }
@@ -159,11 +192,11 @@ extension RewardsCell: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+//        print("willDisplay", indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+//        print("didDisplay", indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
@@ -187,4 +220,22 @@ extension RewardsCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         print(destinationIndexPath.row)
     }
+}
+
+extension RewardsCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        let isRightScroll = scrollView.contentOffset.x > lastOffset
+        lastOffset = scrollView.contentOffset.x
+
+        if isRightScroll && (scrollView.contentOffset.x - beginInset).truncatingRemainder(dividingBy: size) > 61
+            || !isRightScroll && (scrollView.contentOffset.x - beginInset).truncatingRemainder(dividingBy: size) < 31 {
+            var assa: Int = Int((scrollView.contentOffset.x - beginInset) / size)
+            if isRightScroll {
+                assa += 1
+            }
+            print(assa)
+        }
+    }
+
 }
