@@ -230,7 +230,7 @@ extension FoodleTarget: TargetType {
 
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case  .filmWatchedPost, .filmWillWatchPost, .patchCollections, .newsFiltred:
+        case  .filmWatchedPost, .filmWillWatchPost, .patchCollections, .newsFiltred, .auth:
             return JsonArrayEncoding.default
         default:
             return URLEncoding(destination: .queryString)
