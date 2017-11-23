@@ -49,8 +49,8 @@ class RewardsViewController: ParentViewController {
 
     var currentIndex: Int = 0
 
-    let reviewsVC = WillWatchVC()
-    let locationVC = WatchedVC()
+    let reviewsVC = RewardsSubViewController()
+    let locationVC = RewardsSubViewController()
     let controllers: [UIViewController]
 
     // MARK: - Life cycle
@@ -98,9 +98,9 @@ class RewardsViewController: ParentViewController {
 
         setPageVC()
 
-        activityVC.startAnimating()
-        activityVC.isHidden = false
-        activityVC.color = UIColor.cnmMainOrange
+//        activityVC.startAnimating()
+//        activityVC.isHidden = false
+//        activityVC.color = UIColor.cnmMainOrange
         view.bringSubview(toFront: activityVC)
     }
 
