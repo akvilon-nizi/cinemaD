@@ -52,10 +52,10 @@ extension NewsInteractor: NewsInteractorInput {
 
     func putComment(newsID: String, message: String) {
         provider.requestModel(.putNewsComment(newsID: newsID, message: message) )
-            .subscribe { [unowned self] (response: Event<PutCommentResponse>) in
+            .subscribe { [unowned self] (response: Event<Comment>) in
                 switch response {
                 case let .next(model):
-                    self.output.loadComment(model.id)
+                    self.output.loadComment(model)
                 case let .error(error as ProviderError):
                     self.output.getError()
                 default:

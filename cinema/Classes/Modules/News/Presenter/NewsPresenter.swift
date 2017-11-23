@@ -34,8 +34,8 @@ extension NewsPresenter: NewsViewOutput {
 // MARK: - NewsInteractorOutput
 
 extension NewsPresenter: NewsInteractorOutput {
-    func loadComment(_ id: String) {
-        print()
+    func loadComment(_ comment: Comment) {
+        view.addComment(comment)
     }
 
     func getError() {

@@ -12,6 +12,8 @@ protocol NewsViewInput: class {
     func openNews(_ newsData: NewsData)
 
     func showNetworkError()
+
+    func addComment(_ comment: Comment)
 }
 
 protocol NewsViewOutput {

@@ -16,5 +16,5 @@ protocol NewsInteractorOutput: class {
 
     func getNews(_ newsData: NewsData)
 
-    func loadComment(_ id: String)
+    func loadComment(_ comment: Comment)
 }

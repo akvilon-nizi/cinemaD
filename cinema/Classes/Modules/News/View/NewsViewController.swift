@@ -264,6 +264,16 @@ extension NewsViewController: UITableViewDelegate {
 // MARK: - NewsViewInput
 
 extension NewsViewController: NewsViewInput {
+
+    func addComment(_ comment: Comment) {
+        newsData.comments.append(comment)
+        let indexPath = IndexPath(row: newsData.comments.count - 1, section: 0)
+        tableView.insertRows(at: [indexPath], with: .top)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
     func openNews(_ newsData: NewsData) {
         activityVC.isHidden = true
         activityVC.stopAnimating()
