@@ -10,6 +10,7 @@
   typealias Image = UIImage
 #endif
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
@@ -45,6 +46,19 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
+  enum Kinobase {
+    static let check = ImageAsset(name: "check")
+    static let check28 = ImageAsset(name: "check28")
+    static let checkMini = ImageAsset(name: "checkMini")
+    static let cicle = ImageAsset(name: "cicle")
+    static let close = ImageAsset(name: "close")
+    static let enter = ImageAsset(name: "enter")
+    static let forward = ImageAsset(name: "forward")
+    static let remove = ImageAsset(name: "remove")
+    static let remove28 = ImageAsset(name: "remove28")
+    static let settings = ImageAsset(name: "settings")
+    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
+  }
   enum Cinema {
     static let chatIcon = ImageAsset(name: "chatIcon")
     enum MainTab {
@@ -83,19 +97,7 @@ enum Asset {
     }
     static let timeOrange = ImageAsset(name: "timeOrange")
     static let unselectStar = ImageAsset(name: "unselectStar")
-  }
-  enum Kinobase {
-    static let check = ImageAsset(name: "check")
-    static let check28 = ImageAsset(name: "check28")
-    static let checkMini = ImageAsset(name: "checkMini")
-    static let cicle = ImageAsset(name: "cicle")
-    static let close = ImageAsset(name: "close")
-    static let enter = ImageAsset(name: "enter")
-    static let forward = ImageAsset(name: "forward")
-    static let remove = ImageAsset(name: "remove")
-    static let remove28 = ImageAsset(name: "remove28")
-    static let settings = ImageAsset(name: "settings")
-    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
+    static let vader = ImageAsset(name: "vader")
   }
   enum NavBar {
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -128,6 +130,17 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Kinobase.check,
+    Kinobase.check28,
+    Kinobase.checkMini,
+    Kinobase.cicle,
+    Kinobase.close,
+    Kinobase.enter,
+    Kinobase.forward,
+    Kinobase.remove,
+    Kinobase.remove28,
+    Kinobase.settings,
+    Kinobase.settingsUnselect,
     Cinema.chatIcon,
     Cinema.MainTab.Active.chatA,
     Cinema.MainTab.Active.kinobaseA,
@@ -155,17 +168,7 @@ enum Asset {
     Cinema.Slides.slide3Image5,
     Cinema.timeOrange,
     Cinema.unselectStar,
-    Kinobase.check,
-    Kinobase.check28,
-    Kinobase.checkMini,
-    Kinobase.cicle,
-    Kinobase.close,
-    Kinobase.enter,
-    Kinobase.forward,
-    Kinobase.remove,
-    Kinobase.remove28,
-    Kinobase.settings,
-    Kinobase.settingsUnselect,
+    Cinema.vader,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,

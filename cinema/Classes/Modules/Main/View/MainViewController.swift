@@ -415,8 +415,6 @@ extension MainViewController: MainViewInput {
         tableView.reloadData()
     }
 
-
-
 }
 
 // MARK: - MainViewDelegate
@@ -431,7 +429,7 @@ extension MainViewController: MainTabViewDelegate {
     }
 
     func profileTapped() {
-        print("profileTapped")
+        output.openProfile()
     }
 
     func chatTapped() {

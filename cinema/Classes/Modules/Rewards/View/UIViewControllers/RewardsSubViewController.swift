@@ -36,7 +36,7 @@ class RewardsSubViewController: ParentViewController {
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
-        
+
         tableViewRegister()
         //tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
 
@@ -77,7 +77,7 @@ extension RewardsSubViewController: UITableViewDataSource {
 extension RewardsSubViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 220
+        return UITableViewAutomaticDimension
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

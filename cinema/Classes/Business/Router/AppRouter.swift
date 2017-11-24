@@ -36,6 +36,8 @@ enum AppRouterDestination {
         isWatched: Bool
     )
     case news(newsID: String)
+    case profile
+    case settings
 
     var isPresent: Bool {
         switch self {
@@ -98,6 +100,10 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: NewsConfigurator.tag, arguments: newsID)
             case .rewards:
                 return try factory.resolve(tag: RewardsConfigurator.tag)
+            case .profile:
+                return try factory.resolve(tag: ProfileConfigurator.tag)
+            case .settings:
+                return try factory.resolve(tag: SettingsConfigurator.tag)
             }
         } catch {
             fatalError("can't resolve module from factory")

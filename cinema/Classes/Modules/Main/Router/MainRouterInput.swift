@@ -11,6 +11,7 @@ protocol MainRouterInput: BaseRouterInput {
     func openKinobase()
     func openRewards()
     func openStart()
+    func openProfile()
     func setRootVC(_ rootVC: UINavigationController)
     func openNews(newsID: String)
 }

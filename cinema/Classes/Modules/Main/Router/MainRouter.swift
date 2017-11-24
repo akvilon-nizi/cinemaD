@@ -26,6 +26,10 @@ extension MainRouter: MainRouterInput {
         appRouter.transition(to: .rewards)
     }
 
+    func openProfile() {
+        appRouter.transition(to: .profile)
+    }
+
     func openStart() {
         appRouter.starting()
     }

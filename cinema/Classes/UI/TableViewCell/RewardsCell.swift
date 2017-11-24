@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: - NewsFilterCell
+// MARK: - RewardsCell
 
 //protocol RewardsCell: class {
 //    func openShareSimple(news: News)
@@ -59,6 +59,17 @@ class RewardsCell: UITableViewCell {
         return descriptionLabel
     }()
 
+    let infoLabel: UILabel = {
+
+        let descriptionLabel = UILabel()
+
+        descriptionLabel.font = UIFont.cnmFutura(size: 14)
+        descriptionLabel.text = L10n.slide3LabelDescriptionText
+        descriptionLabel.textColor = UIColor.cnmGreyLight
+
+        return descriptionLabel
+    }()
+
     fileprivate let collectionView: UICollectionView = {
 
         let layout = LineLayout()
@@ -70,7 +81,7 @@ class RewardsCell: UITableViewCell {
         //layout.itemSize = CGSize(width: 100.0, height: 100.0)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(FilmsCollectionCell.self, forCellWithReuseIdentifier: FilmsCollectionCell.reuseIdentifier)
+        collectionView.register(RewardCell.self, forCellWithReuseIdentifier: RewardCell.reuseIdentifier)
         collectionView.scrollsToTop = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .white
@@ -146,6 +157,24 @@ class RewardsCell: UITableViewCell {
         contentView.addSubview(descriptionLabel.prepareForAutoLayout())
         descriptionLabel.centerXAnchor ~= contentView.centerXAnchor
         descriptionLabel.topAnchor ~= collectionView.bottomAnchor + 23
+
+        contentView.addSubview(infoLabel.prepareForAutoLayout())
+        infoLabel.leadingAnchor ~= contentView.leadingAnchor + 35
+        infoLabel.trailingAnchor ~= contentView.trailingAnchor - 35
+        infoLabel.topAnchor ~= descriptionLabel.bottomAnchor + 12
+        infoLabel.heightAnchor ~= 55
+        infoLabel.numberOfLines = 0
+
+        let separatorView = UIView()
+        separatorView.backgroundColor = .cnmDadada
+        contentView.addSubview(separatorView.prepareForAutoLayout())
+        separatorView.bottomAnchor ~= contentView.bottomAnchor
+        separatorView.trailingAnchor ~= contentView.trailingAnchor - 24
+        separatorView.leadingAnchor ~= contentView.leadingAnchor + 24
+        separatorView.heightAnchor ~= 1
+        separatorView.topAnchor ~= infoLabel.bottomAnchor + 16
+        separatorView.bottomAnchor ~= contentView.bottomAnchor - 30
+
 //        descriptionLabel.bottomAnchor ~= contentView.bottomAnchor
     }
 
@@ -209,11 +238,11 @@ extension RewardsCell: UICollectionViewDataSource {
         return 15
     }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmsCollectionCell.reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RewardCell.reuseIdentifier, for: indexPath)
 
-        //            if let tagCell = cell as? FilmsCollectionCell {
-        //                tagCell.linkUrlImage = films[indexPath.row].imageUrl
-        //            }
+//        if let tagCell = cell as? FilmsCollectionCell {
+//            tagCell.linkUrlImage = films[indexPath.row].imageUrl
+//        }
         return cell
     }
 
@@ -234,6 +263,15 @@ extension RewardsCell: UIScrollViewDelegate {
             if isRightScroll {
                 assa += 1
             }
+
+            if assa % 2 == 0 {
+                infoLabel.text = "eagfjoaen aiejier o;i oej op'iewj oierwj l;sdj ej s;dl ld ls;ej oselj osd  s sdj 'prsj p'w   sdbj dps'f jdfls jd 'sd sd jksdf ds bldsf lsdj; bsdfj"
+            } else {
+                infoLabel.text = "eagfj"
+            }
+            infoLabel.layoutIfNeeded()
+            contentView.layoutIfNeeded()
+            contentView.layoutSubviews()
             print(assa)
         }
     }

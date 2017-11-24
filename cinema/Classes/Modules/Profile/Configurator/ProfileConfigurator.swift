@@ -4,12 +4,15 @@
 //
 
 import UIKit
+import RxMoya
 
 class ProfileConfigurator {
 
     static let tag: String = "ProfileTag"
 
     var appRouter: AppRouterProtocol!
+
+    var provider: RxMoyaProvider<FoodleTarget>!
 
     func configureModule() -> UIViewController {
         let router = ProfileRouter()

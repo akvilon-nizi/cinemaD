@@ -17,6 +17,10 @@ class MainPresenter {
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
+    func openProfile() {
+        router.openProfile()
+    }
+
     func openRewards() {
         router.openRewards()
     }

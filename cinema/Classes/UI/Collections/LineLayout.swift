@@ -35,20 +35,14 @@ class LineLayout: UICollectionViewFlowLayout {
                         center.x -= (1 - scale) * collectionViewCenterX / 4
                     }
 
-                    //if center.x > 60 {
-                        copyLayout.center = center
-                    //}
+                    copyLayout.center = center
 
                 }
 
                 deltaX = abs(collectionViewCenterX - (copyLayout.center.x - colView.contentOffset.x))
                 if deltaX < colView.bounds.width - 60 {
-                    var scale = 1.0 - deltaX / collectionViewCenterX 
-//                    if scale < 0.4 {
-//                        scale = 0.3
-//                    }
+                    let scale = 1.0 - deltaX / collectionViewCenterX
                     copyLayout.transform = CGAffineTransform(scaleX: scale, y: scale)
-
                 }
 
                 layoutAttributes.append(copyLayout)

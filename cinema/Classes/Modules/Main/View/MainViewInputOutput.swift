@@ -27,6 +27,8 @@ protocol MainViewOutput {
 
     func openRewards()
 
+    func openProfile()
+
     func setRootVC(_ rootVC: UINavigationController)
 
     func changeFilter(_ filters: [String])

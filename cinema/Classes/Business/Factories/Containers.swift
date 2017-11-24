@@ -154,6 +154,19 @@ enum Containers {
             return configurator.configureModule()
         }
 
+        container.register(tag: ProfileConfigurator.tag) { () -> UIViewController in
+            let configurator = ProfileConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: SettingsConfigurator.tag) { () -> UIViewController in
+            let configurator = SettingsConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
         container.register(tag: NewsConfigurator.tag) { (newsID: String) -> UIViewController in
             let configurator = NewsConfigurator(newsID: newsID)
             configurator.appRouter = try managersContainer.resolve()

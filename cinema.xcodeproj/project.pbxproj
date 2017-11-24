@@ -150,6 +150,7 @@
 		7B831C83C43B22C40AE72F7D /* MainViewInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA312F2F0C6CC56BC06EF1D4 /* MainViewInputOutput.swift */; };
 		7E5016F956A4F5C65338F54F /* FilmsInteractorInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A918314C616339DC1510226 /* FilmsInteractorInputOutput.swift */; };
 		7F5DB5844092F4066624E68D /* SlidesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC90B398D934BCDDB8072B24 /* SlidesRouter.swift */; };
+		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
 		81D73A031FC6BADD0091EE3D /* RewardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A021FC6BADD0091EE3D /* RewardsCell.swift */; };
 		81D73A061FC6C1040091EE3D /* RewardsSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */; };
 		81D73A0C1FC6DB4F0091EE3D /* EmojiItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A081FC6DB4F0091EE3D /* EmojiItem.swift */; };
@@ -604,6 +605,7 @@
 		7F3E6560B04FAC859BE975F4 /* FilmPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilmPresenter.swift; sourceTree = "<group>"; };
 		802EC8DFFC71933FC5CC1B8E /* ActorsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActorsRouterInput.swift; sourceTree = "<group>"; };
 		813EFE1DBACB73175B53B782 /* FilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
+		81961BFE1FC7FEC10086E9FB /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
 		81D73A021FC6BADD0091EE3D /* RewardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsCell.swift; sourceTree = "<group>"; };
 		81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsSubViewController.swift; sourceTree = "<group>"; };
 		81D73A081FC6DB4F0091EE3D /* EmojiItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiItem.swift; sourceTree = "<group>"; };
@@ -926,7 +928,6 @@
 				E1D0E8A1E8E4B9FEDDB93370 /* ProfileViewController.swift */,
 				D9B8F58544C52EC37EAE497D /* ProfileViewInputOutput.swift */,
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -1211,7 +1212,6 @@
 			children = (
 				22B9CD37D9BC3539B7C63E2A /* ProfileConfigurator.swift */,
 			);
-			name = Configurator;
 			path = Configurator;
 			sourceTree = "<group>";
 		};
@@ -1403,7 +1403,6 @@
 				1353B52C857EB585D85049A0 /* SettingsRouter.swift */,
 				23125F3F9B6DA051F6901087 /* SettingsRouterInput.swift */,
 			);
-			name = Router;
 			path = Router;
 			sourceTree = "<group>";
 		};
@@ -1429,7 +1428,6 @@
 				62A3D8E35464E3B1F1D90FFD /* ProfileInteractor.swift */,
 				8DCFA9446849501B220DC1A5 /* ProfileInteractorInputOutput.swift */,
 			);
-			name = Interactor;
 			path = Interactor;
 			sourceTree = "<group>";
 		};
@@ -1498,7 +1496,6 @@
 				5C781922B8515AFD9FF87892 /* Router */,
 				0111CFE7F945B8205D446314 /* View */,
 			);
-			name = Profile;
 			path = Profile;
 			sourceTree = "<group>";
 		};
@@ -1525,7 +1522,6 @@
 				37D2EA0E3FECD50EEC0F9E74 /* ProfileRouter.swift */,
 				9C7D21BF7946AC254C1165EE /* ProfileRouterInput.swift */,
 			);
-			name = Router;
 			path = Router;
 			sourceTree = "<group>";
 		};
@@ -1567,7 +1563,6 @@
 				480BBDB532EF0AA16DA86DFA /* Router */,
 				EFD5B6C6C37E3DB37C8BC4F6 /* View */,
 			);
-			name = Settings;
 			path = Settings;
 			sourceTree = "<group>";
 		};
@@ -1586,7 +1581,6 @@
 				6D7A13652AB6A3DFAAE362F3 /* ProfileModuleInputOutput.swift */,
 				0FFFD811851BC7E5FC79FDB1 /* ProfilePresenter.swift */,
 			);
-			name = Presenter;
 			path = Presenter;
 			sourceTree = "<group>";
 		};
@@ -1614,7 +1608,6 @@
 				01D68AFD89491D5E79E917D3 /* SettingsModuleInputOutput.swift */,
 				D0855C30D7DC71D5B049C291 /* SettingsPresenter.swift */,
 			);
-			name = Presenter;
 			path = Presenter;
 			sourceTree = "<group>";
 		};
@@ -1739,7 +1732,6 @@
 				378597AD475A08FF5188BEBB /* SettingsInteractor.swift */,
 				0A94B5CD3DA7B989EBB5A6F3 /* SettingsInteractorInputOutput.swift */,
 			);
-			name = Interactor;
 			path = Interactor;
 			sourceTree = "<group>";
 		};
@@ -2160,7 +2152,6 @@
 			children = (
 				07A303D3815FDC35382E8E31 /* SettingsConfigurator.swift */,
 			);
-			name = Configurator;
 			path = Configurator;
 			sourceTree = "<group>";
 		};
@@ -2431,6 +2422,7 @@
 				CED4EA031FAAF8D500E7F58B /* CollectionCell.swift */,
 				CEA51E391FAF5ACB00EB0782 /* HeaderSearchView.swift */,
 				81D73A141FC6ECA30091EE3D /* LineLayout.swift */,
+				81961BFE1FC7FEC10086E9FB /* RewardCell.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -2655,7 +2647,6 @@
 				E61052EF4F0973CD2DD31AF2 /* SettingsViewController.swift */,
 				AF9BC294B42329C9CB90630D /* SettingsViewInputOutput.swift */,
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -3118,6 +3109,7 @@
 				A278C4E21D68B95BE0FF1E26 /* HelpAuthRouterInput.swift in Sources */,
 				CEE0A9491F988546006E6D9B /* RolesCell.swift in Sources */,
 				CEA4890D1FBDBB02001E2543 /* NewsImageCell.swift in Sources */,
+				81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */,
 				600EEC4FC93ECE7F8E0000B1 /* HelpAuthViewController.swift in Sources */,
 				81D73A0D1FC6DB4F0091EE3D /* EmojiModel.swift in Sources */,
 				E58066E882B5398409188E51 /* HelpAuthViewInputOutput.swift in Sources */,
