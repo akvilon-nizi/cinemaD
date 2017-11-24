@@ -48,7 +48,7 @@ class RewardsCell: UITableViewCell {
         return nameLabel
     }()
 
-    private let descriptionLabel: UILabel = {
+    let descriptionLabel: UILabel = {
 
         let descriptionLabel = UILabel()
 
@@ -266,9 +266,11 @@ extension RewardsCell: UIScrollViewDelegate {
 
             if assa % 2 == 0 {
                 infoLabel.text = "eagfjoaen aiejier o;i oej op'iewj oierwj l;sdj ej s;dl ld ls;ej oselj osd  s sdj 'prsj p'w   sdbj dps'f jdfls jd 'sd sd jksdf ds bldsf lsdj; bsdfj"
+
             } else {
                 infoLabel.text = "eagfj"
             }
+            descriptionLabel.text = "Легенда \(assa)"
             infoLabel.layoutIfNeeded()
             contentView.layoutIfNeeded()
             contentView.layoutSubviews()
