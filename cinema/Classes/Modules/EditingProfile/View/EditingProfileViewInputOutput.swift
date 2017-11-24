@@ -13,4 +13,6 @@ protocol EditingProfileViewInput: class {
 protocol EditingProfileViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
 }

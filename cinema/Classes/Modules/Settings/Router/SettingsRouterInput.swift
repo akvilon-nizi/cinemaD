@@ -6,5 +6,5 @@
 import Foundation
 
 protocol SettingsRouterInput: BaseRouterInput {
-
+    func close()
 }

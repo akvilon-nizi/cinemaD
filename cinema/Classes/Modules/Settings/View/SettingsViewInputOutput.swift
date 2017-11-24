@@ -13,4 +13,6 @@ protocol SettingsViewInput: class {
 protocol SettingsViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
 }

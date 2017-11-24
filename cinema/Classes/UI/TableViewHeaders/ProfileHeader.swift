@@ -77,31 +77,31 @@ class ProfileHeader: UITableViewHeaderFooterView {
         let mainView = UIView()
         contentView.addSubview(mainView.prepareForAutoLayout())
         mainView.topAnchor ~= contentView.topAnchor + 19
-        mainView.leadingAnchor ~= contentView.leadingAnchor + 53
-        mainView.trailingAnchor ~= contentView.trailingAnchor - 53
+        mainView.centerXAnchor ~= contentView.centerXAnchor
         mainView.bottomAnchor ~= contentView.bottomAnchor + 20
 
         mainView.addSubview(userImage.prepareForAutoLayout())
         userImage.topAnchor ~= mainView.topAnchor
-        userImage.leadingAnchor ~= mainView.leadingAnchor
-
-        mainView.addSubview(nameLabel.prepareForAutoLayout())
-        nameLabel.leadingAnchor ~= userImage.trailingAnchor + 21
-        nameLabel.bottomAnchor ~= userImage.bottomAnchor - 52
+        userImage.leadingAnchor ~= mainView.leadingAnchor + 15
 
         mainView.addSubview(editButton.prepareForAutoLayout())
-        editButton.leadingAnchor ~= userImage.trailingAnchor + 21
         editButton.topAnchor ~= userImage.bottomAnchor - 40
         editButton.addTarget(self, action: #selector(handleTapEditButton), for: .touchUpInside)
+
+        mainView.addSubview(nameLabel.prepareForAutoLayout())
+        nameLabel.bottomAnchor ~= userImage.bottomAnchor - 52
+        nameLabel.leadingAnchor ~= editButton.leadingAnchor
 
         mainView.addSubview(settingsButton.prepareForAutoLayout())
         settingsButton.leadingAnchor ~= editButton.trailingAnchor + 8
         settingsButton.centerYAnchor ~= editButton.centerYAnchor
+        settingsButton.trailingAnchor ~= mainView.trailingAnchor - 15
         settingsButton.addTarget(self, action: #selector(handleTapSettingsButton), for: .touchUpInside)
 
         mainView.addSubview(stackView.prepareForAutoLayout())
         stackView.topAnchor ~= userImage.bottomAnchor + 23
-        stackView.centerXAnchor ~= mainView.centerXAnchor
+        stackView.leadingAnchor ~= mainView.leadingAnchor
+        stackView.trailingAnchor ~= mainView.trailingAnchor
         stackView.heightAnchor ~= 43
 
         setStackView()
@@ -152,6 +152,7 @@ private extension UIView {
         topLabel.text = topLabelText
         topLabel.font = UIFont.cnmFuturaLight(size: 16)
         topLabel.textColor = UIColor.cnmAfafaf
+        topLabel.textAlignment = .center
         self.addSubview(topLabel.prepareForAutoLayout())
         topLabel.topAnchor ~= self.topAnchor
         topLabel.centerXAnchor ~= self.centerXAnchor
@@ -191,10 +192,7 @@ private extension UIView {
             rightView.topAnchor ~= self.topAnchor
         }
 
-        let width = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 54 * 2) / 3
-
-        let widthView = isCenter ? width + 2 : width - 1
-
+        let widthView: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 99 : 110
         self.widthAnchor ~= widthView
         self.heightAnchor ~= 43
 

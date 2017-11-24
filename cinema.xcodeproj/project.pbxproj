@@ -158,6 +158,7 @@
 		7F5DB5844092F4066624E68D /* SlidesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC90B398D934BCDDB8072B24 /* SlidesRouter.swift */; };
 		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
 		81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C001FC82A360086E9FB /* ProfileHeader.swift */; };
+		81961C051FC858AE0086E9FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C041FC858AE0086E9FB /* SettingsView.swift */; };
 		81D73A031FC6BADD0091EE3D /* RewardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A021FC6BADD0091EE3D /* RewardsCell.swift */; };
 		81D73A061FC6C1040091EE3D /* RewardsSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */; };
 		81D73A0C1FC6DB4F0091EE3D /* EmojiItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A081FC6DB4F0091EE3D /* EmojiItem.swift */; };
@@ -620,6 +621,7 @@
 		813EFE1DBACB73175B53B782 /* FilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		81961BFE1FC7FEC10086E9FB /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
 		81961C001FC82A360086E9FB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		81961C041FC858AE0086E9FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		81D73A021FC6BADD0091EE3D /* RewardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsCell.swift; sourceTree = "<group>"; };
 		81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsSubViewController.swift; sourceTree = "<group>"; };
 		81D73A081FC6DB4F0091EE3D /* EmojiItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiItem.swift; sourceTree = "<group>"; };
@@ -2030,6 +2032,7 @@
 				9BB4EBD8AFE1A26CB14BCFD7 /* RatingStarView */,
 				9BB4E81E2372BB93E8F56DF2 /* ShadowView */,
 				9BB4EEB164B4D1FB06D6A2EF /* ImageView */,
+				81961C041FC858AE0086E9FB /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3139,6 +3142,7 @@
 				9E26B66C204073EE2B0FA69B /* StartRouterInput.swift in Sources */,
 				AC20850608C915E9DB463AF1 /* StartViewController.swift in Sources */,
 				DCDC2E27C80AD9614A95E682 /* StartViewInputOutput.swift in Sources */,
+				81961C051FC858AE0086E9FB /* SettingsView.swift in Sources */,
 				5A5FBD93BFF118037C5D3AE1 /* AuthCinemaConfigurator.swift in Sources */,
 				045928121FA7B45000DE137E /* FilmCollections.swift in Sources */,
 				6482E5A363727326BAD48BF3 /* AuthCinemaInteractor.swift in Sources */,

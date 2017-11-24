@@ -20,6 +20,10 @@ extension SettingsPresenter: SettingsViewOutput {
     func viewIsReady() {
         log.verbose("Settings is ready")
     }
+
+    func backButtonTap() {
+        router.close()
+    }
 }
 
 // MARK: - SettingsInteractorOutput

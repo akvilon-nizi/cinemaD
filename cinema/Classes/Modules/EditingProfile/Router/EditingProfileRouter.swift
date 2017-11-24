@@ -13,5 +13,7 @@ class EditingProfileRouter {
 // MARK: - EditingProfileRouterInput
 
 extension EditingProfileRouter: EditingProfileRouterInput {
-    
+    func close() {
+        appRouter.backTransition()
+    }
 }

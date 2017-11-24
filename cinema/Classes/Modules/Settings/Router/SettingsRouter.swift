@@ -13,5 +13,7 @@ class SettingsRouter {
 // MARK: - SettingsRouterInput
 
 extension SettingsRouter: SettingsRouterInput {
-
+    func close() {
+        appRouter.backTransition()
+    }
 }

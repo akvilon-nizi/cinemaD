@@ -20,6 +20,10 @@ extension EditingProfilePresenter: EditingProfileViewOutput {
     func viewIsReady() {
         log.verbose("EditingProfile is ready")
     }
+
+    func backButtonTap() {
+        router.close()
+    }
 }
 
 // MARK: - EditingProfileInteractorOutput

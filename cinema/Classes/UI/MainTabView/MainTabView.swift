@@ -59,6 +59,7 @@ class MainTabView: UIView {
         profileButton.heightAnchor ~= 60
         profileButton.backgroundColor = UIColor.cnmGreyLight
         profileButton.widthAnchor ~= 60
+        profileButton.setImage(Asset.Cinema.Profile.userPlaceholder.image, for: .normal)
         profileButton.layer.cornerRadius = 30
         profileButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         profileButton.tag = 2
