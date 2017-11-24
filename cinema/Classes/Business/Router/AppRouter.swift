@@ -37,6 +37,7 @@ enum AppRouterDestination {
     )
     case news(newsID: String)
     case profile
+    case editingProfile
     case settings
 
     var isPresent: Bool {
@@ -102,6 +103,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: RewardsConfigurator.tag)
             case .profile:
                 return try factory.resolve(tag: ProfileConfigurator.tag)
+            case .editingProfile:
+                return try factory.resolve(tag: EditingProfileConfigurator.tag)
             case .settings:
                 return try factory.resolve(tag: SettingsConfigurator.tag)
             }

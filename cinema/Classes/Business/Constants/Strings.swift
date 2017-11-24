@@ -63,6 +63,18 @@ enum L10n {
   static let confirmationNextButtonText = L10n.tr("Localizable", "confirmation-next-button-text")
   /// Подтверждение
   static let confirmationTitleText = L10n.tr("Localizable", "confirmation-title-text")
+  /// Ваше имя
+  static let editingProfileChangeName = L10n.tr("Localizable", "editingProfile-change-name")
+  /// Сменить фото профиля
+  static let editingProfileChangePhoto = L10n.tr("Localizable", "editingProfile-change-photo")
+  /// Новый пароль
+  static let editingProfileNewPassword = L10n.tr("Localizable", "editingProfile-new-password")
+  /// Старый пароль
+  static let editingProfileOldPassword = L10n.tr("Localizable", "editingProfile-old-password")
+  /// Сохранить
+  static let editingProfileSaveButton = L10n.tr("Localizable", "editingProfile-save-button")
+  /// Редактирование
+  static let editingProfileTitleText = L10n.tr("Localizable", "editingProfile-title-text")
   /// Награды и премии
   static let filmAdwardsText = L10n.tr("Localizable", "film-adwards-text")
   /// Возраст
@@ -175,6 +187,20 @@ enum L10n {
   static let phonePhonePlaceholder = L10n.tr("Localizable", "phone-phone-placeholder")
   /// Номер телефона
   static let phoneTitleText = L10n.tr("Localizable", "phone-title-text")
+  /// Просмотренные
+  static let profileDidWatch = L10n.tr("Localizable", "profile-did-watch")
+  /// Редактировать
+  static let profileEditingProfile = L10n.tr("Localizable", "profile-editing-profile")
+  /// Друзья
+  static let profileFriendText = L10n.tr("Localizable", "profile-friend-text")
+  /// Аноним
+  static let profileNamePlaceholder = L10n.tr("Localizable", "profile-name-placeholder")
+  /// Награды
+  static let profileRewardsText = L10n.tr("Localizable", "profile-rewards-text")
+  /// Профиль
+  static let profileTitleText = L10n.tr("Localizable", "profile-title-text")
+  /// Смотрел
+  static let profileWatchText = L10n.tr("Localizable", "profile-watch-text")
   /// и
   static let regAndText = L10n.tr("Localizable", "reg-and-text")
   /// Свет, Камера, Мотор!
@@ -199,6 +225,18 @@ enum L10n {
   static let rewardsReviewsTitle = L10n.tr("Localizable", "rewards-reviews-title")
   /// Награды
   static let rewardsTitleText = L10n.tr("Localizable", "rewards-title-text")
+  /// Определить место положение
+  static let settingsLocationPlace = L10n.tr("Localizable", "settings-location-place")
+  /// Ночная тема
+  static let settingsNightTheme = L10n.tr("Localizable", "settings-night-theme")
+  /// Push - уведомления
+  static let settingsPushMessage = L10n.tr("Localizable", "settings-push-message")
+  /// Оценить приложение
+  static let settingsRateApp = L10n.tr("Localizable", "settings-rate-app")
+  /// Рассказать друзьям
+  static let settingsTellFriends = L10n.tr("Localizable", "settings-tell-friends")
+  /// Настройки
+  static let settingsTitleText = L10n.tr("Localizable", "settings-title-text")
   /// Поехали !
   static let slideMainButton = L10n.tr("Localizable", "slide-main-button")
   /// Купить билеты

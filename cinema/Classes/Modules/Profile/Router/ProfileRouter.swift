@@ -13,5 +13,19 @@ class ProfileRouter {
 // MARK: - ProfileRouterInput
 
 extension ProfileRouter: ProfileRouterInput {
+    func close() {
+        appRouter.backTransition()
+    }
 
+    func openSettings() {
+        appRouter.transition(to: .settings)
+    }
+
+    func openEditing() {
+        appRouter.transition(to: .editingProfile)
+    }
+
+    func openFilm(videoId: String, name: String) {
+        appRouter.transition(to: .film(videoID: videoId, name: name))
+    }
 }

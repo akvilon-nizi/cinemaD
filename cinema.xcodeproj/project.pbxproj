@@ -157,6 +157,7 @@
 		7E5016F956A4F5C65338F54F /* FilmsInteractorInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A918314C616339DC1510226 /* FilmsInteractorInputOutput.swift */; };
 		7F5DB5844092F4066624E68D /* SlidesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC90B398D934BCDDB8072B24 /* SlidesRouter.swift */; };
 		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
+		81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C001FC82A360086E9FB /* ProfileHeader.swift */; };
 		81D73A031FC6BADD0091EE3D /* RewardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A021FC6BADD0091EE3D /* RewardsCell.swift */; };
 		81D73A061FC6C1040091EE3D /* RewardsSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */; };
 		81D73A0C1FC6DB4F0091EE3D /* EmojiItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A081FC6DB4F0091EE3D /* EmojiItem.swift */; };
@@ -618,6 +619,7 @@
 		802EC8DFFC71933FC5CC1B8E /* ActorsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActorsRouterInput.swift; sourceTree = "<group>"; };
 		813EFE1DBACB73175B53B782 /* FilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		81961BFE1FC7FEC10086E9FB /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
+		81961C001FC82A360086E9FB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		81D73A021FC6BADD0091EE3D /* RewardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsCell.swift; sourceTree = "<group>"; };
 		81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsSubViewController.swift; sourceTree = "<group>"; };
 		81D73A081FC6DB4F0091EE3D /* EmojiItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiItem.swift; sourceTree = "<group>"; };
@@ -1111,7 +1113,6 @@
 				C03AD6AF4AAD97687B277B2B /* EditingProfileModuleInputOutput.swift */,
 				A2E1C91D46F696CD171EC796 /* EditingProfilePresenter.swift */,
 			);
-			name = Presenter;
 			path = Presenter;
 			sourceTree = "<group>";
 		};
@@ -1448,7 +1449,6 @@
 				B41F289F7BD111DC2A2ED0B4 /* EditingProfileRouter.swift */,
 				074CC58DB859D5E1B4FD3EE7 /* EditingProfileRouterInput.swift */,
 			);
-			name = Router;
 			path = Router;
 			sourceTree = "<group>";
 		};
@@ -1511,6 +1511,7 @@
 			isa = PBXGroup;
 			children = (
 				BDE7CC5EBF828005E095494A /* KinobaseInteractor.swift */,
+				9BB4EF8A6A03780BD0708C70 /* Common */,
 				B70DACF7B86EA43BEA56D2E0 /* KinobaseInteractorInputOutput.swift */,
 			);
 			path = Interactor;
@@ -1778,7 +1779,6 @@
 			children = (
 				E7E740BBA1173E236507B15C /* Slides */,
 				CE73590D1F86AC5000679D72 /* StartViews */,
-				9BB4EF8A6A03780BD0708C70 /* Common */,
 				803CDD2AF6BE9E3FF0596783 /* Main */,
 				363749F544456CC5DCC30B27 /* Films */,
 				22BCF57C57B5A42AEB8B60B9 /* Film */,
@@ -1789,8 +1789,8 @@
 				7E85BB0D887907C6BBFA75E5 /* Rewards */,
 				659FA74C8DB9A63FCC5681EE /* News */,
 				5A40F15B2EC4D975E3F7F30B /* Profile */,
-				681575C119298F00E8C8707A /* Settings */,
 				E74EB75C12962E20D4D0BF14 /* EditingProfile */,
+				681575C119298F00E8C8707A /* Settings */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -2174,7 +2174,6 @@
 				FC7249CBA7A0BCF7AB90B7E7 /* EditingProfileInteractor.swift */,
 				06A10B01404CC87A29A6265B /* EditingProfileInteractorInputOutput.swift */,
 			);
-			name = Interactor;
 			path = Interactor;
 			sourceTree = "<group>";
 		};
@@ -2376,6 +2375,7 @@
 				CE234B451FBEF31700EC4BAA /* SimpleNewsHeader.swift */,
 				CE234B471FBEF39A00EC4BAA /* ImageNewsHeader.swift */,
 				CE234B491FBEF3AB00EC4BAA /* VideoNewsHeader.swift */,
+				81961C001FC82A360086E9FB /* ProfileHeader.swift */,
 			);
 			path = TableViewHeaders;
 			sourceTree = "<group>";
@@ -2559,7 +2559,6 @@
 			children = (
 				ABD924EFE0F494AC480C71EF /* EditingProfileConfigurator.swift */,
 			);
-			name = Configurator;
 			path = Configurator;
 			sourceTree = "<group>";
 		};
@@ -2632,7 +2631,6 @@
 				4C32A6DA64FE80BC07BCE7B7 /* Router */,
 				ED9DD97A94537234B96F7DBA /* View */,
 			);
-			name = EditingProfile;
 			path = EditingProfile;
 			sourceTree = "<group>";
 		};
@@ -2709,7 +2707,6 @@
 				1F7E08533092F7BA0C733791 /* EditingProfileViewController.swift */,
 				955D5BA8233E04DBBA1EEEC4 /* EditingProfileViewInputOutput.swift */,
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -3060,6 +3057,7 @@
 				9BB4EC2F956B30A4509642DE /* Strings.swift in Sources */,
 				9BB4E3F0DBB64B9E1751C4B5 /* Colors.swift in Sources */,
 				CE09FEAA1F954E2F00D49351 /* Film.swift in Sources */,
+				81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */,
 				2DBA1A63EA33E4B04C5CCC2E /* Fonts.swift in Sources */,
 				9BB4E6A0F37C96D6D2EDA9F2 /* GoodleMapsManager.swift in Sources */,
 				33B37BD01F45964A000838F2 /* ProductsResponse.swift in Sources */,

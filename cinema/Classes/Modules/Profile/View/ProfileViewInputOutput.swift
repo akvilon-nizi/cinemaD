@@ -8,9 +8,21 @@ import Foundation
 protocol ProfileViewInput: class {
 
     func setupInitialState()
+
+    func getError() 
+
+    func getData(_ films: [FilmCollections])
 }
 
 protocol ProfileViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
+
+    func editingButtonTap()
+
+    func settingButtonTap()
+
+    func openFilm(videoID: String, name: String)
 }

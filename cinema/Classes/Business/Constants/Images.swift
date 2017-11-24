@@ -82,6 +82,13 @@ enum Asset {
     }
     static let play = ImageAsset(name: "play")
     static let plus = ImageAsset(name: "plus")
+    enum Profile {
+      static let userPlaceholder = ImageAsset(name: "UserPlaceholder")
+      static let friendsProfile = ImageAsset(name: "friendsProfile")
+      static let rewardsProfile = ImageAsset(name: "rewardsProfile")
+      static let settingsOrange = ImageAsset(name: "settingsOrange")
+      static let watchProfile = ImageAsset(name: "watchProfile")
+    }
     static let selectStar = ImageAsset(name: "selectStar")
     static let sharing = ImageAsset(name: "sharing")
     static let sharingOrange = ImageAsset(name: "sharingOrange")
@@ -155,6 +162,11 @@ enum Asset {
     Cinema.MainView.isOpen,
     Cinema.play,
     Cinema.plus,
+    Cinema.Profile.userPlaceholder,
+    Cinema.Profile.friendsProfile,
+    Cinema.Profile.rewardsProfile,
+    Cinema.Profile.settingsOrange,
+    Cinema.Profile.watchProfile,
     Cinema.selectStar,
     Cinema.sharing,
     Cinema.sharingOrange,

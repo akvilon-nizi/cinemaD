@@ -6,5 +6,11 @@
 import Foundation
 
 protocol ProfileRouterInput: BaseRouterInput {
+    func close()
 
+    func openSettings()
+
+    func openEditing()
+
+    func openFilm(videoId: String, name: String)
 }

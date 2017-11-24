@@ -165,3 +165,28 @@
 "rewards-reviews-title" = "За просмотры";
 "rewards-location-title" = "По геолокации";
 
+//Profile
+"profile-title-text" = "Профиль";
+"profile-name-placeholder" = "Аноним";
+"profile-editing-profile" = "Редактировать";
+"profile-watch-text" = "Смотрел";
+"profile-rewards-text" = "Награды";
+"profile-friend-text" = "Друзья";
+"profile-did-watch" = "Просмотренные";
+
+//EditingProfile
+"editingProfile-title-text" = "Редактирование";
+"editingProfile-change-photo" = "Сменить фото профиля";
+"editingProfile-change-name" = "Ваше имя";
+"editingProfile-old-password" = "Старый пароль";
+"editingProfile-new-password" = "Новый пароль";
+"editingProfile-save-button" = "Сохранить";
+
+//Settings
+"settings-title-text" = "Настройки";
+"settings-location-place" = "Определить место положение";
+"settings-night-theme" = "Ночная тема";
+"settings-push-message" = "Push - уведомления";
+"settings-rate-app" = "Оценить приложение";
+"settings-tell-friends" = "Рассказать друзьям";
+

@@ -23,6 +23,7 @@ class ProfileConfigurator {
 
         let interactor = ProfileInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = ProfileViewController()
         viewController.output = presenter

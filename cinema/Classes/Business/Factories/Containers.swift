@@ -161,6 +161,13 @@ enum Containers {
             return configurator.configureModule()
         }
 
+        container.register(tag: EditingProfileConfigurator.tag) { () -> UIViewController in
+            let configurator = EditingProfileConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
         container.register(tag: SettingsConfigurator.tag) { () -> UIViewController in
             let configurator = SettingsConfigurator()
             configurator.appRouter = try managersContainer.resolve()

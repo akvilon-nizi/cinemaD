@@ -4,8 +4,11 @@
 //
 
 import UIKit
+import RxMoya
 
 class EditingProfileConfigurator {
+
+    var provider: RxMoyaProvider<FoodleTarget>!
 
     static let tag: String = "EditingProfileTag"
 
