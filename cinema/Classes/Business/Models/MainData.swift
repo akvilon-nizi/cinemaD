@@ -13,4 +13,5 @@ struct MainData {
     var recomend: [Film] = []
     var imagePreview: [String] = []
     var news: [News] = []
+    var profile: ProfileModel?
 }

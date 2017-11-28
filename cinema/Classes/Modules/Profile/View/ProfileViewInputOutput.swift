@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ProfileViewInput: class {
 
@@ -20,7 +21,7 @@ protocol ProfileViewOutput {
 
     func backButtonTap()
 
-    func editingButtonTap()
+    func editingButtonTap(nameUser: String, avatar: String)
 
     func settingButtonTap()
 

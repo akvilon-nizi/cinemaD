@@ -156,6 +156,9 @@
 		7B831C83C43B22C40AE72F7D /* MainViewInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA312F2F0C6CC56BC06EF1D4 /* MainViewInputOutput.swift */; };
 		7E5016F956A4F5C65338F54F /* FilmsInteractorInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A918314C616339DC1510226 /* FilmsInteractorInputOutput.swift */; };
 		7F5DB5844092F4066624E68D /* SlidesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC90B398D934BCDDB8072B24 /* SlidesRouter.swift */; };
+		8113241C1FCBFC1F009AED8D /* EditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241B1FCBFC1F009AED8D /* EditingView.swift */; };
+		8113241E1FCC4556009AED8D /* LoadImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241D1FCC4556009AED8D /* LoadImageResponse.swift */; };
+		811324201FCC4E40009AED8D /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241F1FCC4E40009AED8D /* ProfileModel.swift */; };
 		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
 		81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C001FC82A360086E9FB /* ProfileHeader.swift */; };
 		81961C051FC858AE0086E9FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C041FC858AE0086E9FB /* SettingsView.swift */; };
@@ -618,6 +621,9 @@
 		7EEBC710AB7FC91FEFB20E33 /* AuthCinemaModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthCinemaModuleInputOutput.swift; sourceTree = "<group>"; };
 		7F3E6560B04FAC859BE975F4 /* FilmPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilmPresenter.swift; sourceTree = "<group>"; };
 		802EC8DFFC71933FC5CC1B8E /* ActorsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActorsRouterInput.swift; sourceTree = "<group>"; };
+		8113241B1FCBFC1F009AED8D /* EditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingView.swift; sourceTree = "<group>"; };
+		8113241D1FCC4556009AED8D /* LoadImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageResponse.swift; sourceTree = "<group>"; };
+		8113241F1FCC4E40009AED8D /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		813EFE1DBACB73175B53B782 /* FilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		81961BFE1FC7FEC10086E9FB /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
 		81961C001FC82A360086E9FB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
@@ -947,6 +953,7 @@
 		0111CFE7F945B8205D446314 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8154A5E11FCD42B30012D3A8 /* New Group */,
 				E1D0E8A1E8E4B9FEDDB93370 /* ProfileViewController.swift */,
 				D9B8F58544C52EC37EAE497D /* ProfileViewInputOutput.swift */,
 			);
@@ -1684,6 +1691,21 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		8113241A1FCBFB98009AED8D /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				8113241B1FCBFC1F009AED8D /* EditingView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		8154A5E11FCD42B30012D3A8 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		81D73A041FC6BF800091EE3D /* UIViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1907,6 +1929,7 @@
 				CEA489061FBD8E0F001E2543 /* News.swift */,
 				CEA489081FBD93A0001E2543 /* Creator.swift */,
 				CECAF9881FC5C2A400050EAA /* Comment.swift */,
+				8113241F1FCC4E40009AED8D /* ProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1955,6 +1978,7 @@
 				049030451FA7BB8B000B7C08 /* WillWatchResponse.swift */,
 				049030471FA86720000B7C08 /* AllFilms.swift */,
 				CED249791FAF29FA00FE389A /* FilmWatchResponse.swift */,
+				8113241D1FCC4556009AED8D /* LoadImageResponse.swift */,
 				CEA4890A1FBD9A9F001E2543 /* NewsResponse.swift */,
 				CE662F981FC5A17400696955 /* PutCommentResponse.swift */,
 				CECAF98A1FC5C77100050EAA /* CommentsResponse.swift */,
@@ -2707,6 +2731,7 @@
 		ED9DD97A94537234B96F7DBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8113241A1FCBFB98009AED8D /* SubViews */,
 				1F7E08533092F7BA0C733791 /* EditingProfileViewController.swift */,
 				955D5BA8233E04DBBA1EEEC4 /* EditingProfileViewInputOutput.swift */,
 			);
@@ -3051,6 +3076,7 @@
 				9BB4E44D8DC293D80A5493B4 /* Configurations.swift in Sources */,
 				CE1A5B971F8BFDE5001AC04F /* MainVCHeader.swift in Sources */,
 				CEB0457E1F8E159D0090E3EC /* FilmGroup.swift in Sources */,
+				811324201FCC4E40009AED8D /* ProfileModel.swift in Sources */,
 				CED2590E1F969908009C0262 /* RecommendationsResponse.swift in Sources */,
 				040CE5181F5D912C001DF59C /* Ingredient.swift in Sources */,
 				3386D47D1F4437F7009D9A42 /* CartResponse.swift in Sources */,
@@ -3070,6 +3096,7 @@
 				9BB4EAC177088AA22DB9C31F /* FoodleTarget.swift in Sources */,
 				9BB4E330C29F6CB1435CA47E /* Observable+ObjectMapper.swift in Sources */,
 				9BB4E16B5EFDB6CBC8454850 /* Response+ObjectMapper.swift in Sources */,
+				8113241E1FCC4556009AED8D /* LoadImageResponse.swift in Sources */,
 				9BB4E87CA6162F664B0FAE21 /* ProviderError.swift in Sources */,
 				333173281F4EDE4700C7C88E /* Region.swift in Sources */,
 				3386D47B1F443731009D9A42 /* Cart.swift in Sources */,
@@ -3259,6 +3286,7 @@
 				D1289C1C805A4D1EE856B792 /* FilmPresenter.swift in Sources */,
 				5616AB7FB9E76D0FA6CA690F /* FilmRouter.swift in Sources */,
 				9A5E7C2999B695C275922D90 /* FilmRouterInput.swift in Sources */,
+				8113241C1FCBFC1F009AED8D /* EditingView.swift in Sources */,
 				4A95B6E054CDDACEC2BDA148 /* FilmViewController.swift in Sources */,
 				67EFDF9D276C66D9645A9F8B /* FilmViewInputOutput.swift in Sources */,
 				CD5EA006F803A4DD195EC957 /* ActorsConfigurator.swift in Sources */,

@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var profile: ProfileModel?
+
     var rootFlowController: FlowControllerProtocol?
     var firstLaunchManager: LaunchManagerProtocol?
     fileprivate let disposeBag = DisposeBag()

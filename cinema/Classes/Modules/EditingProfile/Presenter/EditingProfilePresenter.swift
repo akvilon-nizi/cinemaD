@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 class EditingProfilePresenter {
 
@@ -17,6 +18,10 @@ class EditingProfilePresenter {
 
 extension EditingProfilePresenter: EditingProfileViewOutput {
 
+    func saveAvatar(image: UIImage) {
+        interactor.loadAvatar(image: image)
+    }
+
     func viewIsReady() {
         log.verbose("EditingProfile is ready")
     }
@@ -29,5 +34,11 @@ extension EditingProfilePresenter: EditingProfileViewOutput {
 // MARK: - EditingProfileInteractorOutput
 
 extension EditingProfilePresenter: EditingProfileInteractorOutput {
+    func getError() {
+        view.getError()
+    }
 
+    func successEditing() {
+
+    }
 }

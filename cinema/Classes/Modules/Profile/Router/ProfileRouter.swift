@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ProfileRouter {
 
@@ -21,8 +22,8 @@ extension ProfileRouter: ProfileRouterInput {
         appRouter.transition(to: .settings)
     }
 
-    func openEditing() {
-        appRouter.transition(to: .editingProfile)
+    func openEditing(nameUser: String, avatar: String, output: EditingProfileModuleOutput) {
+        appRouter.transition(to: .editingProfile(nameUser: nameUser, avatar: avatar, output: output))
     }
 
     func openFilm(videoId: String, name: String) {

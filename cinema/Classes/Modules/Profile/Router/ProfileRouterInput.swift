@@ -10,7 +10,7 @@ protocol ProfileRouterInput: BaseRouterInput {
 
     func openSettings()
 
-    func openEditing()
+    func openEditing(nameUser: String, avatar: String, output: EditingProfileModuleOutput)
 
     func openFilm(videoId: String, name: String)
 }

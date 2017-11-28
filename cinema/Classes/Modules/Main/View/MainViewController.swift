@@ -399,6 +399,10 @@ extension MainViewController: MainViewInput {
         }
 
         self.mainData = mainData
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = mainData.profile {
+            appDelegate.profile = profile
+            mainTabView.setImage(imageUrl: profile.avatar)
+        }
         activityVC.isHidden = true
         activityVC.stopAnimating()
         UIView.setAnimationsEnabled(false)

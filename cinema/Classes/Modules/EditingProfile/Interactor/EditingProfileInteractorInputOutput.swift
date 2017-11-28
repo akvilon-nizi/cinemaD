@@ -4,11 +4,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol EditingProfileInteractorInput {
-
+    func loadAvatar(image: UIImage)
 }
 
 protocol EditingProfileInteractorOutput: class {
+    func getError()
 
+    func successEditing()
 }

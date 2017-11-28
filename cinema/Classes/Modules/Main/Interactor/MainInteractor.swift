@@ -21,7 +21,27 @@ class MainInteractor {
 extension MainInteractor: MainInteractorInput {
 
     func getData() {
-        getTrailers()
+        getProfile()
+    }
+
+    func getProfile() {
+        provider.requestModel(.profile)
+            .subscribe { [unowned self] (response: Event<ProfileModel>) in
+                switch response {
+                case let .next(model):
+                    self.mainData.profile = model
+                    self.getTrailers()
+                case let .error(error as ProviderError):
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
     }
 
     func getTrailers() {
@@ -32,11 +52,7 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.trailers = model.trailers
                     self.getNow() 
                 case let .error(error as ProviderError):
-                    if error.status == 403 {
-                        self.output.tokenError()
-                    } else {
-                        self.output.getError()
-                    }
+                    self.output.getError()
                 default:
                     break
                 }

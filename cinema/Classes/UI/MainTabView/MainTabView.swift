@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol MainTabViewDelegate: class {
 
@@ -61,6 +62,7 @@ class MainTabView: UIView {
         profileButton.widthAnchor ~= 60
         profileButton.setImage(Asset.Cinema.Profile.userPlaceholder.image, for: .normal)
         profileButton.layer.cornerRadius = 30
+        profileButton.layer.masksToBounds = true
         profileButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         profileButton.tag = 2
 
@@ -120,6 +122,17 @@ class MainTabView: UIView {
     func reloadData() {
         for but in buttons {
             but.isSelected = false
+        }
+    }
+
+    func setImage(imageUrl: String) {
+        if let link =  URL(string: imageUrl) {
+            KingfisherManager.shared.retrieveImage(with: link, options: nil, progressBlock: nil, completionHandler: {[unowned self] image, _, _, _ in
+                if let loadImage = image {
+                    self.profileButton.setImage(loadImage, for: .normal)
+                } else {
+                }
+            })
         }
     }
 

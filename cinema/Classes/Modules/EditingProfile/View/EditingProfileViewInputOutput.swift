@@ -4,10 +4,13 @@
 //
 
 import Foundation
+import UIKit
 
 protocol EditingProfileViewInput: class {
 
     func setupInitialState()
+
+    func getError()
 }
 
 protocol EditingProfileViewOutput {
@@ -15,4 +18,6 @@ protocol EditingProfileViewOutput {
     func viewIsReady()
 
     func backButtonTap()
+
+    func saveAvatar(image: UIImage)
 }

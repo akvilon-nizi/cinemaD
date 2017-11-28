@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ProfilePresenter {
 
@@ -20,8 +21,8 @@ extension ProfilePresenter: ProfileViewOutput {
         router.close()
     }
 
-    func editingButtonTap() {
-       router.openEditing()
+    func editingButtonTap(nameUser: String, avatar: String) {
+       router.openEditing(nameUser: nameUser, avatar: avatar, output: self)
     }
 
     func settingButtonTap() {
@@ -48,4 +49,10 @@ extension ProfilePresenter: ProfileInteractorOutput {
     func getWatched(_ films: [FilmCollections]) {
         view.getData(films)
     }
+}
+
+// MARK: - EditingProfileModuleOutput
+
+extension ProfilePresenter: EditingProfileModuleOutput {
+
 }

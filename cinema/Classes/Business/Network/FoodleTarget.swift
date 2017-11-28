@@ -6,6 +6,7 @@
 import Moya
 import CoreLocation
 import Alamofire
+import UIKit
 
 enum FoodleTarget {
     case registration(password: String, name: String, phone: String)
@@ -43,6 +44,8 @@ enum FoodleTarget {
     case newsInfo(newsID: String)
     case newsComments(newsID: String)
     case putNewsComment(newsID: String, message: String)
+    case loadAvatar(image: UIImage)
+    case profile
 
     var isRequiredAuth: Bool {
         switch self {
@@ -137,12 +140,16 @@ extension FoodleTarget: TargetType {
             return "news/\(newsID)/comments"
         case let .putNewsComment(newsID, _):
             return "news/\(newsID)/comments"
+        case .loadAvatar:
+            return "me/avatar"
+        case .profile:
+            return "me"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile:
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
@@ -241,12 +248,17 @@ extension FoodleTarget: TargetType {
     }
 
     var task: Task {
-//        switch self {
-//        case let .uploadData(data):
-//        return .upload(.multipart([MultipartFormData(provider: .data(data), name: "body", fileName: "photo.jpg", mimeType: "image/jpeg")]))
-//        default:
+        switch self {
+        case let .loadAvatar(image):
+            if let data: Data = UIImagePNGRepresentation(image) {
+                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "img", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+            } else if let data:Data = UIImageJPEGRepresentation(image, 1.0) {
+                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "img", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+            }
             return .request
-//        }
+        default:
+            return .request
+        }
     }
 }
 

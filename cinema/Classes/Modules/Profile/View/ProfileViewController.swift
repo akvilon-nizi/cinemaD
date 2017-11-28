@@ -15,6 +15,10 @@ class ProfileViewController: ParentViewController {
 
     var films: [Film] = []
 
+    var avatar: String = ""
+
+    var userName: String = ""
+
     let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
 
     // MARK: - Life cycle
@@ -64,6 +68,11 @@ class ProfileViewController: ParentViewController {
         tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
 
         profileHeader.delegate = self
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = appDelegate.profile {
+            profileHeader.setProfileInfo(profile: profile)
+            userName = profile.name
+            avatar = profile.avatar
+        }
 
         activityVC.startAnimating()
         activityVC.isHidden = false
@@ -74,14 +83,6 @@ class ProfileViewController: ParentViewController {
     // MARK: - Actions
     func didTapLeftButton() {
         output?.backButtonTap()
-    }
-
-    func didTapEditingButton() {
-        output?.editingButtonTap()
-    }
-
-    func didTapSettingsButton() {
-        output?.settingButtonTap()
     }
 }
 
@@ -209,7 +210,7 @@ extension ProfileViewController: FilmGroupDelegate {
 
 extension ProfileViewController: ProfileHeaderDelegate {
     func tapEdit() {
-        output?.editingButtonTap()
+        output?.editingButtonTap(nameUser: userName, avatar: avatar)
     }
 
     func tapSettings() {

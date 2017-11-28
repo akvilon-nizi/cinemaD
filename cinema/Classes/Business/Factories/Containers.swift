@@ -161,8 +161,12 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: EditingProfileConfigurator.tag) { () -> UIViewController in
-            let configurator = EditingProfileConfigurator()
+        container.register(tag: EditingProfileConfigurator.tag) { (
+            nameUser: String,
+            avatar: String,
+            output: EditingProfileModuleOutput
+        ) -> UIViewController in
+            let configurator = EditingProfileConfigurator((nameUser: nameUser, avatar: avatar, output: output))
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()

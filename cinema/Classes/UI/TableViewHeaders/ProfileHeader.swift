@@ -56,6 +56,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
         imageView.widthAnchor ~= 92
         imageView.backgroundColor = UIColor.cnm3a3a3a
         imageView.layer.cornerRadius = 92 / 2
+        imageView.layer.masksToBounds = true
         imageView.image = Asset.Cinema.Profile.userPlaceholder.image
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -74,6 +75,43 @@ class ProfileHeader: UITableViewHeaderFooterView {
 
         autoresizesSubviews = true
 
+    }
+
+    private func setStackView(profile: ProfileModel) {
+
+        let watchView = UIView().setParameters(
+            topLabelText: L10n.profileWatchText,
+            bottomLabelText: String(profile.watched),
+            image: Asset.Cinema.Profile.watchProfile.image)
+
+        let rewardsView = UIView().setParameters(
+            topLabelText: L10n.profileRewardsText,
+            bottomLabelText: String(profile.rewards),
+            image: Asset.Cinema.Profile.rewardsProfile.image,
+            isCenter: true)
+
+        let friendsView = UIView().setParameters(
+            topLabelText: L10n.profileFriendText,
+            bottomLabelText: String(profile.friends),
+            image: Asset.Cinema.Profile.friendsProfile.image)
+
+        let stack = createStackView(.horizontal, .fill, .fill, 0, with: [watchView, rewardsView, friendsView])
+
+        stackView.addSubview(stack.prepareForAutoLayout())
+        stack.pinEdgesToSuperviewEdges()
+    }
+
+// MARK: - Actions
+
+    func handleTapEditButton() {
+        delegate?.tapEdit()
+    }
+
+    func handleTapSettingsButton() {
+        delegate?.tapSettings()
+    }
+
+    func setProfileInfo(profile: ProfileModel) {
         let mainView = UIView()
         contentView.addSubview(mainView.prepareForAutoLayout())
         mainView.topAnchor ~= contentView.topAnchor + 19
@@ -83,6 +121,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
         mainView.addSubview(userImage.prepareForAutoLayout())
         userImage.topAnchor ~= mainView.topAnchor
         userImage.leadingAnchor ~= mainView.leadingAnchor + 15
+        userImage.kf.setImage(with: URL(string: profile.avatar))
 
         mainView.addSubview(editButton.prepareForAutoLayout())
         editButton.topAnchor ~= userImage.bottomAnchor - 40
@@ -91,6 +130,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
         mainView.addSubview(nameLabel.prepareForAutoLayout())
         nameLabel.bottomAnchor ~= userImage.bottomAnchor - 52
         nameLabel.leadingAnchor ~= editButton.leadingAnchor
+        nameLabel.text = profile.name
 
         mainView.addSubview(settingsButton.prepareForAutoLayout())
         settingsButton.leadingAnchor ~= editButton.trailingAnchor + 8
@@ -104,40 +144,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
         stackView.trailingAnchor ~= mainView.trailingAnchor
         stackView.heightAnchor ~= 43
 
-        setStackView()
-    }
-
-    func setStackView() {
-        let watchView = UIView().setParameters(
-            topLabelText: L10n.profileWatchText,
-            bottomLabelText: "23",
-            image: Asset.Cinema.Profile.watchProfile.image)
-
-        let rewardsView = UIView().setParameters(
-            topLabelText: L10n.profileRewardsText,
-            bottomLabelText: "117",
-            image: Asset.Cinema.Profile.rewardsProfile.image,
-            isCenter: true)
-
-        let friendsView = UIView().setParameters(
-            topLabelText: L10n.profileFriendText,
-            bottomLabelText: "8",
-            image: Asset.Cinema.Profile.friendsProfile.image)
-
-        let stack = createStackView(.horizontal, .fill, .fill, 0, with: [watchView, rewardsView, friendsView])
-
-        stackView.addSubview(stack.prepareForAutoLayout())
-        stack.pinEdgesToSuperviewEdges()
-    }
-
-    //MARK: Actions
-
-    func handleTapEditButton() {
-        delegate?.tapEdit()
-    }
-
-    func handleTapSettingsButton() {
-        delegate?.tapSettings()
+        setStackView(profile: profile)
     }
 }
 
