@@ -14,7 +14,7 @@ class KinobaseRouter {
 
 extension KinobaseRouter: KinobaseRouterInput {
     func close() {
-        appRouter.backTransition()
+        appRouter.backToMain()
     }
 
     func openAllFilms(_ films: [Film]) {

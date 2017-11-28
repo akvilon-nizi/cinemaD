@@ -68,7 +68,7 @@ class FilterViewController: ParentViewController {
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         var frame = backButton.frame
         frame.size = CGSize(width: 30, height: 100)
         backButton.frame = frame
@@ -76,9 +76,10 @@ class FilterViewController: ParentViewController {
 
         saveButton.setImage(Asset.Kinobase.checkMini.image, for: .normal)
         saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
-        saveButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
+        saveButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         frame = saveButton.frame
         frame.size = CGSize(width: 30, height: 100)
+        frame.origin.x -= 9
         saveButton.frame = frame
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
 

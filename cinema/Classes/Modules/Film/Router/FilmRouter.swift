@@ -16,4 +16,12 @@ extension FilmRouter: FilmRouterInput {
     func close() {
         appRouter.backTransition()
     }
+
+    func home() {
+        appRouter.backToMain()
+    }
+
+    func openPersonID(_ personID: String, name: String, role: String) {
+        appRouter.transition(to: .actors(id: personID, name: name, role: role))
+    }
 }

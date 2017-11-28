@@ -6,5 +6,7 @@
 import Foundation
 
 protocol ActorsRouterInput: BaseRouterInput {
+    func close()
 
+    func home()
 }

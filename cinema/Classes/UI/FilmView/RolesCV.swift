@@ -8,9 +8,9 @@
 
 import UIKit
 
-//protocol FilmGroupDelegate: class {
-//    func openFilmID(_ filmID: String, name: String)
-//}
+protocol RolesCVDelegate: class {
+    func openPersonID(_ personID: String, name: String, role: String)
+}
 
 class RolesCV: UITableViewHeaderFooterView {
     let titleLabel: UILabel = UILabel()
@@ -25,7 +25,7 @@ class RolesCV: UITableViewHeaderFooterView {
         }
     }
 
-//    weak var delegate: FilmGroupDelegate?
+    weak var delegate: RolesCVDelegate?
 
     fileprivate let collectionView: UICollectionView = {
 
@@ -65,7 +65,7 @@ extension RolesCV: UICollectionViewDelegateFlowLayout {
 
 extension RolesCV: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        delegate?.openFilmID(films[indexPath.row].id, name: films[indexPath.row].name)
+        delegate?.openPersonID(persons[indexPath.row].id, name: persons[indexPath.row].name, role: persons[indexPath.row].relation)
     }
 }
 

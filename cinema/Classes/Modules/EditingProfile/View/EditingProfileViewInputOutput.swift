@@ -19,5 +19,7 @@ protocol EditingProfileViewOutput {
 
     func backButtonTap()
 
+    func homeButtonTap()
+
     func saveAvatar(image: UIImage)
 }

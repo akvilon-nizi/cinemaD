@@ -99,7 +99,7 @@ class NewsCell: UITableViewCell {
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharing.image, for: .normal)
-        shareButton.addTarget(self, action: #selector(tapSharedButton), for: .touchUpInside)
+        //shareButton.addTarget(self, action: #selector(tapSharedButton), for: .touchUpInside)
 
         mainView.addSubview(shareButton.prepareForAutoLayout())
         shareButton.topAnchor ~= newsLabel.bottomAnchor + 20

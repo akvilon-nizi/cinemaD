@@ -16,4 +16,8 @@ extension EditingProfileRouter: EditingProfileRouterInput {
     func close() {
         appRouter.backTransition()
     }
+
+    func home() {
+        appRouter.backToMain()
+    }
 }

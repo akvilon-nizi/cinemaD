@@ -179,6 +179,14 @@ enum L10n {
   static let newsMessagePlaceholder = L10n.tr("Localizable", "news-message-placeholder")
   /// Новость
   static let newsTitleText = L10n.tr("Localizable", "news-title-text")
+  /// Награды и премии
+  static let personAdwardsText = L10n.tr("Localizable", "person-adwards-text")
+  /// Фильмография
+  static let personFilmsText = L10n.tr("Localizable", "person-films-text")
+  /// Родился
+  static let personWasBorn = L10n.tr("Localizable", "person-was-born")
+  /// Актеры и режиссеры
+  static let personsActorsProducers = L10n.tr("Localizable", "persons-actors-producers")
   /// На указанный номер телефона будет\nотправлено сообщение с кодом\nподтврждения
   static let phoneInfoText = L10n.tr("Localizable", "phone-info-text")
   /// Далее

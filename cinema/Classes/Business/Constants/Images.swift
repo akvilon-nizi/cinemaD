@@ -61,6 +61,7 @@ enum Asset {
   }
   enum Cinema {
     static let chatIcon = ImageAsset(name: "chatIcon")
+    static let home = ImageAsset(name: "home")
     enum MainTab {
       enum Active {
         static let chatA = ImageAsset(name: "chatA")
@@ -149,6 +150,7 @@ enum Asset {
     Kinobase.settings,
     Kinobase.settingsUnselect,
     Cinema.chatIcon,
+    Cinema.home,
     Cinema.MainTab.Active.chatA,
     Cinema.MainTab.Active.kinobaseA,
     Cinema.MainTab.Active.rewardA,

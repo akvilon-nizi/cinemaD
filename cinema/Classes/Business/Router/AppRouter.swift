@@ -23,7 +23,7 @@ enum AppRouterDestination {
     case confirmation(phone: String, uid: String, isRestore: Bool)
     case phone(phone: String, uid: String)
     case films(films: [Film])
-    case actors
+    case actors(id: String, name: String, role: String)
     case film(videoID: String, name: String)
     case kinobase
     case main
@@ -85,8 +85,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: PhoneConfigurator.tag, arguments: phone, uid)
             case let .films(films):
                 return try factory.resolve(tag: FilmsConfigurator.tag, arguments: films)
-            case .actors:
-                return try factory.resolve(tag: ActorsConfigurator.tag)
+            case let .actors(id, name, role):
+                return try factory.resolve(tag: ActorsConfigurator.tag, arguments: id, name, role)
             case let .film(videoID, name):
                 return try factory.resolve(tag: FilmConfigurator.tag, arguments: videoID, name)
             case let .newCollections(output, id, name, watched):
@@ -124,6 +124,8 @@ protocol AppRouterProtocol {
     func backTransition()
 
     func openSideMenu()
+
+    func backToMain()
 
     func dropAll()
 
@@ -198,6 +200,16 @@ class AppRouter: AppRouterProtocol {
                 .subscribe()
                 .addDisposableTo(disposeBag)
         }
+    }
+
+    func backToMain() {
+        guard let flowController = dataSource?.flowControllerForTransition() else {
+            log.warning("can't receive flow controller for transition")
+            return
+        }
+        flowController.performTransitionToMain(animated: true)
+            .subscribe()
+            .addDisposableTo(disposeBag)
     }
 
     func openSideMenu() {

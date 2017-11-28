@@ -15,7 +15,7 @@ class ProfileRouter {
 
 extension ProfileRouter: ProfileRouterInput {
     func close() {
-        appRouter.backTransition()
+        appRouter.backToMain()
     }
 
     func openSettings() {

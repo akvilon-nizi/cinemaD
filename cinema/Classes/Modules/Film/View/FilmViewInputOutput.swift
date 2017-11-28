@@ -32,4 +32,8 @@ protocol FilmViewOutput {
     func willWatchTapDelete()
 
     func watchedTapDelete()
+
+    func homeTap()
+
+    func openPersonID(_ personID: String, name: String, role: String)
 }

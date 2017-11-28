@@ -17,6 +17,10 @@ class NewsPresenter {
 // MARK: - NewsViewOutput
 
 extension NewsPresenter: NewsViewOutput {
+    func homeButtonTap() {
+        router.home()
+    }
+
     func sendMessage(message: String) {
         interactor.putComment(newsID: newsID, message: message)
     }

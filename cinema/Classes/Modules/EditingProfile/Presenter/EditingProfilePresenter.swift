@@ -18,6 +18,10 @@ class EditingProfilePresenter {
 
 extension EditingProfilePresenter: EditingProfileViewOutput {
 
+    func homeButtonTap() {
+        router.home()
+    }
+
     func saveAvatar(image: UIImage) {
         interactor.loadAvatar(image: image)
     }

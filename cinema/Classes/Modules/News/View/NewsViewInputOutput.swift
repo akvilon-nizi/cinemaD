@@ -22,5 +22,7 @@ protocol NewsViewOutput {
 
     func backButtonTap()
 
+    func homeButtonTap()
+
     func sendMessage(message: String)
 }

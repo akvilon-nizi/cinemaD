@@ -16,4 +16,8 @@ extension NewsRouter: NewsRouterInput {
     func close() {
         appRouter.backTransition()
     }
+
+    func home() {
+        appRouter.backToMain()
+    }
 }

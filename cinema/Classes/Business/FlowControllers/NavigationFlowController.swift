@@ -60,6 +60,20 @@ extension NavigationFlowController: FlowControllerProtocol {
         }
     }
 
+    func performTransitionToMain(animated: Bool = true) -> FlowControllerResult {
+        return Observable.create { (observer: AnyObserver<UIViewController?>) in
+            guard let navigationController = self.rootViewController as? UINavigationController else {
+                observer.onError(NavigationFlowControllerError.wrongRootViewController)
+                return Disposables.create()
+            }
+            navigationController.popToVC(viewController: self.rootViewController.childViewControllers[0], animated: animated) {
+                observer.onNext(nil)
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+
     func performTransition(to destination: AppRouterDestination) -> FlowControllerResult {
         return performTransition(to: destination, animated: true)
     }
@@ -114,6 +128,13 @@ fileprivate extension UINavigationController {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         popViewController(animated: animated)
+        CATransaction.commit()
+    }
+
+    func popToVC(viewController: UIViewController, animated: Bool, completion: @escaping () -> Void) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        popToViewController(viewController, animated: animated)
         CATransaction.commit()
     }
 

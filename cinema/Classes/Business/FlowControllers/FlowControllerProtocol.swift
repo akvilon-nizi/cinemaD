@@ -28,6 +28,8 @@ protocol FlowControllerProtocol: class {
     func dismissChildFlowController(animated: Bool) -> FlowControllerResult
 
     func performTransitionFromMain(to viewController: UIViewController, animated: Bool) -> FlowControllerResult
+
+    func performTransitionToMain(animated: Bool) -> FlowControllerResult
 }
 
 extension FlowControllerProtocol {

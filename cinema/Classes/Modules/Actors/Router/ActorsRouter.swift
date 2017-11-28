@@ -13,5 +13,11 @@ class ActorsRouter {
 // MARK: - ActorsRouterInput
 
 extension ActorsRouter: ActorsRouterInput {
+    func close() {
+        appRouter.backTransition()
+    }
 
+    func home() {
+        appRouter.backToMain()
+    }
 }

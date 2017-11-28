@@ -130,7 +130,7 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         var imageLink: String = ""
 
         if let cover = news.cover {
-            if let attached = news.attached {
+            if let attached = news.attached, !attached.isEmpty {
                 var imageArray: [KingfisherSource] = []
                 for imageUrl in attached {
                     imageArray.append(KingfisherSource(urlString: imageUrl)!)
@@ -140,6 +140,13 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
                 newsImage.slideshowInterval = 3.0
                 newsImage.draggingEnabled = false
                 newsImage.pageControlPosition = .hidden
+                newsImage.activityIndicator = DefaultActivityIndicator()
+            } else {
+                newsImage.setImageInputs([
+                    KingfisherSource(urlString: cover)!
+                    ])
+                newsImage.contentScaleMode = .scaleToFill
+                newsImage.activityIndicator = DefaultActivityIndicator()
             }
 
             imageLink = cover
@@ -149,7 +156,7 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
                 KingfisherSource(urlString: imageUrl)!
             ])
              newsImage.contentScaleMode = .scaleToFill
-
+            newsImage.activityIndicator = DefaultActivityIndicator()
             imageLink = imageUrl
         }
 

@@ -118,8 +118,8 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: ActorsConfigurator.tag) { () -> UIViewController in
-            let configurator = ActorsConfigurator()
+        container.register(tag: ActorsConfigurator.tag) { (id: String, name: String, role: String) -> UIViewController in
+            let configurator = ActorsConfigurator(id: id, name: name, role: role)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()

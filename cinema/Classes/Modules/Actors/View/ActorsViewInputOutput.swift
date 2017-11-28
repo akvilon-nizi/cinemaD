@@ -8,9 +8,17 @@ import Foundation
 protocol ActorsViewInput: class {
 
     func setupInitialState()
+
+    func showNetworkError()
+    
+    func getPersonInfo(person: FullPerson)
 }
 
 protocol ActorsViewOutput {
 
     func viewIsReady()
+
+    func backButtonTap()
+
+    func homeButtonTap()
 }

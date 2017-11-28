@@ -95,7 +95,7 @@ class NewsImageCell: UITableViewCell {
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharingOrange.image, for: .normal)
-        shareButton.addTarget(self, action: #selector(tapSharedButtons), for: .touchUpInside)
+        //shareButton.addTarget(self, action: #selector(tapSharedButtons), for: .touchUpInside)
 
         mainView.addSubview(shareButton.prepareForAutoLayout())
         shareButton.leadingAnchor ~= mainView.leadingAnchor + 5

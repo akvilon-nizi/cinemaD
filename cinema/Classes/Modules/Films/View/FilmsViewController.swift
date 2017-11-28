@@ -50,11 +50,21 @@ class FilmsViewController: ParentViewController {
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         var frame = backButton.frame
         frame.size = CGSize(width: 30, height: 100)
         backButton.frame = frame
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+
+        let homeButton = UIButton()
+        homeButton.setImage(Asset.Cinema.home.image, for: .normal)
+        //        homeButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        homeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        frame = homeButton.frame
+        frame.origin.x -= 9
+        frame.size = CGSize(width: 30, height: 100)
+        homeButton.frame = frame
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: homeButton)
 
         titleViewLabel.text = L10n.filmsTitleText
         titleViewLabel.font = UIFont.cnmFutura(size: 20)

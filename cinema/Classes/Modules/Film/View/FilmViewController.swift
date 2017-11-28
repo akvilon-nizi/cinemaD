@@ -97,6 +97,8 @@ class FilmViewController: ParentViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        view.layoutIfNeeded()
+        view.layoutSubviews()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,14 +120,47 @@ class FilmViewController: ParentViewController {
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //backButton.contentMode = .center
         var frame = backButton.frame
         frame.size = CGSize(width: 30, height: 100)
         backButton.frame = frame
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
+        if let navCont = navigationController, navCont.viewControllers.count > 2 {
+            let homeButton = UIButton()
+            homeButton.setImage(Asset.Cinema.home.image, for: .normal)
+            homeButton.addTarget(self, action: #selector(didTapHomeButton), for: .touchUpInside)
+            homeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            frame = homeButton.frame
+            frame.origin.x -= 9
+            frame.size = CGSize(width: 30, height: 100)
+            homeButton.frame = frame
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: homeButton)
+        }
+
+        let titleView = UIView()
+        titleView.heightAnchor ~= 88
+        let titleViewLabel = UILabel()
         titleViewLabel.text = name
+        titleViewLabel.lineBreakMode = .byTruncatingTail
         titleViewLabel.font = UIFont.cnmFutura(size: 20)
+        titleViewLabel.textColor = UIColor.cnmGreyDark
+        titleViewLabel.widthAnchor ~= windowWidth + 40
+        titleViewLabel.textAlignment = .center
+        titleView.addSubview(titleViewLabel.prepareForAutoLayout())
+        titleViewLabel.centerXAnchor ~= titleView.centerXAnchor
+        titleViewLabel.centerYAnchor ~= titleView.centerYAnchor - 7
+        //titleViewLabel.topAnchor ~= titleView.topAnchor
+
+        titleLabel.font = UIFont.cnmFuturaLight(size: 14)
+        titleLabel.textColor = UIColor.cnmAfafaf
+
+        titleView.addSubview(titleLabel.prepareForAutoLayout())
+        titleLabel.centerXAnchor ~= titleView.centerXAnchor
+        titleLabel.topAnchor ~= titleViewLabel.bottomAnchor 
+
+        navigationItem.titleView = titleView
 
         starsLabel.text = L10n.filmYourStar
 
@@ -161,21 +196,31 @@ class FilmViewController: ParentViewController {
                 willWatchButton.isSelected = true
             }
 
-            titleLabel.font = UIFont.cnmFuturaLight(size: 14)
-            titleLabel.textColor = UIColor.cnmAfafaf
             var textsArray: [String] = []
             for genres in filmInfo.genres {
                 if let text = genres.name, !text.isEmpty {
                     textsArray.append(text.capitalized)
                 }
             }
+
             titleLabel.text = textsArray.joined(separator: "/") + " (" + String(filmInfo.yearFirstRelease) + ")"
-            view.addSubview(titleLabel.prepareForAutoLayout())
-            titleLabel.centerXAnchor ~= view.centerXAnchor
-            titleLabel.topAnchor ~= titleViewLabel.bottomAnchor
+
+//            if #available(iOS 11.0, *) {
+//                scrollView.contentInsetAdjustmentBehavior = .always
+//            } else {
+//                automaticallyAdjustsScrollViewInsets = true
+//            }
+
+            let separatorView = UIView()
+            separatorView.backgroundColor = .white
+            view.addSubview(separatorView.prepareForAutoLayout())
+            separatorView.topAnchor ~= view.topAnchor + 64
+            separatorView.leadingAnchor ~= view.leadingAnchor
+            separatorView.trailingAnchor ~= view.trailingAnchor
+            separatorView.heightAnchor ~= 10
 
             view.addSubview(scrollView.prepareForAutoLayout())
-            scrollView.topAnchor ~= titleLabel.bottomAnchor + 10
+            scrollView.topAnchor ~= separatorView.bottomAnchor
             scrollView.leadingAnchor ~= view.leadingAnchor
             scrollView.trailingAnchor ~= view.trailingAnchor
             scrollView.bottomAnchor ~= view.bottomAnchor
@@ -298,6 +343,7 @@ class FilmViewController: ParentViewController {
         rolesLabel.leadingAnchor ~= contentView.leadingAnchor + 39
 
         let rolesCV = RolesCV()
+        rolesCV.delegate = self
         rolesCV.persons = filmInfo.persons
         contentView.addSubview(rolesCV.prepareForAutoLayout())
         rolesCV.topAnchor ~= rolesLabel.bottomAnchor + 14
@@ -378,6 +424,10 @@ class FilmViewController: ParentViewController {
 
     func didTapChatButton() {
 //        fbClick()
+    }
+
+    func didTapHomeButton() {
+        output?.homeTap()
     }
 
     func showDialog<C: ContentProtocol>(_ content: C, mode: ShareDialogMode = .automatic) {
@@ -666,5 +716,13 @@ extension FilmViewController: VKSdkDelegate {
 
     func vkSdkUserAuthorizationFailed() {
         print()
+    }
+}
+
+// MARK: - FilmViewInput
+
+extension FilmViewController: RolesCVDelegate {
+    func openPersonID(_ personID: String, name: String, role: String) {
+        output?.openPersonID(personID, name: name, role: role)
     }
 }

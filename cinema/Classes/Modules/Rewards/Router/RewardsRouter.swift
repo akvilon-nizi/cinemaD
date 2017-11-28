@@ -14,6 +14,6 @@ class RewardsRouter {
 
 extension RewardsRouter: RewardsRouterInput {
     func close() {
-        appRouter.backTransition()
+        appRouter.backToMain()
     }
 }
