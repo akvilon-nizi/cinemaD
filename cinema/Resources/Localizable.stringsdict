@@ -20,6 +20,24 @@
 			<string>%d секунд</string>
 		</dict>
 	</dict>
+	<key>%d year(s)</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@year@</string>
+		<key>year</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string>(%d года)</string>
+			<key>one</key>
+			<string>(%d год)</string>
+			<key>many</key>
+			<string>(%d лет)</string>
+		</dict>
+	</dict>
 	<key>%d person(s)</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

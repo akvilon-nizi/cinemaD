@@ -52,8 +52,15 @@ extension Formatter {
         return formatter
     }()
 
+    static let years: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY"
+        return formatter
+    }()
+
 }
 extension Date {
     var monthMedium: String { return Formatter.monthMedium.string(from: self) }
     var hourMinutes: String { return Formatter.hourMinutes.string(from: self) }
+    var years: String { return Formatter.years.string(from: self) }
 }

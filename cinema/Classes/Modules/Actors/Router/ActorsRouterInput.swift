@@ -9,4 +9,8 @@ protocol ActorsRouterInput: BaseRouterInput {
     func close()
 
     func home()
+
+    func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])
+
+    func openFilm(videoId: String, name: String)
 }

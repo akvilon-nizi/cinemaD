@@ -16,8 +16,10 @@ class ActorsViewController: ParentViewController {
     let contentView = UIView()
 
     let imageView = UIImageView()
-    
+
     let scrollView = UIScrollView()
+
+    let persons: [PersonFromFilm]
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 160
 
@@ -37,9 +39,10 @@ class ActorsViewController: ParentViewController {
         navigationController?.navigationBar.isHidden = true
     }
 
-    init(name: String, role: String) {
+    init(name: String, role: String, persons: [PersonFromFilm]) {
         self.name = name
         self.role = role
+        self.persons = persons
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -95,7 +98,31 @@ class ActorsViewController: ParentViewController {
         titleLabel.centerXAnchor ~= titleView.centerXAnchor
         titleLabel.topAnchor ~= titleViewLabel.bottomAnchor
 
+        setScrollView()
+
         navigationItem.titleView = titleView
+    }
+
+    func setScrollView() {
+        let separatorView = UIView()
+        separatorView.backgroundColor = .white
+        view.addSubview(separatorView.prepareForAutoLayout())
+        separatorView.topAnchor ~= view.topAnchor + 64
+        separatorView.leadingAnchor ~= view.leadingAnchor
+        separatorView.trailingAnchor ~= view.trailingAnchor
+        separatorView.heightAnchor ~= 10
+
+        view.addSubview(scrollView.prepareForAutoLayout())
+        scrollView.topAnchor ~= separatorView.bottomAnchor
+        scrollView.leadingAnchor ~= view.leadingAnchor
+        scrollView.trailingAnchor ~= view.trailingAnchor
+        scrollView.bottomAnchor ~= view.bottomAnchor
+
+        scrollView.addSubview(contentView.prepareForAutoLayout())
+        contentView.pinEdgesToSuperviewEdges(top: 0, left: 0, right: 0, bottom: 10)
+        contentView.widthAnchor ~= view.widthAnchor
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
     }
 
     // MARK: - Actions
@@ -105,6 +132,42 @@ class ActorsViewController: ParentViewController {
 
     func didTapHomeButton() {
         output?.homeButtonTap()
+    }
+
+    func setSubviews(person: FullPerson) {
+        let actorHeaderView = ActorHeaderView(person: person)
+        contentView.addSubview(actorHeaderView.prepareForAutoLayout())
+        actorHeaderView.topAnchor ~= contentView.topAnchor
+        actorHeaderView.leadingAnchor ~= contentView.leadingAnchor
+        actorHeaderView.trailingAnchor ~= contentView.trailingAnchor
+
+        let actorFilmsView = ActorFilmsView(films: person.films)
+        contentView.addSubview(actorFilmsView.prepareForAutoLayout())
+        actorFilmsView.topAnchor ~= actorHeaderView.bottomAnchor + 30
+        actorFilmsView.leadingAnchor ~= contentView.leadingAnchor
+        actorFilmsView.trailingAnchor ~= contentView.trailingAnchor
+        actorFilmsView.delegate = self
+
+        let rolesLabel = UILabel()
+        rolesLabel.textColor = UIColor.cnm3a3a3a
+        rolesLabel.text = L10n.personsActorsProducers
+        rolesLabel.font = UIFont.cnmFuturaBold(size: 16)
+        rolesLabel.textAlignment = .left
+
+        contentView.addSubview(rolesLabel.prepareForAutoLayout())
+        rolesLabel.topAnchor ~= actorFilmsView.bottomAnchor + 21
+        rolesLabel.leadingAnchor ~= contentView.leadingAnchor + 41
+        rolesLabel.leadingAnchor ~= contentView.trailingAnchor - 41
+
+        let rolesCV = RolesCV()
+        rolesCV.delegate = self
+        rolesCV.persons = persons.filter({$0.id != person.id})
+        contentView.addSubview(rolesCV.prepareForAutoLayout())
+        rolesCV.topAnchor ~= rolesLabel.bottomAnchor + 14
+        rolesCV.heightAnchor ~= 110
+        rolesCV.leadingAnchor ~= contentView.leadingAnchor
+        rolesCV.trailingAnchor ~= contentView.trailingAnchor
+        rolesCV.bottomAnchor ~= contentView.bottomAnchor
     }
 }
 
@@ -125,5 +188,22 @@ extension ActorsViewController: ActorsViewInput {
     func getPersonInfo(person: FullPerson) {
         activityVC.isHidden = true
         activityVC.stopAnimating()
+        setSubviews(person: person)
+    }
+}
+
+// MARK: - RolesCVDelegate
+
+extension ActorsViewController: RolesCVDelegate {
+    func openPersonID(_ personID: String, name: String, role: String) {
+        output?.openPersonID(personID, name: name, role: role, persons: persons)
+    }
+}
+
+// MARK: - ActorFilmsViewDelegate
+
+extension ActorsViewController: ActorFilmsViewDelegate {
+    func openFilmID(_ film: String, name: String){
+        output?.openFilmID(film, name: name)
     }
 }

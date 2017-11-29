@@ -18,6 +18,14 @@ class ActorsPresenter {
 
 extension ActorsPresenter: ActorsViewOutput {
 
+    func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm]) {
+        router.openPersonID(personID, name: name, role: role, persons: persons)
+    }
+
+    func openFilmID(_ filmId: String, name: String) {
+        router.openFilm(videoId: filmId, name: name)
+    }
+
     func viewIsReady() {
         log.verbose("Actors is ready")
         interactor.getPersonInfo(id: id)

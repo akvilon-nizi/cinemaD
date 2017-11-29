@@ -12,7 +12,7 @@ class FullPerson: ImmutableMappable {
 
     let id: String
     let name: String
-    let birthday: String?
+    let birthday: Date?
     let films: [FilmFromPerson]
     let imageUrl: String?
     let description: String?
@@ -29,7 +29,7 @@ class FullPerson: ImmutableMappable {
     required init(map: Map) throws {
         id = try map.value(idKey)
         name = try map.value(nameKey)
-        birthday = try? map.value(birthdayKey)
+        birthday = try? map.value(birthdayKey, using: DateTransform())
         films = try map.value(filmsKey)
         imageUrl = try? map.value(imageUrlKey)
         description = try? map.value(descriptionKey)
@@ -39,7 +39,7 @@ class FullPerson: ImmutableMappable {
     func mapping(map: Map) {
         id >>> map[idKey]
         name >>> map[nameKey]
-        birthday >>> map[birthdayKey]
+        birthday >>> (map[birthdayKey], DateTransform())
         films >>> map[filmsKey]
         imageUrl >>> map[imageUrlKey]
         description >>> map[descriptionKey]

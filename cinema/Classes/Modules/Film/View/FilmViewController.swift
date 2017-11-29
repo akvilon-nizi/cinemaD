@@ -496,11 +496,9 @@ class FilmViewController: ParentViewController {
 
         // Create an action
 
-
             let action: FBSDKShareOpenGraphAction = FBSDKShareOpenGraphAction()
             action.actionType = "news.publishes"
             action.setObject(object, forKey: "article")
-
 
         // Create the content
         let content: FBSDKShareOpenGraphContent = FBSDKShareOpenGraphContent()
@@ -723,6 +721,8 @@ extension FilmViewController: VKSdkDelegate {
 
 extension FilmViewController: RolesCVDelegate {
     func openPersonID(_ personID: String, name: String, role: String) {
-        output?.openPersonID(personID, name: name, role: role)
+        if let filmInfo = filmInformation {
+            output?.openPersonID(personID, name: name, role: role, persons: filmInfo.persons)
+        }
     }
 }

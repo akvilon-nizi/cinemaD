@@ -51,8 +51,8 @@ extension FilmPresenter: FilmViewOutput {
         interactor.filmWatchedDelete(videoID: videoID)
     }
 
-    func openPersonID(_ personID: String, name: String, role: String) {
-        router.openPersonID(personID, name: name, role: role)
+    func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm]) {
+        router.openPersonID(personID, name: name, role: role, persons: persons)
     }
 }
 

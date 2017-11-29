@@ -191,9 +191,10 @@
 "settings-tell-friends" = "Рассказать друзьям";
 
 //Actor(Person)
-"person-was-born" = "Родился";
+"person-was-born" = "Родился:";
 "person-adwards-text" = "Награды и премии";
 "person-films-text" = "Фильмография";
-"persons-actors-producers" = "Актеры и режиссеры";
+"persons-actors-producers" = "Актеры и режиссеры:";
+"persons-years-text" = " г.";
 
 

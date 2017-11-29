@@ -23,7 +23,7 @@ enum AppRouterDestination {
     case confirmation(phone: String, uid: String, isRestore: Bool)
     case phone(phone: String, uid: String)
     case films(films: [Film])
-    case actors(id: String, name: String, role: String)
+    case actors(id: String, name: String, role: String, persons: [PersonFromFilm])
     case film(videoID: String, name: String)
     case kinobase
     case main
@@ -85,8 +85,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: PhoneConfigurator.tag, arguments: phone, uid)
             case let .films(films):
                 return try factory.resolve(tag: FilmsConfigurator.tag, arguments: films)
-            case let .actors(id, name, role):
-                return try factory.resolve(tag: ActorsConfigurator.tag, arguments: id, name, role)
+            case let .actors(id, name, role, persons):
+                return try factory.resolve(tag: ActorsConfigurator.tag, arguments: id, name, role, persons)
             case let .film(videoID, name):
                 return try factory.resolve(tag: FilmConfigurator.tag, arguments: videoID, name)
             case let .newCollections(output, id, name, watched):
@@ -277,7 +277,7 @@ class AppRouter: AppRouterProtocol {
         }
 //        let navigationController = UINavigationController(rootViewController: viewControler)
         flowController.rootViewController = viewControler
-        
+
         if let appDelegate = application.delegate as? AppDelegate {
             appDelegate.rootFlowController = flowController
         }

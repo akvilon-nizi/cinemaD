@@ -20,10 +20,13 @@ class ActorsConfigurator {
 
     let role: String
 
-    init(id: String, name: String, role: String) {
+    let persons: [PersonFromFilm]
+
+    init(id: String, name: String, role: String, persons: [PersonFromFilm]) {
         self.id = id
         self.name = name
         self.role = role
+        self.persons = persons
     }
 
     func configureModule() -> UIViewController {
@@ -38,7 +41,7 @@ class ActorsConfigurator {
         interactor.output = presenter
         interactor.provider = provider
 
-        let viewController = ActorsViewController(name: name, role: role)
+        let viewController = ActorsViewController(name: name, role: role, persons: persons)
         viewController.output = presenter
 
         presenter.interactor = interactor

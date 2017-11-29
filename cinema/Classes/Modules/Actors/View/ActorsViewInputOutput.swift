@@ -10,7 +10,7 @@ protocol ActorsViewInput: class {
     func setupInitialState()
 
     func showNetworkError()
-    
+
     func getPersonInfo(person: FullPerson)
 }
 
@@ -21,4 +21,8 @@ protocol ActorsViewOutput {
     func backButtonTap()
 
     func homeButtonTap()
+
+    func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])
+
+    func openFilmID(_ filmId: String, name: String)
 }
