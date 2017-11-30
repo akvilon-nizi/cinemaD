@@ -25,6 +25,8 @@ protocol FilmViewOutput {
 
     func backTap()
 
+    func homeTap()
+
     func willWatchTap()
 
     func watchedTap(rate: Int)
@@ -33,7 +35,7 @@ protocol FilmViewOutput {
 
     func watchedTapDelete()
 
-    func homeTap()
-
     func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])
+
+    func tapReviews(name: String, genres: String)
 }

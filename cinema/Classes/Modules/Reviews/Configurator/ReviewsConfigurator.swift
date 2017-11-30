@@ -4,12 +4,27 @@
 //
 
 import UIKit
+import RxMoya
 
 class ReviewsConfigurator {
 
     static let tag: String = "ReviewsTag"
 
+    var provider: RxMoyaProvider<FoodleTarget>!
+
     var appRouter: AppRouterProtocol!
+
+    let filmID: String
+
+    let name: String
+
+    let genres: String
+
+    init(filmID: String, name: String, genres: String) {
+        self.filmID = filmID
+        self.name = name
+        self.genres = genres
+    }
 
     func configureModule() -> UIViewController {
         let router = ReviewsRouter()
@@ -17,11 +32,13 @@ class ReviewsConfigurator {
 
         let presenter = ReviewsPresenter()
         presenter.router = router
+        presenter.filmID = filmID
 
         let interactor = ReviewsInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
-        let viewController = ReviewsViewController()
+        let viewController = ReviewsViewController(filmID: filmID, name: name, genres: genres)
         viewController.output = presenter
 
         presenter.interactor = interactor

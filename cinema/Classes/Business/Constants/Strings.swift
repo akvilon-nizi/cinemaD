@@ -183,7 +183,7 @@ enum L10n {
   static let personAdwardsText = L10n.tr("Localizable", "person-adwards-text")
   /// Фильмография
   static let personFilmsText = L10n.tr("Localizable", "person-films-text")
-  /// Родился:
+  /// Родился(-ась):
   static let personWasBorn = L10n.tr("Localizable", "person-was-born")
   /// Актеры и режиссеры:
   static let personsActorsProducers = L10n.tr("Localizable", "persons-actors-producers")
@@ -229,6 +229,12 @@ enum L10n {
   static let regRegulationsButtonText = L10n.tr("Localizable", "reg-regulations-button-text")
   /// Регистрация
   static let regTitleText = L10n.tr("Localizable", "reg-title-text")
+  /// Не понравилось
+  static let reviewsDislikeText = L10n.tr("Localizable", "reviews-dislike-text")
+  /// Понравилось
+  static let reviewsLikeText = L10n.tr("Localizable", "reviews-like-text")
+  /// Отзывы
+  static let reviewsTitleText = L10n.tr("Localizable", "reviews-title-text")
   /// По геолокации
   static let rewardsLocationTitle = L10n.tr("Localizable", "rewards-location-title")
   /// За просмотры

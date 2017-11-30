@@ -6,5 +6,7 @@
 import Foundation
 
 protocol ReviewsRouterInput: BaseRouterInput {
+    func close()
 
+    func home()
 }

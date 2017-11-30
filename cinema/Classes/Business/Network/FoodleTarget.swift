@@ -46,6 +46,8 @@ enum FoodleTarget {
     case putNewsComment(newsID: String, message: String)
     case loadAvatar(image: UIImage)
     case profile
+    case review(filmID: String)
+    case putReview(filmID: String, name: String, description: String)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -144,18 +146,22 @@ extension FoodleTarget: TargetType {
             return "me/avatar"
         case .profile:
             return "me"
+        case let .review(filmID):
+            return "films/\(filmID)/review"
+        case let .putReview(filmID, _, _):
+            return "films/\(filmID)/review"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review:
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
         case .patchCollections:
             return .patch
-        case .putCollections, .putFilm, .putNewsComment:
+        case .putCollections, .putFilm, .putNewsComment, .putReview:
             return .put
         default:
             return .post
@@ -223,13 +229,15 @@ extension FoodleTarget: TargetType {
             return parameters
         case let .newsFiltred(filters):
             var parameters: [String: Any] = [:]
-//            for filter in filters {
-//                parameters["filter"] = filter
-//            }
             parameters["filter"] = filters
             return parameters
         case let .putNewsComment(_, message):
             return ["description": message]
+        case let .putReview(_, name, description):
+            var parameters: [String: Any] = [:]
+            parameters["name"] = name
+            parameters["description"] = description
+            return parameters
         default:
             return nil
         }

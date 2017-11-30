@@ -39,6 +39,7 @@ enum AppRouterDestination {
     case profile
     case editingProfile(nameUser: String, avatar: String, output: EditingProfileModuleOutput)
     case settings
+    case reviews(filmID: String, name: String, genres: String)
 
     var isPresent: Bool {
         switch self {
@@ -104,9 +105,11 @@ enum AppRouterDestination {
             case .profile:
                 return try factory.resolve(tag: ProfileConfigurator.tag)
             case let .editingProfile(nameUser, avatar, output):
-                return try factory.resolve(tag: EditingProfileConfigurator.tag, arguments:nameUser, avatar, output)
+                return try factory.resolve(tag: EditingProfileConfigurator.tag, arguments: nameUser, avatar, output)
             case .settings:
                 return try factory.resolve(tag: SettingsConfigurator.tag)
+            case let .reviews(filmID, name, genres):
+                return try factory.resolve(tag: ReviewsConfigurator.tag, arguments: filmID, name, genres)
             }
         } catch {
             fatalError("can't resolve module from factory")

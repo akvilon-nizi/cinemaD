@@ -13,5 +13,11 @@ class ReviewsRouter {
 // MARK: - ReviewsRouterInput
 
 extension ReviewsRouter: ReviewsRouterInput {
+    func close() {
+        appRouter.backTransition()
+    }
 
+    func home() {
+        appRouter.backToMain()
+    }
 }

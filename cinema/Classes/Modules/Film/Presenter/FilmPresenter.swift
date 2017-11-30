@@ -54,6 +54,10 @@ extension FilmPresenter: FilmViewOutput {
     func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm]) {
         router.openPersonID(personID, name: name, role: role, persons: persons)
     }
+
+    func tapReviews(name: String, genres: String) {
+        router.rewiewsFromID(videoID, name: name, genres: genres)
+    }
 }
 
 // MARK: - FilmInteractorOutput

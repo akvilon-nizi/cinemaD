@@ -185,6 +185,13 @@ enum Containers {
             return configurator.configureModule()
         }
 
+        container.register(tag: ReviewsConfigurator.tag) { (filmID: String, name: String, genres: String) -> UIViewController in
+            let configurator = ReviewsConfigurator(filmID: filmID, name: name, genres: genres)
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
         container.register(tag: FilterConfigurator.tag) {(output: FilterModuleOutput,
             genres: [String],
             years: [Int],

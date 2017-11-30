@@ -24,4 +24,8 @@ extension FilmRouter: FilmRouterInput {
     func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm]) {
         appRouter.transition(to: .actors(id: personID, name: name, role: role, persons: persons))
     }
+
+    func rewiewsFromID(_ filmID: String, name: String, genres: String) {
+        appRouter.transition(to: .reviews(filmID: filmID, name: name, genres: genres))
+    }
 }

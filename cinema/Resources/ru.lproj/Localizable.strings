@@ -191,10 +191,14 @@
 "settings-tell-friends" = "Рассказать друзьям";
 
 //Actor(Person)
-"person-was-born" = "Родился:";
+"person-was-born" = "Родился(-ась):";
 "person-adwards-text" = "Награды и премии";
 "person-films-text" = "Фильмография";
 "persons-actors-producers" = "Актеры и режиссеры:";
 "persons-years-text" = " г.";
 
+//Reviews
+"reviews-title-text" = "Отзывы";
+"reviews-like-text" = "Понравилось";
+"reviews-dislike-text" = "Не понравилось";
 

@@ -78,6 +78,10 @@ extension UIColor {
         return UIColor(red: 83.0 / 255.0, green: 162.0 / 255.0, blue: 228.0 / 255.0, alpha: 1.0)
     }
 
+    class var cnmBlue: UIColor {
+        return UIColor(red: 64.0 / 255.0, green: 104.0 / 255.0, blue: 152.0 / 255.0, alpha: 1.0)
+    }
+
     class var cnmMainOrange: UIColor {
         return UIColor(red: 250.0 / 255.0, green: 177.0 / 255.0, blue: 61.0 / 255.0, alpha: 1.0)
     }

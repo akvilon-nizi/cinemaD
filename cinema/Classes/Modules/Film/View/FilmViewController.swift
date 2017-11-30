@@ -16,6 +16,8 @@ class FilmViewController: ParentViewController {
 
     var myRate: Int = 0
 
+    var genres: String = ""
+
     let contentView = UIView()
     let imageView = UIImageView()
     let scrollView = UIScrollView()
@@ -97,8 +99,6 @@ class FilmViewController: ParentViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-        view.layoutIfNeeded()
-        view.layoutSubviews()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -203,7 +203,9 @@ class FilmViewController: ParentViewController {
                 }
             }
 
-            titleLabel.text = textsArray.joined(separator: "/") + " (" + String(filmInfo.yearFirstRelease) + ")"
+            genres = textsArray.joined(separator: "/")
+
+            titleLabel.text = genres + " (" + String(filmInfo.yearFirstRelease) + ")"
 
 //            if #available(iOS 11.0, *) {
 //                scrollView.contentInsetAdjustmentBehavior = .always
@@ -379,6 +381,10 @@ class FilmViewController: ParentViewController {
         output?.backTap()
     }
 
+    func didTapHomeButton() {
+        output?.homeTap()
+    }
+
     func didTapWatchedButton() {
 
         watchedButton.isSelected = !watchedButton.isSelected
@@ -423,11 +429,7 @@ class FilmViewController: ParentViewController {
     }
 
     func didTapChatButton() {
-//        fbClick()
-    }
-
-    func didTapHomeButton() {
-        output?.homeTap()
+        output?.tapReviews(name: name, genres: genres)
     }
 
     func showDialog<C: ContentProtocol>(_ content: C, mode: ShareDialogMode = .automatic) {

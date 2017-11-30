@@ -81,6 +81,7 @@ enum Asset {
       static let isClose = ImageAsset(name: "isClose")
       static let isOpen = ImageAsset(name: "isOpen")
     }
+    static let orangeStars = ImageAsset(name: "orangeStars")
     static let play = ImageAsset(name: "play")
     static let plus = ImageAsset(name: "plus")
     enum Profile {
@@ -162,6 +163,7 @@ enum Asset {
     Cinema.MainTab.tabBackground,
     Cinema.MainView.isClose,
     Cinema.MainView.isOpen,
+    Cinema.orangeStars,
     Cinema.play,
     Cinema.plus,
     Cinema.Profile.userPlaceholder,
