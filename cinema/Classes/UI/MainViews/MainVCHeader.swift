@@ -69,9 +69,17 @@ extension MainVCHeader: UICollectionViewDelegateFlowLayout {
 extension MainVCHeader: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? YoutubeViewCell {
-            cell.playVideo()
+            cell.fullScreen()
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? YoutubeViewCell {
+            cell.stopVideo()
+            print("assa", indexPath.row)
+        }
+    }
+
 }
 
 extension MainVCHeader: UICollectionViewDataSource {
@@ -94,6 +102,7 @@ extension MainVCHeader: UIScrollViewDelegate {
         collectionView.isScrollEnabled = false
         beginContentOffsetX = CGFloat(scrollItem) * windowY
             scrollView.setContentOffset(CGPoint(x: CGFloat(scrollItem) * windowY, y: 0), animated: true)
+            playVideoOnCell(row: scrollItem)
         collectionView.isScrollEnabled = true
     }
 
@@ -116,7 +125,16 @@ extension MainVCHeader: UIScrollViewDelegate {
         beginContentOffsetX = CGFloat(scrollItem) * windowY
         if isScroll {
             scrollView.setContentOffset(CGPoint(x: CGFloat(scrollItem) * windowY, y: 0), animated: true)
+
+            playVideoOnCell(row: scrollItem)
         }
         collectionView.isScrollEnabled = true
+    }
+
+    func playVideoOnCell(row: Int) {
+        let indexPath = IndexPath(row: row, section: 0)
+        if let cell = collectionView.cellForItem(at: indexPath) as? YoutubeViewCell {
+            cell.playVideo()
+        }
     }
 }

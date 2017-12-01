@@ -19,7 +19,7 @@ class RewardsViewController: ParentViewController {
 
     let willWatchButton: UIButton = {
         let button = UIButton()
-        button.setTitle(L10n.rewardsReviewsTitle, for: .normal)
+        button.setTitle(L10n.rewardsLocationTitle, for: .normal)
         button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
         button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
         button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
@@ -30,7 +30,7 @@ class RewardsViewController: ParentViewController {
 
     let watchedButton: UIButton = {
         let button = UIButton()
-        button.setTitle(L10n.rewardsLocationTitle, for: .normal)
+        button.setTitle(L10n.rewardsReviewsTitle, for: .normal)
         button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
         button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
         button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
@@ -98,10 +98,20 @@ class RewardsViewController: ParentViewController {
 
         setPageVC()
 
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//            selector:@selector(playerItemBecameCurrentNotif:)
+//            name:@"AVPlayerItemBecameCurrentNotification"
+//            object:nil];
+//        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
+
 //        activityVC.startAnimating()
 //        activityVC.isHidden = false
 //        activityVC.color = UIColor.cnmMainOrange
         view.bringSubview(toFront: activityVC)
+    }
+
+    func assa() {
+        print()
     }
 
     private func setPageVC() {
