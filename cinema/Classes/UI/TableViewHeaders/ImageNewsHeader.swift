@@ -9,6 +9,7 @@
 import UIKit
 import ImageSlideshow
 import Kingfisher
+//import AVFoundation
 
 protocol ImageNewsHeaderDelegate: class {
     func openShare(image: UIImage?)
@@ -64,7 +65,16 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
 
         contentView.backgroundColor = .white
 
-        autoresizesSubviews = true
+        //autoresizesSubviews = true
+
+//        let videoURL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+//        let player = AVPlayer(url: videoURL!)
+//        let playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.frame = CGRect(x: 0, y: 0, width: 320, height: 200)
+//        contentView.layer.addSublayer(playerLayer)
+//        player.play()
+//
+//        contentView.heightAnchor ~= 320
 
         let mainView = UIView()
         contentView.addSubview(mainView.prepareForAutoLayout())
