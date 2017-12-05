@@ -11,7 +11,15 @@ import YouTubeiOSPlayerHelper
 import AVFoundation
 import RxSwift
 
+protocol YoutubeViewDelegate: class {
+    func mute()
+    func notMute()
+}
+
 class YoutubeViewCell: UICollectionViewCell {
+
+    weak var delegate: YoutubeViewDelegate?
+
     @objc fileprivate let youtubeView = YTPlayerView()
     fileprivate let isShowYoutube = false
     fileprivate let previewImageView = UIImageView()
@@ -27,15 +35,15 @@ class YoutubeViewCell: UICollectionViewCell {
 
     var idVideo: String = "" {
         didSet {
-            if let url = URL(string: idVideo),
-                url.absoluteString.contains("youtube.com/embed/") {
-
-                let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
-                if path != "" {
-                    previewImageView.kf.setImage(with: URL(string: String(format: "https://img.youtube.com/vi/%@/maxresdefault.jpg", path)))
-                    //                  youtubeView.frame = previewImageView.frame
-                }
-            }
+//            if let url = URL(string: idVideo),
+//                url.absoluteString.contains("youtube.com/embed/") {
+//
+//                let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
+//                if path != "" {
+//                    previewImageView.kf.setImage(with: URL(string: String(format: "https://img.youtube.com/vi/%@/maxresdefault.jpg", path)))
+//                    //                  youtubeView.frame = previewImageView.frame
+//                }
+//            }
             playVideo()
         }
     }
@@ -44,37 +52,47 @@ class YoutubeViewCell: UICollectionViewCell {
         fatalError("NSCoding not supported")
     }
 
-    //    override func prepareForReuse() {
-    //        super.prepareForReuse()
-    //        idVideo = ""
-    //        isLoad = false
-    //    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        delegate?.mute()
+        isPlay = false
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        youtubeView.backgroundColor = .black
         contentView.addSubview(youtubeView.prepareForAutoLayout())
         youtubeView.pinEdgesToSuperviewEdges()
         youtubeView.layer.cornerRadius = 5.0
         youtubeView.layer.masksToBounds = true
-        youtubeView.isUserInteractionEnabled = false
+//        youtubeView.isUserInteractionEnabled = false
         youtubeView.delegate = self
 
-        contentView.addSubview(previewImageView)
-        previewImageView.pinEdgesToSuperviewEdges()
-        previewImageView.kf.indicatorType = .activity
-        previewImageView.layer.cornerRadius = 5.0
-        previewImageView.layer.masksToBounds = true
-
-        previewImageView.addSubview(playButton.prepareForAutoLayout())
-        playButton.centerXAnchor ~= previewImageView.centerXAnchor
-        playButton.centerYAnchor ~= previewImageView.centerYAnchor
-        playButton.heightAnchor ~= 51
-        playButton.widthAnchor ~= 51
+//        contentView.addSubview(previewImageView)
+//        previewImageView.pinEdgesToSuperviewEdges()
+//        previewImageView.kf.indicatorType = .activity
+//        previewImageView.layer.cornerRadius = 5.0
+//        previewImageView.layer.masksToBounds = true
+//
+//        previewImageView.addSubview(playButton.prepareForAutoLayout())
+//        playButton.centerXAnchor ~= previewImageView.centerXAnchor
+//        playButton.centerYAnchor ~= previewImageView.centerYAnchor
+//        playButton.heightAnchor ~= 51
+//        playButton.widthAnchor ~= 51
 
         activityVC.isHidden = true
 
-        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name.UIWindowDidResignKey,
+            object: self.youtubeView.webView?.window,
+            queue: nil
+        ) { notification in
+            print("Video is now fullscreen")
+            self.delegate?.notMute()
+        }
+
+//        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
 
         //        let tap = UITapGestureRecognizer(target: self, action: #selector(playVideo))
         //        previewImageView.addGestureRecognizer(tap)
@@ -83,21 +101,23 @@ class YoutubeViewCell: UICollectionViewCell {
     }
 
     func assa(notification: Notification) {
-        if let playerItem = notification.object as? AVPlayerItem {
-            self.player = nil
-            if let player = playerItem.value(forKey: "player") as? AVPlayer {
-                self.player = player
-                player.isMuted = true
-            }
-
-        }
+        delegate?.notMute()
+//        if let playerItem = notification.object as? AVPlayerItem {
+//            if let player = playerItem.value(forKey: "player") as? AVPlayer {
+//                self.player = player
+//                player.isMuted = true
+//                delegate?.mute()
+//            }
+//
+//        }
     }
 
     func playVideo() {
 
         // isPlay = true
+        self.delegate?.mute()
         youtubeView.playVideo()
-        youtubeView.isUserInteractionEnabled = false
+      //  youtubeView.isUserInteractionEnabled = false
         //        activityVC.isHidden = false
         //        activityVC.startAnimating()
         //        playButton.isHidden = true
@@ -111,32 +131,37 @@ class YoutubeViewCell: UICollectionViewCell {
     }
 
     func fullScreen() {
-        youtubeView.webView?.allowsInlineMediaPlayback = false
-        isPlay = false
-        youtubeView.pauseVideo()
-        //isPlay = true
-        youtubeView.playVideo()
-        let deadlineTime = DispatchTime.now() + .microseconds(100_000)
-        isPlay = true
+        //if let player = self.player {
+            delegate?.mute()
+            youtubeView.webView?.allowsInlineMediaPlayback = false
+            isPlay = false
+            youtubeView.pauseVideo()
+            //isPlay = true
+            youtubeView.playVideo()
+            let deadlineTime = DispatchTime.now() + .microseconds(500_000)
+            isPlay = true
 
-        if !isLoad {
-            print("not assa")
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-            self.youtubeView.webView?.allowsInlineMediaPlayback = true
-            if let player = self.player {
-                player.isMuted = false
+            if !isLoad {
+                print("not assa")
             }
-            self.isPlay = true
-        }
+
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                self.youtubeView.webView?.allowsInlineMediaPlayback = true
+                self.delegate?.notMute()
+//                if let player = self.player {
+//                    player.isMuted = false
+//                    self.delegate?.notMute()
+//                }
+                self.isPlay = true
+            }
+        //}
     }
 
     func stopVideo() {
 
         // isPlay = false
         youtubeView.stopVideo()
-        youtubeView.isUserInteractionEnabled = false
+      //  youtubeView.isUserInteractionEnabled = false
         youtubeView.webView?.allowsInlineMediaPlayback = false
         activityVC.isHidden = false
         activityVC.startAnimating()
@@ -153,7 +178,7 @@ class YoutubeViewCell: UICollectionViewCell {
             "modestbranding": 1,
             "enablejsapi": 1,
             "autoplay": 1,
-            "controls": 0
+         //   "controls": 0
             ])
     }
 
@@ -174,7 +199,7 @@ class YoutubeViewCell: UICollectionViewCell {
                         youtubeView.playVideo()
                         //contentView.bringSubview(toFront: previewImageView)
                         contentView.sendSubview(toBack: youtubeView)
-                        youtubeView.isUserInteractionEnabled = false
+                      //  youtubeView.isUserInteractionEnabled = false
                         playButton.isHidden = true
                         youtubeView.cueVideo(
                             byId: path,
@@ -203,12 +228,19 @@ extension YoutubeViewCell: YTPlayerViewDelegate {
             //isPlay = true
             contentView.sendSubview(toBack: previewImageView)
             contentView.bringSubview(toFront: youtubeView)
+            self.delegate?.mute()
         }
         if state == .paused {
             if isPlay {
-                player?.isMuted = true
-                playVideo()
-                isPlay = false
+                let deadlineTime = DispatchTime.now() + .microseconds(500_000)
+                self.delegate?.mute()
+                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                    self.delegate?.mute()
+                    //player?.isMuted = true
+                    self.playVideo()
+                   self.isPlay = false
+                }
+
             }
         }
     }

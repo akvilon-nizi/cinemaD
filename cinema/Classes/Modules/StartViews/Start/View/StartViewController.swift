@@ -11,13 +11,13 @@ class StartViewController: ParentViewController {
 
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.cnmFuturaMedium(size: 17)
+        label.font = UIFont.cnmFuturaMedium(size: 24)
         label.textColor = UIColor.cnmGreyColor
         label.text = L10n.startTitleText
         return label
     }()
 
-    let logoImageView = UIImageView(image: Asset.StartViews.Start.shape.image)
+    let logoImageView = UIImageView(image: Asset.Cinema.start.image)
     let contentView = UIView()
 
     // MARK: - Life cycle
@@ -44,37 +44,37 @@ class StartViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
-        let imageView = UIImageView(image: Asset.StartViews.Start.background.image)
-        view.addSubview(imageView.prepareForAutoLayout())
-        imageView.pinEdgesToSuperviewEdges()
+    //let imageView = UIImageView(image: Asset.StartViews.Start.background.image)
+        //view.addSubview(imageView.prepareForAutoLayout())
 
         view.addSubview(contentView.prepareForAutoLayout())
         contentView.leadingAnchor ~= view.leadingAnchor
         contentView.trailingAnchor ~= view.trailingAnchor
         contentView.centerYAnchor ~= view.centerYAnchor
-        contentView.heightAnchor ~= 435
+        contentView.heightAnchor ~= 440
 
         addTopViews()
         addBottomViews()
     }
 
     private func addTopViews() {
+
+//        let formImageView = UIImageView(image: Asset.Cinema.start.image)
+//        logoImageView.addSubview(formImageView.prepareForAutoLayout())
+//        formImageView.centerXAnchor ~= logoImageView.centerXAnchor
+//        formImageView.centerYAnchor ~= logoImageView.centerYAnchor - 10
+//        formImageView.heightAnchor ~= 38
+//        formImageView.widthAnchor ~= 43
+
         contentView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.topAnchor ~= contentView.topAnchor
+        titleLabel.bottomAnchor ~= contentView.centerYAnchor - 30
         titleLabel.centerXAnchor ~= contentView.centerXAnchor
 
         contentView.addSubview(logoImageView.prepareForAutoLayout())
-        logoImageView.topAnchor ~= titleLabel.bottomAnchor + 26
+        logoImageView.bottomAnchor ~= titleLabel.topAnchor - 10
         logoImageView.centerXAnchor ~= contentView.centerXAnchor
-        logoImageView.heightAnchor ~= 121
-        logoImageView.widthAnchor ~= 158
-
-        let formImageView = UIImageView(image: Asset.StartViews.Start.forma.image)
-        logoImageView.addSubview(formImageView.prepareForAutoLayout())
-        formImageView.centerXAnchor ~= logoImageView.centerXAnchor
-        formImageView.centerYAnchor ~= logoImageView.centerYAnchor - 10
-        formImageView.heightAnchor ~= 38
-        formImageView.widthAnchor ~= 43
+        logoImageView.heightAnchor ~= 184
+        logoImageView.widthAnchor ~= 130
     }
 
     private func addBottomViews() {
@@ -85,7 +85,7 @@ class StartViewController: ParentViewController {
         let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [fbButton, vkButtom, regButton])
         contentView.addSubview(buttonsStackView.prepareForAutoLayout())
         buttonsStackView.centerXAnchor ~= contentView.centerXAnchor
-        buttonsStackView.topAnchor ~= logoImageView.bottomAnchor + 63
+        buttonsStackView.topAnchor ~= contentView.centerYAnchor + 20
 
         let authLabel = UILabel()
         authLabel.textColor = .cnmGreyTextColor

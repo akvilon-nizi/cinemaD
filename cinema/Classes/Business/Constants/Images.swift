@@ -104,6 +104,7 @@ enum Asset {
       static let slide3Image4 = ImageAsset(name: "slide3-image4")
       static let slide3Image5 = ImageAsset(name: "slide3-image5")
     }
+    static let start = ImageAsset(name: "start")
     static let timeOrange = ImageAsset(name: "timeOrange")
     static let unselectStar = ImageAsset(name: "unselectStar")
     static let vader = ImageAsset(name: "vader")
@@ -182,6 +183,7 @@ enum Asset {
     Cinema.Slides.slide3Image3,
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
+    Cinema.start,
     Cinema.timeOrange,
     Cinema.unselectStar,
     Cinema.vader,

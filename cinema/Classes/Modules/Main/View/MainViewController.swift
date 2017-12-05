@@ -7,6 +7,7 @@ import UIKit
 import RxMoya
 import RxSwift
 import VKSdkFramework
+import AVFoundation
 
 struct NewsFilter {
     let title: String
@@ -18,6 +19,10 @@ class MainViewController: ParentViewController {
     var output: MainViewOutput!
 
     let header = MainVCHeader()
+
+    var player = AVPlayer()
+
+    var layer = AVPlayerLayer()
 
     let childController = UIViewController()
 
@@ -80,6 +85,8 @@ class MainViewController: ParentViewController {
         view.bringSubview(toFront: activityVC)
         activityVC.isHidden = false
         activityVC.startAnimating()
+
+        header.delegate = self
     }
 
     func addView() {
@@ -138,6 +145,24 @@ class MainViewController: ParentViewController {
         newsHeader.tag = 5
         newsHeader.isOpen = isNewsFilterOpen
         newsHeader.delegate = self
+
+        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
+
+
+    }
+
+    func assa(notification: Notification) {
+        let disposeBag = DisposeBag()
+        if let playerItem = notification.object as? AVPlayerItem {
+            if let player = playerItem.value(forKey: "player") as? AVPlayer {
+                self.player = player
+                player.isMuted = true
+//                layer = AVPlayerLayer(player: player)
+//                layer.rx.observe(CGRect.self, "bounds").subscribe(onNext: { bounds in
+//                    print("assa b", bounds)
+//                }).addDisposableTo(disposeBag)
+            }
+        }
     }
 
     private func tableViewRegister() {
@@ -486,5 +511,15 @@ extension MainViewController: NewsImageCellDelegate {
 extension MainViewController: NewsCellDelegate {
     func openShareSimple(news: News) {
         shareNews(imageShare: nil, news: news)
+    }
+}
+
+extension MainViewController: MainVCHeaderDelegate {
+    func mute() {
+        player.isMuted = true
+        player.play()
+    }
+    func notMute() {
+        player.isMuted = false
     }
 }

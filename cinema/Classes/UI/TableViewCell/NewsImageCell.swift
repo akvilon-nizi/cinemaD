@@ -97,31 +97,31 @@ class NewsImageCell: UITableViewCell {
         shareButton.setImage(Asset.Cinema.sharingOrange.image, for: .normal)
         //shareButton.addTarget(self, action: #selector(tapSharedButtons), for: .touchUpInside)
 
-        mainView.addSubview(shareButton.prepareForAutoLayout())
-        shareButton.leadingAnchor ~= mainView.leadingAnchor + 5
-        shareButton.widthAnchor ~= 20
-        shareButton.heightAnchor ~= 22
-        shareButton.bottomAnchor ~= newsImage.bottomAnchor - 5
-
-        mainView.addSubview(countLabel.prepareForAutoLayout())
-        countLabel.centerYAnchor ~= shareButton.centerYAnchor
-        countLabel.leadingAnchor ~= shareButton.trailingAnchor + 6
+//        mainView.addSubview(shareButton.prepareForAutoLayout())
+//        shareButton.leadingAnchor ~= mainView.leadingAnchor + 5
+//        shareButton.widthAnchor ~= 20
+//        shareButton.heightAnchor ~= 22
+//        shareButton.bottomAnchor ~= newsImage.bottomAnchor - 5
+//
+//        mainView.addSubview(countLabel.prepareForAutoLayout())
+//        countLabel.centerYAnchor ~= shareButton.centerYAnchor
+//        countLabel.leadingAnchor ~= shareButton.trailingAnchor + 6
 
         let imageTime = UIImageView(image: Asset.Cinema.timeOrange.image)
         mainView.addSubview(imageTime.prepareForAutoLayout())
 
-        imageTime.centerYAnchor ~= shareButton.centerYAnchor
-        imageTime.leadingAnchor ~= countLabel.trailingAnchor + 15
+        imageTime.leadingAnchor ~= mainView.leadingAnchor + 5
+        imageTime.bottomAnchor ~= newsImage.bottomAnchor - 5
         imageTime.heightAnchor ~= 21
         imageTime.widthAnchor ~= 21
 
         mainView.addSubview(infoLabel.prepareForAutoLayout())
-        infoLabel.centerYAnchor ~= shareButton.centerYAnchor
+        infoLabel.centerYAnchor ~= imageTime.centerYAnchor
         infoLabel.leadingAnchor ~= imageTime.trailingAnchor + 9
 
         mainView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.bottomAnchor ~= shareButton.topAnchor - 9
-        titleLabel.leadingAnchor ~= shareButton.leadingAnchor
+        titleLabel.bottomAnchor ~= imageTime.topAnchor - 9
+        titleLabel.leadingAnchor ~= imageTime.leadingAnchor
 //        let separatorView = UIView()
 //        separatorView.backgroundColor = .cnmDadada
 //        contentView.addSubview(separatorView.prepareForAutoLayout())

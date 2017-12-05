@@ -177,6 +177,7 @@ class AuthCinemaViewController: ParentViewController {
     func handleTap(sender: UITapGestureRecognizer? = nil) {
         view.endEditing(true)
     }
+
 }
 
 // MARK: - AuthCinemaViewInput
