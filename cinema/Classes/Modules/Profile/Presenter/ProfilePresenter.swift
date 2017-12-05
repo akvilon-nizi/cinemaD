@@ -17,6 +17,10 @@ class ProfilePresenter {
 // MARK: - ProfileViewOutput
 
 extension ProfilePresenter: ProfileViewOutput {
+    func openFriends() {
+        router.openFriends()
+    }
+
     func backButtonTap() {
         router.close()
     }

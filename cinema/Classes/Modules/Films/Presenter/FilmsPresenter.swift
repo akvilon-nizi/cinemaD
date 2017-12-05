@@ -17,6 +17,9 @@ class FilmsPresenter {
 // MARK: - FilmsViewOutput
 
 extension FilmsPresenter: FilmsViewOutput {
+    func homeButtonTap() {
+        router.home()
+    }
 
     func viewIsReady() {
         log.verbose("Films is ready")

@@ -29,4 +29,8 @@ extension ProfileRouter: ProfileRouterInput {
     func openFilm(videoId: String, name: String) {
         appRouter.transition(to: .film(videoID: videoId, name: name))
     }
+
+    func openFriends() {
+        appRouter.transition(to: .friends)
+    }
 }

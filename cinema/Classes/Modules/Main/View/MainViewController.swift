@@ -71,6 +71,14 @@ class MainViewController: ParentViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
         navController.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.view.backgroundColor = .clear
+//        navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navController.navigationBar.shadowImage = UIImage()
+//        navController.navigationBar.isTranslucent = true
+//        navController.view.backgroundColor = .clear
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,7 +94,16 @@ class MainViewController: ParentViewController {
         activityVC.isHidden = false
         activityVC.startAnimating()
 
-        header.delegate = self
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.view.backgroundColor = .clear
+//        navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navController.navigationBar.shadowImage = UIImage()
+//        navController.navigationBar.isTranslucent = true
+//        navController.view.backgroundColor = .clear
+
+        //header.delegate = self
     }
 
     func addView() {
@@ -96,6 +113,9 @@ class MainViewController: ParentViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        if #available(iOS 11.0, *) {
+           tableView.contentInsetAdjustmentBehavior = .never
+        }
 
         view.addSubview(mainTabView.prepareForAutoLayout())
         mainTabView.widthAnchor ~= view.widthAnchor
@@ -146,24 +166,23 @@ class MainViewController: ParentViewController {
         newsHeader.isOpen = isNewsFilterOpen
         newsHeader.delegate = self
 
-        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
-
+//        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
 
     }
 
-    func assa(notification: Notification) {
-        let disposeBag = DisposeBag()
-        if let playerItem = notification.object as? AVPlayerItem {
-            if let player = playerItem.value(forKey: "player") as? AVPlayer {
-                self.player = player
-                player.isMuted = true
-//                layer = AVPlayerLayer(player: player)
-//                layer.rx.observe(CGRect.self, "bounds").subscribe(onNext: { bounds in
-//                    print("assa b", bounds)
-//                }).addDisposableTo(disposeBag)
-            }
-        }
-    }
+//    func assa(notification: Notification) {
+//        let disposeBag = DisposeBag()
+//        if let playerItem = notification.object as? AVPlayerItem {
+//            if let player = playerItem.value(forKey: "player") as? AVPlayer {
+//                self.player = player
+//                player.isMuted = true
+////                layer = AVPlayerLayer(player: player)
+////                layer.rx.observe(CGRect.self, "bounds").subscribe(onNext: { bounds in
+////                    print("assa b", bounds)
+////                }).addDisposableTo(disposeBag)
+//            }
+//        }
+//    }
 
     private func tableViewRegister() {
         tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
@@ -514,12 +533,13 @@ extension MainViewController: NewsCellDelegate {
     }
 }
 
-extension MainViewController: MainVCHeaderDelegate {
-    func mute() {
-        player.isMuted = true
-        player.play()
-    }
-    func notMute() {
-        player.isMuted = false
-    }
-}
+//extension MainViewController: MainVCHeaderDelegate {
+//    func mute() {
+//        player.isMuted = true
+//        player.play()
+//    }
+//    func notMute() {
+//        player.isMuted = false
+//    }
+//}
+

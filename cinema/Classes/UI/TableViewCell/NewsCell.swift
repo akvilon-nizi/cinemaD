@@ -24,14 +24,14 @@ class NewsCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
         label.textColor = UIColor.cnmBlueLight
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         return label
     }()
 
     private let newsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaLight(size: 14)
-        label.textColor = UIColor.cnmAfafaf
+        label.textColor = UIColor.cnm3a3a3a
         label.numberOfLines = 4
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -92,6 +92,7 @@ class NewsCell: UITableViewCell {
         mainView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.topAnchor ~= userImage.bottomAnchor + 9
         titleLabel.leadingAnchor ~= mainView.leadingAnchor
+        titleLabel.trailingAnchor ~= mainView.trailingAnchor
 
         mainView.addSubview(newsLabel.prepareForAutoLayout())
         newsLabel.topAnchor ~= titleLabel.bottomAnchor + 14

@@ -15,8 +15,6 @@ class ActorsViewController: ParentViewController {
 
     let contentView = UIView()
 
-    let imageView = UIImageView()
-
     let scrollView = UIScrollView()
 
     let persons: [PersonFromFilm]

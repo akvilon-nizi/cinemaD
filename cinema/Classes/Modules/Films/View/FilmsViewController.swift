@@ -40,6 +40,16 @@ class FilmsViewController: ParentViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
@@ -58,7 +68,7 @@ class FilmsViewController: ParentViewController {
 
         let homeButton = UIButton()
         homeButton.setImage(Asset.Cinema.home.image, for: .normal)
-        //        homeButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        homeButton.addTarget(self, action: #selector(didTapHomeButton), for: .touchUpInside)
         homeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         frame = homeButton.frame
         frame.origin.x -= 9
@@ -83,6 +93,11 @@ class FilmsViewController: ParentViewController {
     func didTapLeftButton() {
         output?.backButtonTap()
     }
+
+    func didTapHomeButton() {
+        output?.homeButtonTap()
+    }
+
 
 }
 

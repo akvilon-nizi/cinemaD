@@ -159,7 +159,7 @@ extension FoodleTarget: TargetType {
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
-        case .patchCollections:
+        case .patchCollections, .loadAvatar:
             return .patch
         case .putCollections, .putFilm, .putNewsComment, .putReview:
             return .put
@@ -259,9 +259,9 @@ extension FoodleTarget: TargetType {
         switch self {
         case let .loadAvatar(image):
             if let data: Data = UIImagePNGRepresentation(image) {
-                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "img", fileName: "photo.jpg", mimeType: "image/jpeg")]))
-            } else if let data:Data = UIImageJPEGRepresentation(image, 1.0) {
-                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "img", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+            } else if let data: Data = UIImageJPEGRepresentation(image, 1.0) {
+                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
             }
             return .request
         default:

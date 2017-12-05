@@ -11,6 +11,7 @@ import UIKit
 protocol ProfileHeaderDelegate: class {
     func tapEdit()
     func tapSettings()
+    func tapButton(tag: Int)
 }
 
 class ProfileHeader: UITableViewHeaderFooterView {
@@ -89,11 +90,20 @@ class ProfileHeader: UITableViewHeaderFooterView {
             bottomLabelText: String(profile.rewards),
             image: Asset.Cinema.Profile.rewardsProfile.image,
             isCenter: true)
+        rewardsView.tag = 1
 
         let friendsView = UIView().setParameters(
             topLabelText: L10n.profileFriendText,
             bottomLabelText: String(profile.friends),
             image: Asset.Cinema.Profile.friendsProfile.image)
+        rewardsView.tag = 2
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        watchView.addGestureRecognizer(tap)
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        rewardsView.addGestureRecognizer(tap2)
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        friendsView.addGestureRecognizer(tap3)
 
         let stack = createStackView(.horizontal, .fill, .fill, 0, with: [watchView, rewardsView, friendsView])
 
@@ -102,6 +112,12 @@ class ProfileHeader: UITableViewHeaderFooterView {
     }
 
 // MARK: - Actions
+
+    func handleTap(sender: UITapGestureRecognizer) {
+        if let view = sender.view {
+            delegate?.tapButton(tag: view.tag)
+        }
+    }
 
     func handleTapEditButton() {
         delegate?.tapEdit()

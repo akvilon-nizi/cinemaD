@@ -233,6 +233,7 @@ class FilmViewController: ParentViewController {
             scrollView.showsHorizontalScrollIndicator = false
             scrollView.showsVerticalScrollIndicator = false
 
+            imageView.contentMode = .scaleAspectFill
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: URL(string: filmInfo.imageUrl))
 
@@ -279,13 +280,13 @@ class FilmViewController: ParentViewController {
             willStack.leadingAnchor ~= contentView.leadingAnchor
             willStack.trailingAnchor ~= contentView.trailingAnchor
 
-            contentView.addSubview(buyButton.prepareForAutoLayout())
-            buyButton.topAnchor ~= willStack.bottomAnchor + 36
-            buyButton.centerXAnchor ~= contentView.centerXAnchor
-
-            contentView.addSubview(inviteButton.prepareForAutoLayout())
-            inviteButton.topAnchor ~= buyButton.bottomAnchor + 15
-            inviteButton.centerXAnchor ~= contentView.centerXAnchor
+//            contentView.addSubview(buyButton.prepareForAutoLayout())
+//            buyButton.topAnchor ~= willStack.bottomAnchor + 36
+//            buyButton.centerXAnchor ~= contentView.centerXAnchor
+//
+//            contentView.addSubview(inviteButton.prepareForAutoLayout())
+//            inviteButton.topAnchor ~= buyButton.bottomAnchor + 15
+//            inviteButton.centerXAnchor ~= contentView.centerXAnchor
 
             let infoStack = createStackView(.horizontal, .fill, .fill, 0, with: [
                 UIView().setParameters(
@@ -300,7 +301,7 @@ class FilmViewController: ParentViewController {
                 ])
             contentView.addSubview(infoStack.prepareForAutoLayout())
             infoStack.heightAnchor ~= 50
-            infoStack.topAnchor ~= inviteButton.bottomAnchor + 35
+            infoStack.topAnchor ~= willStack.bottomAnchor + 35
             infoStack.centerXAnchor ~= contentView.centerXAnchor
 
             desriptionLabel.textColor = UIColor.cnm3a3a3a

@@ -40,6 +40,7 @@ enum AppRouterDestination {
     case editingProfile(nameUser: String, avatar: String, output: EditingProfileModuleOutput)
     case settings
     case reviews(filmID: String, name: String, genres: String)
+    case friends
 
     var isPresent: Bool {
         switch self {
@@ -102,6 +103,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: NewsConfigurator.tag, arguments: newsID)
             case .rewards:
                 return try factory.resolve(tag: RewardsConfigurator.tag)
+            case .friends:
+                return try factory.resolve(tag: FriendsConfigurator.tag)
             case .profile:
                 return try factory.resolve(tag: ProfileConfigurator.tag)
             case let .editingProfile(nameUser, avatar, output):

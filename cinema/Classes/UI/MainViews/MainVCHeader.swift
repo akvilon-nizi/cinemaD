@@ -8,15 +8,8 @@
 
 import UIKit
 
-protocol MainVCHeaderDelegate: class {
-    func mute()
-    func notMute()
-}
-
 class MainVCHeader: UITableViewHeaderFooterView {
     let titleLabel: UILabel = UILabel()
-
-    weak var delegate: MainVCHeaderDelegate?
 
     var trailers: [String] = [] {
         didSet {
@@ -75,20 +68,10 @@ extension MainVCHeader: UICollectionViewDelegateFlowLayout {
 
 extension MainVCHeader: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if let cell = collectionView.cellForItem(at: indexPath) as? YoutubeViewCell {
-//            cell.fullScreen()
-//        }
+        if let cell = collectionView.cellForItem(at: indexPath) as? YoutubeViewCell {
+            cell.playVideo()
+        }
     }
-
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        delegate?.mute()
-      //  print("assa indexPath", indexPath.row)
-//        if let cells = cell as? YoutubeViewCell {
-//            cells.isPlay = false
-//            print("assa", indexPath.row)
-//        }
-    }
-
 }
 
 extension MainVCHeader: UICollectionViewDataSource {
@@ -100,10 +83,7 @@ extension MainVCHeader: UICollectionViewDataSource {
 
         if let tagCell = cell as? YoutubeViewCell {
             tagCell.idVideo = trailers[indexPath.row]
-//            tagCell.isLoad = false
             tagCell.loadPlayer()
-            tagCell.delegate = self
-            delegate?.mute()
         }
         return cell
     }
@@ -114,7 +94,6 @@ extension MainVCHeader: UIScrollViewDelegate {
         collectionView.isScrollEnabled = false
         beginContentOffsetX = CGFloat(scrollItem) * windowY
             scrollView.setContentOffset(CGPoint(x: CGFloat(scrollItem) * windowY, y: 0), animated: true)
-            playVideoOnCell(row: scrollItem)
         collectionView.isScrollEnabled = true
     }
 
@@ -137,25 +116,7 @@ extension MainVCHeader: UIScrollViewDelegate {
         beginContentOffsetX = CGFloat(scrollItem) * windowY
         if isScroll {
             scrollView.setContentOffset(CGPoint(x: CGFloat(scrollItem) * windowY, y: 0), animated: true)
-
-            playVideoOnCell(row: scrollItem)
         }
         collectionView.isScrollEnabled = true
-    }
-
-    func playVideoOnCell(row: Int) {
-        let indexPath = IndexPath(row: row, section: 0)
-        if let cell = collectionView.cellForItem(at: indexPath) as? YoutubeViewCell {
-            cell.playVideo()
-        }
-    }
-}
-
-extension MainVCHeader: YoutubeViewDelegate {
-    func mute() {
-        delegate?.mute()
-    }
-    func notMute() {
-        delegate?.notMute()
     }
 }

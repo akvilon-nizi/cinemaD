@@ -26,4 +26,6 @@ protocol ProfileViewOutput {
     func settingButtonTap()
 
     func openFilm(videoID: String, name: String)
+
+    func openFriends()
 }

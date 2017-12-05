@@ -66,6 +66,7 @@ extension NavigationFlowController: FlowControllerProtocol {
                 observer.onError(NavigationFlowControllerError.wrongRootViewController)
                 return Disposables.create()
             }
+            navigationController.navigationBar.isHidden = true
             navigationController.popToVC(viewController: self.rootViewController.childViewControllers[0], animated: animated) {
                 observer.onNext(nil)
                 observer.onCompleted()

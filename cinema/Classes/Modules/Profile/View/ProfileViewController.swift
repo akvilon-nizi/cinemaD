@@ -216,4 +216,17 @@ extension ProfileViewController: ProfileHeaderDelegate {
     func tapSettings() {
         output?.settingButtonTap()
     }
+
+    func tapButton(tag: Int) {
+        switch tag {
+        case 0:
+            print("assa")
+        case 1:
+            print("assa")
+        case 2:
+            output.openFriends()
+        default:
+            print("assa")
+        }
+    }
 }

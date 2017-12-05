@@ -45,6 +45,7 @@ class ActorHeaderView: UIView {
             imageView.heightAnchor ~= windowWidth / 3 * 4
             imageView.layer.cornerRadius = 5.0
             imageView.layer.masksToBounds = true
+            imageView.contentMode = .scaleAspectFill
             imageView.backgroundColor = UIColor.lightGray
         return imageView
     }()
