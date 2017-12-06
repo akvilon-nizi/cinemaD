@@ -89,6 +89,9 @@ class ProfileViewController: ParentViewController {
 // MARK: - ProfileViewInput
 
 extension ProfileViewController: ProfileViewInput {
+    func editeProfile(name: String, avatarUrl: String) {
+        profileHeader.editeProfile(name: name, imageUrl: avatarUrl)
+    }
 
     func setupInitialState() {
 

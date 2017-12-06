@@ -10,6 +10,8 @@ class EditingProfileViewController: ParentViewController {
 
     var output: EditingProfileViewOutput!
 
+    var isEditingAvater: Bool = false
+
     let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.heightAnchor ~= 92
@@ -188,12 +190,27 @@ class EditingProfileViewController: ParentViewController {
     }
 
     func didTapSaveButton() {
-        if let image = userImageView.image {
-            activityVC.isHidden = false
-            activityVC.startAnimating()
-            view.bringSubview(toFront: activityVC)
-            output?.saveAvatar(image: image)
+
+        if name.textTF().isEmpty {
+            showAlert(message: "Имя не может быть пустым")
+            return
         }
+
+        if newPassword.textTF().isEmpty && !oldPassword.textTF().isEmpty {
+            showAlert(message: "Введите новый пароль")
+            return
+        }
+
+        if !newPassword.textTF().isEmpty && oldPassword.textTF().isEmpty {
+            showAlert(message: "Введите старый пароль")
+            return
+        }
+
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        view.bringSubview(toFront: activityVC)
+
+        output?.saveEditing(image: isEditingAvater ? userImageView.image : nil, name: name.textTF(), oldPassword: oldPassword.textTF(), password: newPassword.textTF())
     }
 
     func openImagePicker(sourceType: UIImagePickerControllerSourceType) {
@@ -245,6 +262,7 @@ extension EditingProfileViewController: UINavigationControllerDelegate, UIImageP
 
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             userImageView.image = pickedImage
+            isEditingAvater = true
         }
 
         picker.dismiss(animated: true)

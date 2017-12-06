@@ -141,6 +141,20 @@ enum L10n {
   static let filtersNewsMessageActors = L10n.tr("Localizable", "filters-news-message-actors")
   /// novelties
   static let filtersNewsNew = L10n.tr("Localizable", "filters-news-new")
+  /// Добавить
+  static let friendsAddButton = L10n.tr("Localizable", "friends-add-button")
+  /// Список
+  static let friendsListTitle = L10n.tr("Localizable", "friends-list-title")
+  /// Новости
+  static let friendsNewsTitle = L10n.tr("Localizable", "friends-news-title")
+  /// Рекомендации
+  static let friendsRecomendationTitle = L10n.tr("Localizable", "friends-recomendation-title")
+  /// Поиск
+  static let friendsSearchTitle = L10n.tr("Localizable", "friends-search-title")
+  /// Друзья
+  static let friendsTitleText = L10n.tr("Localizable", "friends-title-text")
+  /// Будет смотреть
+  static let friendsWillSee = L10n.tr("Localizable", "friends-will-see")
   /// Полный список
   static let kinobaseCollectionText = L10n.tr("Localizable", "kinobase-collection-text")
   /// + Создать коллекцию

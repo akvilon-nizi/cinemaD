@@ -241,7 +241,7 @@ class FilmViewController: ParentViewController {
             imageView.topAnchor ~= contentView.topAnchor + 11
             imageView.centerXAnchor ~= contentView.centerXAnchor
             imageView.widthAnchor ~= windowWidth
-            imageView.heightAnchor ~= windowWidth / 3 * 4
+            imageView.heightAnchor ~= windowWidth / 800 * 1_185
             imageView.layer.cornerRadius = 5.0
             imageView.layer.masksToBounds = true
 
@@ -323,7 +323,7 @@ class FilmViewController: ParentViewController {
 
         textView.font = UIFont.cnmFutura(size: 14)
         textView.textColor = UIColor.cnmGreyLight
-        textView.textAlignment = .justified
+        textView.textAlignment = .left
         textView.shouldTrim = true
         textView.maximumNumberOfLines = 4
         textView.attributedReadMoreText = NSAttributedString(string: L10n.filmMoreButton, attributes: [

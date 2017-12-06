@@ -237,7 +237,7 @@ public class ReadMoreTextView: UITextView {
     
     private func attributedStringWithDefaultAttributes(from text: String) -> NSAttributedString {
         let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.justified
+        style.alignment = NSTextAlignment.left
         return NSAttributedString(string: text, attributes: [
             NSFontAttributeName: UIFont.cnmFutura(size: 14),
             NSForegroundColorAttributeName: UIColor.cnmGreyLight,

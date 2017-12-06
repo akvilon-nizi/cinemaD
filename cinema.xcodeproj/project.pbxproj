@@ -167,6 +167,7 @@
 		7E5016F956A4F5C65338F54F /* FilmsInteractorInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A918314C616339DC1510226 /* FilmsInteractorInputOutput.swift */; };
 		7EE810178149BAFE8B0D9EE5 /* ReviewsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D4C7E70FBB7A372C0A364F /* ReviewsRouter.swift */; };
 		7F5DB5844092F4066624E68D /* SlidesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC90B398D934BCDDB8072B24 /* SlidesRouter.swift */; };
+		8107F7EE1FD7F1C90067DFD2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107F7ED1FD7F1C90067DFD2 /* Constants.swift */; };
 		8113241C1FCBFC1F009AED8D /* EditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241B1FCBFC1F009AED8D /* EditingView.swift */; };
 		8113241E1FCC4556009AED8D /* LoadImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241D1FCC4556009AED8D /* LoadImageResponse.swift */; };
 		811324201FCC4E40009AED8D /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241F1FCC4E40009AED8D /* ProfileModel.swift */; };
@@ -650,6 +651,7 @@
 		7F3E6560B04FAC859BE975F4 /* FilmPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilmPresenter.swift; sourceTree = "<group>"; };
 		802EC8DFFC71933FC5CC1B8E /* ActorsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActorsRouterInput.swift; sourceTree = "<group>"; };
 		80CBF1459DCAC72A63C576CF /* FriendsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FriendsInteractor.swift; sourceTree = "<group>"; };
+		8107F7ED1FD7F1C90067DFD2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8113241B1FCBFC1F009AED8D /* EditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingView.swift; sourceTree = "<group>"; };
 		8113241D1FCC4556009AED8D /* LoadImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageResponse.swift; sourceTree = "<group>"; };
 		8113241F1FCC4E40009AED8D /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				04A6619B1F6B89BF0032A491 /* ViewHelpers.swift */,
 				88EFD0F51FB1C81300473640 /* HeaderSectionStruct.swift */,
 				CE1D2A421FBF138900E68209 /* KingfisherSource.swift */,
+				8107F7ED1FD7F1C90067DFD2 /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1196,7 +1199,6 @@
 				99FD2834DF58CB08BE4A696D /* FriendsViewController.swift */,
 				58BA790DCD2AAD078E77E7F4 /* FriendsViewInputOutput.swift */,
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -1713,7 +1715,6 @@
 				80CBF1459DCAC72A63C576CF /* FriendsInteractor.swift */,
 				34A5A57EF46CD36B3FEE4F19 /* FriendsInteractorInputOutput.swift */,
 			);
-			name = Interactor;
 			path = Interactor;
 			sourceTree = "<group>";
 		};
@@ -1740,7 +1741,6 @@
 			children = (
 				36342B46096D41E6E773F1BE /* FriendsConfigurator.swift */,
 			);
-			name = Configurator;
 			path = Configurator;
 			sourceTree = "<group>";
 		};
@@ -1845,7 +1845,6 @@
 				AE0FF38F4DEC54A58BF56350 /* Router */,
 				1E2E22EE97FB3A64A33AE520 /* View */,
 			);
-			name = Friends;
 			path = Friends;
 			sourceTree = "<group>";
 		};
@@ -2227,7 +2226,6 @@
 				15FBB7F919B1F58E0109C31F /* FriendsModuleInputOutput.swift */,
 				E913E78F7822FFA43B4E7F93 /* FriendsPresenter.swift */,
 			);
-			name = Presenter;
 			path = Presenter;
 			sourceTree = "<group>";
 		};
@@ -2293,7 +2291,6 @@
 				452B8EC9694B1F431035C725 /* FriendsRouter.swift */,
 				8855AFF86881DB84DD1C83B5 /* FriendsRouterInput.swift */,
 			);
-			name = Router;
 			path = Router;
 			sourceTree = "<group>";
 		};
@@ -3253,6 +3250,7 @@
 				9BB4E87CA6162F664B0FAE21 /* ProviderError.swift in Sources */,
 				333173281F4EDE4700C7C88E /* Region.swift in Sources */,
 				3386D47B1F443731009D9A42 /* Cart.swift in Sources */,
+				8107F7EE1FD7F1C90067DFD2 /* Constants.swift in Sources */,
 				9BB4E0163742B6C1DC140FBF /* TextInputFilter.swift in Sources */,
 				81C4418A1FD040B9004EBB1D /* ReviewsResponse.swift in Sources */,
 				9BB4E5492744BB6F8BD18ED6 /* ParentViewController.swift in Sources */,

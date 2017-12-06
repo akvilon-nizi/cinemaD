@@ -6,5 +6,5 @@
 import Foundation
 
 protocol EditingProfileModuleOutput: class {
-
+    func editeProfile(name: String, imageUrl: String)
 }

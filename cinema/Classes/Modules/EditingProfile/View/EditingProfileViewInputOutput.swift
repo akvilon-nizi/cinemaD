@@ -21,5 +21,5 @@ protocol EditingProfileViewOutput {
 
     func homeButtonTap()
 
-    func saveAvatar(image: UIImage)
+    func saveEditing(image: UIImage?, name: String, oldPassword: String, password: String)
 }

@@ -202,3 +202,11 @@
 "reviews-like-text" = "Понравилось";
 "reviews-dislike-text" = "Не понравилось";
 
+//Friends
+"friends-title-text" = "Друзья";
+"friends-list-title" = "Список";
+"friends-recomendation-title" = "Рекомендации";
+"friends-news-title" = "Новости";
+"friends-will-see" = "Будет смотреть";
+"friends-search-title" = "Поиск";
+"friends-add-button" = "Добавить";

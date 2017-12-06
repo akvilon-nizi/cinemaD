@@ -30,7 +30,7 @@ class FilmGroup: UITableViewHeaderFooterView {
 
     weak var delegate: FilmGroupDelegate?
 
-    let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 3
+    let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 80) / 3
 
     fileprivate let collectionView: UICollectionView = {
 
@@ -64,7 +64,7 @@ extension FilmGroup: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: windowWidth, height: windowWidth / 3 * 4)
+        return CGSize(width: windowWidth, height: windowWidth / 800 * 1_185)
     }
 }
 

@@ -13,6 +13,8 @@ protocol ProfileViewInput: class {
     func getError() 
 
     func getData(_ films: [FilmCollections])
+
+    func editeProfile(name: String, avatarUrl: String)
 }
 
 protocol ProfileViewOutput {

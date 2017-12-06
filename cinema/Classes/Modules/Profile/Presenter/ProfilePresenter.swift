@@ -58,5 +58,7 @@ extension ProfilePresenter: ProfileInteractorOutput {
 // MARK: - EditingProfileModuleOutput
 
 extension ProfilePresenter: EditingProfileModuleOutput {
-
+    func editeProfile(name: String, imageUrl: String) {
+        view.editeProfile(name: name, avatarUrl: imageUrl)
+    }
 }

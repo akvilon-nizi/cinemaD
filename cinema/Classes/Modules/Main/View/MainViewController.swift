@@ -104,6 +104,14 @@ class MainViewController: ParentViewController {
 //        navController.view.backgroundColor = .clear
 
         //header.delegate = self
+
+        NotificationCenter.default.addObserver(self, selector: #selector(changeAvatar), name: NSNotification.Name(rawValue: Constants.changeProfileAvatar), object: nil)
+    }
+
+    func changeAvatar(notification: NSNotification) {
+        if let imageUrl = notification.userInfo?["imageUrl"] as? String {
+            mainTabView.setImage(imageUrl: imageUrl)
+        }
     }
 
     func addView() {
@@ -239,6 +247,10 @@ class MainViewController: ParentViewController {
 
             present(vkShare, animated: true, completion: nil)
         }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

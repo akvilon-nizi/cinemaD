@@ -17,13 +17,12 @@ class EditingProfilePresenter {
 // MARK: - EditingProfileViewOutput
 
 extension EditingProfilePresenter: EditingProfileViewOutput {
+    func saveEditing(image: UIImage?, name: String, oldPassword: String, password: String) {
+        interactor.editeProfile(image: image, name: name, oldPassword: oldPassword, password: password)
+    }
 
     func homeButtonTap() {
         router.home()
-    }
-
-    func saveAvatar(image: UIImage) {
-        interactor.loadAvatar(image: image)
     }
 
     func viewIsReady() {
@@ -38,11 +37,15 @@ extension EditingProfilePresenter: EditingProfileViewOutput {
 // MARK: - EditingProfileInteractorOutput
 
 extension EditingProfilePresenter: EditingProfileInteractorOutput {
-    func getError() {
-        view.getError()
+    func successEditing(_ profile: ProfileModel) {
+        output?.editeProfile(name: profile.name, imageUrl: profile.avatar)
+
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.changeProfileAvatar), object: nil, userInfo: ["imageUrl": profile.avatar])
+
+        router.close()
     }
 
-    func successEditing() {
-
+    func getError() {
+        view.getError()
     }
 }

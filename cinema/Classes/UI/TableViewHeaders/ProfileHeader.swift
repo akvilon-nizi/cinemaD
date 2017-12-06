@@ -96,7 +96,7 @@ class ProfileHeader: UITableViewHeaderFooterView {
             topLabelText: L10n.profileFriendText,
             bottomLabelText: String(profile.friends),
             image: Asset.Cinema.Profile.friendsProfile.image)
-        rewardsView.tag = 2
+        friendsView.tag = 2
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         watchView.addGestureRecognizer(tap)
@@ -161,6 +161,11 @@ class ProfileHeader: UITableViewHeaderFooterView {
         stackView.heightAnchor ~= 43
 
         setStackView(profile: profile)
+    }
+
+    func editeProfile(name: String, imageUrl: String) {
+        userImage.kf.setImage(with: URL(string: imageUrl))
+        nameLabel.text = name
     }
 }
 

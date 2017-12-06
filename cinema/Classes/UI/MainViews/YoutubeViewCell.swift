@@ -49,7 +49,7 @@ class YoutubeViewCell: UICollectionViewCell {
 
         contentView.addSubview(youtubeView.prepareForAutoLayout())
         youtubeView.pinEdgesToSuperviewEdges()
-        youtubeView.layer.cornerRadius = 15.0
+        youtubeView.layer.cornerRadius = 5.0
         youtubeView.layer.masksToBounds = true
         youtubeView.isUserInteractionEnabled = false
         youtubeView.delegate = self
@@ -57,7 +57,7 @@ class YoutubeViewCell: UICollectionViewCell {
         contentView.addSubview(previewImageView.prepareForAutoLayout())
         previewImageView.pinEdgesToSuperviewEdges()
         previewImageView.kf.indicatorType = .activity
-        previewImageView.layer.cornerRadius = 15.0
+        previewImageView.layer.cornerRadius = 5.0
         previewImageView.layer.masksToBounds = true
 
         previewImageView.addSubview(playButton.prepareForAutoLayout())

@@ -18,12 +18,12 @@ class EditingProfileInteractor {
 // MARK: - EditingProfileInteractorInput
 
 extension EditingProfileInteractor: EditingProfileInteractorInput {
-    func loadAvatar(image: UIImage) {
-        provider.requestModel(.loadAvatar(image: image))
-            .subscribe { [unowned self] (response: Event<LoadImageResponse>) in
+    func editeProfile(image: UIImage?, name: String, oldPassword: String, password: String) {
+        provider.requestModel(.editeProfile(image: image, name: name, oldPassword: oldPassword, newPassword: oldPassword))
+            .subscribe { [unowned self] (response: Event<ProfileModel>) in
                 switch response {
                 case let .next(model):
-                    self.output.successEditing()
+                    self.output.successEditing(model)
                 case let .error(error as ProviderError):
                     self.output.getError()
                 default:

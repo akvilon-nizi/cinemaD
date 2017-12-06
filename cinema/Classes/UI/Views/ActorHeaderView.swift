@@ -42,7 +42,7 @@ class ActorHeaderView: UIView {
         let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 160
         let imageView = UIImageView()
             imageView.widthAnchor ~= windowWidth
-            imageView.heightAnchor ~= windowWidth / 3 * 4
+            imageView.heightAnchor ~= windowWidth / 800 * 1_185
             imageView.layer.cornerRadius = 5.0
             imageView.layer.masksToBounds = true
             imageView.contentMode = .scaleAspectFill

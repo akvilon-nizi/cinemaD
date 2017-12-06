@@ -44,7 +44,7 @@ enum FoodleTarget {
     case newsInfo(newsID: String)
     case newsComments(newsID: String)
     case putNewsComment(newsID: String, message: String)
-    case loadAvatar(image: UIImage)
+    case editeProfile(image: UIImage?, name: String, oldPassword: String, newPassword: String)
     case profile
     case review(filmID: String)
     case putReview(filmID: String, name: String, description: String)
@@ -142,8 +142,8 @@ extension FoodleTarget: TargetType {
             return "news/\(newsID)/comments"
         case let .putNewsComment(newsID, _):
             return "news/\(newsID)/comments"
-        case .loadAvatar:
-            return "me/avatar"
+        case .editeProfile:
+            return "me"
         case .profile:
             return "me"
         case let .review(filmID):
@@ -159,7 +159,7 @@ extension FoodleTarget: TargetType {
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete:
             return .delete
-        case .patchCollections, .loadAvatar:
+        case .patchCollections, .editeProfile:
             return .patch
         case .putCollections, .putFilm, .putNewsComment, .putReview:
             return .put
@@ -238,6 +238,17 @@ extension FoodleTarget: TargetType {
             parameters["name"] = name
             parameters["description"] = description
             return parameters
+        case let .editeProfile(_, name, oldPassword, newPassword):
+            var parameters: [String: Any] = [:]
+            parameters["name"] = name
+            if oldPassword.count >= 1 {
+                parameters["old_password"] = oldPassword
+            }
+            if newPassword.count >= 1 {
+                parameters["password"] = newPassword
+            }
+            //parameters["description"] = description
+            return parameters
         default:
             return nil
         }
@@ -257,11 +268,13 @@ extension FoodleTarget: TargetType {
 
     var task: Task {
         switch self {
-        case let .loadAvatar(image):
-            if let data: Data = UIImagePNGRepresentation(image) {
-                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
-            } else if let data: Data = UIImageJPEGRepresentation(image, 1.0) {
-                return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+        case let .editeProfile(image, _, _, _):
+            if let newImage = image {
+                if let data: Data = UIImagePNGRepresentation(newImage) {
+                    return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+                } else if let data: Data = UIImageJPEGRepresentation(newImage, 1.0) {
+                    return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+                }
             }
             return .request
         default:

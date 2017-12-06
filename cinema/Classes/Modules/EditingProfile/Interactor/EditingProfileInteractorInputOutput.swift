@@ -7,11 +7,11 @@ import Foundation
 import UIKit
 
 protocol EditingProfileInteractorInput {
-    func loadAvatar(image: UIImage)
+    func editeProfile(image: UIImage?, name: String, oldPassword: String, password: String)
 }
 
 protocol EditingProfileInteractorOutput: class {
     func getError()
 
-    func successEditing()
+    func successEditing(_ profile: ProfileModel)
 }

@@ -119,7 +119,7 @@ extension FilmsViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: windowWidth, height: windowWidth / 3 * 4)
+        return CGSize(width: windowWidth, height: windowWidth / 800 * 1_185)
     }
 }
 

@@ -52,6 +52,14 @@ class EditingView: UIView {
         separatorView.leadingAnchor ~= leadingAnchor + 24
         separatorView.heightAnchor ~= 1
     }
+
+    func textTF() -> String {
+        if let text = textField.text {
+            return text
+        } else {
+            return ""
+        }
+    }
 }
 
 extension EditingView: UITextFieldDelegate {

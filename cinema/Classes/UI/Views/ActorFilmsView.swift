@@ -25,7 +25,7 @@ class ActorFilmsView: UIView {
         return label
     }()
 
-    let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 3
+    let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 80) / 3
 
     fileprivate let collectionView: UICollectionView = {
 
@@ -63,7 +63,7 @@ class ActorFilmsView: UIView {
         collectionView.leadingAnchor ~= leadingAnchor
         collectionView.trailingAnchor ~= trailingAnchor
         collectionView.bottomAnchor ~= bottomAnchor
-        collectionView.heightAnchor ~= windowWidth / 3 * 4
+        collectionView.heightAnchor ~= windowWidth / 800 * 1_185
         collectionView.delegate = self
         collectionView.dataSource = self
         self.films = films
@@ -77,7 +77,7 @@ extension ActorFilmsView: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: windowWidth, height: windowWidth / 3 * 4)
+        return CGSize(width: windowWidth, height: windowWidth / 800 * 1_185)
     }
 }
 
