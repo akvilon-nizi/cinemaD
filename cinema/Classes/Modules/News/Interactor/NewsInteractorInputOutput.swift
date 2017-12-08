@@ -9,6 +9,7 @@ protocol NewsInteractorInput {
     func getNews(newsID: String)
     func putComment(newsID: String, message: String)
     func getComment(newsID: String)
+    func deleteComment(id: String)
 }
 
 protocol NewsInteractorOutput: class {
@@ -17,4 +18,6 @@ protocol NewsInteractorOutput: class {
     func getNews(_ newsData: NewsData)
 
     func loadComment(_ comment: Comment)
+
+    func deleteComment()
 }

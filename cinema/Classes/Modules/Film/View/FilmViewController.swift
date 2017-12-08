@@ -7,6 +7,7 @@ import UIKit
 import FacebookShare
 import FBSDKShareKit
 import VKSdkFramework
+import YouTubeiOSPlayerHelper
 
 class FilmViewController: ParentViewController {
 
@@ -17,6 +18,10 @@ class FilmViewController: ParentViewController {
     var myRate: Int = 0
 
     var genres: String = ""
+
+    var videoID: String = ""
+
+    fileprivate let playButton = UIButton()
 
     let contentView = UIView()
     let imageView = UIImageView()
@@ -106,6 +111,8 @@ class FilmViewController: ParentViewController {
         navigationController?.navigationBar.isHidden = true
     }
 
+    fileprivate let youtubeView = YTPlayerView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
@@ -177,6 +184,17 @@ class FilmViewController: ParentViewController {
 
     }
 
+    func loadYT(videoID: String) {
+        youtubeView.load(withVideoId: videoID, playerVars: [
+            "playsinline": 1,
+            "disablekb": 1,
+            "iv_load_policy": 3,
+            "rel": 0,
+            "modestbranding": 1
+            ])
+        youtubeView.webView?.allowsInlineMediaPlayback = false
+    }
+
     func setInfo() {
         if let filmInfo = filmInformation {
 
@@ -206,12 +224,6 @@ class FilmViewController: ParentViewController {
             genres = textsArray.joined(separator: "/")
 
             titleLabel.text = genres + " (" + String(filmInfo.yearFirstRelease) + ")"
-
-//            if #available(iOS 11.0, *) {
-//                scrollView.contentInsetAdjustmentBehavior = .always
-//            } else {
-//                automaticallyAdjustsScrollViewInsets = true
-//            }
 
             let separatorView = UIView()
             separatorView.backgroundColor = .white
@@ -244,6 +256,8 @@ class FilmViewController: ParentViewController {
             imageView.heightAnchor ~= windowWidth / 800 * 1_185
             imageView.layer.cornerRadius = 5.0
             imageView.layer.masksToBounds = true
+
+            setYoutube(videoID: filmInfo.trailer)
 
             let chatButton = UIButton()
             chatButton.setImage(Asset.Cinema.chatIcon.image, for: .normal)
@@ -313,6 +327,29 @@ class FilmViewController: ParentViewController {
             desriptionLabel.leadingAnchor ~= contentView.leadingAnchor + 39
 
             setInfo2(filmInfo)
+        }
+    }
+
+    func setYoutube(videoID: String) {
+
+        self.videoID = videoID
+
+        if videoID.count >= 1 {
+            contentView.addSubview(playButton.prepareForAutoLayout())
+            playButton.centerXAnchor ~= imageView.centerXAnchor
+            playButton.centerYAnchor ~= imageView.centerYAnchor
+            playButton.heightAnchor ~= 100
+            playButton.widthAnchor ~= 100
+            playButton.setImage(Asset.Cinema.play.image, for: .normal)
+            playButton.addTarget(self, action: #selector(didTapPlayButton), for: .touchUpInside)
+
+            loadYT(videoID: videoID)
+
+//            youtubeView.cueVideo(
+//                byId: videoID,
+//                startSeconds: 0,
+//                suggestedQuality: .auto
+//            )
         }
     }
 
@@ -398,7 +435,8 @@ class FilmViewController: ParentViewController {
             activityVC.startAnimating()
             output.watchedTapDelete()
         } else {
-            showAlert(message: L10n.filmWatchAlert)
+            output.watchedTap(rate: 0)
+//            showAlert(message: L10n.filmWatchAlert)
             setStars(0)
         }
     }
@@ -433,16 +471,13 @@ class FilmViewController: ParentViewController {
         output?.tapReviews(name: name, genres: genres)
     }
 
-    func showDialog<C: ContentProtocol>(_ content: C, mode: ShareDialogMode = .automatic) {
-        let dialog = ShareDialog(content: content)
-        dialog.presentingViewController = self
-        dialog.mode = mode
-
-        do {
-            try dialog.show()
-        } catch (let error) {
-            print()
-        }
+    func didTapPlayButton() {
+        youtubeView.cueVideo(
+            byId: videoID,
+            startSeconds: 0,
+            suggestedQuality: .auto
+        )
+        youtubeView.playVideo()
     }
 
     func fbClick() {
@@ -481,33 +516,21 @@ class FilmViewController: ParentViewController {
 //            content.contentURL = URL(string: "http://developers.facebook.com")
 //            FBSDKShareDialog.show(from: self, with: content, delegate: nil)
 
-            let title = "FacebookSdk GOVNO!"
-
-            let photo: FBSDKSharePhoto = FBSDKSharePhoto()
-            photo.image = image
-            photo.isUserGenerated = true
-
-            var properties: [AnyHashable: Any] = [
-                "og:type": "article",
-                "og:title": title,
-                "og:image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCalqoke09R7bu90lK8LYMLVeZ4KBqap0xZohNSJG3sCva_auMbw"
-            ]
+//            let title = "FacebookSdk GOVNO!"
+//
+//            let photo: FBSDKSharePhoto = FBSDKSharePhoto()
+//            photo.image = image
+//            photo.isUserGenerated = true
+//
+//            var properties: [AnyHashable: Any] = [
+//                "og:type": "article",
+//                "og:title": title,
+//                "og:image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCalqoke09R7bu90lK8LYMLVeZ4KBqap0xZohNSJG3sCva_auMbw"
+//            ]
 //            @"og:description":contentDesc
         // Create an object
 
-            let object: FBSDKShareOpenGraphObject = FBSDKShareOpenGraphObject(properties: properties)
-
-        // Create an action
-
-            let action: FBSDKShareOpenGraphAction = FBSDKShareOpenGraphAction()
-            action.actionType = "news.publishes"
-            action.setObject(object, forKey: "article")
-
-        // Create the content
-        let content: FBSDKShareOpenGraphContent = FBSDKShareOpenGraphContent()
-        content.action = action
-        content.previewPropertyName = "article"
-
+0
       // FBSDKShareDialog.show(from: self, with: content, delegate: nil)
 
         }
@@ -528,10 +551,6 @@ class FilmViewController: ParentViewController {
 ////        }
 //
         if let image = imageView.image {
-//            let photo: Photo = Photo(image: image, userGenerated: true)
-//            var content = PhotoShareContent(photos: [photo])
-//            content.hashtag = Hashtag("#cinemad #ffdsfdadfa")
-//            showDialog(content)
             let vkShare = VKShareDialogController()
             if let info = titleLabel.text {
                 vkShare.text = name + ". " + info + " " + descriptions
@@ -551,26 +570,9 @@ class FilmViewController: ParentViewController {
 
     }
 
-//    func fbClick() {
-//        var content = LinkShareContent(url: URL(string: "http://ya.ru")!,
-//                                       title: "Title",
-//                                       description: "Description",
-//                                       imageURL: URL(string: "https://www.google.ru/imgres?imgurl=http%3A%2F%2Fmirpozitiva.ru%2Fuploads%2Fposts%2F2016-08%2F1472058088_05.jpg&imgrefurl=http%3A%2F%2Fmirpozitiva.ru%2Fphoto%2F1253-kartinki-na-rabochii-stol.html&docid=6sZU3ZHD1A361M&tbnid=52HObwjKnwe_wM%3A&vet=1&w=1920&h=1080&bih=1096&biw=1647&ved=0ahUKEwjwg9vJgbTXAhXLJJoKHXBaB_cQMwhbKAAwAA&iact=c&ictx=1")!)
-//
-//        showShareDialog(content, mode: .native)
-//    }
 
     func didTapSharingButton() {
         fbClick()
-//        let textToShare = "CinemaD"
-//
-//        if let image = imageView.image {
-//            let objectsToShare = [textToShare, image] as [Any]
-//            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//
-//            //activityVC.popoverPresentationController?.sourceView = sender
-//            present(activityVC, animated: true, completion: nil)
-//        }
     }
 
     func setStars(_ tag: Int) {
@@ -624,16 +626,6 @@ extension FilmViewController: FilmViewInput {
         activityVC.stopAnimating()
     }
 }
-
-//private extension UIButton {
-//    func setProperty() -> UIButton {
-//        self.setImage(Asset.Cinema.unselectStar.image, for: .normal)
-//        self.setImage(Asset.Cinema.selectStar.image, for: .selected)
-//        self.widthAnchor ~= 19
-//        self.heightAnchor ~= 17
-//        return self
-//    }
-//}
 
 private extension UIView {
     func separator() -> UIView {

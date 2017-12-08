@@ -117,7 +117,7 @@ enum L10n {
   static let filmSetStatusRate = L10n.tr("Localizable", "film-set-status-rate")
   /// tMDB
   static let filmTmdbText = L10n.tr("Localizable", "film-tmdb-text")
-  /// Поставьте оценку, и фильм появится в Кинобазе!
+  /// Фильм появился в Кинобазе!
   static let filmWatchAlert = L10n.tr("Localizable", "film-watch-alert")
   /// Смотрел
   static let filmWatchedButton = L10n.tr("Localizable", "film-watched-button")

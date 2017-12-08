@@ -12,6 +12,7 @@ class MainPresenter {
     var interactor: MainInteractorInput!
     var router: MainRouterInput!
     weak var output: MainModuleOutput?
+    var locationManager: LocationManagerProtocol!
 }
 
 // MARK: - MainViewOutput
@@ -64,6 +65,7 @@ extension MainPresenter: MainInteractorOutput {
     }
     func getData(mainData: MainData) {
         view.getData(mainData)
+        locationManager.startMonitoringLocation()
     }
 
     func getNews(mainData: MainData) {

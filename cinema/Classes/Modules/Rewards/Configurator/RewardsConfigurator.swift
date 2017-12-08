@@ -25,6 +25,7 @@ class RewardsConfigurator {
 
         let interactor = RewardsInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = RewardsViewController()
         viewController.output = presenter

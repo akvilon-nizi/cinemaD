@@ -17,6 +17,10 @@ class ReviewsPresenter {
 // MARK: - ReviewsViewOutput
 
 extension ReviewsPresenter: ReviewsViewOutput {
+    func deleteReview(id: String) {
+        interactor.deleteReview(id: id)
+    }
+    
     func sendReview(name: String, description: String) {
         interactor.putComment(filmID: filmID, message: description)
     }
@@ -48,5 +52,9 @@ extension ReviewsPresenter: ReviewsInteractorOutput {
 
     func getError() {
         view.showNetworkError()
+    }
+
+    func deleteComment() {
+        view.deleteComment()
     }
 }

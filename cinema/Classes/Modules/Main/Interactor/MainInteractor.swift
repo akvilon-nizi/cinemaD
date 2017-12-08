@@ -100,6 +100,7 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.news = model.news
                     self.output.getData(mainData: self.mainData)
                 case let .error(error as ProviderError):
+                   // self.output.getData(mainData: self.mainData)
                     self.output.getError()
                 default:
                     break

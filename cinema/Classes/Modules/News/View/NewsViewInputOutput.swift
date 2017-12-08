@@ -14,6 +14,8 @@ protocol NewsViewInput: class {
     func showNetworkError()
 
     func addComment(_ comment: Comment)
+
+    func deleteComment()
 }
 
 protocol NewsViewOutput {
@@ -25,4 +27,6 @@ protocol NewsViewOutput {
     func homeButtonTap()
 
     func sendMessage(message: String)
+
+    func deleteComment(id: String)
 }

@@ -144,6 +144,7 @@ enum Containers {
             let configurator = MainConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
+            configurator.locationManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 

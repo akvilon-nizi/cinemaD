@@ -121,9 +121,6 @@ class MainViewController: ParentViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
-        if #available(iOS 11.0, *) {
-           tableView.contentInsetAdjustmentBehavior = .never
-        }
 
         view.addSubview(mainTabView.prepareForAutoLayout())
         mainTabView.widthAnchor ~= view.widthAnchor

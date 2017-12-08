@@ -15,6 +15,8 @@ protocol ReviewsViewInput: class {
 
     func addComment(_ comment: Comment)
 
+    func deleteComment()
+
 }
 
 protocol ReviewsViewOutput {
@@ -26,4 +28,6 @@ protocol ReviewsViewOutput {
     func homeTap()
 
     func sendReview(name: String, description: String)
+
+    func deleteReview(id: String)
 }

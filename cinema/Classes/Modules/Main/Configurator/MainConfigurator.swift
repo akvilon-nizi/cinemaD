@@ -12,14 +12,18 @@ class MainConfigurator {
 
     var provider: RxMoyaProvider<FoodleTarget>!
 
+    var locationManager: LocationManagerProtocol!
+
     var appRouter: AppRouterProtocol!
 
     func configureModule() -> UIViewController {
+
         let router = MainRouter()
         router.appRouter = appRouter
 
         let presenter = MainPresenter()
         presenter.router = router
+        presenter.locationManager = locationManager
 
         let interactor = MainInteractor()
         interactor.output = presenter

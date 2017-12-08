@@ -11,12 +11,15 @@ import UIKit
 // MARK: - NewsFilterCell
 
 protocol CommentCellDelegate: class {
-    func openShareSimple(comment: News)
+//    func openShareSimple(comment: News)
+    func deleteComment(indexRow: Int)
 }
 
 class CommentCell: UITableViewCell {
 
     var comment: Comment?
+
+    var indexRow: Int = 0
 
     weak var delegate: CommentCellDelegate?
 
@@ -44,12 +47,19 @@ class CommentCell: UITableViewCell {
         return label
     }()
 
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Kinobase.close.image, for: .normal)
+        return button
+    }()
+
     private let userImage: UIImageView = {
         let imageView = UIImageView()
         imageView.heightAnchor ~= 23
         imageView.widthAnchor ~= 23
         imageView.backgroundColor = UIColor.cnm3a3a3a
         imageView.layer.cornerRadius = 23 / 2
+        imageView.layer.masksToBounds = true
         return imageView
     }()
 
@@ -85,6 +95,12 @@ class CommentCell: UITableViewCell {
         newsLabel.leadingAnchor ~= mainView.leadingAnchor
         newsLabel.trailingAnchor ~= mainView.trailingAnchor
         newsLabel.bottomAnchor ~= mainView.bottomAnchor
+
+        contentView.addSubview(deleteButton.prepareForAutoLayout())
+        deleteButton.trailingAnchor ~= contentView.trailingAnchor - 20
+        deleteButton.topAnchor ~= contentView.topAnchor + 10
+        deleteButton.isHidden = true
+        deleteButton.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
 
 //        let shareButton = UIButton()
 //        shareButton.setImage(Asset.Cinema.sharing.image, for: .normal)
@@ -123,10 +139,22 @@ class CommentCell: UITableViewCell {
         countLabel.text = String(comment.shared)
     }
 
-    func tapSharedButton() {
-        if let newShare = comment {
-//            delegate?.openShareSimple(news: newShare)
-        }
+//    func tapSharedButton() {
+//        if let newShare = comment {
+////            delegate?.openShareSimple(news: newShare)
+//        }
+//    }
+
+    func isMain() {
+        deleteButton.isHidden = false
+    }
+
+    func isNotMain() {
+        deleteButton.isHidden = true
+    }
+
+    func deleteButtonTap() {
+        delegate?.deleteComment(indexRow: indexRow)
     }
 
     static var reuseIdentifier: String {

@@ -27,6 +27,10 @@ class ReviewsViewController: ParentViewController {
 
     var comments: [Comment] = []
 
+    var myID: String = ""
+
+    var currentDeleteIndex: Int = 0
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -99,6 +103,10 @@ class ReviewsViewController: ParentViewController {
         activityVC.isHidden = false
         activityVC.startAnimating()
         view.bringSubview(toFront: activityVC)
+
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = appDelegate.profile {
+            myID = profile.id
+        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -190,7 +198,14 @@ extension ReviewsViewController: ReviewsViewInput {
     }
 
     func setupInitialState() {
+    }
 
+    func deleteComment() {
+        let indexPath = IndexPath(row: currentDeleteIndex, section: 0)
+        comments.remove(at: currentDeleteIndex)
+        tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableViewRowAnimation.none)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
     }
 }
 
@@ -207,6 +222,11 @@ extension ReviewsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReviewsCell.reuseIdentifier, for: indexPath)
         if let collCel = cell as? ReviewsCell {
             collCel.setComment(comments[indexPath.row])
+            collCel.delegate = self
+            collCel.indexRow = indexPath.row
+            if myID == comments[indexPath.row].creator.id {
+                collCel.isMain()
+            }
         }
         return cell
     }
@@ -268,5 +288,18 @@ extension ReviewsViewController: MessageViewDelegate {
         view.endEditing(true)
         messageView.isHidden = true
         addButton.isHidden = false
+    }
+}
+
+// MARK: - ReviewsCellDelegate
+
+extension ReviewsViewController: ReviewsCellDelegate {
+    func deleteReview(indexRow: Int) {
+        if activityVC.isHidden {
+            output.deleteReview(id: comments[indexRow].id)
+            currentDeleteIndex = indexRow
+            activityVC.isHidden = false
+            activityVC.startAnimating()
+        }
     }
 }

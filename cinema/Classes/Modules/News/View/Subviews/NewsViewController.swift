@@ -34,7 +34,11 @@ class NewsViewController: ParentViewController {
 
     let addButton = UIButton()
 
+    var myID: String = ""
+
     var constraintAddView: NSLayoutConstraint?
+
+    var currentDeleteIndex: Int = 0
 
     // MARK: - Life cycle
 
@@ -68,6 +72,10 @@ class NewsViewController: ParentViewController {
         frame.size = CGSize(width: 30, height: 100)
         backButton.frame = frame
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = appDelegate.profile {
+            myID = profile.id
+        }
 
 //        let homeButton = UIButton()
 //        homeButton.setImage(Asset.Cinema.home.image, for: .normal)
@@ -209,6 +217,13 @@ extension NewsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CommentCell.reuseIdentifier, for: indexPath)
         if let collCel = cell as? CommentCell {
             collCel.setComment(newsData.comments[indexPath.row])
+            collCel.delegate = self
+            collCel.indexRow = indexPath.row
+            if myID == newsData.comments[indexPath.row].creator.id {
+                collCel.isMain()
+            } else {
+                collCel.isNotMain()
+            }
             return collCel
         }
         return cell
@@ -306,6 +321,14 @@ extension NewsViewController: NewsViewInput {
     func setupInitialState() {
 
     }
+
+    func deleteComment() {
+        let indexPath = IndexPath(row: currentDeleteIndex, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .top)
+        newsData.comments.remove(at: currentDeleteIndex)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
 }
 
 // MARK: - UITextViewDelegate
@@ -338,5 +361,18 @@ extension NewsViewController: MessageViewDelegate {
         view.endEditing(true)
         messageView.isHidden = true
         addButton.isHidden = false
+    }
+}
+
+// MARK: - CommentCellDelegate
+
+extension NewsViewController: CommentCellDelegate {
+    func deleteComment(indexRow: Int) {
+        if activityVC.isHidden {
+            output.deleteComment(id: newsData.comments[indexRow].id)
+            currentDeleteIndex = indexRow
+            activityVC.isHidden = false
+            activityVC.startAnimating()
+        }
     }
 }

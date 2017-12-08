@@ -173,6 +173,15 @@ class RewardsViewController: ParentViewController {
 // MARK: - RewardsViewInput
 
 extension RewardsViewController: RewardsViewInput {
+    func showError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
+    func getAwards(_ awards: RewardsData) {
+        reviewsVC.setAwards(awards.awardsView)
+    }
 
     func setupInitialState() {
 

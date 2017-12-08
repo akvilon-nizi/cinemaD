@@ -60,7 +60,9 @@ enum Asset {
     static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
   enum Cinema {
+    static let backImage = ImageAsset(name: "backImage")
     static let chatIcon = ImageAsset(name: "chatIcon")
+    static let forwardImage = ImageAsset(name: "forwardImage")
     static let home = ImageAsset(name: "home")
     enum MainTab {
       enum Active {
@@ -151,7 +153,9 @@ enum Asset {
     Kinobase.remove28,
     Kinobase.settings,
     Kinobase.settingsUnselect,
+    Cinema.backImage,
     Cinema.chatIcon,
+    Cinema.forwardImage,
     Cinema.home,
     Cinema.MainTab.Active.chatA,
     Cinema.MainTab.Active.kinobaseA,

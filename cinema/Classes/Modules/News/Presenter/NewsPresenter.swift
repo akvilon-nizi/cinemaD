@@ -17,6 +17,10 @@ class NewsPresenter {
 // MARK: - NewsViewOutput
 
 extension NewsPresenter: NewsViewOutput {
+    func deleteComment(id: String) {
+        interactor.deleteComment(id: id)
+    }
+
     func homeButtonTap() {
         router.home()
     }
@@ -38,6 +42,10 @@ extension NewsPresenter: NewsViewOutput {
 // MARK: - NewsInteractorOutput
 
 extension NewsPresenter: NewsInteractorOutput {
+    func deleteComment() {
+        view.deleteComment()
+    }
+
     func loadComment(_ comment: Comment) {
         view.addComment(comment)
     }

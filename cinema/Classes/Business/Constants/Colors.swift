@@ -118,7 +118,7 @@ extension UIColor {
         return UIColor(red: 175.0 / 255.0, green: 175.0 / 255.0, blue: 175.0 / 255.0, alpha: 1.0)
     }
 
-    class func setColorGray(white: CGFloat) -> UIColor {
-         return UIColor(white: white / 255.0, alpha: 1.0)
+    class func setColorGray(white: CGFloat, alpha: CGFloat = 1) -> UIColor {
+         return UIColor(white: white / 255.0, alpha: alpha)
     }
 }

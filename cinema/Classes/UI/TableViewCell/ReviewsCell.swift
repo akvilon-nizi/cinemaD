@@ -11,14 +11,16 @@ import UIKit
 // MARK: - NewsFilterCell
 
 protocol ReviewsCellDelegate: class {
-    func openShareSimple(news: News)
+    func deleteReview(indexRow: Int)
 }
 
 class ReviewsCell: UITableViewCell {
 
     var comment: Comment?
 
-    weak var delegate: NewsCellDelegate?
+    weak var delegate: ReviewsCellDelegate?
+
+    var indexRow: Int = 0
 
     private let userInfoView = UIView()
 
@@ -72,6 +74,12 @@ class ReviewsCell: UITableViewCell {
         return imageView
     } ()
 
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Kinobase.close.image, for: .normal)
+        return button
+    }()
+
     required init?(coder _: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -115,6 +123,12 @@ class ReviewsCell: UITableViewCell {
         newsLabel.trailingAnchor ~= mainView.trailingAnchor
         newsLabel.bottomAnchor ~= mainView.bottomAnchor
 
+        contentView.addSubview(deleteButton.prepareForAutoLayout())
+        deleteButton.trailingAnchor ~= contentView.trailingAnchor - 20
+        deleteButton.topAnchor ~= contentView.topAnchor + 20
+        deleteButton.isHidden = true
+        deleteButton.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
+
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
         contentView.addSubview(separatorView.prepareForAutoLayout())
@@ -153,10 +167,18 @@ class ReviewsCell: UITableViewCell {
         }
     }
 
+    func isMain() {
+        deleteButton.isHidden = false
+    }
+
     func tapSharedButton() {
 //        if let newShare = news {
 //            delegate?.openShareSimple(news: newShare)
 //        }
+    }
+
+    func deleteButtonTap() {
+        delegate?.deleteReview(indexRow: indexRow)
     }
 
     static var reuseIdentifier: String {

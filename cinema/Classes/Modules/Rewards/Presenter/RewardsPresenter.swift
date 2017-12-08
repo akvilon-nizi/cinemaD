@@ -5,6 +5,11 @@
 
 import Foundation
 
+struct RewardsData {
+    var awardsView: [String: Adwards] = [:]
+    var awardsGeo: [String: Adwards] = [:]
+}
+
 class RewardsPresenter {
 
     weak var view: RewardsViewInput!
@@ -22,11 +27,18 @@ extension RewardsPresenter: RewardsViewOutput {
 
     func viewIsReady() {
         log.verbose("Rewards is ready")
+        interactor.getAdwardsView()
     }
 }
 
 // MARK: - RewardsInteractorOutput
 
 extension RewardsPresenter: RewardsInteractorOutput {
+    func getError() {
+        view.showError()
+    }
 
+    func getAwards(awards: RewardsData) {
+        view.getAwards(awards)
+    }
 }

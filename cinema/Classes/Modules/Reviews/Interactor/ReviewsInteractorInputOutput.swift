@@ -9,6 +9,8 @@ protocol ReviewsInteractorInput {
     func getComment(filmID: String)
 
     func putComment(filmID: String, message: String)
+
+    func deleteReview(id: String)
 }
 
 protocol ReviewsInteractorOutput: class {
@@ -18,4 +20,6 @@ protocol ReviewsInteractorOutput: class {
     func loadComment(_ comment: Comment)
 
     func getError()
+
+    func deleteComment()
 }

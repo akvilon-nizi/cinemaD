@@ -22,27 +22,14 @@ class YoutubeViewCell: UICollectionViewCell {
 
     var idVideo: String = "" {
         didSet {
-            if let url = URL(string: idVideo),
-                url.absoluteString.contains("youtube.com/embed/") {
-
-                let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
-                if path != "" {
-                     previewImageView.kf.setImage(with: URL(string: String(format: "https://img.youtube.com/vi/%@/maxresdefault.jpg", path)))
-//                  youtubeView.frame = previewImageView.frame
-                }
-            }
+             previewImageView.kf.setImage(with: URL(string: String(format: "https://img.youtube.com/vi/%@/maxresdefault.jpg", idVideo)))
+             youtubeView.frame = previewImageView.frame
         }
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        idVideo = ""
-//        isLoad = false
-//    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,7 +77,7 @@ class YoutubeViewCell: UICollectionViewCell {
 
     }
     func loadYT() {
-        youtubeView.load(withVideoId: "", playerVars: [
+        youtubeView.load(withVideoId: "sXd0GDvoXfM", playerVars: [
             "playsinline": 1,
             "disablekb": 1,
             "iv_load_policy": 3,
@@ -108,23 +95,16 @@ class YoutubeViewCell: UICollectionViewCell {
         } else {
             if idVideo != "" {
                 isLoad = true
-                if let url = URL(string: idVideo),
-                    url.absoluteString.contains("youtube.com/embed/") {
-
-                    let path = (url.path as NSString).replacingOccurrences(of: "/embed/", with: "")
-                    if path != "" {
-                        youtubeView.pauseVideo()
-                        contentView.bringSubview(toFront: previewImageView)
-                        contentView.sendSubview(toBack: youtubeView)
-                        youtubeView.isUserInteractionEnabled = false
-                        playButton.isHidden = false
-                        youtubeView.cueVideo(
-                            byId: path,
-                            startSeconds: self.youtubeView.currentTime(),
-                            suggestedQuality: .auto
-                        )
-                    }
-                }
+                    youtubeView.pauseVideo()
+                    contentView.bringSubview(toFront: previewImageView)
+                    contentView.sendSubview(toBack: youtubeView)
+                    youtubeView.isUserInteractionEnabled = false
+                    playButton.isHidden = false
+                    youtubeView.cueVideo(
+                        byId: idVideo,
+                        startSeconds: self.youtubeView.currentTime(),
+                        suggestedQuality: .auto
+                    )
             }
         }
     }

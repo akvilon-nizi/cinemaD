@@ -64,4 +64,19 @@ extension NewsInteractor: NewsInteractorInput {
             }
             .addDisposableTo(disposeBag)
     }
+
+    func deleteComment(id: String) {
+        provider.requestModel(.deleteReview(id: id))
+            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                switch response {
+                case let .next(model):
+                    self.output.deleteComment()
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
 }

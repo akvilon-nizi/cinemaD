@@ -110,7 +110,7 @@
 "film-change-status-watch" = "Изменения сохранены";
 "film-set-status-rate" = "Рейтинг фильма:";
 "film-search-placeholder" = "Поиск";
-"film-watch-alert" = "Поставьте оценку, и фильм появится в Кинобазе!";
+"film-watch-alert" = "Фильм появился в Кинобазе!";
 
 //Film respons
 "film-response-watched" = "film append to the 'watched'";

@@ -9,6 +9,12 @@ class FriendsViewController: ParentViewController {
 
     var output: FriendsViewOutput!
 
+    let pageViewController = UIPageViewController(
+        transitionStyle: .pageCurl,
+        navigationOrientation: .horizontal,
+        options: nil
+    )
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -56,6 +62,13 @@ class FriendsViewController: ParentViewController {
 
         titleViewLabel.text = L10n.reviewsTitleText
         titleViewLabel.font = UIFont.cnmFutura(size: 20)
+
+        let navTabBar = NavTabBar(titles: ["Друзья", "Рекомендации", "Новости"])
+
+        view.addSubview(navTabBar.prepareForAutoLayout())
+        navTabBar.leadingAnchor ~= view.leadingAnchor
+        navTabBar.trailingAnchor ~= view.trailingAnchor
+        navTabBar.topAnchor ~= view.topAnchor + 40
     }
 
     // MARK: - Actions

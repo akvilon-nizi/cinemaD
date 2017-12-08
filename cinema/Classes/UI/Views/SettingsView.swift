@@ -18,7 +18,8 @@ class SettingsView: UIView {
 
     private let nameSettingLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.cnmFuturaLight(size: 16)
+        let size: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 14 : 16
+        label.font = UIFont.cnmFuturaLight(size: size)
         label.textColor = UIColor.cnm3a3a3a
         label.numberOfLines = 1
         return label
@@ -49,13 +50,17 @@ class SettingsView: UIView {
 
         heightAnchor ~= 65
 
+        let leading: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 34 : 54
+
         addSubview(nameSettingLabel.prepareForAutoLayout())
-        nameSettingLabel.leadingAnchor ~= leadingAnchor + 54
+        nameSettingLabel.leadingAnchor ~= leadingAnchor + leading
         nameSettingLabel.centerYAnchor ~= centerYAnchor
+
+        let trailing: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 40 : 60
 
         addSubview(selectImage.prepareForAutoLayout())
         selectImage.centerYAnchor ~= centerYAnchor
-        selectImage.trailingAnchor ~= trailingAnchor - 60
+        selectImage.trailingAnchor ~= trailingAnchor - trailing
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada

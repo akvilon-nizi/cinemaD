@@ -6,9 +6,10 @@
 import Foundation
 
 protocol RewardsInteractorInput {
-
+    func getAdwardsView()
 }
 
 protocol RewardsInteractorOutput: class {
-
+    func getError()
+    func getAwards(awards: RewardsData)
 }

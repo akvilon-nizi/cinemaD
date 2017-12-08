@@ -14,6 +14,10 @@ class RewardsSubViewController: ParentViewController {
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
+    var awardsKey: [String] = []
+
+    var awards: [Adwards] = []
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -46,6 +50,17 @@ class RewardsSubViewController: ParentViewController {
 
     private func tableViewRegister() {
         tableView.register(RewardsCell.self, forCellReuseIdentifier: RewardsCell.reuseIdentifier)
+        tableView.register(ExsRewardsCell.self, forCellReuseIdentifier: ExsRewardsCell.reuseIdentifier)
+    }
+
+    func setAwards(_ awards: [String: Adwards]) {
+        awardsKey = []
+        self.awards = []
+        for (key, value) in awards {
+            awardsKey.append(key)
+            self.awards.append(value)
+        }
+        tableView.reloadData()
     }
 }
 
@@ -54,14 +69,14 @@ class RewardsSubViewController: ParentViewController {
 extension RewardsSubViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return awardsKey.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RewardsCell.reuseIdentifier, for: indexPath)
-
-        //        cell.setData(products[indexPath.row])
-        //        cell.delegate = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExsRewardsCell.reuseIdentifier, for: indexPath)
+        if let cellAdwards = cell as? ExsRewardsCell {
+            cellAdwards.setAwards(awardsKey[indexPath.row], award: awards[indexPath.row])
+        }
 
         return cell
     }

@@ -8,6 +8,10 @@ import Foundation
 protocol RewardsViewInput: class {
 
     func setupInitialState()
+
+    func showError()
+
+    func getAwards(_ awards:  RewardsData)
 }
 
 protocol RewardsViewOutput {

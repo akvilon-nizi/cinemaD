@@ -30,6 +30,7 @@ class FullFilm: ImmutableMappable {
     let nameOriginal: String
     let rate: Double
     let myRate: Int
+    let trailer: String
 
     private let idKey = "id"
     private let nameKey = "name"
@@ -51,6 +52,7 @@ class FullFilm: ImmutableMappable {
     private let nameOriginalKey = "name_original"
     private let rateKey = "rate"
     private let myRateKey = "my_rate"
+    private let trailerKey = "trailer"
 
     required init(map: Map) throws {
         id = try map.value(idKey)
@@ -73,6 +75,7 @@ class FullFilm: ImmutableMappable {
         nameOriginal = try map.value(nameOriginalKey)
         rate = try map.value(rateKey)
         myRate = try map.value(myRateKey)
+        trailer = try map.value(trailerKey)
     }
 
     func mapping(map: Map) {
@@ -99,5 +102,6 @@ class FullFilm: ImmutableMappable {
         nameOriginal >>> map[nameOriginalKey]
         rate >>> map[rateKey]
         myRate >>> map[myRateKey]
+        trailer >>> map[trailerKey]
     }
 }

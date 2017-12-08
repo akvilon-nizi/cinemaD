@@ -27,20 +27,20 @@ class RewardCell: UICollectionViewCell {
         fatalError("NSCoding not supported")
     }
 
-//    var linkUrlImage: String = "" {
-//        didSet {
-//            posterView.kf.indicatorType = .activity
-//            posterView.kf.setImage(with: URL(string: linkUrlImage))
-//        }
-//    }
+    var linkUrlImage: String = "" {
+        didSet {
+            rewardImage.kf.indicatorType = .activity
+            rewardImage.kf.setImage(with: URL(string: linkUrlImage))
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         contentView.addSubview(rewardImage.prepareForAutoLayout())
         rewardImage.pinEdgesToSuperviewEdges()
-        rewardImage.image = Asset.Cinema.vader.image
-        rewardImage.contentMode = .scaleToFill
+//        rewardImage.image = Asset.Cinema.vader.image
+        rewardImage.contentMode = .scaleAspectFit
     }
 
     static var reuseIdentifier: String {
