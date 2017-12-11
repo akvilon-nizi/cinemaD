@@ -90,7 +90,7 @@ class WatchedVC: ParentViewController {
         }
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 6...7), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 5...7), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
 
@@ -211,9 +211,9 @@ extension WatchedVC: UITableViewDelegate {
             view.withoutLine()
             return view
         case 7:
-            if colFilms.isEmpty {
-                return nil
-            }
+//            if colFilms.count < 1 {
+//                return UIView()
+//            }
             let view = FilmGroup()
             view.films = colFilms
             view.delegate = self
@@ -260,17 +260,17 @@ extension WatchedVC: UITableViewDelegate {
             return 55
         case 6:
             if colFilms.isEmpty {
-                return 0
+                return 1
             }
             return 22
         case 7:
-            if colFilms.isEmpty {
-                return 0
+            if colFilms.count < 1 {
+                return 1
             }
             return windowWidth / 4 * 3 - 80
         case 0:
             if films.isEmpty {
-                return 0
+                return 0.1
             }
             return 22
         case 1:

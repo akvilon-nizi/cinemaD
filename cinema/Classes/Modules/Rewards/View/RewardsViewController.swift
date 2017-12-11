@@ -179,8 +179,25 @@ extension RewardsViewController: RewardsViewInput {
         activityVC.stopAnimating()
     }
 
-    func getAwards(_ awards: RewardsData) {
-        reviewsVC.setAwards(awards.awardsView)
+    func getAwards(_ awards: [String: Adwards]) {
+        var awardsView: [String: Adwards] = [:]
+        var awardsGeo: [String: Adwards] = [:]
+        for (key, value) in awards {
+            if key != L10n.awardsResponseGeo && key != L10n.awardsResponseExclusive && value.awardsCount != 0 {
+                awardsView[key] = value
+            }
+        }
+
+        if let count = awards[L10n.awardsResponseGeo]?.myAwardsCount, count >= 1 {
+            awardsGeo[L10n.awardsResponseGeoRu] = awards[L10n.awardsResponseGeo]
+        }
+
+        if let count = awards[L10n.awardsResponseExclusive]?.myAwardsCount, count >= 1 {
+            awardsView[L10n.awardsResponseExclusiveRu] = awards[L10n.awardsResponseGeo]
+        }
+
+        reviewsVC.setAwards(awardsView)
+        locationVC.setAwards(awardsGeo)
     }
 
     func setupInitialState() {

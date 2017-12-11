@@ -73,12 +73,22 @@ extension RewardsSubViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ExsRewardsCell.reuseIdentifier, for: indexPath)
-        if let cellAdwards = cell as? ExsRewardsCell {
-            cellAdwards.setAwards(awardsKey[indexPath.row], award: awards[indexPath.row])
-        }
 
-        return cell
+        if awardsKey[indexPath.row] == L10n.awardsResponseExclusiveRu {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ExsRewardsCell.reuseIdentifier, for: indexPath)
+            if let cellAdwards = cell as? ExsRewardsCell {
+                cellAdwards.setAwards(awardsKey[indexPath.row], award: awards[indexPath.row])
+            }
+
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: RewardsCell.reuseIdentifier, for: indexPath)
+            if let cellAdwards = cell as? RewardsCell {
+                cellAdwards.setAwards(awardsKey[indexPath.row], award: awards[indexPath.row])
+            }
+
+            return cell
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

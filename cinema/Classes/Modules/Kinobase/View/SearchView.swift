@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: - WillWatch
+// MARK: - SearchView
 
 class SearchView: UIView {
 

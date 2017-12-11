@@ -123,8 +123,9 @@ class MainViewController: ParentViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
 
         view.addSubview(mainTabView.prepareForAutoLayout())
+        let tabViewHeight: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.height < 812 ? 80 : 110
         mainTabView.widthAnchor ~= view.widthAnchor
-        mainTabView.heightAnchor ~= 80
+        mainTabView.heightAnchor ~= tabViewHeight
         mainTabView.leadingAnchor ~= view.leadingAnchor
         mainTabView.bottomAnchor ~= view.bottomAnchor
 

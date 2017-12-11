@@ -45,6 +45,14 @@ enum L10n {
   static let authHelpSmsButtonText = L10n.tr("Localizable", "authHelp-sms-button-text")
   /// Помощь при входе
   static let authHelpTitleText = L10n.tr("Localizable", "authHelp-title-text")
+  /// awards_exclusive
+  static let awardsResponseExclusive = L10n.tr("Localizable", "awards-response-exclusive")
+  /// Экслюзивные награды
+  static let awardsResponseExclusiveRu = L10n.tr("Localizable", "awards-response-exclusive-ru")
+  /// awards_geo
+  static let awardsResponseGeo = L10n.tr("Localizable", "awards-response-geo")
+  /// Геолокационные награды
+  static let awardsResponseGeoRu = L10n.tr("Localizable", "awards-response-geo-ru")
   /// collection updated
   static let collectionsUpdateMessage = L10n.tr("Localizable", "collections-update-message")
   /// Войдите

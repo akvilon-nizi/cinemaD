@@ -46,14 +46,14 @@ class MainTabView: UIView {
 
         ticketsButton.setImage(Asset.Cinema.MainTab.Passive.tickets.image, for: .normal)
         ticketsButton.setImage(Asset.Cinema.MainTab.Active.ticketsA.image, for: .selected)
-        ticketsButton.heightAnchor ~= 19
-        ticketsButton.widthAnchor ~= 30
+        ticketsButton.heightAnchor ~= 40
+        ticketsButton.widthAnchor ~= 40
         ticketsButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
 
         rewardsButton.setImage(Asset.Cinema.MainTab.Passive.reward.image, for: .normal)
         rewardsButton.setImage(Asset.Cinema.MainTab.Active.rewardA.image, for: .selected)
-        rewardsButton.heightAnchor ~= 25
-        rewardsButton.widthAnchor ~= 26
+        rewardsButton.heightAnchor ~= 40
+        rewardsButton.widthAnchor ~= 40
         rewardsButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         rewardsButton.tag = 1
 
@@ -68,15 +68,15 @@ class MainTabView: UIView {
 
         chatButton.setImage(Asset.Cinema.MainTab.Passive.chat.image, for: .normal)
         chatButton.setImage(Asset.Cinema.MainTab.Active.chatA.image, for: .selected)
-        chatButton.heightAnchor ~= 21
-        chatButton.widthAnchor ~= 27
+        chatButton.heightAnchor ~= 40
+        chatButton.widthAnchor ~= 40
         chatButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         chatButton.tag = 3
 
         kinobaseButton.setImage(Asset.Cinema.MainTab.Passive.kinobase.image, for: .normal)
         kinobaseButton.setImage(Asset.Cinema.MainTab.Active.kinobaseA.image, for: .selected)
-        kinobaseButton.heightAnchor ~= 21
-        kinobaseButton.widthAnchor ~= 26
+        kinobaseButton.heightAnchor ~= 40
+        kinobaseButton.widthAnchor ~= 40
         kinobaseButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         kinobaseButton.tag = 4
 

@@ -48,10 +48,10 @@ enum FoodleTarget {
     case profile
     case review(filmID: String)
     case putReview(filmID: String, name: String, description: String)
-    case adwardsGeo
-    case adwardsView
+    case adwards
     case deleteReview(id: String)
     case deleteComment(id: String)
+    case getAdminCollections
 
     var isRequiredAuth: Bool {
         switch self {
@@ -124,6 +124,8 @@ extension FoodleTarget: TargetType {
             return "restore/\(uid))"
         case .getCollections:
             return "me/collections"
+        case .getAdminCollections:
+            return "me/collections"
         case .putCollections:
             return "me/collections"
         case let .deleteFilm(idFilm, _):
@@ -154,10 +156,8 @@ extension FoodleTarget: TargetType {
             return "films/\(filmID)/review"
         case let .putReview(filmID, _, _):
             return "films/\(filmID)/review"
-        case .adwardsGeo:
-            return "me/awards/geo"
-        case .adwardsView:
-            return "me/awards/view"
+        case .adwards:
+            return "me/awards"
         case let .deleteReview(id):
             return "reviews/\(id)"
         case let .deleteComment(id):
@@ -167,7 +167,7 @@ extension FoodleTarget: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwardsGeo, .adwardsView:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollections:
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview:
             return .delete

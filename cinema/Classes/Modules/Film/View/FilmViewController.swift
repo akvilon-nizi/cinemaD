@@ -226,7 +226,7 @@ class FilmViewController: ParentViewController {
             titleLabel.text = genres + " (" + String(filmInfo.yearFirstRelease) + ")"
 
             let separatorView = UIView()
-            separatorView.backgroundColor = .white
+            //separatorView.backgroundColor = .white
             view.addSubview(separatorView.prepareForAutoLayout())
             separatorView.topAnchor ~= view.topAnchor + 64
             separatorView.leadingAnchor ~= view.leadingAnchor
@@ -430,9 +430,11 @@ class FilmViewController: ParentViewController {
         starsView.isHidden = !watchedButton.isSelected
         willWatchButton.isSelected = false
 
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        view.bringSubview(toFront: activityVC)
+
         if !watchedButton.isSelected {
-            activityVC.isHidden = false
-            activityVC.startAnimating()
             output.watchedTapDelete()
         } else {
             output.watchedTap(rate: 0)

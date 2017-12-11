@@ -61,7 +61,7 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 switch response {
                 case let .next(model):
                     self.kbData.collections = model.collections
-                    self.output.getData(self.kbData)
+                    self.getAdminCollections()
                 case let .error(error as ProviderError):
                     self.output.getError()
                 default:
@@ -94,6 +94,22 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     print()
                 case let .error(error as ProviderError):
                     print()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getAdminCollections() {
+        provider.requestModel(.getAdminCollections)
+            .subscribe { [unowned self] (response: Event<GetColResponse>) in
+                switch response {
+                case let .next(model):
+                    self.kbData.adminCollections = model.collections
+                    self.output.getData(self.kbData)
+                case let .error(error as ProviderError):
+                    self.output.getError()
                 default:
                     break
                 }

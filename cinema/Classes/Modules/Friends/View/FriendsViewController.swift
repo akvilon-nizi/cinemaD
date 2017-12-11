@@ -9,11 +9,15 @@ class FriendsViewController: ParentViewController {
 
     var output: FriendsViewOutput!
 
+    let controllers: [UIViewController]
+
     let pageViewController = UIPageViewController(
         transitionStyle: .pageCurl,
         navigationOrientation: .horizontal,
         options: nil
     )
+
+    var container = UIView()
 
     // MARK: - Life cycle
 
@@ -22,6 +26,14 @@ class FriendsViewController: ParentViewController {
     }
 
     init() {
+        let view1 = ListFriendsVC()
+
+        let view2 = AddFriendsVC()
+
+        let view3 = UIViewController()
+        view3.view.backgroundColor = .green
+
+        controllers = [view1, view2, view3]
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -60,15 +72,37 @@ class FriendsViewController: ParentViewController {
         homeButton.frame = frame
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: homeButton)
 
-        titleViewLabel.text = L10n.reviewsTitleText
+        titleViewLabel.text = L10n.friendsTitleText
         titleViewLabel.font = UIFont.cnmFutura(size: 20)
 
+        setPageVC()
+
+    }
+
+    private func setPageVC() {
+        pageViewController.setViewControllers(
+            [controllers[0]],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
+
         let navTabBar = NavTabBar(titles: ["Друзья", "Рекомендации", "Новости"])
+        navTabBar.delegate = self
 
         view.addSubview(navTabBar.prepareForAutoLayout())
         navTabBar.leadingAnchor ~= view.leadingAnchor
         navTabBar.trailingAnchor ~= view.trailingAnchor
         navTabBar.topAnchor ~= view.topAnchor + 40
+
+        container = pageViewController.view
+
+        view.addSubview(container.prepareForAutoLayout())
+        container.topAnchor ~= navTabBar.bottomAnchor + 10
+        container.leadingAnchor ~= view.leadingAnchor
+        container.trailingAnchor ~= view.trailingAnchor
+        container.bottomAnchor ~= view.bottomAnchor
+
     }
 
     // MARK: - Actions
@@ -89,3 +123,19 @@ extension FriendsViewController: FriendsViewInput {
 
     }
 }
+
+// MARK: - NavTabBarDelegate
+
+extension FriendsViewController: NavTabBarDelegate {
+    func tapElement(_ number: Int) {
+        pageViewController.setViewControllers(
+            [controllers[number]],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
+       // currentIndex = 1
+    }
+}
+
+

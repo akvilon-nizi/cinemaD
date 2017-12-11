@@ -210,3 +210,9 @@
 "friends-will-see" = "Будет смотреть";
 "friends-search-title" = "Поиск";
 "friends-add-button" = "Добавить";
+
+//AwardsResponse
+"awards-response-exclusive" = "awards_exclusive";
+"awards-response-geo" = "awards_geo";
+"awards-response-exclusive-ru" = "Экслюзивные награды";
+"awards-response-geo-ru" = "Геолокационные награды";

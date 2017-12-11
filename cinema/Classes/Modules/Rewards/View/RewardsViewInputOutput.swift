@@ -11,7 +11,7 @@ protocol RewardsViewInput: class {
 
     func showError()
 
-    func getAwards(_ awards:  RewardsData)
+    func getAwards(_ awards: [String: Adwards])
 }
 
 protocol RewardsViewOutput {

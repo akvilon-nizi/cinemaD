@@ -175,6 +175,12 @@
 		8113241C1FCBFC1F009AED8D /* EditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241B1FCBFC1F009AED8D /* EditingView.swift */; };
 		8113241E1FCC4556009AED8D /* LoadImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241D1FCC4556009AED8D /* LoadImageResponse.swift */; };
 		811324201FCC4E40009AED8D /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113241F1FCC4E40009AED8D /* ProfileModel.swift */; };
+		8138ECF51FDE820B00F69628 /* SearchCommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECF41FDE820B00F69628 /* SearchCommonView.swift */; };
+		8138ECF81FDE841A00F69628 /* ListFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECF71FDE841A00F69628 /* ListFriendsVC.swift */; };
+		8138ECFC1FDE880800F69628 /* FriendsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECFB1FDE880800F69628 /* FriendsListCell.swift */; };
+		8138ECFE1FDEB4D100F69628 /* FriendsAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECFD1FDEB4D100F69628 /* FriendsAddCell.swift */; };
+		8138ED001FDEB60C00F69628 /* AddFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */; };
+		8138ED021FDEC62500F69628 /* AdminCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */; };
 		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
 		81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C001FC82A360086E9FB /* ProfileHeader.swift */; };
 		81961C051FC858AE0086E9FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C041FC858AE0086E9FB /* SettingsView.swift */; };
@@ -664,6 +670,12 @@
 		8113241B1FCBFC1F009AED8D /* EditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingView.swift; sourceTree = "<group>"; };
 		8113241D1FCC4556009AED8D /* LoadImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageResponse.swift; sourceTree = "<group>"; };
 		8113241F1FCC4E40009AED8D /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		8138ECF41FDE820B00F69628 /* SearchCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCommonView.swift; sourceTree = "<group>"; };
+		8138ECF71FDE841A00F69628 /* ListFriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFriendsVC.swift; sourceTree = "<group>"; };
+		8138ECFB1FDE880800F69628 /* FriendsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListCell.swift; sourceTree = "<group>"; };
+		8138ECFD1FDEB4D100F69628 /* FriendsAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAddCell.swift; sourceTree = "<group>"; };
+		8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsVC.swift; sourceTree = "<group>"; };
+		8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminCollectionCell.swift; sourceTree = "<group>"; };
 		813EFE1DBACB73175B53B782 /* FilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		816E7A3BA28785BBCB4E3676 /* ReviewsModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReviewsModuleInputOutput.swift; sourceTree = "<group>"; };
 		81961BFE1FC7FEC10086E9FB /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
@@ -1206,6 +1218,7 @@
 		1E2E22EE97FB3A64A33AE520 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8138ECF61FDE83E400F69628 /* UIViewControllers */,
 				99FD2834DF58CB08BE4A696D /* FriendsViewController.swift */,
 				58BA790DCD2AAD078E77E7F4 /* FriendsViewInputOutput.swift */,
 			);
@@ -1722,6 +1735,7 @@
 		70BCB15697413A12366B33C5 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				9F5E3F31594B32453420BF0B /* Presenter */,
 				80CBF1459DCAC72A63C576CF /* FriendsInteractor.swift */,
 				34A5A57EF46CD36B3FEE4F19 /* FriendsInteractorInputOutput.swift */,
 			);
@@ -1794,6 +1808,15 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		8138ECF61FDE83E400F69628 /* UIViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8138ECF71FDE841A00F69628 /* ListFriendsVC.swift */,
+				8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */,
+			);
+			path = UIViewControllers;
+			sourceTree = "<group>";
+		};
 		8154A5E11FCD42B30012D3A8 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -1851,7 +1874,6 @@
 			children = (
 				776AE12BEA052DE5CBFF9662 /* Configurator */,
 				70BCB15697413A12366B33C5 /* Interactor */,
-				9F5E3F31594B32453420BF0B /* Presenter */,
 				AE0FF38F4DEC54A58BF56350 /* Router */,
 				1E2E22EE97FB3A64A33AE520 /* View */,
 			);
@@ -2161,6 +2183,7 @@
 				81FBA3841FCE94DD00EBAFED /* ActorHeaderView.swift */,
 				81FBA3861FCEB13500EBAFED /* ActorFilmsView.swift */,
 				8107F7EF1FD7FFCC0067DFD2 /* NavTabBar.swift */,
+				8138ECF41FDE820B00F69628 /* SearchCommonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2583,6 +2606,9 @@
 				81D73A021FC6BADD0091EE3D /* RewardsCell.swift */,
 				81FBA38A1FCEF17E00EBAFED /* ReviewsCell.swift */,
 				81B39B6C1FD9492900C75520 /* ExsRewardsCell.swift */,
+				8138ECFB1FDE880800F69628 /* FriendsListCell.swift */,
+				8138ECFD1FDEB4D100F69628 /* FriendsAddCell.swift */,
+				8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -3244,6 +3270,7 @@
 				CEB0457E1F8E159D0090E3EC /* FilmGroup.swift in Sources */,
 				811324201FCC4E40009AED8D /* ProfileModel.swift in Sources */,
 				CED2590E1F969908009C0262 /* RecommendationsResponse.swift in Sources */,
+				8138ED001FDEB60C00F69628 /* AddFriendsVC.swift in Sources */,
 				040CE5181F5D912C001DF59C /* Ingredient.swift in Sources */,
 				3386D47D1F4437F7009D9A42 /* CartResponse.swift in Sources */,
 				9BB4E26D89A31E79BAFE6B36 /* Images.swift in Sources */,
@@ -3261,6 +3288,7 @@
 				CEE4A34F1F8DA0AA00A64179 /* RegistrationUIDResponse.swift in Sources */,
 				9BB4EAC177088AA22DB9C31F /* FoodleTarget.swift in Sources */,
 				9BB4E330C29F6CB1435CA47E /* Observable+ObjectMapper.swift in Sources */,
+				8138ECF51FDE820B00F69628 /* SearchCommonView.swift in Sources */,
 				9BB4E16B5EFDB6CBC8454850 /* Response+ObjectMapper.swift in Sources */,
 				8113241E1FCC4556009AED8D /* LoadImageResponse.swift in Sources */,
 				9BB4E87CA6162F664B0FAE21 /* ProviderError.swift in Sources */,
@@ -3296,6 +3324,7 @@
 				9BB4E83463B88093AD36D771 /* ShadowView.swift in Sources */,
 				9BB4E402AB446D9B5FACB640 /* ImageView.swift in Sources */,
 				CEAB467D1F96142200432F70 /* TrailersResponse.swift in Sources */,
+				8138ED021FDEC62500F69628 /* AdminCollectionCell.swift in Sources */,
 				81D73A151FC6ECA30091EE3D /* LineLayout.swift in Sources */,
 				3331732A1F4EE11900C7C88E /* RegionManagerImplementation.swift in Sources */,
 				043A733C1F80CD4700E1DF43 /* Slide1View.swift in Sources */,
@@ -3376,6 +3405,7 @@
 				A1FC08E535FC1F3B4B7F8042 /* PasswordPresenter.swift in Sources */,
 				19288479A9A8AD592D115199 /* PasswordRouter.swift in Sources */,
 				CEAB46791F96076D00432F70 /* PersonFromFilm.swift in Sources */,
+				8138ECF81FDE841A00F69628 /* ListFriendsVC.swift in Sources */,
 				2DE7C03D870968CEA2965B59 /* PasswordRouterInput.swift in Sources */,
 				3AB20DCFFB49D068E449E845 /* PasswordViewController.swift in Sources */,
 				8F5238DDE0595438367D43F1 /* PasswordViewInputOutput.swift in Sources */,
@@ -3507,6 +3537,7 @@
 				B9C44483491AFC248FA7DFE2 /* FilterViewController.swift in Sources */,
 				D8B115F7794D636B7108A866 /* FilterViewInputOutput.swift in Sources */,
 				94D678E8A8A1733D10ECACFD /* RewardsConfigurator.swift in Sources */,
+				8138ECFC1FDE880800F69628 /* FriendsListCell.swift in Sources */,
 				7A2DA77AEA6AD12C9035BBF2 /* RewardsInteractor.swift in Sources */,
 				CD2ADABF41A10C1F33F0B243 /* RewardsInteractorInputOutput.swift in Sources */,
 				CE662F971FC5767C00696955 /* MessageView.swift in Sources */,
@@ -3531,6 +3562,7 @@
 				23B2C8A77EA0785120873FC7 /* ProfileInteractorInputOutput.swift in Sources */,
 				C8D540483797269E5E603A45 /* ProfileModuleInputOutput.swift in Sources */,
 				DE98E0FFC2EAE4A2BE73E62F /* ProfilePresenter.swift in Sources */,
+				8138ECFE1FDEB4D100F69628 /* FriendsAddCell.swift in Sources */,
 				67A7F555642099ABB6B343E6 /* ProfileRouter.swift in Sources */,
 				ED4936EA89AAC132487F7D50 /* ProfileRouterInput.swift in Sources */,
 				17FC17B3F8C5C49D6CE684B5 /* ProfileViewController.swift in Sources */,
