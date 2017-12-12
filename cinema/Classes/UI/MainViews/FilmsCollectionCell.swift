@@ -32,7 +32,7 @@ class FilmsCollectionCell: UICollectionViewCell {
     var isCheck: Bool = false {
         didSet {
             if isCheck {
-                actionsImage.image = isAdd ? Asset.Kinobase.check28.image : Asset.Kinobase.remove28.image
+                actionsImage.image = isAdd ? Asset.Kinobase.check28.image : Asset.Kinobase.close.image
             } else {
                 actionsImage.image = nil
             }

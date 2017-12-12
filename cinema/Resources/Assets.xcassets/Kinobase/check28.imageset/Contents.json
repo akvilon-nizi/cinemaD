@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "check_28.pdf",
+      "filename" : "check-28r.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "check-28r@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "check-28r@3x.png",
       "scale" : "3x"
     }
   ],

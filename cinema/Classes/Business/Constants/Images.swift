@@ -113,6 +113,7 @@ enum Asset {
     static let vader = ImageAsset(name: "vader")
   }
   enum NavBar {
+    static let back = ImageAsset(name: "back")
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
     static let navBarList = ImageAsset(name: "nav-bar-list")
     static let navBarLogo = ImageAsset(name: "nav-bar-logo")
@@ -193,6 +194,7 @@ enum Asset {
     Cinema.timeOrange,
     Cinema.unselectStar,
     Cinema.vader,
+    NavBar.back,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,
