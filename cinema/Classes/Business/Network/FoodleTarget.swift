@@ -125,7 +125,7 @@ extension FoodleTarget: TargetType {
         case .getCollections:
             return "me/collections"
         case .getAdminCollections:
-            return "me/collections"
+            return "admin_collections"
         case .putCollections:
             return "me/collections"
         case let .deleteFilm(idFilm, _):

@@ -41,6 +41,7 @@ class ListFriendsVC: ParentViewController {
         searchView.topAnchor ~= view.topAnchor + 10
         searchView.leadingAnchor ~= view.leadingAnchor
         searchView.trailingAnchor ~= view.trailingAnchor
+        searchView.heightAnchor ~= 35
         searchView.delegate = self
 
         view.addSubview(tableView.prepareForAutoLayout())
@@ -148,7 +149,11 @@ extension ListFriendsVC: UITableViewDelegate {
 // MARK: - SearchCommonDelegate
 
 extension ListFriendsVC: SearchCommonDelegate {
-    func changeText(_ query: String) {
+    func tapFilter() {
+
+    }
+
+    func changeText(_ text: String) {
 
     }
 }

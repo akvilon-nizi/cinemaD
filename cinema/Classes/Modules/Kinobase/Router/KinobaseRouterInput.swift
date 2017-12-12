@@ -10,6 +10,7 @@ protocol KinobaseRouterInput: BaseRouterInput {
     func openAllFilms(_ films: [Film])
     func openCollections(output: NewCollectionsModuleOutput, id: String, name: String, watched: [Film])
     func openFilm(videoId: String, name: String)
+    func openAdminCollection(id: String, name: String)
     func openFilter(output: FilterModuleOutput,
     genres: [String],
     years: [Int],

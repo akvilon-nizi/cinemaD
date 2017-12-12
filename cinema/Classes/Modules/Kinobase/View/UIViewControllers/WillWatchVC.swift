@@ -13,6 +13,8 @@ protocol WillWatchVCDelegate: class {
     func openFilmId(_ filmID: String, name: String)
     func getQuery(_ query: String)
     func tapFilter()
+    func openCollection(id: String, name: String)
+    func refreshes()
 }
 
 class WillWatchVC: ParentViewController {
@@ -25,7 +27,19 @@ class WillWatchVC: ParentViewController {
 
     var films: [Film] = []
 
+    var collections: [Collection] = []
+
     weak var delegate: WillWatchVCDelegate?
+
+    let headerViewTitle = HeaderViewTitle()
+
+    let fullListFilms = FullListFilms()
+
+    let filmGroup = FilmGroup()
+
+    let headerSearchView = SearchCommonView()
+
+    let refreshControl = UIRefreshControl()
 
     // MARK: - Life cycle
 
@@ -50,14 +64,71 @@ class WillWatchVC: ParentViewController {
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
 
-        tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
+//        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = .never
+//        } else {
+//            automaticallyAdjustsScrollViewInsets = true
+//        }
+
+        tableView.contentInset = UIEdgeInsets(top: -11, left: 0, bottom: 0, right: 0)
+
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+
+        print(tableView.frame)
+
+        tableView.register(AdminCollectionCell.self, forCellReuseIdentifier: AdminCollectionCell.reuseIdentifier)
 
         tableView.separatorStyle = .none
-        tableView.allowsMultipleSelection = false
+        //tableView.allowsMultipleSelection = false
+        //setHeaderView()
     }
 
-    func setFilms(_ films: [Film]) {
+    func refresh() {
+        delegate?.refreshes()
+    }
+
+    func setHeaderView() {
+        headerViewTitle.title = "Фильмы"
+        headerViewTitle.heightAnchor ~= 44
+
+        fullListFilms.delegate = self
+        fullListFilms.heightAnchor ~= 35
+
+        filmGroup.delegate = self
+        filmGroup.heightAnchor ~= windowWidth / 4 * 3 - 53.5
+        filmGroup.films = films
+
+        headerSearchView.delegate = self
+        headerSearchView.heightAnchor ~= 48
+
+        let view = HeaderViewTitle()
+        view.title = "Коллекции"
+
+        var viewArray: [UIView] = []
+        var height: CGFloat = 44
+
+        if films.isEmpty {
+            viewArray = [view]
+            view.heightAnchor ~= 44
+        } else {
+            view.heightAnchor ~= 30
+            height = windowWidth / 4 * 3 + 125
+            viewArray = [headerViewTitle, fullListFilms, headerSearchView, filmGroup, view]
+        }
+
+        let stackView = createStackView(.vertical, .fill, .fill, 0, with: viewArray)
+        stackView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
+        stackView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: height)
+        tableView.tableHeaderView = stackView
+    }
+
+    func setFilms(_ films: [Film], collections: [Collection]) {
         self.films = films
+        tableView.scrollsToTop = true
+        setHeaderView()
+        refreshControl.endRefreshing()
+        self.collections = collections
         tableView.reloadData()
     }
 
@@ -76,21 +147,19 @@ class WillWatchVC: ParentViewController {
 extension WillWatchVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return 0
+        return collections.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-
-        //        cell.setData(products[indexPath.row])
-        //        cell.delegate = self
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: AdminCollectionCell.reuseIdentifier, for: indexPath)
+        if let collCel = cell as? AdminCollectionCell {
+            var imageLink = ""
+            if let imageUrl = collections[indexPath.row].imageUrl {
+                imageLink = imageUrl
+            }
+            collCel.setInfo(name: collections[indexPath.row].name, imageUrl: imageLink)
+        }
         return cell
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
     }
 
 }
@@ -100,61 +169,11 @@ extension WillWatchVC: UITableViewDataSource {
 extension WillWatchVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 0
+        return UITableViewAutomaticDimension
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Фильмы"
-            return view
-        case 1:
-            if films.isEmpty {
-                return nil
-            }
-            let view = FullListFilms()
-            view.delegate = self
-            return view
-        case 3:
-            if films.isEmpty {
-                return nil
-            }
-            let view = FilmGroup()
-            view.films = films
-            view.delegate = self
-            return view
-        case 2:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderSearchView()
-            view.delegate = self
-            return view
-        default:
-            return nil
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 22
-        case 1:
-            return 22
-        case 3:
-            if films.isEmpty {
-                return 0
-            }
-            return windowWidth / 4 * 3 - 80
-        case 2:
-            return 33
-        default:
-            return 0
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.openCollection(id: collections[indexPath.row].id, name: collections[indexPath.row].name)
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -177,7 +196,7 @@ extension WillWatchVC: FilmGroupDelegate {
 
 // MARK: - FilmGroupDelegate
 
-extension WillWatchVC: HeaderSearchDelegate {
+extension WillWatchVC: SearchCommonDelegate {
     func changeText(_ text: String) {
         delegate?.getQuery(text)
     }

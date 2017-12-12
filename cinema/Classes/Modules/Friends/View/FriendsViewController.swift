@@ -137,5 +137,3 @@ extension FriendsViewController: NavTabBarDelegate {
        // currentIndex = 1
     }
 }
-
-

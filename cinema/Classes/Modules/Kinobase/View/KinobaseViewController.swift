@@ -232,7 +232,7 @@ extension KinobaseViewController: KinobaseViewInput {
             let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
             willWatch.append(film)
         }
-        willWatchVC.setFilms(willWatch)
+        willWatchVC.setFilms(willWatch, collections: kbData.adminCollections)
 
         watched = []
 
@@ -296,6 +296,16 @@ extension KinobaseViewController: WillWatchVCDelegate {
     }
     func tapFilter() {
         output?.tapFilter(isWatched: false, genres: kbData.genresWillWatch, years: kbData.yearsWillWatch)
+    }
+
+    func openCollection(id: String, name: String) {
+        output?.openAdminCollection(id: id, name: name)
+    }
+
+    func refreshes() {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        output?.refresh()
     }
 }
 

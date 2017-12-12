@@ -26,6 +26,9 @@ class KinobasePresenter {
 // MARK: - KinobaseViewOutput
 
 extension KinobasePresenter: KinobaseViewOutput {
+    func openAdminCollection(id: String, name: String) {
+        router.openAdminCollection(id: id, name: name)
+    }
 
     func viewIsReady() {
         log.verbose("Kinobase is ready")

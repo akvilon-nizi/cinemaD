@@ -62,7 +62,7 @@ class WatchedVC: ParentViewController {
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
         tableView.separatorStyle = .none
-        tableView.allowsMultipleSelection = false
+       // tableView.allowsMultipleSelection = false
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
