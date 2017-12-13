@@ -120,6 +120,8 @@
 "film-response-put-collection" = "film append to this collection";
 "film-response-delete-collection" = "collection removed";
 "film-response-delete-film-collection" = "film removed from this collection";
+"film-response-did-not-like" = "film append to the 'did_not_like'";
+"film-response-liked" = "film append to the 'liked'";
 
 //Kinobase
 "kinobase-title-text" = "Кинобаза";

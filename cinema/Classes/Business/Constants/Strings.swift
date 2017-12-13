@@ -109,6 +109,10 @@ enum L10n {
   static let filmResponseDeleteCollection = L10n.tr("Localizable", "film-response-delete-collection")
   /// film removed from this collection
   static let filmResponseDeleteFilmCollection = L10n.tr("Localizable", "film-response-delete-film-collection")
+  /// film append to the 'did_not_like'
+  static let filmResponseDidNotLike = L10n.tr("Localizable", "film-response-did-not-like")
+  /// film append to the 'liked'
+  static let filmResponseLiked = L10n.tr("Localizable", "film-response-liked")
   /// film append to this collection
   static let filmResponsePutCollection = L10n.tr("Localizable", "film-response-put-collection")
   /// film append to the 'watched'

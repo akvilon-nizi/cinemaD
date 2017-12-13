@@ -20,6 +20,8 @@ enum FoodleTarget {
     case film(filmID: String)
     case filmWatched(filmID: String, rate: Int)
     case filmWillWatch(filmID: String)
+    case filmLiked(filmID: String)
+    case filmDisLiked(filmID: String)
     case filmWatchedPost(query: String, genres: [String], years: [Int])
     case filmWillWatchPost(query: String, genres: [String], years: [Int])
     case filmWatchedDelete(filmID: String)
@@ -95,6 +97,10 @@ extension FoodleTarget: TargetType {
             return "films/\(filmID)/action/watched"
         case let .filmWillWatch(filmID):
             return "films/\(filmID)/action/will_watch"
+        case let .filmLiked(filmID):
+            return "films/\(filmID)/action/liked"
+        case let .filmDisLiked(filmID):
+            return "films/\(filmID)/action/did_not_like"
         case .filmWatchedPost:
             return "me/watched"
         case .filmWillWatchPost:
