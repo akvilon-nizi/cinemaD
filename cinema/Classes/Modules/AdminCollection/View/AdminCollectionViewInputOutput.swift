@@ -8,13 +8,19 @@ import Foundation
 protocol AdminCollectionViewInput: class {
 
     func setupInitialState()
+
+    func openCollection(_ collection: Collection)
+
+    func showNetworkError()
 }
 
 protocol AdminCollectionViewOutput {
 
     func viewIsReady()
-    
+
     func backTap()
 
     func homeTap()
+
+    func openFilmID(_ filmId: String, name: String)
 }

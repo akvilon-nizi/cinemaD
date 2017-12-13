@@ -24,6 +24,7 @@ class SettingsView: UIView {
         label.numberOfLines = 1
         return label
     }()
+
     private let selectImage: UIImageView = {
         let imageView = UIImageView()
         imageView.heightAnchor ~= 21

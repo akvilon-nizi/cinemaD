@@ -52,6 +52,7 @@ enum FoodleTarget {
     case deleteReview(id: String)
     case deleteComment(id: String)
     case getAdminCollections
+    case getAdminCollection(id: String)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -162,12 +163,14 @@ extension FoodleTarget: TargetType {
             return "reviews/\(id)"
         case let .deleteComment(id):
             return "comments/\(id)"
+        case let .getAdminCollection(id):
+            return "admin_collections/\(id)"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollections:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollections, .getAdminCollection:
             return .get
         case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview:
             return .delete

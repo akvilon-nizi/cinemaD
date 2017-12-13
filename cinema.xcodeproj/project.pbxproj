@@ -194,6 +194,7 @@
 		81D73A121FC6DD510091EE3D /* CollectionNode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D73A101FC6DD490091EE3D /* CollectionNode.framework */; };
 		81D73A131FC6DD510091EE3D /* CollectionNode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 81D73A101FC6DD490091EE3D /* CollectionNode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		81D73A151FC6ECA30091EE3D /* LineLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A141FC6ECA30091EE3D /* LineLayout.swift */; };
+		81E250931FE125BC00B3C0C3 /* HeaderCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E250921FE125BC00B3C0C3 /* HeaderCollectionCell.swift */; };
 		81FB1C7E317E56D5D1F9754A /* FilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206905B2583F4068BCECE35F /* FilmsViewController.swift */; };
 		81FBA3851FCE94DD00EBAFED /* ActorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FBA3841FCE94DD00EBAFED /* ActorHeaderView.swift */; };
 		81FBA3871FCEB13500EBAFED /* ActorFilmsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FBA3861FCEB13500EBAFED /* ActorFilmsView.swift */; };
@@ -699,6 +700,7 @@
 		81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsSubViewController.swift; sourceTree = "<group>"; };
 		81D73A101FC6DD490091EE3D /* CollectionNode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CollectionNode.framework; path = Carthage/Build/iOS/CollectionNode.framework; sourceTree = "<group>"; };
 		81D73A141FC6ECA30091EE3D /* LineLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineLayout.swift; sourceTree = "<group>"; };
+		81E250921FE125BC00B3C0C3 /* HeaderCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionCell.swift; sourceTree = "<group>"; };
 		81FBA3841FCE94DD00EBAFED /* ActorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorHeaderView.swift; sourceTree = "<group>"; };
 		81FBA3861FCEB13500EBAFED /* ActorFilmsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorFilmsView.swift; sourceTree = "<group>"; };
 		81FBA3881FCEE9D900EBAFED /* ReviewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsHeaderView.swift; sourceTree = "<group>"; };
@@ -2735,6 +2737,7 @@
 				81D73A141FC6ECA30091EE3D /* LineLayout.swift */,
 				81961BFE1FC7FEC10086E9FB /* RewardCell.swift */,
 				81FBA3881FCEE9D900EBAFED /* ReviewsHeaderView.swift */,
+				81E250921FE125BC00B3C0C3 /* HeaderCollectionCell.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -3350,6 +3353,7 @@
 				3386D47D1F4437F7009D9A42 /* CartResponse.swift in Sources */,
 				9BB4E26D89A31E79BAFE6B36 /* Images.swift in Sources */,
 				0459280A1FA6107E00DE137E /* SearchView.swift in Sources */,
+				81E250931FE125BC00B3C0C3 /* HeaderCollectionCell.swift in Sources */,
 				3361E48A1F54347200ECF276 /* Upload.swift in Sources */,
 				9BB4EC2F956B30A4509642DE /* Strings.swift in Sources */,
 				9BB4E3F0DBB64B9E1751C4B5 /* Colors.swift in Sources */,

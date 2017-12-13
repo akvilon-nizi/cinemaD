@@ -11,14 +11,19 @@ class AdminCollectionPresenter {
     var interactor: AdminCollectionInteractorInput!
     var router: AdminCollectionRouterInput!
     weak var output: AdminCollectionModuleOutput?
+    var id: String!
 }
 
 // MARK: - AdminCollectionViewOutput
 
 extension AdminCollectionPresenter: AdminCollectionViewOutput {
+    func openFilmID(_ filmId: String, name: String) {
+        router.openFilm(videoId: filmId, name: name)
+    }
 
     func viewIsReady() {
         log.verbose("AdminCollection is ready")
+        interactor.getAdminCollections(id: id)
     }
 
     func backTap() {
@@ -33,5 +38,11 @@ extension AdminCollectionPresenter: AdminCollectionViewOutput {
 // MARK: - AdminCollectionInteractorOutput
 
 extension AdminCollectionPresenter: AdminCollectionInteractorOutput {
+    func getCollection(_ collection: Collection) {
+        view.openCollection(collection)
+    }
 
+    func getError() {
+        view.showNetworkError()
+    }
 }

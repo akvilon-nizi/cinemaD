@@ -6,9 +6,11 @@
 import Foundation
 
 protocol AdminCollectionInteractorInput {
-
+    func getAdminCollections(id: String)
 }
 
 protocol AdminCollectionInteractorOutput: class {
+    func getCollection(_ collection: Collection)
 
+    func getError()
 }

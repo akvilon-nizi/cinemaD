@@ -71,14 +71,6 @@ class MainViewController: ParentViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
         navController.navigationBar.isHidden = true
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
-//        navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navController.navigationBar.shadowImage = UIImage()
-//        navController.navigationBar.isTranslucent = true
-//        navController.view.backgroundColor = .clear
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -93,17 +85,6 @@ class MainViewController: ParentViewController {
         view.bringSubview(toFront: activityVC)
         activityVC.isHidden = false
         activityVC.startAnimating()
-
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
-//        navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navController.navigationBar.shadowImage = UIImage()
-//        navController.navigationBar.isTranslucent = true
-//        navController.view.backgroundColor = .clear
-
-        //header.delegate = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(changeAvatar), name: NSNotification.Name(rawValue: Constants.changeProfileAvatar), object: nil)
     }
@@ -151,12 +132,6 @@ class MainViewController: ParentViewController {
 
         navController.delegate = self
 
-//        [myNav willMoveToParentViewController:self];
-//        myNav.view.frame = navFrame;  //Set a frame or constraints
-//        [self.view addSubview:myNav.view];
-//        [self addChildViewController:myNav];
-//        [myNav didMoveToParentViewController:self];
-
         childController.view.addSubview(tableView.prepareForAutoLayout())
         tableView.pinEdgesToSuperviewEdges()
         tableView.showsVerticalScrollIndicator = false
@@ -172,23 +147,7 @@ class MainViewController: ParentViewController {
         newsHeader.isOpen = isNewsFilterOpen
         newsHeader.delegate = self
 
-//        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
-
     }
-
-//    func assa(notification: Notification) {
-//        let disposeBag = DisposeBag()
-//        if let playerItem = notification.object as? AVPlayerItem {
-//            if let player = playerItem.value(forKey: "player") as? AVPlayer {
-//                self.player = player
-//                player.isMuted = true
-////                layer = AVPlayerLayer(player: player)
-////                layer.rx.observe(CGRect.self, "bounds").subscribe(onNext: { bounds in
-////                    print("assa b", bounds)
-////                }).addDisposableTo(disposeBag)
-//            }
-//        }
-//    }
 
     private func tableViewRegister() {
         tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)

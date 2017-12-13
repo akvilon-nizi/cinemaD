@@ -4,14 +4,36 @@
 //
 
 import Foundation
+import RxMoya
+import RxSwift
 
 class AdminCollectionInteractor {
 
     weak var output: AdminCollectionInteractorOutput!
+
+    var provider: RxMoyaProvider<FoodleTarget>!
+
+    let disposeBag = DisposeBag()
 }
 
 // MARK: - AdminCollectionInteractorInput
 
 extension AdminCollectionInteractor: AdminCollectionInteractorInput {
+
+    func getAdminCollections(id: String) {
+        provider.requestModel(.getAdminCollection(id: id))
+            .subscribe { [unowned self] (response: Event<Collection>) in
+                switch response {
+                case let .next(model):
+                    self.output.getCollection(model)
+                case let .error(error as ProviderError):
+                    print()
+                    self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
 
 }

@@ -29,9 +29,11 @@ class AdminCollectionConfigurator {
 
         let presenter = AdminCollectionPresenter()
         presenter.router = router
+        presenter.id = id
 
         let interactor = AdminCollectionInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = AdminCollectionViewController(name: name)
         viewController.output = presenter
