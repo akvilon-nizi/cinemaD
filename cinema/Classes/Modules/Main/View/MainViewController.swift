@@ -36,7 +36,7 @@ class MainViewController: ParentViewController {
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
-    let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
+    let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4 + 20
 
     var isFirstLoaded = false
 
@@ -149,6 +149,56 @@ class MainViewController: ParentViewController {
 
     }
 
+    func setHeaderTableView() {
+        var headerViewsArray: [UIView] = []
+        var height: CGFloat = 44
+
+        if !mainData.trailers.isEmpty {
+            header.trailers = mainData.trailers
+            header.heightAnchor ~= windowWidth / 16 * 9 + 20
+            height += windowWidth / 16 * 9 + 20
+            headerViewsArray.append(header)
+        }
+
+        if !mainData.now.isEmpty {
+            let nowTitle = HeaderViewTitle()
+            nowTitle.title = "Сейчас в кино"
+            nowTitle.heightAnchor ~= 44
+            height += 44
+            headerViewsArray.append(nowTitle)
+
+            let nowFilms = FilmGroup()
+            nowFilms.films = mainData.now
+            nowFilms.delegate = self
+            nowFilms.heightAnchor ~= windowWidth2
+            height += windowWidth2
+            headerViewsArray.append(nowFilms)
+        }
+
+        if !mainData.recomend.isEmpty {
+
+            let recomendTitle = HeaderViewTitle()
+            recomendTitle.title = "Рекомендации"
+            recomendTitle.heightAnchor ~= 44
+            height += 44
+            headerViewsArray.append(recomendTitle)
+
+            let recomendFilms = FilmGroup()
+            recomendFilms.films = mainData.recomend
+            recomendFilms.heightAnchor ~= windowWidth2
+            height += windowWidth2
+            headerViewsArray.append(recomendFilms)
+        }
+
+        newsHeader.heightAnchor ~= 44
+        headerViewsArray.append(newsHeader)
+
+        let stackView = createStackView(.vertical, .fill, .fill, 0, with: headerViewsArray)
+        stackView.widthAnchor ~= windowWidth + 60
+        stackView.frame = CGRect(x: 0, y: 0, width: windowWidth + 60, height: height)
+        tableView.tableHeaderView = stackView
+    }
+
     private func tableViewRegister() {
         tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
         tableView.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseIdentifier)
@@ -217,10 +267,10 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if section == 5 && isNewsFilterOpen {
+        if section == 0 && isNewsFilterOpen {
             return 4
         }
-        if section == 6 {
+        if section == 1 {
             return mainData.news.count
         }
         return 0
@@ -228,7 +278,7 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if indexPath.section == 5 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsFilterCell.reuseIdentifier, for: indexPath)
             if let collCel = cell as? NewsFilterCell {
                 collCel.indexPath = indexPath
@@ -239,7 +289,7 @@ extension MainViewController: UITableViewDataSource {
             return cell
         }
 
-        if indexPath.section == 6 {
+        if indexPath.section == 1 {
             if mainData.news[indexPath.row].type == "common" {
                 let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseIdentifier, for: indexPath)
                 if let collCel = cell as? NewsCell {
@@ -263,11 +313,11 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 2
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 5 {
+        if indexPath.section == 0 {
             let cell = tableView.cellForRow(at: indexPath)
             if let collectionCell = cell as? NewsFilterCell {
                 collectionCell.isDidSelect = !collectionCell.isDidSelect
@@ -275,7 +325,7 @@ extension MainViewController: UITableViewDataSource {
                 UIView.setAnimationsEnabled(false)
                 tableView.beginUpdates()
                 mainData.news = []
-                tableView.reloadSections(IndexSet(integersIn: indexPath.section...indexPath.section + 1), with: UITableViewRowAnimation.none)
+                tableView.reloadSections(IndexSet(integersIn: 0...1), with: UITableViewRowAnimation.none)
                 tableView.endUpdates()
                 UIView.setAnimationsEnabled(true)
                 activityVC.startAnimating()
@@ -284,7 +334,7 @@ extension MainViewController: UITableViewDataSource {
                 reloadNewsFilter()
             }
         }
-        if indexPath.section == 6 {
+        if indexPath.section == 1 {
             output?.tapNews(newsID: mainData.news[indexPath.row].id)
         }
     }
@@ -296,97 +346,33 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 5 && isNewsFilterOpen {
+        if indexPath.section == 0 && isNewsFilterOpen {
             return 44
         }
 
-        if indexPath.section == 6 {
+        if indexPath.section == 1 {
             return UITableViewAutomaticDimension
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0:
-            if mainData.trailers.isEmpty {
-                return nil
-            }
-            header.trailers = mainData.trailers
-            return header
-        case 1:
-            if mainData.now.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Сейчас в кино"
-            return view
-        case 2:
-            if mainData.now.isEmpty {
-                return nil
-            }
-            let view = FilmGroup()
-            view.films = mainData.now
-            view.delegate = self
-            return view
-        case 3:
-            if mainData.recomend.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Рекомендации"
-            return view
-        case 4:
-            if mainData.recomend.isEmpty {
-                return nil
-            }
-            let view = FilmGroup()
-            view.films = mainData.recomend
-            view.delegate = self
-            return view
-        case 5:
-            return newsHeader
-        default:
-            return nil
-        }
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            if mainData.trailers.isEmpty {
-                return 0
-            }
-            return windowWidth / 16 * 9 + 20
-        case 1:
-            if mainData.now.isEmpty {
-                return 0
-            }
-            return 27
-        case 2:
-            if mainData.now.isEmpty {
-                return 0
-            }
-            return windowWidth2
-        case 3:
-            if mainData.recomend.isEmpty {
-                return 0
-            }
-            return 27
-        case 4:
-            if mainData.recomend.isEmpty {
-            return 0
-            }
-            return windowWidth2
-        case 5:
-            return 44
-        default:
-            return 0
-        }
+        return 1
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        if isNewsFilterOpen {
+            return 20
+        }
+        return 1
     }
 
 }
@@ -412,6 +398,7 @@ extension MainViewController: MainViewInput {
         }
 
         self.mainData = mainData
+        setHeaderTableView()
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = mainData.profile {
             appDelegate.profile = profile
             mainTabView.setImage(imageUrl: profile.avatar)
@@ -420,7 +407,7 @@ extension MainViewController: MainViewInput {
         activityVC.stopAnimating()
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 6...6), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
@@ -474,7 +461,7 @@ extension MainViewController: HeaderViewOpennedDelegate {
         isNewsFilterOpen = isOpen
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 4...5), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
