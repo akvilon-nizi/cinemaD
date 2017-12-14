@@ -24,7 +24,7 @@ class FilmCollections: ImmutableMappable {
     private let nameOriginalKey = "name_original"
     private let userCollectionsKey = "user_collections"
     private let adminCollectionsKey = "admin_collections"
-    private let rateKey = "rate"
+    private let rateKey = "my_rate"
 
     required init(map: Map) throws {
         id = try map.value(idKey)

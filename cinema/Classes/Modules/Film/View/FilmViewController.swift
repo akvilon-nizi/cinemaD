@@ -165,7 +165,7 @@ class FilmViewController: ParentViewController {
 
         titleView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.centerXAnchor ~= titleView.centerXAnchor
-        titleLabel.topAnchor ~= titleViewLabel.bottomAnchor 
+        titleLabel.topAnchor ~= titleViewLabel.bottomAnchor
 
         navigationItem.titleView = titleView
 
@@ -226,7 +226,6 @@ class FilmViewController: ParentViewController {
             titleLabel.text = genres + " (" + String(filmInfo.yearFirstRelease) + ")"
 
             let separatorView = UIView()
-            //separatorView.backgroundColor = .white
             view.addSubview(separatorView.prepareForAutoLayout())
             separatorView.topAnchor ~= view.topAnchor + 64
             separatorView.leadingAnchor ~= view.leadingAnchor
@@ -294,14 +293,6 @@ class FilmViewController: ParentViewController {
             willStack.leadingAnchor ~= contentView.leadingAnchor
             willStack.trailingAnchor ~= contentView.trailingAnchor
 
-//            contentView.addSubview(buyButton.prepareForAutoLayout())
-//            buyButton.topAnchor ~= willStack.bottomAnchor + 36
-//            buyButton.centerXAnchor ~= contentView.centerXAnchor
-//
-//            contentView.addSubview(inviteButton.prepareForAutoLayout())
-//            inviteButton.topAnchor ~= buyButton.bottomAnchor + 15
-//            inviteButton.centerXAnchor ~= contentView.centerXAnchor
-
             let infoStack = createStackView(.horizontal, .fill, .fill, 0, with: [
                 UIView().setParameters(
                     topLabelText: filmInfo.rateTmdb == 0 ? " " : String(filmInfo.rateTmdb),
@@ -344,12 +335,6 @@ class FilmViewController: ParentViewController {
             playButton.addTarget(self, action: #selector(didTapPlayButton), for: .touchUpInside)
 
             loadYT(videoID: videoID)
-
-//            youtubeView.cueVideo(
-//                byId: videoID,
-//                startSeconds: 0,
-//                suggestedQuality: .auto
-//            )
         }
     }
 
@@ -470,7 +455,9 @@ class FilmViewController: ParentViewController {
     }
 
     func didTapChatButton() {
-        output?.tapReviews(name: name, genres: genres)
+        if let fullFilm = filmInformation {
+            output?.tapReviews(fullFilm)
+        }
     }
 
     func didTapPlayButton() {
@@ -510,32 +497,32 @@ class FilmViewController: ParentViewController {
         //let object: OpenGraphObject = OpenGraphObject(dictionaryLiteral: ( "og:type", "books.book"))
 
         // Create an action
-        if let image = imageView.image {
-
-           // FBSDKShareMediaContent 
-
-//            let content: FBSDKShareLinkContent = FBSDKShareLinkContent()
-//            content.contentURL = URL(string: "http://developers.facebook.com")
-//            FBSDKShareDialog.show(from: self, with: content, delegate: nil)
-
-//            let title = "FacebookSdk GOVNO!"
+//        if let image = imageView.image {
 //
-//            let photo: FBSDKSharePhoto = FBSDKSharePhoto()
-//            photo.image = image
-//            photo.isUserGenerated = true
+//           // FBSDKShareMediaContent
 //
-//            var properties: [AnyHashable: Any] = [
-//                "og:type": "article",
-//                "og:title": title,
-//                "og:image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCalqoke09R7bu90lK8LYMLVeZ4KBqap0xZohNSJG3sCva_auMbw"
-//            ]
-//            @"og:description":contentDesc
-        // Create an object
-
-0
-      // FBSDKShareDialog.show(from: self, with: content, delegate: nil)
-
-        }
+////            let content: FBSDKShareLinkContent = FBSDKShareLinkContent()
+////            content.contentURL = URL(string: "http://developers.facebook.com")
+////            FBSDKShareDialog.show(from: self, with: content, delegate: nil)
+//
+////            let title = "FacebookSdk GOVNO!"
+////
+////            let photo: FBSDKSharePhoto = FBSDKSharePhoto()
+////            photo.image = image
+////            photo.isUserGenerated = true
+////
+////            var properties: [AnyHashable: Any] = [
+////                "og:type": "article",
+////                "og:title": title,
+////                "og:image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCalqoke09R7bu90lK8LYMLVeZ4KBqap0xZohNSJG3sCva_auMbw"
+////            ]
+////            @"og:description":contentDesc
+//        // Create an object
+//
+////0
+//      // FBSDKShareDialog.show(from: self, with: content, delegate: nil)
+//
+//        }
 //        var action = OpenGraphAction(type: "book.reads")
 //        action["books:book"] = OpenGraphObject(dictionaryLiteral: ( "og:type", "books.book"))
 //
@@ -566,10 +553,8 @@ class FilmViewController: ParentViewController {
             vkShare.completionHandler = { result, str  in
                 self.dismiss(animated: true, completion: nil)
             }
-
             present(vkShare, animated: true, completion: nil)
         }
-
     }
 
 

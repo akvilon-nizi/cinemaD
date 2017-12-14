@@ -16,8 +16,6 @@ class ParentViewController: UIViewController {
 
     let activityVC = UIActivityIndicatorView()
 
-    let mainTabView = MainTabView()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

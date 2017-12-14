@@ -9,5 +9,5 @@ protocol FilmRouterInput: BaseRouterInput {
     func close()
     func home()
     func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])
-    func rewiewsFromID(_ filmID: String, name: String, genres: String)
+    func rewiewsFrom(_ film: FullFilm)
 }

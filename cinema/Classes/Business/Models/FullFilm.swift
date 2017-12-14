@@ -31,6 +31,9 @@ class FullFilm: ImmutableMappable {
     let rate: Double
     let myRate: Int
     let trailer: String
+    var iLiked: Bool?
+    let notLiked: Int
+    let liked: Int
 
     private let idKey = "id"
     private let nameKey = "name"
@@ -53,6 +56,9 @@ class FullFilm: ImmutableMappable {
     private let rateKey = "rate"
     private let myRateKey = "my_rate"
     private let trailerKey = "trailer"
+    private let iLikedKey = "i_like_it"
+    private let notLikedKey = "did_not_like"
+    private let likedKey = "liked"
 
     required init(map: Map) throws {
         id = try map.value(idKey)
@@ -76,6 +82,9 @@ class FullFilm: ImmutableMappable {
         rate = try map.value(rateKey)
         myRate = try map.value(myRateKey)
         trailer = try map.value(trailerKey)
+        iLiked = try? map.value(iLikedKey)
+        liked = try map.value(likedKey)
+        notLiked = try map.value(notLikedKey)
     }
 
     func mapping(map: Map) {
@@ -103,5 +112,8 @@ class FullFilm: ImmutableMappable {
         rate >>> map[rateKey]
         myRate >>> map[myRateKey]
         trailer >>> map[trailerKey]
+        iLiked >>> map[iLikedKey]
+        liked >>> map[likedKey]
+        notLiked >>> map[notLikedKey]
     }
 }

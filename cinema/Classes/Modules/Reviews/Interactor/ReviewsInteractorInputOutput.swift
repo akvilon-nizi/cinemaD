@@ -11,6 +11,8 @@ protocol ReviewsInteractorInput {
     func putComment(filmID: String, message: String)
 
     func deleteReview(id: String)
+
+    func changeStatusLike(filmID: String, isLiked: Bool, status: Bool)
 }
 
 protocol ReviewsInteractorOutput: class {
@@ -18,6 +20,8 @@ protocol ReviewsInteractorOutput: class {
     func getComments(_ comments: [Comment])
 
     func loadComment(_ comment: Comment)
+
+    func changeStatus()
 
     func getError()
 

@@ -14,16 +14,10 @@ class ReviewsConfigurator {
 
     var appRouter: AppRouterProtocol!
 
-    let filmID: String
+    let film: FullFilm
 
-    let name: String
-
-    let genres: String
-
-    init(filmID: String, name: String, genres: String) {
-        self.filmID = filmID
-        self.name = name
-        self.genres = genres
+    init(film: FullFilm) {
+        self.film = film
     }
 
     func configureModule() -> UIViewController {
@@ -32,13 +26,13 @@ class ReviewsConfigurator {
 
         let presenter = ReviewsPresenter()
         presenter.router = router
-        presenter.filmID = filmID
+        presenter.filmID = film.id
 
         let interactor = ReviewsInteractor()
         interactor.output = presenter
         interactor.provider = provider
 
-        let viewController = ReviewsViewController(filmID: filmID, name: name, genres: genres)
+        let viewController = ReviewsViewController(film: film)
         viewController.output = presenter
 
         presenter.interactor = interactor

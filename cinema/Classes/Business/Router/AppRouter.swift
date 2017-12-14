@@ -39,7 +39,7 @@ enum AppRouterDestination {
     case profile
     case editingProfile(nameUser: String, avatar: String, output: EditingProfileModuleOutput)
     case settings
-    case reviews(filmID: String, name: String, genres: String)
+    case reviews(film: FullFilm)
     case friends
     case adminCollection(id: String, name: String)
 
@@ -112,8 +112,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: EditingProfileConfigurator.tag, arguments: nameUser, avatar, output)
             case .settings:
                 return try factory.resolve(tag: SettingsConfigurator.tag)
-            case let .reviews(filmID, name, genres):
-                return try factory.resolve(tag: ReviewsConfigurator.tag, arguments: filmID, name, genres)
+            case let .reviews(film):
+                return try factory.resolve(tag: ReviewsConfigurator.tag, arguments: film)
             case let .adminCollection(id, name):
                 return try factory.resolve(tag: AdminCollectionConfigurator.tag, arguments: id, name)
             }

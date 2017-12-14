@@ -16,7 +16,53 @@ class ReviewsInteractor {
 
 // MARK: - ReviewsInteractorInput
 
-extension ReviewsInteractor: ReviewsInteractorInput {
+extension ReviewsInteractor: ReviewsInteractorInput {    
+    func changeStatusLike(filmID: String, isLiked: Bool, status: Bool) {
+        if isLiked {
+            if status {
+                provider.requestModel(.filmLiked(filmID: filmID))
+                    .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                        switch response {
+                        case let .next(model):
+                            if model.message.first == L10n.filmResponseLiked {
+                                self.output.changeStatus()
+                            } else {
+                                self.output.getError()
+                            }
+                        case let .error(error as ProviderError):
+                            self.output.getError()
+                        default:
+                            break
+                        }
+                    }
+                    .addDisposableTo(disposeBag)
+            } else {
+
+            }
+        } else {
+            if status {
+                provider.requestModel(.filmDisLiked(filmID: filmID))
+                    .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                        switch response {
+                        case let .next(model):
+                            if model.message.first == L10n.filmResponseDidNotLike {
+                                self.output.changeStatus()
+                            } else {
+                                self.output.getError()
+                            }
+                        case let .error(error as ProviderError):
+                            self.output.getError()
+                        default:
+                            break
+                        }
+                    }
+                    .addDisposableTo(disposeBag)
+            } else {
+
+            }
+        }
+    }
+
     func getComment(filmID: String) {
         provider.requestModel(.review(filmID: filmID) )
             .subscribe { [unowned self] (response: Event<ReviewsResponse>) in

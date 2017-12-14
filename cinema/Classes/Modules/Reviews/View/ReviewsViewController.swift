@@ -9,11 +9,7 @@ class ReviewsViewController: ParentViewController {
 
     var output: ReviewsViewOutput!
 
-    let filmID: String
-
-    let name: String
-
-    let genres: String
+    let film: FullFilm
 
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
 
@@ -31,16 +27,16 @@ class ReviewsViewController: ParentViewController {
 
     var currentDeleteIndex: Int = 0
 
+    var iLiked: Bool?
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
-    init(filmID: String, name: String, genres: String) {
-        self.filmID = filmID
-        self.name = name
-        self.genres = genres
+    init(film: FullFilm) {
+        self.film = film
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -85,7 +81,8 @@ class ReviewsViewController: ParentViewController {
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.pinEdgesToSuperviewEdges()
 
-        reviewsHeader.setParameters(name: name, genres: genres)
+        reviewsHeader.setParameters(film: film)
+        reviewsHeader.delegate = self
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -180,6 +177,17 @@ extension ReviewsViewController: ReviewsViewInput {
         tableView.reloadData()
         activityVC.isHidden = true
         activityVC.stopAnimating()
+    }
+
+    func changeStatus() {
+        film.iLiked = iLiked
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
+    func startChangeStatus() {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
     }
 
     func showNetworkError() {
@@ -301,5 +309,26 @@ extension ReviewsViewController: ReviewsCellDelegate {
             activityVC.isHidden = false
             activityVC.startAnimating()
         }
+    }
+}
+
+// MARK: - ReviewsHeaderViewDelegate
+
+extension ReviewsViewController: ReviewsHeaderViewDelegate {
+    func selectLike() {
+        output?.setStatusLike(isLike: true, isSelect: true)
+        iLiked = true
+    }
+    func unselectLike() {
+        output?.setStatusLike(isLike: true, isSelect: false)
+        iLiked = nil
+    }
+    func selectDislike() {
+        output?.setStatusLike(isLike: false, isSelect: true)
+        iLiked = false
+    }
+    func unselectDislike() {
+        output?.setStatusLike(isLike: false, isSelect: false)
+        iLiked = nil
     }
 }

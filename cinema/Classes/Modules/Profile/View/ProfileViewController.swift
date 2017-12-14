@@ -108,7 +108,10 @@ extension ProfileViewController: ProfileViewInput {
         self.films = []
 
         for filmColW in films {
-            let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
+            var rate: Int = 0
+            if let rating = filmColW.rate {
+               rate = Int(rating)
+            }
             let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
             self.films.append(film)
         }

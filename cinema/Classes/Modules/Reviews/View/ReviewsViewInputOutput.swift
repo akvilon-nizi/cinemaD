@@ -17,6 +17,10 @@ protocol ReviewsViewInput: class {
 
     func deleteComment()
 
+    func changeStatus()
+    
+    func startChangeStatus()
+
 }
 
 protocol ReviewsViewOutput {
@@ -30,4 +34,6 @@ protocol ReviewsViewOutput {
     func sendReview(name: String, description: String)
 
     func deleteReview(id: String)
+
+    func setStatusLike(isLike: Bool, isSelect: Bool)
 }

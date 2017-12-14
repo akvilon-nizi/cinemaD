@@ -8,7 +8,17 @@
 
 import UIKit
 
+protocol ReviewsHeaderViewDelegate: class {
+    func selectLike()
+    func unselectLike()
+    func selectDislike()
+    func unselectDislike()
+}
+
 class ReviewsHeaderView: UITableViewHeaderFooterView {
+
+    weak var delegate: ReviewsHeaderViewDelegate?
+
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaBold(size: 20)
@@ -39,6 +49,7 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
         let button = UIButton()
         button.setTitle(L10n.reviewsLikeText, for: .normal)
         button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
+        button.titleLabel?.textAlignment = .center
         button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
         button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
         button.heightAnchor ~= 33
@@ -81,9 +92,23 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
         buttonsStack.bottomAnchor ~= bottomAnchor
     }
 
-    func setParameters(name: String, genres: String) {
-        titleLabel.text = name
-        genresLabel.text = genres
+    func setParameters(film: FullFilm) {
+        titleLabel.text = film.name
+        var textsArray: [String] = []
+        for genres in film.genres {
+            if let text = genres.name, !text.isEmpty {
+                textsArray.append(text.capitalized)
+            }
+        }
+
+        genresLabel.text = textsArray.joined(separator: "/")
+        if let iLiked = film.iLiked {
+            if iLiked {
+                watchedButton.isSelected = true
+            } else {
+                willWatchButton.isSelected = true
+            }
+        }
     }
 
     func tapButton(button: UIButton) {
@@ -91,11 +116,17 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
             watchedButton.isSelected = !watchedButton.isSelected
             if watchedButton.isSelected {
                 willWatchButton.isSelected = false
+                delegate?.selectLike()
+            } else {
+                delegate?.unselectLike()
             }
         } else {
              willWatchButton.isSelected = !willWatchButton.isSelected
             if willWatchButton.isSelected {
                 watchedButton.isSelected = false
+                delegate?.selectDislike()
+            } else {
+                delegate?.unselectDislike()
             }
         }
     }

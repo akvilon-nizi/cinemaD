@@ -62,12 +62,111 @@ class WatchedVC: ParentViewController {
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
         tableView.separatorStyle = .none
-       // tableView.allowsMultipleSelection = false
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
 
         tableView.register(CollectionCell.self, forCellReuseIdentifier: CollectionCell.reuseIdentifier)
+    }
+
+    func setHeaderTableView() {
+//        switch section {
+//        case 4:
+//            if films.isEmpty {
+//                return nil
+//            }
+//            let view = HeaderViewTitle()
+//            view.title = "Коллекции"
+//            return view
+//        case 5:
+//            if films.isEmpty {
+//                return nil
+//            }
+//            let view = MakeNewCollections()
+//            view.delegate = self
+//            return view
+//        case 6:
+//            if colFilms.isEmpty {
+//                return nil
+//            }
+//            let view = HeaderViewTitle()
+//            view.title = colHeaderTitle
+//            view.withoutLine()
+//            return view
+//        case 7:
+//            //            if colFilms.count < 1 {
+//            //                return UIView()
+//            //            }
+//            let view = FilmGroup()
+//            view.films = colFilms
+//            view.delegate = self
+//            return view
+//        case 0:
+//            if films.isEmpty {
+//                return nil
+//            }
+//            let view = HeaderViewTitle()
+//            view.title = "Фильмы"
+//            return view
+//        case 1:
+//            if films.isEmpty {
+//                return nil
+//            }
+//            let view = FullListFilms()
+//            view.delegate = self
+//            return view
+//        case 3:
+//            if films.isEmpty {
+//                return nil
+//            }
+//            let view = FilmGroup()
+//            view.films = films
+//            view.delegate = self
+//            return view
+//        case 2:
+//            if films.isEmpty {
+//                return nil
+//            }
+//            let view = HeaderSearchView()
+//            view.delegate = self
+//            return view
+//        default:
+//            return nil
+//        }
+
+//        switch section {
+//        case 4:
+//            return 22
+//        case 5:
+//            return 55
+//        case 6:
+//            if colFilms.isEmpty {
+//                return 1
+//            }
+//            return 22
+//        case 7:
+//            if colFilms.count < 1 {
+//                return 1
+//            }
+//            return windowWidth / 4 * 3 - 80
+//        case 0:
+//            if films.isEmpty {
+//                return 0.1
+//            }
+//            return 22
+//        case 1:
+//            return 22
+//        case 2:
+//            return 33
+//        case 3:
+//            if films.isEmpty {
+//                return 0
+//            }
+//            return windowWidth / 4 * 3 - 80
+//
+//        default:
+//            return 0
+//        }
     }
 
     func setFilmsAndCol(_ films: [Film], col: [Collection]) {
@@ -83,7 +182,10 @@ class WatchedVC: ParentViewController {
         colFilms = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
-                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
+                var rate: Int = 0
+                if let rating = filmColW.rate {
+                    rate = Int(rating)
+                }
                 let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
                 colFilms.append(film)
             }
@@ -132,23 +234,17 @@ extension WatchedVC: UITableViewDataSource {
                 collCel.indexPath = indexPath.row
                 collCel.title = collections[indexPath.row].name
                 collCel.delegate = self
-//                if let index = selectedIndex, index == indexPath.row {
-//                    collCel.isSelected = true
-//                }
             }
             return cell
         }
 
         let cell = UITableViewCell()
 
-        //        cell.setData(products[indexPath.row])
-        //        cell.delegate = self
-
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let collectionCell = tableView.cellForRow(at: indexPath) as? CollectionCell, selectedIndex != indexPath.row {
+        if ((tableView.cellForRow(at: indexPath) as? CollectionCell) != nil), selectedIndex != indexPath.row {
             selectedIndex = indexPath.row
             delegate?.openCollectionFromId(id: collections[indexPath.row].id)
         }
@@ -157,21 +253,6 @@ extension WatchedVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 8
     }
-
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == UITableViewCellEditingStyle.delete {
-//            delegate?.removeCollectionFromId(id: collections[indexPath.row].id)
-//            collections.remove(at: indexPath.row)
-//            if selectedIndex == indexPath.row {
-//                colFilms = []
-//            }
-//            tableView.reloadData()
-//        }
-//    }
 
 }
 

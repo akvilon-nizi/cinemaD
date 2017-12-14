@@ -44,6 +44,8 @@ class MainViewController: ParentViewController {
 
     var isNewsFilterOpen = false
 
+    let mainTabView = MainTabView()
+
     var newsFilterArray: [NewsFilter] = [
         NewsFilter(title: L10n.mainNewsNew, isSwitch: false),
         NewsFilter(title: L10n.mainNewsMessageActors, isSwitch: false),
@@ -86,7 +88,12 @@ class MainViewController: ParentViewController {
         activityVC.isHidden = false
         activityVC.startAnimating()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(changeAvatar), name: NSNotification.Name(rawValue: Constants.changeProfileAvatar), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(changeAvatar),
+            name: NSNotification.Name(rawValue: Constants.changeProfileAvatar),
+            object: nil
+        )
     }
 
     func changeAvatar(notification: NSNotification) {
@@ -195,6 +202,7 @@ class MainViewController: ParentViewController {
 
         let stackView = createStackView(.vertical, .fill, .fill, 0, with: headerViewsArray)
         stackView.widthAnchor ~= windowWidth + 60
+        stackView.heightAnchor ~= height
         stackView.frame = CGRect(x: 0, y: 0, width: windowWidth + 60, height: height)
         tableView.tableHeaderView = stackView
     }
@@ -238,7 +246,6 @@ class MainViewController: ParentViewController {
     func shareNews(imageShare: UIImage?, news: News?) {
         if let newsShare = news {
             let vkShare = VKShareDialogController()
-            //            var text = newsShare.description.components(separatedBy: ".")
             let string: String = newsShare.name + ". " + newsShare.description
             vkShare.text = string
             if let image = imageShare {

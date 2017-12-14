@@ -64,31 +64,11 @@ class WillWatchVC: ParentViewController {
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
 
-//        if #available(iOS 11.0, *) {
-//            tableView.contentInsetAdjustmentBehavior = .never
-//        } else {
-//            automaticallyAdjustsScrollViewInsets = true
-//        }
-
         tableView.contentInset = UIEdgeInsets(top: -11, left: 0, bottom: 0, right: 0)
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
 
-        print(tableView.frame)
-
-        tableView.register(AdminCollectionCell.self, forCellReuseIdentifier: AdminCollectionCell.reuseIdentifier)
-
-        tableView.separatorStyle = .none
-        //tableView.allowsMultipleSelection = false
-        //setHeaderView()
-    }
-
-    func refresh() {
-        delegate?.refreshes()
-    }
-
-    func setHeaderView() {
         headerViewTitle.title = "Фильмы"
         headerViewTitle.heightAnchor ~= 44
 
@@ -102,6 +82,17 @@ class WillWatchVC: ParentViewController {
         headerSearchView.delegate = self
         headerSearchView.heightAnchor ~= 48
 
+        tableView.register(AdminCollectionCell.self, forCellReuseIdentifier: AdminCollectionCell.reuseIdentifier)
+
+        tableView.separatorStyle = .none
+    }
+
+    func refresh() {
+        delegate?.refreshes()
+    }
+
+    func setHeaderView() {
+
         let view = HeaderViewTitle()
         view.title = "Коллекции"
 
@@ -113,12 +104,13 @@ class WillWatchVC: ParentViewController {
             view.heightAnchor ~= 44
         } else {
             view.heightAnchor ~= 30
-            height = windowWidth / 4 * 3 + 125
+            height = windowWidth / 4 * 3 + 103.5
             viewArray = [headerViewTitle, fullListFilms, headerSearchView, filmGroup, view]
         }
 
         let stackView = createStackView(.vertical, .fill, .fill, 0, with: viewArray)
         stackView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
+        stackView.heightAnchor ~= height
         stackView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: height)
         tableView.tableHeaderView = stackView
     }
@@ -176,8 +168,20 @@ extension WillWatchVC: UITableViewDelegate {
         delegate?.openCollection(id: collections[indexPath.row].id, name: collections[indexPath.row].name)
     }
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 1
     }
 }
 

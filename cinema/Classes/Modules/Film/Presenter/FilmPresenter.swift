@@ -21,6 +21,9 @@ class FilmPresenter {
 // MARK: - FilmViewOutput
 
 extension FilmPresenter: FilmViewOutput {
+    func tapReviews(_ film: FullFilm) {
+        router.rewiewsFrom(film)
+    }
 
     func homeTap() {
         router.home()
@@ -53,10 +56,6 @@ extension FilmPresenter: FilmViewOutput {
 
     func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm]) {
         router.openPersonID(personID, name: name, role: role, persons: persons)
-    }
-
-    func tapReviews(name: String, genres: String) {
-        router.rewiewsFromID(videoID, name: name, genres: genres)
     }
 }
 

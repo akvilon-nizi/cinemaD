@@ -25,7 +25,7 @@ extension FilmRouter: FilmRouterInput {
         appRouter.transition(to: .actors(id: personID, name: name, role: role, persons: persons))
     }
 
-    func rewiewsFromID(_ filmID: String, name: String, genres: String) {
-        appRouter.transition(to: .reviews(filmID: filmID, name: name, genres: genres))
+    func rewiewsFrom(_ film: FullFilm) {
+        appRouter.transition(to: .reviews(film: film))
     }
 }

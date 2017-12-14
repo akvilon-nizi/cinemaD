@@ -37,5 +37,5 @@ protocol FilmViewOutput {
 
     func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])
 
-    func tapReviews(name: String, genres: String)
+    func tapReviews(_ film: FullFilm)
 }
