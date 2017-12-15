@@ -495,14 +495,3 @@ extension MainViewController: NewsCellDelegate {
         shareNews(imageShare: nil, news: news)
     }
 }
-
-//extension MainViewController: MainVCHeaderDelegate {
-//    func mute() {
-//        player.isMuted = true
-//        player.play()
-//    }
-//    func notMute() {
-//        player.isMuted = false
-//    }
-//}
-

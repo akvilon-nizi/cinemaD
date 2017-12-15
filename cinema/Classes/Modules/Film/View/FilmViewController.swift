@@ -198,7 +198,7 @@ class FilmViewController: ParentViewController {
     func setInfo() {
         if let filmInfo = filmInformation {
 
-            myRate = filmInfo.myRate
+            myRate = Int(filmInfo.myRate)
 
             starsLabel.isHidden = true
             starsView.isHidden = true

@@ -23,13 +23,13 @@ class FullFilm: ImmutableMappable {
     let yearFirstRelease: Int
     let budget: Int
     let rateTmdb: Double
-    let ageLimit: Int?
+    let ageLimit: String?
     let adminCollections: [Film]
     let watched: Int
     let genres: [Genre]
     let nameOriginal: String
     let rate: Double
-    let myRate: Int
+    let myRate: Double
     let trailer: String
     var iLiked: Bool?
     let notLiked: Int

@@ -25,7 +25,7 @@ class ProfileModel: ImmutableMappable {
     private let watchedKey = "watched"
     private let avatarKey = "avatar"
     private let friendsKey = "friends"
-    private let rewardsKey = "rewards"
+    private let rewardsKey = "awards"
     private let phoneKey = "phone"
     private let willWatchKey = "will_watch"
     private let newMailKey = "new_mail"

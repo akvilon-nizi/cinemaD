@@ -19,7 +19,7 @@ protocol WillWatchVCDelegate: class {
 
 class WillWatchVC: ParentViewController {
 
-    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    let tableView = UITableView(frame: CGRect.zero, style: .plain)
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
@@ -31,15 +31,19 @@ class WillWatchVC: ParentViewController {
 
     weak var delegate: WillWatchVCDelegate?
 
-    let headerViewTitle = HeaderViewTitle()
-
-    let fullListFilms = FullListFilms()
-
-    let filmGroup = FilmGroup()
-
-    let headerSearchView = SearchCommonView()
-
     let refreshControl = UIRefreshControl()
+
+    var heightLayout: NSLayoutConstraint?
+
+    var searchHeightLayout: NSLayoutConstraint?
+
+    var currentHeight: CGFloat = 0
+
+    var heightFilmGroup: CGFloat = 0
+
+    var stackView = UIStackView()
+
+    let searchFilmGroup = FilmGroup()
 
     // MARK: - Life cycle
 
@@ -49,6 +53,12 @@ class WillWatchVC: ParentViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.layoutIfNeeded()
+        view.layoutSubviews()
     }
 
     override func viewDidLoad() {
@@ -64,27 +74,14 @@ class WillWatchVC: ParentViewController {
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
 
-        tableView.contentInset = UIEdgeInsets(top: -11, left: 0, bottom: 0, right: 0)
-
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
-
-        headerViewTitle.title = "Фильмы"
-        headerViewTitle.heightAnchor ~= 44
-
-        fullListFilms.delegate = self
-        fullListFilms.heightAnchor ~= 35
-
-        filmGroup.delegate = self
-        filmGroup.heightAnchor ~= windowWidth / 4 * 3 - 53.5
-        filmGroup.films = films
-
-        headerSearchView.delegate = self
-        headerSearchView.heightAnchor ~= 48
 
         tableView.register(AdminCollectionCell.self, forCellReuseIdentifier: AdminCollectionCell.reuseIdentifier)
 
         tableView.separatorStyle = .none
+
+        self.automaticallyAdjustsScrollViewInsets = false
     }
 
     func refresh() {
@@ -93,31 +90,71 @@ class WillWatchVC: ParentViewController {
 
     func setHeaderView() {
 
+        let headerViewTitle = HeaderViewTitle()
+
+        let fullListFilms = FullListFilms()
+
+        let filmGroup = FilmGroup()
+
+        let headerSearchView = SearchCommonView()
+
+        heightFilmGroup = windowWidth / 4 * 3 - 53.5
+
+        headerViewTitle.title = "Фильмы"
+        headerViewTitle.heightAnchor ~= 44
+
+        fullListFilms.delegate = self
+        fullListFilms.heightAnchor ~= 35
+
+        searchFilmGroup.delegate = self
+        searchHeightLayout = searchFilmGroup.heightAnchor.constraint(equalToConstant: 0)
+        searchHeightLayout?.isActive = true
+
+        filmGroup.delegate = self
+        filmGroup.heightAnchor ~= heightFilmGroup
+        filmGroup.films = films
+
+        headerSearchView.delegate = self
+        headerSearchView.heightAnchor ~= 48
+
         let view = HeaderViewTitle()
         view.title = "Коллекции"
 
         var viewArray: [UIView] = []
-        var height: CGFloat = 44
 
         if films.isEmpty {
-            viewArray = [view]
+            currentHeight = 92
+            viewArray = [headerSearchView, searchFilmGroup, view]
             view.heightAnchor ~= 44
         } else {
             view.heightAnchor ~= 30
-            height = windowWidth / 4 * 3 + 103.5
-            viewArray = [headerViewTitle, fullListFilms, headerSearchView, filmGroup, view]
+            currentHeight = windowWidth / 4 * 3 + 103.5
+            viewArray = [headerSearchView, searchFilmGroup, headerViewTitle, fullListFilms, filmGroup, view]
         }
 
-        let stackView = createStackView(.vertical, .fill, .fill, 0, with: viewArray)
+        stackView = createStackView(.vertical, .fill, .fill, 0, with: viewArray)
         stackView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
-        stackView.heightAnchor ~= height
-        stackView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: height)
+        heightLayout = stackView.heightAnchor.constraint(equalToConstant: currentHeight)
+        heightLayout?.isActive = true
+//        stackView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
         tableView.tableHeaderView = stackView
+        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
+
+        //searchFilmGroup.isHidden = true
+    }
+
+    func setStackViewHeight() {
+        heightLayout?.constant = currentHeight
+        //tableView.tableHeaderView = stackView
+        UIView.animate(withDuration: 0) {
+            self.stackView.layoutIfNeeded()
+        }
+        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
     }
 
     func setFilms(_ films: [Film], collections: [Collection]) {
         self.films = films
-        tableView.scrollsToTop = true
+        //tableView.scrollsToTop = true
         setHeaderView()
         refreshControl.endRefreshing()
         self.collections = collections
@@ -125,12 +162,19 @@ class WillWatchVC: ParentViewController {
     }
 
     func getSearch(_ films: [Film]) {
-        self.films = films
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+        if searchFilmGroup.films.isEmpty && !films.isEmpty {
+            searchHeightLayout?.constant = heightFilmGroup
+            currentHeight += heightFilmGroup
+            setStackViewHeight()
+        }
+
+        if !searchFilmGroup.films.isEmpty && films.isEmpty {
+            searchHeightLayout?.constant = 0
+            currentHeight -= heightFilmGroup
+            setStackViewHeight()
+        }
+
+        searchFilmGroup.films = films
     }
 }
 
@@ -177,7 +221,7 @@ extension WillWatchVC: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 35
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -202,7 +246,11 @@ extension WillWatchVC: FilmGroupDelegate {
 
 extension WillWatchVC: SearchCommonDelegate {
     func changeText(_ text: String) {
-        delegate?.getQuery(text)
+        if text.count >= 1 {
+            delegate?.getQuery(text)
+        } else {
+            getSearch([])
+        }
     }
     func tapFilter() {
         delegate?.tapFilter()

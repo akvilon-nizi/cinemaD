@@ -24,7 +24,7 @@ class WatchedVC: ParentViewController {
 
     let refreshControl = UIRefreshControl()
 
-    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    let tableView = UITableView(frame: CGRect.zero, style: .plain)
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
@@ -36,6 +36,20 @@ class WatchedVC: ParentViewController {
     var films: [Film] = []
     var collections: [Collection] = []
     var selectedIndex: Int?
+
+    var heightLayout: NSLayoutConstraint?
+
+    var searchHeightLayout: NSLayoutConstraint?
+
+    var currentHeight: CGFloat = 0
+
+    var heightFilmGroup: CGFloat = 0
+
+    var stackView = UIStackView()
+
+    let searchFilmGroup = FilmGroup()
+
+//    var isFirstStart = true
 
     weak var delegate: WatchedFilmDelegate?
 
@@ -52,121 +66,75 @@ class WatchedVC: ParentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = .white
-        tableView.delegate = self
-        tableView.dataSource = self
-
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.topAnchor ~= view.topAnchor
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
-        tableView.separatorStyle = .none
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
 
         tableView.register(CollectionCell.self, forCellReuseIdentifier: CollectionCell.reuseIdentifier)
+
+        tableView.backgroundColor = .white
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.separatorStyle = .none
+
     }
 
-    func setHeaderTableView() {
-//        switch section {
-//        case 4:
-//            if films.isEmpty {
-//                return nil
-//            }
-//            let view = HeaderViewTitle()
-//            view.title = "Коллекции"
-//            return view
-//        case 5:
-//            if films.isEmpty {
-//                return nil
-//            }
-//            let view = MakeNewCollections()
-//            view.delegate = self
-//            return view
-//        case 6:
-//            if colFilms.isEmpty {
-//                return nil
-//            }
-//            let view = HeaderViewTitle()
-//            view.title = colHeaderTitle
-//            view.withoutLine()
-//            return view
-//        case 7:
-//            //            if colFilms.count < 1 {
-//            //                return UIView()
-//            //            }
-//            let view = FilmGroup()
-//            view.films = colFilms
-//            view.delegate = self
-//            return view
-//        case 0:
-//            if films.isEmpty {
-//                return nil
-//            }
-//            let view = HeaderViewTitle()
-//            view.title = "Фильмы"
-//            return view
-//        case 1:
-//            if films.isEmpty {
-//                return nil
-//            }
-//            let view = FullListFilms()
-//            view.delegate = self
-//            return view
-//        case 3:
-//            if films.isEmpty {
-//                return nil
-//            }
-//            let view = FilmGroup()
-//            view.films = films
-//            view.delegate = self
-//            return view
-//        case 2:
-//            if films.isEmpty {
-//                return nil
-//            }
-//            let view = HeaderSearchView()
-//            view.delegate = self
-//            return view
-//        default:
-//            return nil
-//        }
+    func setHeaderView() {
 
-//        switch section {
-//        case 4:
-//            return 22
-//        case 5:
-//            return 55
-//        case 6:
-//            if colFilms.isEmpty {
-//                return 1
-//            }
-//            return 22
-//        case 7:
-//            if colFilms.count < 1 {
-//                return 1
-//            }
-//            return windowWidth / 4 * 3 - 80
-//        case 0:
-//            if films.isEmpty {
-//                return 0.1
-//            }
-//            return 22
-//        case 1:
-//            return 22
-//        case 2:
-//            return 33
-//        case 3:
-//            if films.isEmpty {
-//                return 0
-//            }
-//            return windowWidth / 4 * 3 - 80
-//
-//        default:
-//            return 0
-//        }
+        let headerViewTitle = HeaderViewTitle()
+
+        let fullListFilms = FullListFilms()
+
+        let filmGroup = FilmGroup()
+
+        let headerSearchView = SearchCommonView()
+
+        heightFilmGroup = windowWidth / 4 * 3 - 53.5
+
+        headerViewTitle.title = "Фильмы"
+        headerViewTitle.heightAnchor ~= 44
+
+        fullListFilms.delegate = self
+        fullListFilms.heightAnchor ~= 35
+
+        searchFilmGroup.delegate = self
+        searchHeightLayout = searchFilmGroup.heightAnchor.constraint(equalToConstant: 0)
+        searchHeightLayout?.isActive = true
+
+        filmGroup.delegate = self
+        filmGroup.heightAnchor ~= heightFilmGroup
+        filmGroup.films = films
+
+        headerSearchView.delegate = self
+        headerSearchView.heightAnchor ~= 48
+
+        let view = HeaderViewTitle()
+        view.title = "Коллекции"
+
+        var viewArray: [UIView] = []
+
+        if films.isEmpty {
+            currentHeight = 92
+            viewArray = [headerSearchView, searchFilmGroup, view]
+            view.heightAnchor ~= 44
+        } else {
+            view.heightAnchor ~= 30
+            currentHeight = windowWidth / 4 * 3 + 103.5
+            viewArray = [headerSearchView, searchFilmGroup, headerViewTitle, fullListFilms, filmGroup, view]
+        }
+
+        stackView = createStackView(.vertical, .fill, .fill, 0, with: viewArray)
+        stackView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
+        heightLayout = stackView.heightAnchor.constraint(equalToConstant: currentHeight)
+        heightLayout?.isActive = true
+        tableView.tableHeaderView = stackView
+        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
     }
 
     func setFilmsAndCol(_ films: [Film], col: [Collection]) {
@@ -174,6 +142,8 @@ class WatchedVC: ParentViewController {
         self.collections = col
         colFilms = []
         selectedIndex = nil
+        setHeaderView()
+        refreshControl.endRefreshing()
         tableView.reloadData()
     }
 
@@ -192,7 +162,7 @@ class WatchedVC: ParentViewController {
         }
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 5...7), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 0...2), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
 
@@ -206,12 +176,28 @@ class WatchedVC: ParentViewController {
     }
 
     func getSearch(_ films: [Film]) {
-        self.films = films
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+        if searchFilmGroup.films.isEmpty && !films.isEmpty {
+            searchHeightLayout?.constant = heightFilmGroup
+            currentHeight += heightFilmGroup
+            setStackViewHeight()
+        }
+
+        if !searchFilmGroup.films.isEmpty && films.isEmpty {
+            searchHeightLayout?.constant = 0
+            currentHeight -= heightFilmGroup
+            setStackViewHeight()
+        }
+
+        searchFilmGroup.films = films
+    }
+
+    func setStackViewHeight() {
+        heightLayout?.constant = currentHeight
+        //tableView.tableHeaderView = stackView
+        UIView.animate(withDuration: 0) {
+            self.stackView.layoutIfNeeded()
+        }
+        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
     }
 }
 
@@ -220,7 +206,7 @@ class WatchedVC: ParentViewController {
 extension WatchedVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 5 {
+        if section == 0 {
             return collections.count
         }
         return 0
@@ -228,7 +214,7 @@ extension WatchedVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if indexPath.section == 5 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CollectionCell.reuseIdentifier, for: indexPath)
             if let collCel = cell as? CollectionCell {
                 collCel.indexPath = indexPath.row
@@ -251,7 +237,7 @@ extension WatchedVC: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 3
     }
 
 }
@@ -261,7 +247,7 @@ extension WatchedVC: UITableViewDataSource {
 extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 5 {
+        if indexPath.section == 0 {
             return 44
         }
         return 0
@@ -269,29 +255,19 @@ extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 4:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Коллекции"
-            return view
-        case 5:
-            if films.isEmpty {
-                return nil
-            }
+        case 0:
             let view = MakeNewCollections()
             view.delegate = self
             return view
-        case 6:
+        case 1:
             if colFilms.isEmpty {
-                return nil
+                return UIView()
             }
             let view = HeaderViewTitle()
             view.title = colHeaderTitle
             view.withoutLine()
             return view
-        case 7:
+        case 2:
 //            if colFilms.count < 1 {
 //                return UIView()
 //            }
@@ -299,78 +275,36 @@ extension WatchedVC: UITableViewDelegate {
             view.films = colFilms
             view.delegate = self
             return view
-        case 0:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Фильмы"
-            return view
-        case 1:
-            if films.isEmpty {
-                return nil
-            }
-            let view = FullListFilms()
-            view.delegate = self
-            return view
-        case 3:
-            if films.isEmpty {
-                return nil
-            }
-            let view = FilmGroup()
-            view.films = films
-            view.delegate = self
-            return view
-        case 2:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderSearchView()
-            view.delegate = self
-            return view
         default:
-            return nil
+            return UIView()
         }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 4:
-            return 22
-        case 5:
+        case 0:
             return 55
-        case 6:
+        case 1:
             if colFilms.isEmpty {
                 return 1
             }
-            return 22
-        case 7:
+            return 44
+        case 2:
             if colFilms.count < 1 {
                 return 1
             }
             return windowWidth / 4 * 3 - 80
-        case 0:
-            if films.isEmpty {
-                return 0.1
-            }
-            return 22
-        case 1:
-            return 22
-        case 2:
-            return 33
-        case 3:
-            if films.isEmpty {
-                return 0
-            }
-            return windowWidth / 4 * 3 - 80
-
         default:
-            return 0
+            return 1
         }
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 }
 
@@ -399,13 +333,18 @@ extension WatchedVC: CollectionCellDelegate {
     }
 }
 
-// MARK: - FilmGroupDelegate
+// MARK: - SearchCommonDelegate
 
-extension WatchedVC: HeaderSearchDelegate {
+extension WatchedVC: SearchCommonDelegate {
     func changeText(_ text: String) {
-        delegate?.getQueryWatched(text)
+        if text.count >= 1 {
+            delegate?.getQueryWatched(text)
+        } else {
+            getSearch([])
+        }
     }
+
     func tapFilter() {
-        delegate?.tapFilterWatched()
+//        delegate?.tapFilter()
     }
 }
