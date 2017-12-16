@@ -55,6 +55,7 @@ enum FoodleTarget {
     case deleteComment(id: String)
     case getAdminCollections
     case getAdminCollection(id: String)
+    case globalSearch(query: String)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -171,6 +172,8 @@ extension FoodleTarget: TargetType {
             return "comments/\(id)"
         case let .getAdminCollection(id):
             return "admin_collections/\(id)"
+        case .globalSearch:
+            return "films"
         }
     }
 
@@ -231,6 +234,12 @@ extension FoodleTarget: TargetType {
             }
             if !years.isEmpty {
                 parameters["year"] = years
+            }
+            return parameters
+        case let .globalSearch(query):
+            var parameters: [String: Any] = [:]
+            if !query.isEmpty {
+                parameters["query"] = query
             }
             return parameters
         case let .filmWillWatchPost(query, genres, years):

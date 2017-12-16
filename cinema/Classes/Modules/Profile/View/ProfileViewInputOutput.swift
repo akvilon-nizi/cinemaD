@@ -30,4 +30,8 @@ protocol ProfileViewOutput {
     func openFilm(videoID: String, name: String)
 
     func openFriends()
+
+    func handleTapRewards()
+
+    func handleTapWatched()
 }

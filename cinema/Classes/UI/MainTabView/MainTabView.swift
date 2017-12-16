@@ -126,7 +126,7 @@ class MainTabView: UIView {
     }
 
     func setImage(imageUrl: String) {
-        if let link =  URL(string: imageUrl) {
+        if let link = URL(string: imageUrl) {
             KingfisherManager.shared.retrieveImage(with: link, options: nil, progressBlock: nil, completionHandler: {[unowned self] image, _, _, _ in
                 if let loadImage = image {
                     self.profileButton.setImage(loadImage, for: .normal)
@@ -134,6 +134,28 @@ class MainTabView: UIView {
                 }
             })
         }
+    }
+
+    func tapKinobase() {
+        for but in buttons {
+            if but.tag != 1 {
+
+            } else {
+                but.isSelected = true
+            }
+        }
+        delegate?.rewardsTapped()
+    }
+
+    func tapAwards() {
+        for but in buttons {
+            if but.tag != 4 {
+
+            } else {
+                but.isSelected = true
+            }
+        }
+        delegate?.kinobaseTapped()
     }
 
     required init?(coder aDecoder: NSCoder) {

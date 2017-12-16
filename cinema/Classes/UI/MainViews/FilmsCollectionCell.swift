@@ -93,6 +93,10 @@ class FilmsCollectionCell: UICollectionViewCell {
         rateView.isHidden = false
     }
 
+    func delRating() {
+        rateView.isHidden = true
+    }
+
     static var reuseIdentifier: String {
         return "FilmsCollectionCell"
     }

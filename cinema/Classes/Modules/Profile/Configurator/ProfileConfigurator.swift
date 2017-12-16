@@ -14,8 +14,14 @@ class ProfileConfigurator {
 
     var provider: RxMoyaProvider<FoodleTarget>!
 
+    let mainView: MainTabView
+
+    init(_ mainView: MainTabView) {
+        self.mainView = mainView
+    }
+
     func configureModule() -> UIViewController {
-        let router = ProfileRouter()
+        let router = ProfileRouter(mainView)
         router.appRouter = appRouter
 
         let presenter = ProfilePresenter()

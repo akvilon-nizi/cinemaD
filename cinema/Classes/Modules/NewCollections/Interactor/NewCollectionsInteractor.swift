@@ -19,17 +19,16 @@ class NewCollectionsInteractor {
 // MARK: - NewCollectionsInteractorInput
 
 extension NewCollectionsInteractor: NewCollectionsInteractorInput {
-    func getWatched() {
+
+    func getFilms(_ text: String) {
         provider.requestModel(.meFilmWatched)
             .subscribe { [unowned self] (response: Event<WatchedResponse>) in
                 switch response {
                 case let .next(model):
-//                    self.kbData.watched = model.watched
-//                    self.getWillWatch()
-                    print()
+                    self.output.getFilms(model.watched)
                 case let .error(error as ProviderError):
-                    print()
-//                    self.output.getError()
+                    print(error.code)
+                    self.output.getError()
                 default:
                     break
                 }
@@ -44,6 +43,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                 case let .next(model):
                     self.putFilmsIntoCol(idCol: model.id, films: films)
                 case let .error(error as ProviderError):
+                    print(error.code)
                     self.output.getError()
                 default:
                     break
@@ -52,8 +52,6 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .addDisposableTo(disposeBag)
     }
 
-    //1c1bde9e-087b-4552-bc5a-31cebb52ea79 id коллекции
-    //07cdcf7e-95d4-4bb7-b096-cc0d6ecbaf86 id фильма
     func putFilmsIntoCol(idCol: String, films: [Film]) {
         var filmsCol = films
         provider.requestModel(.putFilm(idFilm: films[0].id, idCollections: idCol))
@@ -77,39 +75,6 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                 }
             }
             .addDisposableTo(disposeBag)
-    }
-
-    func putDeleteFilms(idCol: String, filmsAdd: [Film], filmsDelete: [Film]) {
-//        if filmsAdd.isEmpty {
-//            deleteFilmsIntoCol(idCol: idCol, filmsID: filmsDelete)
-//        } else {
-//            var filmsCol = filmsAdd
-//            provider.requestModel(.putFilm(idFilm: filmsAdd[0].id, idCollections: idCol))
-//                .subscribe { [unowned self] (response: Event<FilmResponse>) in
-//                    switch response {
-//                    case let .next(model):
-//                        if model.message.first == L10n.filmResponsePutCollection {
-//                            filmsCol.remove(at: 0)
-//                            if filmsCol.isEmpty {
-//                                if !filmsDelete.isEmpty {
-//                                    self.deleteFilmsIntoCol(idCol: idCol, filmsID: filmsDelete)
-//                                } else {
-//                                    self.output.getSeccess()
-//                                }
-//                            } else {
-//                                self.putDeleteFilms(idCol: idCol, filmsAdd: filmsCol, filmsDelete: filmsDelete)
-//                            }
-//                        } else {
-//                            self.output.getError()
-//                        }
-//                    case let .error(error as ProviderError):
-//                        self.output.getError()
-//                    default:
-//                        break
-//                    }
-//                }
-//                .addDisposableTo(disposeBag)
-//        }
     }
 
     func deleteFilmsIntoCol(idCol: String, filmsID: [Film]) {
@@ -185,6 +150,5 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             }
             .addDisposableTo(disposeBag)
     }
-
 
 }

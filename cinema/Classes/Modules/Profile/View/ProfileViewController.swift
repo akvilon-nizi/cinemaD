@@ -226,13 +226,13 @@ extension ProfileViewController: ProfileHeaderDelegate {
     func tapButton(tag: Int) {
         switch tag {
         case 0:
-            print("assa")
+            output.handleTapRewards()
         case 1:
-            print("assa")
+            output.handleTapWatched()
         case 2:
             output.openFriends()
         default:
-            print("assa")
+            print()
         }
     }
 }

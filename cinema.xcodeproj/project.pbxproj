@@ -187,6 +187,7 @@
 		81961C051FC858AE0086E9FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C041FC858AE0086E9FB /* SettingsView.swift */; };
 		819933231FD18E7E00D1FFE7 /* YoutubeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DA9501F8AC56000F371E4 /* YoutubeViewCell.swift */; };
 		81B39B6D1FD9492900C75520 /* ExsRewardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B39B6C1FD9492900C75520 /* ExsRewardsCell.swift */; };
+		81C3655F1FE561BF0021CFC6 /* LikedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C3655E1FE561BF0021CFC6 /* LikedView.swift */; };
 		81C4418A1FD040B9004EBB1D /* ReviewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C441891FD040B9004EBB1D /* ReviewsResponse.swift */; };
 		81D73A031FC6BADD0091EE3D /* RewardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A021FC6BADD0091EE3D /* RewardsCell.swift */; };
 		81D73A061FC6C1040091EE3D /* RewardsSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */; };
@@ -695,6 +696,7 @@
 		81961C001FC82A360086E9FB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		81961C041FC858AE0086E9FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		81B39B6C1FD9492900C75520 /* ExsRewardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExsRewardsCell.swift; sourceTree = "<group>"; };
+		81C3655E1FE561BF0021CFC6 /* LikedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedView.swift; sourceTree = "<group>"; };
 		81C441891FD040B9004EBB1D /* ReviewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsResponse.swift; sourceTree = "<group>"; };
 		81D73A021FC6BADD0091EE3D /* RewardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsCell.swift; sourceTree = "<group>"; };
 		81D73A051FC6C1040091EE3D /* RewardsSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsSubViewController.swift; sourceTree = "<group>"; };
@@ -2226,6 +2228,7 @@
 				81FBA3861FCEB13500EBAFED /* ActorFilmsView.swift */,
 				8107F7EF1FD7FFCC0067DFD2 /* NavTabBar.swift */,
 				8138ECF41FDE820B00F69628 /* SearchCommonView.swift */,
+				81C3655E1FE561BF0021CFC6 /* LikedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3322,6 +3325,7 @@
 				338AD1A91F5554DE00717F3A /* LogoutManagerImplementation.swift in Sources */,
 				81D73A031FC6BADD0091EE3D /* RewardsCell.swift in Sources */,
 				331CA20F1F508365000BA43E /* Profile.swift in Sources */,
+				81C3655F1FE561BF0021CFC6 /* LikedView.swift in Sources */,
 				CE09FEB21F95792A00D49351 /* FullFilm.swift in Sources */,
 				3331732C1F4EE61500C7C88E /* RegionResponse.swift in Sources */,
 				3386D47F1F443C8B009D9A42 /* CartProduct.swift in Sources */,

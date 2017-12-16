@@ -17,6 +17,9 @@ class NewCollectionsPresenter {
 // MARK: - NewCollectionsViewOutput
 
 extension NewCollectionsPresenter: NewCollectionsViewOutput {
+    func getQuery(_ text: String) {
+        interactor.getFilms(text)
+    }
 
     func viewIsReady() {
         log.verbose("NewCollections is ready")
@@ -36,10 +39,6 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
         interactor.putNewColWithFilm(name: name, films: films)
     }
 
-    func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film]) {
-        interactor.putDeleteFilms(idCol: id, filmsAdd: filmsAdd, filmsDelete: filmsDelete)
-    }
-
     func patchCollections(name: String, films: [Film]) {
         var filmsId: [String] = []
         for film in films {
@@ -56,6 +55,16 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
 // MARK: - NewCollectionsInteractorOutput
 
 extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
+    func getFilms(_ films: [FilmCollections]) {
+        var searchFilm: [Film] = []
+        for filmColW in films {
+            let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
+            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+            searchFilm.append(film)
+        }
+        view.getSearch(searchFilm)
+    }
+
     func getCollection(collection: Collection) {
         var colFilms: [Film] = []
         if let colFilmsArray = collection.films {

@@ -65,7 +65,7 @@ class HeaderSearchView: UITableViewHeaderFooterView {
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
         contentView.addSubview(separatorView.prepareForAutoLayout())
-        separatorView.bottomAnchor ~= bottomAnchor
+        separatorView.bottomAnchor ~= bottomAnchor - 20
         separatorView.trailingAnchor ~= trailingAnchor - 24
         separatorView.leadingAnchor ~= leadingAnchor + 24
         separatorView.heightAnchor ~= 1

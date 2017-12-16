@@ -14,6 +14,8 @@ protocol NewCollectionsViewInput: class {
     func getError()
 
     func getSeccess(message: String)
+
+    func getSearch(_ films: [Film])
 }
 
 protocol NewCollectionsViewOutput {
@@ -24,9 +26,9 @@ protocol NewCollectionsViewOutput {
 
     func addNewFilm(name: String, films: [Film])
 
-    func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film])
-
     func patchCollections(name: String, films: [Film])
 
     func deleteCollections()
+
+    func getQuery(_ text: String)
 }

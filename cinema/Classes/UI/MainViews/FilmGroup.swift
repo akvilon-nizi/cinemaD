@@ -98,6 +98,8 @@ extension FilmGroup: UICollectionViewDataSource {
             tagCell.linkUrlImage = films[indexPath.row].imageUrl
             if let rate = films[indexPath.row].rate, rate > 0 {
                 tagCell.setRating(rate)
+            } else {
+                tagCell.delRating()
             }
             if isCollections {
                 tagCell.isCollections()

@@ -15,4 +15,8 @@ protocol ProfileRouterInput: BaseRouterInput {
     func openFilm(videoId: String, name: String)
 
     func openFriends()
+
+    func openWatched()
+
+    func openRewards()
 }

@@ -440,7 +440,7 @@ extension MainViewController: MainTabViewDelegate {
     }
 
     func profileTapped() {
-        output.openProfile()
+        output.openProfile(mainView: mainTabView)
     }
 
     func chatTapped() {

@@ -155,8 +155,8 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: ProfileConfigurator.tag) { () -> UIViewController in
-            let configurator = ProfileConfigurator()
+        container.register(tag: ProfileConfigurator.tag) { (mainView: MainTabView) -> UIViewController in
+            let configurator = ProfileConfigurator(mainView)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()

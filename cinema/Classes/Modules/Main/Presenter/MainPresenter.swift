@@ -18,8 +18,9 @@ class MainPresenter {
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
-    func openProfile() {
-        router.openProfile()
+
+    func openProfile(mainView: MainTabView) {
+        router.openProfile(mainView: mainView)
     }
 
     func openRewards() {

@@ -17,6 +17,14 @@ class ProfilePresenter {
 // MARK: - ProfileViewOutput
 
 extension ProfilePresenter: ProfileViewOutput {
+    func handleTapRewards() {
+        router.openRewards()
+    }
+
+    func handleTapWatched() {
+        router.openWatched()
+    }
+
     func openFriends() {
         router.openFriends()
     }

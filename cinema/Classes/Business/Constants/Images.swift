@@ -63,8 +63,12 @@ enum Asset {
     static let backImage = ImageAsset(name: "backImage")
     static let chatButton = ImageAsset(name: "chatButton")
     static let chatIcon = ImageAsset(name: "chatIcon")
+    static let dislikeSelect = ImageAsset(name: "dislikeSelect")
+    static let dislikeUnselect = ImageAsset(name: "dislikeUnselect")
     static let forwardImage = ImageAsset(name: "forwardImage")
     static let home = ImageAsset(name: "home")
+    static let likeSelect = ImageAsset(name: "likeSelect")
+    static let likeUnselect = ImageAsset(name: "likeUnselect")
     enum MainTab {
       enum Active {
         static let chatA = ImageAsset(name: "chatA")
@@ -112,6 +116,7 @@ enum Asset {
     static let unselectStar = ImageAsset(name: "unselectStar")
     static let vader = ImageAsset(name: "vader")
   }
+  static let dislikeSelect = ImageAsset(name: "dislikeSelect")
   enum NavBar {
     static let back = ImageAsset(name: "back")
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -158,8 +163,12 @@ enum Asset {
     Cinema.backImage,
     Cinema.chatButton,
     Cinema.chatIcon,
+    Cinema.dislikeSelect,
+    Cinema.dislikeUnselect,
     Cinema.forwardImage,
     Cinema.home,
+    Cinema.likeSelect,
+    Cinema.likeUnselect,
     Cinema.MainTab.Active.chatA,
     Cinema.MainTab.Active.kinobaseA,
     Cinema.MainTab.Active.rewardA,
@@ -194,6 +203,7 @@ enum Asset {
     Cinema.timeOrange,
     Cinema.unselectStar,
     Cinema.vader,
+    dislikeSelect,
     NavBar.back,
     NavBar.navBarArrowBack,
     NavBar.navBarList,

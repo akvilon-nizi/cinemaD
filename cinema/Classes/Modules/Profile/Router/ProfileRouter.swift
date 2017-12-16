@@ -9,6 +9,12 @@ import UIKit
 class ProfileRouter {
 
     var appRouter: AppRouterProtocol!
+
+    let mainView: MainTabView
+
+    init(_ mainView: MainTabView) {
+        self.mainView = mainView
+    }
 }
 
 // MARK: - ProfileRouterInput
@@ -32,5 +38,13 @@ extension ProfileRouter: ProfileRouterInput {
 
     func openFriends() {
         appRouter.transition(to: .friends)
+    }
+
+    func openWatched() {
+        mainView.tapKinobase()
+    }
+
+    func openRewards() {
+        mainView.tapAwards()
     }
 }

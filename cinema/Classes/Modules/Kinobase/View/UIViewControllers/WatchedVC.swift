@@ -178,12 +178,18 @@ class WatchedVC: ParentViewController {
     func getSearch(_ films: [Film]) {
         if searchFilmGroup.films.isEmpty && !films.isEmpty {
             searchHeightLayout?.constant = heightFilmGroup
+            UIView.animate(withDuration: 0) {
+                self.stackView.layoutIfNeeded()
+            }
             currentHeight += heightFilmGroup
             setStackViewHeight()
         }
 
         if !searchFilmGroup.films.isEmpty && films.isEmpty {
             searchHeightLayout?.constant = 0
+            UIView.animate(withDuration: 0) {
+                self.stackView.layoutIfNeeded()
+            }
             currentHeight -= heightFilmGroup
             setStackViewHeight()
         }

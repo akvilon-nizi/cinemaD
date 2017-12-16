@@ -36,7 +36,7 @@ enum AppRouterDestination {
         isWatched: Bool
     )
     case news(newsID: String)
-    case profile
+    case profile(mainView: MainTabView)
     case editingProfile(nameUser: String, avatar: String, output: EditingProfileModuleOutput)
     case settings
     case reviews(film: FullFilm)
@@ -106,8 +106,8 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: RewardsConfigurator.tag)
             case .friends:
                 return try factory.resolve(tag: FriendsConfigurator.tag)
-            case .profile:
-                return try factory.resolve(tag: ProfileConfigurator.tag)
+            case let .profile(mainView):
+                return try factory.resolve(tag: ProfileConfigurator.tag, arguments: mainView)
             case let .editingProfile(nameUser, avatar, output):
                 return try factory.resolve(tag: EditingProfileConfigurator.tag, arguments: nameUser, avatar, output)
             case .settings:

@@ -26,8 +26,8 @@ extension MainRouter: MainRouterInput {
         appRouter.transition(to: .rewards)
     }
 
-    func openProfile() {
-        appRouter.transition(to: .profile)
+    func openProfile(mainView: MainTabView) {
+        appRouter.transition(to: .profile(mainView: mainView))
     }
 
     func openStart() {
