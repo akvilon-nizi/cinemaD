@@ -58,7 +58,7 @@ class HeaderSearchView: UITableViewHeaderFooterView {
 
         titleField.rx.text.orEmpty
             .skip(1)
-            .throttle(3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
+            .throttle(2, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
                 self?.getVideoID(query)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
 

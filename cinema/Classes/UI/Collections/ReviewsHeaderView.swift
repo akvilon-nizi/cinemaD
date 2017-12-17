@@ -96,6 +96,9 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
                 likedView.didSelect = false
                 dislikedView.didSelect = true
             }
+        } else {
+            likedView.didSelect = false
+            dislikedView.didSelect = false
         }
     }
 }

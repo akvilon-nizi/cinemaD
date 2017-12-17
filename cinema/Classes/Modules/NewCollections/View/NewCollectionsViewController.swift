@@ -35,6 +35,8 @@ class NewCollectionsViewController: ParentViewController {
 
     var stackView = UIStackView()
 
+    var query: String = ""
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -107,6 +109,7 @@ class NewCollectionsViewController: ParentViewController {
         viewsArray.append(searchFilms)
         searchFilms.isCollections = true
         searchFilms.isAdd = true
+        searchFilms.delegate = self
 
         if nameCollections != "" {
             let titleView = HeaderViewTitle()
@@ -149,7 +152,21 @@ class NewCollectionsViewController: ParentViewController {
     }
 
     func getSearch(_ films: [Film]) {
-        if searchFilms.films.isEmpty && !films.isEmpty {
+
+        var filmsArray: [Film] = []
+
+        for film in films {
+            let col = collections.filter{ $0.id == film.id }
+            if col.isEmpty {
+                let col1 = watched.filter{ $0.id == film.id }
+                if !col1.isEmpty {
+                    film.add = true
+                }
+                filmsArray.append(film)
+            }
+        }
+
+        if searchFilms.films.isEmpty && !filmsArray.isEmpty {
             searchHeightLayout?.constant = heightFilmGroup
             UIView.animate(withDuration: 0) {
                 self.stackView.layoutIfNeeded()
@@ -158,7 +175,7 @@ class NewCollectionsViewController: ParentViewController {
             setStackViewHeight()
         }
 
-        if !searchFilms.films.isEmpty && films.isEmpty {
+        if !searchFilms.films.isEmpty && filmsArray.isEmpty {
             searchHeightLayout?.constant = 0
             UIView.animate(withDuration: 0) {
                self.stackView.layoutIfNeeded()
@@ -167,7 +184,8 @@ class NewCollectionsViewController: ParentViewController {
             setStackViewHeight()
         }
 
-        searchFilms.films = films
+        searchFilms.films = filmsArray
+
     }
 
     func setStackViewHeight() {
@@ -267,11 +285,33 @@ extension NewCollectionsViewController: NewCollectionsViewInput {
 extension NewCollectionsViewController: SearchCommonDelegate {
     func changeText(_ text: String) {
         if text.count >= 1 {
-           output?.getQuery(text)
+            if text != query {
+                output?.getQuery(text)
+            }
         } else {
             getSearch([])
+            if text != query {
+                output?.getQuery(text)
+            }
         }
+
+        query = text
     }
     func tapFilter() {
+    }
+}
+
+// MARK: - FilmGroupDelegate
+extension NewCollectionsViewController: FilmGroupDelegate {
+    func openFilmID(_ filmID: String, name: String) {
+        //output?.openFilm(videoID: filmID, name: name)
+    }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+        if isAdd {
+            watched.append(film)
+        } else {
+           watched = watched.filter{ $0.id != film.id }
+        }
     }
 }

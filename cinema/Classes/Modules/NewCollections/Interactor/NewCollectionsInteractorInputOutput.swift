@@ -17,7 +17,7 @@ protocol NewCollectionsInteractorInput {
 
 protocol NewCollectionsInteractorOutput: class {
     func getCollection(collection: Collection)
-    func getFilms(_ films: [FilmCollections])
+    func getFilms(_ films: [Film])
     func getError()
     func getSeccess(message: String)
 }

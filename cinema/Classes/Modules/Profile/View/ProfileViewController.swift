@@ -210,6 +210,10 @@ extension ProfileViewController: FilmGroupDelegate {
     func openFilmID(_ filmID: String, name: String) {
         output?.openFilm(videoID: filmID, name: name)
     }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+
+    }
 }
 
 // MARK: - ProfileHeaderDelegate

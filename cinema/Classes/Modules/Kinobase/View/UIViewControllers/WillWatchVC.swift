@@ -45,6 +45,8 @@ class WillWatchVC: ParentViewController {
 
     let searchFilmGroup = FilmGroup()
 
+    var query: String = ""
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -80,6 +82,8 @@ class WillWatchVC: ParentViewController {
         tableView.register(AdminCollectionCell.self, forCellReuseIdentifier: AdminCollectionCell.reuseIdentifier)
 
         tableView.separatorStyle = .none
+
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
 
         self.automaticallyAdjustsScrollViewInsets = false
     }
@@ -181,6 +185,8 @@ class WillWatchVC: ParentViewController {
         }
 
         searchFilmGroup.films = films
+
+        tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableViewRowAnimation.none)
     }
 }
 
@@ -246,6 +252,10 @@ extension WillWatchVC: FilmGroupDelegate {
     func openFilmID(_ filmID: String, name: String) {
         delegate?.openFilmId(filmID, name: name)
     }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+
+    }
 }
 
 // MARK: - FilmGroupDelegate
@@ -253,6 +263,10 @@ extension WillWatchVC: FilmGroupDelegate {
 extension WillWatchVC: SearchCommonDelegate {
     func changeText(_ text: String) {
         if text.count >= 1 {
+            if text == query {
+                return
+            }
+            self.query = text
             delegate?.getQuery(text)
         } else {
             getSearch([])

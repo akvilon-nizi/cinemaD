@@ -52,20 +52,20 @@ class SearchCommonView: UIView {
         leftView.addSubview(searchImageView)
         searchImageView.frame = CGRect(x: 32, y: 0, width: 19, height: 18)
 
-        rightButton.setImage(Asset.Search.type.image, for: .normal)
-        rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
-        let rightView = UIView()
-        rightView.frame = CGRect(x: 0, y: 0, width: 68, height: 20)
-        rightView.addSubview(rightButton)
-        titleField.rightView = rightView
-        titleField.rightViewMode = .always
+//        rightButton.setImage(Asset.Search.type.image, for: .normal)
+//        rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
+//        let rightView = UIView()
+//        rightView.frame = CGRect(x: 0, y: 0, width: 68, height: 20)
+//        rightView.addSubview(rightButton)
+//        titleField.rightView = rightView
+//        titleField.rightViewMode = .always
 
         titleField.leftView = leftView
         titleField.leftViewMode = .always
 
         titleField.rx.text.orEmpty
             .skip(1)
-            .throttle(1, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
+            .throttle(2, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
                 self?.getVideoID(query)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
     }

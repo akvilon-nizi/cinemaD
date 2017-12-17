@@ -21,19 +21,22 @@ class NewCollectionsInteractor {
 extension NewCollectionsInteractor: NewCollectionsInteractorInput {
 
     func getFilms(_ text: String) {
-        provider.requestModel(.meFilmWatched)
-            .subscribe { [unowned self] (response: Event<WatchedResponse>) in
-                switch response {
-                case let .next(model):
-                    self.output.getFilms(model.watched)
-                case let .error(error as ProviderError):
-                    print(error.code)
-                    self.output.getError()
-                default:
-                    break
+        disposeBag = DisposeBag()
+        if text != "" {
+            provider.requestModel(.globalSearch(query: text) )
+                .subscribe { [unowned self] (response: Event<AllFilms>) in
+                    switch response {
+                    case let .next(model):
+                        self.output.getFilms(model.films)
+                    case let .error(error as ProviderError):
+                        print(error.code)
+                        self.output.getError()
+                    default:
+                        break
+                    }
                 }
-            }
-            .addDisposableTo(disposeBag)
+                .addDisposableTo(disposeBag)
+        }
     }
 
     func putNewColWithFilm(name: String, films: [Film]) {

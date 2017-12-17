@@ -118,35 +118,52 @@ extension KinobaseInteractor: KinobaseInteractorInput {
     }
 
     func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {
-        if isWatched {
-            provider.requestModel(.filmWatchedPost(query: query, genres: genres, years: years))
-                .subscribe { [unowned self] (response: Event<WatchedResponse>) in
-                    switch response {
-                    case let .next(model):
-                        self.kbData.watched = model.watched
-                        self.output.getSearch(self.kbData, isWatched: true)
-                    case let .error(error as ProviderError):
-                        self.output.getError()
-                    default:
-                        break
-                    }
+        disposeBag = DisposeBag()
+        provider.requestModel(.globalSearch(query: query))
+            .subscribe { [unowned self] (response: Event<AllFilms>) in
+                switch response {
+                case let .next(model):
+                    self.kbData.filmsSearch = model.films
+                    self.output.getSearch(self.kbData, isWatched: isWatched)
+                case let .error(error as ProviderError):
+                    self.output.getError()
+                default:
+                    break
                 }
-                .addDisposableTo(disposeBag)
-        } else {
-            provider.requestModel(.filmWillWatchPost(query: query, genres: genres, years: years))
-                .subscribe { [unowned self] (response: Event<WillWatchResponse>) in
-                    switch response {
-                    case let .next(model):
-                        self.kbData.willWatched = model.willWatch
-                        self.output.getSearch(self.kbData, isWatched: false)
-                    case let .error(error as ProviderError):
-                        self.output.getError()
-                    default:
-                        break
-                    }
-                }
-                .addDisposableTo(disposeBag)
-        }
-
+            }
+            .addDisposableTo(disposeBag)
     }
+
+//    func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {
+//        if isWatched {
+//            provider.requestModel(.filmWatchedPost(query: query, genres: genres, years: years))
+//                .subscribe { [unowned self] (response: Event<WatchedResponse>) in
+//                    switch response {
+//                    case let .next(model):
+//                        self.kbData.watched = model.watched
+//                        self.output.getSearch(self.kbData, isWatched: true)
+//                    case let .error(error as ProviderError):
+//                        self.output.getError()
+//                    default:
+//                        break
+//                    }
+//                }
+//                .addDisposableTo(disposeBag)
+//        } else {
+//            provider.requestModel(.filmWillWatchPost(query: query, genres: genres, years: years))
+//                .subscribe { [unowned self] (response: Event<WillWatchResponse>) in
+//                    switch response {
+//                    case let .next(model):
+//                        self.kbData.willWatched = model.willWatch
+//                        self.output.getSearch(self.kbData, isWatched: false)
+//                    case let .error(error as ProviderError):
+//                        self.output.getError()
+//                    default:
+//                        break
+//                    }
+//                }
+//                .addDisposableTo(disposeBag)
+//        }
+//
+//    }
 }

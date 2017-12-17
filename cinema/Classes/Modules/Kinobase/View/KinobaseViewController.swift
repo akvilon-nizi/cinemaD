@@ -263,20 +263,20 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.stopAnimating()
         self.kbData = kbData
         if isWatched {
-            watched = []
-            for filmColW in kbData.watched {
-                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
-                watched.append(film)
-            }
-            watchedVC.getSearch(watched)
+//            watched = []
+//            for filmColW in kbData.watched {
+//                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
+//                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+//                watched.append(film)
+//            }
+            watchedVC.getSearch(kbData.filmsSearch)
         } else {
-            var willWatch: [Film] = []
-            for filmCol in kbData.willWatched {
-                let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
-                willWatch.append(film)
-            }
-            willWatchVC.getSearch(willWatch)
+//            var willWatch: [Film] = []
+//            for filmCol in kbData.willWatched {
+//                let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
+//                willWatch.append(film)
+//            }
+            willWatchVC.getSearch(kbData.filmsSearch)
         }
     }
 

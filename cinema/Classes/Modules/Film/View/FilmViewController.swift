@@ -295,13 +295,13 @@ class FilmViewController: ParentViewController {
 
             let infoStack = createStackView(.horizontal, .fill, .fill, 0, with: [
                 UIView().setParameters(
-                    topLabelText: filmInfo.rateTmdb == 0 ? " " : String(filmInfo.rateTmdb),
+                    topLabelText: filmInfo.rateTmdb == 0 ? "-" : String(filmInfo.rateTmdb),
                     bottomLabelText: L10n.filmTmdbText),
                 UIView().setParameters(
-                    topLabelText: filmInfo.duration == 0 ? " " : String(filmInfo.duration) + " мин",
+                    topLabelText: filmInfo.duration == 0 ? "-" : String(filmInfo.duration) + " мин",
                     bottomLabelText: L10n.filmDurationText),
                 UIView().setParameters(
-                    topLabelText: filmInfo.ageLimit == nil ? " " : String(format: "%@ +", (filmInfo.ageLimit)!),
+                    topLabelText: filmInfo.ageLimit == "" ? "-" : (filmInfo.ageLimit)!,
                     bottomLabelText: L10n.filmAgeText)
                 ])
             contentView.addSubview(infoStack.prepareForAutoLayout())
@@ -387,10 +387,10 @@ class FilmViewController: ParentViewController {
         let infoStack = createStackView(.horizontal, .fill, .fill, 1, with: [
             UIView().setParameters2(topLabelText: filmInfo.budget > 0 ?
                 String(filmInfo.budget).setPriceMask() + " $" :
-                " ", bottomLabelText: L10n.filmBudjetText), UIView().separator(),
+                "-", bottomLabelText: L10n.filmBudjetText), UIView().separator(),
             UIView().setParameters2(topLabelText: filmInfo.gross > 0
                 ? String(filmInfo.gross).setPriceMask() + " $"
-                : " ", bottomLabelText: L10n.filmCashText)])
+                : "-", bottomLabelText: L10n.filmCashText)])
         contentView.addSubview(infoStack.prepareForAutoLayout())
         infoStack.heightAnchor ~= 50
         infoStack.topAnchor ~= sepView.bottomAnchor + 10

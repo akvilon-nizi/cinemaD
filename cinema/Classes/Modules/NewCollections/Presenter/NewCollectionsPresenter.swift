@@ -55,14 +55,8 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
 // MARK: - NewCollectionsInteractorOutput
 
 extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
-    func getFilms(_ films: [FilmCollections]) {
-        var searchFilm: [Film] = []
-        for filmColW in films {
-            let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
-            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
-            searchFilm.append(film)
-        }
-        view.getSearch(searchFilm)
+    func getFilms(_ films: [Film]) {
+        view.getSearch(films)
     }
 
     func getCollection(collection: Collection) {

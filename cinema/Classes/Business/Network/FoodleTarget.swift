@@ -22,6 +22,8 @@ enum FoodleTarget {
     case filmWillWatch(filmID: String)
     case filmLiked(filmID: String)
     case filmDisLiked(filmID: String)
+    case deleteFilmLiked(filmID: String)
+    case deleteFilmDisLiked(filmID: String)
     case filmWatchedPost(query: String, genres: [String], years: [Int])
     case filmWillWatchPost(query: String, genres: [String], years: [Int])
     case filmWatchedDelete(filmID: String)
@@ -56,6 +58,10 @@ enum FoodleTarget {
     case getAdminCollections
     case getAdminCollection(id: String)
     case globalSearch(query: String)
+//    case friendsRecommendation
+//    case friends
+//    case putFriends
+//    case 
 
     var isRequiredAuth: Bool {
         switch self {
@@ -101,6 +107,10 @@ extension FoodleTarget: TargetType {
         case let .filmLiked(filmID):
             return "films/\(filmID)/action/liked"
         case let .filmDisLiked(filmID):
+            return "films/\(filmID)/action/did_not_like"
+        case let .deleteFilmLiked(filmID):
+            return "films/\(filmID)/action/liked"
+        case let .deleteFilmDisLiked(filmID):
             return "films/\(filmID)/action/did_not_like"
         case .filmWatchedPost:
             return "me/watched"
@@ -174,6 +184,7 @@ extension FoodleTarget: TargetType {
             return "admin_collections/\(id)"
         case .globalSearch:
             return "films"
+
         }
     }
 
@@ -181,7 +192,7 @@ extension FoodleTarget: TargetType {
         switch self {
         case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollections, .getAdminCollection:
             return .get
-        case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview:
+        case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview, .deleteFilmLiked, .deleteFilmDisLiked:
             return .delete
         case .patchCollections, .editeProfile:
             return .patch

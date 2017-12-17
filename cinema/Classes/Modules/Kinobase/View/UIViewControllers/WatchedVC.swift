@@ -49,6 +49,10 @@ class WatchedVC: ParentViewController {
 
     let searchFilmGroup = FilmGroup()
 
+    var tableSizeHeight: CGFloat = 0
+
+    var query: String = ""
+
 //    var isFirstStart = true
 
     weak var delegate: WatchedFilmDelegate?
@@ -135,6 +139,8 @@ class WatchedVC: ParentViewController {
         heightLayout?.isActive = true
         tableView.tableHeaderView = stackView
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
+
+        tableSizeHeight = tableView.contentSize.height
     }
 
     func setFilmsAndCol(_ films: [Film], col: [Collection]) {
@@ -195,6 +201,11 @@ class WatchedVC: ParentViewController {
         }
 
         searchFilmGroup.films = films
+
+        tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableViewRowAnimation.none)
+
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+
     }
 
     func setStackViewHeight() {
@@ -204,6 +215,10 @@ class WatchedVC: ParentViewController {
             self.stackView.layoutIfNeeded()
         }
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
+       // UIView.animate(withDuration: 0) {
+//            tableView.layoutSubviews()
+//            tableView.layoutIfNeeded()
+      //  }
     }
 }
 
@@ -331,6 +346,10 @@ extension WatchedVC: FilmGroupDelegate {
     func openFilmID(_ filmID: String, name: String) {
         delegate?.openFilmID(filmID, name: name)
     }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+
+    }
 }
 
 extension WatchedVC: CollectionCellDelegate {
@@ -343,11 +362,15 @@ extension WatchedVC: CollectionCellDelegate {
 
 extension WatchedVC: SearchCommonDelegate {
     func changeText(_ text: String) {
-        if text.count >= 1 {
+        if text.count >= 2 {
+            if text == query {
+                return
+            }
             delegate?.getQueryWatched(text)
         } else {
             getSearch([])
         }
+        self.query = text
     }
 
     func tapFilter() {

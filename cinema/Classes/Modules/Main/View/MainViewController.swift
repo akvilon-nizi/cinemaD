@@ -458,6 +458,10 @@ extension MainViewController: FilmGroupDelegate {
         output.openFilm(videoID: filmID, name: name)
         navController.navigationBar.isHidden = true
     }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+
+    }
 }
 
 // MARK: - HeaderViewOpennedDelegate

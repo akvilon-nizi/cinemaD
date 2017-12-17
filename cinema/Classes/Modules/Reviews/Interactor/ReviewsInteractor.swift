@@ -37,7 +37,22 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                     }
                     .addDisposableTo(disposeBag)
             } else {
-
+                provider.requestModel(.deleteFilmLiked(filmID: filmID))
+                    .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                        switch response {
+                        case let .next(model):
+                            if model.code == 200 {
+                                self.output.changeStatus()
+                            } else {
+                                self.output.getError()
+                            }
+                        case let .error(error as ProviderError):
+                            self.output.getError()
+                        default:
+                            break
+                        }
+                    }
+                    .addDisposableTo(disposeBag)
             }
         } else {
             if status {
@@ -45,7 +60,7 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                     .subscribe { [unowned self] (response: Event<FilmResponse>) in
                         switch response {
                         case let .next(model):
-                            if model.message == L10n.filmResponseDidNotLike {
+                            if model.code == 200 {
                                 self.output.changeStatus()
                             } else {
                                 self.output.getError()
@@ -58,7 +73,22 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                     }
                     .addDisposableTo(disposeBag)
             } else {
-
+                provider.requestModel(.deleteFilmDisLiked(filmID: filmID))
+                    .subscribe { [unowned self] (response: Event<FilmResponse>) in
+                        switch response {
+                        case let .next(model):
+                            if model.code == 200 {
+                                self.output.changeStatus()
+                            } else {
+                                self.output.getError()
+                            }
+                        case let .error(error as ProviderError):
+                            self.output.getError()
+                        default:
+                            break
+                        }
+                    }
+                    .addDisposableTo(disposeBag)
             }
         }
     }

@@ -10,6 +10,7 @@ import UIKit
 
 protocol FilmGroupDelegate: class {
     func openFilmID(_ filmID: String, name: String)
+    func changeStatusFilm(_ film: Film, isAdd: Bool)
 }
 
 class FilmGroup: UITableViewHeaderFooterView {
@@ -76,6 +77,7 @@ extension FilmGroup: UICollectionViewDelegate {
             if let tagCell = cell as? FilmsCollectionCell {
                 if isAdd {
                     films[indexPath.row].add = !films[indexPath.row].add
+                    delegate?.changeStatusFilm(films[indexPath.row], isAdd: films[indexPath.row].add)
                 } else {
                     films[indexPath.row].delete = !films[indexPath.row].delete
                 }
@@ -106,6 +108,8 @@ extension FilmGroup: UICollectionViewDataSource {
                 tagCell.isAdd = isAdd
                 if films[indexPath.row].delete || films[indexPath.row].add {
                     tagCell.isCheck = true
+                } else {
+                    tagCell.isCheck = false
                 }
             }
         }
