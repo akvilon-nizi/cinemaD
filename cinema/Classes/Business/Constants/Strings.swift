@@ -2,7 +2,6 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -109,19 +108,19 @@ enum L10n {
   static let filmResponseDeleteCollection = L10n.tr("Localizable", "film-response-delete-collection")
   /// film removed from this collection
   static let filmResponseDeleteFilmCollection = L10n.tr("Localizable", "film-response-delete-film-collection")
-  /// film append to the 'did_not_like'
+  /// film remove from the "did_not_like"
   static let filmResponseDidNotLike = L10n.tr("Localizable", "film-response-did-not-like")
-  /// film append to the 'liked'
+  /// film append to the "liked"
   static let filmResponseLiked = L10n.tr("Localizable", "film-response-liked")
   /// film append to this collection
   static let filmResponsePutCollection = L10n.tr("Localizable", "film-response-put-collection")
-  /// film append to the 'watched'
+  /// film append to the "watched"
   static let filmResponseWatched = L10n.tr("Localizable", "film-response-watched")
-  /// film remove from the 'watched'
+  /// film remove from the "watched"
   static let filmResponseWatchedDelete = L10n.tr("Localizable", "film-response-watched-delete")
-  /// film append to the 'will_watch'
+  /// film append to the "will_watch"
   static let filmResponseWillWatch = L10n.tr("Localizable", "film-response-will_watch")
-  /// film remove from the 'will_watch'
+  /// film remove from the "will_watch"
   static let filmResponseWillWatchDelete = L10n.tr("Localizable", "film-response-will_watch-delete")
   /// Поиск
   static let filmSearchPlaceholder = L10n.tr("Localizable", "film-search-placeholder")

@@ -24,7 +24,7 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                     .subscribe { [unowned self] (response: Event<FilmResponse>) in
                         switch response {
                         case let .next(model):
-                            if model.message.first == L10n.filmResponseLiked {
+                            if model.message == L10n.filmResponseLiked {
                                 self.output.changeStatus()
                             } else {
                                 self.output.getError()
@@ -45,7 +45,7 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                     .subscribe { [unowned self] (response: Event<FilmResponse>) in
                         switch response {
                         case let .next(model):
-                            if model.message.first == L10n.filmResponseDidNotLike {
+                            if model.message == L10n.filmResponseDidNotLike {
                                 self.output.changeStatus()
                             } else {
                                 self.output.getError()

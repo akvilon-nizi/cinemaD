@@ -19,6 +19,8 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
 
     weak var delegate: ReviewsHeaderViewDelegate?
 
+    var film: FullFilm?
+
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaBold(size: 20)
@@ -33,29 +35,9 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
         return label
     } ()
 
-    let willWatchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(L10n.reviewsDislikeText, for: .normal)
-        button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
-        button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
-        button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
-        button.heightAnchor ~= 33
-        button.tag = 1
-        button.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
-        return button
-    }()
+    let likedView = LikedView(isLike: true)
 
-    let watchedButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(L10n.reviewsLikeText, for: .normal)
-        button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
-        button.titleLabel?.textAlignment = .center
-        button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
-        button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
-        button.heightAnchor ~= 33
-        button.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
-        return button
-    }()
+    let dislikedView = LikedView(isLike: false)
 
     let separatorView: UIView = {
         let view = UIView()
@@ -82,17 +64,18 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
         genresLabel.topAnchor ~= titleLabel.bottomAnchor
         genresLabel.centerXAnchor ~= centerXAnchor
 
-        willWatchButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-        watchedButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-
-        let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [watchedButton, separatorView, willWatchButton])
+        let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [likedView, separatorView, dislikedView])
         addSubview(buttonsStack.prepareForAutoLayout())
         buttonsStack.centerXAnchor ~= centerXAnchor
         buttonsStack.topAnchor ~= genresLabel.bottomAnchor + 24
         buttonsStack.bottomAnchor ~= bottomAnchor
+
+        likedView.delegate = self
+        dislikedView.delegate = self
     }
 
     func setParameters(film: FullFilm) {
+        self.film = film
         titleLabel.text = film.name
         var textsArray: [String] = []
         for genres in film.genres {
@@ -101,32 +84,56 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
             }
         }
 
+        likedView.count = film.liked
+        dislikedView.count = film.notLiked
+
         genresLabel.text = textsArray.joined(separator: "/")
         if let iLiked = film.iLiked {
             if iLiked {
-                watchedButton.isSelected = true
+                likedView.didSelect = true
+                dislikedView.didSelect = false
             } else {
-                willWatchButton.isSelected = true
+                likedView.didSelect = false
+                dislikedView.didSelect = true
             }
         }
     }
+}
 
-    func tapButton(button: UIButton) {
-        if button.tag == 0 {
-            watchedButton.isSelected = !watchedButton.isSelected
-            if watchedButton.isSelected {
-                willWatchButton.isSelected = false
+extension ReviewsHeaderView: LikedViewDelegate {
+    func changeStatus(isLike: Bool, isSelect: Bool) {
+        guard let filmInfo = film else {
+            return
+        }
+        if isLike {
+            if isSelect {
                 delegate?.selectLike()
+                filmInfo.liked += 1
+                filmInfo.iLiked = true
+                if dislikedView.didSelect {
+                    filmInfo.notLiked -= 1
+                    dislikedView.didSelect = false
+                    dislikedView.count = filmInfo.notLiked
+                }
             } else {
                 delegate?.unselectLike()
+                filmInfo.liked -= 1
+                filmInfo.iLiked = nil
             }
         } else {
-             willWatchButton.isSelected = !willWatchButton.isSelected
-            if willWatchButton.isSelected {
-                watchedButton.isSelected = false
+            if isSelect {
                 delegate?.selectDislike()
+                filmInfo.notLiked += 1
+                filmInfo.iLiked = false
+                if likedView.didSelect {
+                    filmInfo.liked -= 1
+                    likedView.didSelect = false
+                    likedView.count = filmInfo.liked
+                }
             } else {
                 delegate?.unselectDislike()
+                filmInfo.notLiked -= 1
+                filmInfo.iLiked = nil
             }
         }
     }

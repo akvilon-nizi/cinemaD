@@ -32,8 +32,8 @@ class FullFilm: ImmutableMappable {
     let myRate: Double
     let trailer: String
     var iLiked: Bool?
-    let notLiked: Int
-    let liked: Int
+    var notLiked: Int
+    var liked: Int
 
     private let idKey = "id"
     private let nameKey = "name"

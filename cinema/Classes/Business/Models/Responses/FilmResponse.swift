@@ -10,15 +10,19 @@ import ObjectMapper
 
 class FilmResponse: ImmutableMappable {
 
-    let message: [String]
+    let message: String
+    let code: Int
 
     private let messageKey = "message"
+    private let codeKey = "status"
 
     required init(map: Map) throws {
         message = try map.value(messageKey)
+        code = try map.value(codeKey)
     }
 
     func mapping(map: Map) {
         message >>> map[messageKey]
+        code >>> map[codeKey]
     }
 }

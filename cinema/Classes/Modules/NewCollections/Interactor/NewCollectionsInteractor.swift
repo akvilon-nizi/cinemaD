@@ -58,7 +58,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponsePutCollection {
+                    if model.message == L10n.filmResponsePutCollection {
                         filmsCol.remove(at: 0)
                         if filmsCol.isEmpty {
                             self.output.getSeccess(message: L10n.alertCollectionsAdd)
@@ -83,7 +83,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseDeleteFilmCollection {
+                    if model.message == L10n.filmResponseDeleteFilmCollection {
                         filmsCol.remove(at: 0)
                         if filmsCol.isEmpty {
                             self.output.getSeccess(message: L10n.alertCollectionsRemove)
@@ -122,7 +122,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.collectionsUpdateMessage {
+                    if model.message == L10n.collectionsUpdateMessage {
                         self.output.getSeccess(message: L10n.alertCollectionsChange)
                     } else {
                         self.output.getError()

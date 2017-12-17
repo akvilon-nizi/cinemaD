@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-class FilmWatchResponse: FilmResponse {
+class FilmWatchResponse: ImmutableMappable {
 
     let rate: Double
 
@@ -16,11 +16,9 @@ class FilmWatchResponse: FilmResponse {
 
     required init(map: Map) throws {
         rate = try map.value(rateKey)
-        try super.init(map: map)
     }
 
-    override func mapping(map: Map) {
-        super.mapping(map: map)
+    func mapping(map: Map) {
         rate >>> map[rateKey]
     }
 }

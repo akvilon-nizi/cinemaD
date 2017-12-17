@@ -113,15 +113,15 @@
 "film-watch-alert" = "Фильм появился в Кинобазе!";
 
 //Film respons
-"film-response-watched" = "film append to the 'watched'";
-"film-response-watched-delete" = "film remove from the 'watched'";
-"film-response-will_watch" = "film append to the 'will_watch'";
-"film-response-will_watch-delete" = "film remove from the 'will_watch'";
+"film-response-watched" = "film append to the \"watched\"";
+"film-response-watched-delete" = "film remove from the \"watched\"";
+"film-response-will_watch" = "film append to the \"will_watch\"";
+"film-response-will_watch-delete" = "film remove from the \"will_watch\"";
 "film-response-put-collection" = "film append to this collection";
 "film-response-delete-collection" = "collection removed";
 "film-response-delete-film-collection" = "film removed from this collection";
-"film-response-did-not-like" = "film append to the 'did_not_like'";
-"film-response-liked" = "film append to the 'liked'";
+"film-response-did-not-like" = "film remove from the \"did_not_like\"";
+"film-response-liked" = "film append to the \"liked\"";
 
 //Kinobase
 "kinobase-title-text" = "Кинобаза";

@@ -38,11 +38,12 @@ extension FilmInteractor: FilmInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmWatchResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWatched {
-                        self.output.getRate(model.rate)
-                    } else {
-                        self.output.getError()
-                    }
+                    print(model.rate)
+//                    if model.message == L10n.filmResponseWatched {
+//                        self.output.getRate(model.rate)
+//                    } else {
+//                        self.output.getError()
+//                    }
                 case let .error(error as ProviderError):
                     print()
                     self.output.getError()
@@ -59,7 +60,7 @@ extension FilmInteractor: FilmInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWillWatch {
+                    if model.message == L10n.filmResponseWillWatch {
                         self.output.changeStatus()
                     } else {
                         self.output.getError()
@@ -79,7 +80,7 @@ extension FilmInteractor: FilmInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWatchedDelete {
+                    if model.message == L10n.filmResponseWatchedDelete {
                         self.output.changeStatus()
                     } else {
                         self.output.getError()
@@ -99,7 +100,7 @@ extension FilmInteractor: FilmInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWillWatchDelete {
+                    if model.message == L10n.filmResponseWillWatchDelete {
                         self.output.changeStatus()
                     } else {
                         self.output.getError()

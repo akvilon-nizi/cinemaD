@@ -8,69 +8,92 @@
 
 import UIKit
 
+protocol LikedViewDelegate: class {
+    func changeStatus(isLike: Bool, isSelect: Bool)
+}
+
 class LikedView: UIView {
 
-    //UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ?
+    weak var delegate: LikedViewDelegate?
 
-    var text: String? {
+    var count: Int = 0 {
         didSet {
-            nameSettingLabel.text = text
+            countLabel.text = String(describing: count)
         }
     }
 
-    private let nameSettingLabel: UILabel = {
+    private let countLabel: UILabel = {
         let label = UILabel()
         let size: CGFloat = 14
+        label.text = "0"
         label.font = UIFont.cnmFuturaLight(size: size)
-        label.textColor = UIColor.cnm3a3a3a
         label.numberOfLines = 1
         return label
     }()
 
-    private let selectImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.heightAnchor ~= 21
-        imageView.widthAnchor ~= 21
-        return imageView
+    private let likeButton: UIButton = {
+        let button = UIButton()
+        button.heightAnchor ~= 33
+        button.widthAnchor ~= 33
+        return button
     }()
+
+    private var isLike: Bool = true
+
+    var didSelect: Bool = false {
+        didSet {
+            if didSelect {
+                countLabel.textColor = UIColor.setColorGray(white: 46)
+                likeButton.isSelected = true
+            } else {
+                countLabel.textColor = UIColor.setColorGray(white: 46, alpha: 0.4)
+                likeButton.isSelected = false
+            }
+        }
+    }
+
+    private let inset: CGFloat = 40.0
 
     required init(coder _: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
-    var didSelect: Bool = false {
-        didSet {
-            if didSelect {
-                selectImage.image = Asset.Kinobase.check28.image
-            } else {
-                selectImage.image = Asset.Kinobase.cicle.image
-            }
-        }
-    }
-
-    init() {
+    init(isLike: Bool) {
+        self.isLike = isLike
         super.init(frame: .zero)
 
-        heightAnchor ~= 65
+        heightAnchor ~= 33
+        widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
 
-        let leading: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 34 : 54
+        addSubview(likeButton.prepareForAutoLayout())
 
-        addSubview(nameSettingLabel.prepareForAutoLayout())
-        nameSettingLabel.leadingAnchor ~= leadingAnchor + leading
-        nameSettingLabel.centerYAnchor ~= centerYAnchor
+        addSubview(countLabel.prepareForAutoLayout())
+        countLabel.centerYAnchor ~= centerYAnchor
 
-        let trailing: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 40 : 60
+        if isLike {
+            likeButton.centerYAnchor ~= centerYAnchor - 5
+            likeButton.trailingAnchor ~= trailingAnchor - inset
+            countLabel.trailingAnchor ~= likeButton.leadingAnchor - 10
+            likeButton.setImage(Asset.Cinema.likeUnselect.image, for: .normal)
+            likeButton.setImage(Asset.Cinema.likeSelect.image, for: .selected)
+        } else {
+            likeButton.centerYAnchor ~= centerYAnchor + 5
+            likeButton.leadingAnchor ~= leadingAnchor + inset
+            countLabel.leadingAnchor ~= likeButton.trailingAnchor + 10
+            likeButton.setImage(Asset.Cinema.dislikeUnselect.image, for: .normal)
+            likeButton.setImage(Asset.Cinema.dislikeSelect.image, for: .selected)
+        }
 
-        addSubview(selectImage.prepareForAutoLayout())
-        selectImage.centerYAnchor ~= centerYAnchor
-        selectImage.trailingAnchor ~= trailingAnchor - trailing
+        likeButton.addTarget(self, action: #selector(changeStatus), for: .touchUpInside)
+    }
 
-        let separatorView = UIView()
-        separatorView.backgroundColor = .cnmDadada
-        addSubview(separatorView.prepareForAutoLayout())
-        separatorView.bottomAnchor ~= bottomAnchor
-        separatorView.trailingAnchor ~= trailingAnchor - 24
-        separatorView.leadingAnchor ~= leadingAnchor + 24
-        separatorView.heightAnchor ~= 1
+    func changeStatus() {
+        didSelect = !didSelect
+        delegate?.changeStatus(isLike: isLike, isSelect: didSelect)
+        if didSelect {
+            count += 1
+        } else {
+            count -= 1
+        }
     }
 }
