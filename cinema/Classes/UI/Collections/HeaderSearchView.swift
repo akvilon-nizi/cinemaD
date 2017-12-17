@@ -48,13 +48,13 @@ class HeaderSearchView: UITableViewHeaderFooterView {
         titleField.leftView = leftView
         titleField.leftViewMode = .always
 
-        rightButton.setImage(Asset.Search.type.image, for: .normal)
-        rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
-        let rightView = UIView()
-        rightView.frame = CGRect(x: 0, y: 0, width: 68, height: 20)
-        rightView.addSubview(rightButton)
-        titleField.rightView = rightView
-        titleField.rightViewMode = .always
+//        rightButton.setImage(Asset.Search.type.image, for: .normal)
+//        rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
+//        let rightView = UIView()
+//        rightView.frame = CGRect(x: 0, y: 0, width: 68, height: 20)
+//        rightView.addSubview(rightButton)
+//        titleField.rightView = rightView
+//        titleField.rightViewMode = .always
 
         titleField.rx.text.orEmpty
             .skip(1)

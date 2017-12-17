@@ -58,10 +58,10 @@ enum FoodleTarget {
     case getAdminCollections
     case getAdminCollection(id: String)
     case globalSearch(query: String)
-//    case friendsRecommendation
-//    case friends
-//    case putFriends
-//    case 
+    case friendsRecommendation
+    case friends
+    case putFriends(id: String)
+    case friendsNews
 
     var isRequiredAuth: Bool {
         switch self {
@@ -184,19 +184,26 @@ extension FoodleTarget: TargetType {
             return "admin_collections/\(id)"
         case .globalSearch:
             return "films"
-
+        case .friendsRecommendation:
+            return "friends/recommendations"
+        case .friends:
+            return "friends"
+        case .putFriends:
+            return "friends"
+        case .friendsNews:
+            return "friends/news"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollections, .getAdminCollection:
+        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollection, .friendsRecommendation, .friendsNews, .friends:
             return .get
-        case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview, .deleteFilmLiked, .deleteFilmDisLiked:
+    case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview, .deleteFilmLiked, .deleteFilmDisLiked:
             return .delete
         case .patchCollections, .editeProfile:
             return .patch
-        case .putCollections, .putFilm, .putNewsComment, .putReview:
+        case .putCollections, .putFilm, .putNewsComment, .putReview, .putFriends:
             return .put
         default:
             return .post
@@ -207,6 +214,8 @@ extension FoodleTarget: TargetType {
         switch self {
         case let .registration(password, name, phone):
             return ["password": password, "phone": phone, "name": name]
+        case let .putFriends(id):
+            return ["id": id]
         case let .restore(phone):
             return ["phone": phone]
         case let .restoreFromUid(_, code):
