@@ -19,6 +19,8 @@ class ProfileViewController: ParentViewController {
 
     var userName: String = ""
 
+    let refreshControl = UIRefreshControl()
+
     let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
 
     // MARK: - Life cycle
@@ -67,6 +69,9 @@ class ProfileViewController: ParentViewController {
 
         tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
 
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+       // tableView.addSubview(refreshControl)
+
         profileHeader.delegate = self
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = appDelegate.profile {
             profileHeader.setProfileInfo(profile: profile)
@@ -78,6 +83,10 @@ class ProfileViewController: ParentViewController {
         activityVC.isHidden = false
         activityVC.color = UIColor.cnmMainOrange
         view.bringSubview(toFront: activityVC)
+    }
+
+    func refresh() {
+//        delegate?.refreshes()
     }
 
     // MARK: - Actions
@@ -102,6 +111,8 @@ extension ProfileViewController: ProfileViewInput {
         activityVC.isHidden = true
         activityVC.stopAnimating()
     }
+
+//    refreshControl.endRefreshing()
 
     func getData(_ films: [FilmCollections]) {
 

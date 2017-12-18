@@ -12,7 +12,7 @@ class FilmWatchResponse: ImmutableMappable {
 
     let rate: Double
 
-    private let rateKey = "rate"
+    private let rateKey = "my_rate"
 
     required init(map: Map) throws {
         rate = try map.value(rateKey)

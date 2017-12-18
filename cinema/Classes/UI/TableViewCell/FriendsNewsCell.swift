@@ -1,22 +1,24 @@
 //
-//  FriendsListCell.swift
+//  FriendsNewsCell.swift
 //  cinema
 //
-//  Created by iOS on 11.12.17.
+//  Created by User on 17.12.17.
 //  Copyright © 2017 Heads and Hands. All rights reserved.
 //
 
 import UIKit
 
-protocol FriendsListCellDelegate: class {
-    func tapButtonChat(_ index: Int)
-}
+//protocol FriendsListCellDelegate: class {
+//    func tapButtonChat(_ index: Int)
+//}
 
 // MARK: - FriendsListCell
 
-class FriendsListCell: UITableViewCell {
+class FriendsNewsCell: UITableViewCell {
 
     weak var delegate: FriendsListCellDelegate?
+
+    private let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4 + 20
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -24,6 +26,14 @@ class FriendsListCell: UITableViewCell {
         label.font = UIFont.cnmFuturaLight(size: size)
         label.textColor = UIColor.cnmBlue
         label.numberOfLines = 3
+        return label
+    }()
+
+    private let newsTitleLabel: UILabel = {
+        let label = UILabel()
+        let size: CGFloat = 14
+        label.font = UIFont.cnmFuturaLight(size: size)
+        label.textColor = UIColor.setColorGray(white: 61)
         return label
     }()
 
@@ -36,6 +46,8 @@ class FriendsListCell: UITableViewCell {
         image.image = Asset.Cinema.Profile.userPlaceholder.image
         return image
     }()
+
+    private let filmGroup = FilmGroup()
 
     var name: String = "" {
         didSet {
@@ -61,36 +73,45 @@ class FriendsListCell: UITableViewCell {
         let leading: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 20 : 27
 
         contentView.addSubview(userImage.prepareForAutoLayout())
-        userImage.centerYAnchor ~= contentView.centerYAnchor
+        userImage.topAnchor ~= contentView.topAnchor + 18
         userImage.leadingAnchor ~= contentView.leadingAnchor + leading
 
         contentView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.centerYAnchor ~= centerYAnchor
+        titleLabel.centerYAnchor ~= userImage.centerYAnchor
         titleLabel.leadingAnchor ~= userImage.trailingAnchor + 13
+        titleLabel.trailingAnchor ~= contentView.trailingAnchor - 10
 
-        contentView.addSubview(button.prepareForAutoLayout())
-        button.centerYAnchor ~= centerYAnchor
-        button.trailingAnchor ~= trailingAnchor - 40
-        button.setImage(Asset.Cinema.chatButton.image, for: .normal)
-        button.addTarget(self, action: #selector(chatButtonHandlerTap), for: .touchUpInside)
-        button.isHidden = true
+        contentView.addSubview(newsTitleLabel.prepareForAutoLayout())
+        newsTitleLabel.topAnchor ~= userImage.bottomAnchor + 16
+        newsTitleLabel.leadingAnchor ~= titleLabel.leadingAnchor
 
-        contentView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.centerYAnchor ~= centerYAnchor
-        titleLabel.leadingAnchor ~= userImage.trailingAnchor + 34
-        titleLabel.trailingAnchor ~= button.leadingAnchor - 10
+        contentView.addSubview(filmGroup.prepareForAutoLayout())
+        filmGroup.heightAnchor ~= windowWidth
+        filmGroup.widthAnchor ~= contentView.widthAnchor
+        filmGroup.topAnchor ~= newsTitleLabel.bottomAnchor
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
         contentView.addSubview(separatorView.prepareForAutoLayout())
+        separatorView.topAnchor ~= filmGroup.bottomAnchor
         separatorView.bottomAnchor ~= contentView.bottomAnchor
         separatorView.trailingAnchor ~= contentView.trailingAnchor - 24
         separatorView.leadingAnchor ~= titleLabel.leadingAnchor
         separatorView.heightAnchor ~= 1
     }
 
-    func setUserInfo(name: String, imageLink: String) {
-
+    func setUserInfo(info: FriendsNewsForView) {
+        titleLabel.text = info.name
+        userImage.kf.setImage(with: URL(string: info.avatar))
+        newsTitleLabel.text = info.type.rawValue
+        switch info.type {
+        case .watched:
+            filmGroup.films = info.todayWatched
+        case .willWatch:
+            filmGroup.films = info.todayWillWatch
+        default:
+            return
+        }
     }
 
     override func layoutSubviews() {
@@ -108,6 +129,6 @@ class FriendsListCell: UITableViewCell {
     }
 
     static var reuseIdentifier: String {
-        return "FriendsListCell"
+        return "FriendsNewsCell"
     }
 }

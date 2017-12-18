@@ -24,7 +24,6 @@ class FriendsAddCell: UITableViewCell {
         label.font = UIFont.cnmFuturaLight(size: size)
         label.textColor = UIColor.cnmBlue
         label.numberOfLines = 3
-        label.text = "Владимирович Владимир"
         return label
     }()
 
@@ -46,6 +45,7 @@ class FriendsAddCell: UITableViewCell {
         button.setTitle("Добавить", for: .normal)
         button.titleLabel?.font = .cnmFuturaLight(size: 12)
         button.setTitleColor(UIColor.cnmMainOrange, for: .normal)
+        button.setTitleColor(UIColor.cnmGreyColor, for: .disabled)
         button.layer.cornerRadius = 5.0
         button.layer.borderColor = UIColor.cnmMainOrange.cgColor
         button.layer.borderWidth = 1.0
@@ -53,7 +53,25 @@ class FriendsAddCell: UITableViewCell {
         return button
     }()
 
+    var name: String = "" {
+        didSet{
+            titleLabel.text = name
+        }
+    }
+
     var index: Int = 0
+
+    var buttonIsEnabled = true {
+        didSet {
+            if buttonIsEnabled {
+                addButton.layer.borderColor = UIColor.cnmMainOrange.cgColor
+                addButton.isEnabled = true
+            } else {
+                addButton.layer.borderColor = UIColor.cnmGreyColor.cgColor
+                addButton.isEnabled = false
+            }
+        }
+    }
 
     required init?(coder _: NSCoder) {
         fatalError("NSCoding not supported")

@@ -5,6 +5,21 @@
 
 import Foundation
 
+enum FriendsNewsType: String {
+    case willWatch = "Будет смотреть:"
+    case watched = "Посмотрел:"
+}
+
+struct FriendsNewsForView {
+    var avatar: String = ""
+    var name: String = ""
+    var todayAwards: [TodayAwards]
+    var todayFriends: [Creator]
+    var todayWatched: [Film]
+    var todayWillWatch: [Film]
+    var type: FriendsNewsType = .watched
+}
+
 class FriendsPresenter {
 
     weak var view: FriendsViewInput!
@@ -26,11 +41,36 @@ extension FriendsPresenter: FriendsViewOutput {
 
     func viewIsReady() {
         log.verbose("Friends is ready")
+        interactor.getData()
+    }
+
+    func addFriend(id: String) {
+        interactor.addFriend(id: id)
     }
 }
 
 // MARK: - FriendsInteractorOutput
 
 extension FriendsPresenter: FriendsInteractorOutput {
+    func getError() {
+        view.showNetworkError()
+    }
 
+    func getData(data: FriendsData) {
+        var dataNews = data
+        for news in data.news {
+            if !news.todayWatched.isEmpty {
+                dataNews.newsView.append(FriendsNewsForView(avatar: news.avatar, name: news.name, todayAwards: [], todayFriends: [], todayWatched: news.todayWatched, todayWillWatch: [], type: .watched))
+            }
+
+            if !news.todayWillWatch.isEmpty {
+                dataNews.newsView.append(FriendsNewsForView(avatar: news.avatar, name: news.name, todayAwards: [], todayFriends: [], todayWatched: [], todayWillWatch: news.todayWillWatch, type: .willWatch))
+            }
+        }
+        view.getData(data: dataNews)
+    }
+
+    func addedFriend() {
+        view.addedFriend()
+    }
 }

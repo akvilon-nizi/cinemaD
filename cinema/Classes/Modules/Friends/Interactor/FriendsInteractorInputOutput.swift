@@ -6,9 +6,12 @@
 import Foundation
 
 protocol FriendsInteractorInput {
-
+    func getData()
+    func addFriend(id: String)
 }
 
 protocol FriendsInteractorOutput: class {
-
+    func getError()
+    func getData(data: FriendsData)
+    func addedFriend()
 }

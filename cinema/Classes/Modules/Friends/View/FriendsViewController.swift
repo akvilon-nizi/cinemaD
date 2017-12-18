@@ -19,6 +19,12 @@ class FriendsViewController: ParentViewController {
 
     var container = UIView()
 
+    let listFriendsVC = ListFriendsVC()
+
+    let addFriendsVC = AddFriendsVC()
+
+    let newsFriendsVC = NewsFriendVC()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -26,14 +32,8 @@ class FriendsViewController: ParentViewController {
     }
 
     init() {
-        let view1 = ListFriendsVC()
 
-        let view2 = AddFriendsVC()
-
-        let view3 = UIViewController()
-        view3.view.backgroundColor = .green
-
-        controllers = [view1, view2, view3]
+        controllers = [listFriendsVC, addFriendsVC, newsFriendsVC]
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -52,6 +52,8 @@ class FriendsViewController: ParentViewController {
         output.viewIsReady()
 
         view.backgroundColor = .white
+
+        addFriendsVC.delegate = self
 
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
@@ -118,6 +120,21 @@ class FriendsViewController: ParentViewController {
 // MARK: - FriendsViewInput
 
 extension FriendsViewController: FriendsViewInput {
+    func getData(data: FriendsData) {
+        listFriendsVC.setFriends(data.friends)
+        addFriendsVC.setFriends(data.recomendaions)
+        newsFriendsVC.setNews(data.newsView)
+    }
+
+    func addedFriend() {
+        addFriendsVC.seccessAdded()
+    }
+
+    func showNetworkError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
 
     func setupInitialState() {
 
@@ -135,5 +152,13 @@ extension FriendsViewController: NavTabBarDelegate {
             completion: nil
         )
        // currentIndex = 1
+    }
+}
+
+// MARK: - AddFriendsVCDelegate
+
+extension FriendsViewController: AddFriendsVCDelegate {
+    func addFriend(id: String) {
+        output.addFriend(id: id)
     }
 }

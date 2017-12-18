@@ -40,7 +40,7 @@ extension FilmInteractor: FilmInteractorInput {
                 case let .next(model):
                     print(model.rate)
 //                    if model.message == L10n.filmResponseWatched {
-//                        self.output.getRate(model.rate)
+                        self.output.getRate(model.rate)
 //                    } else {
 //                        self.output.getError()
 //                    }
@@ -57,14 +57,15 @@ extension FilmInteractor: FilmInteractorInput {
     func filmWillWatch(videoID: String) {
         disposeBag = DisposeBag()
         provider.requestModel(.filmWillWatch(filmID: videoID))
-            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+            .subscribe { [unowned self] (response: Event<FilmWatchResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message == L10n.filmResponseWillWatch {
+                    print()
+//                    if model.message == L10n.filmResponseWillWatch {
                         self.output.changeStatus()
-                    } else {
-                        self.output.getError()
-                    }
+//                    } else {
+//                        self.output.getError()
+//                    }
                 case let .error(error as ProviderError):
                     self.output.getError()
                 default:

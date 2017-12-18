@@ -197,7 +197,9 @@ extension FoodleTarget: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case  .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollection, .friendsRecommendation, .friendsNews, .friends:
+        case .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollection, .friendsRecommendation, .friendsNews, .friends:
+            return .get
+        case .getAdminCollections:
             return .get
     case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview, .deleteFilmLiked, .deleteFilmDisLiked:
             return .delete
