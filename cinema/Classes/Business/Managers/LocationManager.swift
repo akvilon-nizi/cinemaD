@@ -36,6 +36,7 @@ class LocationManager: NSObject, LocationManagerProtocol {
         super.init()
 
         locationManager.delegate = self
+        locationManager.distanceFilter = 500
     }
 
     func startMonitoringLocation() {
@@ -61,7 +62,7 @@ extension LocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last
-        print("assa location", location ?? "assa location 0")
+        output?.didUpdate(location: location)
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

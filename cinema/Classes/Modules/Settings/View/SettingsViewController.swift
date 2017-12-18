@@ -4,12 +4,15 @@
 //
 
 import UIKit
+import VKSdkFramework
 
 class SettingsViewController: ParentViewController {
 
     var output: SettingsViewOutput!
 
     let saveButton = UIButton()
+
+    let location = SettingsView()
 
     // MARK: - Life cycle
 
@@ -35,6 +38,8 @@ class SettingsViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        let sdk = VKSdk.initialize(withAppId: "6258240")
+
         view.backgroundColor = .white
 
         let backButton = UIButton()
@@ -47,7 +52,7 @@ class SettingsViewController: ParentViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         saveButton.setImage(Asset.Kinobase.checkMini.image, for: .normal)
-//        saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
         saveButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         frame = saveButton.frame
         frame.size = CGSize(width: 30, height: 100)
@@ -58,9 +63,8 @@ class SettingsViewController: ParentViewController {
         titleViewLabel.text = L10n.settingsTitleText
         titleViewLabel.font = UIFont.cnmFutura(size: 20)
 
-        let location = SettingsView()
         location.text = L10n.settingsLocationPlace
-        location.didSelect = false
+        location.didSelect = UserDefaults.standard.bool(forKey: "isLocation")
 
         let nightTheme = SettingsView()
         nightTheme.text = L10n.settingsNightTheme
@@ -80,7 +84,9 @@ class SettingsViewController: ParentViewController {
         tellFriends.text = L10n.settingsTellFriends
         tellFriends.tag = 4
 
-        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, nightTheme, pushMessage, rateApp, tellFriends])
+//        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, nightTheme, pushMessage, rateApp, tellFriends])
+
+        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, tellFriends])
 
         view.addSubview(stackView.prepareForAutoLayout())
         stackView.topAnchor ~= view.topAnchor + 88
@@ -93,6 +99,8 @@ class SettingsViewController: ParentViewController {
         nightTheme.addGestureRecognizer(tap2)
         let tap3 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         pushMessage.addGestureRecognizer(tap3)
+        let tap5 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tellFriends.addGestureRecognizer(tap5)
     }
 
     // MARK: - Actions
@@ -102,9 +110,34 @@ class SettingsViewController: ParentViewController {
 
     func handleTap(sender: UITapGestureRecognizer) {
         if let view = sender.view as? SettingsView {
-            view.didSelect = !view.didSelect
+            if view.tag == 0 {
+                view.didSelect = !view.didSelect
+            } else {
+                didTapSharingButton()
+            }
         }
     }
+
+    func didTapSaveButton() {
+        output.saveButtonTap(location.didSelect)
+    }
+
+    func didTapSharingButton() {
+        let image = Asset.Cinema.sharingImage.image
+        let vkShare = VKShareDialogController()
+        vkShare.text = "Как тебе моя коллекция фильмов? Здесь можешь собрать свою!"
+
+        let img = VKUploadImage(image: image, andParams: nil)
+        let link = URL(string: Configurations.linkShare)
+        vkShare.shareLink = VKShareLink(title: "Cinemad", link: link)
+        vkShare.uploadImages = [img as Any]
+
+        vkShare.completionHandler = { result, str  in
+            self.dismiss(animated: true, completion: nil)
+        }
+        present(vkShare, animated: true, completion: nil)
+    }
+
 }
 
 // MARK: - SettingsViewInput

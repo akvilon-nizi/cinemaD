@@ -21,7 +21,7 @@ class MainConfigurator {
         let router = MainRouter()
         router.appRouter = appRouter
 
-        let presenter = MainPresenter()
+        let presenter = MainPresenter(locationManager: locationManager)
         presenter.router = router
         presenter.locationManager = locationManager
 

@@ -25,7 +25,7 @@ extension NewsInteractor: NewsInteractorInput {
                 case let .next(model):
                     self.newsData.news = model
                     self.getComment(newsID: newsID)
-                case let .error(error as ProviderError):                    print()
+                case let .error(error as ProviderError):
                     self.output.getError()
                 default:
                     break

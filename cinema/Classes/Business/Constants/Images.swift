@@ -10,6 +10,7 @@
   typealias Image = UIImage
 #endif
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
@@ -45,6 +46,19 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
+  enum Kinobase {
+    static let check = ImageAsset(name: "check")
+    static let check28 = ImageAsset(name: "check28")
+    static let checkMini = ImageAsset(name: "checkMini")
+    static let cicle = ImageAsset(name: "cicle")
+    static let close = ImageAsset(name: "close")
+    static let enter = ImageAsset(name: "enter")
+    static let forward = ImageAsset(name: "forward")
+    static let remove = ImageAsset(name: "remove")
+    static let remove28 = ImageAsset(name: "remove28")
+    static let settings = ImageAsset(name: "settings")
+    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
+  }
   enum Cinema {
     static let backImage = ImageAsset(name: "backImage")
     static let chatButton = ImageAsset(name: "chatButton")
@@ -78,14 +92,15 @@ enum Asset {
     static let play = ImageAsset(name: "play")
     static let plus = ImageAsset(name: "plus")
     enum Profile {
+      static let userPlaceholder = ImageAsset(name: "UserPlaceholder")
       static let friendsProfile = ImageAsset(name: "friendsProfile")
       static let rewardsProfile = ImageAsset(name: "rewardsProfile")
       static let settingsOrange = ImageAsset(name: "settingsOrange")
-      static let userPlaceholder = ImageAsset(name: "UserPlaceholder")
       static let watchProfile = ImageAsset(name: "watchProfile")
     }
     static let selectStar = ImageAsset(name: "selectStar")
     static let sharing = ImageAsset(name: "sharing")
+    static let sharingImage = ImageAsset(name: "sharingImage")
     static let sharingOrange = ImageAsset(name: "sharingOrange")
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
@@ -103,19 +118,6 @@ enum Asset {
     static let vader = ImageAsset(name: "vader")
   }
   static let dislikeSelect = ImageAsset(name: "dislikeSelect")
-  enum Kinobase {
-    static let check = ImageAsset(name: "check")
-    static let check28 = ImageAsset(name: "check28")
-    static let checkMini = ImageAsset(name: "checkMini")
-    static let cicle = ImageAsset(name: "cicle")
-    static let close = ImageAsset(name: "close")
-    static let enter = ImageAsset(name: "enter")
-    static let forward = ImageAsset(name: "forward")
-    static let remove = ImageAsset(name: "remove")
-    static let remove28 = ImageAsset(name: "remove28")
-    static let settings = ImageAsset(name: "settings")
-    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
-  }
   enum NavBar {
     static let back = ImageAsset(name: "back")
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
@@ -148,6 +150,17 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Kinobase.check,
+    Kinobase.check28,
+    Kinobase.checkMini,
+    Kinobase.cicle,
+    Kinobase.close,
+    Kinobase.enter,
+    Kinobase.forward,
+    Kinobase.remove,
+    Kinobase.remove28,
+    Kinobase.settings,
+    Kinobase.settingsUnselect,
     Cinema.backImage,
     Cinema.chatButton,
     Cinema.chatIcon,
@@ -171,13 +184,14 @@ enum Asset {
     Cinema.orangeStars,
     Cinema.play,
     Cinema.plus,
+    Cinema.Profile.userPlaceholder,
     Cinema.Profile.friendsProfile,
     Cinema.Profile.rewardsProfile,
     Cinema.Profile.settingsOrange,
-    Cinema.Profile.userPlaceholder,
     Cinema.Profile.watchProfile,
     Cinema.selectStar,
     Cinema.sharing,
+    Cinema.sharingImage,
     Cinema.sharingOrange,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
@@ -192,17 +206,6 @@ enum Asset {
     Cinema.unselectStar,
     Cinema.vader,
     dislikeSelect,
-    Kinobase.check,
-    Kinobase.check28,
-    Kinobase.checkMini,
-    Kinobase.cicle,
-    Kinobase.close,
-    Kinobase.enter,
-    Kinobase.forward,
-    Kinobase.remove,
-    Kinobase.remove28,
-    Kinobase.settings,
-    Kinobase.settingsUnselect,
     NavBar.back,
     NavBar.navBarArrowBack,
     NavBar.navBarList,

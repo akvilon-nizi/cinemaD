@@ -310,6 +310,8 @@ extension FoodleTarget: TargetType {
         switch self {
         case  .filmWatchedPost, .filmWillWatchPost, .patchCollections, .newsFiltred, .auth:
             return JsonArrayEncoding.default
+        case .editeProfile:
+            return URLEncoding(destination: .methodDependent)
         default:
             return URLEncoding(destination: .queryString)
         }

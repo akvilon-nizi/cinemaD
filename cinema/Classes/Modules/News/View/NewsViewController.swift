@@ -281,7 +281,6 @@ extension NewsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        //return 200
         return UITableViewAutomaticDimension
     }
 

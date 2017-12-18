@@ -11,12 +11,15 @@ class SettingsConfigurator {
 
     var appRouter: AppRouterProtocol!
 
+    var locationManager: LocationManagerProtocol!
+
     func configureModule() -> UIViewController {
         let router = SettingsRouter()
         router.appRouter = appRouter
 
         let presenter = SettingsPresenter()
         presenter.router = router
+        presenter.locationManager = locationManager
 
         let interactor = SettingsInteractor()
         interactor.output = presenter

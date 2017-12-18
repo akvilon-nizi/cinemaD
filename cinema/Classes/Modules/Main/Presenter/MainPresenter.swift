@@ -5,6 +5,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class MainPresenter {
 
@@ -12,12 +13,20 @@ class MainPresenter {
     var interactor: MainInteractorInput!
     var router: MainRouterInput!
     weak var output: MainModuleOutput?
-    var locationManager: LocationManagerProtocol!
+    var locationManager: LocationManagerProtocol
+
+    init(locationManager: LocationManagerProtocol) {
+        self.locationManager = locationManager
+        self.locationManager.output = self
+    }
 }
 
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
+    func refresh() {
+        interactor.getData()
+    }
 
     func openProfile(mainView: MainTabView) {
         router.openProfile(mainView: mainView)
@@ -66,10 +75,24 @@ extension MainPresenter: MainInteractorOutput {
     }
     func getData(mainData: MainData) {
         view.getData(mainData)
-        locationManager.startMonitoringLocation()
+        if UserDefaults.standard.bool(forKey: "isLocation") {
+            locationManager.startMonitoringLocation()
+        } else {
+            locationManager.stopMonitoringLocation()
+        }
     }
 
     func getNews(mainData: MainData) {
         view.getNews(mainData)
+    }
+}
+
+// MARK: - MainInteractorOutput
+
+extension MainPresenter: LocationManagerOutput {
+    func didUpdate(location: CLLocation?) {
+        if let loc = location {
+            print(loc)
+        }
     }
 }

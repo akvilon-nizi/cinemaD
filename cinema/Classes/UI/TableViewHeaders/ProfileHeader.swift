@@ -63,6 +63,12 @@ class ProfileHeader: UITableViewHeaderFooterView {
         return imageView
     }()
 
+    let watchView = ProfileHeaderView()
+
+    let rewardsView = ProfileHeaderView(true)
+
+    let friendsView = ProfileHeaderView()
+
     let stackView = UIView()
 
     required init(coder aDecoder: NSCoder) {
@@ -80,19 +86,18 @@ class ProfileHeader: UITableViewHeaderFooterView {
 
     private func setStackView(profile: ProfileModel) {
 
-        let watchView = UIView().setParameters(
+        watchView.setParameters(
             topLabelText: L10n.profileWatchText,
             bottomLabelText: String(profile.watched),
             image: Asset.Cinema.Profile.watchProfile.image)
 
-        let rewardsView = UIView().setParameters(
+        rewardsView.setParameters(
             topLabelText: L10n.profileRewardsText,
             bottomLabelText: String(profile.rewards),
-            image: Asset.Cinema.Profile.rewardsProfile.image,
-            isCenter: true)
+            image: Asset.Cinema.Profile.rewardsProfile.image)
         rewardsView.tag = 1
 
-        let friendsView = UIView().setParameters(
+        friendsView.setParameters(
             topLabelText: L10n.profileFriendText,
             bottomLabelText: String(profile.friends),
             image: Asset.Cinema.Profile.friendsProfile.image)
@@ -163,74 +168,19 @@ class ProfileHeader: UITableViewHeaderFooterView {
         setStackView(profile: profile)
     }
 
+    func reloadData(_ profile: ProfileModel) {
+        userImage.kf.setImage(with: URL(string: profile.avatar))
+        nameLabel.text = profile.name
+
+        watchView.setCount(text: String(profile.watched))
+
+        rewardsView.setCount(text: String(profile.rewards))
+
+        friendsView.setCount(text: String(profile.friends))
+    }
+
     func editeProfile(name: String, imageUrl: String) {
         userImage.kf.setImage(with: URL(string: imageUrl))
         nameLabel.text = name
-    }
-}
-
-private extension UIView {
-    func setParameters(
-        topLabelText: String,
-        bottomLabelText: String,
-        image: UIImage,
-        isCenter: Bool = false) -> UIView {
-
-        let topLabel = UILabel()
-        topLabel.text = topLabelText
-        topLabel.font = UIFont.cnmFuturaLight(size: 16)
-        topLabel.textColor = UIColor.cnmAfafaf
-        topLabel.textAlignment = .center
-        self.addSubview(topLabel.prepareForAutoLayout())
-        topLabel.topAnchor ~= self.topAnchor
-        topLabel.centerXAnchor ~= self.centerXAnchor
-
-        let contentView = UIView()
-        self.addSubview(contentView.prepareForAutoLayout())
-        contentView.centerXAnchor ~= self.centerXAnchor
-        contentView.topAnchor ~= topLabel.bottomAnchor + 8
-        contentView.bottomAnchor ~= self.bottomAnchor
-
-        let imageView = UIImageView()
-        imageView.image = image
-        contentView.addSubview(imageView.prepareForAutoLayout())
-        imageView.centerYAnchor ~= contentView.centerYAnchor
-        imageView.leadingAnchor ~= contentView.leadingAnchor
-
-        let bottomLabel = UILabel()
-        bottomLabel.text = bottomLabelText
-        bottomLabel.font = UIFont.cnmFuturaLight(size: 17)
-        bottomLabel.textColor = UIColor.setColorGray(white: 109)
-        contentView.addSubview(bottomLabel.prepareForAutoLayout())
-        bottomLabel.centerYAnchor ~= contentView.centerYAnchor
-        bottomLabel.trailingAnchor ~= contentView.trailingAnchor
-        bottomLabel.leadingAnchor ~= imageView.trailingAnchor + 6
-
-        if isCenter {
-            let leftView = UIView().separator()
-            self.addSubview(leftView.prepareForAutoLayout())
-            leftView.topAnchor ~= self.topAnchor
-            leftView.leadingAnchor ~= self.leadingAnchor
-            leftView.topAnchor ~= self.topAnchor
-
-            let rightView = UIView().separator()
-            self.addSubview(rightView.prepareForAutoLayout())
-            rightView.topAnchor ~= self.topAnchor
-            rightView.trailingAnchor ~= self.trailingAnchor
-            rightView.topAnchor ~= self.topAnchor
-        }
-
-        let widthView: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 99 : 110
-        self.widthAnchor ~= widthView
-        self.heightAnchor ~= 43
-
-        return self
-    }
-
-    func separator() -> UIView {
-        self.heightAnchor ~= 43
-        self.widthAnchor ~= 1
-        self.backgroundColor = UIColor.cnmAfafaf
-        return self
     }
 }

@@ -93,7 +93,9 @@ class ProfileViewController: ParentViewController {
     }
 
     func refresh() {
-//        delegate?.refreshes()
+        activityVC.startAnimating()
+        activityVC.isHidden = false
+        output.refresh()
     }
 
 }
@@ -116,12 +118,14 @@ extension ProfileViewController: ProfileViewInput {
     }
 
     func getProfile(_ profile: ProfileModel) {
-        
+        profileHeader.reloadData(profile)
     }
 
     func getData(_ films: [FilmCollections]) {
 
         self.films = []
+
+        refreshControl.endRefreshing()
 
         for filmColW in films {
             var rate: Int = 0

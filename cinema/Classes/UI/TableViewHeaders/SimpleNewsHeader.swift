@@ -20,7 +20,8 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
         label.textColor = UIColor.cnmBlueLight
-        label.numberOfLines = 1
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
 
@@ -81,6 +82,7 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         mainView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.topAnchor ~= infoLabel.bottomAnchor + 12
         titleLabel.leadingAnchor ~= mainView.leadingAnchor
+        titleLabel.trailingAnchor ~= mainView.trailingAnchor
 
         mainView.addSubview(newsLabel.prepareForAutoLayout())
         newsLabel.topAnchor ~= titleLabel.bottomAnchor + 14

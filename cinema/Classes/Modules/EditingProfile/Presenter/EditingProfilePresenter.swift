@@ -38,6 +38,11 @@ extension EditingProfilePresenter: EditingProfileViewOutput {
 
 extension EditingProfilePresenter: EditingProfileInteractorOutput {
     func successEditing(_ profile: ProfileModel) {
+
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.profile = profile
+        }
+
         output?.editeProfile(name: profile.name, imageUrl: profile.avatar)
 
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.changeProfileAvatar), object: nil, userInfo: ["imageUrl": profile.avatar])

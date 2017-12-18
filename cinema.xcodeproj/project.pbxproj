@@ -2664,7 +2664,6 @@
 		CE662F951FC5763B00696955 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				4FC2AEFFDC1D58A3674A53E8 /* NewsViewController.swift */,
 				CE662F961FC5767C00696955 /* MessageView.swift */,
 			);
 			path = Subviews;
@@ -3054,6 +3053,7 @@
 			children = (
 				CE662F951FC5763B00696955 /* Subviews */,
 				6B88F848F6C1E6E57C41A034 /* NewsViewInputOutput.swift */,
+				4FC2AEFFDC1D58A3674A53E8 /* NewsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

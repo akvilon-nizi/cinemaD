@@ -34,4 +34,6 @@ protocol MainViewOutput {
     func changeFilter(_ filters: [String])
 
     func tapNews(newsID: String)
+
+    func refresh()
 }

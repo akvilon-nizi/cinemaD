@@ -93,7 +93,12 @@ class MainTabView: UIView {
                                         with: [ticketsButton, rewardsButton, profileButton, chatButton, kinobaseButton])
 
         addSubview(stackView.prepareForAutoLayout())
-        stackView.pin(to: self, top: 0, left: 30, right: 30, bottom: 0)
+        if UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 {
+            stackView.pin(to: self, top: 0, left: 15, right: 15, bottom: 0)
+        } else {
+            stackView.pin(to: self, top: 0, left: 30, right: 30, bottom: 0)
+        }
+
     }
 
     func tapButton(button: UIButton) {

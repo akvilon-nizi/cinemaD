@@ -50,8 +50,6 @@ class MainViewController: ParentViewController {
 
     let mainTabView = MainTabView()
 
-    let refreshControl = UIRefreshControl()
-
     var newsFilterArray: [NewsFilter] = [
         NewsFilter(title: L10n.mainNewsNew, isSwitch: false),
         NewsFilter(title: L10n.mainNewsMessageActors, isSwitch: false),
@@ -120,7 +118,7 @@ class MainViewController: ParentViewController {
 //        tableView.addSubview(refreshControl)
 
         view.addSubview(mainTabView.prepareForAutoLayout())
-        let tabViewHeight: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.height < 812 ? 80 : 110
+        let tabViewHeight: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.height < 812 ? 70 : 100
         mainTabView.widthAnchor ~= view.widthAnchor
         mainTabView.heightAnchor ~= tabViewHeight
         mainTabView.leadingAnchor ~= view.leadingAnchor
@@ -169,7 +167,9 @@ class MainViewController: ParentViewController {
     }
 
     func refresh() {
-//        delegate?.refreshes()
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        output?.refresh()
     }
 
     func setHeaderTableView() {
@@ -209,6 +209,7 @@ class MainViewController: ParentViewController {
             let recomendFilms = FilmGroup()
             recomendFilms.films = mainData.recomend
             recomendFilms.heightAnchor ~= windowWidth2
+            recomendFilms.delegate = self
             height += windowWidth2
             headerViewsArray.append(recomendFilms)
         }
@@ -420,14 +421,13 @@ extension MainViewController: MainViewInput {
             isFirstLoaded = true
         }
 
-        refreshControl.endRefreshing()
-
         self.mainData = mainData
         setHeaderTableView()
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = mainData.profile {
             appDelegate.profile = profile
             mainTabView.setImage(imageUrl: profile.avatar)
         }
+
         activityVC.isHidden = true
         activityVC.stopAnimating()
         UIView.setAnimationsEnabled(false)
@@ -435,6 +435,8 @@ extension MainViewController: MainViewInput {
         tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
+
+        refreshControl.endRefreshing()
     }
 
     func getNews(_ mainData: MainData) {

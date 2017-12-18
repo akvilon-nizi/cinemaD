@@ -15,4 +15,6 @@ protocol SettingsViewOutput {
     func viewIsReady()
 
     func backButtonTap()
+
+    func saveButtonTap(_ isLocation: Bool)
 }

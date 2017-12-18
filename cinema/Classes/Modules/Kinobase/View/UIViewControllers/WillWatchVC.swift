@@ -127,12 +127,12 @@ class WillWatchVC: ParentViewController {
         var viewArray: [UIView] = []
 
         if films.isEmpty {
-            currentHeight = 92
+            currentHeight = 92 - 22
             viewArray = [headerSearchView, searchFilmGroup, view]
             view.heightAnchor ~= 44
         } else {
             view.heightAnchor ~= 30
-            currentHeight = windowWidth / 4 * 3 + 103.5
+            currentHeight = windowWidth / 4 * 3 + 103.5 - 22
             viewArray = [headerSearchView, searchFilmGroup, headerViewTitle, fullListFilms, filmGroup, view]
         }
 

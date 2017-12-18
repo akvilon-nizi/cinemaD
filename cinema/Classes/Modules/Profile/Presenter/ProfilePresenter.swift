@@ -49,11 +49,20 @@ extension ProfilePresenter: ProfileViewOutput {
     func openFilm(videoID: String, name: String) {
         router.openFilm(videoId: videoID, name: name)
     }
+
+    func refresh() {
+        interactor.getProfile()
+        interactor.getFilms()
+    }
 }
 
 // MARK: - ProfileInteractorOutput
 
 extension ProfilePresenter: ProfileInteractorOutput {
+    func getProfile(_ profile: ProfileModel) {
+        view.getProfile(profile)
+    }
+
     func getError() {
         view.getError()
     }

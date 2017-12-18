@@ -523,24 +523,25 @@ extension FilmViewController: FilmViewInput {
 
     func showNetworkError() {
         showAlert(message: L10n.alertCinemaNetworkErrror)
-        activityVC.isHidden = true
-        activityVC.stopAnimating()
+        stopAnimating()
     }
 
     func setFilmInfo(_ filmInfo: FullFilm) {
         self.filmInformation = filmInfo
-        activityVC.isHidden = true
-        activityVC.stopAnimating()
+        stopAnimating()
         activityVC.color = UIColor.cnmMainOrange
         setInfo()
     }
 
     func statusChange() {
-        activityVC.isHidden = true
-        activityVC.stopAnimating()
+        stopAnimating()
     }
 
     func setStatus(_ rate: Double) {
+        stopAnimating()
+    }
+
+    func stopAnimating() {
         activityVC.isHidden = true
         activityVC.stopAnimating()
     }
@@ -553,9 +554,7 @@ private extension UIView {
         self.backgroundColor = UIColor.cnmAfafaf
         return self
     }
-}
 
-private extension UIView {
     func setParameters(topLabelText: String, bottomLabelText: String) -> UIView {
 
         let topLabel = UILabel()
@@ -605,17 +604,6 @@ private extension UIView {
     }
 }
 
-//extension FilmViewController: VKSdkDelegate {
-//    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-//        print()
-//    }
-//
-//    func vkSdkUserAuthorizationFailed() {
-//        print()
-//    }
-//}
-
-// MARK: - FilmViewInput
 
 extension FilmViewController: RolesCVDelegate {
     func openPersonID(_ personID: String, name: String, role: String) {

@@ -40,11 +40,7 @@ extension ProfileInteractor: ProfileInteractorInput {
                 case let .next(model):
                     self.output.getProfile(model)
                 case let .error(error as ProviderError):
-//                    if error.status == 403 {
-//                        self.output.tokenError()
-//                    } else {
-                        self.output.getError()
-//                    }
+                    self.output.getError()
                 default:
                     break
                 }

@@ -31,20 +31,20 @@ class SearchCommonView: UIView {
     init() {
         super.init(frame: .zero)
 
-        let separatorView = UIView()
-        separatorView.backgroundColor = .cnmDadada
-        addSubview(separatorView.prepareForAutoLayout())
-        separatorView.bottomAnchor ~= bottomAnchor - 4
-        separatorView.trailingAnchor ~= trailingAnchor - 24
-        separatorView.leadingAnchor ~= leadingAnchor + 24
-        separatorView.heightAnchor ~= 1
+//        let separatorView = UIView()
+//        separatorView.backgroundColor = .cnmDadada
+//        addSubview(separatorView.prepareForAutoLayout())
+//        separatorView.bottomAnchor ~= bottomAnchor - 4
+//        separatorView.trailingAnchor ~= trailingAnchor - 24
+//        separatorView.leadingAnchor ~= leadingAnchor + 24
+//        separatorView.heightAnchor ~= 1
 
         let titleField = UITextField()
         addSubview(titleField.prepareForAutoLayout())
         titleField.placeholder = L10n.filmSearchPlaceholder
         titleField.trailingAnchor ~= trailingAnchor
         titleField.leadingAnchor ~= leadingAnchor
-        titleField.bottomAnchor ~= separatorView.topAnchor - 11
+        titleField.topAnchor ~= topAnchor + 5
 
         let searchImageView = UIImageView(image: Asset.Search.search.image)
         let leftView = UIView()

@@ -15,6 +15,8 @@ protocol ProfileViewInput: class {
     func getData(_ films: [FilmCollections])
 
     func editeProfile(name: String, avatarUrl: String)
+
+    func getProfile(_ profile: ProfileModel)
 }
 
 protocol ProfileViewOutput {
@@ -34,4 +36,6 @@ protocol ProfileViewOutput {
     func handleTapRewards()
 
     func handleTapWatched()
+
+    func refresh()
 }

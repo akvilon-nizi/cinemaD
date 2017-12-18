@@ -11,6 +11,7 @@ class SettingsPresenter {
     var interactor: SettingsInteractorInput!
     var router: SettingsRouterInput!
     weak var output: SettingsModuleOutput?
+    var locationManager: LocationManagerProtocol!
 }
 
 // MARK: - SettingsViewOutput
@@ -22,6 +23,21 @@ extension SettingsPresenter: SettingsViewOutput {
     }
 
     func backButtonTap() {
+        router.close()
+    }
+
+    func saveButtonTap(_ isLocation: Bool) {
+        if UserDefaults.standard.bool(forKey: "isLocation") {
+            if !isLocation {
+                locationManager.stopMonitoringLocation()
+            }
+        } else {
+            if isLocation {
+                locationManager.startMonitoringLocation()
+            }
+        }
+        UserDefaults.standard.set(isLocation, forKey: "isLocation")
+        UserDefaults.standard.synchronize()
         router.close()
     }
 }

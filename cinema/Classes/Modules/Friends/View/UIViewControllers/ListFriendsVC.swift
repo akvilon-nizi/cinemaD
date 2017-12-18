@@ -41,7 +41,7 @@ class ListFriendsVC: ParentViewController {
         searchView.topAnchor ~= view.topAnchor + 10
         searchView.leadingAnchor ~= view.leadingAnchor
         searchView.trailingAnchor ~= view.trailingAnchor
-        searchView.heightAnchor ~= 35
+        searchView.heightAnchor ~= 45
         searchView.delegate = self
 
         view.addSubview(tableView.prepareForAutoLayout())

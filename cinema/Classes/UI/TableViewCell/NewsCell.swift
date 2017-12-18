@@ -59,6 +59,7 @@ class NewsCell: UITableViewCell {
         imageView.widthAnchor ~= 23
         imageView.backgroundColor = UIColor.cnm3a3a3a
         imageView.layer.cornerRadius = 23 / 2
+        imageView.layer.masksToBounds = true
         return imageView
     }()
 
