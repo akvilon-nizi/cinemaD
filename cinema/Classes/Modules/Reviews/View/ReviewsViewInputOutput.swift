@@ -18,7 +18,7 @@ protocol ReviewsViewInput: class {
     func deleteComment()
 
     func changeStatus()
-    
+
     func startChangeStatus()
 
 }

@@ -370,6 +370,9 @@
 		CE09FEAE1F95714700D49351 /* FilmFromPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FEAD1F95714700D49351 /* FilmFromPerson.swift */; };
 		CE09FEB01F95735900D49351 /* FullPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FEAF1F95735900D49351 /* FullPerson.swift */; };
 		CE09FEB21F95792A00D49351 /* FullFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FEB11F95792A00D49351 /* FullFilm.swift */; };
+		CE174E101FE6F51C0008EDDA /* FriendsNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE174E0F1FE6F51C0008EDDA /* FriendsNewsResponse.swift */; };
+		CE174E121FE70C430008EDDA /* FriendsNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE174E111FE70C430008EDDA /* FriendsNewsCell.swift */; };
+		CE174E141FE71F2F0008EDDA /* NewsFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE174E131FE71F2F0008EDDA /* NewsFriendVC.swift */; };
 		CE1A5B971F8BFDE5001AC04F /* MainVCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1A5B961F8BFDE5001AC04F /* MainVCHeader.swift */; };
 		CE1A5B991F8C0BCD001AC04F /* YouTubeiOSPlayerHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1A5B981F8C0BCC001AC04F /* YouTubeiOSPlayerHelper.framework */; };
 		CE1A5B9B1F8C0BFC001AC04F /* YouTubeiOSPlayerHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE1A5B981F8C0BCC001AC04F /* YouTubeiOSPlayerHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -388,6 +391,9 @@
 		CE4DA9511F8AC56000F371E4 /* YoutubeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DA9501F8AC56000F371E4 /* YoutubeViewCell.swift */; };
 		CE662F971FC5767C00696955 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE662F961FC5767C00696955 /* MessageView.swift */; };
 		CE662F991FC5A17400696955 /* PutCommentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE662F981FC5A17400696955 /* PutCommentResponse.swift */; };
+		CE8F425C1FE6E8B300CA0EDB /* FriendsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F425B1FE6E8B300CA0EDB /* FriendsResponse.swift */; };
+		CE8F425E1FE6EC2E00CA0EDB /* FriendsNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F425D1FE6EC2E00CA0EDB /* FriendsNews.swift */; };
+		CE8F42601FE6EF5100CA0EDB /* TodayAwards.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F425F1FE6EF5100CA0EDB /* TodayAwards.swift */; };
 		CE9C39391FBD69FA00EF8AA5 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C39381FBD69FA00EF8AA5 /* NewsCell.swift */; };
 		CEA0A8561FB5DC9E00471566 /* DeleteFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA0A8551FB5DC9E00471566 /* DeleteFooter.swift */; };
 		CEA489071FBD8E0F001E2543 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA489061FBD8E0F001E2543 /* News.swift */; };
@@ -865,6 +871,9 @@
 		CE09FEAD1F95714700D49351 /* FilmFromPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmFromPerson.swift; sourceTree = "<group>"; };
 		CE09FEAF1F95735900D49351 /* FullPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPerson.swift; sourceTree = "<group>"; };
 		CE09FEB11F95792A00D49351 /* FullFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFilm.swift; sourceTree = "<group>"; };
+		CE174E0F1FE6F51C0008EDDA /* FriendsNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNewsResponse.swift; sourceTree = "<group>"; };
+		CE174E111FE70C430008EDDA /* FriendsNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNewsCell.swift; sourceTree = "<group>"; };
+		CE174E131FE71F2F0008EDDA /* NewsFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFriendVC.swift; sourceTree = "<group>"; };
 		CE1A5B961F8BFDE5001AC04F /* MainVCHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCHeader.swift; sourceTree = "<group>"; };
 		CE1A5B981F8C0BCC001AC04F /* YouTubeiOSPlayerHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeiOSPlayerHelper.framework; path = Carthage/Build/iOS/YouTubeiOSPlayerHelper.framework; sourceTree = "<group>"; };
 		CE1A5B9E1F8C9FCD001AC04F /* HeaderViewOpenned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewOpenned.swift; sourceTree = "<group>"; };
@@ -882,6 +891,9 @@
 		CE662F981FC5A17400696955 /* PutCommentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutCommentResponse.swift; sourceTree = "<group>"; };
 		CE6B86A8B2685837B84B5549 /* PhoneViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
 		CE84316DBE05856180A542BA /* SlidesModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SlidesModuleInputOutput.swift; sourceTree = "<group>"; };
+		CE8F425B1FE6E8B300CA0EDB /* FriendsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsResponse.swift; sourceTree = "<group>"; };
+		CE8F425D1FE6EC2E00CA0EDB /* FriendsNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNews.swift; sourceTree = "<group>"; };
+		CE8F425F1FE6EF5100CA0EDB /* TodayAwards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAwards.swift; sourceTree = "<group>"; };
 		CE9C39381FBD69FA00EF8AA5 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		CEA0A8551FB5DC9E00471566 /* DeleteFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFooter.swift; sourceTree = "<group>"; };
 		CEA489061FBD8E0F001E2543 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
@@ -1857,6 +1869,7 @@
 			children = (
 				8138ECF71FDE841A00F69628 /* ListFriendsVC.swift */,
 				8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */,
+				CE174E131FE71F2F0008EDDA /* NewsFriendVC.swift */,
 			);
 			path = UIViewControllers;
 			sourceTree = "<group>";
@@ -2065,7 +2078,9 @@
 				CEDCF2071F9713250082BCD0 /* Youtube */,
 				9BB4E9EBE0947D83E6592724 /* Responses */,
 				9BB4E6805806AD51A6AB5599 /* Restaurant.swift */,
+				CE8F425D1FE6EC2E00CA0EDB /* FriendsNews.swift */,
 				CE09FEA91F954E2F00D49351 /* Film.swift */,
+				CE8F425F1FE6EF5100CA0EDB /* TodayAwards.swift */,
 				CE09FEB11F95792A00D49351 /* FullFilm.swift */,
 				CE09FEAF1F95735900D49351 /* FullPerson.swift */,
 				CE09FEAD1F95714700D49351 /* FilmFromPerson.swift */,
@@ -2151,6 +2166,8 @@
 				81C441891FD040B9004EBB1D /* ReviewsResponse.swift */,
 				8107F7F31FD831400067DFD2 /* AdwardsResponse.swift */,
 				8107F7F51FD842480067DFD2 /* Adwards.swift */,
+				CE8F425B1FE6E8B300CA0EDB /* FriendsResponse.swift */,
+				CE174E0F1FE6F51C0008EDDA /* FriendsNewsResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2683,6 +2700,7 @@
 				8138ECFB1FDE880800F69628 /* FriendsListCell.swift */,
 				8138ECFD1FDEB4D100F69628 /* FriendsAddCell.swift */,
 				8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */,
+				CE174E111FE70C430008EDDA /* FriendsNewsCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -3331,6 +3349,7 @@
 				81C3655F1FE561BF0021CFC6 /* LikedView.swift in Sources */,
 				CE09FEB21F95792A00D49351 /* FullFilm.swift in Sources */,
 				3331732C1F4EE61500C7C88E /* RegionResponse.swift in Sources */,
+				CE8F425C1FE6E8B300CA0EDB /* FriendsResponse.swift in Sources */,
 				3386D47F1F443C8B009D9A42 /* CartProduct.swift in Sources */,
 				CEAB467B1F96097300432F70 /* Genre.swift in Sources */,
 				049030441FA7BAD1000B7C08 /* WatchedResponse.swift in Sources */,
@@ -3401,6 +3420,7 @@
 				3361E4951F54A4DA00ECF276 /* PhoneNumberFormatter.swift in Sources */,
 				8107F7F41FD831400067DFD2 /* AdwardsResponse.swift in Sources */,
 				331CA2131F5089A4000BA43E /* ProfileResponse.swift in Sources */,
+				CE174E121FE70C430008EDDA /* FriendsNewsCell.swift in Sources */,
 				CEBE86511FA90FB000129163 /* WatchedVC.swift in Sources */,
 				9BB4E94C184BEFBC43554F82 /* LayoutMagic.swift in Sources */,
 				9BB4EFD94AF2A23E96B0BF90 /* LocationManager.swift in Sources */,
@@ -3441,6 +3461,7 @@
 				8107F7F01FD7FFCC0067DFD2 /* NavTabBar.swift in Sources */,
 				88EFD0F61FB1C81400473640 /* HeaderSectionStruct.swift in Sources */,
 				11E31E31F3F52310B0FAE016 /* SlidesViewInputOutput.swift in Sources */,
+				CE174E141FE71F2F0008EDDA /* NewsFriendVC.swift in Sources */,
 				9BB4E2D2E17EA5E6ED5DB0BF /* Formatters.swift in Sources */,
 				71138B20F5581E9243DAB2BD /* StartConfigurator.swift in Sources */,
 				9057AC2F9825D7DAA8F262FA /* StartInteractor.swift in Sources */,
@@ -3484,6 +3505,7 @@
 				25D499678E4808BE54FC18A9 /* RegistrationViewController.swift in Sources */,
 				CE09FEB01F95735900D49351 /* FullPerson.swift in Sources */,
 				F6CB5474F67A108E4A0EEF97 /* RegistrationViewInputOutput.swift in Sources */,
+				CE174E101FE6F51C0008EDDA /* FriendsNewsResponse.swift in Sources */,
 				2E1C5E23D289A72A3CDF2C21 /* PasswordConfigurator.swift in Sources */,
 				D34E5EF09CF6F3FC36B99749 /* PasswordInteractor.swift in Sources */,
 				BD435856EBD9262508345A8E /* PasswordInteractorInputOutput.swift in Sources */,
@@ -3515,6 +3537,7 @@
 				5AC1B8594869310978ABBA35 /* NewPasswordModuleInputOutput.swift in Sources */,
 				0563140F3103825CBCA7FB2D /* NewPasswordPresenter.swift in Sources */,
 				E96C860D3EBCCEDEF320F1B9 /* NewPasswordRouter.swift in Sources */,
+				CE8F425E1FE6EC2E00CA0EDB /* FriendsNews.swift in Sources */,
 				004768C04CB4BA0563FA3BE4 /* NewPasswordRouterInput.swift in Sources */,
 				8233DA71ABABDC4316A0E910 /* NewPasswordViewController.swift in Sources */,
 				E410AE616EDC8C618E838A82 /* NewPasswordViewInputOutput.swift in Sources */,
@@ -3671,6 +3694,7 @@
 				57F3D9F526E874F0EB9EB038 /* EditingProfileRouter.swift in Sources */,
 				FEECD781FA032DD46C8E3A8B /* EditingProfileRouterInput.swift in Sources */,
 				0166E153B6C77982083A9725 /* EditingProfileViewController.swift in Sources */,
+				CE8F42601FE6EF5100CA0EDB /* TodayAwards.swift in Sources */,
 				B82787825B1894A0E8A5669F /* EditingProfileViewInputOutput.swift in Sources */,
 				B0060A7D3A6D38A7344CDC73 /* ReviewsConfigurator.swift in Sources */,
 				5621B6EA13540BD76DF1A191 /* ReviewsInteractor.swift in Sources */,

@@ -8,6 +8,12 @@ import Foundation
 protocol FriendsViewInput: class {
 
     func setupInitialState()
+
+    func getData(data: FriendsData)
+
+    func addedFriend()
+
+    func showNetworkError()
 }
 
 protocol FriendsViewOutput {
@@ -17,4 +23,6 @@ protocol FriendsViewOutput {
     func backTap()
 
     func homeTap()
+
+    func addFriend(id: String)
 }

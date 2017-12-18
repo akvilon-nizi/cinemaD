@@ -69,19 +69,7 @@ class FilmViewController: ParentViewController {
         return button
     }()
 
-    let inviteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(L10n.filmInviteFilm, for: .normal)
-        button.setTitleColor(UIColor.cnmMainOrange, for: .normal)
-        button.titleLabel?.font = UIFont.cnmFutura(size: 16)
-        button.backgroundColor = UIColor.white
-        button.layer.cornerRadius = 5.0
-        button.layer.borderColor = UIColor.cnmMainOrange.cgColor
-        button.layer.borderWidth = 1.0
-        button.heightAnchor ~= 53
-        button.widthAnchor ~= 182
-        return button
-    }()
+    let inviteButton = UIButton().inviteButton()
 
     let starsLabel = UILabel()
 
@@ -118,7 +106,7 @@ class FilmViewController: ParentViewController {
         output.viewIsReady()
 
         let sdk = VKSdk.initialize(withAppId: "6258240")
-        sdk?.register(self)
+        //sdk?.register(self)
         //sdk.ui
 
         activityVC.isHidden = false
@@ -422,6 +410,7 @@ class FilmViewController: ParentViewController {
         if !watchedButton.isSelected {
             output.watchedTapDelete()
         } else {
+            animation(isWatch: true)
             output.watchedTap(rate: 0)
 //            showAlert(message: L10n.filmWatchAlert)
             setStars(0)
@@ -441,10 +430,27 @@ class FilmViewController: ParentViewController {
 
         if willWatchButton.isSelected {
             output.willWatchTap()
+            animation(isWatch: false)
         } else {
             output.willWatchTapDelete()
         }
 
+    }
+
+    func animation(isWatch: Bool) {
+        var frame = imageView.convert(imageView.frame, to: view)
+        frame.origin.x -= view.frame.size.width / 2 - imageView.frame.size.width / 2
+        let doubleImageView = UIImageView()
+        doubleImageView.image = imageView.image
+        doubleImageView.frame = frame
+        view.addSubview(doubleImageView)
+        UIView.animate(withDuration: 2.0, animations: {
+            frame.origin.x = isWatch ? -800 : 800
+            frame.origin.y = 2_000
+            doubleImageView.frame = frame
+        }, completion: { _ in
+            doubleImageView.removeFromSuperview()
+        })
     }
 
     func didTapStarButton(button: UIButton) {
@@ -469,76 +475,7 @@ class FilmViewController: ParentViewController {
         youtubeView.playVideo()
     }
 
-    func fbClick() {
-
-//        let loginManager = LoginManager()
-//        loginManager.logIn(readPermissions: [ .publicProfile], viewController: self) { loginResult in
-//            switch loginResult {
-//            case .failed(let error):
-//              //  self.activityView.stopAnimating()
-//                print(error)
-//            case .cancelled:
-//                //self.activityView.stopAnimating()
-//                print("User cancelled login.")
-//            case .success(let grantedPermissions, let declinedPermissions, let token):
-//                 print("User cancelled login.")
-//               // self.loginService.loginByFB(with: token.authenticationToken, deviceId: token.userId!)
-//            }
-//        }
-
-        // Create an object
-//        let object: OpenGraphObject = [
-//            "og:type": "books.book",
-//            "og:title": "A Game of Thrones",
-//            "og:description": "In the frozen wastes to the north of Winterfell, sinister and supernatural forces are mustering.",
-//            "books:isbn": "0-553-57340-3"
-//        ]
-
-        //let object: OpenGraphObject = OpenGraphObject(dictionaryLiteral: ( "og:type", "books.book"))
-
-        // Create an action
-//        if let image = imageView.image {
-//
-//           // FBSDKShareMediaContent
-//
-////            let content: FBSDKShareLinkContent = FBSDKShareLinkContent()
-////            content.contentURL = URL(string: "http://developers.facebook.com")
-////            FBSDKShareDialog.show(from: self, with: content, delegate: nil)
-//
-////            let title = "FacebookSdk GOVNO!"
-////
-////            let photo: FBSDKSharePhoto = FBSDKSharePhoto()
-////            photo.image = image
-////            photo.isUserGenerated = true
-////
-////            var properties: [AnyHashable: Any] = [
-////                "og:type": "article",
-////                "og:title": title,
-////                "og:image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCalqoke09R7bu90lK8LYMLVeZ4KBqap0xZohNSJG3sCva_auMbw"
-////            ]
-////            @"og:description":contentDesc
-//        // Create an object
-//
-////0
-//      // FBSDKShareDialog.show(from: self, with: content, delegate: nil)
-//
-//        }
-//        var action = OpenGraphAction(type: "book.reads")
-//        action["books:book"] = OpenGraphObject(dictionaryLiteral: ( "og:type", "books.book"))
-//
-//        // Create the content
-//        var content = OpenGraphShareContent()
-//        content.action = action
-//        content.previewPropertyName = "books:book"
-//
-//        // let dialog = ShareDialog(content: content)
-//
-////        do {
-////            try ShareDialog.show(content: content)
-////        } catch (let error) {
-////            print()
-////        }
-//
+    func didTapSharingButton() {
         if let image = imageView.image {
             let vkShare = VKShareDialogController()
             if let info = titleLabel.text {
@@ -555,11 +492,6 @@ class FilmViewController: ParentViewController {
             }
             present(vkShare, animated: true, completion: nil)
         }
-    }
-
-
-    func didTapSharingButton() {
-        fbClick()
     }
 
     func setStars(_ tag: Int) {
@@ -673,31 +605,15 @@ private extension UIView {
     }
 }
 
-extension String {
-    func setPriceMask() -> String {
-        var resultString = String()
-        self.enumerated().forEach { index, character in
-
-            // Add space every 4 characters
-
-            if (self.count - index) % 3 == 0 && index > 0 {
-                resultString += " "
-            }
-            resultString.append(character)
-        }
-        return resultString
-    }
-}
-
-extension FilmViewController: VKSdkDelegate {
-    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        print()
-    }
-
-    func vkSdkUserAuthorizationFailed() {
-        print()
-    }
-}
+//extension FilmViewController: VKSdkDelegate {
+//    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
+//        print()
+//    }
+//
+//    func vkSdkUserAuthorizationFailed() {
+//        print()
+//    }
+//}
 
 // MARK: - FilmViewInput
 

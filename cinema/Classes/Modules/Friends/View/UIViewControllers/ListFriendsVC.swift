@@ -16,7 +16,7 @@ class ListFriendsVC: ParentViewController {
 
     let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
 
-    var films: [Film] = []
+    var friends: [Creator] = []
 
     // MARK: - Life cycle
 
@@ -62,18 +62,9 @@ class ListFriendsVC: ParentViewController {
         tableView.reloadData()
     }
 
-    func setFilms(_ films: [Film]) {
-        self.films = films
+    func setFriends(_ friends: [Creator]) {
+        self.friends = friends
         tableView.reloadData()
-    }
-
-    func getSearch(_ films: [Film]) {
-        self.films = films
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
     }
 }
 
@@ -83,7 +74,7 @@ extension ListFriendsVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 10
+        return friends.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,6 +82,7 @@ extension ListFriendsVC: UITableViewDataSource {
         if let cellFriends = cell as? FriendsListCell {
             cellFriends.delegate = self
             cellFriends.index = indexPath.row
+            cellFriends.name = friends[indexPath.row].name
         }
         //        cell.setData(products[indexPath.row])
         //        cell.delegate = self

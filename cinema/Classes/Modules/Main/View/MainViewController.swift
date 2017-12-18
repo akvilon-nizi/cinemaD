@@ -44,6 +44,8 @@ class MainViewController: ParentViewController {
 
     var mainData = MainData()
 
+    let refreshControl = UIRefreshControl()
+
     var isNewsFilterOpen = false
 
     let mainTabView = MainTabView()
@@ -113,6 +115,9 @@ class MainViewController: ParentViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
+
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+//        tableView.addSubview(refreshControl)
 
         view.addSubview(mainTabView.prepareForAutoLayout())
         let tabViewHeight: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.height < 812 ? 80 : 110
@@ -414,6 +419,8 @@ extension MainViewController: MainViewInput {
             addView()
             isFirstLoaded = true
         }
+
+        refreshControl.endRefreshing()
 
         self.mainData = mainData
         setHeaderTableView()
