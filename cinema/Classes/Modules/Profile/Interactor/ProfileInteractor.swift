@@ -17,6 +17,7 @@ class ProfileInteractor {
 // MARK: - ProfileInteractorInput
 
 extension ProfileInteractor: ProfileInteractorInput {
+
     func getFilms() {
         provider.requestModel(.meFilmWatched)
             .subscribe { [unowned self] (response: Event<WatchedResponse>) in
@@ -25,6 +26,25 @@ extension ProfileInteractor: ProfileInteractorInput {
                     self.output.getWatched(model.watched)
                 case let .error(error as ProviderError):
                     self.output.getError()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getProfile() {
+        provider.requestModel(.profile)
+            .subscribe { [unowned self] (response: Event<ProfileModel>) in
+                switch response {
+                case let .next(model):
+                    self.output.getProfile(model)
+                case let .error(error as ProviderError):
+//                    if error.status == 403 {
+//                        self.output.tokenError()
+//                    } else {
+                        self.output.getError()
+//                    }
                 default:
                     break
                 }

@@ -14,6 +14,8 @@ struct NewsFilter {
     var isSwitch: Bool
 }
 
+//refreshControl.endRefreshing()
+
 class MainViewController: ParentViewController {
 
     var output: MainViewOutput!
@@ -45,6 +47,8 @@ class MainViewController: ParentViewController {
     var isNewsFilterOpen = false
 
     let mainTabView = MainTabView()
+
+    let refreshControl = UIRefreshControl()
 
     var newsFilterArray: [NewsFilter] = [
         NewsFilter(title: L10n.mainNewsNew, isSwitch: false),
@@ -144,6 +148,9 @@ class MainViewController: ParentViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
 
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
         mainTabView.delegate = self
@@ -154,6 +161,10 @@ class MainViewController: ParentViewController {
         newsHeader.isOpen = isNewsFilterOpen
         newsHeader.delegate = self
 
+    }
+
+    func refresh() {
+//        delegate?.refreshes()
     }
 
     func setHeaderTableView() {

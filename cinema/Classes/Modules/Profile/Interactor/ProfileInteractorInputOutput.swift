@@ -7,9 +7,11 @@ import Foundation
 
 protocol ProfileInteractorInput {
     func getFilms()
+    func getProfile()
 }
 
 protocol ProfileInteractorOutput: class {
     func getError()
     func getWatched(_ films: [FilmCollections])
+    func getProfile(_ profile: ProfileModel)
 }

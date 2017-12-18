@@ -19,7 +19,11 @@ class ProfileViewController: ParentViewController {
 
     var userName: String = ""
 
+    let refreshControl = UIRefreshControl()
+
     let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
+
+    //refreshControl.endRefreshing()
 
     // MARK: - Life cycle
 
@@ -65,6 +69,9 @@ class ProfileViewController: ParentViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+
         tableView.register(NewsFilterCell.self, forCellReuseIdentifier: NewsFilterCell.reuseIdentifier)
 
         profileHeader.delegate = self
@@ -84,6 +91,11 @@ class ProfileViewController: ParentViewController {
     func didTapLeftButton() {
         output?.backButtonTap()
     }
+
+    func refresh() {
+//        delegate?.refreshes()
+    }
+
 }
 
 // MARK: - ProfileViewInput
@@ -101,6 +113,10 @@ extension ProfileViewController: ProfileViewInput {
         showAlert(message: L10n.alertCinemaNetworkErrror)
         activityVC.isHidden = true
         activityVC.stopAnimating()
+    }
+
+    func getProfile(_ profile: ProfileModel) {
+        
     }
 
     func getData(_ films: [FilmCollections]) {
