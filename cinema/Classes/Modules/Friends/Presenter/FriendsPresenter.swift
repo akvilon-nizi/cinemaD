@@ -8,6 +8,8 @@ import Foundation
 enum FriendsNewsType: String {
     case willWatch = "Будет смотреть:"
     case watched = "Посмотрел:"
+    case newFriends = "Добавил друзей:"
+    case newAwards = "Получил награды"
 }
 
 struct FriendsNewsForView {
@@ -60,11 +62,46 @@ extension FriendsPresenter: FriendsInteractorOutput {
         var dataNews = data
         for news in data.news {
             if !news.todayWatched.isEmpty {
-                dataNews.newsView.append(FriendsNewsForView(avatar: news.avatar, name: news.name, todayAwards: [], todayFriends: [], todayWatched: news.todayWatched, todayWillWatch: [], type: .watched))
+                dataNews.newsView.append(FriendsNewsForView(
+                    avatar: news.avatar,
+                    name: news.name, todayAwards: [],
+                    todayFriends: [],
+                    todayWatched: news.todayWatched,
+                    todayWillWatch: [],
+                    type: .watched))
             }
 
             if !news.todayWillWatch.isEmpty {
-                dataNews.newsView.append(FriendsNewsForView(avatar: news.avatar, name: news.name, todayAwards: [], todayFriends: [], todayWatched: [], todayWillWatch: news.todayWillWatch, type: .willWatch))
+                dataNews.newsView.append(FriendsNewsForView(
+                    avatar: news.avatar,
+                    name: news.name,
+                    todayAwards: [],
+                    todayFriends: [],
+                    todayWatched: [],
+                    todayWillWatch: news.todayWillWatch,
+                    type: .willWatch))
+            }
+
+            if !news.todayFriends.isEmpty {
+                dataNews.newsView.append(FriendsNewsForView(
+                    avatar: news.avatar,
+                    name: news.name,
+                    todayAwards: [],
+                    todayFriends: news.todayFriends,
+                    todayWatched: [],
+                    todayWillWatch: [],
+                    type: .newFriends))
+            }
+
+            if !news.todayAwards.isEmpty {
+                dataNews.newsView.append(FriendsNewsForView(
+                    avatar: news.avatar,
+                    name: news.name,
+                    todayAwards: news.todayAwards,
+                    todayFriends: [],
+                    todayWatched: [],
+                    todayWillWatch: [],
+                    type: .newAwards))
             }
         }
         view.getData(data: dataNews)

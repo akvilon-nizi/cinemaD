@@ -45,7 +45,8 @@ class NewsFriendVC: ParentViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.register(FriendsNewsCell.self, forCellReuseIdentifier: FriendsListCell.reuseIdentifier)
+        tableView.register(FriendsNewsCell.self, forCellReuseIdentifier: FriendsNewsCell.reuseIdentifier)
+        tableView.register(FriendsNewCell.self, forCellReuseIdentifier: FriendsNewCell.reuseIdentifier)
 
         tableView.reloadData()
     }
@@ -66,17 +67,21 @@ extension NewsFriendVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FriendsListCell.reuseIdentifier, for: indexPath)
-        if let cellFriends = cell as? FriendsNewsCell {
-            cellFriends.setUserInfo(info: news[indexPath.row])
-//            cellFriends.delegate = self
-//            cellFriends.index = indexPath.row
-//            cellFriends.name = friends[indexPath.row].name
-        }
-        //        cell.setData(products[indexPath.row])
-        //        cell.delegate = self
+        if news[indexPath.row].type == .willWatch || news[indexPath.row].type == .watched {
+            let cell = tableView.dequeueReusableCell(withIdentifier: FriendsNewsCell.reuseIdentifier, for: indexPath)
+            if let cellFriends = cell as? FriendsNewsCell {
+                cellFriends.setUserInfo(info: news[indexPath.row])
+            }
 
-        return cell
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: FriendsNewCell.reuseIdentifier, for: indexPath)
+            if let cellFriends = cell as? FriendsNewCell {
+                cellFriends.setUserInfo(info: news[indexPath.row])
+            }
+
+            return cell
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,55 +98,7 @@ extension NewsFriendVC: UITableViewDelegate {
         return UITableViewAutomaticDimension
     }
 
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        switch section {
-    //        case 0:
-    //            let view = HeaderViewTitle()
-    //            view.title = "Фильмы"
-    //            return view
-    //        default:
-    //            return nil
-    //        }
-    //    }
-    //
-    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    //        switch section {
-    //        case 0:
-    //            return 22
-    //        case 1:
-    //            return 22
-    //        case 3:
-    //            if films.isEmpty {
-    //                return 0
-    //            }
-    //            return windowWidth / 4 * 3 - 80
-    //        case 2:
-    //            return 33
-    //        default:
-    //            return 0
-    //        }
-    //  }
-
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
 }
-
-//// MARK: - SearchCommonDelegate
-//
-//extension ListFriendsVC: SearchCommonDelegate {
-//    func tapFilter() {
-//
-//    }
-//
-//    func changeText(_ text: String) {
-//
-//    }
-//}
-//
-//extension ListFriendsVC: FriendsListCellDelegate {
-//    func tapButtonChat(_ index: Int) {
-//        print()
-//    }
-//}
-

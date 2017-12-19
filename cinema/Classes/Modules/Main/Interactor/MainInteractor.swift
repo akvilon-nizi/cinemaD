@@ -44,6 +44,21 @@ extension MainInteractor: MainInteractorInput {
             .addDisposableTo(disposeBag)
     }
 
+    func postLocation(lat: Double, log: Double) {
+        provider.requestModel(.postAdwardsGeo(lat: lat, log: log))
+            .subscribe { [unowned self] (response: Event<GeoResponse>) in
+                switch response {
+                case let .next(model):
+                    print()
+                case let .error(error as ProviderError):
+                    print()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
     func getTrailers() {
         provider.requestModel(.trailersFilms)
             .subscribe { [unowned self] (response: Event<TrailersResponse>) in

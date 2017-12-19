@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : ".png",
+      "filename" : "messageUnselect.png",
       "scale" : "1x"
     },
     {

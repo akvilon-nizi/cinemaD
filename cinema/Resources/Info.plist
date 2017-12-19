@@ -25,7 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb366498413796939</string>
+				<string>fb1990282874579533</string>
 			</array>
 		</dict>
 		<dict>
@@ -54,7 +54,9 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>366498413796939</string>
+	<string>1990282874579533</string>
+    <key>AccountKitClientToken</key>
+    <string>5489ec4fdd6b224ecc6cd6220dbc3418</string>
 	<key>FacebookDisplayName</key>
 	<string>CinemaD</string>
 	<key>LSApplicationCategoryType</key>

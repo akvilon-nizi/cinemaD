@@ -294,7 +294,6 @@ extension NewCollectionsViewController: SearchCommonDelegate {
                 output?.getQuery(text)
             }
         }
-
         query = text
     }
     func tapFilter() {

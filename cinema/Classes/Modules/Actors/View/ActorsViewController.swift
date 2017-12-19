@@ -159,7 +159,7 @@ class ActorsViewController: ParentViewController {
 
         let rolesCV = RolesCV()
         rolesCV.delegate = self
-        rolesCV.persons = persons.filter({$0.id != person.id})
+        rolesCV.persons = persons.filter({ $0.id != person.id })
         contentView.addSubview(rolesCV.prepareForAutoLayout())
         rolesCV.topAnchor ~= rolesLabel.bottomAnchor + 14
         rolesCV.heightAnchor ~= 110
@@ -201,7 +201,7 @@ extension ActorsViewController: RolesCVDelegate {
 // MARK: - ActorFilmsViewDelegate
 
 extension ActorsViewController: ActorFilmsViewDelegate {
-    func openFilmID(_ film: String, name: String){
+    func openFilmID(_ film: String, name: String) {
         output?.openFilmID(film, name: name)
     }
 }

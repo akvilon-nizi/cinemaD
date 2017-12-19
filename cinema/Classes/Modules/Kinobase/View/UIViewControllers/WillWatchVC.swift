@@ -266,11 +266,11 @@ extension WillWatchVC: SearchCommonDelegate {
             if text == query {
                 return
             }
-            self.query = text
             delegate?.getQuery(text)
         } else {
             getSearch([])
         }
+        self.query = text
     }
     func tapFilter() {
         delegate?.tapFilter()

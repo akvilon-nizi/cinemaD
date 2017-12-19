@@ -92,7 +92,7 @@ extension MainPresenter: MainInteractorOutput {
 extension MainPresenter: LocationManagerOutput {
     func didUpdate(location: CLLocation?) {
         if let loc = location {
-            print(loc)
+            interactor.postLocation(lat: Double(loc.coordinate.latitude), log: Double(loc.coordinate.longitude))
         }
     }
 }

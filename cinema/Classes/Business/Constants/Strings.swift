@@ -2,6 +2,7 @@
 
 import Foundation
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
@@ -306,7 +307,7 @@ enum L10n {
   static let startFacebookText = L10n.tr("Localizable", "start-facebook-text")
   /// У вас уже есть аккаунт?
   static let startHaveAuthText = L10n.tr("Localizable", "start-have-auth-text")
-  /// Регистрация
+  /// Регистрация по SMS
   static let startRegistrationText = L10n.tr("Localizable", "start-registration-text")
   /// CINEMAD
   static let startTitleText = L10n.tr("Localizable", "start-title-text")

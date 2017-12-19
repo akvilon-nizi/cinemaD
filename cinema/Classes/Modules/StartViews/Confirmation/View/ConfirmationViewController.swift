@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import AccountKit
 
 class ConfirmationViewController: ParentViewController {
 
@@ -16,6 +17,10 @@ class ConfirmationViewController: ParentViewController {
     let newCodeButton = UIButton(type: .system)
     let nextButton = UIButton(type: .system).setTitleWithColor(title: L10n.confirmationNextButtonText, color: UIColor.cnmMainOrange)
     let phone: String
+
+    var accountKit: AKFAccountKit?
+    var pendingLoginVC: AKFViewController?
+    var authorizationCode: String?
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -27,8 +32,20 @@ class ConfirmationViewController: ParentViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+////        if let assa = accountKit?.au {
+////            // if the user is already logged in, go to the main screen
+////            print(assa.tokenString)
+////            print("User already logged in go to ViewController")
+////
+////
+////        }
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         output.viewIsReady()
 
         let backButton = UIButton()
@@ -41,6 +58,13 @@ class ConfirmationViewController: ParentViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         titleViewLabel.text = L10n.confirmationTitleText
+
+        if accountKit == nil {
+            accountKit = AKFAccountKit(responseType: .authorizationCode)
+        }
+
+        pendingLoginVC = accountKit!.viewControllerForPhoneLogin() as? AKFViewController
+        pendingLoginVC?.delegate = self
 
         addTopView()
         addStackView()
@@ -140,6 +164,14 @@ class ConfirmationViewController: ParentViewController {
         } else {
             showAlert(message: L10n.alertCinemaCorrectErrror)
         }
+//        accountKit!.viewControllerForPhoneLogin() as? AKFViewController
+//        pendingLoginVC?.delegate = self
+//        if let vc = accountKit?.viewControllerForPhoneLogin() as? AKFViewController {
+
+//            present(vc as! UIViewController, animated: true, completion: nil)
+//            vc.delegate = self
+//       // }
+//        }
 //        output?.next()
     }
 
@@ -169,5 +201,18 @@ extension ConfirmationViewController: UITextFieldDelegate {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
         return newLength <= 6 // Boolzzzz
+    }
+}
+
+extension ConfirmationViewController: AKFViewControllerDelegate {
+
+    func viewController(_ viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
+        print("did complete login with AuthCode \(code) state \(state)")
+    }
+    func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
+        print("error \(error)")
+    }
+    func viewController(_ viewController: UIViewController!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        print("did complete login with access token \(accessToken.tokenString) state \(state)")
     }
 }

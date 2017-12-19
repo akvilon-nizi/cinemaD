@@ -82,13 +82,14 @@ class FriendsNewsCell: UITableViewCell {
         titleLabel.trailingAnchor ~= contentView.trailingAnchor - 10
 
         contentView.addSubview(newsTitleLabel.prepareForAutoLayout())
-        newsTitleLabel.topAnchor ~= userImage.bottomAnchor + 16
-        newsTitleLabel.leadingAnchor ~= titleLabel.leadingAnchor
+        newsTitleLabel.topAnchor ~= userImage.bottomAnchor + 15
+        newsTitleLabel.leadingAnchor ~= contentView.leadingAnchor + 51
 
         contentView.addSubview(filmGroup.prepareForAutoLayout())
         filmGroup.heightAnchor ~= windowWidth
         filmGroup.widthAnchor ~= contentView.widthAnchor
-        filmGroup.topAnchor ~= newsTitleLabel.bottomAnchor
+        filmGroup.topAnchor ~= newsTitleLabel.bottomAnchor + 10
+        filmGroup.changeInset(inset: 51)
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
@@ -96,7 +97,7 @@ class FriendsNewsCell: UITableViewCell {
         separatorView.topAnchor ~= filmGroup.bottomAnchor
         separatorView.bottomAnchor ~= contentView.bottomAnchor
         separatorView.trailingAnchor ~= contentView.trailingAnchor - 24
-        separatorView.leadingAnchor ~= titleLabel.leadingAnchor
+        separatorView.leadingAnchor ~= contentView.leadingAnchor + 24
         separatorView.heightAnchor ~= 1
     }
 

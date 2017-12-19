@@ -58,6 +58,16 @@ class FilmGroup: UITableViewHeaderFooterView {
         collectionView.dataSource = self
         collectionView.reloadData()
     }
+
+    func changeInset(inset: CGFloat) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 13
+        layout.minimumLineSpacing = 13
+        layout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        collectionView.setCollectionViewLayout(layout, animated: false)
+        
+    }
 }
 
 extension FilmGroup: UICollectionViewDelegateFlowLayout {

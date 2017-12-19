@@ -54,7 +54,7 @@ class FriendsAddCell: UITableViewCell {
     }()
 
     var name: String = "" {
-        didSet{
+        didSet {
             titleLabel.text = name
         }
     }

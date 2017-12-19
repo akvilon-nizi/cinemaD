@@ -8,6 +8,7 @@ import Foundation
 protocol MainInteractorInput {
     func getData()
     func getNewsWithFilters(filters: [String])
+    func postLocation(lat: Double, log: Double)
 }
 
 protocol MainInteractorOutput: class {
