@@ -7,8 +7,6 @@ import Foundation
 
 protocol FilmViewInput: class {
 
-    func setupInitialState()
-
     func setFilmInfo(_ filmInfo: FullFilm)
 
     func showNetworkError()

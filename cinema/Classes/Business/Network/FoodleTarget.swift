@@ -62,6 +62,8 @@ enum FoodleTarget {
     case friends
     case putFriends(id: String)
     case friendsNews
+    case adwardsGeo
+    case postAdwardsGeo(lat: Double, log: Double)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -166,13 +168,9 @@ extension FoodleTarget: TargetType {
             return "news/\(newsID)/comments"
         case let .putNewsComment(newsID, _):
             return "news/\(newsID)/comments"
-        case .editeProfile:
+        case .editeProfile, .profile:
             return "me"
-        case .profile:
-            return "me"
-        case let .review(filmID):
-            return "films/\(filmID)/review"
-        case let .putReview(filmID, _, _):
+        case let .review(filmID), let .putReview(filmID, _, _):
             return "films/\(filmID)/review"
         case .adwards:
             return "me/awards"
@@ -186,12 +184,12 @@ extension FoodleTarget: TargetType {
             return "films"
         case .friendsRecommendation:
             return "friends/recommendations"
-        case .friends:
-            return "friends"
-        case .putFriends:
+        case .friends, .putFriends:
             return "friends"
         case .friendsNews:
             return "friends/news"
+        case .adwardsGeo, .postAdwardsGeo:
+            return "me/awards/geo"
         }
     }
 
@@ -199,7 +197,7 @@ extension FoodleTarget: TargetType {
         switch self {
         case .trailersFilms, .films, .film, .persons, .person, .now, .recommendations, .youtubeVideo, .meFilmWatched, .meFilmWillWatched, .getCollections, .getFilmsFromCollections, .news, .newsInfo, .newsComments, .profile, .review, .adwards, .getAdminCollection, .friendsRecommendation, .friendsNews, .friends:
             return .get
-        case .getAdminCollections:
+        case .getAdminCollections, .adwardsGeo:
             return .get
     case .deleteFilm, .deleteCollections, .filmWatchedDelete, .filmWillWatchDelete, .deleteComment, .deleteReview, .deleteFilmLiked, .deleteFilmDisLiked:
             return .delete
@@ -300,6 +298,11 @@ extension FoodleTarget: TargetType {
                 parameters["password"] = newPassword
             }
             //parameters["description"] = description
+            return parameters
+        case let .postAdwardsGeo(lat, lon):
+            var parameters: [String: Any] = [:]
+            parameters["lat"] = lat
+            parameters["lon"] = lon
             return parameters
         default:
             return nil

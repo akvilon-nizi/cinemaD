@@ -27,16 +27,7 @@ class FilmViewController: ParentViewController {
     let imageView = UIImageView()
     let scrollView = UIScrollView()
 
-    let willWatchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(L10n.filmWillWatchButton, for: .normal)
-        button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
-        button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
-        button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
-        button.heightAnchor ~= 33
-        button.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
-        return button
-    }()
+    let willWatchButton = UIButton().setParameters(L10n.filmWillWatchButton)
 
     let textView = ReadMoreTextView()
 
@@ -46,16 +37,7 @@ class FilmViewController: ParentViewController {
 
     let titleLabel = UILabel()
 
-    let watchedButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(L10n.filmWatchedButton, for: .normal)
-        button.setTitleColor(UIColor.cnmAfafaf, for: .normal)
-        button.setTitleColor(UIColor.cnmMainOrange, for: .selected)
-        button.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
-        button.heightAnchor ~= 33
-        button.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
-        return button
-    }()
+    let watchedButton = UIButton().setParameters(L10n.filmWatchedButton)
 
     let buyButton: UIButton = {
         let button = UIButton()
@@ -150,10 +132,12 @@ class FilmViewController: ParentViewController {
 
         titleLabel.font = UIFont.cnmFuturaLight(size: 14)
         titleLabel.textColor = UIColor.cnmAfafaf
+        titleLabel.lineBreakMode = .byTruncatingMiddle
 
         titleView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.centerXAnchor ~= titleView.centerXAnchor
         titleLabel.topAnchor ~= titleViewLabel.bottomAnchor
+        titleLabel.widthAnchor ~= windowWidth + 20
 
         navigationItem.titleView = titleView
 
@@ -331,15 +315,15 @@ class FilmViewController: ParentViewController {
         textView.text = filmInfo.description
         descriptions = filmInfo.description
 
-        textView.font = UIFont.cnmFutura(size: 14)
-        textView.textColor = UIColor.cnmGreyLight
-        textView.textAlignment = .left
-        textView.shouldTrim = true
-        textView.maximumNumberOfLines = 4
         textView.attributedReadMoreText = NSAttributedString(string: L10n.filmMoreButton, attributes: [
             NSForegroundColorAttributeName: UIColor.cnmBlueLight,
             NSFontAttributeName: UIFont.cnmFutura(size: 14)
             ])
+        textView.font = UIFont.cnmFutura(size: 14)
+        textView.textColor = UIColor.cnmGreyLight
+        textView.textAlignment = .left
+        textView.maximumNumberOfLines = 4
+        textView.shouldTrim = true
 
         contentView.addSubview(textView.prepareForAutoLayout())
         textView.topAnchor ~= desriptionLabel.bottomAnchor + 12
@@ -447,6 +431,8 @@ class FilmViewController: ParentViewController {
         UIView.animate(withDuration: 2.0, animations: {
             frame.origin.x = isWatch ? -800 : 800
             frame.origin.y = 2_000
+            frame.size.height = 0
+            frame.size.width = 0
             doubleImageView.frame = frame
         }, completion: { _ in
             doubleImageView.removeFromSuperview()
@@ -516,10 +502,6 @@ class FilmViewController: ParentViewController {
 // MARK: - FilmViewInput
 
 extension FilmViewController: FilmViewInput {
-
-    func setupInitialState() {
-
-    }
 
     func showNetworkError() {
         showAlert(message: L10n.alertCinemaNetworkErrror)
@@ -604,11 +586,22 @@ private extension UIView {
     }
 }
 
-
 extension FilmViewController: RolesCVDelegate {
     func openPersonID(_ personID: String, name: String, role: String) {
         if let filmInfo = filmInformation {
             output?.openPersonID(personID, name: name, role: role, persons: filmInfo.persons)
         }
+    }
+}
+
+extension UIButton {
+    func setParameters(_ title: String) -> UIButton {
+        self.setTitle(title, for: .normal)
+        self.setTitleColor(UIColor.cnmAfafaf, for: .normal)
+        self.setTitleColor(UIColor.cnmMainOrange, for: .selected)
+        self.titleLabel?.font = UIFont.cnmFuturaLight(size: 16)
+        self.heightAnchor ~= 33
+        self.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
+        return self
     }
 }

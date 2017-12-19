@@ -18,6 +18,8 @@ class ListFriendsVC: ParentViewController {
 
     var friends: [Creator] = []
 
+    var arrayVC: [Creator] = []
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -64,6 +66,7 @@ class ListFriendsVC: ParentViewController {
 
     func setFriends(_ friends: [Creator]) {
         self.friends = friends
+        self.arrayVC = friends
         tableView.reloadData()
     }
 }
@@ -146,7 +149,12 @@ extension ListFriendsVC: SearchCommonDelegate {
     }
 
     func changeText(_ text: String) {
-
+        if text.count >= 1 {
+            friends = arrayVC.filter{ $0.name.range(of: text) != nil || $0.name.lowercased().range(of: text) != nil || $0.name.range(of: text.lowercased()) != nil || $0.name.lowercased().range(of: text.lowercased()) != nil}
+        } else {
+            friends = arrayVC
+        }
+        tableView.reloadData()
     }
 }
 

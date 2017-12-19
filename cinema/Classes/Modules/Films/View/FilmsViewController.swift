@@ -98,7 +98,6 @@ class FilmsViewController: ParentViewController {
         output?.homeButtonTap()
     }
 
-
 }
 
 // MARK: - FilmsViewInput
@@ -138,6 +137,9 @@ extension FilmsViewController: UICollectionViewDataSource {
 
         if let tagCell = cell as? FilmsCollectionCell {
             tagCell.linkUrlImage = films[indexPath.row].imageUrl
+            if let rate = films[indexPath.row].rate, rate > 0 {
+                tagCell.setRating(rate)
+            }
         }
         return cell
     }

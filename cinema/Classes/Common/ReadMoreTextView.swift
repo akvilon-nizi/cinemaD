@@ -22,6 +22,8 @@ public class ReadMoreTextView: UITextView {
         setupDefaults()
     }
 
+    var isFirst = true
+
     public convenience init(frame: CGRect) {
         self.init(frame: frame, textContainer: nil)
     }
@@ -260,11 +262,17 @@ public class ReadMoreTextView: UITextView {
 
         if let text = attributedReadMoreText {
             let range = rangeToReplaceWithReadMoreText()
-            guard range.location != NSNotFound else { return }
-
+            guard range.location != NSNotFound else {
+                if isFirst {
+                    isFirst = false
+                    invalidateIntrinsicContentSize()
+                    invokeOnSizeChangeIfNeeded()
+                }
+                return
+            }
             textStorage.replaceCharacters(in: range, with: text)
         }
-        
+
         invalidateIntrinsicContentSize()
         invokeOnSizeChangeIfNeeded()
 
@@ -285,7 +293,7 @@ public class ReadMoreTextView: UITextView {
             }
             textStorage.replaceCharacters(in: range, with: originalAttributedText)
         }
-        
+
         invalidateIntrinsicContentSize()
         invokeOnSizeChangeIfNeeded()
     }

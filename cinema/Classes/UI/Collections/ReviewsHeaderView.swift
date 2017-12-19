@@ -25,6 +25,8 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = UIFont.cnmFuturaBold(size: 20)
         label.textColor = UIColor.setColorGray(white: 45)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     } ()
 
@@ -32,6 +34,8 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = UIFont.cnmFuturaLight(size: 14)
         label.textColor = UIColor.setColorGray(white: 175)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     } ()
 
@@ -59,10 +63,12 @@ class ReviewsHeaderView: UITableViewHeaderFooterView {
         addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.topAnchor ~= topAnchor
         titleLabel.centerXAnchor ~= centerXAnchor
+        titleLabel.widthAnchor ~= widthAnchor - 30
 
         addSubview(genresLabel.prepareForAutoLayout())
         genresLabel.topAnchor ~= titleLabel.bottomAnchor
         genresLabel.centerXAnchor ~= centerXAnchor
+        genresLabel.widthAnchor ~= widthAnchor - 50
 
         let buttonsStack = createStackView(.horizontal, .fill, .fill, 1, with: [likedView, separatorView, dislikedView])
         addSubview(buttonsStack.prepareForAutoLayout())
