@@ -44,8 +44,8 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: StartConfigurator.tag) { () -> UIViewController in
-            let configurator = StartConfigurator()
+        container.register(tag: StartConfigurator.tag) { (isError: Bool) -> UIViewController in
+            let configurator = StartConfigurator(isError: isError)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             configurator.authTokenManager = try managersContainer.resolve()
@@ -59,8 +59,8 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: AuthCinemaConfigurator.tag) { () -> UIViewController in
-            let configurator = AuthCinemaConfigurator()
+        container.register(tag: AuthCinemaConfigurator.tag) { (isError: Bool) -> UIViewController in
+            let configurator = AuthCinemaConfigurator(isError: isError)
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             configurator.authTokenManager = try managersContainer.resolve()

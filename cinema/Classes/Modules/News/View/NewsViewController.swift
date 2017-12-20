@@ -323,8 +323,8 @@ extension NewsViewController: NewsViewInput {
 
     func deleteComment() {
         let indexPath = IndexPath(row: currentDeleteIndex, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .top)
         newsData.comments.remove(at: currentDeleteIndex)
+        tableView.deleteRows(at: [indexPath], with: .top)
         activityVC.isHidden = true
         activityVC.stopAnimating()
     }

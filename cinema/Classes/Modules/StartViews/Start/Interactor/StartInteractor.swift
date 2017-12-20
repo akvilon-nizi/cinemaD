@@ -4,14 +4,20 @@
 //
 
 import Foundation
+import RxMoya
+import RxSwift
 
 class StartInteractor {
 
     weak var output: StartInteractorOutput!
+
+    var provider: RxMoyaProvider<FoodleTarget>!
+
+    fileprivate let disposeBag = DisposeBag()
 }
 
 // MARK: - StartInteractorInput
 
 extension StartInteractor: StartInteractorInput {
-
+    
 }

@@ -64,7 +64,7 @@ extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
                 let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Double(rate))
                 colFilms.append(film)
             }
         }

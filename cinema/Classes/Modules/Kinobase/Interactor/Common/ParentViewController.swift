@@ -32,10 +32,20 @@ class ParentViewController: UIViewController {
         activityVC.isHidden = true
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
+        statusBarAlertManager.unregistrate(viewController: self)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: animated)
+
+        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
+        statusBarAlertManager.registrate(viewController: self)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

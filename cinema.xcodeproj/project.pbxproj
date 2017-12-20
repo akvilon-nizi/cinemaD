@@ -190,6 +190,8 @@
 		8138ECFE1FDEB4D100F69628 /* FriendsAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECFD1FDEB4D100F69628 /* FriendsAddCell.swift */; };
 		8138ED001FDEB60C00F69628 /* AddFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */; };
 		8138ED021FDEC62500F69628 /* AdminCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */; };
+		813D863C1FEA78CF0026327B /* StatusBarAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863B1FEA78CF0026327B /* StatusBarAlertManager.swift */; };
+		813D863E1FEA83AB0026327B /* MessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863D1FEA83AB0026327B /* MessageError.swift */; };
 		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
 		81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C001FC82A360086E9FB /* ProfileHeader.swift */; };
 		81961C051FC858AE0086E9FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C041FC858AE0086E9FB /* SettingsView.swift */; };
@@ -711,6 +713,8 @@
 		8138ECFD1FDEB4D100F69628 /* FriendsAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAddCell.swift; sourceTree = "<group>"; };
 		8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsVC.swift; sourceTree = "<group>"; };
 		8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminCollectionCell.swift; sourceTree = "<group>"; };
+		813D863B1FEA78CF0026327B /* StatusBarAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarAlertManager.swift; sourceTree = "<group>"; };
+		813D863D1FEA83AB0026327B /* MessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageError.swift; sourceTree = "<group>"; };
 		813EFE1DBACB73175B53B782 /* FilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		816E7A3BA28785BBCB4E3676 /* ReviewsModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReviewsModuleInputOutput.swift; sourceTree = "<group>"; };
 		81961BFE1FC7FEC10086E9FB /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
@@ -1140,6 +1144,7 @@
 				88EFD0F51FB1C81300473640 /* HeaderSectionStruct.swift */,
 				CE1D2A421FBF138900E68209 /* KingfisherSource.swift */,
 				8107F7ED1FD7F1C90067DFD2 /* Constants.swift */,
+				813D863B1FEA78CF0026327B /* StatusBarAlertManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2287,6 +2292,7 @@
 				9BB4EED6E2659E4C696CCF34 /* AuthTokenManager.swift */,
 				9BB4E4CCB9AE6E5FB278B961 /* AuthTokenMoyaPlugin.swift */,
 				9BB4E23DB7E875222F687BDE /* Responses.swift */,
+				813D863D1FEA83AB0026327B /* MessageError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3346,6 +3352,7 @@
 				81FBA3851FCE94DD00EBAFED /* ActorHeaderView.swift in Sources */,
 				CE1A5BA11F8CCFF4001AC04F /* HeaderViewTitle.swift in Sources */,
 				0464ACE81F58144500D8D49A /* SlidePageControl.swift in Sources */,
+				813D863E1FEA83AB0026327B /* MessageError.swift in Sources */,
 				CEE0A9431F987405006E6D9B /* ReadMoreTextView.swift in Sources */,
 				9BB4EE643D7AB8FF33E4C138 /* AppDelegate.swift in Sources */,
 				9BB4EF4A84B7977863DF8BC1 /* CrashReportManager.swift in Sources */,
@@ -3626,6 +3633,7 @@
 				E39F014A5C62B07EFB33B488 /* ActorsInteractor.swift in Sources */,
 				CEA51E3A1FAF5ACB00EB0782 /* HeaderSearchView.swift in Sources */,
 				90F542FCBD9375645FDB4A64 /* ActorsInteractorInputOutput.swift in Sources */,
+				813D863C1FEA78CF0026327B /* StatusBarAlertManager.swift in Sources */,
 				33BBB59FA5CC1FC91889C202 /* ActorsModuleInputOutput.swift in Sources */,
 				56D6926E347F6D3EBA495E66 /* ActorsPresenter.swift in Sources */,
 				CECAF98B1FC5C77100050EAA /* CommentsResponse.swift in Sources */,

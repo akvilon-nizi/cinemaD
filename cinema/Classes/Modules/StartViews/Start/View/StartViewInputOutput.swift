@@ -8,6 +8,7 @@ import Foundation
 protocol StartViewInput: class {
 
     func setupInitialState()
+    func showNetworkError(message: String)
 }
 
 protocol StartViewOutput {

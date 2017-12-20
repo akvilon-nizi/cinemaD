@@ -16,12 +16,19 @@ class AuthCinemaConfigurator {
 
     var authTokenManager: AuthTokenManagerProtocol!
 
+    let isError: Bool
+
+    init(isError: Bool = false) {
+        self.isError = isError
+    }
+
     func configureModule() -> UIViewController {
         let router = AuthCinemaRouter()
         router.appRouter = appRouter
 
         let presenter = AuthCinemaPresenter()
         presenter.router = router
+        presenter.isError = isError
 
         let interactor = AuthCinemaInteractor()
         interactor.output = presenter

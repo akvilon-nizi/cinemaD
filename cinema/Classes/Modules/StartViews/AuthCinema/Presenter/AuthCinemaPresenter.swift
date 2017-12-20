@@ -11,6 +11,7 @@ class AuthCinemaPresenter {
     var interactor: AuthCinemaInteractorInput!
     var router: AuthCinemaRouterInput!
     weak var output: AuthCinemaModuleOutput?
+    var isError: Bool!
 }
 
 // MARK: - AuthCinemaViewOutput
@@ -19,6 +20,9 @@ extension AuthCinemaPresenter: AuthCinemaViewOutput {
 
     func viewIsReady() {
         log.verbose("AuthCinema is ready")
+     //   if isError {
+            view.showNetworkError()
+    //    }
     }
 
     func backTap() {

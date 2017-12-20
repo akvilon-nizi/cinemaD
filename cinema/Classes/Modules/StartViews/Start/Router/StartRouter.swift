@@ -17,6 +17,6 @@ extension StartRouter: StartRouterInput {
         appRouter.transition(to: .registration)
     }
     func openAuth() {
-        appRouter.transition(to: .authCinema)
+        appRouter.transition(to: .authCinema(isError: false))
     }
 }

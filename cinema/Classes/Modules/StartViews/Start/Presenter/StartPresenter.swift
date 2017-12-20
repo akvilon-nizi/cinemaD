@@ -11,6 +11,12 @@ class StartPresenter {
     var interactor: StartInteractorInput!
     var router: StartRouterInput!
     weak var output: StartModuleOutput?
+    let isError: Bool
+
+    init(isError: Bool) {
+        self.isError = isError
+    }
+
 }
 
 // MARK: - StartViewOutput
@@ -19,6 +25,9 @@ extension StartPresenter: StartViewOutput {
 
     func viewIsReady() {
         log.verbose("Start is ready")
+        if isError {
+            view.showNetworkError(message: L10n.alertAutorizationError)
+        }
     }
 
     func authFromFb() {

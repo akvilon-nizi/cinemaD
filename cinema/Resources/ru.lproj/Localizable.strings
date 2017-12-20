@@ -8,7 +8,9 @@
 
 // Alert
 
+"alert-title-internet-error" = "Проверьте интернет соединение";
 "alert-title-network-error" = "Сетевая ошибка";
+"alert-autorization-error" = "Ошибка авторизации";
 "alert-title-system-error" = "Системная ошибка";
 "alert-button-ok" = "ОК";
 "alert-button-cancel" = "Отменить";

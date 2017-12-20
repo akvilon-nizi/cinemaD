@@ -7,6 +7,8 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 enum L10n {
+  /// Ошибка авторизации
+  static let alertAutorizationError = L10n.tr("Localizable", "alert-autorization-error")
   /// Отменить
   static let alertButtonCancel = L10n.tr("Localizable", "alert-button-cancel")
   /// ОК
@@ -21,6 +23,8 @@ enum L10n {
   static let alertCollectionsChange = L10n.tr("Localizable", "alert-collections-change")
   /// Коллекция удалена
   static let alertCollectionsRemove = L10n.tr("Localizable", "alert-collections-remove")
+  /// Проверьте интернет соединение
+  static let alertTitleInternetError = L10n.tr("Localizable", "alert-title-internet-error")
   /// Сетевая ошибка
   static let alertTitleNetworkError = L10n.tr("Localizable", "alert-title-network-error")
   /// Системная ошибка

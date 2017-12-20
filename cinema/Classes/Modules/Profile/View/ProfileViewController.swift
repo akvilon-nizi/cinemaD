@@ -123,6 +123,11 @@ extension ProfileViewController: ProfileViewInput {
 
     func getData(_ films: [FilmCollections]) {
 
+        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
+        statusBarAlertManager.setStatusBarAlert(with: "assa", with: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            statusBarAlertManager.clear()
+        }
         self.films = []
 
         refreshControl.endRefreshing()
@@ -132,7 +137,7 @@ extension ProfileViewController: ProfileViewInput {
             if let rating = filmColW.rate {
                rate = Int(rating)
             }
-            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Double(rate))
             self.films.append(film)
         }
         tableView.reloadData()

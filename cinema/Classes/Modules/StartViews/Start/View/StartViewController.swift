@@ -4,10 +4,17 @@
 //
 
 import UIKit
+import FacebookLogin
+import FBSDKLoginKit
+import FacebookCore
+import VKSdkFramework
+import AccountKit
 
 class StartViewController: ParentViewController {
 
     var output: StartViewOutput!
+
+    var accountKit: AKFAccountKit?
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -42,10 +49,16 @@ class StartViewController: ParentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        output.viewIsReady()
 
     //let imageView = UIImageView(image: Asset.StartViews.Start.background.image)
         //view.addSubview(imageView.prepareForAutoLayout())
+
+        VKSdk.initialize(withAppId: "6258240").register(self)
+        VKSdk.instance().uiDelegate = self
+
+        if accountKit == nil {
+            accountKit = AKFAccountKit(responseType: .authorizationCode)
+        }
 
         view.addSubview(contentView.prepareForAutoLayout())
         contentView.leadingAnchor ~= view.leadingAnchor
@@ -55,6 +68,7 @@ class StartViewController: ParentViewController {
 
         addTopViews()
         addBottomViews()
+        output.viewIsReady()
     }
 
     private func addTopViews() {
@@ -79,7 +93,9 @@ class StartViewController: ParentViewController {
 
     private func addBottomViews() {
         let fbButton = UIButton(type: .system).setTitleWithColor(title: L10n.startFacebookText, color: UIColor.cnmFbColor)
+        fbButton.addTarget(self, action: #selector(handleTapFbButton), for: .touchUpInside)
         let vkButtom = UIButton(type: .system).setTitleWithColor(title: L10n.startVkontakteText, color: UIColor.cnmVkColor)
+        vkButtom.addTarget(self, action: #selector(handleTapVkButton), for: .touchUpInside)
         let regButton = UIButton(type: .system).setTitleWithColor(title: L10n.startRegistrationText, color: UIColor.cnmMainOrange)
         regButton.addTarget(self, action: #selector(handleTapRegButton), for: .touchUpInside)
         let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [fbButton, vkButtom, regButton])
@@ -107,11 +123,39 @@ class StartViewController: ParentViewController {
 
     // MARK: - Actions
     func handleTapRegButton() {
-        output?.registration()
+//        output?.registration()
+        if let vc = accountKit?.viewControllerForPhoneLogin() as? AKFViewController {
+            // swiftlint:disable:next force_cast
+            present(vc as! UIViewController, animated: true, completion: nil)
+            vc.delegate = self
+        }
     }
 
     func handleTapAuthButton() {
         output?.auth()
+    }
+
+    func handleTapFbButton() {
+        let loginManager = LoginManager()
+        loginManager.logOut()
+        loginManager.logIn(readPermissions: [ .publicProfile], viewController: self) { loginResult in
+            switch loginResult {
+            case .failed(let error):
+                print(error)
+            case .cancelled:
+                print("User cancelled login.")
+            case .success(let grantedPermissions, let declinedPermissions, let token):
+                print("User cancelled login.")
+            }
+        }
+    }
+
+    func handleTapVkButton() {
+        let wakeUpSession = VKSdk.wakeUpSession(nil, complete: { _ in
+                VKSdk.forceLogout()
+                VKSdk.authorize([])
+            }
+        )
     }
 }
 
@@ -121,5 +165,69 @@ extension StartViewController: StartViewInput {
 
     func setupInitialState() {
 
+    }
+
+    func showNetworkError(message: String) {
+        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
+        statusBarAlertManager.setStatusBarAlert(with: message, with: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            statusBarAlertManager.clear()
+        }
+    }
+}
+
+
+extension StartViewController: VKSdkDelegate {
+    /**
+     Notifies about access error. For example, this may occurs when user rejected app permissions through VK.com
+     */
+    public func vkSdkUserAuthorizationFailed() {
+        print()
+    }
+
+    /**
+     Notifies about authorization was completed, and returns authorization result with new token or error.
+
+     @param result contains new token or error, retrieved after VK authorization.
+     */
+    public func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
+        if result.token != nil {
+            print()
+//            self.loginService.loginByVK(with: result.token.accessToken!, deviceId: result.token.userId!)
+        }
+        print()
+    }
+    func vkSdkShouldPresentViewController(controller: UIViewController) {
+        print()
+    }
+}
+
+extension StartViewController: VKSdkUIDelegate {
+    public    func vkSdkTokenHasExpired(expiredToken: VKAccessToken) {
+        print()
+    }
+    //    func vkSdkUserDeniedAccess(authorizationError: VKError) {
+    public func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
+        print()
+    }
+    public func vkSdkShouldPresent(_ controller: UIViewController!) {
+        if !VKSdk.vkAppMayExists() {
+            present(controller, animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: - AKFViewControllerDelegate
+
+extension StartViewController: AKFViewControllerDelegate {
+
+    func viewController(_ viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
+        print("did complete login with AuthCode \(code) state \(state)")
+    }
+    func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
+        print("error \(error)")
+    }
+    func viewController(_ viewController: UIViewController!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        print("did complete login with access token \(accessToken.tokenString) state \(state)")
     }
 }

@@ -166,12 +166,11 @@ class ConfirmationViewController: ParentViewController {
         }
 //        accountKit!.viewControllerForPhoneLogin() as? AKFViewController
 //        pendingLoginVC?.delegate = self
-//        if let vc = accountKit?.viewControllerForPhoneLogin() as? AKFViewController {
-
-//            present(vc as! UIViewController, animated: true, completion: nil)
-//            vc.delegate = self
-//       // }
-//        }
+        if let vc = accountKit?.viewControllerForPhoneLogin() as? AKFViewController {
+            // swiftlint:disable:next force_cast
+            present(vc as! UIViewController, animated: true, completion: nil)
+            vc.delegate = self
+        }
 //        output?.next()
     }
 

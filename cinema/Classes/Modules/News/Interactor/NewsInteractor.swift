@@ -66,7 +66,7 @@ extension NewsInteractor: NewsInteractorInput {
     }
 
     func deleteComment(id: String) {
-        provider.requestModel(.deleteReview(id: id))
+        provider.requestModel(.deleteComment(id: id))
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):

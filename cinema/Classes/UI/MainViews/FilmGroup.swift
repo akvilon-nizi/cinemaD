@@ -66,7 +66,6 @@ class FilmGroup: UITableViewHeaderFooterView {
         layout.minimumLineSpacing = 13
         layout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         collectionView.setCollectionViewLayout(layout, animated: false)
-        
     }
 }
 
@@ -109,7 +108,7 @@ extension FilmGroup: UICollectionViewDataSource {
         if let tagCell = cell as? FilmsCollectionCell {
             tagCell.linkUrlImage = films[indexPath.row].imageUrl
             if let rate = films[indexPath.row].rate, rate > 0 {
-                tagCell.setRating(rate)
+                tagCell.setRating(Int(rate))
             } else {
                 tagCell.delRating()
             }

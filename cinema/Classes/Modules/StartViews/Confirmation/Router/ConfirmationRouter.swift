@@ -18,7 +18,7 @@ extension ConfirmationRouter: ConfirmationRouterInput {
     }
 
     func transitionToAuth() {
-        appRouter.transition(to: .authCinema)
+        //appRouter.transition(to: .authCinema)
     }
 
     func transitionToMain() {

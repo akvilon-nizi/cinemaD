@@ -54,8 +54,6 @@ enum Asset {
     static let close = ImageAsset(name: "close")
     static let enter = ImageAsset(name: "enter")
     static let forward = ImageAsset(name: "forward")
-    static let remove = ImageAsset(name: "remove")
-    static let remove28 = ImageAsset(name: "remove28")
     static let settings = ImageAsset(name: "settings")
     static let settingsUnselect = ImageAsset(name: "settingsUnselect")
   }
@@ -157,8 +155,6 @@ enum Asset {
     Kinobase.close,
     Kinobase.enter,
     Kinobase.forward,
-    Kinobase.remove,
-    Kinobase.remove28,
     Kinobase.settings,
     Kinobase.settingsUnselect,
     Cinema.backImage,

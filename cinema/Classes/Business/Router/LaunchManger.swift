@@ -46,7 +46,7 @@ extension LaunchManager: LaunchManagerProtocol {
             }
 
             let invokeAuthModule = { [unowned self] (window: UIWindow, observer: AnyObserver<FlowControllerProtocol>) in
-                let module = self.moduleCreator.createModule(for: .start)
+                let module = self.moduleCreator.createModule(for: .start(isError: false))
                 let flowController = self.moduleCreator.createNavigationFlowController(viewController: module)
                 observer.onNext(flowController)
                 self.animateRootControllerChange(in: window, viewController: flowController.rootViewController)

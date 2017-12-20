@@ -15,8 +15,8 @@ struct AlertControllerData {
 enum AppRouterDestination {
     case systemAlert(data: AlertControllerData)
     case slides
-    case start
-    case authCinema
+    case start(isError: Bool)
+    case authCinema(isError: Bool)
     case registration
     case newPassword
     case helpAuth
@@ -72,10 +72,10 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: Containers.ViewControllerType.systemAlert, arguments: data)
             case .slides:
                 return try factory.resolve(tag: SlidesConfigurator.tag)
-            case .start:
-                return try factory.resolve(tag: StartConfigurator.tag)
-            case .authCinema:
-                return try factory.resolve(tag: AuthCinemaConfigurator.tag)
+            case let .start(isError):
+                return try factory.resolve(tag: StartConfigurator.tag, arguments: isError)
+            case let .authCinema(isError):
+                return try factory.resolve(tag: AuthCinemaConfigurator.tag, arguments: isError)
             case .registration:
                 return try factory.resolve(tag: RegistrationConfigurator.tag)
             case .newPassword:
@@ -226,16 +226,19 @@ class AppRouter: AppRouterProtocol {
 
     func dropAll() {
 
-        let authViewController = moduleCreator.createModule(for: .authCinema)
+        let authViewController = moduleCreator.createModule(for: .start(isError: true))
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
 
-        application.keyWindow?.rootViewController = flowController.rootViewController
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+            appDelegate.window?.rootViewController = flowController.rootViewController
+        }
     }
 
     func starting() {
 
-        let authViewController = moduleCreator.createModule(for: .start)
+        let authViewController = moduleCreator.createModule(for: .start(isError: false))
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
 

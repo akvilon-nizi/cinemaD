@@ -162,7 +162,7 @@ class WatchedVC: ParentViewController {
                 if let rating = filmColW.rate {
                     rate = Int(rating)
                 }
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Double(rate))
                 colFilms.append(film)
             }
         }

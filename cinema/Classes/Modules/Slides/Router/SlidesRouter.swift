@@ -15,6 +15,6 @@ class SlidesRouter {
 extension SlidesRouter: SlidesRouterInput {
 
     func openAuth() {
-        appRouter.transition(to: .start)
+        appRouter.transition(to: .start(isError: false))
     }
 }
