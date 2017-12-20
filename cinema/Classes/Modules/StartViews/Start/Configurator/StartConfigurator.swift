@@ -34,6 +34,8 @@ class StartConfigurator {
 
         let interactor = StartInteractor()
         interactor.output = presenter
+        interactor.provider = provider
+        interactor.authTokenManager = authTokenManager
 
         let viewController = StartViewController()
         viewController.output = presenter

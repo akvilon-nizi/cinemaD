@@ -14,10 +14,26 @@ class StartInteractor {
     var provider: RxMoyaProvider<FoodleTarget>!
 
     fileprivate let disposeBag = DisposeBag()
+
+    var authTokenManager: AuthTokenManagerProtocol!
 }
 
 // MARK: - StartInteractorInput
 
 extension StartInteractor: StartInteractorInput {
-    
+    func sendData(authCode: String) {
+        provider.requestModel(.auth2(authCode: authCode))
+            .subscribe { [unowned self] (response: Event<AuthResponse>) in
+                switch response {
+                case let .next(model):
+                    self.authTokenManager.save(apiToken: model.token)
+                    self.output.authSuccess()
+                case let .error(error as ProviderError):
+                    self.output.faulireAuth()
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
 }

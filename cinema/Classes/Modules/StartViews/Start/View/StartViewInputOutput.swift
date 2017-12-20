@@ -9,6 +9,7 @@ protocol StartViewInput: class {
 
     func setupInitialState()
     func showNetworkError(message: String)
+    func getError()
 }
 
 protocol StartViewOutput {
@@ -22,4 +23,6 @@ protocol StartViewOutput {
     func auth()
 
     func registration()
+
+    func getAuthCode(_ authCode: String)
 }

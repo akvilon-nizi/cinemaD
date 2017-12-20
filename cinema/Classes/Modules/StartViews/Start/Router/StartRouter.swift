@@ -19,4 +19,10 @@ extension StartRouter: StartRouterInput {
     func openAuth() {
         appRouter.transition(to: .authCinema(isError: false))
     }
+
+    func transitionToMain() {
+        OperationQueue.main.addOperation {
+            self.appRouter.mainView()
+        }
+    }
 }

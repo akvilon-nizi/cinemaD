@@ -45,10 +45,20 @@ extension StartPresenter: StartViewOutput {
     func registration() {
         router.openRegistration()
     }
+
+    func getAuthCode(_ authCode: String) {
+        interactor.sendData(authCode: authCode)
+    }
 }
 
 // MARK: - StartInteractorOutput
 
 extension StartPresenter: StartInteractorOutput {
+    func authSuccess() {
+        router.transitionToMain()
+    }
 
+    func faulireAuth() {
+        view.getError()
+    }
 }

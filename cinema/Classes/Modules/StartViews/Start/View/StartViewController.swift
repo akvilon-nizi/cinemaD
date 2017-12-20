@@ -64,7 +64,7 @@ class StartViewController: ParentViewController {
         contentView.leadingAnchor ~= view.leadingAnchor
         contentView.trailingAnchor ~= view.trailingAnchor
         contentView.centerYAnchor ~= view.centerYAnchor
-        contentView.heightAnchor ~= 440
+//        contentView.heightAnchor ~= 440
 
         addTopViews()
         addBottomViews()
@@ -102,23 +102,24 @@ class StartViewController: ParentViewController {
         contentView.addSubview(buttonsStackView.prepareForAutoLayout())
         buttonsStackView.centerXAnchor ~= contentView.centerXAnchor
         buttonsStackView.topAnchor ~= contentView.centerYAnchor + 20
+        buttonsStackView.bottomAnchor ~= contentView.bottomAnchor
 
-        let authLabel = UILabel()
-        authLabel.textColor = .cnmGreyTextColor
-        authLabel.font = UIFont.cnmFutura(size: 12)
-        authLabel.text = L10n.startHaveAuthText
-
-        let authButton = UIButton(type: .system)
-        authButton.addTarget(self, action: #selector(handleTapAuthButton), for: .touchUpInside)
-        authButton.setTitle(L10n.startButtonAuthText, for: .normal)
-        authButton.titleLabel?.font = UIFont.cnmFutura(size: 12)
-        authButton.setTitleColor(UIColor.cnmBlueLight, for: .normal)
-
-        let bottomStackView = createStackView(.horizontal, .fill, .fill, 5.0, with: [authLabel, authButton])
-        contentView.addSubview(bottomStackView.prepareForAutoLayout())
-        bottomStackView.centerXAnchor ~= contentView.centerXAnchor
-        bottomStackView.topAnchor ~= buttonsStackView.bottomAnchor + 21
-        bottomStackView.bottomAnchor ~= contentView.bottomAnchor
+//        let authLabel = UILabel()
+//        authLabel.textColor = .cnmGreyTextColor
+//        authLabel.font = UIFont.cnmFutura(size: 12)
+//        authLabel.text = L10n.startHaveAuthText
+//
+//        let authButton = UIButton(type: .system)
+//        authButton.addTarget(self, action: #selector(handleTapAuthButton), for: .touchUpInside)
+//        authButton.setTitle(L10n.startButtonAuthText, for: .normal)
+//        authButton.titleLabel?.font = UIFont.cnmFutura(size: 12)
+//        authButton.setTitleColor(UIColor.cnmBlueLight, for: .normal)
+//
+//        let bottomStackView = createStackView(.horizontal, .fill, .fill, 5.0, with: [authLabel, authButton])
+//        contentView.addSubview(bottomStackView.prepareForAutoLayout())
+//        bottomStackView.centerXAnchor ~= contentView.centerXAnchor
+//        bottomStackView.topAnchor ~= buttonsStackView.bottomAnchor + 21
+//        bottomStackView.bottomAnchor ~= contentView.bottomAnchor
     }
 
     // MARK: - Actions
@@ -174,6 +175,10 @@ extension StartViewController: StartViewInput {
             statusBarAlertManager.clear()
         }
     }
+
+    func getError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+    }
 }
 
 
@@ -222,7 +227,7 @@ extension StartViewController: VKSdkUIDelegate {
 extension StartViewController: AKFViewControllerDelegate {
 
     func viewController(_ viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
-        print("did complete login with AuthCode \(code) state \(state)")
+        output.getAuthCode(code)
     }
     func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
         print("error \(error)")

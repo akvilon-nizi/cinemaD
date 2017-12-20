@@ -12,6 +12,7 @@ enum FoodleTarget {
     case registration(password: String, name: String, phone: String)
     case getTokenFromUid(uid: String, code: String)
     case auth(phone: String, password: String)
+    case auth2(authCode: String)
     case restore(phone: String)
     case restoreFromUid(uid: String, code: String)
     case sendCode(phone: String)
@@ -91,6 +92,8 @@ extension FoodleTarget: TargetType {
         case .registration:
             return "registration"
         case .auth:
+            return "login"
+        case .auth2:
             return "login"
         case .sendCode:
             return "auth/send-code"
@@ -224,6 +227,10 @@ extension FoodleTarget: TargetType {
             return parameters
         case let .auth(phone, password):
             return ["password": password, "phone": phone]
+        case let .auth2(authCode):
+            return ["authorization_code": authCode]
+        case let .auth(phone, password):
+            return ["password": password, "phone": phone]
         case let .filmWatched(_, rate):
             return ["rate": rate]
         case let .getTokenFromUid(_, code):
@@ -298,6 +305,11 @@ extension FoodleTarget: TargetType {
                 parameters["password"] = newPassword
             }
             //parameters["description"] = description
+            return parameters
+        case let .postAdwardsGeo(lat, lon):
+            var parameters: [String: Any] = [:]
+            parameters["lat"] = lat
+            parameters["lon"] = lon
             return parameters
         case let .postAdwardsGeo(lat, lon):
             var parameters: [String: Any] = [:]

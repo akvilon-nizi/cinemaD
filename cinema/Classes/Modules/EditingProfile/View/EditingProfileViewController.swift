@@ -117,7 +117,7 @@ class EditingProfileViewController: ParentViewController {
         oldPassword.textPlaceholder = L10n.editingProfileOldPassword
         newPassword.textPlaceholder = L10n.editingProfileNewPassword
 
-        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [name, oldPassword, newPassword])
+        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [name])
 
         contentView.addSubview(stackView.prepareForAutoLayout())
         stackView.topAnchor ~= changePhotoButton.bottomAnchor + 30

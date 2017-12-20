@@ -6,9 +6,10 @@
 import Foundation
 
 protocol StartInteractorInput {
-
+    func sendData(authCode: String)
 }
 
 protocol StartInteractorOutput: class {
-
+    func authSuccess()
+    func faulireAuth()
 }

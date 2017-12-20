@@ -410,6 +410,7 @@ extension MainViewController: MainViewInput {
     }
 
     func getError() {
+        refreshControl.endRefreshing()
         showAlert(message: L10n.alertCinemaNetworkErrror)
         activityVC.isHidden = true
         activityVC.stopAnimating()
@@ -436,7 +437,6 @@ extension MainViewController: MainViewInput {
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
 
-        refreshControl.endRefreshing()
     }
 
     func getNews(_ mainData: MainData) {
