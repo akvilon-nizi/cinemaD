@@ -86,9 +86,8 @@ extension ListFriendsVC: UITableViewDataSource {
             cellFriends.delegate = self
             cellFriends.index = indexPath.row
             cellFriends.name = friends[indexPath.row].name
+            cellFriends.linkImage = friends[indexPath.row].avatar
         }
-        //        cell.setData(products[indexPath.row])
-        //        cell.delegate = self
 
         return cell
     }
@@ -150,7 +149,7 @@ extension ListFriendsVC: SearchCommonDelegate {
 
     func changeText(_ text: String) {
         if text.count >= 1 {
-            friends = arrayVC.filter{ $0.name.range(of: text) != nil || $0.name.lowercased().range(of: text) != nil || $0.name.range(of: text.lowercased()) != nil || $0.name.lowercased().range(of: text.lowercased()) != nil}
+            friends = arrayVC.filter { $0.name.range(of: text) != nil || $0.name.lowercased().range(of: text) != nil || $0.name.range(of: text.lowercased()) != nil || $0.name.lowercased().range(of: text.lowercased()) != nil}
         } else {
             friends = arrayVC
         }

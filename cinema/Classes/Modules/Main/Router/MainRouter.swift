@@ -26,12 +26,20 @@ extension MainRouter: MainRouterInput {
         appRouter.transition(to: .rewards)
     }
 
+    func openChats() {
+        appRouter.transition(to: .chats)
+    }
+
+    func openTickets() {
+        appRouter.transition(to: .tickets)
+    }
+
     func openProfile(mainView: MainTabView) {
         appRouter.transition(to: .profile(mainView: mainView))
     }
 
     func openStart() {
-        appRouter.dropAll()
+        appRouter.dropAll(isError: true                                                                                                                                                                                                                                                                                                                                                                             )
     }
 
     func setRootVC(_ rootVC: UINavigationController) {

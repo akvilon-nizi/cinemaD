@@ -38,23 +38,39 @@ class NavTabBar: UIView {
         var elementsArray: [UIView] = []
 
         var i = 0
+
+        var widthStackView: CGFloat = 0
+
         for title in titles {
             let button = UIButton().setParameters(title: title, width: width, height: height)
             button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
             button.tag = i
             i += 1
             buttonsArray.append(button)
+            button.sizeToFit()
+            widthStackView += width
             elementsArray.append(button)
             if i != titles.count {
+                widthStackView += 1
                 elementsArray.append(UIView().makeSeparator(height: height))
             }
         }
 
         buttonsArray[0].isSelected = true
 
+        let scrollView = UIScrollView()
+        addSubview(scrollView.prepareForAutoLayout())
+        scrollView.topAnchor ~= topAnchor
+        scrollView.leadingAnchor ~= leadingAnchor
+        scrollView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
+        scrollView.heightAnchor ~= height
+        scrollView.backgroundColor = .red
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+
         let stackView = createStackView(.horizontal, .fill, .equalSpacing, 0, with: elementsArray)
-        addSubview(stackView.prepareForAutoLayout())
-        stackView.pinEdgesToSuperviewEdges(top: 0, left: inset, right: inset, bottom: 0)
+        scrollView.addSubview(stackView)
+        scrollView.contentSize = CGSize(width: widthStackView, height: height)
+
     }
 
     func didTapButton(button: UIButton) {

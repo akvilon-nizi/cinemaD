@@ -87,6 +87,7 @@ extension AddFriendsVC: UITableViewDataSource {
             cellFriends.delegate = self
             cellFriends.index = indexPath.row
             cellFriends.name = friends[indexPath.row].name
+            cellFriends.linkImage = friends[indexPath.row].avatar
             cellFriends.buttonIsEnabled = !addedIndex.contains(indexPath.row)
         }
 

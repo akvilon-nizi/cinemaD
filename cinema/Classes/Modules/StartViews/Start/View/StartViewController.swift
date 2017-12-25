@@ -126,6 +126,7 @@ class StartViewController: ParentViewController {
     func handleTapRegButton() {
 //        output?.registration()
         if let vc = accountKit?.viewControllerForPhoneLogin() as? AKFViewController {
+            prepareLoginViewController(vc)
             // swiftlint:disable:next force_cast
             present(vc as! UIViewController, animated: true, completion: nil)
             vc.delegate = self
@@ -157,6 +158,24 @@ class StartViewController: ParentViewController {
                 VKSdk.authorize([])
             }
         )
+    }
+
+    func prepareLoginViewController(_ loginViewController: AKFViewController) {
+
+        loginViewController.delegate = self
+        loginViewController.setAdvancedUIManager(nil)
+
+        //Costumize the theme
+        let theme: AKFTheme = AKFTheme.default()
+        theme.headerBackgroundColor = .green
+        theme.headerTextColor = .green
+        theme.iconColor = .green
+        theme.inputTextColor = .green
+        theme.statusBarStyle = .default
+        theme.textColor = .green
+        theme.titleColor = .green
+        loginViewController.setTheme(theme)
+
     }
 }
 

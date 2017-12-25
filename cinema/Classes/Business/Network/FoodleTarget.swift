@@ -65,6 +65,7 @@ enum FoodleTarget {
     case friendsNews
     case adwardsGeo
     case postAdwardsGeo(lat: Double, log: Double)
+    case logout
 
     var isRequiredAuth: Bool {
         switch self {
@@ -193,6 +194,8 @@ extension FoodleTarget: TargetType {
             return "friends/news"
         case .adwardsGeo, .postAdwardsGeo:
             return "me/awards/geo"
+        case .logout:
+            return "logout"
         }
     }
 

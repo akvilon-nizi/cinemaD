@@ -53,6 +53,8 @@ class WatchedVC: ParentViewController {
 
     var query: String = ""
 
+    let headerSearchView = SearchCommonView()
+
 //    var isFirstStart = true
 
     weak var delegate: WatchedFilmDelegate?
@@ -96,8 +98,6 @@ class WatchedVC: ParentViewController {
         let fullListFilms = FullListFilms()
 
         let filmGroup = FilmGroup()
-
-        let headerSearchView = SearchCommonView()
 
         heightFilmGroup = windowWidth / 4 * 3 - 53.5
 
@@ -182,6 +182,7 @@ class WatchedVC: ParentViewController {
     }
 
     func getSearch(_ films: [Film]) {
+        headerSearchView.hiddenActivityVC()
         if searchFilmGroup.films.isEmpty && !films.isEmpty {
             searchHeightLayout?.constant = heightFilmGroup
             UIView.animate(withDuration: 0) {

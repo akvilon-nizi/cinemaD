@@ -37,6 +37,8 @@ class NewCollectionsViewController: ParentViewController {
 
     var query: String = ""
 
+    let headerSearchView = SearchCommonView()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -152,6 +154,8 @@ class NewCollectionsViewController: ParentViewController {
     }
 
     func getSearch(_ films: [Film]) {
+
+        headerSearchView.hiddenActivityVC()
 
         var filmsArray: [Film] = []
 

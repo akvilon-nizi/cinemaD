@@ -59,16 +59,25 @@ class FriendsAddCell: UITableViewCell {
         }
     }
 
+    var linkImage: String = "" {
+        didSet {
+            userImage.kf.indicatorType = .activity
+            userImage.kf.setImage(with: URL(string: linkImage))
+        }
+    }
+
     var index: Int = 0
 
     var buttonIsEnabled = true {
         didSet {
             if buttonIsEnabled {
-                addButton.layer.borderColor = UIColor.cnmMainOrange.cgColor
-                addButton.isEnabled = true
+//                addButton.layer.borderColor = UIColor.cnmMainOrange.cgColor
+//                addButton.isEnabled = true
+                addButton.isHidden = false
             } else {
-                addButton.layer.borderColor = UIColor.cnmGreyColor.cgColor
-                addButton.isEnabled = false
+//                addButton.layer.borderColor = UIColor.cnmGreyColor.cgColor
+//                addButton.isEnabled = false
+                addButton.isHidden = true
             }
         }
     }

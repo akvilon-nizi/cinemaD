@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import RxMoya
 
 class SettingsConfigurator {
 
@@ -13,6 +14,10 @@ class SettingsConfigurator {
 
     var locationManager: LocationManagerProtocol!
 
+    var provider: RxMoyaProvider<FoodleTarget>!
+
+    var authTokenManager: AuthTokenManagerProtocol!
+
     func configureModule() -> UIViewController {
         let router = SettingsRouter()
         router.appRouter = appRouter
@@ -20,9 +25,11 @@ class SettingsConfigurator {
         let presenter = SettingsPresenter()
         presenter.router = router
         presenter.locationManager = locationManager
+        presenter.authTokenManager = authTokenManager
 
         let interactor = SettingsInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
         let viewController = SettingsViewController()
         viewController.output = presenter

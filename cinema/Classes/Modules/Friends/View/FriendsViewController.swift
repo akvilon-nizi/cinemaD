@@ -89,7 +89,7 @@ class FriendsViewController: ParentViewController {
             completion: nil
         )
 
-        let navTabBar = NavTabBar(titles: ["Друзья", "Рекомендации", "Новости"])
+        let navTabBar = NavTabBar(titles: ["Друзья", "Рекомендации", "Новости", "Встречи"])
         navTabBar.delegate = self
 
         view.addSubview(navTabBar.prepareForAutoLayout())

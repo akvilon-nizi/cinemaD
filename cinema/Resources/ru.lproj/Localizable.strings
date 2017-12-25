@@ -193,6 +193,7 @@
 "settings-push-message" = "Push - уведомления";
 "settings-rate-app" = "Оценить приложение";
 "settings-tell-friends" = "Рассказать друзьям";
+"settings-exit-button" = "Выйти";
 
 //Actor(Person)
 "person-was-born" = "Родился(-ась):";
@@ -220,3 +221,12 @@
 "awards-response-geo" = "awards_geo";
 "awards-response-exclusive-ru" = "Экслюзивные награды";
 "awards-response-geo-ru" = "Геолокационные награды";
+
+//Tickets
+"chats-title-text" = "Чат";
+
+//Chats
+"tickets-title-text" = "Билеты";
+
+//StubsVIew
+"stubs-title-text" = "Данный функционал находится в разработке";

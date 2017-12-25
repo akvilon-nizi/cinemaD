@@ -24,6 +24,8 @@ class SearchCommonView: UIView {
 
     fileprivate let rightButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
 
+    fileprivate let activityVC = UIActivityIndicatorView()
+
     required init(coder _: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -42,7 +44,7 @@ class SearchCommonView: UIView {
         let titleField = UITextField()
         addSubview(titleField.prepareForAutoLayout())
         titleField.placeholder = L10n.filmSearchPlaceholder
-        titleField.trailingAnchor ~= trailingAnchor
+        titleField.trailingAnchor ~= trailingAnchor - 20
         titleField.leadingAnchor ~= leadingAnchor
         titleField.topAnchor ~= topAnchor + 5
 
@@ -54,19 +56,23 @@ class SearchCommonView: UIView {
 
 //        rightButton.setImage(Asset.Search.type.image, for: .normal)
 //        rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
-//        let rightView = UIView()
-//        rightView.frame = CGRect(x: 0, y: 0, width: 68, height: 20)
+        activityVC.activityIndicatorViewStyle = .gray
+        activityVC.hidesWhenStopped = true
+        activityVC.frame = CGRect(x: 0, y: 0, width: 38, height: 38)
 //        rightView.addSubview(rightButton)
-//        titleField.rightView = rightView
-//        titleField.rightViewMode = .always
+        titleField.rightView = activityVC
+        titleField.rightViewMode = .always
 
         titleField.leftView = leftView
         titleField.leftViewMode = .always
 
         titleField.rx.text.orEmpty
             .skip(1)
-            .throttle(2, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
+            .throttle(0, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
                 self?.getVideoID(query)
+                if !query.isEmpty {
+                    self?.activityVC.startAnimating()
+                }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
     }
 
@@ -80,5 +86,9 @@ class SearchCommonView: UIView {
 
     func getVideoID(_ query: String) {
         delegate?.changeText(query)
+    }
+
+    func hiddenActivityVC() {
+        activityVC.stopAnimating()
     }
 }

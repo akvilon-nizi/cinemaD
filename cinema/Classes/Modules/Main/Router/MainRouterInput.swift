@@ -14,4 +14,6 @@ protocol MainRouterInput: BaseRouterInput {
     func openProfile(mainView: MainTabView)
     func setRootVC(_ rootVC: UINavigationController)
     func openNews(newsID: String)
+    func openChats()
+    func openTickets()
 }

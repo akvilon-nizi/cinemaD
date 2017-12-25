@@ -61,6 +61,8 @@ class FilmViewController: ParentViewController {
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 160
 
+    let youtubeIndicator = UIActivityIndicatorView()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -82,6 +84,10 @@ class FilmViewController: ParentViewController {
     }
 
     fileprivate let youtubeView = YTPlayerView()
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,6 +144,7 @@ class FilmViewController: ParentViewController {
         titleLabel.centerXAnchor ~= titleView.centerXAnchor
         titleLabel.topAnchor ~= titleViewLabel.bottomAnchor
         titleLabel.widthAnchor ~= windowWidth + 20
+        titleLabel.textAlignment = .center
 
         navigationItem.titleView = titleView
 
@@ -157,6 +164,7 @@ class FilmViewController: ParentViewController {
     }
 
     func loadYT(videoID: String) {
+        youtubeView.delegate = self
         youtubeView.load(withVideoId: videoID, playerVars: [
             "playsinline": 1,
             "disablekb": 1,
@@ -164,6 +172,7 @@ class FilmViewController: ParentViewController {
             "rel": 0,
             "modestbranding": 1
             ])
+
         youtubeView.webView?.allowsInlineMediaPlayback = false
     }
 
@@ -227,6 +236,11 @@ class FilmViewController: ParentViewController {
             imageView.heightAnchor ~= windowWidth / 800 * 1_185
             imageView.layer.cornerRadius = 5.0
             imageView.layer.masksToBounds = true
+
+            imageView.addSubview(youtubeIndicator.prepareForAutoLayout())
+            youtubeIndicator.centerXAnchor ~= imageView.centerXAnchor
+            youtubeIndicator.centerYAnchor ~= imageView.centerYAnchor
+            youtubeIndicator.isHidden = true
 
             setYoutube(videoID: filmInfo.trailer)
 
@@ -453,12 +467,11 @@ class FilmViewController: ParentViewController {
     }
 
     func didTapPlayButton() {
-        youtubeView.cueVideo(
-            byId: videoID,
-            startSeconds: 0,
-            suggestedQuality: .auto
-        )
+        playButton.isHidden = true
+        youtubeIndicator.isHidden = false
+        youtubeIndicator.startAnimating()
         youtubeView.playVideo()
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     func didTapSharingButton() {
@@ -603,5 +616,27 @@ extension UIButton {
         self.heightAnchor ~= 33
         self.widthAnchor ~= (UIWindow(frame: UIScreen.main.bounds).bounds.width - 1) / 2
         return self
+    }
+}
+
+// MARK: YTPlayerViewDelegate
+
+extension FilmViewController: YTPlayerViewDelegate {
+
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        if state == .playing {
+            if youtubeView.currentTime() == 0 {
+                self.playButton.isHidden = false
+                self.youtubeIndicator.isHidden = true
+                self.youtubeIndicator.stopAnimating()
+            }
+        }
+        if state == .paused {
+            if youtubeView.currentTime() > 0 {
+                self.playButton.isHidden = false
+                self.youtubeIndicator.isHidden = true
+                self.youtubeIndicator.stopAnimating()
+            }
+        }
     }
 }

@@ -84,9 +84,13 @@ class SettingsViewController: ParentViewController {
         tellFriends.text = L10n.settingsTellFriends
         tellFriends.tag = 4
 
+        let exit = SettingsView()
+        exit.text = L10n.settingsExitButton
+        exit.tag = 5
+
 //        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, nightTheme, pushMessage, rateApp, tellFriends])
 
-        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, tellFriends])
+        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, tellFriends, exit])
 
         view.addSubview(stackView.prepareForAutoLayout())
         stackView.topAnchor ~= view.topAnchor + 88
@@ -101,6 +105,8 @@ class SettingsViewController: ParentViewController {
         pushMessage.addGestureRecognizer(tap3)
         let tap5 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tellFriends.addGestureRecognizer(tap5)
+        let tap6 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        exit.addGestureRecognizer(tap6)
     }
 
     // MARK: - Actions
@@ -110,10 +116,15 @@ class SettingsViewController: ParentViewController {
 
     func handleTap(sender: UITapGestureRecognizer) {
         if let view = sender.view as? SettingsView {
-            if view.tag == 0 {
+            switch view.tag {
+            case 0:
                 view.didSelect = !view.didSelect
-            } else {
+            case 4:
                 didTapSharingButton()
+            case 5:
+                output.logoutTap()
+            default:
+                return
             }
         }
     }
@@ -146,5 +157,13 @@ extension SettingsViewController: SettingsViewInput {
 
     func setupInitialState() {
 
+    }
+
+    func showNetworkError(message: String) {
+        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
+        statusBarAlertManager.setStatusBarAlert(with: message, with: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            statusBarAlertManager.clear()
+        }
     }
 }

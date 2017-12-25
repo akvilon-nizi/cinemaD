@@ -47,6 +47,8 @@ class WillWatchVC: ParentViewController {
 
     var query: String = ""
 
+    let headerSearchView = SearchCommonView()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -99,8 +101,6 @@ class WillWatchVC: ParentViewController {
         let fullListFilms = FullListFilms()
 
         let filmGroup = FilmGroup()
-
-        let headerSearchView = SearchCommonView()
 
         heightFilmGroup = windowWidth / 4 * 3 - 53.5
 
@@ -166,6 +166,7 @@ class WillWatchVC: ParentViewController {
     }
 
     func getSearch(_ films: [Film]) {
+        headerSearchView.hiddenActivityVC()
         if searchFilmGroup.films.isEmpty && !films.isEmpty {
             searchHeightLayout?.constant = heightFilmGroup
             UIView.animate(withDuration: 0) {

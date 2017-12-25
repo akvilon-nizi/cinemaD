@@ -8,6 +8,8 @@ import Foundation
 protocol SettingsViewInput: class {
 
     func setupInitialState()
+
+    func showNetworkError(message: String)
 }
 
 protocol SettingsViewOutput {
@@ -17,4 +19,6 @@ protocol SettingsViewOutput {
     func backButtonTap()
 
     func saveButtonTap(_ isLocation: Bool)
+
+    func logoutTap()
 }

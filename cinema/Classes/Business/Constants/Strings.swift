@@ -57,6 +57,8 @@ enum L10n {
   static let awardsResponseGeo = L10n.tr("Localizable", "awards-response-geo")
   /// Геолокационные награды
   static let awardsResponseGeoRu = L10n.tr("Localizable", "awards-response-geo-ru")
+  /// Чат
+  static let chatsTitleText = L10n.tr("Localizable", "chats-title-text")
   /// collection updated
   static let collectionsUpdateMessage = L10n.tr("Localizable", "collections-update-message")
   /// Войдите
@@ -271,6 +273,8 @@ enum L10n {
   static let rewardsReviewsTitle = L10n.tr("Localizable", "rewards-reviews-title")
   /// Награды
   static let rewardsTitleText = L10n.tr("Localizable", "rewards-title-text")
+  /// Выйти
+  static let settingsExitButton = L10n.tr("Localizable", "settings-exit-button")
   /// Определить место положение
   static let settingsLocationPlace = L10n.tr("Localizable", "settings-location-place")
   /// Ночная тема
@@ -317,6 +321,10 @@ enum L10n {
   static let startTitleText = L10n.tr("Localizable", "start-title-text")
   /// Войти через Vkontakte
   static let startVkontakteText = L10n.tr("Localizable", "start-vkontakte-text")
+  /// Данный функционал находится в разработке
+  static let stubsTitleText = L10n.tr("Localizable", "stubs-title-text")
+  /// Билеты
+  static let ticketsTitleText = L10n.tr("Localizable", "tickets-title-text")
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 

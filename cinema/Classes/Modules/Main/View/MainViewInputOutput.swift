@@ -27,6 +27,10 @@ protocol MainViewOutput {
 
     func openRewards()
 
+    func openChats()
+
+    func openTickets()
+
     func openProfile(mainView: MainTabView)
 
     func setRootVC(_ rootVC: UINavigationController)

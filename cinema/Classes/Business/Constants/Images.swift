@@ -59,6 +59,7 @@ enum Asset {
   }
   enum Cinema {
     static let backImage = ImageAsset(name: "backImage")
+    static let blankSplash = ImageAsset(name: "blankSplash")
     static let chatButton = ImageAsset(name: "chatButton")
     static let chatIcon = ImageAsset(name: "chatIcon")
     static let dislikeSelect = ImageAsset(name: "dislikeSelect")
@@ -158,6 +159,7 @@ enum Asset {
     Kinobase.settings,
     Kinobase.settingsUnselect,
     Cinema.backImage,
+    Cinema.blankSplash,
     Cinema.chatButton,
     Cinema.chatIcon,
     Cinema.dislikeSelect,

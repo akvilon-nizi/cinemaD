@@ -12,6 +12,7 @@ class SettingsPresenter {
     var router: SettingsRouterInput!
     weak var output: SettingsModuleOutput?
     var locationManager: LocationManagerProtocol!
+    var authTokenManager: AuthTokenManagerProtocol!
 }
 
 // MARK: - SettingsViewOutput
@@ -40,10 +41,21 @@ extension SettingsPresenter: SettingsViewOutput {
         UserDefaults.standard.synchronize()
         router.close()
     }
+
+    func logoutTap() {
+        interactor.logout()
+    }
 }
 
 // MARK: - SettingsInteractorOutput
 
 extension SettingsPresenter: SettingsInteractorOutput {
+    func getError() {
+        view.showNetworkError(message: L10n.alertCinemaNetworkErrror)
+    }
 
+    func successLogout() {
+        authTokenManager.removeApiToken()
+        router.start()
+    }
 }

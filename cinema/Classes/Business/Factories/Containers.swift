@@ -183,7 +183,9 @@ enum Containers {
         container.register(tag: SettingsConfigurator.tag) { () -> UIViewController in
             let configurator = SettingsConfigurator()
             configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
             configurator.locationManager = try managersContainer.resolve()
+            configurator.authTokenManager = try managersContainer.resolve()
             return configurator.configureModule()
         }
 
@@ -203,6 +205,20 @@ enum Containers {
 
         container.register(tag: AdminCollectionConfigurator.tag) { (id: String, name: String) -> UIViewController in
             let configurator = AdminCollectionConfigurator(id: id, name: name)
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: ChatsConfigurator.tag) { () -> UIViewController in
+            let configurator = ChatsConfigurator()
+            configurator.appRouter = try managersContainer.resolve()
+            configurator.provider = try managersContainer.resolve()
+            return configurator.configureModule()
+        }
+
+        container.register(tag: TicketsConfigurator.tag) { () -> UIViewController in
+            let configurator = TicketsConfigurator()
             configurator.appRouter = try managersContainer.resolve()
             configurator.provider = try managersContainer.resolve()
             return configurator.configureModule()

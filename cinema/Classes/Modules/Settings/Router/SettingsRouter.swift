@@ -16,4 +16,7 @@ extension SettingsRouter: SettingsRouterInput {
     func close() {
         appRouter.backTransition()
     }
+    func start() {
+        appRouter.dropAll(isError: false)
+    }
 }

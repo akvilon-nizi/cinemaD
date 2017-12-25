@@ -6,9 +6,10 @@
 import Foundation
 
 protocol SettingsInteractorInput {
-
+    func logout()
 }
 
 protocol SettingsInteractorOutput: class {
-
+    func getError()
+    func successLogout()
 }

@@ -417,6 +417,8 @@ extension MainViewController: MainViewInput {
     }
     func getData(_ mainData: MainData) {
 
+        refreshControl.endRefreshing()
+
         if !isFirstLoaded {
             addView()
             isFirstLoaded = true
@@ -452,7 +454,7 @@ extension MainViewController: MainViewInput {
 
 extension MainViewController: MainTabViewDelegate {
     func ticketsTapped() {
-        print("ticketsTapped")
+        output.openTickets()
     }
 
     func rewardsTapped() {
@@ -464,7 +466,7 @@ extension MainViewController: MainTabViewDelegate {
     }
 
     func chatTapped() {
-//        output.openKinobase()
+        output.openChats()
     }
 
     func kinobaseTapped() {

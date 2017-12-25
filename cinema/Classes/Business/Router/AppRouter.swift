@@ -41,6 +41,8 @@ enum AppRouterDestination {
     case settings
     case reviews(film: FullFilm)
     case friends
+    case chats
+    case tickets
     case adminCollection(id: String, name: String)
 
     var isPresent: Bool {
@@ -112,6 +114,10 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: EditingProfileConfigurator.tag, arguments: nameUser, avatar, output)
             case .settings:
                 return try factory.resolve(tag: SettingsConfigurator.tag)
+            case .chats:
+                return try factory.resolve(tag: ChatsConfigurator.tag)
+            case .tickets:
+                return try factory.resolve(tag: TicketsConfigurator.tag)
             case let .reviews(film):
                 return try factory.resolve(tag: ReviewsConfigurator.tag, arguments: film)
             case let .adminCollection(id, name):
@@ -136,7 +142,7 @@ protocol AppRouterProtocol {
 
     func backToMain()
 
-    func dropAll()
+    func dropAll(isError: Bool)
 
     func mainView()
 
@@ -224,9 +230,9 @@ class AppRouter: AppRouterProtocol {
     func openSideMenu() {
     }
 
-    func dropAll() {
+    func dropAll(isError: Bool = true) {
 
-        let authViewController = moduleCreator.createModule(for: .start(isError: true))
+        let authViewController = moduleCreator.createModule(for: .start(isError: isError))
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
 

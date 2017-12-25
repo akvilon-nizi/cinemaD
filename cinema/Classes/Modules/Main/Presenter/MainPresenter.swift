@@ -24,6 +24,14 @@ class MainPresenter {
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
+    func openChats() {
+        router.openChats()
+    }
+
+    func openTickets() {
+        router.openTickets()
+    }
+
     func refresh() {
         interactor.getData()
     }

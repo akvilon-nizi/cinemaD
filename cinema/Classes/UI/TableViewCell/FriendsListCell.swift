@@ -43,6 +43,13 @@ class FriendsListCell: UITableViewCell {
         }
     }
 
+    var linkImage: String = "" {
+        didSet {
+            userImage.kf.indicatorType = .activity
+            userImage.kf.setImage(with: URL(string: linkImage))
+        }
+    }
+
     private let chatButton = UIButton()
 
     private let button = UIButton()
