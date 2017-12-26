@@ -20,4 +20,8 @@ extension FriendsRouter: FriendsRouterInput {
     func home() {
         appRouter.backToMain()
     }
+
+    func openFilm(videoId: String, name: String) {
+        appRouter.transition(to: .film(videoID: videoId, name: name))
+    }
 }

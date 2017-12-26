@@ -165,16 +165,16 @@ class StartViewController: ParentViewController {
         loginViewController.delegate = self
         loginViewController.setAdvancedUIManager(nil)
 
-        //Costumize the theme
-        let theme: AKFTheme = AKFTheme.default()
-        theme.headerBackgroundColor = .green
-        theme.headerTextColor = .green
-        theme.iconColor = .green
-        theme.inputTextColor = .green
-        theme.statusBarStyle = .default
-        theme.textColor = .green
-        theme.titleColor = .green
-        loginViewController.setTheme(theme)
+//        //Costumize the theme
+//        let theme: AKFTheme = AKFTheme.default()
+//        theme.headerBackgroundColor = .green
+//        theme.headerTextColor = .green
+//        theme.iconColor = .green
+//        theme.inputTextColor = .green
+//        theme.statusBarStyle = .default
+//        theme.textColor = .green
+//        theme.titleColor = .green
+//        loginViewController.setTheme(theme)
 
     }
 }

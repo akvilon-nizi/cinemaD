@@ -8,15 +8,16 @@
 
 import UIKit
 
-//protocol FriendsListCellDelegate: class {
-//    func tapButtonChat(_ index: Int)
-//}
+protocol FriendsNewsCellDelegate: class {
+    func openFilmId(_ filmID: String, name: String)
+}
 
 // MARK: - FriendsListCell
 
 class FriendsNewsCell: UITableViewCell {
 
-    weak var delegate: FriendsListCellDelegate?
+    //weak var delegate: FriendsListCellDelegate?
+    weak var delegate: FriendsNewsCellDelegate?
 
     private let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4 + 20
 
@@ -90,6 +91,7 @@ class FriendsNewsCell: UITableViewCell {
         filmGroup.widthAnchor ~= contentView.widthAnchor
         filmGroup.topAnchor ~= newsTitleLabel.bottomAnchor + 10
         filmGroup.changeInset(inset: 51)
+        filmGroup.delegate = self
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
@@ -126,10 +128,21 @@ class FriendsNewsCell: UITableViewCell {
 
     // MARK: Actions
     func chatButtonHandlerTap() {
-        delegate?.tapButtonChat(index)
+        //delegate?.tapButtonChat(index)
     }
 
     static var reuseIdentifier: String {
         return "FriendsNewsCell"
+    }
+}
+
+// MARK: - FilmGroupDelegate
+extension FriendsNewsCell: FilmGroupDelegate {
+    func openFilmID(_ filmID: String, name: String) {
+        delegate?.openFilmId(filmID, name: name)
+    }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+
     }
 }

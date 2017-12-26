@@ -28,7 +28,7 @@ class NavTabBar: UIView {
 
     let height: CGFloat = 37
 
-    let inset: CGFloat = 36
+    let inset: CGFloat = 16
 
     init(titles: [String]) {
         super.init(frame: .zero)
@@ -48,7 +48,7 @@ class NavTabBar: UIView {
             i += 1
             buttonsArray.append(button)
             button.sizeToFit()
-            widthStackView += width
+            widthStackView += button.frame.width + 15
             elementsArray.append(button)
             if i != titles.count {
                 widthStackView += 1
@@ -63,13 +63,19 @@ class NavTabBar: UIView {
         scrollView.topAnchor ~= topAnchor
         scrollView.leadingAnchor ~= leadingAnchor
         scrollView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
-        scrollView.heightAnchor ~= height
-        scrollView.backgroundColor = .red
+        scrollView.heightAnchor ~= height + 50
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        scrollView.contentOffset = CGPoint(x: -inset, y: 0)
 
         let stackView = createStackView(.horizontal, .fill, .equalSpacing, 0, with: elementsArray)
-        scrollView.addSubview(stackView)
-        scrollView.contentSize = CGSize(width: widthStackView, height: height)
+        scrollView.addSubview(stackView.prepareForAutoLayout())
+        stackView.centerYAnchor ~= scrollView.centerYAnchor
+        stackView.leadingAnchor ~= scrollView.leadingAnchor
+        stackView.widthAnchor ~= widthStackView + 20
+        stackView.heightAnchor ~= height
+        scrollView.contentSize = CGSize(width: widthStackView + 20, height: height)
 
     }
 
@@ -98,6 +104,7 @@ private extension UIButton {
 
         self.titleLabel?.font = UIFont.cnmFuturaLight(size: size)
         self.heightAnchor ~= height
+        self.titleLabel?.sizeToFit()
         if let titleLabel = self.titleLabel {
             self.widthAnchor ~= titleLabel.widthAnchor + 15
         }

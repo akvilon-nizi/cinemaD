@@ -101,8 +101,6 @@ class NewCollectionsViewController: ParentViewController {
 
         heightFilmGroup = windowWidth / 4 * 3 - 43.5
 
-        let headerSearchView = SearchCommonView()
-
         headerSearchView.delegate = self
         headerSearchView.heightAnchor ~= 48
         currentHeight += 48

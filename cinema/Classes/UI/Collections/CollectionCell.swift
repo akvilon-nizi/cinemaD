@@ -23,6 +23,7 @@ class CollectionCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
         label.textColor = UIColor.cnmAfafaf
+        label.lineBreakMode = .byTruncatingTail
 //        label.text = "sdofnkalsfna"
         return label
     }()
@@ -56,6 +57,7 @@ class CollectionCell: UITableViewCell {
         contentView.addSubview(button.prepareForAutoLayout())
         button.centerYAnchor ~= centerYAnchor
         button.trailingAnchor ~= trailingAnchor - 40
+        button.leadingAnchor ~= titleLabel.trailingAnchor + 15
         button.addTarget(self, action: #selector(tapSettings), for: .touchUpInside)
 
         let separatorView = UIView()

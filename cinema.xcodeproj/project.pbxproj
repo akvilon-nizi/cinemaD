@@ -202,6 +202,7 @@
 		8138ED021FDEC62500F69628 /* AdminCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */; };
 		813D863C1FEA78CF0026327B /* StatusBarAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863B1FEA78CF0026327B /* StatusBarAlertManager.swift */; };
 		813D863E1FEA83AB0026327B /* MessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863D1FEA83AB0026327B /* MessageError.swift */; };
+		8190A1681FF23FF000479388 /* MeetingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8190A1671FF23FF000479388 /* MeetingVC.swift */; };
 		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
 		81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C001FC82A360086E9FB /* ProfileHeader.swift */; };
 		81961C051FC858AE0086E9FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C041FC858AE0086E9FB /* SettingsView.swift */; };
@@ -747,6 +748,7 @@
 		813D863D1FEA83AB0026327B /* MessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageError.swift; sourceTree = "<group>"; };
 		813EFE1DBACB73175B53B782 /* FilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		816E7A3BA28785BBCB4E3676 /* ReviewsModuleInputOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReviewsModuleInputOutput.swift; sourceTree = "<group>"; };
+		8190A1671FF23FF000479388 /* MeetingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingVC.swift; sourceTree = "<group>"; };
 		81961BFE1FC7FEC10086E9FB /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
 		81961C001FC82A360086E9FB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		81961C041FC858AE0086E9FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -2004,6 +2006,7 @@
 				8138ECF71FDE841A00F69628 /* ListFriendsVC.swift */,
 				8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */,
 				CE174E131FE71F2F0008EDDA /* NewsFriendVC.swift */,
+				8190A1671FF23FF000479388 /* MeetingVC.swift */,
 			);
 			path = UIViewControllers;
 			sourceTree = "<group>";
@@ -3605,6 +3608,7 @@
 				CE174E121FE70C430008EDDA /* FriendsNewsCell.swift in Sources */,
 				CEBE86511FA90FB000129163 /* WatchedVC.swift in Sources */,
 				9BB4E94C184BEFBC43554F82 /* LayoutMagic.swift in Sources */,
+				8190A1681FF23FF000479388 /* MeetingVC.swift in Sources */,
 				9BB4EFD94AF2A23E96B0BF90 /* LocationManager.swift in Sources */,
 				9BB4E94B355A032C3C17F138 /* ReusableView.swift in Sources */,
 				9BB4E3581028DDB78F2B2A7A /* RatingStarView.swift in Sources */,
@@ -4016,7 +4020,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R82X32X6B7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4092,7 +4096,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R82X32X6B7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4309,7 +4313,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R82X32X6B7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4337,7 +4341,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R82X32X6B7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

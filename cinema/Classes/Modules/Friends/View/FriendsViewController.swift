@@ -25,6 +25,8 @@ class FriendsViewController: ParentViewController {
 
     let newsFriendsVC = NewsFriendVC()
 
+    let meetingVC = MeetingVC()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -32,8 +34,7 @@ class FriendsViewController: ParentViewController {
     }
 
     init() {
-
-        controllers = [listFriendsVC, addFriendsVC, newsFriendsVC]
+        controllers = [listFriendsVC, addFriendsVC, newsFriendsVC, meetingVC]
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -54,6 +55,7 @@ class FriendsViewController: ParentViewController {
         view.backgroundColor = .white
 
         addFriendsVC.delegate = self
+        newsFriendsVC.delegate = self
 
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
@@ -96,6 +98,7 @@ class FriendsViewController: ParentViewController {
         navTabBar.leadingAnchor ~= view.leadingAnchor
         navTabBar.trailingAnchor ~= view.trailingAnchor
         navTabBar.topAnchor ~= view.topAnchor + 40
+        navTabBar.heightAnchor ~= 57
 
         container = pageViewController.view
 
@@ -160,5 +163,13 @@ extension FriendsViewController: NavTabBarDelegate {
 extension FriendsViewController: AddFriendsVCDelegate {
     func addFriend(id: String) {
         output.addFriend(id: id)
+    }
+}
+
+// MARK: - NewsFriendVCDelegate
+
+extension FriendsViewController: NewsFriendVCDelegate {
+     func openFilmId(_ filmID: String, name: String) {
+        output.openFilmId(filmID, name: name)
     }
 }

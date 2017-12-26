@@ -25,4 +25,6 @@ protocol FriendsViewOutput {
     func homeTap()
 
     func addFriend(id: String)
+
+    func openFilmId(_ filmID: String, name: String)
 }

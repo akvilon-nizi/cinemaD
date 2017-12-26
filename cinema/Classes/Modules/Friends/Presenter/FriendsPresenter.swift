@@ -7,7 +7,7 @@ import Foundation
 
 enum FriendsNewsType: String {
     case willWatch = "Будет смотреть:"
-    case watched = "Посмотрел:"
+    case watched = "Cмотрел:"
     case newFriends = "Добавил друзей:"
     case newAwards = "Получил награды"
 }
@@ -48,6 +48,10 @@ extension FriendsPresenter: FriendsViewOutput {
 
     func addFriend(id: String) {
         interactor.addFriend(id: id)
+    }
+
+    func openFilmId(_ filmID: String, name: String) {
+        router.openFilm(videoId: filmID, name: name)
     }
 }
 

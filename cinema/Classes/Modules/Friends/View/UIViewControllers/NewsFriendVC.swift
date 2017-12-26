@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol NewsFriendVCDelegate: class {
+    func openFilmId(_ filmID: String, name: String)
+}
+
 class NewsFriendVC: ParentViewController {
+
+    weak var delegate: NewsFriendVCDelegate?
 
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
 
@@ -71,6 +77,7 @@ extension NewsFriendVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: FriendsNewsCell.reuseIdentifier, for: indexPath)
             if let cellFriends = cell as? FriendsNewsCell {
                 cellFriends.setUserInfo(info: news[indexPath.row])
+                cellFriends.delegate = self
             }
 
             return cell
@@ -100,5 +107,11 @@ extension NewsFriendVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
+    }
+}
+
+extension NewsFriendVC: FriendsNewsCellDelegate {
+    func openFilmId(_ filmID: String, name: String) {
+        delegate?.openFilmId(filmID, name: name)
     }
 }
