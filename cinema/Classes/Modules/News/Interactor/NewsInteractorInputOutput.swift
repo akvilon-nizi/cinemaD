@@ -14,10 +14,8 @@ protocol NewsInteractorInput {
 
 protocol NewsInteractorOutput: class {
     func getError()
-
+    func tokenError()
     func getNews(_ newsData: NewsData)
-
     func loadComment(_ comment: Comment)
-
     func deleteComment()
 }

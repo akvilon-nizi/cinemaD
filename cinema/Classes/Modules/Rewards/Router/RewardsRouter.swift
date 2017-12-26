@@ -16,4 +16,8 @@ extension RewardsRouter: RewardsRouterInput {
     func close() {
         appRouter.backToMain()
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

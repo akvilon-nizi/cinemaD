@@ -7,6 +7,7 @@ import Foundation
 
 protocol KinobaseRouterInput: BaseRouterInput {
     func close()
+    func openStart()
     func openAllFilms(_ films: [Film])
     func openCollections(output: NewCollectionsModuleOutput, id: String, name: String, watched: [Film])
     func openFilm(videoId: String, name: String)

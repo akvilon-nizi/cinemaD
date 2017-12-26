@@ -10,5 +10,7 @@ protocol AdminCollectionRouterInput: BaseRouterInput {
 
     func home()
 
+    func openStart()
+
     func openFilm(videoId: String, name: String)
 }

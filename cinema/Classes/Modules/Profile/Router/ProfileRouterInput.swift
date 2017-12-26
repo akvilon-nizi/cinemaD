@@ -19,4 +19,6 @@ protocol ProfileRouterInput: BaseRouterInput {
     func openWatched()
 
     func openRewards()
+
+    func openStart()
 }

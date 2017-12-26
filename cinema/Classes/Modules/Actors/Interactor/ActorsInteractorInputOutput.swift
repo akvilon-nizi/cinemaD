@@ -11,5 +11,6 @@ protocol ActorsInteractorInput {
 
 protocol ActorsInteractorOutput: class {
     func getError()
+    func tokenError()
     func getPersonInfo(person: FullPerson)
 }

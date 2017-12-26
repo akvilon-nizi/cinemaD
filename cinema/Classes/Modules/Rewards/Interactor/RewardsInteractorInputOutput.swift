@@ -11,5 +11,6 @@ protocol RewardsInteractorInput {
 
 protocol RewardsInteractorOutput: class {
     func getError()
+    func tokenError()
     func getAwards(awards: [String: Adwards])
 }

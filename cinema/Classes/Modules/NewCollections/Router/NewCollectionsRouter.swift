@@ -16,4 +16,8 @@ extension NewCollectionsRouter: NewCollectionsRouterInput {
     func close() {
         appRouter.backTransition()
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

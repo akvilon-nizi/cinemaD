@@ -28,4 +28,8 @@ extension FilmRouter: FilmRouterInput {
     func rewiewsFrom(_ film: FullFilm) {
         appRouter.transition(to: .reviews(film: film))
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

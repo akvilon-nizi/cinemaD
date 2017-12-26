@@ -45,4 +45,8 @@ extension KinobaseRouter: KinobaseRouterInput {
                                          isWatched: isWatched
             ))
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

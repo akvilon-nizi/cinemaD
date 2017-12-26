@@ -12,6 +12,7 @@ protocol ProfileInteractorInput {
 
 protocol ProfileInteractorOutput: class {
     func getError()
+    func tokenError()
     func getWatched(_ films: [FilmCollections])
     func getProfile(_ profile: ProfileModel)
 }

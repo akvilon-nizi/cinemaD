@@ -7,4 +7,5 @@ import Foundation
 
 protocol RewardsRouterInput: BaseRouterInput {
     func close()
+    func openStart()
 }

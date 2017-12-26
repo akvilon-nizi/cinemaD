@@ -19,4 +19,7 @@ extension SettingsRouter: SettingsRouterInput {
     func start() {
         appRouter.dropAll(isError: false)
     }
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

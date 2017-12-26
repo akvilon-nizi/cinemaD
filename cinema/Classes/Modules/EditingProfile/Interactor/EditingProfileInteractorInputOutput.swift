@@ -12,6 +12,6 @@ protocol EditingProfileInteractorInput {
 
 protocol EditingProfileInteractorOutput: class {
     func getError()
-
+    func tokenError()
     func successEditing(_ profile: ProfileModel)
 }

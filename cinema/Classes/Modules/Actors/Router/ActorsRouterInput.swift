@@ -7,7 +7,7 @@ import Foundation
 
 protocol ActorsRouterInput: BaseRouterInput {
     func close()
-
+    func openStart()
     func home()
 
     func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])

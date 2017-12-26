@@ -24,4 +24,8 @@ extension FriendsRouter: FriendsRouterInput {
     func openFilm(videoId: String, name: String) {
         appRouter.transition(to: .film(videoID: videoId, name: name))
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

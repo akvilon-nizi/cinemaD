@@ -12,4 +12,5 @@ protocol SettingsInteractorInput {
 protocol SettingsInteractorOutput: class {
     func getError()
     func successLogout()
+    func tokenError()
 }

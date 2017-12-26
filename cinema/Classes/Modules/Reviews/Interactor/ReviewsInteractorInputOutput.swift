@@ -26,4 +26,6 @@ protocol ReviewsInteractorOutput: class {
     func getError()
 
     func deleteComment()
+    
+    func tokenError()
 }

@@ -20,4 +20,8 @@ extension NewsRouter: NewsRouterInput {
     func home() {
         appRouter.backToMain()
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

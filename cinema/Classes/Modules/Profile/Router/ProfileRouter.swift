@@ -47,4 +47,8 @@ extension ProfileRouter: ProfileRouterInput {
     func openRewards() {
         mainView.tapAwards()
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

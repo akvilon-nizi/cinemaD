@@ -14,4 +14,5 @@ protocol FriendsInteractorOutput: class {
     func getError()
     func getData(data: FriendsData)
     func addedFriend()
+    func tokenError()
 }

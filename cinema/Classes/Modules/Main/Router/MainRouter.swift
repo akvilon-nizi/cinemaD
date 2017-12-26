@@ -39,7 +39,7 @@ extension MainRouter: MainRouterInput {
     }
 
     func openStart() {
-        appRouter.dropAll(isError: true                                                                                                                                                                                                                                                                                                                                                                             )
+        appRouter.dropAll(isError: true)
     }
 
     func setRootVC(_ rootVC: UINavigationController) {

@@ -8,4 +8,5 @@ import Foundation
 protocol SettingsRouterInput: BaseRouterInput {
     func close()
     func start()
+    func openStart()
 }
