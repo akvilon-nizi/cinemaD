@@ -52,12 +52,12 @@ class CollectionCell: UITableViewCell {
         contentView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.centerYAnchor ~= centerYAnchor
         titleLabel.leadingAnchor ~= leadingAnchor + 34
+        titleLabel.trailingAnchor ~= trailingAnchor - 75
 
         button.setImage(Asset.Kinobase.settingsUnselect.image, for: .normal)
         contentView.addSubview(button.prepareForAutoLayout())
         button.centerYAnchor ~= centerYAnchor
         button.trailingAnchor ~= trailingAnchor - 40
-        button.leadingAnchor ~= titleLabel.trailingAnchor + 15
         button.addTarget(self, action: #selector(tapSettings), for: .touchUpInside)
 
         let separatorView = UIView()

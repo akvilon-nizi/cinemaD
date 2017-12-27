@@ -124,6 +124,7 @@
 "film-response-delete-film-collection" = "film removed from this collection";
 "film-response-did-not-like" = "film remove from the \"did_not_like\"";
 "film-response-liked" = "film append to the \"liked\"";
+"review-response-success" = "review deleted";
 
 //Kinobase
 "kinobase-title-text" = "Кинобаза";

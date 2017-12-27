@@ -26,6 +26,8 @@ class SearchCommonView: UIView {
 
     fileprivate let activityVC = UIActivityIndicatorView()
 
+    fileprivate let titleField = UITextField()
+
     required init(coder _: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -41,7 +43,6 @@ class SearchCommonView: UIView {
 //        separatorView.leadingAnchor ~= leadingAnchor + 24
 //        separatorView.heightAnchor ~= 1
 
-        let titleField = UITextField()
         addSubview(titleField.prepareForAutoLayout())
         titleField.placeholder = L10n.filmSearchPlaceholder
         titleField.trailingAnchor ~= trailingAnchor - 20
@@ -68,7 +69,7 @@ class SearchCommonView: UIView {
 
         titleField.rx.text.orEmpty
             .skip(1)
-            .throttle(0, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
+            .throttle(1.5, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
                 self?.getVideoID(query)
                 if !query.isEmpty {
                     self?.activityVC.startAnimating()
@@ -77,7 +78,7 @@ class SearchCommonView: UIView {
     }
 
     func hiddenFilter() {
-        rightButton.isHidden = true
+        titleField.rightViewMode = .never
     }
 
     func typeButtonTap() {
@@ -89,6 +90,12 @@ class SearchCommonView: UIView {
     }
 
     func hiddenActivityVC() {
+        activityVC.stopAnimating()
+    }
+
+    func removeQuery() {
+        getVideoID("")
+        titleField.text = ""
         activityVC.stopAnimating()
     }
 }

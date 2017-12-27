@@ -417,8 +417,6 @@ extension MainViewController: MainViewInput {
     }
     func getData(_ mainData: MainData) {
 
-        refreshControl.endRefreshing()
-
         if !isFirstLoaded {
             addView()
             isFirstLoaded = true
@@ -433,11 +431,8 @@ extension MainViewController: MainViewInput {
 
         activityVC.isHidden = true
         activityVC.stopAnimating()
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableViewRowAnimation.none)
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+        tableView.reloadData()
+        refreshControl.endRefreshing()
 
     }
 

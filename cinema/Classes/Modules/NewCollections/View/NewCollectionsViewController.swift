@@ -227,11 +227,15 @@ class NewCollectionsViewController: ParentViewController {
             if filteredWatched.isEmpty {
                  showAlert(message: "Выберете фильмы")
             } else {
+                if  !headerCollectionsView.returnTitle().isEmpty {
                  output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)
                 saveButton.isEnabled = false
                 activityVC.isHidden = false
                 activityVC.startAnimating()
                 view.bringSubview(toFront: activityVC)
+                } else {
+                    showAlert(message: "Название не может быть пустым")
+                }
             }
         } else {
                 if films.isEmpty {

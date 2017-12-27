@@ -282,8 +282,13 @@ extension ReviewsViewController: UITextViewDelegate {
 
 extension ReviewsViewController: MessageViewDelegate {
     func sendMessage(_ message: String) {
+        var comment = message
+        if message.count > 1_000 {
+            let index = message.index(message.startIndex, offsetBy: 1_000)
+            comment = message.substring(to: index)
+        }
         closeMessageView()
-        output?.sendReview(name: "", description: message)
+        output?.sendReview(name: "", description: comment)
         activityVC.isHidden = false
         activityVC.startAnimating()
     }

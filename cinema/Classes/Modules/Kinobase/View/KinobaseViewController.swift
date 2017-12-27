@@ -241,7 +241,6 @@ extension KinobaseViewController: KinobaseViewInput {
             let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Double(rate))
             watched.append(film)
         }
-        watchedVC.refreshControl.endRefreshing()
         watchedVC.setFilmsAndCol(watched, col: kbData.collections)
 
         activityVC.isHidden = true

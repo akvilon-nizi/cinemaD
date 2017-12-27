@@ -149,10 +149,14 @@ extension ReviewsInteractor: ReviewsInteractorInput {
 
     func deleteReview(id: String) {
         provider.requestModel(.deleteReview(id: id))
-            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+            .subscribe { [unowned self] (response: Event<Sergey500>) in
                 switch response {
                 case let .next(model):
-                    self.output.deleteComment()
+                    if model.message.first == L10n.reviewResponseSuccess {
+                        self.output.deleteComment()
+                    } else {
+                        self.output.getError()
+                    }
                 case let .error(error as ProviderError):
                     if error.status == 403 {
                         self.output.tokenError()

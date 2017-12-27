@@ -261,6 +261,8 @@ enum L10n {
   static let regRegulationsButtonText = L10n.tr("Localizable", "reg-regulations-button-text")
   /// Регистрация
   static let regTitleText = L10n.tr("Localizable", "reg-title-text")
+  /// review deleted
+  static let reviewResponseSuccess = L10n.tr("Localizable", "review-response-success")
   /// Не понравилось
   static let reviewsDislikeText = L10n.tr("Localizable", "reviews-dislike-text")
   /// Понравилось

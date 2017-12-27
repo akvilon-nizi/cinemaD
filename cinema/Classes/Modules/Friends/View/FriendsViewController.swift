@@ -125,7 +125,13 @@ class FriendsViewController: ParentViewController {
 extension FriendsViewController: FriendsViewInput {
     func getData(data: FriendsData) {
         listFriendsVC.setFriends(data.friends)
-        addFriendsVC.setFriends(data.recomendaions)
+        var recomendaions: [Creator] = []
+        for creator in data.recomendaions {
+            if data.friends.filter({$0.id == creator.id}).isEmpty {
+                recomendaions.append(creator)
+            }
+        }
+        addFriendsVC.setFriends(recomendaions)
         newsFriendsVC.setNews(data.newsView)
     }
 

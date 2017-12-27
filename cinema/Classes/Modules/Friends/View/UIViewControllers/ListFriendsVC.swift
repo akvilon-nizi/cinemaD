@@ -38,6 +38,7 @@ class ListFriendsVC: ParentViewController {
         tableView.dataSource = self
 
         let searchView = SearchCommonView()
+        searchView.hiddenFilter()
 
         view.addSubview(searchView.prepareForAutoLayout())
         searchView.topAnchor ~= view.topAnchor + 10

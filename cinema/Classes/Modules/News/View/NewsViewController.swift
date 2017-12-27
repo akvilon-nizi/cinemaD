@@ -346,8 +346,13 @@ extension NewsViewController: UITextViewDelegate {
 
 extension NewsViewController: MessageViewDelegate {
     func sendMessage(_ message: String) {
+        var comment = message
+        if message.count > 1_000 {
+            let index = message.index(message.startIndex, offsetBy: 1_000)
+            comment = message.substring(to: index)
+        }
         closeMessageView()
-        output?.sendMessage(message: message)
+        output?.sendMessage(message: comment)
         activityVC.isHidden = false
         activityVC.startAnimating()
     }

@@ -29,6 +29,12 @@ class WillWatchVC: ParentViewController {
 
     var collections: [Collection] = []
 
+    var widthLayout: NSLayoutConstraint?
+
+    var fixHeight: CGFloat = 0
+
+    var isRefresh = false
+
     weak var delegate: WillWatchVCDelegate?
 
     let refreshControl = UIRefreshControl()
@@ -91,6 +97,7 @@ class WillWatchVC: ParentViewController {
     }
 
     func refresh() {
+        isRefresh = true
         delegate?.refreshes()
     }
 
@@ -136,8 +143,11 @@ class WillWatchVC: ParentViewController {
             viewArray = [headerSearchView, searchFilmGroup, headerViewTitle, fullListFilms, filmGroup, view]
         }
 
+        fixHeight = currentHeight
+
         stackView = createStackView(.vertical, .fill, .fill, 0, with: viewArray)
-        stackView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
+        widthLayout = stackView.widthAnchor.constraint(equalToConstant: UIWindow(frame: UIScreen.main.bounds).bounds.width)
+        widthLayout?.isActive = true
         heightLayout = stackView.heightAnchor.constraint(equalToConstant: currentHeight)
         heightLayout?.isActive = true
 //        stackView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
@@ -157,12 +167,16 @@ class WillWatchVC: ParentViewController {
     }
 
     func setFilms(_ films: [Film], collections: [Collection]) {
-        self.films = films
-        //tableView.scrollsToTop = true
+        if isRefresh {
+            searchFilmGroup.films = []
+            headerSearchView.removeQuery()
+            // headerSearchView.hiddenActivityVC()
+        }
+        self.films = films.reversed()
         setHeaderView()
-        refreshControl.endRefreshing()
         self.collections = collections
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 
     func getSearch(_ films: [Film]) {
@@ -181,13 +195,18 @@ class WillWatchVC: ParentViewController {
             UIView.animate(withDuration: 0) {
                 self.stackView.layoutIfNeeded()
             }
-            currentHeight -= heightFilmGroup
+            currentHeight = fixHeight
             setStackViewHeight()
         }
 
         searchFilmGroup.films = films
 
-        tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableViewRowAnimation.none)
+        if isRefresh {
+            isRefresh = false
+        } else {
+            tableView.reloadData()
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        }
     }
 }
 
@@ -269,7 +288,11 @@ extension WillWatchVC: SearchCommonDelegate {
             }
             delegate?.getQuery(text)
         } else {
-            getSearch([])
+            if searchFilmGroup.films.isEmpty && query.isEmpty {
+
+            } else {
+                getSearch([])
+            }
         }
         self.query = text
     }

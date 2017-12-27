@@ -139,7 +139,14 @@ class ActorsViewController: ParentViewController {
         actorHeaderView.leadingAnchor ~= contentView.leadingAnchor
         actorHeaderView.trailingAnchor ~= contentView.trailingAnchor
 
-        let actorFilmsView = ActorFilmsView(films: person.films)
+        var films: [FilmFromPerson] = []
+        for film in person.films {
+            if films.filter({$0.id == film.id}).isEmpty {
+                films.append(film)
+            }
+        }
+
+        let actorFilmsView = ActorFilmsView(films: films)
         contentView.addSubview(actorFilmsView.prepareForAutoLayout())
         actorFilmsView.topAnchor ~= actorHeaderView.bottomAnchor + 30
         actorFilmsView.leadingAnchor ~= contentView.leadingAnchor
