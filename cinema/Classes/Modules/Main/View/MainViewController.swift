@@ -111,8 +111,8 @@ class MainViewController: ParentViewController {
         tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = 44.0
+//        tableView.rowHeight = UITableViewAutomaticDimension
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 //        tableView.addSubview(refreshControl)
@@ -389,14 +389,14 @@ extension MainViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
+        return 0
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if isNewsFilterOpen {
             return 20
         }
-        return 1
+        return 0
     }
 
 }
@@ -488,9 +488,9 @@ extension MainViewController: HeaderViewOpennedDelegate {
     func open(isOpen: Bool, section: Int) {
         isNewsFilterOpen = isOpen
         UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableViewRowAnimation.none)
-        tableView.endUpdates()
+        tableView.reloadData()
+
+        //tableView.setContentOffset(CGPoint(x: 0, y: 350), animated: true)
         UIView.setAnimationsEnabled(true)
     }
 }
