@@ -37,6 +37,10 @@ extension NewsPresenter: NewsViewOutput {
     func backButtonTap() {
         router.close()
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }
 
 // MARK: - NewsInteractorOutput

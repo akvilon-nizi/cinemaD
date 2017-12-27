@@ -30,7 +30,11 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                                 self.output.getError()
                             }
                         case let .error(error as ProviderError):
-                            self.output.getError()
+                            if error.status == 403 {
+                                self.output.tokenError()
+                            } else {
+                                self.output.getError()
+                            }
                         default:
                             break
                         }
@@ -47,7 +51,11 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                                 self.output.getError()
                             }
                         case let .error(error as ProviderError):
-                            self.output.getError()
+                            if error.status == 403 {
+                                self.output.tokenError()
+                            } else {
+                                self.output.getError()
+                            }
                         default:
                             break
                         }
@@ -66,7 +74,11 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                                 self.output.getError()
                             }
                         case let .error(error as ProviderError):
-                            self.output.getError()
+                            if error.status == 403 {
+                                self.output.tokenError()
+                            } else {
+                                self.output.getError()
+                            }
                         default:
                             break
                         }
@@ -83,7 +95,11 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                                 self.output.getError()
                             }
                         case let .error(error as ProviderError):
-                            self.output.getError()
+                            if error.status == 403 {
+                                self.output.tokenError()
+                            } else {
+                                self.output.getError()
+                            }
                         default:
                             break
                         }
@@ -100,7 +116,11 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                 case let .next(model):
                     self.output.getComments(model.reviews)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -115,7 +135,11 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                 case let .next(model):
                     self.output.loadComment(model)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -130,7 +154,11 @@ extension ReviewsInteractor: ReviewsInteractorInput {
                 case let .next(model):
                     self.output.deleteComment()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

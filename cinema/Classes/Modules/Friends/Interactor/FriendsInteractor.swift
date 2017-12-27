@@ -49,7 +49,11 @@ extension FriendsInteractor: FriendsInteractorInput {
                     self.friendsData.recomendaions = model.friends
                     self.getNews()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -65,7 +69,11 @@ extension FriendsInteractor: FriendsInteractorInput {
                     self.friendsData.news = model.friends
                     self.output.getData(data: self.friendsData)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -80,7 +88,11 @@ extension FriendsInteractor: FriendsInteractorInput {
                 case let .next(model):
                     self.output.addedFriend()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

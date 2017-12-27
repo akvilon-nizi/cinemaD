@@ -200,7 +200,6 @@ extension StartViewController: StartViewInput {
     }
 }
 
-
 extension StartViewController: VKSdkDelegate {
     /**
      Notifies about access error. For example, this may occurs when user rejected app permissions through VK.com

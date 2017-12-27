@@ -54,6 +54,10 @@ extension ProfilePresenter: ProfileViewOutput {
         interactor.getProfile()
         interactor.getFilms()
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }
 
 // MARK: - ProfileInteractorOutput

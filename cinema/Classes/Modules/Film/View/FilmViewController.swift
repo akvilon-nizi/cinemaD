@@ -19,7 +19,7 @@ class FilmViewController: ParentViewController {
 
     var genres: String = ""
 
-    var videoID: String = ""
+    //var videoID: String = ""
 
     fileprivate let playButton = UIButton()
 
@@ -86,7 +86,7 @@ class FilmViewController: ParentViewController {
     fileprivate let youtubeView = YTPlayerView()
 
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
 
     override func viewDidLoad() {
@@ -160,10 +160,13 @@ class FilmViewController: ParentViewController {
             starView.button.addTarget(self, action: #selector(didTapStarButton), for: .touchUpInside)
             starsButons.append(starView)
         }
-
     }
 
     func loadYT(videoID: String) {
+        playButton.isHidden = true
+        youtubeIndicator.isHidden = false
+        youtubeIndicator.startAnimating()
+        //self.videoID = videoID
         youtubeView.delegate = self
         youtubeView.load(withVideoId: videoID, playerVars: [
             "playsinline": 1,
@@ -309,7 +312,7 @@ class FilmViewController: ParentViewController {
 
     func setYoutube(videoID: String) {
 
-        self.videoID = videoID
+        //self.videoID = videoID
 
         if videoID.count >= 1 {
             contentView.addSubview(playButton.prepareForAutoLayout())
@@ -471,6 +474,8 @@ class FilmViewController: ParentViewController {
         youtubeIndicator.isHidden = false
         youtubeIndicator.startAnimating()
         youtubeView.playVideo()
+        print("assaa1")
+        UIApplication.shared.isStatusBarHidden = false
         setNeedsStatusBarAppearanceUpdate()
     }
 
@@ -626,17 +631,23 @@ extension FilmViewController: YTPlayerViewDelegate {
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         if state == .playing {
             if youtubeView.currentTime() == 0 {
-                self.playButton.isHidden = false
-                self.youtubeIndicator.isHidden = true
-                self.youtubeIndicator.stopAnimating()
+                self.isHidden()
             }
         }
         if state == .paused {
             if youtubeView.currentTime() > 0 {
-                self.playButton.isHidden = false
-                self.youtubeIndicator.isHidden = true
-                self.youtubeIndicator.stopAnimating()
+                self.isHidden()
             }
         }
+    }
+
+    func isHidden() {
+        self.playButton.isHidden = false
+        self.youtubeIndicator.isHidden = true
+        self.youtubeIndicator.stopAnimating()
+    }
+
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        isHidden()
     }
 }

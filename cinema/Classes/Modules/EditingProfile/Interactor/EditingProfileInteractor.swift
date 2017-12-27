@@ -25,7 +25,11 @@ extension EditingProfileInteractor: EditingProfileInteractorInput {
                 case let .next(model):
                     self.output.successEditing(model)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

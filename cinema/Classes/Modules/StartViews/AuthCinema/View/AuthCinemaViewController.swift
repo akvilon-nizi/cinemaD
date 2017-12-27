@@ -189,14 +189,7 @@ extension AuthCinemaViewController: AuthCinemaViewInput {
     }
 
     func showNetworkError() {
-        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
-        statusBarAlertManager.setStatusBarAlert(with: "assa", with: self)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            statusBarAlertManager.clear()
-        }
-//        showAlert(message: L10n.alertCinemaNetworkErrror)
-//        activityVC.isHidden = true
-//        activityVC.stopAnimating()
+        showAlert(message: L10n.alertCinemaNetworkErrror)
     }
 
 }

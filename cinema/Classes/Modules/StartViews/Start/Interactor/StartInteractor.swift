@@ -30,7 +30,6 @@ extension StartInteractor: StartInteractorInput {
                     self.output.authSuccess()
                 case let .error(error as ProviderError):
                     self.output.faulireAuth()
-                    print("assa", error.status)
                 default:
                     break
                 }

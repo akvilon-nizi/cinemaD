@@ -33,6 +33,10 @@ extension AdminCollectionPresenter: AdminCollectionViewOutput {
     func homeTap() {
         router.home()
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }
 
 // MARK: - AdminCollectionInteractorOutput

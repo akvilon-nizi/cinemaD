@@ -58,4 +58,8 @@ extension SettingsPresenter: SettingsInteractorOutput {
         authTokenManager.removeApiToken()
         router.start()
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }

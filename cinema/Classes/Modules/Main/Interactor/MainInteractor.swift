@@ -67,7 +67,11 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.trailers = model.trailers
                     self.getNow() 
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -83,7 +87,11 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.now = model.now
                     self.getRecommendations()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -99,7 +107,11 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.recomend = model.recommendations
                     self.getNews()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -115,7 +127,11 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.news = model.news
                     self.output.getData(mainData: self.mainData)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -131,7 +147,11 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.news = model.news
                     self.output.getNews(mainData: self.mainData)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

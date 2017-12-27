@@ -66,4 +66,8 @@ extension ReviewsPresenter: ReviewsInteractorOutput {
     func deleteComment() {
         view.deleteComment()
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }

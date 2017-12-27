@@ -122,12 +122,7 @@ extension ProfileViewController: ProfileViewInput {
     }
 
     func getData(_ films: [FilmCollections]) {
-
-        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
-        statusBarAlertManager.setStatusBarAlert(with: "assa", with: self)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            statusBarAlertManager.clear()
-        }
+        
         self.films = []
 
         refreshControl.endRefreshing()

@@ -30,7 +30,11 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     self.kbData.yearsWatched = model.years
                     self.getWillWatch()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -47,7 +51,11 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     self.kbData.yearsWillWatch = model.years
                     self.getCollections()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -63,7 +71,11 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     self.kbData.collections = model.collections
                     self.getAdminCollections()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -93,7 +105,11 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 case let .next(model):
                     print()
                 case let .error(error as ProviderError):
-                    print()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -126,7 +142,11 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     self.kbData.filmsSearch = model.films
                     self.output.getSearch(self.kbData, isWatched: isWatched)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

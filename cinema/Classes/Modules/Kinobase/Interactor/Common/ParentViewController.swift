@@ -54,15 +54,12 @@ class ParentViewController: UIViewController {
 
     func showAlert(message: String) {
 
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: UIAlertControllerStyle.alert)
-
-        let cancelAction = UIAlertAction(title: "OK",
-                                         style: .cancel, handler: nil)
-
-        alert.addAction(cancelAction)
-        present(alert, animated: true)
+        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
+        statusBarAlertManager.setStatusBarAlert(with: message, with: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            statusBarAlertManager.clear()
+        }
 
     }
+
 }

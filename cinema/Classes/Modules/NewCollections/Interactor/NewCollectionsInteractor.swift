@@ -29,8 +29,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                     case let .next(model):
                         self.output.getFilms(model.films)
                     case let .error(error as ProviderError):
-                        print(error.code)
-                        self.output.getError()
+                        if error.status == 403 {
+                            self.output.tokenError()
+                        } else {
+                            self.output.getError()
+                        }
                     default:
                         break
                     }
@@ -46,8 +49,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                 case let .next(model):
                     self.putFilmsIntoCol(idCol: model.id, films: films)
                 case let .error(error as ProviderError):
-                    print(error.code)
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -72,7 +78,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -97,7 +107,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -131,7 +145,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -146,7 +164,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                 case let .next(model):
                     self.output.getSeccess(message: L10n.alertCollectionsRemove)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

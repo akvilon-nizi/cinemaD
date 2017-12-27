@@ -26,6 +26,10 @@ class KinobasePresenter {
 // MARK: - KinobaseViewOutput
 
 extension KinobasePresenter: KinobaseViewOutput {
+    func tokenError() {
+        router.openStart()
+    }
+
     func openAdminCollection(id: String, name: String) {
         router.openAdminCollection(id: id, name: name)
     }

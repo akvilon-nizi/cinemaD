@@ -30,7 +30,11 @@ extension SettingsInteractor: SettingsInteractorInput {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

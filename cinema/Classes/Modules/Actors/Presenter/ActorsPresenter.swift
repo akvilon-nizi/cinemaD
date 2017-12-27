@@ -38,6 +38,10 @@ extension ActorsPresenter: ActorsViewOutput {
     func backButtonTap() {
         router.close()
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }
 
 // MARK: - ActorsInteractorOutput

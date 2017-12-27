@@ -38,6 +38,10 @@ extension FilmsPresenter: FilmsViewOutput {
 // MARK: - FilmsInteractorOutput
 
 extension FilmsPresenter: FilmsInteractorOutput {
+    func tokenError() {
+        router.openStart()
+    }
+
     func getError() {
 
     }

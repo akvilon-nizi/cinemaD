@@ -21,6 +21,11 @@ class FilmPresenter {
 // MARK: - FilmViewOutput
 
 extension FilmPresenter: FilmViewOutput {
+
+    func tokenError() {
+        router.openStart()
+    }
+
     func tapReviews(_ film: FullFilm) {
         router.rewiewsFrom(film)
     }

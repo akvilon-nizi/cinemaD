@@ -55,6 +55,10 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
 // MARK: - NewCollectionsInteractorOutput
 
 extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
+    func tokenError() {
+        router.openStart()
+    }
+
     func getFilms(_ films: [Film]) {
         view.getSearch(films)
     }

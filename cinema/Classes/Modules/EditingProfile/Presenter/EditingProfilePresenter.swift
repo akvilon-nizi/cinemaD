@@ -53,4 +53,8 @@ extension EditingProfilePresenter: EditingProfileInteractorOutput {
     func getError() {
         view.getError()
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }

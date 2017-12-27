@@ -27,8 +27,11 @@ extension AdminCollectionInteractor: AdminCollectionInteractorInput {
                 case let .next(model):
                     self.output.getCollection(model)
                 case let .error(error as ProviderError):
-                    print()
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

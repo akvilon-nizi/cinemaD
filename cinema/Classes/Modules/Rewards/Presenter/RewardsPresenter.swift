@@ -36,4 +36,8 @@ extension RewardsPresenter: RewardsInteractorOutput {
     func getAwards(awards: [String: Adwards]) {
         view.getAwards(awards)
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }

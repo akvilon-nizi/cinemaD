@@ -26,7 +26,11 @@ extension NewsInteractor: NewsInteractorInput {
                     self.newsData.news = model
                     self.getComment(newsID: newsID)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -42,7 +46,11 @@ extension NewsInteractor: NewsInteractorInput {
                     self.newsData.comments = model.comments
                     self.output.getNews(self.newsData)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -57,7 +65,11 @@ extension NewsInteractor: NewsInteractorInput {
                 case let .next(model):
                     self.output.loadComment(model)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -72,7 +84,11 @@ extension NewsInteractor: NewsInteractorInput {
                 case let .next(model):
                     self.output.deleteComment()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

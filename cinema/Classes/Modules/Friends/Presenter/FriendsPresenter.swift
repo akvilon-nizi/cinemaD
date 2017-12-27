@@ -53,6 +53,10 @@ extension FriendsPresenter: FriendsViewOutput {
     func openFilmId(_ filmID: String, name: String) {
         router.openFilm(videoId: filmID, name: name)
     }
+
+    func tokenError() {
+        router.openStart()
+    }
 }
 
 // MARK: - FriendsInteractorOutput
