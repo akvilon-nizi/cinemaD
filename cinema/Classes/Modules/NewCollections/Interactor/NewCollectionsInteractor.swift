@@ -31,6 +31,8 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                     case let .error(error as ProviderError):
                         if error.status == 403 {
                             self.output.tokenError()
+                        } else if error.status == 504 {
+                            self.getFilms(text)
                         } else {
                             self.output.getError()
                         }

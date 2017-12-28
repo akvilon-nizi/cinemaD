@@ -40,6 +40,8 @@ class NewsViewController: ParentViewController {
 
     var currentDeleteIndex: Int = 0
 
+    var profileName: String?
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -180,8 +182,23 @@ class NewsViewController: ParentViewController {
     }
 
     func didTapAddButton() {
-        addButton.isHidden = true
-        messageView.isHidden = false
+        if let name = profileName {
+            if !name.isEmpty {
+                addButton.isHidden = true
+                messageView.isHidden = false
+                return
+            }
+        } else {
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = appDelegate.profile {
+                profileName = profile.name
+                if !profile.name.isEmpty {
+                    addButton.isHidden = true
+                    messageView.isHidden = false
+                    return
+                }
+            }
+        }
+        showMessage(message: "Введите сначала имя в профиле")
     }
 
     func keyboardWillShow(notification: NSNotification) {

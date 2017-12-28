@@ -144,6 +144,8 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 case let .error(error as ProviderError):
                     if error.status == 403 {
                         self.output.tokenError()
+                    } else if error.status == 504 {
+                        self.searchFilms(query: query, genres: genres, years: years, isWatched: isWatched)
                     } else {
                         self.output.getError()
                     }

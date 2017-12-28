@@ -176,7 +176,10 @@ class FilmViewController: ParentViewController {
             "modestbranding": 1
             ])
 
+//        youtubeView.webView?.autoresizesSubviews = true
+//        youtubeView.webView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         youtubeView.webView?.allowsInlineMediaPlayback = false
+//        youtubeView.webView?.frame = CGRect(x: 0, y: 0, width: 320, height: 2_000)
     }
 
     func setInfo() {

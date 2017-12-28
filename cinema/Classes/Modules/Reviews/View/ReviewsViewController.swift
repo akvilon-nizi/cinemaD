@@ -29,6 +29,8 @@ class ReviewsViewController: ParentViewController {
 
     var iLiked: Bool?
 
+    var profileName: String?
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -144,8 +146,23 @@ class ReviewsViewController: ParentViewController {
     }
 
     func didTapAddButton() {
-        addButton.isHidden = true
-        messageView.isHidden = false
+        if let name = profileName {
+            if !name.isEmpty {
+                addButton.isHidden = true
+                messageView.isHidden = false
+                return
+            }
+        } else {
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let profile = appDelegate.profile {
+                profileName = profile.name
+                if !profile.name.isEmpty {
+                    addButton.isHidden = true
+                    messageView.isHidden = false
+                    return
+                }
+            }
+        }
+        showMessage(message: "Введите сначала имя в профиле")
     }
 
     func keyboardWillShow(notification: NSNotification) {
@@ -234,6 +251,8 @@ extension ReviewsViewController: UITableViewDataSource {
             collCel.indexRow = indexPath.row
             if myID == comments[indexPath.row].creator.id {
                 collCel.isMain()
+            } else {
+                collCel.isNotMain()
             }
         }
         return cell

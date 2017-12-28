@@ -449,23 +449,33 @@ extension MainViewController: MainViewInput {
 
 extension MainViewController: MainTabViewDelegate {
     func ticketsTapped() {
-        output.openTickets()
+        if !(navController.viewControllers.last is TicketsViewController) {
+            output.openTickets()
+        }
     }
 
     func rewardsTapped() {
-        output.openRewards()
+        if !(navController.viewControllers.last is RewardsViewController ) {
+            output.openRewards()
+        }
     }
 
     func profileTapped() {
-        output.openProfile(mainView: mainTabView)
+        if !(navController.viewControllers.last is ProfileViewController) {
+            output.openProfile(mainView: mainTabView)
+        }
     }
 
     func chatTapped() {
-        output.openChats()
+        if !(navController.viewControllers.last is ChatsViewController) {
+            output.openChats()
+        }
     }
 
     func kinobaseTapped() {
-        output.openKinobase()
+        if !(navController.viewControllers.last is KinobaseViewController) {
+            output.openKinobase()
+        }
     }
 }
 

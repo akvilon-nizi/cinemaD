@@ -139,6 +139,8 @@ extension FilmsViewController: UICollectionViewDataSource {
             tagCell.linkUrlImage = films[indexPath.row].imageUrl
             if let rate = films[indexPath.row].rate, rate > 0 {
                 tagCell.setRating(Int(rate))
+            } else {
+                tagCell.delRating()
             }
         }
         return cell

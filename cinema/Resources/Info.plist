@@ -42,7 +42,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>27</string>
+	<string>29</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -109,11 +109,11 @@
 	<array>
 		<string>armv7</string>
 	</array>
-    <key>UIViewControllerBasedStatusBarAppearance</key>
-    <false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

@@ -171,6 +171,10 @@ class ReviewsCell: UITableViewCell {
         deleteButton.isHidden = false
     }
 
+    func isNotMain() {
+        deleteButton.isHidden = true
+    }
+
     func tapSharedButton() {
 //        if let newShare = news {
 //            delegate?.openShareSimple(news: newShare)

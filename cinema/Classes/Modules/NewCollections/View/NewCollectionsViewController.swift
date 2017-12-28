@@ -225,7 +225,7 @@ class NewCollectionsViewController: ParentViewController {
 
         if nameCollections.isEmpty {
             if filteredWatched.isEmpty {
-                 showAlert(message: "Выберете фильмы")
+                 showAlert(message: "Выберите фильмы")
             } else {
                 if  !headerCollectionsView.returnTitle().isEmpty {
                  output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)

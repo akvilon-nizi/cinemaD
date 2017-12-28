@@ -102,7 +102,7 @@ class MainTabView: UIView {
     }
 
     func tapButton(button: UIButton) {
-        if !button.isSelected {
+//        if !button.isSelected {
             button.isSelected = true
             for but in buttons where button.tag != but.tag {
                 but.isSelected = false
@@ -121,7 +121,7 @@ class MainTabView: UIView {
             default:
                 return
             }
-        }
+//        }
     }
 
     func reloadData() {
