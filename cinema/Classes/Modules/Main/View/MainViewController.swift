@@ -92,6 +92,8 @@ class MainViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+//        automaticallyAdjustsScrollViewInsets
+
         view.bringSubview(toFront: activityVC)
         activityVC.isHidden = false
         activityVC.startAnimating()

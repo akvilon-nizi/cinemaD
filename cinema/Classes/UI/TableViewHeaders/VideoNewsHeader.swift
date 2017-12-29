@@ -79,8 +79,13 @@ class VideoNewsHeader: UITableViewHeaderFooterView {
         mainView.trailingAnchor ~= contentView.trailingAnchor
 
         mainView.addSubview(newsImage.prepareForAutoLayout())
-        newsImage.pinEdgesToSuperviewEdges()
-        newsImage.heightAnchor ~= windowWidth / 375 * 131
+        newsImage.topAnchor ~= mainView.topAnchor
+        newsImage.bottomAnchor ~= mainView.bottomAnchor
+        newsImage.centerXAnchor ~= mainView.centerXAnchor
+        newsImage.widthAnchor ~= windowWidth - 55
+        newsImage.heightAnchor ~= windowWidth / 320 * 131
+        newsImage.layer.cornerRadius = 5.0
+        newsImage.layer.masksToBounds = true
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharingOrange.image, for: .normal)

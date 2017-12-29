@@ -67,11 +67,11 @@ class HeaderCollectionCell: UICollectionViewCell {
 
         contentView.addSubview(rewardImage.prepareForAutoLayout())
         rewardImage.topAnchor ~= contentView.topAnchor
-        rewardImage.leadingAnchor ~= contentView.leadingAnchor
-        rewardImage.trailingAnchor ~= contentView.trailingAnchor
+        rewardImage.centerXAnchor ~= contentView.centerXAnchor
         rewardImage.layer.masksToBounds = true
-        rewardImage.widthAnchor ~= windowWidth
-        rewardImage.heightAnchor ~= windowWidth / 375 * 131
+        rewardImage.layer.cornerRadius = 5.0
+        rewardImage.widthAnchor ~= windowWidth - 55
+        rewardImage.heightAnchor ~= (windowWidth - 55) / 325 * 131
         rewardImage.contentMode = .scaleToFill
 
         contentView.addSubview(titleLabel.prepareForAutoLayout())

@@ -22,7 +22,7 @@ class MeetingVC: ParentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let stubsView = StubsView()
         view.addSubview(stubsView.prepareForAutoLayout())
         stubsView.trailingAnchor ~= view.trailingAnchor

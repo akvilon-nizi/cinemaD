@@ -126,12 +126,9 @@ class KinobaseViewController: ParentViewController {
         buttonsStack.topAnchor ~= view.topAnchor + 40
 
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-//        pageViewController.dataSource = self
-//        pageViewController.delegate = self
 
         container = pageViewController.view
-//        container = SearchView()
-//        container.setInfo(placeholder: "assa", titles: ["assa", "assa1", "asdadsa"])
+
         view.addSubview(container.prepareForAutoLayout())
         container.topAnchor ~= buttonsStack.bottomAnchor + 10
         container.leadingAnchor ~= view.leadingAnchor

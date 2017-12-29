@@ -41,6 +41,10 @@ extension FriendsPresenter: FriendsViewOutput {
         router.home()
     }
 
+    func refreshData() {
+        interactor.getData()
+    }
+
     func viewIsReady() {
         log.verbose("Friends is ready")
         interactor.getData()

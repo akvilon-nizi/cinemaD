@@ -98,20 +98,7 @@ class RewardsViewController: ParentViewController {
 
         setPageVC()
 
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//            selector:@selector(playerItemBecameCurrentNotif:)
-//            name:@"AVPlayerItemBecameCurrentNotification"
-//            object:nil];
-//        NotificationCenter.default.addObserver(self, selector: #selector(assa), name: NSNotification.Name(rawValue: "AVPlayerItemBecameCurrentNotification"), object: nil)
-
-//        activityVC.startAnimating()
-//        activityVC.isHidden = false
-//        activityVC.color = UIColor.cnmMainOrange
         view.bringSubview(toFront: activityVC)
-    }
-
-    func assa() {
-        print()
     }
 
     private func setPageVC() {

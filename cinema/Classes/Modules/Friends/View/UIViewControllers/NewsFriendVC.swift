@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol NewsFriendVCDelegate: class {
+protocol NewsFriendVCDelegate: FriendsSubVCDelegate {
     func openFilmId(_ filmID: String, name: String)
 }
 
@@ -21,6 +21,8 @@ class NewsFriendVC: ParentViewController {
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
     let windowWidth2 = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 40) / 9 * 4
+
+    let refreshControl = UIRefreshControl()
 
     var news: [FriendsNewsForView] = []
 
@@ -44,7 +46,7 @@ class NewsFriendVC: ParentViewController {
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.pinEdgesToSuperviewEdges()
 
-        tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         tableView.separatorStyle = .none
         tableView.allowsMultipleSelection = false
@@ -54,10 +56,18 @@ class NewsFriendVC: ParentViewController {
         tableView.register(FriendsNewsCell.self, forCellReuseIdentifier: FriendsNewsCell.reuseIdentifier)
         tableView.register(FriendsNewCell.self, forCellReuseIdentifier: FriendsNewCell.reuseIdentifier)
 
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+
         tableView.reloadData()
     }
 
+    func refresh() {
+        delegate?.pullToRefresh()
+    }
+
     func setNews(_ news: [FriendsNewsForView]) {
+        refreshControl.endRefreshing()
         self.news = news
         tableView.reloadData()
     }
@@ -105,8 +115,20 @@ extension NewsFriendVC: UITableViewDelegate {
         return UITableViewAutomaticDimension
     }
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 0
     }
 }
 

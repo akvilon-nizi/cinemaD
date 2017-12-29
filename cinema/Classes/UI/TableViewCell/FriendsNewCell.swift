@@ -77,7 +77,7 @@ class FriendsNewCell: UITableViewCell {
         let leading: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 20 : 27
 
         contentView.addSubview(userImage.prepareForAutoLayout())
-        userImage.topAnchor ~= contentView.topAnchor + 18
+        userImage.topAnchor ~= contentView.topAnchor
         userImage.leadingAnchor ~= contentView.leadingAnchor + leading
 
         contentView.addSubview(titleLabel.prepareForAutoLayout())
@@ -98,7 +98,7 @@ class FriendsNewCell: UITableViewCell {
         separatorView.backgroundColor = .cnmDadada
         contentView.addSubview(separatorView.prepareForAutoLayout())
         separatorView.topAnchor ~= newFriends.bottomAnchor
-        separatorView.bottomAnchor ~= contentView.bottomAnchor
+        separatorView.bottomAnchor ~= contentView.bottomAnchor - 18
         separatorView.trailingAnchor ~= contentView.trailingAnchor - 24
         separatorView.leadingAnchor ~= contentView.leadingAnchor + 24
         separatorView.heightAnchor ~= 1

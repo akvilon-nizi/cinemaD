@@ -20,6 +20,8 @@ protocol FriendsViewOutput {
 
     func viewIsReady()
 
+    func refreshData()
+
     func backTap()
 
     func homeTap()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddFriendsVCDelegate: class {
+protocol AddFriendsVCDelegate: FriendsSubVCDelegate {
     func addFriend(id: String)
 }
 
@@ -25,6 +25,8 @@ class AddFriendsVC: ParentViewController {
     var curentIndex: Int?
 
     var addedIndex: Set<Int> = []
+
+    let refreshControl = UIRefreshControl()
 
     weak var delegate: AddFriendsVCDelegate?
 
@@ -47,7 +49,7 @@ class AddFriendsVC: ParentViewController {
 
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.pinEdgesToSuperviewEdges()
-        tableView.contentInset = UIEdgeInsets(top: -25, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         tableView.separatorStyle = .none
         tableView.allowsMultipleSelection = false
@@ -56,10 +58,18 @@ class AddFriendsVC: ParentViewController {
 
         tableView.register(FriendsAddCell.self, forCellReuseIdentifier: FriendsAddCell.reuseIdentifier)
 
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+
         tableView.reloadData()
     }
 
+    func refresh() {
+        delegate?.pullToRefresh()
+    }
+
     func setFriends(_ friends: [Creator]) {
+        refreshControl.endRefreshing()
         self.friends = friends
         tableView.reloadData()
     }

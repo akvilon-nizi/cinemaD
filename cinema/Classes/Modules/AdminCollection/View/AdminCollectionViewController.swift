@@ -166,7 +166,7 @@ extension AdminCollectionViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
             let inset: CGFloat = colInfo == "" ? 15 : 60
-            return CGSize(width: view.frame.width, height: view.frame.width / 375 * 131 + colInfo.height(withConstrainedWidth: view.frame.width - 70, font: UIFont.cnmFuturaLight(size: 14) ) + inset)
+            return CGSize(width: view.frame.width - 55, height: (view.frame.width - 55) / 320 * 131 + colInfo.height(withConstrainedWidth: view.frame.width - 70, font: UIFont.cnmFuturaLight(size: 14) ) + inset)
         }
         return CGSize(width: windowWidth, height: windowWidth / 800 * 1_185)
     }

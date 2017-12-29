@@ -83,9 +83,17 @@ class FilmViewController: ParentViewController {
         navigationController?.navigationBar.isHidden = true
     }
 
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        print()
+//    }
+
     fileprivate let youtubeView = YTPlayerView()
 
     override var prefersStatusBarHidden: Bool {
+       // edgesForExtendedLayout = []
+        view.layoutSubviews()
+        view.layoutIfNeeded()
         return false
     }
 
@@ -93,12 +101,20 @@ class FilmViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        if #available(iOS 11.0, *) {
+            definesPresentationContext = true
+        }
+
+       // edgesForExtendedLayout = []
+
         let sdk = VKSdk.initialize(withAppId: "6258240")
         //sdk?.register(self)
         //sdk.ui
 
         activityVC.isHidden = false
         activityVC.startAnimating()
+
+        automaticallyAdjustsScrollViewInsets = true
 
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
@@ -477,9 +493,6 @@ class FilmViewController: ParentViewController {
         youtubeIndicator.isHidden = false
         youtubeIndicator.startAnimating()
         youtubeView.playVideo()
-        print("assaa1")
-        UIApplication.shared.isStatusBarHidden = false
-        setNeedsStatusBarAppearanceUpdate()
     }
 
     func didTapSharingButton() {
@@ -502,21 +515,21 @@ class FilmViewController: ParentViewController {
     }
 
     func setStars(_ tag: Int) {
-        myRate = tag
-
-            for starView in starsButons {
-
-                if tag == 0 {
-                    starView.setState(false, labelIsHidden: true)
-                    continue
-                }
-
-                if starView.button.tag <= tag - 1 {
-                    starView.setState(true, labelIsHidden: starView.button.tag != tag - 1)
-                } else {
-                    starView.setState(false, labelIsHidden: true)
-                }
-            }
+//        myRate = tag
+//
+//            for starView in starsButons {
+//
+//                if tag == 0 {
+//                    starView.setState(false, labelIsHidden: true)
+//                    continue
+//                }
+//
+//                if starView.button.tag <= tag - 1 {
+//                    starView.setState(true, labelIsHidden: starView.button.tag != tag - 1)
+//                } else {
+//                    starView.setState(false, labelIsHidden: true)
+//                }
+//            }
     }
 }
 
@@ -641,6 +654,9 @@ extension FilmViewController: YTPlayerViewDelegate {
             if youtubeView.currentTime() > 0 {
                 self.isHidden()
             }
+            UIApplication.shared.isStatusBarHidden = false
+            setNeedsStatusBarAppearanceUpdate()
+
         }
     }
 

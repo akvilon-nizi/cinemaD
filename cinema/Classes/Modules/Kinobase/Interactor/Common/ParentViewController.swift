@@ -30,6 +30,7 @@ class ParentViewController: UIViewController {
         activityVC.color = UIColor.cnmGreyDark
 
         activityVC.isHidden = true
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {

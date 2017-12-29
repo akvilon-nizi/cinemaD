@@ -52,6 +52,8 @@ class FriendsViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
+        listFriendsVC.delegate = self
+
         view.backgroundColor = .white
 
         addFriendsVC.delegate = self
@@ -177,5 +179,13 @@ extension FriendsViewController: AddFriendsVCDelegate {
 extension FriendsViewController: NewsFriendVCDelegate {
      func openFilmId(_ filmID: String, name: String) {
         output.openFilmId(filmID, name: name)
+    }
+}
+
+// MARK: - NewsFriendVCDelegate
+
+extension FriendsViewController: FriendsSubVCDelegate {
+    func pullToRefresh() {
+        output?.refreshData()
     }
 }

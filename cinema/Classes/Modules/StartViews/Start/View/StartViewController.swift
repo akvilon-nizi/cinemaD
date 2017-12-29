@@ -98,15 +98,17 @@ class StartViewController: ParentViewController {
         vkButtom.addTarget(self, action: #selector(handleTapVkButton), for: .touchUpInside)
         let regButton = UIButton(type: .system).setTitleWithColor(title: L10n.startRegistrationText, color: UIColor.cnmMainOrange)
         regButton.addTarget(self, action: #selector(handleTapRegButton), for: .touchUpInside)
-        let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [fbButton, vkButtom, regButton])
+//        let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [fbButton, vkButtom, regButton])
+        let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [regButton])
         contentView.addSubview(buttonsStackView.prepareForAutoLayout())
         buttonsStackView.centerXAnchor ~= contentView.centerXAnchor
         buttonsStackView.topAnchor ~= contentView.centerYAnchor + 20
         buttonsStackView.bottomAnchor ~= contentView.bottomAnchor
 
-        print("assa", UserDefaults.standard.object(forKey: "AppleLanguages"))
-        UserDefaults.standard.set("vi_VN", forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize()
+//        [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0];
+
+//        UserDefaults.standard.set(["de_DE"], forKey: "AppleLanguages")
+//        UserDefaults.standard.synchronize()
 
 //        let authLabel = UILabel()
 //        authLabel.textColor = .cnmGreyTextColor
@@ -171,16 +173,14 @@ class StartViewController: ParentViewController {
 
         //print(uiManager.actionBarView(for: .phoneNumberInput)?.subviews)
 
-        //Costumize the theme
-        let theme: AKFTheme = AKFTheme.default()
-        theme.headerBackgroundColor = .green
-        theme.headerTextColor = .green
-        theme.iconColor = .green
-        theme.inputTextColor = .green
-        theme.statusBarStyle = .default
-        theme.textColor = .green
-        theme.titleColor = .green
-        loginViewController.setTheme(theme)
+        //Costumize the them
+
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor.setColorGray(white: 120, alpha: 0.5)
+
+        loginViewController.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: UIColor.darkGray, backgroundImage: Asset.background.image, backgroundTint: .black, tintIntensity: 0.75)
+
+//        viewController.uiManager
 
 //        let uiManager = AKFUIManager(
 //        uiManager.actionBarView(for: .phoneNumberInput)?.tintColor = .red

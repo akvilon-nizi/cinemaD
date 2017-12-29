@@ -108,7 +108,6 @@ extension FilmGroup: UICollectionViewDelegate {
 
 extension FilmGroup: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("assa", films.count)
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.contentOffset.x = 0
         return films.count

@@ -51,6 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             statusBar.backgroundColor = UIColor.white
         }
 
+//        var language = "de"
+//        let path = Bundle.main.path(forResource: language, ofType: "lproj")
+//        let bundle = Bundle(path: path!)
+//        _ = bundle?.localizedString(forKey: "key", value: nil, table: nil)
+
         return true
     }
 

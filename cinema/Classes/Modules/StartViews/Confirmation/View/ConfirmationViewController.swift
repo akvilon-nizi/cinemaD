@@ -32,17 +32,6 @@ class ConfirmationViewController: ParentViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-////        if let assa = accountKit?.au {
-////            // if the user is already logged in, go to the main screen
-////            print(assa.tokenString)
-////            print("User already logged in go to ViewController")
-////
-////
-////        }
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

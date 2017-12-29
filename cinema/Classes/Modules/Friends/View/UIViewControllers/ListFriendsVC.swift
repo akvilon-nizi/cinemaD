@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol FriendsSubVCDelegate: class {
+    func pullToRefresh()
+}
+
 class ListFriendsVC: ParentViewController {
 
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+
+    weak var delegate: FriendsSubVCDelegate?
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
@@ -19,6 +25,8 @@ class ListFriendsVC: ParentViewController {
     var friends: [Creator] = []
 
     var arrayVC: [Creator] = []
+
+    let refreshControl = UIRefreshControl()
 
     // MARK: - Life cycle
 
@@ -40,20 +48,30 @@ class ListFriendsVC: ParentViewController {
         let searchView = SearchCommonView()
         searchView.hiddenFilter()
 
-        view.addSubview(searchView.prepareForAutoLayout())
-        searchView.topAnchor ~= view.topAnchor + 10
-        searchView.leadingAnchor ~= view.leadingAnchor
-        searchView.trailingAnchor ~= view.trailingAnchor
+        let headerView = UIView()
+
+        headerView.addSubview(searchView.prepareForAutoLayout())
+        searchView.topAnchor ~= headerView.topAnchor + 10
+        searchView.leadingAnchor ~= headerView.leadingAnchor
+        searchView.trailingAnchor ~= headerView.trailingAnchor
         searchView.heightAnchor ~= 45
+        searchView.bottomAnchor ~= headerView.bottomAnchor
         searchView.delegate = self
 
+        headerView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: 45)
+
+        tableView.tableHeaderView = headerView
+
         view.addSubview(tableView.prepareForAutoLayout())
-        tableView.topAnchor ~= searchView.bottomAnchor
+        tableView.topAnchor ~= view.topAnchor + 10
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
 
-        tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
 
         tableView.separatorStyle = .none
         tableView.allowsMultipleSelection = false
@@ -65,7 +83,12 @@ class ListFriendsVC: ParentViewController {
         tableView.reloadData()
     }
 
+    func refresh() {
+        delegate?.pullToRefresh()
+    }
+
     func setFriends(_ friends: [Creator]) {
+        refreshControl.endRefreshing()
         self.friends = friends
         self.arrayVC = friends
         tableView.reloadData()
