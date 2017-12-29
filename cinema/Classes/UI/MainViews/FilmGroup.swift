@@ -25,7 +25,15 @@ class FilmGroup: UITableViewHeaderFooterView {
 
     var films: [Film] = [] {
         didSet {
+            collectionView.dataSource = nil
+
+            collectionView.delegate = nil
+
+            collectionView.dataSource = self
+
+            collectionView.delegate = self
             collectionView.reloadData()
+            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
 
@@ -43,7 +51,7 @@ class FilmGroup: UITableViewHeaderFooterView {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FilmsCollectionCell.self, forCellWithReuseIdentifier: FilmsCollectionCell.reuseIdentifier)
-        collectionView.scrollsToTop = false
+        collectionView.scrollsToTop = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .white
 
@@ -100,6 +108,9 @@ extension FilmGroup: UICollectionViewDelegate {
 
 extension FilmGroup: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("assa", films.count)
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.contentOffset.x = 0
         return films.count
     }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

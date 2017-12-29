@@ -50,6 +50,10 @@ class MainViewController: ParentViewController {
 
     let mainTabView = MainTabView()
 
+    var isChanges = false
+
+    var y: CGFloat = 0
+
     var newsFilterArray: [NewsFilter] = [
         NewsFilter(title: L10n.mainNewsNew, isSwitch: false),
         NewsFilter(title: L10n.mainNewsMessageActors, isSwitch: false),
@@ -393,12 +397,23 @@ extension MainViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if isNewsFilterOpen {
-            return 20
-        }
+//        if isNewsFilterOpen {
+//            return 20
+//        }
         return 0
     }
 
+}
+
+// MARK: - UITableViewDelegate
+
+extension MainViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isChanges {
+           tableView.contentOffset.y = y
+           isChanges = false
+        }
+    }
 }
 
 // MARK: - MainViewInput
@@ -497,9 +512,10 @@ extension MainViewController: HeaderViewOpennedDelegate {
 
     func open(isOpen: Bool, section: Int) {
         isNewsFilterOpen = isOpen
+        isChanges = true
+        y = tableView.contentOffset.y
         UIView.setAnimationsEnabled(false)
         tableView.reloadData()
-
         //tableView.setContentOffset(CGPoint(x: 0, y: 350), animated: true)
         UIView.setAnimationsEnabled(true)
     }

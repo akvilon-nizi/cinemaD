@@ -204,7 +204,7 @@ class WatchedVC: ParentViewController {
         if searchFilmGroup.films.isEmpty && !films.isEmpty {
             searchHeightLayout?.constant = heightFilmGroup
             UIView.animate(withDuration: 0) {
-                self.stackView.layoutIfNeeded()
+                self.searchFilmGroup.layoutIfNeeded()
             }
             currentHeight += heightFilmGroup
             setStackViewHeight()
@@ -213,7 +213,7 @@ class WatchedVC: ParentViewController {
         if !searchFilmGroup.films.isEmpty && films.isEmpty {
             searchHeightLayout?.constant = 0
             UIView.animate(withDuration: 0) {
-                self.stackView.layoutIfNeeded()
+                 self.searchFilmGroup.layoutIfNeeded()
             }
             currentHeight = fixHeight
             setStackViewHeight()
@@ -233,9 +233,6 @@ class WatchedVC: ParentViewController {
     func setStackViewHeight() {
         heightLayout?.constant = currentHeight
         //tableView.tableHeaderView = stackView
-        UIView.animate(withDuration: 0) {
-            self.stackView.layoutIfNeeded()
-        }
         tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
        // UIView.animate(withDuration: 0) {
 //            tableView.layoutSubviews()

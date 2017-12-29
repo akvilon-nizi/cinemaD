@@ -104,6 +104,10 @@ class StartViewController: ParentViewController {
         buttonsStackView.topAnchor ~= contentView.centerYAnchor + 20
         buttonsStackView.bottomAnchor ~= contentView.bottomAnchor
 
+        print("assa", UserDefaults.standard.object(forKey: "AppleLanguages"))
+        UserDefaults.standard.set("vi_VN", forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
+
 //        let authLabel = UILabel()
 //        authLabel.textColor = .cnmGreyTextColor
 //        authLabel.font = UIFont.cnmFutura(size: 12)
@@ -163,19 +167,24 @@ class StartViewController: ParentViewController {
     func prepareLoginViewController(_ loginViewController: AKFViewController) {
 
         loginViewController.delegate = self
-        loginViewController.setAdvancedUIManager(nil)
+//        loginViewController.setAdvancedUIManager(nil)
 
-//        //Costumize the theme
-//        let theme: AKFTheme = AKFTheme.default()
-//        theme.headerBackgroundColor = .green
-//        theme.headerTextColor = .green
-//        theme.iconColor = .green
-//        theme.inputTextColor = .green
-//        theme.statusBarStyle = .default
-//        theme.textColor = .green
-//        theme.titleColor = .green
-//        loginViewController.setTheme(theme)
+        //print(uiManager.actionBarView(for: .phoneNumberInput)?.subviews)
 
+        //Costumize the theme
+        let theme: AKFTheme = AKFTheme.default()
+        theme.headerBackgroundColor = .green
+        theme.headerTextColor = .green
+        theme.iconColor = .green
+        theme.inputTextColor = .green
+        theme.statusBarStyle = .default
+        theme.textColor = .green
+        theme.titleColor = .green
+        loginViewController.setTheme(theme)
+
+//        let uiManager = AKFUIManager(
+//        uiManager.actionBarView(for: .phoneNumberInput)?.tintColor = .red
+//        loginViewController.setAdvancedUIManager(uiManager)
     }
 }
 

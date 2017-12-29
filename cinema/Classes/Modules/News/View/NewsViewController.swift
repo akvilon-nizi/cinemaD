@@ -141,6 +141,8 @@ class NewsViewController: ParentViewController {
     func loadData(_ news: News) {
         if news.type == "common" {
             newsType = .common
+        } else if news.type == "video" {
+            newsType = .video
         } else {
             newsType = .images
         }
@@ -284,6 +286,11 @@ extension NewsViewController: UITableViewDelegate {
         if let newsA = newsData.news {
             if newsType == .common {
                 let view = SimpleNewsHeader()
+                view.setNews(newsA)
+                view.delegate = self
+                return view
+            } else if newsType == .video {
+                let view = VideoNewsHeader()
                 view.setNews(newsA)
                 view.delegate = self
                 return view
