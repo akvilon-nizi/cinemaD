@@ -35,7 +35,7 @@ class ReviewsCell: UITableViewCell {
     private let newsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaLight(size: 14)
-        label.textColor = UIColor.cnmAfafaf
+        label.textColor = UIColor.setColorGray(white: 52)
         label.numberOfLines = 0
         return label
     }()
@@ -43,7 +43,7 @@ class ReviewsCell: UITableViewCell {
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFuturaLight(size: 10)
-        label.textColor = UIColor.setColorGray(white: 52)
+        label.textColor = UIColor.cnmAfafaf
         label.numberOfLines = 1
         return label
     }()

@@ -90,12 +90,12 @@ class FilmViewController: ParentViewController {
 
     fileprivate let youtubeView = YTPlayerView()
 
-    override var prefersStatusBarHidden: Bool {
-       // edgesForExtendedLayout = []
-        view.layoutSubviews()
-        view.layoutIfNeeded()
-        return false
-    }
+//    override var prefersStatusBarHidden: Bool {
+//       // edgesForExtendedLayout = []
+//        view.layoutSubviews()
+//        view.layoutIfNeeded()
+//        return false
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +154,7 @@ class FilmViewController: ParentViewController {
 
         titleLabel.font = UIFont.cnmFuturaLight(size: 14)
         titleLabel.textColor = UIColor.cnmAfafaf
-        titleLabel.lineBreakMode = .byTruncatingMiddle
+        titleLabel.lineBreakMode = .byTruncatingTail
 
         titleView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.centerXAnchor ~= titleView.centerXAnchor
@@ -515,21 +515,21 @@ class FilmViewController: ParentViewController {
     }
 
     func setStars(_ tag: Int) {
-//        myRate = tag
-//
-//            for starView in starsButons {
-//
-//                if tag == 0 {
-//                    starView.setState(false, labelIsHidden: true)
-//                    continue
-//                }
-//
-//                if starView.button.tag <= tag - 1 {
-//                    starView.setState(true, labelIsHidden: starView.button.tag != tag - 1)
-//                } else {
-//                    starView.setState(false, labelIsHidden: true)
-//                }
-//            }
+        myRate = tag
+
+            for starView in starsButons {
+
+                if tag == 0 {
+                    starView.setState(false, labelIsHidden: true)
+                    continue
+                }
+
+                if starView.button.tag <= tag - 1 {
+                    starView.setState(true, labelIsHidden: starView.button.tag != tag - 1)
+                } else {
+                    starView.setState(false, labelIsHidden: true)
+                }
+            }
     }
 }
 

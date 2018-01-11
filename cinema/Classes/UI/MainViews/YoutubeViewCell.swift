@@ -68,7 +68,6 @@ class YoutubeViewCell: UICollectionViewCell {
     }
 
     func playVideo() {
-
         youtubeView.playVideo()
         youtubeView.isUserInteractionEnabled = true
         activityVC.isHidden = false
@@ -76,6 +75,11 @@ class YoutubeViewCell: UICollectionViewCell {
         playButton.isHidden = true
 
     }
+
+    func pauseVideo() {
+        youtubeView.pauseVideo()
+    }
+
     func loadYT() {
         youtubeView.load(withVideoId: "sXd0GDvoXfM", playerVars: [
             "playsinline": 1,

@@ -220,6 +220,7 @@ class WatchedVC: ParentViewController {
         }
 
         searchFilmGroup.films = films
+        searchFilmGroup.gotoStart()
 
         if isRefresh {
             isRefresh = false
@@ -381,12 +382,13 @@ extension WatchedVC: CollectionCellDelegate {
 
 extension WatchedVC: SearchCommonDelegate {
     func changeText(_ text: String) {
-        if text.count >= 2 {
+        if text.count >= 1 {
             if text == query {
                 return
             }
             delegate?.getQueryWatched(text)
         } else {
+            delegate?.getQueryWatched(text)
             if searchFilmGroup.films.isEmpty && query.isEmpty {
 
             } else {

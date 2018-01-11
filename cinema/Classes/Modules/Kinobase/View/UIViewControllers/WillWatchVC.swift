@@ -200,6 +200,7 @@ class WillWatchVC: ParentViewController {
         }
 
         searchFilmGroup.films = films
+        searchFilmGroup.gotoStart()
 
         if isRefresh {
             isRefresh = false
@@ -288,6 +289,7 @@ extension WillWatchVC: SearchCommonDelegate {
             }
             delegate?.getQuery(text)
         } else {
+            delegate?.getQuery(text)
             if searchFilmGroup.films.isEmpty && query.isEmpty {
 
             } else {

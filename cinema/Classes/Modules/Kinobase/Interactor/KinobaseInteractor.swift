@@ -135,25 +135,27 @@ extension KinobaseInteractor: KinobaseInteractorInput {
 
     func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {
         disposeBag = DisposeBag()
-        provider.requestModel(.globalSearch(query: query))
-            .subscribe { [unowned self] (response: Event<AllFilms>) in
-                switch response {
-                case let .next(model):
-                    self.kbData.filmsSearch = model.films
-                    self.output.getSearch(self.kbData, isWatched: isWatched)
-                case let .error(error as ProviderError):
-                    if error.status == 403 {
-                        self.output.tokenError()
-                    } else if error.status == 504 {
-                        self.searchFilms(query: query, genres: genres, years: years, isWatched: isWatched)
-                    } else {
-                        self.output.getError()
+        if query.count >= 1 {
+            provider.requestModel(.globalSearch(query: query))
+                .subscribe { [unowned self] (response: Event<AllFilms>) in
+                    switch response {
+                    case let .next(model):
+                        self.kbData.filmsSearch = model.films
+                        self.output.getSearch(self.kbData, isWatched: isWatched)
+                    case let .error(error as ProviderError):
+                        if error.status == 403 {
+                            self.output.tokenError()
+                        } else if error.status == 504 {
+                            self.searchFilms(query: query, genres: genres, years: years, isWatched: isWatched)
+                        } else {
+                            self.output.getError()
+                        }
+                    default:
+                        break
                     }
-                default:
-                    break
                 }
-            }
-            .addDisposableTo(disposeBag)
+                .addDisposableTo(disposeBag)
+        }
     }
 
 //    func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {

@@ -118,5 +118,14 @@ extension MainVCHeader: UIScrollViewDelegate {
             scrollView.setContentOffset(CGPoint(x: CGFloat(scrollItem) * windowY, y: 0), animated: true)
         }
         collectionView.isScrollEnabled = true
+
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            for colCell in self.collectionView.visibleCells {
+                if let cell = colCell as? YoutubeViewCell {
+                    cell.pauseVideo()
+                }
+            }
+        }
     }
 }

@@ -42,7 +42,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>30</string>
+	<string>36</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -92,10 +92,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>$(PRODUCT_NAME) use bluetooth</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) camera use</string>
-	<key>NSHumanReadableCopyright</key>
-	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>$(PRODUCT_NAME) location in use on</string>
 	<key>NSPhotoLibraryUsageDescription</key>
