@@ -176,9 +176,6 @@ class ReviewsCell: UITableViewCell {
     }
 
     func tapSharedButton() {
-//        if let newShare = news {
-//            delegate?.openShareSimple(news: newShare)
-//        }
     }
 
     func deleteButtonTap() {

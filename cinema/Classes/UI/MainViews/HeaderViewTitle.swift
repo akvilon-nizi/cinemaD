@@ -45,8 +45,6 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
 
         centerView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.pinEdgesToSuperviewEdges()
-//        titleLabel.trailingAnchor ~= centerView.trailingAnchor
-//        titleLabel.centerYAnchor ~= centerView.centerYAnchor
 
         centerView.backgroundColor = .white
 

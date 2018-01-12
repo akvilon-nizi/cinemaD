@@ -102,26 +102,24 @@ class MainTabView: UIView {
     }
 
     func tapButton(button: UIButton) {
-//        if !button.isSelected {
-            button.isSelected = true
-            for but in buttons where button.tag != but.tag {
-                but.isSelected = false
-            }
-            switch button.tag {
-            case 0:
-                delegate?.ticketsTapped()
-            case 1:
-                delegate?.rewardsTapped()
-            case 2:
-                delegate?.profileTapped()
-            case 3:
-                delegate?.chatTapped()
-            case 4:
-                delegate?.kinobaseTapped()
-            default:
-                return
-            }
-//        }
+        button.isSelected = true
+        for but in buttons where button.tag != but.tag {
+            but.isSelected = false
+        }
+        switch button.tag {
+        case 0:
+            delegate?.ticketsTapped()
+        case 1:
+            delegate?.rewardsTapped()
+        case 2:
+            delegate?.profileTapped()
+        case 3:
+            delegate?.chatTapped()
+        case 4:
+            delegate?.kinobaseTapped()
+        default:
+            return
+        }
     }
 
     func reloadData() {

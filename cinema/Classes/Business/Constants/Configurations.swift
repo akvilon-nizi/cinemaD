@@ -25,14 +25,6 @@ enum Configurations {
             fatalError("Wrong api base url")
         }
      return url
-//        switch self {
-//        case .debug, .internal:
-//
-//            return url
-//        case .prerelease, .release:
-//            // TODO: Find production url
-//            fatalError("Need production url")
-//        }
     }
 
     var youtubeURL: URL {
@@ -40,14 +32,6 @@ enum Configurations {
             fatalError("Wrong api base url")
         }
         return url
-        //        switch self {
-        //        case .debug, .internal:
-        //
-        //            return url
-        //        case .prerelease, .release:
-        //            // TODO: Find production url
-        //            fatalError("Need production url")
-        //        }
     }
 
     static let linkShare: String = "https://itunes.apple.com/us/app/keynote/id361285480?mt=8"

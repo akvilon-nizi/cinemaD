@@ -8,7 +8,7 @@ import FacebookShare
 import FBSDKShareKit
 import VKSdkFramework
 import YouTubeiOSPlayerHelper
-
+// swiftlint:disable:next type_body_length
 class FilmViewController: ParentViewController {
 
     var output: FilmViewOutput!
@@ -35,7 +35,11 @@ class FilmViewController: ParentViewController {
 
     var descriptions: String = ""
 
-    let titleLabel = UILabel()
+    let descriptionView = UIView()
+
+    var descriptionText: String = ""
+
+    let yearLabel = UILabel()
 
     let watchedButton = UIButton().setParameters(L10n.filmWatchedButton)
 
@@ -83,19 +87,7 @@ class FilmViewController: ParentViewController {
         navigationController?.navigationBar.isHidden = true
     }
 
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        print()
-//    }
-
     fileprivate let youtubeView = YTPlayerView()
-
-//    override var prefersStatusBarHidden: Bool {
-//       // edgesForExtendedLayout = []
-//        view.layoutSubviews()
-//        view.layoutIfNeeded()
-//        return false
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,17 +142,11 @@ class FilmViewController: ParentViewController {
         titleView.addSubview(titleViewLabel.prepareForAutoLayout())
         titleViewLabel.centerXAnchor ~= titleView.centerXAnchor
         titleViewLabel.centerYAnchor ~= titleView.centerYAnchor - 7
-        //titleViewLabel.topAnchor ~= titleView.topAnchor
 
-        titleLabel.font = UIFont.cnmFuturaLight(size: 14)
-        titleLabel.textColor = UIColor.cnmAfafaf
-        titleLabel.lineBreakMode = .byTruncatingTail
-
-        titleView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.centerXAnchor ~= titleView.centerXAnchor
-        titleLabel.topAnchor ~= titleViewLabel.bottomAnchor
-        titleLabel.widthAnchor ~= windowWidth + 20
-        titleLabel.textAlignment = .center
+        titleView.addSubview(descriptionView.prepareForAutoLayout())
+        descriptionView.centerXAnchor ~= titleView.centerXAnchor
+        descriptionView.topAnchor ~= titleViewLabel.bottomAnchor
+        descriptionView.widthAnchor ~= windowWidth + 20
 
         navigationItem.titleView = titleView
 
@@ -198,6 +184,7 @@ class FilmViewController: ParentViewController {
 //        youtubeView.webView?.frame = CGRect(x: 0, y: 0, width: 320, height: 2_000)
     }
 
+    // swiftlint:disable:next function_body_length
     func setInfo() {
         if let filmInfo = filmInformation {
 
@@ -226,7 +213,7 @@ class FilmViewController: ParentViewController {
 
             genres = textsArray.joined(separator: "/")
 
-            titleLabel.text = genres + " (" + String(filmInfo.yearFirstRelease) + ")"
+            getTitle(genres: genres, years: " (" + String(filmInfo.yearFirstRelease) + ")", font: UIFont.cnmFuturaLight(size: 14))
 
             let separatorView = UIView()
             view.addSubview(separatorView.prepareForAutoLayout())
@@ -407,6 +394,44 @@ class FilmViewController: ParentViewController {
         infoStack.bottomAnchor ~= contentView.bottomAnchor
     }
 
+    func getTitle(genres: String, years: String, font: UIFont) {
+        descriptionText = genres + years
+
+        let fontAttributes = [NSFontAttributeName: font]
+        let sizeWidth = (descriptionText as NSString).size(attributes: fontAttributes).width
+
+        let titleLabel = UILabel()
+
+        titleLabel.font = UIFont.cnmFuturaLight(size: 14)
+        titleLabel.textColor = UIColor.cnmAfafaf
+        titleLabel.lineBreakMode = .byTruncatingTail
+        titleLabel.textAlignment = .center
+
+        if sizeWidth <= windowWidth + 20 {
+            descriptionView.addSubview(titleLabel.prepareForAutoLayout())
+            titleLabel.pinEdgesToSuperviewEdges()
+            titleLabel.text = descriptionText
+        } else {
+            let yearLabel = UILabel()
+            yearLabel.font = UIFont.cnmFuturaLight(size: 14)
+            yearLabel.textColor = UIColor.cnmAfafaf
+            yearLabel.textAlignment = .center
+            yearLabel.text = years
+            descriptionView.addSubview(yearLabel.prepareForAutoLayout())
+            yearLabel.widthAnchor ~= (years as NSString).size(attributes: fontAttributes).width + 1
+            yearLabel.trailingAnchor ~= descriptionView.trailingAnchor
+            yearLabel.topAnchor ~= descriptionView.topAnchor
+            yearLabel.bottomAnchor ~= descriptionView.bottomAnchor
+
+            titleLabel.text = descriptionText
+            descriptionView.addSubview(titleLabel.prepareForAutoLayout())
+            titleLabel.trailingAnchor ~= yearLabel.leadingAnchor
+            titleLabel.leadingAnchor ~= descriptionView.leadingAnchor
+            titleLabel.topAnchor ~= descriptionView.topAnchor
+            titleLabel.bottomAnchor ~= descriptionView.bottomAnchor
+        }
+    }
+
     // MARK: - Actions
     func didTapLeftButton() {
         output?.backTap()
@@ -498,9 +523,7 @@ class FilmViewController: ParentViewController {
     func didTapSharingButton() {
         if let image = imageView.image {
             let vkShare = VKShareDialogController()
-            if let info = titleLabel.text {
-                vkShare.text = name + ". " + info + " " + descriptions
-            }
+            vkShare.text = name + ". " + descriptionText + " " + descriptions
 
             let img = VKUploadImage(image: image, andParams: nil)
             let link = URL(string: Configurations.linkShare)

@@ -343,9 +343,17 @@ extension FoodleTarget: TargetType {
         case let .editeProfile(image, _, _, _):
             if let newImage = image {
                 if let data: Data = UIImagePNGRepresentation(newImage) {
-                    return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+                    return .upload(.multipart([MultipartFormData(
+                        provider: .data(data),
+                        name: "image",
+                        fileName: "photo.jpg",
+                        mimeType: "image/jpeg")]))
                 } else if let data: Data = UIImageJPEGRepresentation(newImage, 1.0) {
-                    return .upload(.multipart([MultipartFormData(provider: .data(data), name: "image", fileName: "photo.jpg", mimeType: "image/jpeg")]))
+                    return .upload(.multipart([MultipartFormData(
+                        provider: .data(data),
+                        name: "image",
+                        fileName: "photo.jpg",
+                        mimeType: "image/jpeg")]))
                 }
             }
             return .request

@@ -13,13 +13,12 @@ import Foundation
 class PhoneNumberFormatterImplementation: PhoneNumberFormatter {
 
     func validate(phone: String) -> Bool {
-
-        return unformat(phone: phone).characters.count == 11
+        return unformat(phone: phone).count == 11
     }
 
     func format(phone: String) -> String {
 
-        guard phone.characters.count == 11 else {
+        guard phone.count == 11 else {
 
             return ""
         }
@@ -33,7 +32,7 @@ class PhoneNumberFormatterImplementation: PhoneNumberFormatter {
         phone.insert("(", at: phone.index(phone.startIndex, offsetBy: 1))
         phone.insert(" ", at: phone.index(phone.startIndex, offsetBy: 1))
 
-        if phone.characters.first == "7" {
+        if phone.first == "7" {
 
             phone.insert("+", at: phone.index(phone.startIndex, offsetBy: 0))
         }

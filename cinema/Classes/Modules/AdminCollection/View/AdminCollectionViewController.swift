@@ -124,7 +124,6 @@ extension AdminCollectionViewController: AdminCollectionViewInput {
 
         if let description = collection.description {
             self.colInfo = description
-//            self.colInfo = " faeskjf wquefhqwu qw iuwh gowe e eogo ieh goew ewor geowhg wen kadv eow ewh gwhg we oho we wehg ewohg owe hwe hgoewrh gwer wevasdhv qakghqjdrqeghqw[oejf'sl ah"
         }
         collectionView.reloadData()
         activityVC.isHidden = true
@@ -137,24 +136,6 @@ extension AdminCollectionViewController: AdminCollectionViewInput {
         activityVC.stopAnimating()
     }
 
-//    func estimatedHeightOfLabel(text: String) -> CGFloat {
-//
-//        let constraintRect = CGSize(width: view.frame.width - 70, height: .greatestFiniteMagnitude)
-//        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.cnmFuturaLight(size: 14)], context: nil)
-//
-//        return ceil(boundingBox.height)
-//
-//        let size = CGSize(width: view.frame.width - 70, height: 1_000)
-//
-//        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-//
-//        let attributes = [NSFontAttributeName: UIFont.cnmFuturaLight(size: 14)]
-//
-//        let rectangleHeight = String(text).boundingRect(with: size, options: nil, attributes: attributes, context: nil).height
-//
-//        return text == "" ? 0 : 120
-//    }
-
     func setupInitialState() {
 
     }
@@ -166,7 +147,10 @@ extension AdminCollectionViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
             let inset: CGFloat = colInfo == "" ? 15 : 60
-            return CGSize(width: view.frame.width - 55, height: (view.frame.width - 55) / 320 * 131 + colInfo.height(withConstrainedWidth: view.frame.width - 70, font: UIFont.cnmFuturaLight(size: 14) ) + inset)
+            return CGSize(
+                width: view.frame.width - 55,
+                height: (view.frame.width - 55) / 320 * 131 + colInfo.height(withConstrainedWidth: view.frame.width - 70,
+                                                                             font: UIFont.cnmFuturaLight(size: 14) ) + inset)
         }
         return CGSize(width: windowWidth, height: windowWidth / 800 * 1_185)
     }
@@ -208,7 +192,12 @@ extension AdminCollectionViewController: UICollectionViewDataSource {
 extension String {
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = self.boundingRect(
+            with: constraintRect,
+            options: .usesLineFragmentOrigin,
+            attributes: [NSFontAttributeName: font],
+            context: nil
+        )
         return ceil(boundingBox.height)
     }
 }

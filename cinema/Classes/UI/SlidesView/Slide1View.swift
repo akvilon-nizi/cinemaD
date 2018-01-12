@@ -37,7 +37,7 @@ class Slide1View: UIView {
         contentView.centerXAnchor ~= centerXAnchor
         contentView.centerYAnchor ~= centerYAnchor
 
-        let imageView = UIImageView(image:Asset.Cinema.Slides.slide1Image.image).setSize(width: 144, height: 191)
+        let imageView = UIImageView(image: Asset.Cinema.Slides.slide1Image.image).setSize(width: 144, height: 191)
         contentView.addSubview(imageView.prepareForAutoLayout())
         imageView.centerXAnchor ~= contentView.centerXAnchor - 4
         imageView.topAnchor ~= contentView.topAnchor - 30

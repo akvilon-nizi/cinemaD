@@ -13,12 +13,6 @@ class StartRouter {
 // MARK: - StartRouterInput
 
 extension StartRouter: StartRouterInput {
-    func openRegistration() {
-        appRouter.transition(to: .registration)
-    }
-    func openAuth() {
-        appRouter.transition(to: .authCinema(isError: false))
-    }
 
     func transitionToMain() {
         OperationQueue.main.addOperation {

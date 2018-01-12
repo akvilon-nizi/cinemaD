@@ -44,9 +44,6 @@ class StatusBarAlertManager {
 
     func setStatusBarAlert(with message: String, withType type: StatusBarMessageType = .failure, with viewController: UIViewController) {
 
-//        guard viewControllers.index(of: viewController) != nil else {
-//            return
-//        }
 
         guard !message.isEmpty else {
             clear()

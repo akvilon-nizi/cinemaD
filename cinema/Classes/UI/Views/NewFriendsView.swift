@@ -12,6 +12,7 @@ import RxSwift
 class FriendsNewsData {
     let imageUrl: String?
     let name: String
+
     init(imageUrl: String?, name: String) {
         self.imageUrl = imageUrl
         self.name = name

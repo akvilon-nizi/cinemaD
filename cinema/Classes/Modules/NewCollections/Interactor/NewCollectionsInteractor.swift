@@ -128,6 +128,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                 case let .next(model):
                     self.output.getCollection(collection: model)
                 case let .error(error as ProviderError):
+                    print(error)
                     self.output.getError()
                 default:
                     break
@@ -164,6 +165,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
+                    print(model)
                     self.output.getSeccess(message: L10n.alertCollectionsRemove)
                 case let .error(error as ProviderError):
                     if error.status == 403 {

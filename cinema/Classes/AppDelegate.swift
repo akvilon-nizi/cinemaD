@@ -45,16 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         Fabric.with([Crashlytics.self])
 
-//        UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().clipsToBounds = true
         if let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
             statusBar.backgroundColor = UIColor.white
         }
-
-//        var language = "de"
-//        let path = Bundle.main.path(forResource: language, ofType: "lproj")
-//        let bundle = Bundle(path: path!)
-//        _ = bundle?.localizedString(forKey: "key", value: nil, table: nil)
 
         return true
     }
@@ -86,17 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        return SDKApplicationDelegate.shared.application(application,
-//                                                         open: url,
-//                                                         sourceApplication: sourceApplication,
-//                                                         annotation: annotation)
-//    }
-
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        return SDKApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-//    }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return true

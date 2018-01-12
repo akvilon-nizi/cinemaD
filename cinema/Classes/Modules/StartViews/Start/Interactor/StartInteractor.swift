@@ -29,6 +29,7 @@ extension StartInteractor: StartInteractorInput {
                     self.authTokenManager.save(apiToken: model.token)
                     self.output.authSuccess()
                 case let .error(error as ProviderError):
+                    print(error)
                     self.output.faulireAuth()
                 default:
                     break

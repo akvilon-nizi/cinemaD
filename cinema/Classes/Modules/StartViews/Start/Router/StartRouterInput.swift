@@ -6,7 +6,5 @@
 import Foundation
 
 protocol StartRouterInput: BaseRouterInput {
-    func openRegistration()
-    func openAuth()
     func transitionToMain()
 }

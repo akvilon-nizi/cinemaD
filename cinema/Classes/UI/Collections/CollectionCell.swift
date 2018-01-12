@@ -16,15 +16,11 @@ protocol CollectionCellDelegate: class {
 
 class CollectionCell: UITableViewCell {
 
-//    let selectColor = UIColor(white: 87.0 / 255.0, alpha: 1.0)
-//    let unSelectColor = UIColor.cnmAfafaf
-
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
         label.textColor = UIColor.cnmAfafaf
         label.lineBreakMode = .byTruncatingTail
-//        label.text = "sdofnkalsfna"
         return label
     }()
 

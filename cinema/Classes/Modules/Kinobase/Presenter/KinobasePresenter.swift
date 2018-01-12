@@ -64,9 +64,6 @@ extension KinobasePresenter: KinobaseViewOutput {
     }
 
     func searchWithText(_ query: String, isWatched: Bool) {
-//        if query.isEmpty {
-//            return
-//        }
         var genres: [String] = []
         var years: [Int] = []
         if isWatched {

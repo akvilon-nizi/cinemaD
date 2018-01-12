@@ -72,7 +72,6 @@ class SlideView: UIView {
         mainView.leadingAnchor ~= leadingAnchor + 40
         mainView.trailingAnchor ~= trailingAnchor - 40
         mainView.topAnchor ~= descriptionLabel.bottomAnchor
-//        mainView.bottomAnchor ~= bottomAnchor - 24
         mainView.heightAnchor ~= 293
 
     }

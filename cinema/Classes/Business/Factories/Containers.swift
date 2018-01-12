@@ -52,50 +52,6 @@ enum Containers {
             return configurator.configureModule()
         }
 
-        container.register(tag: RegistrationConfigurator.tag) { () -> UIViewController in
-            let configurator = RegistrationConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-
-        container.register(tag: AuthCinemaConfigurator.tag) { (isError: Bool) -> UIViewController in
-            let configurator = AuthCinemaConfigurator(isError: isError)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.authTokenManager = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-
-        container.register(tag: NewPasswordConfigurator.tag) { () -> UIViewController in
-            let configurator = NewPasswordConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-
-        container.register(tag: HelpAuthConfigurator.tag) { () -> UIViewController in
-            let configurator = HelpAuthConfigurator()
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-
-        container.register(tag: ConfirmationConfigurator.tag) { (phone: String, uid: String, isRestore: Bool) -> UIViewController in
-            let configurator = ConfirmationConfigurator(uid: uid, phone: phone, isRestore: isRestore)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            configurator.authTokenManager = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-
-        container.register(tag: PhoneConfigurator.tag) { (phone: String, uid: String) -> UIViewController in
-            let configurator = PhoneConfigurator(uid: uid, phone: phone)
-            configurator.appRouter = try managersContainer.resolve()
-            configurator.provider = try managersContainer.resolve()
-            return configurator.configureModule()
-        }
-
         container.register(tag: MainConfigurator.tag) { () -> UIViewController in
             let configurator = MainConfigurator()
             configurator.appRouter = try managersContainer.resolve()

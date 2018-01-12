@@ -226,7 +226,7 @@ extension ReviewsViewController: ReviewsViewInput {
     }
 
     func deleteComment() {
-        let indexPath = IndexPath(row: currentDeleteIndex, section: 0)
+       // let indexPath = IndexPath(row: currentDeleteIndex, section: 0)
         comments.remove(at: currentDeleteIndex)
         tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableViewRowAnimation.none)
         activityVC.isHidden = true

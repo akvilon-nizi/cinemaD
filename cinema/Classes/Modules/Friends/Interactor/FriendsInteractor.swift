@@ -33,6 +33,7 @@ extension FriendsInteractor: FriendsInteractorInput {
                     self.friendsData.friends = model.friends
                     self.getRecomendations()
                 case let .error(error as ProviderError):
+                    print(error)
                     self.output.getError()
                 default:
                     break
@@ -86,6 +87,7 @@ extension FriendsInteractor: FriendsInteractorInput {
             .subscribe { [unowned self] (response: Event<Creator>) in
                 switch response {
                 case let .next(model):
+                    print(model)
                     self.output.addedFriend()
                 case let .error(error as ProviderError):
                     if error.status == 403 {

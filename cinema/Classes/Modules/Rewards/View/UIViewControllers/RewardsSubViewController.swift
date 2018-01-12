@@ -42,7 +42,6 @@ class RewardsSubViewController: ParentViewController {
         tableView.bottomAnchor ~= view.bottomAnchor
 
         tableViewRegister()
-        //tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
 
         tableView.separatorStyle = .none
         tableView.allowsMultipleSelection = false

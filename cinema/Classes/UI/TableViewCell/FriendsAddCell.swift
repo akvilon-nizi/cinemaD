@@ -71,12 +71,8 @@ class FriendsAddCell: UITableViewCell {
     var buttonIsEnabled = true {
         didSet {
             if buttonIsEnabled {
-//                addButton.layer.borderColor = UIColor.cnmMainOrange.cgColor
-//                addButton.isEnabled = true
                 addButton.isHidden = false
             } else {
-//                addButton.layer.borderColor = UIColor.cnmGreyColor.cgColor
-//                addButton.isEnabled = false
                 addButton.isHidden = true
             }
         }

@@ -30,10 +30,6 @@ class SearchCell: UIView {
         titleLabel.text = L10n.slide1ButtonText
         titleLabel.font = UIFont.cnmFutura(size: 16)
         titleLabel.textColor = UIColor.cnmGreyDark
-//        titleLabel.textAlignment = .center
-//        titleLabel.backgroundColor = UIColor.cnmMainOrange
-//        titleLabel.layer.cornerRadius = 3.0
-//        titleLabel.layer.masksToBounds = true
 
         return titleLabel
     }()

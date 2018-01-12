@@ -64,7 +64,6 @@ class StartViewController: ParentViewController {
         contentView.leadingAnchor ~= view.leadingAnchor
         contentView.trailingAnchor ~= view.trailingAnchor
         contentView.centerYAnchor ~= view.centerYAnchor
-//        contentView.heightAnchor ~= 440
 
         addTopViews()
         addBottomViews()
@@ -72,14 +71,6 @@ class StartViewController: ParentViewController {
     }
 
     private func addTopViews() {
-
-//        let formImageView = UIImageView(image: Asset.Cinema.start.image)
-//        logoImageView.addSubview(formImageView.prepareForAutoLayout())
-//        formImageView.centerXAnchor ~= logoImageView.centerXAnchor
-//        formImageView.centerYAnchor ~= logoImageView.centerYAnchor - 10
-//        formImageView.heightAnchor ~= 38
-//        formImageView.widthAnchor ~= 43
-
         contentView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.bottomAnchor ~= contentView.centerYAnchor - 30
         titleLabel.centerXAnchor ~= contentView.centerXAnchor
@@ -98,49 +89,21 @@ class StartViewController: ParentViewController {
         vkButtom.addTarget(self, action: #selector(handleTapVkButton), for: .touchUpInside)
         let regButton = UIButton(type: .system).setTitleWithColor(title: L10n.startRegistrationText, color: UIColor.cnmMainOrange)
         regButton.addTarget(self, action: #selector(handleTapRegButton), for: .touchUpInside)
-//        let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [fbButton, vkButtom, regButton])
         let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [regButton])
         contentView.addSubview(buttonsStackView.prepareForAutoLayout())
         buttonsStackView.centerXAnchor ~= contentView.centerXAnchor
         buttonsStackView.topAnchor ~= contentView.centerYAnchor + 20
         buttonsStackView.bottomAnchor ~= contentView.bottomAnchor
-
-//        [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0];
-
-//        UserDefaults.standard.set(["de_DE"], forKey: "AppleLanguages")
-//        UserDefaults.standard.synchronize()
-
-//        let authLabel = UILabel()
-//        authLabel.textColor = .cnmGreyTextColor
-//        authLabel.font = UIFont.cnmFutura(size: 12)
-//        authLabel.text = L10n.startHaveAuthText
-//
-//        let authButton = UIButton(type: .system)
-//        authButton.addTarget(self, action: #selector(handleTapAuthButton), for: .touchUpInside)
-//        authButton.setTitle(L10n.startButtonAuthText, for: .normal)
-//        authButton.titleLabel?.font = UIFont.cnmFutura(size: 12)
-//        authButton.setTitleColor(UIColor.cnmBlueLight, for: .normal)
-//
-//        let bottomStackView = createStackView(.horizontal, .fill, .fill, 5.0, with: [authLabel, authButton])
-//        contentView.addSubview(bottomStackView.prepareForAutoLayout())
-//        bottomStackView.centerXAnchor ~= contentView.centerXAnchor
-//        bottomStackView.topAnchor ~= buttonsStackView.bottomAnchor + 21
-//        bottomStackView.bottomAnchor ~= contentView.bottomAnchor
     }
 
     // MARK: - Actions
     func handleTapRegButton() {
-//        output?.registration()
         if let vc = accountKit?.viewControllerForPhoneLogin() as? AKFViewController {
             prepareLoginViewController(vc)
             // swiftlint:disable:next force_cast
             present(vc as! UIViewController, animated: true, completion: nil)
             vc.delegate = self
         }
-    }
-
-    func handleTapAuthButton() {
-        output?.auth()
     }
 
     func handleTapFbButton() {
@@ -169,22 +132,18 @@ class StartViewController: ParentViewController {
     func prepareLoginViewController(_ loginViewController: AKFViewController) {
 
         loginViewController.delegate = self
-//        loginViewController.setAdvancedUIManager(nil)
-
-        //print(uiManager.actionBarView(for: .phoneNumberInput)?.subviews)
 
         //Costumize the them
 
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor.setColorGray(white: 120, alpha: 0.5)
 
-        loginViewController.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: UIColor.darkGray, backgroundImage: Asset.background.image, backgroundTint: .black, tintIntensity: 0.75)
-
-//        viewController.uiManager
-
-//        let uiManager = AKFUIManager(
-//        uiManager.actionBarView(for: .phoneNumberInput)?.tintColor = .red
-//        loginViewController.setAdvancedUIManager(uiManager)
+        loginViewController.uiManager = AKFSkinManager(
+            skinType: .contemporary,
+            primaryColor: UIColor.darkGray,
+            backgroundImage: Asset.background.image,
+            backgroundTint: .black,
+            tintIntensity: 0.75)
     }
 }
 
@@ -225,7 +184,6 @@ extension StartViewController: VKSdkDelegate {
     public func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
         if result.token != nil {
             print()
-//            self.loginService.loginByVK(with: result.token.accessToken!, deviceId: result.token.userId!)
         }
         print()
     }
@@ -256,9 +214,11 @@ extension StartViewController: AKFViewControllerDelegate {
     func viewController(_ viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
         output.getAuthCode(code)
     }
-    func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
+
+    private func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
         print("error \(error)")
     }
+
     func viewController(_ viewController: UIViewController!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
         print("did complete login with access token \(accessToken.tokenString) state \(state)")
     }

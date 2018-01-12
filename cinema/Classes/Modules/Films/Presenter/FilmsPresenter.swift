@@ -46,6 +46,5 @@ extension FilmsPresenter: FilmsInteractorOutput {
 
     }
     func getFilms(films: [Film]) {
-//        view.setupInitialState(films)
     }
 }

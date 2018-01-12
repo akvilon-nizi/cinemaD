@@ -7,7 +7,6 @@ import Foundation
 
 protocol FilmsRouterInput: BaseRouterInput {
     func close()
-
     func home()
     func openStart()
     func openFilm(videoId: String, name: String)

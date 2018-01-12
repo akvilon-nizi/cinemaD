@@ -16,12 +16,6 @@ enum AppRouterDestination {
     case systemAlert(data: AlertControllerData)
     case slides
     case start(isError: Bool)
-    case authCinema(isError: Bool)
-    case registration
-    case newPassword
-    case helpAuth
-    case confirmation(phone: String, uid: String, isRestore: Bool)
-    case phone(phone: String, uid: String)
     case films(films: [Film])
     case actors(id: String, name: String, role: String, persons: [PersonFromFilm])
     case film(videoID: String, name: String)
@@ -76,18 +70,6 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: SlidesConfigurator.tag)
             case let .start(isError):
                 return try factory.resolve(tag: StartConfigurator.tag, arguments: isError)
-            case let .authCinema(isError):
-                return try factory.resolve(tag: AuthCinemaConfigurator.tag, arguments: isError)
-            case .registration:
-                return try factory.resolve(tag: RegistrationConfigurator.tag)
-            case .newPassword:
-                return try factory.resolve(tag: NewPasswordConfigurator.tag)
-            case .helpAuth:
-                return try factory.resolve(tag: HelpAuthConfigurator.tag)
-            case let .confirmation(phone, uid, isRestore):
-                return try factory.resolve(tag: ConfirmationConfigurator.tag, arguments: phone, uid, isRestore)
-            case let .phone(phone, uid):
-                return try factory.resolve(tag: PhoneConfigurator.tag, arguments: phone, uid)
             case let .films(films):
                 return try factory.resolve(tag: FilmsConfigurator.tag, arguments: films)
             case let .actors(id, name, role, persons):

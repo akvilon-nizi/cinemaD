@@ -199,28 +199,17 @@ extension RewardsCell: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-//        if indexPath.row == 0 {
-//            return CGSize(width: windowWidth, height: windowWidth / 3 * 4)
-//        }
-
         return CGSize(width: 80, height: 80)
     }
 }
 
 extension RewardsCell: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //output?.openFilmID(films[indexPath.row].id, name: films[indexPath.row].name)
-    }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        print("willDisplay", indexPath.row)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        print("didDisplay", indexPath.row)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplaySupplementaryView view: UICollectionReusableView,
+                        forElementKind elementKind: String,
+                        at indexPath: IndexPath
+        ) {
         print(indexPath.row)
     }
 }

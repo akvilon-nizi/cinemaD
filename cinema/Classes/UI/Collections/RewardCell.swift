@@ -39,7 +39,6 @@ class RewardCell: UICollectionViewCell {
 
         contentView.addSubview(rewardImage.prepareForAutoLayout())
         rewardImage.pinEdgesToSuperviewEdges()
-//        rewardImage.image = Asset.Cinema.vader.image
         rewardImage.contentMode = .scaleAspectFit
     }
 

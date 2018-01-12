@@ -47,14 +47,11 @@ class NewsVideoCell: UITableViewCell {
 
     var title: String = "" {
         didSet {
-            titleLabel.text = "Какой-то заголовок"
-            infoLabel.text = "sakdflsa, sdsadf,, sdf"
-            countLabel.text = "3"
+            titleLabel.text = ""
+            infoLabel.text = ""
+            countLabel.text = ""
             newsImage.kf.indicatorType = .activity
             newsImage.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w640/cDgrrQnCmC6kqUGaFZmK7DmsE7.jpg"))
-            //            newsLabel.layoutIfNeeded()
-            //            layoutIfNeeded()
-            //            layoutSubviews()
         }
     }
 
@@ -86,7 +83,6 @@ class NewsVideoCell: UITableViewCell {
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharingOrange.image, for: .normal)
-        //shareButton.addTarget(self, action: #selector(tapSharedButton), for: .touchUpInside)
 
         newsImage.addSubview(shareButton.prepareForAutoLayout())
         shareButton.leadingAnchor ~= newsImage.leadingAnchor + 5
@@ -109,14 +105,6 @@ class NewsVideoCell: UITableViewCell {
         newsImage.addSubview(infoLabel.prepareForAutoLayout())
         infoLabel.centerYAnchor ~= shareButton.centerYAnchor
         infoLabel.leadingAnchor ~= imageTime.trailingAnchor + 9
-        //        let separatorView = UIView()
-        //        separatorView.backgroundColor = .cnmDadada
-        //        contentView.addSubview(separatorView.prepareForAutoLayout())
-        //        separatorView.bottomAnchor ~= contentView.bottomAnchor
-        //        separatorView.trailingAnchor ~= contentView.trailingAnchor - 24
-        //        separatorView.leadingAnchor ~= contentView.leadingAnchor + 24
-        //        separatorView.heightAnchor ~= 1
-        //        separatorView.topAnchor ~= mainView.bottomAnchor + 20
     }
 
     func setNews(_ news: News) {

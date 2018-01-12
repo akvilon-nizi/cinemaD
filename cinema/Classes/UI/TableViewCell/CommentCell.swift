@@ -102,21 +102,6 @@ class CommentCell: UITableViewCell {
         deleteButton.isHidden = true
         deleteButton.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
 
-//        let shareButton = UIButton()
-//        shareButton.setImage(Asset.Cinema.sharing.image, for: .normal)
-//        //shareButton.addTarget(self, action: #selector(tapSharedButton), for: .touchUpInside)
-//
-//        mainView.addSubview(shareButton.prepareForAutoLayout())
-//        shareButton.topAnchor ~= newsLabel.bottomAnchor + 20
-//        shareButton.leadingAnchor ~= mainView.leadingAnchor
-//        shareButton.widthAnchor ~= 20
-//        shareButton.heightAnchor ~= 22
-//        shareButton.bottomAnchor ~= mainView.bottomAnchor
-//
-//        mainView.addSubview(countLabel.prepareForAutoLayout())
-//        countLabel.centerYAnchor ~= shareButton.centerYAnchor
-//        countLabel.leadingAnchor ~= shareButton.trailingAnchor + 6
-
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
         contentView.addSubview(separatorView.prepareForAutoLayout())
@@ -138,12 +123,6 @@ class CommentCell: UITableViewCell {
         newsLabel.text = comment.description
         countLabel.text = String(comment.shared)
     }
-
-//    func tapSharedButton() {
-//        if let newShare = comment {
-////            delegate?.openShareSimple(news: newShare)
-//        }
-//    }
 
     func isMain() {
         deleteButton.isHidden = false

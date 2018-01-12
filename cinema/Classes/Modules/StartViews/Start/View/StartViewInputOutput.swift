@@ -20,9 +20,5 @@ protocol StartViewOutput {
 
     func authFromFbVk()
 
-    func auth()
-
-    func registration()
-
     func getAuthCode(_ authCode: String)
 }

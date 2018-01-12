@@ -106,8 +106,6 @@ extension FilmGroup: UICollectionViewDelegate {
 
 extension FilmGroup: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        collectionView.collectionViewLayout.invalidateLayout()
-//        collectionView.contentOffset.x = 0
         return films.count
     }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -38,14 +38,6 @@ extension StartPresenter: StartViewOutput {
 
     }
 
-    func auth() {
-        router.openAuth()
-    }
-
-    func registration() {
-        router.openRegistration()
-    }
-
     func getAuthCode(_ authCode: String) {
         interactor.sendData(authCode: authCode)
     }

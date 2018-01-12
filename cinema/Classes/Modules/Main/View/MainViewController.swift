@@ -52,7 +52,7 @@ class MainViewController: ParentViewController {
 
     var isChanges = false
 
-    var y: CGFloat = 0
+    var yHeight:CGFloat = 0
 
     var newsFilterArray: [NewsFilter] = [
         NewsFilter(title: L10n.mainNewsNew, isSwitch: false),
@@ -92,8 +92,6 @@ class MainViewController: ParentViewController {
         super.viewDidLoad()
         output.viewIsReady()
 
-//        automaticallyAdjustsScrollViewInsets
-
         view.bringSubview(toFront: activityVC)
         activityVC.isHidden = false
         activityVC.startAnimating()
@@ -117,11 +115,8 @@ class MainViewController: ParentViewController {
         tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.estimatedRowHeight = 44.0
-//        tableView.rowHeight = UITableViewAutomaticDimension
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-//        tableView.addSubview(refreshControl)
 
         view.addSubview(mainTabView.prepareForAutoLayout())
         let tabViewHeight: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.height < 812 ? 70 : 100
@@ -399,9 +394,6 @@ extension MainViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        if isNewsFilterOpen {
-//            return 20
-//        }
         return 0
     }
 
@@ -412,7 +404,7 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if isChanges {
-           tableView.contentOffset.y = y
+           tableView.contentOffset.y = yHeight
            isChanges = false
         }
     }
@@ -515,10 +507,9 @@ extension MainViewController: HeaderViewOpennedDelegate {
     func open(isOpen: Bool, section: Int) {
         isNewsFilterOpen = isOpen
         isChanges = true
-        y = tableView.contentOffset.y
+        yHeight = tableView.contentOffset.y
         UIView.setAnimationsEnabled(false)
         tableView.reloadData()
-        //tableView.setContentOffset(CGPoint(x: 0, y: 350), animated: true)
         UIView.setAnimationsEnabled(true)
     }
 }

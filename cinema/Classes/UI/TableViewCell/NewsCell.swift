@@ -102,21 +102,6 @@ class NewsCell: UITableViewCell {
         newsLabel.sizeToFit()
         newsLabel.bottomAnchor ~= mainView.bottomAnchor
 
-//        let shareButton = UIButton()
-//        shareButton.setImage(Asset.Cinema.sharing.image, for: .normal)
-//        //shareButton.addTarget(self, action: #selector(tapSharedButton), for: .touchUpInside)
-//
-//        mainView.addSubview(shareButton.prepareForAutoLayout())
-//        shareButton.topAnchor ~= newsLabel.bottomAnchor + 20
-//        shareButton.leadingAnchor ~= mainView.leadingAnchor
-//        shareButton.widthAnchor ~= 20
-//        shareButton.heightAnchor ~= 22
-//        shareButton.bottomAnchor ~= mainView.bottomAnchor
-//
-//        mainView.addSubview(countLabel.prepareForAutoLayout())
-//        countLabel.centerYAnchor ~= shareButton.centerYAnchor
-//        countLabel.leadingAnchor ~= shareButton.trailingAnchor + 6
-
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
         contentView.addSubview(separatorView.prepareForAutoLayout())

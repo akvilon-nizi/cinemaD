@@ -45,7 +45,11 @@ extension EditingProfilePresenter: EditingProfileInteractorOutput {
 
         output?.editeProfile(name: profile.name, imageUrl: profile.avatar)
 
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Constants.changeProfileAvatar), object: nil, userInfo: ["imageUrl": profile.avatar])
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: Constants.changeProfileAvatar),
+            object: nil,
+            userInfo: ["imageUrl": profile.avatar]
+        )
 
         router.close()
     }

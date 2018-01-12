@@ -141,7 +141,7 @@ class ActorsViewController: ParentViewController {
 
         var films: [FilmFromPerson] = []
         for film in person.films {
-            if films.filter({$0.id == film.id}).isEmpty {
+            if films.filter({ $0.id == film.id }).isEmpty {
                 films.append(film)
             }
         }

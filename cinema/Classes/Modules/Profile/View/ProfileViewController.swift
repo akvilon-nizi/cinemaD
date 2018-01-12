@@ -206,17 +206,6 @@ extension ProfileViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-//        if indexPath.section == 5 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: NewsFilterCell.reuseIdentifier, for: indexPath)
-//            if let collCel = cell as? NewsFilterCell {
-//                collCel.indexPath = indexPath
-//                collCel.title = newsFilterArray[indexPath.row].title
-//                collCel.isDidSelect = newsFilterArray[indexPath.row].isSwitch
-//            }
-//
-//            return cell
-//        }
-
         return UITableViewCell()
     }
 

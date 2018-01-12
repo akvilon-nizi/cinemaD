@@ -82,6 +82,7 @@ extension NewsInteractor: NewsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
+                    print(model)
                     self.output.deleteComment()
                 case let .error(error as ProviderError):
                     if error.status == 403 {

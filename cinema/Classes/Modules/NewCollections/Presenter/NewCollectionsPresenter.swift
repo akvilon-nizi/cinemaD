@@ -23,7 +23,6 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
 
     func viewIsReady() {
         log.verbose("NewCollections is ready")
-//        interactor.putNewColWithFilm(name: "Советские", filmsID: ["sd", "a"])
         if id.isEmpty {
             view.setCollections(collections: [])
         } else {

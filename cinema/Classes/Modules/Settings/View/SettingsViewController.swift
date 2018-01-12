@@ -88,8 +88,6 @@ class SettingsViewController: ParentViewController {
         exit.text = L10n.settingsExitButton
         exit.tag = 5
 
-//        let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, nightTheme, pushMessage, rateApp, tellFriends])
-
         let stackView = createStackView(.vertical, .fill, .fill, 0, with: [location, tellFriends, exit])
 
         view.addSubview(stackView.prepareForAutoLayout())

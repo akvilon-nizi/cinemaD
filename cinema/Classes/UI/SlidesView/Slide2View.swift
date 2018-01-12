@@ -39,12 +39,12 @@ class Slide2View: UIView {
         contentView.centerXAnchor ~= centerXAnchor
         contentView.centerYAnchor ~= centerYAnchor
 
-        let imageView = UIImageView(image:Asset.Cinema.Slides.slide2Image.image).setSize(width: 124, height: 178)
+        let imageView = UIImageView(image: Asset.Cinema.Slides.slide2Image.image).setSize(width: 124, height: 178)
         contentView.addSubview(imageView.prepareForAutoLayout())
         imageView.centerXAnchor ~= contentView.centerXAnchor - 4
         imageView.topAnchor ~= contentView.topAnchor
 
-        let playImage = UIImageView(image:Asset.Cinema.Slides.slide2Play.image).setSize(width: 29, height: 29)
+        let playImage = UIImageView(image: Asset.Cinema.Slides.slide2Play.image).setSize(width: 29, height: 29)
         imageView.addSubview(playImage.prepareForAutoLayout())
         playImage.centerXAnchor ~= imageView.centerXAnchor
         playImage.centerYAnchor ~= imageView.centerYAnchor

@@ -105,15 +105,11 @@ class FilterViewController: ParentViewController {
     func didTapSaveButton() {
         var yearsInd: [Int] = []
         var genresInd: [Int] = []
-        for i in 0..<genresOpen.count {
-            if genresOpen[i] {
-                genresInd.append(i)
-            }
+        for i in 0..<genresOpen.count where genresOpen[i] {
+            genresInd.append(i)
         }
-        for i in 0..<yearsOpen.count {
-            if yearsOpen[i] {
-                yearsInd.append(i)
-            }
+        for i in 0..<yearsOpen.count where yearsOpen[i] {
+            yearsInd.append(i)
         }
         output?.addFilter(genresInd: genresInd, yearsInd: yearsInd)
     }

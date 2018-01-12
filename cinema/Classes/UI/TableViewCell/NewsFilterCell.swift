@@ -66,12 +66,6 @@ class NewsFilterCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        //      button.isSelected = false
-        //        if selected {
-        //            button.setImage(Asset.Kinobase.settings.image, for: .normal)
-        //        } else {
-        //            button.setImage(Asset.Kinobase.settingsUnselect.image, for: .normal)
-        //        }
 
         contentView.backgroundColor = .white
     }

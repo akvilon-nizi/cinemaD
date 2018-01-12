@@ -2,10 +2,6 @@
 //  FriendsNewCell.swift
 //  cinema
 //
-//  Created by iOS on 19.12.17.
-//  Copyright © 2017 Heads and Hands. All rights reserved.
-//
-
 //
 //  FriendsNewsCell.swift
 //  cinema
@@ -16,9 +12,6 @@
 
 import UIKit
 
-//protocol FriendsListCellDelegate: class {
-//    func tapButtonChat(_ index: Int)
-//}
 
 // MARK: - FriendsListCell
 

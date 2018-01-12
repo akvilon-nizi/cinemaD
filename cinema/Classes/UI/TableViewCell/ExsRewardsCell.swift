@@ -133,11 +133,6 @@ class ExsRewardsCell: UITableViewCell {
         contentView.addSubview(nameLabel.prepareForAutoLayout())
         nameLabel.centerXAnchor ~= contentView.centerXAnchor
         nameLabel.topAnchor ~= titleLabel.bottomAnchor + 10
-        //
-        //        let stackView = createStackView(.horizontal, .center, .fillProportionally, 32, with: imagesArray)
-        //        contentView.addSubview(stackView.prepareForAutoLayout())
-        //        stackView.centerXAnchor ~= contentView.centerXAnchor
-        //        stackView.topAnchor ~= nameLabel.bottomAnchor + 17
 
         contentView.addSubview(collectionView.prepareForAutoLayout())
         collectionView.leadingAnchor ~= contentView.leadingAnchor
@@ -178,7 +173,6 @@ class ExsRewardsCell: UITableViewCell {
         separatorView.topAnchor ~= infoLabel.bottomAnchor + 16
         separatorView.bottomAnchor ~= contentView.bottomAnchor - 30
 
-        //        descriptionLabel.bottomAnchor ~= contentView.bottomAnchor
     }
 
     override func layoutSubviews() {
@@ -227,12 +221,6 @@ class ExsRewardsCell: UITableViewCell {
             forwardButton.isEnabled = false
         }
     }
-
-    //    func tiewapSharedButton() {
-    //        if let newShare = news {
-    //            delegate?.openShareSimple(news: newShare)
-    //        }
-    //    }
 
     static var reuseIdentifier: String {
         return "ExsRewardsCell"

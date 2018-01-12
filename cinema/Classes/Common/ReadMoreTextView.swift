@@ -375,6 +375,6 @@ public class ReadMoreTextView: UITextView {
 
 extension String {
     var length: Int {
-        return characters.count
+        return count
     }
 }

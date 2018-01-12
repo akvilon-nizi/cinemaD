@@ -210,7 +210,12 @@ class EditingProfileViewController: ParentViewController {
         activityVC.startAnimating()
         view.bringSubview(toFront: activityVC)
 
-        output?.saveEditing(image: isEditingAvater ? userImageView.image : nil, name: name.textTF(), oldPassword: oldPassword.textTF(), password: newPassword.textTF())
+        output?.saveEditing(
+            image: isEditingAvater ? userImageView.image : nil,
+            name: name.textTF(),
+            oldPassword: oldPassword.textTF(),
+            password: newPassword.textTF()
+        )
     }
 
     func openImagePicker(sourceType: UIImagePickerControllerSourceType) {
@@ -258,7 +263,10 @@ extension EditingProfileViewController: EditingProfileViewInput {
 
 extension EditingProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : Any]
+        ) {
 
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             userImageView.image = pickedImage

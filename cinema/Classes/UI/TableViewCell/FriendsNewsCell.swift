@@ -74,7 +74,7 @@ class FriendsNewsCell: UITableViewCell {
         let leading: CGFloat = UIWindow(frame: UIScreen.main.bounds).bounds.width == 320 ? 20 : 27
 
         contentView.addSubview(userImage.prepareForAutoLayout())
-        userImage.topAnchor ~= contentView.topAnchor 
+        userImage.topAnchor ~= contentView.topAnchor
         userImage.leadingAnchor ~= contentView.leadingAnchor + leading
 
         contentView.addSubview(titleLabel.prepareForAutoLayout())

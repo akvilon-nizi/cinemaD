@@ -45,10 +45,6 @@ class NewCollectionsConfigurator {
         let viewController = NewCollectionsViewController()
         viewController.output = presenter
         viewController.nameCollections = nameCol
-//        for film in watched {
-//            let filmVC = Film(id: film.id, name: film.name, imageUrl: film.imageUrl, rate: film.rate!)
-//            viewController.watched.append(filmVC)
-//        }
 
         presenter.interactor = interactor
         presenter.view = viewController

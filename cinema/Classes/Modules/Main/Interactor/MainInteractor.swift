@@ -49,9 +49,9 @@ extension MainInteractor: MainInteractorInput {
             .subscribe { [unowned self] (response: Event<GeoResponse>) in
                 switch response {
                 case let .next(model):
-                    print()
+                    print(model)
                 case let .error(error as ProviderError):
-                    print()
+                    print(error)
                 default:
                     break
                 }
@@ -65,7 +65,7 @@ extension MainInteractor: MainInteractorInput {
                 switch response {
                 case let .next(model):
                     self.mainData.trailers = model.trailers
-                    self.getNow() 
+                    self.getNow()
                 case let .error(error as ProviderError):
                     if error.status == 403 {
                         self.output.tokenError()

@@ -87,7 +87,10 @@ class ActorHeaderView: UIView {
 
         var infoText = ""
         if let date = person.birthday {
-            let now = Date()
+            var now = Date()
+            if let deathDate = person.deathday {
+                now = deathDate
+            }
             let localized = String.localizedStringWithFormat(String(
                 format: NSLocalizedString("%d year(s)", comment: ""),
                 locale: Locale(identifier: "RU_ru"),

@@ -119,7 +119,6 @@ extension MainVCHeader: UIScrollViewDelegate {
         }
         collectionView.isScrollEnabled = true
 
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             for colCell in self.collectionView.visibleCells {
                 if let cell = colCell as? YoutubeViewCell {
