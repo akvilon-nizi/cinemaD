@@ -25,9 +25,13 @@ class FilmGroup: UITableViewHeaderFooterView {
 
     var films: [Film] = [] {
         didSet {
-            collectionView.collectionViewLayout.invalidateLayout()
+            collectionView.delegate = nil
+            collectionView.dataSource = nil
+            collectionView.delegate = self
+            collectionView.dataSource = self
+            changeInset(inset: 30)
             collectionView.reloadData()
-            collectionView.layoutSubviews()
+            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
 
@@ -67,7 +71,7 @@ class FilmGroup: UITableViewHeaderFooterView {
         layout.minimumInteritemSpacing = 13
         layout.minimumLineSpacing = 13
         layout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.collectionViewLayout = layout
     }
     
     func gotoStart() {

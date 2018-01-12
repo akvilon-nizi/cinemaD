@@ -215,7 +215,7 @@ class WatchedVC: ParentViewController {
             UIView.animate(withDuration: 0) {
                  self.searchFilmGroup.layoutIfNeeded()
             }
-            currentHeight = fixHeight
+            currentHeight = fixHeight + 20
             setStackViewHeight()
         }
 
@@ -228,7 +228,6 @@ class WatchedVC: ParentViewController {
             tableView.reloadData()
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         }
-
     }
 
     func setStackViewHeight() {
