@@ -43,7 +43,7 @@ class RewardsCell: UITableViewCell {
 
         let nameLabel = UILabel()
 
-        nameLabel.text = "5/24"
+        nameLabel.text = " "
         nameLabel.font = UIFont.cnmFutura(size: 14)
         nameLabel.textColor = UIColor.cnmGreyDark
 

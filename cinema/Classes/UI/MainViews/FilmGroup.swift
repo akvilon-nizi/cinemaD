@@ -25,13 +25,14 @@ class FilmGroup: UITableViewHeaderFooterView {
 
     var films: [Film] = [] {
         didSet {
-            collectionView.delegate = nil
-            collectionView.dataSource = nil
-            collectionView.delegate = self
-            collectionView.dataSource = self
-            changeInset(inset: 30)
+//            collectionView.delegate = nil
+//            collectionView.dataSource = nil
+//            collectionView.delegate = self
+//            collectionView.dataSource = self
+//            changeInset(inset: 30)
+            setStackView()
             collectionView.reloadData()
-            collectionView.collectionViewLayout.invalidateLayout()
+//            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
 
@@ -39,7 +40,7 @@ class FilmGroup: UITableViewHeaderFooterView {
 
     let windowWidth = (UIWindow(frame: UIScreen.main.bounds).bounds.width - 80) / 3
 
-    fileprivate let collectionView: UICollectionView = {
+    fileprivate var collectionView: UICollectionView = {
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -73,9 +74,29 @@ class FilmGroup: UITableViewHeaderFooterView {
         layout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         collectionView.collectionViewLayout = layout
     }
-    
+
     func gotoStart() {
         collectionView.contentOffset.x = 0
+    }
+
+    func setStackView() {
+        collectionView.removeFromSuperview()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 13
+        layout.minimumLineSpacing = 13
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(FilmsCollectionCell.self, forCellWithReuseIdentifier: FilmsCollectionCell.reuseIdentifier)
+        collectionView.scrollsToTop = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .white
+        addSubview(collectionView.prepareForAutoLayout())
+        collectionView.pinEdgesToSuperviewEdges()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
     }
 }
 

@@ -121,7 +121,10 @@ class NewsCell: UITableViewCell {
         infoLabel.text = news.creator.name + ", " + news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
         userImage.kf.setImage(with: URL(string: news.creator.avatar))
         titleLabel.text = news.name
-        newsLabel.text = news.description
+        newsLabel.text = ""
+//        DispatchQueue.main.async { // in half a second...
+            self.newsLabel.attributedText = news.description.htmlAttributedString(font: self.newsLabel.font)
+//        }
         countLabel.text = String(news.shared)
     }
 

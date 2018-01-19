@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 protocol SimpleNewsHeaderDelegate: class {
     func openShareSimple()
@@ -27,7 +28,7 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
 
     private let newsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.cnmFuturaLight(size: 14)
+        label.font = UIFont.cnmFuturaLight(size: 12)
         label.textColor = UIColor.cnm3a3a3a
         label.numberOfLines = 0
         return label
@@ -58,6 +59,10 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         return imageView
     }()
 
+    var contentOffset: CGPoint = CGPoint(x: 0, y: 0)
+
+    let webView = UIWebView()
+
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -84,17 +89,27 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         titleLabel.leadingAnchor ~= mainView.leadingAnchor
         titleLabel.trailingAnchor ~= mainView.trailingAnchor
 
-        mainView.addSubview(newsLabel.prepareForAutoLayout())
-        newsLabel.topAnchor ~= titleLabel.bottomAnchor + 14
-        newsLabel.leadingAnchor ~= mainView.leadingAnchor
-        newsLabel.trailingAnchor ~= mainView.trailingAnchor
+        mainView.addSubview(webView.prepareForAutoLayout())
+        webView.topAnchor ~= titleLabel.bottomAnchor + 14
+        webView.leadingAnchor ~= mainView.leadingAnchor
+        webView.trailingAnchor ~= mainView.trailingAnchor
+        webView.delegate = self
+        webView.scrollView.delegate = self
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.isPagingEnabled = false
+        webView.scrollView.bounces = false
+        webView.scrollView.showsHorizontalScrollIndicator = false
+        webView.scrollView.backgroundColor = .white
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.backgroundColor = .white
+        webView.isOpaque = false
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharing.image, for: .normal)
         shareButton.addTarget(self, action: #selector(tapSharedButton), for: .touchUpInside)
 
         mainView.addSubview(shareButton.prepareForAutoLayout())
-        shareButton.topAnchor ~= newsLabel.bottomAnchor + 20
+        shareButton.topAnchor ~= webView.bottomAnchor + 10
         shareButton.leadingAnchor ~= mainView.leadingAnchor
         shareButton.widthAnchor ~= 20
         shareButton.heightAnchor ~= 22
@@ -118,11 +133,35 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         infoLabel.text = news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
         userImage.kf.setImage(with: URL(string: news.creator.avatar))
         titleLabel.text = news.name
-        newsLabel.text = news.description
+        webView.loadHTMLString(String(format: "<span style=\"font-family: \(newsLabel.font.fontName); font-size: \(newsLabel.font.pointSize)\">%@</span>", news.description), baseURL: nil)
+        webView.heightAnchor ~= news.description.htmlAttributedStringSize(font: newsLabel.font, inset: 65) + 15
+        contentOffset = webView.scrollView.contentOffset
         countLabel.text = String(news.shared)
     }
 
     func tapSharedButton() {
         delegate?.openShareSimple()
+    }
+}
+
+extension SimpleNewsHeader: UIWebViewDelegate {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if let link = request.url, link.absoluteString != "about:blank" {
+            UIApplication.shared.open(link, options: [:], completionHandler: nil)
+            return false
+        } else {
+            return true
+        }
+    }
+}
+
+extension SimpleNewsHeader: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.contentOffset = contentOffset
+        scrollView.zoomScale = 1
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        scrollView.zoomScale = 1
     }
 }

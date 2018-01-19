@@ -168,11 +168,10 @@
 		8138ED021FDEC62500F69628 /* AdminCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */; };
 		813D863C1FEA78CF0026327B /* StatusBarAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863B1FEA78CF0026327B /* StatusBarAlertManager.swift */; };
 		813D863E1FEA83AB0026327B /* MessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863D1FEA83AB0026327B /* MessageError.swift */; };
+		8155D309200F4682008F373F /* AccountKitStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 818911A61FF79F940074400B /* AccountKitStrings.bundle */; };
 		8159D0D320065508006CF82B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8159D0D220065508006CF82B /* Bolts.framework */; };
 		8176B3C82004CE85003943DC /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FEBEE1FB5D57200FF9AC5 /* FacebookShare.framework */; };
-		8176B3D22004FEC3003943DC /* AccountKitStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 818911A61FF79F940074400B /* AccountKitStrings.bundle */; };
 		818911A41FF79F940074400B /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8102AA891FE92D8F00416830 /* AccountKit.framework */; };
-		818911A81FF79F940074400B /* AccountKitStrings.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 818911A61FF79F940074400B /* AccountKitStrings.bundle */; };
 		8190A1681FF23FF000479388 /* MeetingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8190A1671FF23FF000479388 /* MeetingVC.swift */; };
 		81961BFF1FC7FEC10086E9FB /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961BFE1FC7FEC10086E9FB /* RewardCell.swift */; };
 		81961C011FC82A360086E9FB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81961C001FC82A360086E9FB /* ProfileHeader.swift */; };
@@ -867,7 +866,6 @@
 			files = (
 				8159D0D320065508006CF82B /* Bolts.framework in Frameworks */,
 				8176B3C82004CE85003943DC /* FacebookShare.framework in Frameworks */,
-				818911A81FF79F940074400B /* AccountKitStrings.bundle in Frameworks */,
 				818911A41FF79F940074400B /* AccountKit.framework in Frameworks */,
 				882FEBF31FB5D57300FF9AC5 /* FBSDKLoginKit.framework in Frameworks */,
 				CEB86C4C1F88AB43003F07FC /* Crashlytics.framework in Frameworks */,
@@ -2782,7 +2780,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8176B3D22004FEC3003943DC /* AccountKitStrings.bundle in Resources */,
+				8155D309200F4682008F373F /* AccountKitStrings.bundle in Resources */,
 				C03A2C431F2F31FB006E9B45 /* InfoPlist.strings in Resources */,
 				C0047BB81F20C33D0073544B /* Localizable.strings in Resources */,
 				C0B9D4771F1FB8F6009A77DD /* Assets.xcassets in Resources */,

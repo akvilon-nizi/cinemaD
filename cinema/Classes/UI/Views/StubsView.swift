@@ -24,10 +24,7 @@ class StubsView: UIView {
         super.init(frame: .zero)
 
         addSubview(contentView.prepareForAutoLayout())
-        contentView.leadingAnchor ~= leadingAnchor
-        contentView.trailingAnchor ~= trailingAnchor
-        contentView.topAnchor ~= topAnchor
-        contentView.bottomAnchor ~= bottomAnchor
+        contentView.pinEdgesToSuperviewEdges()
 
         contentView.addSubview(topLabel.prepareForAutoLayout())
         topLabel.centerXAnchor ~= contentView.centerXAnchor

@@ -7,6 +7,8 @@ import Foundation
 
 protocol StartInteractorInput {
     func sendData(authCode: String)
+    func authVK(_ authToken: String)
+    func authFB(_ authToken: String)
 }
 
 protocol StartInteractorOutput: class {

@@ -79,15 +79,6 @@ class NewsViewController: ParentViewController {
             myID = profile.id
         }
 
-//        let homeButton = UIButton()
-//        homeButton.setImage(Asset.Cinema.home.image, for: .normal)
-//        homeButton.addTarget(self, action: #selector(didTapHomeButton), for: .touchUpInside)
-//        homeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
-//        frame = homeButton.frame
-//        frame.size = CGSize(width: 30, height: 100)
-//        homeButton.frame = frame
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: homeButton)
-
         titleViewLabel.text = L10n.newsTitleText
         titleViewLabel.font = UIFont.cnmFutura(size: 20)
 

@@ -89,7 +89,7 @@ class StartViewController: ParentViewController {
         vkButtom.addTarget(self, action: #selector(handleTapVkButton), for: .touchUpInside)
         let regButton = UIButton(type: .system).setTitleWithColor(title: L10n.startRegistrationText, color: UIColor.cnmMainOrange)
         regButton.addTarget(self, action: #selector(handleTapRegButton), for: .touchUpInside)
-        let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [regButton])
+        let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [fbButton, vkButtom, regButton])
         contentView.addSubview(buttonsStackView.prepareForAutoLayout())
         buttonsStackView.centerXAnchor ~= contentView.centerXAnchor
         buttonsStackView.topAnchor ~= contentView.centerYAnchor + 20
@@ -107,16 +107,31 @@ class StartViewController: ParentViewController {
     }
 
     func handleTapFbButton() {
-        let loginManager = LoginManager()
-        loginManager.logOut()
-        loginManager.logIn(readPermissions: [ .publicProfile], viewController: self) { loginResult in
-            switch loginResult {
-            case .failed(let error):
-                print(error)
-            case .cancelled:
-                print("User cancelled login.")
-            case .success(let grantedPermissions, let declinedPermissions, let token):
-                print("User cancelled login.")
+//        let loginManager = LoginManager()
+//        loginManager.logOut()
+//        loginManager.logIn(readPermissions: [ .publicProfile], viewController: self) { loginResult in
+//            switch loginResult {
+//            case .failed(let error):
+//                print(error)
+//            case .cancelled:
+//                print("User cancelled login.")
+//            case .success(let grantedPermissions, let declinedPermissions, let token):
+//                print("User cancelled login.")
+//            }
+//        }
+
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            if (error == nil) {
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                if fbloginresult.grantedPermissions != nil {
+                    if(fbloginresult.grantedPermissions.contains("email"))
+                    {
+                        self.output.authFromFb(FBSDKAccessToken.current().tokenString)
+                    }
+                }
+            } else {
+                print("fb server Fail!")
             }
         }
     }
@@ -182,8 +197,8 @@ extension StartViewController: VKSdkDelegate {
      @param result contains new token or error, retrieved after VK authorization.
      */
     public func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        if result.token != nil {
-            print()
+        if let token = result.token {
+            output.authFromVk(token.accessToken)
         }
         print()
     }
@@ -193,7 +208,7 @@ extension StartViewController: VKSdkDelegate {
 }
 
 extension StartViewController: VKSdkUIDelegate {
-    public    func vkSdkTokenHasExpired(expiredToken: VKAccessToken) {
+    public func vkSdkTokenHasExpired(expiredToken: VKAccessToken) {
         print()
     }
     //    func vkSdkUserDeniedAccess(authorizationError: VKError) {

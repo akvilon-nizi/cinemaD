@@ -66,6 +66,8 @@ enum FoodleTarget {
     case adwardsGeo
     case postAdwardsGeo(lat: Double, log: Double)
     case logout
+    case authFB(token: String)
+    case authVK(token: String)
 
     var isRequiredAuth: Bool {
         switch self {
@@ -196,6 +198,10 @@ extension FoodleTarget: TargetType {
             return "me/awards/geo"
         case .logout:
             return "logout"
+        case .authFB:
+            return "side_auth/fb"
+        case .authVK:
+            return "side_auth/vk"
         }
     }
 
@@ -319,6 +325,10 @@ extension FoodleTarget: TargetType {
             parameters["lat"] = lat
             parameters["lon"] = lon
             return parameters
+        case let .authFB(token):
+            return ["auth_token": token]
+        case let .authVK(token):
+            return ["auth_token": token]
         default:
             return nil
         }

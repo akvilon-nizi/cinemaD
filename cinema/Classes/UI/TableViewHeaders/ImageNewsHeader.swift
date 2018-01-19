@@ -54,6 +54,10 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width
 
+    let webView = UIWebView()
+
+    var contentOffset: CGPoint = CGPoint(x: 0, y: 0)
+
     var image: UIImage?
 
     required init(coder aDecoder: NSCoder) {
@@ -105,10 +109,20 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         titleLabel.bottomAnchor ~= shareButton.topAnchor - 9
         titleLabel.leadingAnchor ~= shareButton.leadingAnchor
 
-        mainView.addSubview(newsLabel.prepareForAutoLayout())
-        newsLabel.topAnchor ~= newsImage.bottomAnchor + 35
-        newsLabel.leadingAnchor ~= mainView.leadingAnchor + 35
-        newsLabel.trailingAnchor ~= mainView.trailingAnchor - 35
+        mainView.addSubview(webView.prepareForAutoLayout())
+        webView.topAnchor ~= newsImage.bottomAnchor + 14
+        webView.leadingAnchor ~= mainView.leadingAnchor + 35
+        webView.trailingAnchor ~= mainView.trailingAnchor - 35
+        webView.delegate = self
+        webView.scrollView.delegate = self
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.isPagingEnabled = false
+        webView.scrollView.bounces = false
+        webView.scrollView.showsHorizontalScrollIndicator = false
+        webView.scrollView.backgroundColor = .white
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.backgroundColor = .white
+        webView.isOpaque = false
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
@@ -117,14 +131,17 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         separatorView.trailingAnchor ~= contentView.trailingAnchor - 24
         separatorView.leadingAnchor ~= contentView.leadingAnchor + 24
         separatorView.heightAnchor ~= 1
-        separatorView.topAnchor ~= newsLabel.bottomAnchor + 24
+        separatorView.topAnchor ~= webView.bottomAnchor + 24
     }
 
     func setNews(_ news: News) {
         infoLabel.text = news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
         titleLabel.text = news.name
         countLabel.text = String(news.shared)
-        newsLabel.text = news.description
+        webView.loadHTMLString(String(format: "<span style=\"font-family: \(newsLabel.font.fontName); font-size: \(newsLabel.font.pointSize)\">%@</span>", news.description), baseURL: nil)
+        webView.heightAnchor ~= news.description.htmlAttributedStringSize(font: newsLabel.font, inset: 70) + 15
+        print(webView.scrollView.contentSize)
+        contentOffset = webView.scrollView.contentOffset
 
         var imageLink: String = ""
 
@@ -171,5 +188,39 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
 
     func tapSharedButton() {
         delegate?.openShare(image: self.image)
+    }
+}
+
+extension ImageNewsHeader: UIWebViewDelegate {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if let link = request.url, link.absoluteString != "about:blank" {
+            UIApplication.shared.open(link, options: [:], completionHandler: nil)
+            return false
+        } else {
+            print("assa", webView.scrollView.contentSize.height)
+            return true
+        }
+    }
+
+//    func webViewDidFinishLoad(_ webView: UIWebView) {
+////        print("assa", webView.scrollView.contentSize.height)
+////        webView.sizeThatFits(CGSize(width: UIWindow(frame: UIScreen.main.bounds).frame.width - 70, height: 2000))
+////        self.webView.heightAnchor ~= webView.scrollView.contentSize.height
+////        UIView.animate(withDuration: 0) {
+////            self.webView.layoutIfNeeded()
+////            self.contentView.layoutSubviews()
+////            self.contentView.layoutIfNeeded()
+////        }
+//    }
+}
+
+extension ImageNewsHeader: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.contentOffset = contentOffset
+        scrollView.zoomScale = 1
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        scrollView.zoomScale = 1
     }
 }

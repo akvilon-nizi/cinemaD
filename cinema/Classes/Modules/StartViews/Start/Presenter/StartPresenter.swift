@@ -30,12 +30,12 @@ extension StartPresenter: StartViewOutput {
         }
     }
 
-    func authFromFb() {
-
+    func authFromFb(_ authToken: String) {
+        interactor.authFB(authToken)
     }
 
-    func authFromFbVk() {
-
+    func authFromVk(_ authToken: String) {
+        interactor.authVK(authToken)
     }
 
     func getAuthCode(_ authCode: String) {
