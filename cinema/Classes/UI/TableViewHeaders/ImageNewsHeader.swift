@@ -9,10 +9,11 @@
 import UIKit
 import ImageSlideshow
 import Kingfisher
-//import AVFoundation
+import RxSwift
 
 protocol ImageNewsHeaderDelegate: class {
     func openShare(image: UIImage?)
+    func reloadHeader()
 }
 
 class ImageNewsHeader: UITableViewHeaderFooterView {
@@ -60,6 +61,12 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
 
     var image: UIImage?
 
+    let disposeBag = DisposeBag()
+
+    let mainView = UIView()
+
+    var webViewHight: NSLayoutConstraint?
+
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -69,15 +76,14 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
 
         contentView.backgroundColor = .white
 
-        let mainView = UIView()
         contentView.addSubview(mainView.prepareForAutoLayout())
         mainView.topAnchor ~= contentView.topAnchor + 5
         mainView.leadingAnchor ~= contentView.leadingAnchor
         mainView.trailingAnchor ~= contentView.trailingAnchor
+        mainView.heightAnchor ~= windowWidth / 375 * 131
 
         mainView.addSubview(newsImage.prepareForAutoLayout())
         newsImage.pinEdgesToSuperviewEdges()
-        newsImage.heightAnchor ~= windowWidth / 375 * 131
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharingOrange.image, for: .normal)
@@ -109,8 +115,8 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         titleLabel.bottomAnchor ~= shareButton.topAnchor - 9
         titleLabel.leadingAnchor ~= shareButton.leadingAnchor
 
-        mainView.addSubview(webView.prepareForAutoLayout())
-        webView.topAnchor ~= newsImage.bottomAnchor + 14
+        contentView.addSubview(webView.prepareForAutoLayout())
+        webView.topAnchor ~= mainView.bottomAnchor + 14
         webView.leadingAnchor ~= mainView.leadingAnchor + 35
         webView.trailingAnchor ~= mainView.trailingAnchor - 35
         webView.delegate = self
@@ -123,6 +129,8 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.backgroundColor = .white
         webView.isOpaque = false
+        webViewHight = webView.heightAnchor.constraint(equalToConstant: 1)
+        webViewHight?.isActive = true
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
@@ -139,8 +147,6 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         titleLabel.text = news.name
         countLabel.text = String(news.shared)
         webView.loadHTMLString(String(format: "<span style=\"font-family: \(newsLabel.font.fontName); font-size: \(newsLabel.font.pointSize)\">%@</span>", news.description), baseURL: nil)
-        webView.heightAnchor ~= news.description.htmlAttributedStringSize(font: newsLabel.font, inset: 70) + 15
-        print(webView.scrollView.contentSize)
         contentOffset = webView.scrollView.contentOffset
 
         var imageLink: String = ""
@@ -197,21 +203,14 @@ extension ImageNewsHeader: UIWebViewDelegate {
             UIApplication.shared.open(link, options: [:], completionHandler: nil)
             return false
         } else {
-            print("assa", webView.scrollView.contentSize.height)
             return true
         }
     }
 
-//    func webViewDidFinishLoad(_ webView: UIWebView) {
-////        print("assa", webView.scrollView.contentSize.height)
-////        webView.sizeThatFits(CGSize(width: UIWindow(frame: UIScreen.main.bounds).frame.width - 70, height: 2000))
-////        self.webView.heightAnchor ~= webView.scrollView.contentSize.height
-////        UIView.animate(withDuration: 0) {
-////            self.webView.layoutIfNeeded()
-////            self.contentView.layoutSubviews()
-////            self.contentView.layoutIfNeeded()
-////        }
-//    }
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        self.webViewHight?.constant = webView.scrollView.contentSize.height
+        delegate?.reloadHeader()
+    }
 }
 
 extension ImageNewsHeader: UIScrollViewDelegate {

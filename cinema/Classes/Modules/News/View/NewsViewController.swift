@@ -42,6 +42,12 @@ class NewsViewController: ParentViewController {
 
     var profileName: String?
 
+    var imageNewsHeader: ImageNewsHeader?
+
+    var simpleNewsHeader: SimpleNewsHeader?
+
+    var videoNewsHeader: VideoNewsHeader?
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -256,10 +262,18 @@ extension NewsViewController: ImageNewsHeaderDelegate {
     func openShare(image: UIImage?) {
         shareNews(imageShare: image)
     }
+
+    func reloadHeader() {
+        tableView.reloadData()
+    }
 }
 
 // MARK: - SimpleNewsHeaderDelegate
 extension NewsViewController: SimpleNewsHeaderDelegate {
+    func reloadHeaderSimpler() {
+        tableView.reloadData()
+    }
+
     func openShareSimple() {
         shareNews(imageShare: nil)
     }
@@ -276,20 +290,26 @@ extension NewsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let newsA = newsData.news {
             if newsType == .common {
-                let view = SimpleNewsHeader()
-                view.setNews(newsA)
-                view.delegate = self
-                return view
+                if simpleNewsHeader == nil {
+                    simpleNewsHeader = SimpleNewsHeader()
+                    simpleNewsHeader?.setNews(newsA)
+                    simpleNewsHeader?.delegate = self
+                }
+                return simpleNewsHeader
             } else if newsType == .video {
-                let view = VideoNewsHeader()
-                view.setNews(newsA)
-                view.delegate = self
-                return view
+                if videoNewsHeader == nil {
+                    videoNewsHeader = VideoNewsHeader()
+                    videoNewsHeader?.setNews(newsA)
+                    videoNewsHeader?.delegate = self
+                }
+                return videoNewsHeader
             } else {
-                let view = ImageNewsHeader()
-                view.setNews(newsA)
-                view.delegate = self
-                return view
+                if imageNewsHeader == nil {
+                    imageNewsHeader = ImageNewsHeader()
+                    imageNewsHeader?.setNews(newsA)
+                    imageNewsHeader?.delegate = self
+                }
+                return imageNewsHeader
             }
         }
         return nil

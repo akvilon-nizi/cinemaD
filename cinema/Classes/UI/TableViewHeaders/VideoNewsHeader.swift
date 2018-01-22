@@ -56,6 +56,8 @@ class VideoNewsHeader: UITableViewHeaderFooterView {
 
     var image: UIImage?
 
+    var webViewHight: NSLayoutConstraint?
+
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -124,6 +126,8 @@ class VideoNewsHeader: UITableViewHeaderFooterView {
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.backgroundColor = .white
         webView.isOpaque = false
+        webViewHight = webView.heightAnchor.constraint(equalToConstant: 1)
+        webViewHight?.isActive = true
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
@@ -201,16 +205,10 @@ extension VideoNewsHeader: UIWebViewDelegate {
         }
     }
 
-    //    func webViewDidFinishLoad(_ webView: UIWebView) {
-    //
-    //        webView.sizeThatFits(CGSize(width: UIWindow(frame: UIScreen.main.bounds).frame.width - 70, height: 2000))
-    //        self.webView.heightAnchor ~= webView.scrollView.contentSize.height
-    //        UIView.animate(withDuration: 0) {
-    //            self.webView.layoutIfNeeded()
-    //            self.contentView.layoutSubviews()
-    //            self.contentView.layoutIfNeeded()
-    //        }
-    //    }
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        self.webViewHight?.constant = webView.scrollView.contentSize.height
+        delegate?.reloadHeader()
+    }
 }
 
 extension VideoNewsHeader: UIScrollViewDelegate {

@@ -8,9 +8,11 @@
 
 import UIKit
 import Foundation
+import RxSwift
 
 protocol SimpleNewsHeaderDelegate: class {
     func openShareSimple()
+    func reloadHeaderSimpler()
 }
 
 class SimpleNewsHeader: UITableViewHeaderFooterView {
@@ -59,9 +61,13 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         return imageView
     }()
 
+    let disposeBag = DisposeBag()
+
     var contentOffset: CGPoint = CGPoint(x: 0, y: 0)
 
     let webView = UIWebView()
+
+    var webViewHight: NSLayoutConstraint?
 
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -103,6 +109,8 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.backgroundColor = .white
         webView.isOpaque = false
+        webViewHight = webView.heightAnchor.constraint(equalToConstant: 1)
+        webViewHight?.isActive = true
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharing.image, for: .normal)
@@ -134,7 +142,6 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
         userImage.kf.setImage(with: URL(string: news.creator.avatar))
         titleLabel.text = news.name
         webView.loadHTMLString(String(format: "<span style=\"font-family: \(newsLabel.font.fontName); font-size: \(newsLabel.font.pointSize)\">%@</span>", news.description), baseURL: nil)
-        webView.heightAnchor ~= news.description.htmlAttributedStringSize(font: newsLabel.font, inset: 65) + 15
         contentOffset = webView.scrollView.contentOffset
         countLabel.text = String(news.shared)
     }
@@ -152,6 +159,11 @@ extension SimpleNewsHeader: UIWebViewDelegate {
         } else {
             return true
         }
+    }
+
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        webViewHight?.constant = webView.scrollView.contentSize.height
+        delegate?.reloadHeaderSimpler()
     }
 }
 
