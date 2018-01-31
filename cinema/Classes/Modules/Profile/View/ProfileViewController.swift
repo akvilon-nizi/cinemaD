@@ -119,10 +119,13 @@ extension ProfileViewController: ProfileViewInput {
 
     func getProfile(_ profile: ProfileModel) {
         profileHeader.reloadData(profile)
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.profile = profile
+        }
     }
 
     func getData(_ films: [FilmCollections]) {
-        
+
         self.films = []
 
         refreshControl.endRefreshing()

@@ -21,7 +21,7 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 20)
         label.textColor = .white
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         return label
     }()
 
@@ -114,6 +114,7 @@ class ImageNewsHeader: UITableViewHeaderFooterView {
         newsImage.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.bottomAnchor ~= shareButton.topAnchor - 9
         titleLabel.leadingAnchor ~= shareButton.leadingAnchor
+        titleLabel.trailingAnchor ~= newsImage.trailingAnchor - 10
 
         contentView.addSubview(webView.prepareForAutoLayout())
         webView.topAnchor ~= mainView.bottomAnchor + 14

@@ -150,7 +150,11 @@ class NewsViewController: ParentViewController {
     func shareNews(imageShare: UIImage?) {
         if let newsShare = newsData.news {
             let vkShare = VKShareDialogController()
-            let string: String = newsShare.name + ". " + newsShare.description
+            var desription = ""
+            if let descr = newsShare.description.htmlAttributedString(font: UIFont.cnmFutura(size: 14))?.string {
+                desription = descr
+            }
+            let string: String = newsShare.name + ". " + desription
             vkShare.text = string
             if let image = imageShare {
                 let img = VKUploadImage(image: image, andParams: nil)

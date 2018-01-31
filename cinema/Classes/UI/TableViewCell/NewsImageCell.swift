@@ -24,7 +24,7 @@ class NewsImageCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
         label.textColor = .white
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -64,7 +64,7 @@ class NewsImageCell: UITableViewCell {
         }
     }
 
-    let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 58
+    let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 59
 
     required init?(coder _: NSCoder) {
         fatalError("NSCoding not supported")
@@ -77,18 +77,19 @@ class NewsImageCell: UITableViewCell {
 
         contentView.backgroundColor = .white
 
-        autoresizesSubviews = true
+        contentView.heightAnchor ~= windowWidth / 320 * 131 + 10    
 
         let mainView = UIView()
         contentView.addSubview(mainView.prepareForAutoLayout())
         mainView.topAnchor ~= contentView.topAnchor + 5
         mainView.leadingAnchor ~= contentView.leadingAnchor + 29
         mainView.trailingAnchor ~= contentView.trailingAnchor - 30
-        mainView.bottomAnchor ~= contentView.bottomAnchor - 5
+       // mainView.bottomAnchor ~= contentView.bottomAnchor - 5
 
         mainView.addSubview(newsImage.prepareForAutoLayout())
         newsImage.pinEdgesToSuperviewEdges()
         newsImage.heightAnchor ~= windowWidth / 320 * 131
+        newsImage.kf.indicatorType = .activity
 
         let shareButton = UIButton()
         shareButton.setImage(Asset.Cinema.sharingOrange.image, for: .normal)
@@ -108,23 +109,27 @@ class NewsImageCell: UITableViewCell {
         mainView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.bottomAnchor ~= imageTime.topAnchor - 9
         titleLabel.leadingAnchor ~= imageTime.leadingAnchor
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        titleLabel.trailingAnchor ~= mainView.trailingAnchor - 10
     }
 
     func setNews(_ news: News) {
-        self.news = news
-        infoLabel.text = news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
-        titleLabel.text = news.name
-        countLabel.text = String(news.shared)
-        if let cover = news.cover {
-            newsImage.kf.setImage(with: URL(string: cover))
-        }
-        if let imageUrl = news.imageUrl {
-            newsImage.kf.setImage(with: URL(string: imageUrl))
-        }
+
+//        DispatchQueue.global(qos: .background).async {
+//            //let attrString = news.description.htmlAttributedString(font: assa!)
+            DispatchQueue.main.async {
+                if let cover = news.cover {
+                    self.newsImage.kf.setImage(with: URL(string: cover))
+                }
+                if let imageUrl = news.imageUrl {
+                    self.newsImage.kf.setImage(with: URL(string: imageUrl))
+                }
+                self.news = news
+                self.infoLabel.text = news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
+                self.titleLabel.text = news.name
+                self.countLabel.text = String(news.shared)
+            }
+//        }
+
     }
 
     func tapSharedButtons() {

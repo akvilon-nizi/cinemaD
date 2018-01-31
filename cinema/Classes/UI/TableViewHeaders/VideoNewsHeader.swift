@@ -16,7 +16,7 @@ class VideoNewsHeader: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 20)
         label.textColor = .white
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         return label
     }()
 
@@ -106,6 +106,7 @@ class VideoNewsHeader: UITableViewHeaderFooterView {
         newsImage.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.bottomAnchor ~= shareButton.topAnchor - 9
         titleLabel.leadingAnchor ~= shareButton.leadingAnchor
+        titleLabel.trailingAnchor ~= shareButton.trailingAnchor - 10
 
 //        mainView.addSubview(newsLabel.prepareForAutoLayout())
 //        newsLabel.topAnchor ~= newsImage.bottomAnchor + 35
@@ -144,7 +145,6 @@ class VideoNewsHeader: UITableViewHeaderFooterView {
         titleLabel.text = news.name
         countLabel.text = String(news.shared)
         webView.loadHTMLString(String(format: "<span style=\"font-family: \(newsLabel.font.fontName); font-size: \(newsLabel.font.pointSize)\">%@</span>", news.description), baseURL: nil)
-        webView.heightAnchor ~= news.description.htmlAttributedStringSize(font: newsLabel.font, inset: 75) + 15
         contentOffset = webView.scrollView.contentOffset
 
         var imageLink: String = ""

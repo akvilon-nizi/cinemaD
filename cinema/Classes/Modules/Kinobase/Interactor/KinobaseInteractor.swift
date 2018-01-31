@@ -13,7 +13,7 @@ class KinobaseInteractor {
     var provider: RxMoyaProvider<FoodleTarget>!
     fileprivate var disposeBag = DisposeBag()
     var kbData = KinobaseData()
-
+    var query = ""
 }
 
 // MARK: - KinobaseInteractorInput
@@ -136,14 +136,20 @@ extension KinobaseInteractor: KinobaseInteractorInput {
     }
 
     func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {
-        disposeBag = DisposeBag()
+         self.query = query
+//        provider.manager.session.getAllTasks { tasks in
+//            tasks.forEach { $0.cancel() }
+//            self.disposeBag = DisposeBag()
+//        }
         if query.count >= 1 {
             provider.requestModel(.globalSearch(query: query))
                 .subscribe { [unowned self] (response: Event<AllFilms>) in
                     switch response {
                     case let .next(model):
-                        self.kbData.filmsSearch = model.films
-                        self.output.getSearch(self.kbData, isWatched: isWatched)
+                        if self.query == query {
+                            self.kbData.filmsSearch = model.films
+                            self.output.getSearch(self.kbData, isWatched: isWatched)
+                        }
                     case let .error(error as ProviderError):
                         if error.status == 403 {
                             self.output.tokenError()
@@ -157,6 +163,8 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     }
                 }
                 .addDisposableTo(disposeBag)
+        } else {
+            disposeBag = DisposeBag()
         }
     }
 }

@@ -146,10 +146,20 @@ extension AdminCollectionViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            let inset: CGFloat = colInfo == "" ? 15 : 60
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 70, height: 0))
+            label.font = UIFont.cnmFuturaLight(size: 14)
+            label.numberOfLines = 0
+            label.text = colInfo
+            label.lineBreakMode = .byWordWrapping
+            label.sizeToFit()
+
+            print(colInfo.height(withConstrainedWidth: view.frame.width - 70,
+                                 font: UIFont.cnmFuturaLight(size: 14)))
+
+            let inset: CGFloat = colInfo == "" ? 25 : 50
             return CGSize(
-                width: view.frame.width - 55,
-                height: (view.frame.width - 55) / 320 * 131 + colInfo.height(withConstrainedWidth: view.frame.width - 70,
+                width: view.frame.width,
+                height: (view.frame.width - 55) / 325 * 131 + colInfo.height(withConstrainedWidth: view.frame.width - 70,
                                                                              font: UIFont.cnmFuturaLight(size: 14) ) + inset)
         }
         return CGSize(width: windowWidth, height: windowWidth / 800 * 1_185)

@@ -88,17 +88,23 @@ class ActorHeaderView: UIView {
         var infoText = ""
         if let date = person.birthday {
             var now = Date()
+            var dateDeath: String = ""
             if let deathDate = person.deathday {
                 now = deathDate
+                dateDeath = " - "
+                    + deathDate.monthMedium
+                    + " "
+                    + deathDate.years
+                    + L10n.personsYearsText
             }
             let localized = String.localizedStringWithFormat(String(
                 format: NSLocalizedString("%d year(s)", comment: ""),
                 locale: Locale(identifier: "RU_ru"),
                 Calendar.current.dateComponents([.year], from: date, to: now).year!))
-            infoText = date.monthMedium
-                + " "
+            infoText = date.monthMedium + " "
                 + date.years
-                + L10n.personsYearsText + ", " + localized
+                + L10n.personsYearsText
+                + dateDeath + ", " + localized
         }
 
         if let place = person.birthPlace, place != "" {

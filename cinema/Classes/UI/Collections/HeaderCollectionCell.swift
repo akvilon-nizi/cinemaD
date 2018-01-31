@@ -82,9 +82,9 @@ class HeaderCollectionCell: UICollectionViewCell {
         contentView.addSubview(newsLabel.prepareForAutoLayout())
         layout = newsLabel.topAnchor.constraint(equalTo: rewardImage.bottomAnchor)
         layout?.isActive = true
-        layout?.constant = -10
-        newsLabel.leadingAnchor ~= rewardImage.leadingAnchor + 35
-        newsLabel.trailingAnchor ~= rewardImage.trailingAnchor - 35
+        layout?.constant = 15
+        newsLabel.leadingAnchor ~= contentView.leadingAnchor + 35
+        newsLabel.trailingAnchor ~= contentView.trailingAnchor - 35
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
@@ -100,12 +100,12 @@ class HeaderCollectionCell: UICollectionViewCell {
         linkUrlImage = imageUrl
         self.title = title
         self.text = text
-        if text != "" {
-            layout?.constant = 35
-            UIView.animate(withDuration: 0) {
-                self.layoutIfNeeded()
-            }
-        }
+//        if text != "" {
+//            layout?.constant = 35
+//            UIView.animate(withDuration: 0) {
+//                self.layoutIfNeeded()
+//            }
+//        }
     }
 
     static var reuseIdentifier: String {

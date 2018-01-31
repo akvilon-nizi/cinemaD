@@ -166,6 +166,7 @@
 		8138ECFE1FDEB4D100F69628 /* FriendsAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECFD1FDEB4D100F69628 /* FriendsAddCell.swift */; };
 		8138ED001FDEB60C00F69628 /* AddFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ECFF1FDEB60C00F69628 /* AddFriendsVC.swift */; };
 		8138ED021FDEC62500F69628 /* AdminCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138ED011FDEC62500F69628 /* AdminCollectionCell.swift */; };
+		813B199B20162DF600DD173A /* ProviderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4E11B5EB6237E3B466875 /* ProviderError.swift */; };
 		813D863C1FEA78CF0026327B /* StatusBarAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863B1FEA78CF0026327B /* StatusBarAlertManager.swift */; };
 		813D863E1FEA83AB0026327B /* MessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D863D1FEA83AB0026327B /* MessageError.swift */; };
 		8155D309200F4682008F373F /* AccountKitStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 818911A61FF79F940074400B /* AccountKitStrings.bundle */; };
@@ -2906,6 +2907,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				813B199B20162DF600DD173A /* ProviderError.swift in Sources */,
 				819933231FD18E7E00D1FFE7 /* YoutubeViewCell.swift in Sources */,
 				C04B61E71F20EF050042AC92 /* cinemaTests.swift in Sources */,
 			);
@@ -3374,8 +3376,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Vendor/Bugsee",
-					"$(PROJECT_DIR)/Vendor/GoogleMaps",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";
@@ -3451,8 +3451,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Vendor/Bugsee",
-					"$(PROJECT_DIR)/Vendor/GoogleMaps",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";
@@ -3669,8 +3667,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Vendor/Bugsee",
-					"$(PROJECT_DIR)/Vendor/GoogleMaps",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";
@@ -3698,8 +3694,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Vendor/Bugsee",
-					"$(PROJECT_DIR)/Vendor/GoogleMaps",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/cinema/Resources/Info.plist";

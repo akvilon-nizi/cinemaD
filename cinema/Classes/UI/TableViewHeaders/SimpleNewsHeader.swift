@@ -30,7 +30,7 @@ class SimpleNewsHeader: UITableViewHeaderFooterView {
 
     private let newsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.cnmFuturaLight(size: 12)
+        label.font = UIFont.cnmFuturaLight(size: 14)
         label.textColor = UIColor.cnm3a3a3a
         label.numberOfLines = 0
         return label

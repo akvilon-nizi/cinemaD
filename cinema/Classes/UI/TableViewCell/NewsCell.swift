@@ -24,7 +24,7 @@ class NewsCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.cnmFutura(size: 19)
         label.textColor = UIColor.cnmBlueLight
-        label.numberOfLines = 2
+        label.numberOfLines = 1
         return label
     }()
 
@@ -63,6 +63,10 @@ class NewsCell: UITableViewCell {
         return imageView
     }()
 
+    private var contentHeight: NSLayoutConstraint?
+
+    private let width = UIWindow(frame: UIScreen.main.bounds).frame.width - 61
+
     required init?(coder _: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -74,7 +78,8 @@ class NewsCell: UITableViewCell {
 
         contentView.backgroundColor = .white
 
-        autoresizesSubviews = true
+        contentHeight = contentView.heightAnchor.constraint(equalToConstant: 191)
+        contentHeight?.isActive = true
 
         let mainView = UIView()
         contentView.addSubview(mainView.prepareForAutoLayout())
@@ -99,7 +104,6 @@ class NewsCell: UITableViewCell {
         newsLabel.topAnchor ~= titleLabel.bottomAnchor + 14
         newsLabel.leadingAnchor ~= mainView.leadingAnchor
         newsLabel.trailingAnchor ~= mainView.trailingAnchor
-        newsLabel.sizeToFit()
         newsLabel.bottomAnchor ~= mainView.bottomAnchor
 
         let separatorView = UIView()
@@ -109,23 +113,31 @@ class NewsCell: UITableViewCell {
         separatorView.trailingAnchor ~= contentView.trailingAnchor - 24
         separatorView.leadingAnchor ~= contentView.leadingAnchor + 24
         separatorView.heightAnchor ~= 1
-        separatorView.topAnchor ~= mainView.bottomAnchor + 20
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        //separatorView.topAnchor ~= mainView.bottomAnchor + 20
     }
 
     func setNews(_ news: News) {
-        self.news = news
-        infoLabel.text = news.creator.name + ", " + news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
-        userImage.kf.setImage(with: URL(string: news.creator.avatar))
-        titleLabel.text = news.name
-        newsLabel.text = ""
-//        DispatchQueue.main.async { // in half a second...
-            self.newsLabel.attributedText = news.description.htmlAttributedString(font: self.newsLabel.font)
-//        }
-        countLabel.text = String(news.shared)
+
+        //newsLabel.text = news.description
+
+        let assa = self.newsLabel.font
+//        self.contentHeight?.constant = 191 - 25 + news.name.heightWithConstrainedWidth(width: width, font: self.titleLabel.font)
+//        UIView.animate(withDuration: 0, animations: {
+//            self.contentView.layoutIfNeeded()
+//            self.layoutIfNeeded()
+//        })
+        DispatchQueue.global(qos: .background).async {
+            let attrString = news.description.htmlAttributedString(font: assa!)
+            DispatchQueue.main.async {
+                self.newsLabel.attributedText = attrString
+                //self.newsLabel.text = "dsffds"
+                self.news = news
+                self.infoLabel.text = news.creator.name + ", " + news.createdAt.hourMinutes + ", " + news.createdAt.monthMedium
+                self.userImage.kf.setImage(with: URL(string: news.creator.avatar))
+                self.titleLabel.text = news.name
+                self.countLabel.text = String(news.shared)
+            }
+        }
     }
 
     func tapSharedButton() {
@@ -136,5 +148,13 @@ class NewsCell: UITableViewCell {
 
     static var reuseIdentifier: String {
         return "NewsCell"
+    }
+}
+
+extension String {
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSFontAttributeName: font], context: nil)
+        return boundingBox.height
     }
 }
