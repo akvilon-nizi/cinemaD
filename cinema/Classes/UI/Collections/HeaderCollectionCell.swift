@@ -77,7 +77,8 @@ class HeaderCollectionCell: UICollectionViewCell {
         contentView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.centerXAnchor ~= rewardImage.centerXAnchor
         titleLabel.centerYAnchor ~= rewardImage.centerYAnchor
-        //titleLabel.text = "wsfdasfsa"
+        titleLabel.leadingAnchor ~= rewardImage.leadingAnchor + 15
+        titleLabel.trailingAnchor ~= rewardImage.trailingAnchor - 15
 
         contentView.addSubview(newsLabel.prepareForAutoLayout())
         layout = newsLabel.topAnchor.constraint(equalTo: rewardImage.bottomAnchor)
