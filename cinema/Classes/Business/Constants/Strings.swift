@@ -2,10 +2,13 @@
 
 import Foundation
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 enum L10n {
+  /// Ошибка авторизации
+  static let alertAutorizationError = L10n.tr("Localizable", "alert-autorization-error")
   /// Отменить
   static let alertButtonCancel = L10n.tr("Localizable", "alert-button-cancel")
   /// ОК
@@ -20,6 +23,8 @@ enum L10n {
   static let alertCollectionsChange = L10n.tr("Localizable", "alert-collections-change")
   /// Коллекция удалена
   static let alertCollectionsRemove = L10n.tr("Localizable", "alert-collections-remove")
+  /// Проверьте интернет соединение
+  static let alertTitleInternetError = L10n.tr("Localizable", "alert-title-internet-error")
   /// Сетевая ошибка
   static let alertTitleNetworkError = L10n.tr("Localizable", "alert-title-network-error")
   /// Системная ошибка
@@ -44,6 +49,16 @@ enum L10n {
   static let authHelpSmsButtonText = L10n.tr("Localizable", "authHelp-sms-button-text")
   /// Помощь при входе
   static let authHelpTitleText = L10n.tr("Localizable", "authHelp-title-text")
+  /// awards_exclusive
+  static let awardsResponseExclusive = L10n.tr("Localizable", "awards-response-exclusive")
+  /// Экслюзивные награды
+  static let awardsResponseExclusiveRu = L10n.tr("Localizable", "awards-response-exclusive-ru")
+  /// awards_geo
+  static let awardsResponseGeo = L10n.tr("Localizable", "awards-response-geo")
+  /// Геолокационные награды
+  static let awardsResponseGeoRu = L10n.tr("Localizable", "awards-response-geo-ru")
+  /// Чат
+  static let chatsTitleText = L10n.tr("Localizable", "chats-title-text")
   /// collection updated
   static let collectionsUpdateMessage = L10n.tr("Localizable", "collections-update-message")
   /// Войдите
@@ -62,6 +77,18 @@ enum L10n {
   static let confirmationNextButtonText = L10n.tr("Localizable", "confirmation-next-button-text")
   /// Подтверждение
   static let confirmationTitleText = L10n.tr("Localizable", "confirmation-title-text")
+  /// Ваше имя
+  static let editingProfileChangeName = L10n.tr("Localizable", "editingProfile-change-name")
+  /// Сменить фото профиля
+  static let editingProfileChangePhoto = L10n.tr("Localizable", "editingProfile-change-photo")
+  /// Новый пароль
+  static let editingProfileNewPassword = L10n.tr("Localizable", "editingProfile-new-password")
+  /// Старый пароль
+  static let editingProfileOldPassword = L10n.tr("Localizable", "editingProfile-old-password")
+  /// Сохранить
+  static let editingProfileSaveButton = L10n.tr("Localizable", "editingProfile-save-button")
+  /// Редактирование
+  static let editingProfileTitleText = L10n.tr("Localizable", "editingProfile-title-text")
   /// Награды и премии
   static let filmAdwardsText = L10n.tr("Localizable", "film-adwards-text")
   /// Возраст
@@ -88,15 +115,19 @@ enum L10n {
   static let filmResponseDeleteCollection = L10n.tr("Localizable", "film-response-delete-collection")
   /// film removed from this collection
   static let filmResponseDeleteFilmCollection = L10n.tr("Localizable", "film-response-delete-film-collection")
+  /// film remove from the "did_not_like"
+  static let filmResponseDidNotLike = L10n.tr("Localizable", "film-response-did-not-like")
+  /// film append to the "liked"
+  static let filmResponseLiked = L10n.tr("Localizable", "film-response-liked")
   /// film append to this collection
   static let filmResponsePutCollection = L10n.tr("Localizable", "film-response-put-collection")
-  /// film append to the 'watched'
+  /// film append to the "watched"
   static let filmResponseWatched = L10n.tr("Localizable", "film-response-watched")
-  /// film remove from the 'watched'
+  /// film remove from the "watched"
   static let filmResponseWatchedDelete = L10n.tr("Localizable", "film-response-watched-delete")
-  /// film append to the 'will_watch'
+  /// film append to the "will_watch"
   static let filmResponseWillWatch = L10n.tr("Localizable", "film-response-will_watch")
-  /// film remove from the 'will_watch'
+  /// film remove from the "will_watch"
   static let filmResponseWillWatchDelete = L10n.tr("Localizable", "film-response-will_watch-delete")
   /// Поиск
   static let filmSearchPlaceholder = L10n.tr("Localizable", "film-search-placeholder")
@@ -104,7 +135,7 @@ enum L10n {
   static let filmSetStatusRate = L10n.tr("Localizable", "film-set-status-rate")
   /// tMDB
   static let filmTmdbText = L10n.tr("Localizable", "film-tmdb-text")
-  /// Поставьте оценку, и фильм появится в Кинобазе!
+  /// Фильм появился в Кинобазе!
   static let filmWatchAlert = L10n.tr("Localizable", "film-watch-alert")
   /// Смотрел
   static let filmWatchedButton = L10n.tr("Localizable", "film-watched-button")
@@ -120,6 +151,28 @@ enum L10n {
   static let filterFilter2Title = L10n.tr("Localizable", "filter-filter2-title")
   /// Фильтр
   static let filterTitleText = L10n.tr("Localizable", "filter-title-text")
+  /// contest
+  static let filtersNewsDrawing = L10n.tr("Localizable", "filters-news-drawing")
+  /// free_cinema_session
+  static let filtersNewsFree = L10n.tr("Localizable", "filters-news-free")
+  /// events_about_the_actors
+  static let filtersNewsMessageActors = L10n.tr("Localizable", "filters-news-message-actors")
+  /// novelties
+  static let filtersNewsNew = L10n.tr("Localizable", "filters-news-new")
+  /// Добавить
+  static let friendsAddButton = L10n.tr("Localizable", "friends-add-button")
+  /// Список
+  static let friendsListTitle = L10n.tr("Localizable", "friends-list-title")
+  /// Новости
+  static let friendsNewsTitle = L10n.tr("Localizable", "friends-news-title")
+  /// Рекомендации
+  static let friendsRecomendationTitle = L10n.tr("Localizable", "friends-recomendation-title")
+  /// Поиск
+  static let friendsSearchTitle = L10n.tr("Localizable", "friends-search-title")
+  /// Друзья
+  static let friendsTitleText = L10n.tr("Localizable", "friends-title-text")
+  /// Будет смотреть
+  static let friendsWillSee = L10n.tr("Localizable", "friends-will-see")
   /// Полный список
   static let kinobaseCollectionText = L10n.tr("Localizable", "kinobase-collection-text")
   /// + Создать коллекцию
@@ -136,6 +189,16 @@ enum L10n {
   static let kinobaseWatchedButton = L10n.tr("Localizable", "kinobase-watched-button")
   /// Посмотрю
   static let kinobaseWillWatchButton = L10n.tr("Localizable", "kinobase-willWatch-button")
+  /// Розыгрыши
+  static let mainNewsDrawing = L10n.tr("Localizable", "main-news-drawing")
+  /// Бесплатные сеансы
+  static let mainNewsFree = L10n.tr("Localizable", "main-news-free")
+  /// События о актерах
+  static let mainNewsMessageActors = L10n.tr("Localizable", "main-news-message-actors")
+  /// Новинки
+  static let mainNewsNew = L10n.tr("Localizable", "main-news-new")
+  /// Новости
+  static let mainNewsTitle = L10n.tr("Localizable", "main-news-title")
   /// Подтверждение
   static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "newPassword-confirm-placeholder")
   /// Новый пароль
@@ -144,6 +207,20 @@ enum L10n {
   static let newPasswordReadyButtonText = L10n.tr("Localizable", "newPassword-ready-button-text")
   /// Новый пароль
   static let newPasswordTitleText = L10n.tr("Localizable", "newPassword-title-text")
+  /// Написать комментарий
+  static let newsMessagePlaceholder = L10n.tr("Localizable", "news-message-placeholder")
+  /// Новость
+  static let newsTitleText = L10n.tr("Localizable", "news-title-text")
+  /// Награды и премии
+  static let personAdwardsText = L10n.tr("Localizable", "person-adwards-text")
+  /// Фильмография
+  static let personFilmsText = L10n.tr("Localizable", "person-films-text")
+  /// Родился(-ась):
+  static let personWasBorn = L10n.tr("Localizable", "person-was-born")
+  /// Актеры и режиссеры:
+  static let personsActorsProducers = L10n.tr("Localizable", "persons-actors-producers")
+  ///  г.
+  static let personsYearsText = L10n.tr("Localizable", "persons-years-text")
   /// На указанный номер телефона будет\nотправлено сообщение с кодом\nподтврждения
   static let phoneInfoText = L10n.tr("Localizable", "phone-info-text")
   /// Далее
@@ -152,6 +229,20 @@ enum L10n {
   static let phonePhonePlaceholder = L10n.tr("Localizable", "phone-phone-placeholder")
   /// Номер телефона
   static let phoneTitleText = L10n.tr("Localizable", "phone-title-text")
+  /// Просмотренные
+  static let profileDidWatch = L10n.tr("Localizable", "profile-did-watch")
+  /// Редактировать
+  static let profileEditingProfile = L10n.tr("Localizable", "profile-editing-profile")
+  /// Друзья
+  static let profileFriendText = L10n.tr("Localizable", "profile-friend-text")
+  /// Аноним
+  static let profileNamePlaceholder = L10n.tr("Localizable", "profile-name-placeholder")
+  /// Награды
+  static let profileRewardsText = L10n.tr("Localizable", "profile-rewards-text")
+  /// Профиль
+  static let profileTitleText = L10n.tr("Localizable", "profile-title-text")
+  /// Смотрел
+  static let profileWatchText = L10n.tr("Localizable", "profile-watch-text")
   /// и
   static let regAndText = L10n.tr("Localizable", "reg-and-text")
   /// Свет, Камера, Мотор!
@@ -170,6 +261,34 @@ enum L10n {
   static let regRegulationsButtonText = L10n.tr("Localizable", "reg-regulations-button-text")
   /// Регистрация
   static let regTitleText = L10n.tr("Localizable", "reg-title-text")
+  /// review deleted
+  static let reviewResponseSuccess = L10n.tr("Localizable", "review-response-success")
+  /// Не понравилось
+  static let reviewsDislikeText = L10n.tr("Localizable", "reviews-dislike-text")
+  /// Понравилось
+  static let reviewsLikeText = L10n.tr("Localizable", "reviews-like-text")
+  /// Отзывы
+  static let reviewsTitleText = L10n.tr("Localizable", "reviews-title-text")
+  /// По геолокации
+  static let rewardsLocationTitle = L10n.tr("Localizable", "rewards-location-title")
+  /// За просмотры
+  static let rewardsReviewsTitle = L10n.tr("Localizable", "rewards-reviews-title")
+  /// Награды
+  static let rewardsTitleText = L10n.tr("Localizable", "rewards-title-text")
+  /// Выйти
+  static let settingsExitButton = L10n.tr("Localizable", "settings-exit-button")
+  /// Определить место положение
+  static let settingsLocationPlace = L10n.tr("Localizable", "settings-location-place")
+  /// Ночная тема
+  static let settingsNightTheme = L10n.tr("Localizable", "settings-night-theme")
+  /// Push - уведомления
+  static let settingsPushMessage = L10n.tr("Localizable", "settings-push-message")
+  /// Оценить приложение
+  static let settingsRateApp = L10n.tr("Localizable", "settings-rate-app")
+  /// Рассказать друзьям
+  static let settingsTellFriends = L10n.tr("Localizable", "settings-tell-friends")
+  /// Настройки
+  static let settingsTitleText = L10n.tr("Localizable", "settings-title-text")
   /// Поехали !
   static let slideMainButton = L10n.tr("Localizable", "slide-main-button")
   /// Купить билеты
@@ -198,12 +317,16 @@ enum L10n {
   static let startFacebookText = L10n.tr("Localizable", "start-facebook-text")
   /// У вас уже есть аккаунт?
   static let startHaveAuthText = L10n.tr("Localizable", "start-have-auth-text")
-  /// Регистрация
+  /// Регистрация по SMS
   static let startRegistrationText = L10n.tr("Localizable", "start-registration-text")
   /// CINEMAD
   static let startTitleText = L10n.tr("Localizable", "start-title-text")
   /// Войти через Vkontakte
   static let startVkontakteText = L10n.tr("Localizable", "start-vkontakte-text")
+  /// Данный функционал находится в разработке
+  static let stubsTitleText = L10n.tr("Localizable", "stubs-title-text")
+  /// Билеты
+  static let ticketsTitleText = L10n.tr("Localizable", "tickets-title-text")
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 

@@ -19,12 +19,12 @@ class CrashReportManager {
 
     fileprivate static func configureBugsee() {
 #if INTERNAL
-        if UIDevice.current.name.range(of: "^handh\\.", options: .regularExpression) != nil {
-            Bugsee.launch(token :"bd2abcca-3ae5-4954-9273-e7b64ec26b35", options: [
-                BugseeShakeToReportKey: true,
-                BugseeKillDetectionKey: true
-            ])
-        }
+//        if UIDevice.current.name.range(of: "^handh\\.", options: .regularExpression) != nil {
+//            Bugsee.launch(token: "bd2abcca-3ae5-4954-9273-e7b64ec26b35", options: [
+//                BugseeShakeToReportKey: true,
+//                BugseeKillDetectionKey: true
+//            ])
+//        }
 #endif
     }
 }

@@ -4,9 +4,16 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MainRouterInput: BaseRouterInput {
     func openFilm(videoId: String, name: String)
     func openKinobase()
+    func openRewards()
     func openStart()
+    func openProfile(mainView: MainTabView)
+    func setRootVC(_ rootVC: UINavigationController)
+    func openNews(newsID: String)
+    func openChats()
+    func openTickets()
 }

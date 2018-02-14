@@ -4,20 +4,27 @@
 //
 
 import UIKit
+import FacebookLogin
+import FBSDKLoginKit
+import FacebookCore
+import VKSdkFramework
+import AccountKit
 
 class StartViewController: ParentViewController {
 
     var output: StartViewOutput!
 
+    var accountKit: AKFAccountKit?
+
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.cnmFuturaMedium(size: 17)
+        label.font = UIFont.cnmFuturaMedium(size: 24)
         label.textColor = UIColor.cnmGreyColor
         label.text = L10n.startTitleText
         return label
     }()
 
-    let logoImageView = UIImageView(image: Asset.StartViews.Start.shape.image)
+    let logoImageView = UIImageView(image: Asset.Cinema.start.image)
     let contentView = UIView()
 
     // MARK: - Life cycle
@@ -42,76 +49,116 @@ class StartViewController: ParentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        output.viewIsReady()
 
-        let imageView = UIImageView(image: Asset.StartViews.Start.background.image)
-        view.addSubview(imageView.prepareForAutoLayout())
-        imageView.pinEdgesToSuperviewEdges()
+    //let imageView = UIImageView(image: Asset.StartViews.Start.background.image)
+        //view.addSubview(imageView.prepareForAutoLayout())
+
+        VKSdk.initialize(withAppId: "6258240").register(self)
+        VKSdk.instance().uiDelegate = self
+
+        if accountKit == nil {
+            accountKit = AKFAccountKit(responseType: .authorizationCode)
+        }
 
         view.addSubview(contentView.prepareForAutoLayout())
         contentView.leadingAnchor ~= view.leadingAnchor
         contentView.trailingAnchor ~= view.trailingAnchor
         contentView.centerYAnchor ~= view.centerYAnchor
-        contentView.heightAnchor ~= 435
 
         addTopViews()
         addBottomViews()
+        output.viewIsReady()
     }
 
     private func addTopViews() {
         contentView.addSubview(titleLabel.prepareForAutoLayout())
-        titleLabel.topAnchor ~= contentView.topAnchor
+        titleLabel.bottomAnchor ~= contentView.centerYAnchor - 30
         titleLabel.centerXAnchor ~= contentView.centerXAnchor
 
         contentView.addSubview(logoImageView.prepareForAutoLayout())
-        logoImageView.topAnchor ~= titleLabel.bottomAnchor + 26
+        logoImageView.bottomAnchor ~= titleLabel.topAnchor - 10
         logoImageView.centerXAnchor ~= contentView.centerXAnchor
-        logoImageView.heightAnchor ~= 121
-        logoImageView.widthAnchor ~= 158
-
-        let formImageView = UIImageView(image: Asset.StartViews.Start.forma.image)
-        logoImageView.addSubview(formImageView.prepareForAutoLayout())
-        formImageView.centerXAnchor ~= logoImageView.centerXAnchor
-        formImageView.centerYAnchor ~= logoImageView.centerYAnchor - 10
-        formImageView.heightAnchor ~= 38
-        formImageView.widthAnchor ~= 43
+        logoImageView.heightAnchor ~= 184
+        logoImageView.widthAnchor ~= 130
     }
 
     private func addBottomViews() {
         let fbButton = UIButton(type: .system).setTitleWithColor(title: L10n.startFacebookText, color: UIColor.cnmFbColor)
+        fbButton.addTarget(self, action: #selector(handleTapFbButton), for: .touchUpInside)
         let vkButtom = UIButton(type: .system).setTitleWithColor(title: L10n.startVkontakteText, color: UIColor.cnmVkColor)
+        vkButtom.addTarget(self, action: #selector(handleTapVkButton), for: .touchUpInside)
         let regButton = UIButton(type: .system).setTitleWithColor(title: L10n.startRegistrationText, color: UIColor.cnmMainOrange)
         regButton.addTarget(self, action: #selector(handleTapRegButton), for: .touchUpInside)
         let buttonsStackView = createStackView(.vertical, .fill, .fill, 11.0, with: [fbButton, vkButtom, regButton])
         contentView.addSubview(buttonsStackView.prepareForAutoLayout())
         buttonsStackView.centerXAnchor ~= contentView.centerXAnchor
-        buttonsStackView.topAnchor ~= logoImageView.bottomAnchor + 63
-
-        let authLabel = UILabel()
-        authLabel.textColor = .cnmGreyTextColor
-        authLabel.font = UIFont.cnmFutura(size: 12)
-        authLabel.text = L10n.startHaveAuthText
-
-        let authButton = UIButton(type: .system)
-        authButton.addTarget(self, action: #selector(handleTapAuthButton), for: .touchUpInside)
-        authButton.setTitle(L10n.startButtonAuthText, for: .normal)
-        authButton.titleLabel?.font = UIFont.cnmFutura(size: 12)
-        authButton.setTitleColor(UIColor.cnmBlueLight, for: .normal)
-
-        let bottomStackView = createStackView(.horizontal, .fill, .fill, 5.0, with: [authLabel, authButton])
-        contentView.addSubview(bottomStackView.prepareForAutoLayout())
-        bottomStackView.centerXAnchor ~= contentView.centerXAnchor
-        bottomStackView.topAnchor ~= buttonsStackView.bottomAnchor + 21
-        bottomStackView.bottomAnchor ~= contentView.bottomAnchor
+        buttonsStackView.topAnchor ~= contentView.centerYAnchor + 20
+        buttonsStackView.bottomAnchor ~= contentView.bottomAnchor
     }
 
     // MARK: - Actions
     func handleTapRegButton() {
-        output?.registration()
+        if let vc = accountKit?.viewControllerForPhoneLogin() as? AKFViewController {
+            prepareLoginViewController(vc)
+            // swiftlint:disable:next force_cast
+            present(vc as! UIViewController, animated: true, completion: nil)
+            vc.delegate = self
+        }
     }
 
-    func handleTapAuthButton() {
-        output?.auth()
+    func handleTapFbButton() {
+//        let loginManager = LoginManager()
+//        loginManager.logOut()
+//        loginManager.logIn(readPermissions: [ .publicProfile], viewController: self) { loginResult in
+//            switch loginResult {
+//            case .failed(let error):
+//                print(error)
+//            case .cancelled:
+//                print("User cancelled login.")
+//            case .success(let grantedPermissions, let declinedPermissions, let token):
+//                print("User cancelled login.")
+//            }
+//        }
+
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            if (error == nil) {
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                if fbloginresult.grantedPermissions != nil {
+                    if(fbloginresult.grantedPermissions.contains("email"))
+                    {
+                        self.output.authFromFb(FBSDKAccessToken.current().tokenString)
+                    }
+                }
+            } else {
+                print("fb server Fail!")
+            }
+        }
+    }
+
+    func handleTapVkButton() {
+        let wakeUpSession = VKSdk.wakeUpSession(nil, complete: { _ in
+                VKSdk.forceLogout()
+                VKSdk.authorize([])
+            }
+        )
+    }
+
+    func prepareLoginViewController(_ loginViewController: AKFViewController) {
+
+        loginViewController.delegate = self
+
+        //Costumize the them
+
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor.setColorGray(white: 120, alpha: 0.5)
+
+        loginViewController.uiManager = AKFSkinManager(
+            skinType: .contemporary,
+            primaryColor: UIColor.darkGray,
+            backgroundImage: Asset.background.image,
+            backgroundTint: .black,
+            tintIntensity: 0.75)
     }
 }
 
@@ -121,5 +168,73 @@ extension StartViewController: StartViewInput {
 
     func setupInitialState() {
 
+    }
+
+    func showNetworkError(message: String) {
+        let statusBarAlertManager = StatusBarAlertManager.sharedInstance
+        statusBarAlertManager.setStatusBarAlert(with: message, with: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            statusBarAlertManager.clear()
+        }
+    }
+
+    func getError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+    }
+}
+
+extension StartViewController: VKSdkDelegate {
+    /**
+     Notifies about access error. For example, this may occurs when user rejected app permissions through VK.com
+     */
+    public func vkSdkUserAuthorizationFailed() {
+        print()
+    }
+
+    /**
+     Notifies about authorization was completed, and returns authorization result with new token or error.
+
+     @param result contains new token or error, retrieved after VK authorization.
+     */
+    public func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
+        if let token = result.token {
+            output.authFromVk(token.accessToken)
+        }
+        print()
+    }
+    func vkSdkShouldPresentViewController(controller: UIViewController) {
+        print()
+    }
+}
+
+extension StartViewController: VKSdkUIDelegate {
+    public func vkSdkTokenHasExpired(expiredToken: VKAccessToken) {
+        print()
+    }
+    //    func vkSdkUserDeniedAccess(authorizationError: VKError) {
+    public func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
+        print()
+    }
+    public func vkSdkShouldPresent(_ controller: UIViewController!) {
+        if !VKSdk.vkAppMayExists() {
+            present(controller, animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: - AKFViewControllerDelegate
+
+extension StartViewController: AKFViewControllerDelegate {
+
+    func viewController(_ viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
+        output.getAuthCode(code)
+    }
+
+    private func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
+        print("error \(error)")
+    }
+
+    func viewController(_ viewController: UIViewController!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        print("did complete login with access token \(accessToken.tokenString) state \(state)")
     }
 }

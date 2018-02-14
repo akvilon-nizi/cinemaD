@@ -19,7 +19,7 @@ extension Response {
     /// Maps data received from the signal into an array of objects which implement the Mappable protocol.
     /// If the conversion fails, the signal errors.
     func mapArray<T: BaseMappable>(_ type: T.Type, context: MapContext? = nil) throws -> [T] {
-        guard let array = try mapJSON() as? [[String : Any]] else {
+        guard let array = try mapJSON() as? [[String: Any]] else {
             throw MoyaError.jsonMapping(self)
         }
         return Mapper<T>(context: context).mapArray(JSONArray: array)

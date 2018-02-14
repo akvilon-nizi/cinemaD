@@ -7,4 +7,5 @@ import Foundation
 
 protocol NewCollectionsRouterInput: BaseRouterInput {
     func close()
+    func openStart()
 }

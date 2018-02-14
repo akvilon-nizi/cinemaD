@@ -9,7 +9,7 @@ typealias FlowControllerResult = Observable<UIViewController?>
 
 protocol FlowControllerProtocol: class {
 
-    var rootViewController: UIViewController { get }
+    var rootViewController: UIViewController { get set }
 
     var childFlowControllers: [FlowControllerProtocol]? { get set }
 
@@ -26,6 +26,10 @@ protocol FlowControllerProtocol: class {
     func presentRoot(childFlowController: FlowControllerProtocol, animated: Bool) -> FlowControllerResult
 
     func dismissChildFlowController(animated: Bool) -> FlowControllerResult
+
+    func performTransitionFromMain(to viewController: UIViewController, animated: Bool) -> FlowControllerResult
+
+    func performTransitionToMain(animated: Bool) -> FlowControllerResult
 }
 
 extension FlowControllerProtocol {

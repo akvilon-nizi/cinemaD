@@ -12,28 +12,30 @@ class Film: ImmutableMappable {
 
     let id: String
     let name: String
-    let iWatched: Bool
-    let iWillWatch: Bool
+    let iWatched: Bool?
+    let iWillWatch: Bool?
     let imageUrl: String
     var add: Bool = false
     var delete: Bool = false
-    var rate: Int? = 0
+    var rate: Double? = 0
 
     private let idKey = "id"
     private let nameKey = "name"
     private let iWatchedKey = "i_watched"
     private let iWillWatchKey = "i_will_watch"
     private let imageUrlKey = "image_url"
+    private let rateKey = "my_rate"
 
     required init(map: Map) throws {
         id = try map.value(idKey)
         name = try map.value(nameKey)
-        iWatched = try map.value(iWatchedKey)
-        iWillWatch = try map.value(iWillWatchKey)
+        iWatched = try? map.value(iWatchedKey)
+        iWillWatch = try? map.value(iWillWatchKey)
         imageUrl = try map.value(imageUrlKey)
+        rate = try? map.value(rateKey)
     }
 
-    init(id: String, name: String, imageUrl: String, rate: Int = 0) {
+    init(id: String, name: String, imageUrl: String, rate: Double = 0) {
         self.id = id
         self.name = name
         iWatched = false
@@ -48,5 +50,6 @@ class Film: ImmutableMappable {
         iWatched >>> map[iWatchedKey]
         iWillWatch >>> map[iWillWatchKey]
         imageUrl >>> map[imageUrlKey]
+        rate >>> map[rateKey]
     }
 }

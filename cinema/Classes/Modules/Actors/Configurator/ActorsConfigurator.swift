@@ -14,17 +14,34 @@ class ActorsConfigurator {
 
     var provider: RxMoyaProvider<FoodleTarget>!
 
+    let id: String
+
+    let name: String
+
+    let role: String
+
+    let persons: [PersonFromFilm]
+
+    init(id: String, name: String, role: String, persons: [PersonFromFilm]) {
+        self.id = id
+        self.name = name
+        self.role = role
+        self.persons = persons
+    }
+
     func configureModule() -> UIViewController {
         let router = ActorsRouter()
         router.appRouter = appRouter
 
         let presenter = ActorsPresenter()
         presenter.router = router
+        presenter.id = id
 
         let interactor = ActorsInteractor()
         interactor.output = presenter
+        interactor.provider = provider
 
-        let viewController = ActorsViewController()
+        let viewController = ActorsViewController(name: name, role: role, persons: persons)
         viewController.output = presenter
 
         presenter.interactor = interactor

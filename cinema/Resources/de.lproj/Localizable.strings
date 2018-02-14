@@ -1,0 +1,233 @@
+/* 
+  Localizable.strings
+  cinema
+
+  Created by User on 20.07.17.
+  Copyright © 2017 Heads and Hands. All rights reserved.
+*/
+
+// Alert
+
+"alert-title-internet-error" = "Проверьте интернет соединение";
+"alert-title-network-error" = "Сетевая ошибка";
+"alert-autorization-error" = "Ошибка авторизации";
+"alert-title-system-error" = "Системная ошибка";
+"alert-button-ok" = "ОК";
+"alert-button-cancel" = "Отменить";
+"alert-collections-add" = "";
+"alert-collections-remove" = "Коллекция удалена";
+"alert-collections-add" = "Коллекция добавлена";
+"alert-collections-change" = "Коллекция изменена";
+
+//Cinema alert
+
+"alert-cinema-correct-errror" = "Проверьте корректность введеных данных";
+"alert-cinema-network-errror" = "Сетевая ошибка";
+
+//Slides
+"slide1-title-text" = "Покупай билеты";
+"slide2-title-text" = "Создавайте встречи";
+"slide3-title-text" = "Получайте награды";
+
+"slide1-description-text" = "Покупай электронные билеты в кино\nпрямо из приложения";
+"slide2-description-text" = "Приглашайте друзей на фильм\nи делитесь впечатлениями";
+"slide3-description-text" = "Получайте награды за просмотры\nваших любимых фильмов";
+
+"slide1-button-text" = "Купить билеты";
+"slide2-button-text" = "Пригласить на фильм";
+"slide3-label-title-text" = "Вселенная Marvel";
+"slide3-label-description-text" = "Легенда";
+
+"slide-main-button" = "Поехали !";
+
+//Start
+"start-title-text" = "CINEMAD";
+"start-facebook-text" = "111Войти через Facebook";
+"start-vkontakte-text" = "Войти через Vkontakte";
+"start-registration-text" = "Регистрация по SMS";
+"start-have-auth-text" = "У вас уже есть аккаунт?";
+"start-button-auth-text" = "Войдите";
+
+//Registration
+"reg-title-text" = "Регистрация";
+"reg-name-placeholder" = "Имя";
+"reg-phone-placeholder" = "Телефон";
+"reg-password-placeholder" = "Пароль";
+"reg-button-text" = "Свет, Камера, Мотор!";
+"reg-info-text" = "Регистрируясь, вы принимаете наши";
+"reg-conditions-button-text" = "Условия";
+"reg-regulations-button-text" = "Политика конфиденциальности";
+"reg-and-text" = "и";
+
+//Auth
+"auth-title-text" = "Вход";
+"auth-phone-placeholder" = "Телефон";
+"auth-password-placeholder" = "Пароль";
+"auth-button-text" = "Свет, Камера, Мотор!";
+"auth-remember-text" = "Забыли данные для входа?";
+"auth-help-button-text" = "Помощь со входом в систему";
+
+//AuthHelp
+"authHelp-title-text" = "Помощь при входе";
+"authHelp-sms-button-text" = "Отправить SMS код";
+"authHelp-post-button-text" = "Отправить на Эл. почту";
+"authHelp-center-text" = "Справочный центр CinemaD";
+
+//Phone
+"phone-title-text" = "Номер телефона";
+"phone-info-text" = "На указанный номер телефона будет\nотправлено сообщение с кодом\nподтврждения";
+"phone-phone-placeholder" = "Ваш номер";
+"phone-next-button-text" = "Далее";
+
+//Confirmation
+"confirmation-title-text" = "Подтверждение";
+"confirmation-info-text" = "Введите 6-значный код, который\nбыл отпрпавлен на номер\n%@";
+"confirmation-code-text" = "Код";
+"confirmation-new-password-button" = "Запросить новый";
+"confirmation-next-button-text" = "Далее";
+"confirmation-have-auth-text" = "У вас уже есть аккаунт?";
+"confirmation-button-auth-text" = "Войдите";
+
+//NewPassword
+"newPassword-title-text" = "Новый пароль";
+"newPassword-password-placeholder" = "Новый пароль";
+"newPassword-confirm-placeholder" = "Подтверждение";
+"newPassword-ready-button-text" = "Готово";
+
+//Film
+"film-willWatch-button" = "Посмотрю";
+"film-watched-button" = "Смотрел";
+"film-budjet-text" = "Бюджет";
+"film-your-star" = "Ваша оценка:";
+"film-pay-ticket" = "Купить билеты";
+"film-invite-film" = "Приласить на фильм";
+"film-duration-text" = "Длительность";
+"film-age-text" = "Возраст";
+"film-tmdb-text" = "tMDB";
+"film-description-text" = "Сюжет:";
+"film-mans-text" = "Актёры и режиссёры:";
+"film-cash-text" = "Сборы";
+"film-adwards-text" = "Награды и премии";
+"film-more-button" = "  Читать дальше >";
+"film-change-status-watch" = "Изменения сохранены";
+"film-set-status-rate" = "Рейтинг фильма:";
+"film-search-placeholder" = "Поиск";
+"film-watch-alert" = "Фильм появился в Кинобазе!";
+
+//Film respons
+"film-response-watched" = "film append to the \"watched\"";
+"film-response-watched-delete" = "film remove from the \"watched\"";
+"film-response-will_watch" = "film append to the \"will_watch\"";
+"film-response-will_watch-delete" = "film remove from the \"will_watch\"";
+"film-response-put-collection" = "film append to this collection";
+"film-response-delete-collection" = "collection removed";
+"film-response-delete-film-collection" = "film removed from this collection";
+"film-response-did-not-like" = "film remove from the \"did_not_like\"";
+"film-response-liked" = "film append to the \"liked\"";
+"review-response-success" = "review deleted";
+
+//Kinobase
+"kinobase-title-text" = "Кинобаза";
+"kinobase-willWatch-button" = "Посмотрю";
+"kinobase-watched-button" = "Смотрел";
+"kinobase-search-text" = "Поиск";
+"kinobase-full-list" = "Полный список";
+"kinobase-collection-text" = "Полный список";
+"kinobase-make-collection" = "Полный список";
+"kinobase-favorites-title" = "+ Создать коллекцию";
+
+//Films
+"films-title-text" = "Полный список";
+"kinobase-willWatch-button" = "Посмотрю";
+
+//Filter
+"filter-title-text" = "Фильтр";
+"filter-filter1-title" = "Год";
+"filter-filter2-title" = "Жанр";
+
+//CollectionsResponse
+"collections-update-message" = "collection updated";
+
+//Main
+"main-news-title" = "Новости";
+"main-news-new" = "Новинки";
+"main-news-message-actors" = "События о актерах";
+"main-news-drawing" = "Розыгрыши";
+"main-news-free" = "Бесплатные сеансы";
+
+//Filters
+"filters-news-new" = "novelties";
+"filters-news-message-actors" = "events_about_the_actors";
+"filters-news-drawing" = "contest";
+"filters-news-free" = "free_cinema_session";
+
+//News
+"news-title-text" = "Новость";
+"news-message-placeholder" = "Написать комментарий";
+
+//Rewards
+"rewards-title-text" = "Награды";
+"rewards-reviews-title" = "За просмотры";
+"rewards-location-title" = "По геолокации";
+
+//Profile
+"profile-title-text" = "Профиль";
+"profile-name-placeholder" = "Аноним";
+"profile-editing-profile" = "Редактировать";
+"profile-watch-text" = "Смотрел";
+"profile-rewards-text" = "Награды";
+"profile-friend-text" = "Друзья";
+"profile-did-watch" = "Просмотренные";
+
+//EditingProfile
+"editingProfile-title-text" = "Редактирование";
+"editingProfile-change-photo" = "Сменить фото профиля";
+"editingProfile-change-name" = "Ваше имя";
+"editingProfile-old-password" = "Старый пароль";
+"editingProfile-new-password" = "Новый пароль";
+"editingProfile-save-button" = "Сохранить";
+
+//Settings
+"settings-title-text" = "Настройки";
+"settings-location-place" = "Определить место положение";
+"settings-night-theme" = "Ночная тема";
+"settings-push-message" = "Push - уведомления";
+"settings-rate-app" = "Оценить приложение";
+"settings-tell-friends" = "Рассказать друзьям";
+"settings-exit-button" = "Выйти";
+
+//Actor(Person)
+"person-was-born" = "Родился(-ась):";
+"person-adwards-text" = "Награды и премии";
+"person-films-text" = "Фильмография";
+"persons-actors-producers" = "Актеры и режиссеры:";
+"persons-years-text" = " г.";
+
+//Reviews
+"reviews-title-text" = "Отзывы";
+"reviews-like-text" = "Понравилось";
+"reviews-dislike-text" = "Не понравилось";
+
+//Friends
+"friends-title-text" = "Друзья";
+"friends-list-title" = "Список";
+"friends-recomendation-title" = "Рекомендации";
+"friends-news-title" = "Новости";
+"friends-will-see" = "Будет смотреть";
+"friends-search-title" = "Поиск";
+"friends-add-button" = "Добавить";
+
+//AwardsResponse
+"awards-response-exclusive" = "awards_exclusive";
+"awards-response-geo" = "awards_geo";
+"awards-response-exclusive-ru" = "Экслюзивные награды";
+"awards-response-geo-ru" = "Геолокационные награды";
+
+//Tickets
+"chats-title-text" = "Чат";
+
+//Chats
+"tickets-title-text" = "Билеты";
+
+//StubsVIew
+"stubs-title-text" = "Данный функционал находится в разработке";

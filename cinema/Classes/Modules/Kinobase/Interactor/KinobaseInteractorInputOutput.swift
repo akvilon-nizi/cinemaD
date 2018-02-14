@@ -14,6 +14,7 @@ protocol KinobaseInteractorInput {
 
 protocol KinobaseInteractorOutput: class {
     func getError()
+    func tokenError()
     func getData(_ kbData: KinobaseData)
     func getCollection(_ collection: Collection)
     func getSearch(_ kbData: KinobaseData, isWatched: Bool)

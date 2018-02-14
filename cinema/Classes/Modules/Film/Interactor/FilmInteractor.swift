@@ -24,7 +24,11 @@ extension FilmInteractor: FilmInteractorInput {
                 case let .next(model):
                     self.output.getFilmInfo(model)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -38,14 +42,18 @@ extension FilmInteractor: FilmInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmWatchResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWatched {
+                    print(model.rate)
+//                    if model.message == L10n.filmResponseWatched {
                         self.output.getRate(model.rate)
+//                    } else {
+//                        self.output.getError()
+//                    }
+                case let .error(error as ProviderError):
+                    if error.status == 403 {
+                        self.output.tokenError()
                     } else {
                         self.output.getError()
                     }
-                case let .error(error as ProviderError):
-                    print()
-                    self.output.getError()
                 default:
                     break
                 }
@@ -56,16 +64,21 @@ extension FilmInteractor: FilmInteractorInput {
     func filmWillWatch(videoID: String) {
         disposeBag = DisposeBag()
         provider.requestModel(.filmWillWatch(filmID: videoID))
-            .subscribe { [unowned self] (response: Event<FilmResponse>) in
+            .subscribe { [unowned self] (response: Event<FilmWatchResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWillWatch {
+                    print()
+//                    if model.message == L10n.filmResponseWillWatch {
                         self.output.changeStatus()
+//                    } else {
+//                        self.output.getError()
+//                    }
+                case let .error(error as ProviderError):
+                    if error.status == 403 {
+                        self.output.tokenError()
                     } else {
                         self.output.getError()
                     }
-                case let .error(error as ProviderError):
-                    self.output.getError()
                 default:
                     break
                 }
@@ -79,13 +92,17 @@ extension FilmInteractor: FilmInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWatchedDelete {
+                    if model.message == L10n.filmResponseWatchedDelete {
                         self.output.changeStatus()
                     } else {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -99,13 +116,17 @@ extension FilmInteractor: FilmInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseWillWatchDelete {
+                    if model.message == L10n.filmResponseWillWatchDelete {
                         self.output.changeStatus()
                     } else {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

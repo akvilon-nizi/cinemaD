@@ -7,8 +7,6 @@ import Foundation
 
 protocol FilmViewInput: class {
 
-    func setupInitialState()
-
     func setFilmInfo(_ filmInfo: FullFilm)
 
     func showNetworkError()
@@ -25,6 +23,8 @@ protocol FilmViewOutput {
 
     func backTap()
 
+    func homeTap()
+
     func willWatchTap()
 
     func watchedTap(rate: Int)
@@ -32,4 +32,8 @@ protocol FilmViewOutput {
     func willWatchTapDelete()
 
     func watchedTapDelete()
+
+    func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])
+
+    func tapReviews(_ film: FullFilm)
 }

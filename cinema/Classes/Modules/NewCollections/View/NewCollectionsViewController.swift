@@ -17,11 +17,28 @@ class NewCollectionsViewController: ParentViewController {
 
     let headerCollectionsView = HeaderCollectionsView()
 
-    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    let searchFilms = FilmGroup()
 
-    let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
+    let scrollView = UIScrollView()
+
+    let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 80
+
+    var currentHeight: CGFloat = 0
+
+    var heightLayout: NSLayoutConstraint?
+
+    var searchHeightLayout: NSLayoutConstraint?
 
     let saveButton = UIButton()
+
+    var heightFilmGroup: CGFloat = 0
+
+    var stackView = UIStackView()
+
+    var query: String = ""
+
+    let headerSearchView = SearchCommonView()
+
     // MARK: - Life cycle
 
     required init(coder aDecoder: NSCoder) {
@@ -41,7 +58,7 @@ class NewCollectionsViewController: ParentViewController {
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         var frame = backButton.frame
         frame.size = CGSize(width: 30, height: 100)
         backButton.frame = frame
@@ -49,21 +66,19 @@ class NewCollectionsViewController: ParentViewController {
 
         saveButton.setImage(Asset.Kinobase.checkMini.image, for: .normal)
         saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
-        saveButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -20)
+        saveButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         frame = saveButton.frame
         frame.size = CGSize(width: 30, height: 100)
+        frame.origin.x -= 9
         saveButton.frame = frame
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
 
         titleViewLabel.text = nameCollections == "" ? "Новая коллекция" : nameCollections
         titleViewLabel.font = UIFont.cnmFutura(size: 20)
 
-        tableView.backgroundColor = .white
-        view.addSubview(tableView.prepareForAutoLayout())
-        tableView.pinEdgesToSuperviewEdges()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
+        scrollView.backgroundColor = .white
+        view.addSubview(scrollView.prepareForAutoLayout())
+        scrollView.pinEdgesToSuperviewEdges()
 
         if nameCollections != "" {
             activityVC.isHidden = false
@@ -72,9 +87,130 @@ class NewCollectionsViewController: ParentViewController {
         view.bringSubview(toFront: activityVC)
     }
 
+    func setStackView() {
+        currentHeight = 88
+
+        var viewsArray: [UIView] = []
+        viewsArray.append(headerCollectionsView)
+
+        if !nameCollections.isEmpty {
+            headerCollectionsView.title = nameCollections
+        }
+
+        headerCollectionsView.heightAnchor ~= currentHeight
+
+        heightFilmGroup = windowWidth / 4 * 3 - 43.5
+
+        headerSearchView.delegate = self
+        headerSearchView.heightAnchor ~= 48
+        currentHeight += 48
+        viewsArray.append(headerSearchView)
+
+        viewsArray.append(searchFilms)
+        searchFilms.isCollections = true
+        searchFilms.isAdd = true
+        searchFilms.delegate = self
+
+        if nameCollections != "" {
+            let titleView = HeaderViewTitle()
+            titleView.title = "Коллекция"
+            titleView.heightAnchor ~= 44
+            viewsArray.append(titleView)
+
+            currentHeight += 44
+
+            let filmGroup = FilmGroup()
+            filmGroup.films = collections
+            filmGroup.isCollections = true
+            filmGroup.isAdd = false
+            filmGroup.heightAnchor ~= heightFilmGroup
+            viewsArray.append(filmGroup)
+
+            currentHeight += heightFilmGroup
+        }
+
+        searchHeightLayout = searchFilms.heightAnchor.constraint(equalToConstant: 0)
+        searchHeightLayout?.isActive = true
+
+        if nameCollections != "" {
+            let deleteFooter = DeleteFooter()
+            deleteFooter.deleteButton.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+            deleteFooter.heightAnchor ~= 66
+            viewsArray.append(deleteFooter)
+            currentHeight += 66
+        }
+
+        stackView = createStackView(.vertical, .fill, .fill, 0, with: viewsArray)
+        stackView.widthAnchor ~= UIWindow(frame: UIScreen.main.bounds).bounds.width
+        heightLayout = stackView.heightAnchor.constraint(equalToConstant: currentHeight)
+        heightLayout?.isActive = true
+        stackView.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
+        scrollView.addSubview(stackView.prepareForAutoLayout())
+        stackView.pinEdgesToSuperviewEdges()
+        scrollView.contentSize = stackView.frame.size
+
+    }
+
+    func getSearch(_ films: [Film]) {
+
+        headerSearchView.hiddenActivityVC()
+
+        var filmsArray: [Film] = []
+
+        for film in films {
+            let col = collections.filter{ $0.id == film.id }
+            if col.isEmpty {
+                let col1 = watched.filter{ $0.id == film.id }
+                if !col1.isEmpty {
+                    film.add = true
+                }
+                filmsArray.append(film)
+            }
+        }
+
+        if searchFilms.films.isEmpty && !filmsArray.isEmpty {
+            searchHeightLayout?.constant = heightFilmGroup
+            UIView.animate(withDuration: 0) {
+                self.stackView.layoutIfNeeded()
+            }
+            currentHeight += heightFilmGroup
+            setStackViewHeight()
+        }
+
+        if !searchFilms.films.isEmpty && filmsArray.isEmpty {
+            searchHeightLayout?.constant = 0
+            UIView.animate(withDuration: 0) {
+               self.stackView.layoutIfNeeded()
+            }
+            currentHeight -= heightFilmGroup
+            setStackViewHeight()
+        }
+
+        searchFilms.films = filmsArray
+
+    }
+
+    func setStackViewHeight() {
+        heightLayout?.constant = currentHeight
+        UIView.animate(withDuration: 0) {
+            self.stackView.layoutIfNeeded()
+        }
+        scrollView.contentSize = CGSize(width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
+    }
+
     // MARK: - Actions
     func didTapLeftButton() {
         output?.backButtonTap()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
 
     func didTapSaveButton() {
@@ -89,13 +225,17 @@ class NewCollectionsViewController: ParentViewController {
 
         if nameCollections.isEmpty {
             if filteredWatched.isEmpty {
-                 showAlert(message: "Выберете фильмы")
+                 showAlert(message: "Выберите фильмы")
             } else {
+                if  !headerCollectionsView.returnTitle().isEmpty {
                  output?.addNewFilm(name: headerCollectionsView.returnTitle(), films: filteredWatched)
                 saveButton.isEnabled = false
                 activityVC.isHidden = false
                 activityVC.startAnimating()
                 view.bringSubview(toFront: activityVC)
+                } else {
+                    showAlert(message: "Название не может быть пустым")
+                }
             }
         } else {
                 if films.isEmpty {
@@ -118,142 +258,6 @@ class NewCollectionsViewController: ParentViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
-
-extension NewCollectionsViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        return UITableViewCell()
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
-    }
-
-}
-
-// MARK: - UITableViewDelegate
-
-extension NewCollectionsViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 0
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0:
-//            if films.isEmpty {
-//                return nil
-//            }
-            if !nameCollections.isEmpty {
-                headerCollectionsView.title = nameCollections
-            }
-            return headerCollectionsView
-        case 1:
-            if nameCollections == "" {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Коллекция"
-            return view
-        case 2:
-            if nameCollections == "" {
-                return nil
-            }
-            let view = FilmGroup()
-            view.films = collections
-            view.isCollections = true
-            view.isAdd = false
-            return view
-        case 3:
-            if watched.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Фильмы"
-            return view
-
-        case 4:
-            let view = FilmGroup()
-            for film in collections {
-                var i: Int = 0
-                for wFilm in watched {
-                    if film.id == wFilm.id {
-                        watched.remove(at: i)
-                    }
-                    i += 1
-                }
-            }
-//            if watched.isEmpty {
-//                UIView.setAnimationsEnabled(false)
-//                tableView.beginUpdates()
-//                tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
-//                tableView.endUpdates()
-//                UIView.setAnimationsEnabled(true)
-//                return nil
-//            }
-            view.films = watched
-            view.isCollections = true
-            view.isAdd = true
-            return view
-        case 5:
-            if nameCollections == "" {
-                return nil
-            }
-            let view = DeleteFooter()
-            view.deleteButton.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
-            return view
-        default:
-            return nil
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 88
-        case 1:
-            if nameCollections == "" {
-                return 0
-            }
-            return 22
-        case 2:
-            if nameCollections == "" {
-                return 0
-            }
-            return windowWidth / 4 * 3 - 80
-        case 3:
-            //            if films.isEmpty {
-            //                return 0
-            //            }
-            return 22
-        case 4:
-            //            if films.isEmpty {
-            //                return 0
-            //            }
-            return windowWidth / 4 * 3 - 80
-        case 5:
-            if nameCollections == "" {
-                return 0
-            }
-            return 66
-        default:
-            return 0
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
-    }
-}
-
 // MARK: - NewCollectionsViewInput
 
 extension NewCollectionsViewController: NewCollectionsViewInput {
@@ -272,17 +276,47 @@ extension NewCollectionsViewController: NewCollectionsViewInput {
 
     func setCollections(collections: [Film]) {
         self.collections = collections
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 1...4), with: UITableViewRowAnimation.none)
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+        setStackView()
         activityVC.isHidden = true
         activityVC.stopAnimating()
-        view.sendSubview(toBack: activityVC)
     }
 
     func getSeccess(message: String) {
         showAlert(message: message)
+    }
+}
+
+// MARK: - SearchCommonDelegate
+
+extension NewCollectionsViewController: SearchCommonDelegate {
+    func changeText(_ text: String) {
+        if text.count >= 1 {
+            if text != query {
+                output?.getQuery(text)
+            }
+        } else {
+            getSearch([])
+            if text != query {
+                output?.getQuery(text)
+            }
+        }
+        query = text
+    }
+    func tapFilter() {
+    }
+}
+
+// MARK: - FilmGroupDelegate
+extension NewCollectionsViewController: FilmGroupDelegate {
+    func openFilmID(_ filmID: String, name: String) {
+        //output?.openFilm(videoID: filmID, name: name)
+    }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+        if isAdd {
+            watched.append(film)
+        } else {
+           watched = watched.filter{ $0.id != film.id }
+        }
     }
 }

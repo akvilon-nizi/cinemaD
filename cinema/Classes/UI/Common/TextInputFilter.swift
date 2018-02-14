@@ -27,7 +27,7 @@ extension TextInputFilterProtocol {
             return false
         }
 
-        if text.distance(from: range.lowerBound, to: range.upperBound) != text.characters.count {
+        if text.distance(from: range.lowerBound, to: range.upperBound) != text.count {
             return false
         }
         return true

@@ -6,9 +6,11 @@
 import Foundation
 
 protocol ActorsInteractorInput {
-
+    func getPersonInfo(id: String)
 }
 
 protocol ActorsInteractorOutput: class {
-
+    func getError()
+    func tokenError()
+    func getPersonInfo(person: FullPerson)
 }

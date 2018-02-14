@@ -19,22 +19,29 @@ class NewCollectionsInteractor {
 // MARK: - NewCollectionsInteractorInput
 
 extension NewCollectionsInteractor: NewCollectionsInteractorInput {
-    func getWatched() {
-        provider.requestModel(.meFilmWatched)
-            .subscribe { [unowned self] (response: Event<WatchedResponse>) in
-                switch response {
-                case let .next(model):
-//                    self.kbData.watched = model.watched
-//                    self.getWillWatch()
-                    print()
-                case let .error(error as ProviderError):
-                    print()
-//                    self.output.getError()
-                default:
-                    break
+
+    func getFilms(_ text: String) {
+        disposeBag = DisposeBag()
+        if text != "" {
+            provider.requestModel(.globalSearch(query: text) )
+                .subscribe { [unowned self] (response: Event<AllFilms>) in
+                    switch response {
+                    case let .next(model):
+                        self.output.getFilms(model.films)
+                    case let .error(error as ProviderError):
+                        if error.status == 403 {
+                            self.output.tokenError()
+                        } else if error.status == 504 {
+                            self.getFilms(text)
+                        } else {
+                            self.output.getError()
+                        }
+                    default:
+                        break
+                    }
                 }
-            }
-            .addDisposableTo(disposeBag)
+                .addDisposableTo(disposeBag)
+        }
     }
 
     func putNewColWithFilm(name: String, films: [Film]) {
@@ -44,7 +51,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                 case let .next(model):
                     self.putFilmsIntoCol(idCol: model.id, films: films)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -52,15 +63,13 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .addDisposableTo(disposeBag)
     }
 
-    //1c1bde9e-087b-4552-bc5a-31cebb52ea79 id коллекции
-    //07cdcf7e-95d4-4bb7-b096-cc0d6ecbaf86 id фильма
     func putFilmsIntoCol(idCol: String, films: [Film]) {
         var filmsCol = films
         provider.requestModel(.putFilm(idFilm: films[0].id, idCollections: idCol))
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponsePutCollection {
+                    if model.message == L10n.filmResponsePutCollection {
                         filmsCol.remove(at: 0)
                         if filmsCol.isEmpty {
                             self.output.getSeccess(message: L10n.alertCollectionsAdd)
@@ -71,45 +80,16 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
             }
             .addDisposableTo(disposeBag)
-    }
-
-    func putDeleteFilms(idCol: String, filmsAdd: [Film], filmsDelete: [Film]) {
-//        if filmsAdd.isEmpty {
-//            deleteFilmsIntoCol(idCol: idCol, filmsID: filmsDelete)
-//        } else {
-//            var filmsCol = filmsAdd
-//            provider.requestModel(.putFilm(idFilm: filmsAdd[0].id, idCollections: idCol))
-//                .subscribe { [unowned self] (response: Event<FilmResponse>) in
-//                    switch response {
-//                    case let .next(model):
-//                        if model.message.first == L10n.filmResponsePutCollection {
-//                            filmsCol.remove(at: 0)
-//                            if filmsCol.isEmpty {
-//                                if !filmsDelete.isEmpty {
-//                                    self.deleteFilmsIntoCol(idCol: idCol, filmsID: filmsDelete)
-//                                } else {
-//                                    self.output.getSeccess()
-//                                }
-//                            } else {
-//                                self.putDeleteFilms(idCol: idCol, filmsAdd: filmsCol, filmsDelete: filmsDelete)
-//                            }
-//                        } else {
-//                            self.output.getError()
-//                        }
-//                    case let .error(error as ProviderError):
-//                        self.output.getError()
-//                    default:
-//                        break
-//                    }
-//                }
-//                .addDisposableTo(disposeBag)
-//        }
     }
 
     func deleteFilmsIntoCol(idCol: String, filmsID: [Film]) {
@@ -118,7 +98,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.filmResponseDeleteFilmCollection {
+                    if model.message == L10n.filmResponseDeleteFilmCollection {
                         filmsCol.remove(at: 0)
                         if filmsCol.isEmpty {
                             self.output.getSeccess(message: L10n.alertCollectionsRemove)
@@ -129,7 +109,11 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -144,6 +128,7 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
                 case let .next(model):
                     self.output.getCollection(collection: model)
                 case let .error(error as ProviderError):
+                    print(error)
                     self.output.getError()
                 default:
                     break
@@ -157,13 +142,17 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    if model.message.first == L10n.collectionsUpdateMessage {
+                    if model.message == L10n.collectionsUpdateMessage {
                         self.output.getSeccess(message: L10n.alertCollectionsChange)
                     } else {
                         self.output.getError()
                     }
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -176,15 +165,19 @@ extension NewCollectionsInteractor: NewCollectionsInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
+                    print(model)
                     self.output.getSeccess(message: L10n.alertCollectionsRemove)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
             }
             .addDisposableTo(disposeBag)
     }
-
 
 }

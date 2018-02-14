@@ -4,6 +4,8 @@
 //
 
 import Foundation
+import UIKit
+import CoreLocation
 
 class MainPresenter {
 
@@ -11,11 +13,44 @@ class MainPresenter {
     var interactor: MainInteractorInput!
     var router: MainRouterInput!
     weak var output: MainModuleOutput?
+    var locationManager: LocationManagerProtocol
+
+    init(locationManager: LocationManagerProtocol) {
+        self.locationManager = locationManager
+        self.locationManager.output = self
+    }
 }
 
 // MARK: - MainViewOutput
 
 extension MainPresenter: MainViewOutput {
+    func openChats() {
+        router.openChats()
+    }
+
+    func openTickets() {
+        router.openTickets()
+    }
+
+    func refresh() {
+        interactor.getData()
+    }
+
+    func openProfile(mainView: MainTabView) {
+        router.openProfile(mainView: mainView)
+    }
+
+    func openRewards() {
+        router.openRewards()
+    }
+
+    func tapNews(newsID: String) {
+        router.openNews(newsID: newsID)
+    }
+
+    func setRootVC(_ rootVC: UINavigationController) {
+        router.setRootVC(rootVC)
+    }
 
     func viewIsReady() {
         log.verbose("Main is ready")
@@ -28,6 +63,10 @@ extension MainPresenter: MainViewOutput {
 
     func openKinobase() {
         router.openKinobase()
+    }
+
+    func changeFilter(_ filters: [String]) {
+        interactor.getNewsWithFilters(filters: filters)
     }
 
 }
@@ -44,5 +83,24 @@ extension MainPresenter: MainInteractorOutput {
     }
     func getData(mainData: MainData) {
         view.getData(mainData)
+        if UserDefaults.standard.bool(forKey: "isLocation") {
+            locationManager.startMonitoringLocation()
+        } else {
+            locationManager.stopMonitoringLocation()
+        }
+    }
+
+    func getNews(mainData: MainData) {
+        view.getNews(mainData)
+    }
+}
+
+// MARK: - MainInteractorOutput
+
+extension MainPresenter: LocationManagerOutput {
+    func didUpdate(location: CLLocation?) {
+        if let loc = location {
+            interactor.postLocation(lat: Double(loc.coordinate.latitude), log: Double(loc.coordinate.longitude))
+        }
     }
 }

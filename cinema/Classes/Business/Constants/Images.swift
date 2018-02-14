@@ -10,6 +10,7 @@
   typealias Image = UIImage
 #endif
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
@@ -45,22 +46,62 @@ struct ColorAsset {
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 enum Asset {
+  enum Kinobase {
+    static let check = ImageAsset(name: "check")
+    static let check28 = ImageAsset(name: "check28")
+    static let checkMini = ImageAsset(name: "checkMini")
+    static let cicle = ImageAsset(name: "cicle")
+    static let close = ImageAsset(name: "close")
+    static let enter = ImageAsset(name: "enter")
+    static let forward = ImageAsset(name: "forward")
+    static let settings = ImageAsset(name: "settings")
+    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
+  }
+  static let background = ImageAsset(name: "background")
   enum Cinema {
+    static let backImage = ImageAsset(name: "backImage")
+    static let blankSplash = ImageAsset(name: "blankSplash")
+    static let chatButton = ImageAsset(name: "chatButton")
     static let chatIcon = ImageAsset(name: "chatIcon")
+    static let dislikeSelect = ImageAsset(name: "dislikeSelect")
+    static let dislikeUnselect = ImageAsset(name: "dislikeUnselect")
+    static let forwardImage = ImageAsset(name: "forwardImage")
+    static let home = ImageAsset(name: "home")
+    static let likeSelect = ImageAsset(name: "likeSelect")
+    static let likeUnselect = ImageAsset(name: "likeUnselect")
     enum MainTab {
-      static let chat = ImageAsset(name: "chat")
-      static let kinobase = ImageAsset(name: "kinobase")
-      static let reward = ImageAsset(name: "reward")
+      enum Active {
+        static let chatA = ImageAsset(name: "chatA")
+        static let kinobaseA = ImageAsset(name: "kinobaseA")
+        static let rewardA = ImageAsset(name: "rewardA")
+        static let ticketsA = ImageAsset(name: "ticketsA")
+      }
+      enum Passive {
+        static let chat = ImageAsset(name: "chat")
+        static let kinobase = ImageAsset(name: "kinobase")
+        static let reward = ImageAsset(name: "reward")
+        static let tickets = ImageAsset(name: "tickets")
+      }
       static let tabBackground = ImageAsset(name: "tabBackground")
-      static let tickets = ImageAsset(name: "tickets")
     }
     enum MainView {
       static let isClose = ImageAsset(name: "isClose")
       static let isOpen = ImageAsset(name: "isOpen")
     }
+    static let orangeStars = ImageAsset(name: "orangeStars")
     static let play = ImageAsset(name: "play")
+    static let plus = ImageAsset(name: "plus")
+    enum Profile {
+      static let userPlaceholder = ImageAsset(name: "UserPlaceholder")
+      static let friendsProfile = ImageAsset(name: "friendsProfile")
+      static let rewardsProfile = ImageAsset(name: "rewardsProfile")
+      static let settingsOrange = ImageAsset(name: "settingsOrange")
+      static let watchProfile = ImageAsset(name: "watchProfile")
+    }
     static let selectStar = ImageAsset(name: "selectStar")
     static let sharing = ImageAsset(name: "sharing")
+    static let sharingImage = ImageAsset(name: "sharingImage")
+    static let sharingOrange = ImageAsset(name: "sharingOrange")
     enum Slides {
       static let slide1Image = ImageAsset(name: "slide1-image")
       static let slide2Image = ImageAsset(name: "slide2-image")
@@ -71,19 +112,14 @@ enum Asset {
       static let slide3Image4 = ImageAsset(name: "slide3-image4")
       static let slide3Image5 = ImageAsset(name: "slide3-image5")
     }
+    static let start = ImageAsset(name: "start")
+    static let timeOrange = ImageAsset(name: "timeOrange")
     static let unselectStar = ImageAsset(name: "unselectStar")
+    static let vader = ImageAsset(name: "vader")
   }
-  enum Kinobase {
-    static let check = ImageAsset(name: "check")
-    static let check28 = ImageAsset(name: "check28")
-    static let checkMini = ImageAsset(name: "checkMini")
-    static let forward = ImageAsset(name: "forward")
-    static let remove = ImageAsset(name: "remove")
-    static let remove28 = ImageAsset(name: "remove28")
-    static let settings = ImageAsset(name: "settings")
-    static let settingsUnselect = ImageAsset(name: "settingsUnselect")
-  }
+  static let dislikeSelect = ImageAsset(name: "dislikeSelect")
   enum NavBar {
+    static let back = ImageAsset(name: "back")
     static let navBarArrowBack = ImageAsset(name: "nav-bar-arrow-back")
     static let navBarList = ImageAsset(name: "nav-bar-list")
     static let navBarLogo = ImageAsset(name: "nav-bar-logo")
@@ -114,17 +150,49 @@ enum Asset {
   static let allColors: [ColorAsset] = [
   ]
   static let allImages: [ImageAsset] = [
+    Kinobase.check,
+    Kinobase.check28,
+    Kinobase.checkMini,
+    Kinobase.cicle,
+    Kinobase.close,
+    Kinobase.enter,
+    Kinobase.forward,
+    Kinobase.settings,
+    Kinobase.settingsUnselect,
+    background,
+    Cinema.backImage,
+    Cinema.blankSplash,
+    Cinema.chatButton,
     Cinema.chatIcon,
-    Cinema.MainTab.chat,
-    Cinema.MainTab.kinobase,
-    Cinema.MainTab.reward,
+    Cinema.dislikeSelect,
+    Cinema.dislikeUnselect,
+    Cinema.forwardImage,
+    Cinema.home,
+    Cinema.likeSelect,
+    Cinema.likeUnselect,
+    Cinema.MainTab.Active.chatA,
+    Cinema.MainTab.Active.kinobaseA,
+    Cinema.MainTab.Active.rewardA,
+    Cinema.MainTab.Active.ticketsA,
+    Cinema.MainTab.Passive.chat,
+    Cinema.MainTab.Passive.kinobase,
+    Cinema.MainTab.Passive.reward,
+    Cinema.MainTab.Passive.tickets,
     Cinema.MainTab.tabBackground,
-    Cinema.MainTab.tickets,
     Cinema.MainView.isClose,
     Cinema.MainView.isOpen,
+    Cinema.orangeStars,
     Cinema.play,
+    Cinema.plus,
+    Cinema.Profile.userPlaceholder,
+    Cinema.Profile.friendsProfile,
+    Cinema.Profile.rewardsProfile,
+    Cinema.Profile.settingsOrange,
+    Cinema.Profile.watchProfile,
     Cinema.selectStar,
     Cinema.sharing,
+    Cinema.sharingImage,
+    Cinema.sharingOrange,
     Cinema.Slides.slide1Image,
     Cinema.Slides.slide2Image,
     Cinema.Slides.slide2Play,
@@ -133,15 +201,12 @@ enum Asset {
     Cinema.Slides.slide3Image3,
     Cinema.Slides.slide3Image4,
     Cinema.Slides.slide3Image5,
+    Cinema.start,
+    Cinema.timeOrange,
     Cinema.unselectStar,
-    Kinobase.check,
-    Kinobase.check28,
-    Kinobase.checkMini,
-    Kinobase.forward,
-    Kinobase.remove,
-    Kinobase.remove28,
-    Kinobase.settings,
-    Kinobase.settingsUnselect,
+    Cinema.vader,
+    dislikeSelect,
+    NavBar.back,
     NavBar.navBarArrowBack,
     NavBar.navBarList,
     NavBar.navBarLogo,

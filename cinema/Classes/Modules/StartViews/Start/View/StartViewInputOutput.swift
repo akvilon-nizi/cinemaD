@@ -8,17 +8,17 @@ import Foundation
 protocol StartViewInput: class {
 
     func setupInitialState()
+    func showNetworkError(message: String)
+    func getError()
 }
 
 protocol StartViewOutput {
 
     func viewIsReady()
 
-    func authFromFb()
+    func authFromFb(_ authToken: String)
 
-    func authFromFbVk()
+    func authFromVk(_ authToken: String)
 
-    func auth()
-
-    func registration()
+    func getAuthCode(_ authCode: String)
 }

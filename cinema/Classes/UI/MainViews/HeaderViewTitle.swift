@@ -35,7 +35,7 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = .red
+        contentView.backgroundColor = .white
 
         leftView.backgroundColor = .cnmDadada
 
@@ -45,8 +45,8 @@ class HeaderViewTitle: UITableViewHeaderFooterView {
 
         centerView.addSubview(titleLabel.prepareForAutoLayout())
         titleLabel.pinEdgesToSuperviewEdges()
-//        titleLabel.trailingAnchor ~= centerView.trailingAnchor
-//        titleLabel.centerYAnchor ~= centerView.centerYAnchor
+
+        centerView.backgroundColor = .white
 
         addSubview(centerView.prepareForAutoLayout())
         centerView.centerXAnchor ~= centerXAnchor

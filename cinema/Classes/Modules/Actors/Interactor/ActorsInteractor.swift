@@ -4,14 +4,37 @@
 //
 
 import Foundation
+import RxMoya
+import RxSwift
 
 class ActorsInteractor {
 
     weak var output: ActorsInteractorOutput!
+
+    var provider: RxMoyaProvider<FoodleTarget>!
+
+    let disposeBag = DisposeBag()
 }
 
 // MARK: - ActorsInteractorInput
 
 extension ActorsInteractor: ActorsInteractorInput {
-
+    func getPersonInfo(id: String) {
+        provider.requestModel(.person(personID: id))
+            .subscribe { [unowned self] (response: Event<FullPerson>) in
+                switch response {
+                case let .next(model):
+                    self.output.getPersonInfo(person: model)
+                case let .error(error as ProviderError):
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
 }

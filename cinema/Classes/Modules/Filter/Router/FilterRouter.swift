@@ -16,4 +16,8 @@ extension FilterRouter: FilterRouterInput {
     func close() {
         appRouter.backTransition()
     }
+
+    func openStart() {
+        appRouter.dropAll(isError: true)
+    }
 }

@@ -1,0 +1,191 @@
+//
+// Created by Danila Lyahomskiy on 05/12/2017.
+// Copyright (c) 2017 Heads and Hands. All rights reserved.
+//
+
+import UIKit
+
+class FriendsViewController: ParentViewController {
+
+    var output: FriendsViewOutput!
+
+    let controllers: [UIViewController]
+
+    let pageViewController = UIPageViewController(
+        transitionStyle: .pageCurl,
+        navigationOrientation: .horizontal,
+        options: nil
+    )
+
+    var container = UIView()
+
+    let listFriendsVC = ListFriendsVC()
+
+    let addFriendsVC = AddFriendsVC()
+
+    let newsFriendsVC = NewsFriendVC()
+
+    let meetingVC = MeetingVC()
+
+    // MARK: - Life cycle
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
+
+    init() {
+        controllers = [listFriendsVC, addFriendsVC, newsFriendsVC, meetingVC]
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        output.viewIsReady()
+
+        listFriendsVC.delegate = self
+
+        view.backgroundColor = .white
+
+        addFriendsVC.delegate = self
+        newsFriendsVC.delegate = self
+
+        let backButton = UIButton()
+        backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
+        backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        var frame = backButton.frame
+        frame.size = CGSize(width: 30, height: 100)
+        backButton.frame = frame
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+
+        let homeButton = UIButton()
+        homeButton.setImage(Asset.Cinema.home.image, for: .normal)
+        homeButton.addTarget(self, action: #selector(didTapHomeButton), for: .touchUpInside)
+        homeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        frame = homeButton.frame
+        frame.origin.x -= 9
+        frame.size = CGSize(width: 30, height: 100)
+        homeButton.frame = frame
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: homeButton)
+
+        titleViewLabel.text = L10n.friendsTitleText
+        titleViewLabel.font = UIFont.cnmFutura(size: 20)
+
+        setPageVC()
+
+    }
+
+    private func setPageVC() {
+        pageViewController.setViewControllers(
+            [controllers[0]],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
+
+        let navTabBar = NavTabBar(titles: ["Друзья", "Рекомендации", "Новости", "Встречи"])
+        navTabBar.delegate = self
+
+        view.addSubview(navTabBar.prepareForAutoLayout())
+        navTabBar.leadingAnchor ~= view.leadingAnchor
+        navTabBar.trailingAnchor ~= view.trailingAnchor
+        navTabBar.topAnchor ~= view.topAnchor + 40
+        navTabBar.heightAnchor ~= 57
+
+        container = pageViewController.view
+
+        view.addSubview(container.prepareForAutoLayout())
+        container.topAnchor ~= navTabBar.bottomAnchor + 10
+        container.leadingAnchor ~= view.leadingAnchor
+        container.trailingAnchor ~= view.trailingAnchor
+        container.bottomAnchor ~= view.bottomAnchor
+
+    }
+
+    // MARK: - Actions
+    func didTapLeftButton() {
+        output?.backTap()
+    }
+
+    func didTapHomeButton() {
+        output?.homeTap()
+    }
+}
+
+// MARK: - FriendsViewInput
+
+extension FriendsViewController: FriendsViewInput {
+    func getData(data: FriendsData) {
+        listFriendsVC.setFriends(data.friends)
+        var recomendaions: [Creator] = []
+        for creator in data.recomendaions {
+            if data.friends.filter({$0.id == creator.id}).isEmpty {
+                recomendaions.append(creator)
+            }
+        }
+        addFriendsVC.setFriends(recomendaions)
+        newsFriendsVC.setNews(data.newsView)
+    }
+
+    func addedFriend() {
+        addFriendsVC.seccessAdded()
+    }
+
+    func showNetworkError() {
+        showAlert(message: L10n.alertCinemaNetworkErrror)
+        activityVC.isHidden = true
+        activityVC.stopAnimating()
+    }
+
+    func setupInitialState() {
+
+    }
+}
+
+// MARK: - NavTabBarDelegate
+
+extension FriendsViewController: NavTabBarDelegate {
+    func tapElement(_ number: Int) {
+        pageViewController.setViewControllers(
+            [controllers[number]],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
+       // currentIndex = 1
+    }
+}
+
+// MARK: - AddFriendsVCDelegate
+
+extension FriendsViewController: AddFriendsVCDelegate {
+    func addFriend(id: String) {
+        output.addFriend(id: id)
+    }
+}
+
+// MARK: - NewsFriendVCDelegate
+
+extension FriendsViewController: NewsFriendVCDelegate {
+     func openFilmId(_ filmID: String, name: String) {
+        output.openFilmId(filmID, name: name)
+    }
+}
+
+// MARK: - NewsFriendVCDelegate
+
+extension FriendsViewController: FriendsSubVCDelegate {
+    func pullToRefresh() {
+        output?.refreshData()
+    }
+}

@@ -7,4 +7,8 @@ import Foundation
 
 protocol FilmRouterInput: BaseRouterInput {
     func close()
+    func home()
+    func openStart()
+    func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm])
+    func rewiewsFrom(_ film: FullFilm)
 }

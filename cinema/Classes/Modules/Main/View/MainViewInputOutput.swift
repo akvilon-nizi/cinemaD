@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MainViewInput: class {
 
@@ -12,6 +13,8 @@ protocol MainViewInput: class {
     func getError()
 
     func getData(_ mainData: MainData)
+
+    func getNews(_ mainData: MainData)
 }
 
 protocol MainViewOutput {
@@ -21,4 +24,20 @@ protocol MainViewOutput {
     func openFilm(videoID: String, name: String)
 
     func openKinobase()
+
+    func openRewards()
+
+    func openChats()
+
+    func openTickets()
+
+    func openProfile(mainView: MainTabView)
+
+    func setRootVC(_ rootVC: UINavigationController)
+
+    func changeFilter(_ filters: [String])
+
+    func tapNews(newsID: String)
+
+    func refresh()
 }

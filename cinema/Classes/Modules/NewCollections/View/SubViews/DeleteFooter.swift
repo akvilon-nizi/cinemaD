@@ -14,7 +14,10 @@ class DeleteFooter: UITableViewHeaderFooterView {
         fatalError("NSCoding not supported")
     }
 
-    let deleteButton = UIButton(type: .system).setTitleWithColor(title: "Удалить", color: UIColor(red: 202.0 / 255.0, green: 80.0 / 255.0, blue: 62.0 / 255.0, alpha: 1.0))
+    let deleteButton = UIButton(type: .system).setTitleWithColor(
+        title: "Удалить",
+        color: UIColor(red: 202.0 / 255.0, green: 80.0 / 255.0, blue: 62.0 / 255.0, alpha: 1.0)
+    )
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)

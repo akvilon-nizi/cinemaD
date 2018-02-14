@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AccountKitClientToken</key>
+	<string>5489ec4fdd6b224ecc6cd6220dbc3418</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>ru</string>
+	<string>ru_RU</string>
 	<key>CFBundleDisplayName</key>
 	<string>Cinema</string>
 	<key>CFBundleExecutable</key>
@@ -19,9 +21,28 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
+	<key>CFBundleSignature</key>
+	<string></string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1990282874579533</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>vk6258240</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>18</string>
+	<string>41</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -36,19 +57,45 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>1990282874579533</string>
+	<key>FacebookDisplayName</key>
+	<string>Cinemad</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
 		<string>comgooglemaps</string>
+		<string>fbauth2</string>
+		<string>fbapi</string>
+		<string>fbshareextension</string>
+		<string>fb-messenger-api</string>
+		<string>vk</string>
+		<string>vk-share</string>
+		<string>vkauthorize</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>vk.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>$(PRODUCT_NAME) use bluetooth</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) camera use</string>
-	<key>NSHumanReadableCopyright</key>
-	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>$(PRODUCT_NAME) location in use on</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -62,13 +109,11 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
+	<false/>
 </dict>
 </plist>

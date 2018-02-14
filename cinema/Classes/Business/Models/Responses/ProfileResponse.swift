@@ -10,7 +10,7 @@ import ObjectMapper
 
 // MARK: - ProfileResponse
 
-class ProfileResponse: ServerResponse {
+class ProfileResponse1: ServerResponse {
 
     let profile: Profile
 

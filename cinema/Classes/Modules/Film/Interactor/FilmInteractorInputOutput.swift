@@ -15,6 +15,7 @@ protocol FilmInteractorInput {
 
 protocol FilmInteractorOutput: class {
     func getError()
+    func tokenError()
     func getFilmInfo(_ filmInfo: FullFilm)
     func changeStatus()
     func getRate(_ rate: Double)

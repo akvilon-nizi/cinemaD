@@ -11,5 +11,6 @@ protocol FilmsInteractorInput {
 
 protocol FilmsInteractorOutput: class {
     func getError()
+    func tokenError()
     func getFilms(films: [Film])
 }

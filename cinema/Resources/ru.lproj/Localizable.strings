@@ -8,7 +8,9 @@
 
 // Alert
 
+"alert-title-internet-error" = "Проверьте интернет соединение";
 "alert-title-network-error" = "Сетевая ошибка";
+"alert-autorization-error" = "Ошибка авторизации";
 "alert-title-system-error" = "Системная ошибка";
 "alert-button-ok" = "ОК";
 "alert-button-cancel" = "Отменить";
@@ -42,7 +44,7 @@
 "start-title-text" = "CINEMAD";
 "start-facebook-text" = "Войти через Facebook";
 "start-vkontakte-text" = "Войти через Vkontakte";
-"start-registration-text" = "Регистрация";
+"start-registration-text" = "Регистрация по SMS";
 "start-have-auth-text" = "У вас уже есть аккаунт?";
 "start-button-auth-text" = "Войдите";
 
@@ -110,16 +112,19 @@
 "film-change-status-watch" = "Изменения сохранены";
 "film-set-status-rate" = "Рейтинг фильма:";
 "film-search-placeholder" = "Поиск";
-"film-watch-alert" = "Поставьте оценку, и фильм появится в Кинобазе!";
+"film-watch-alert" = "Фильм появился в Кинобазе!";
 
 //Film respons
-"film-response-watched" = "film append to the 'watched'";
-"film-response-watched-delete" = "film remove from the 'watched'";
-"film-response-will_watch" = "film append to the 'will_watch'";
-"film-response-will_watch-delete" = "film remove from the 'will_watch'";
+"film-response-watched" = "film append to the \"watched\"";
+"film-response-watched-delete" = "film remove from the \"watched\"";
+"film-response-will_watch" = "film append to the \"will_watch\"";
+"film-response-will_watch-delete" = "film remove from the \"will_watch\"";
 "film-response-put-collection" = "film append to this collection";
 "film-response-delete-collection" = "collection removed";
 "film-response-delete-film-collection" = "film removed from this collection";
+"film-response-did-not-like" = "film remove from the \"did_not_like\"";
+"film-response-liked" = "film append to the \"liked\"";
+"review-response-success" = "review deleted";
 
 //Kinobase
 "kinobase-title-text" = "Кинобаза";
@@ -143,4 +148,86 @@
 //CollectionsResponse
 "collections-update-message" = "collection updated";
 
+//Main
+"main-news-title" = "Новости";
+"main-news-new" = "Новинки";
+"main-news-message-actors" = "События о актерах";
+"main-news-drawing" = "Розыгрыши";
+"main-news-free" = "Бесплатные сеансы";
 
+//Filters
+"filters-news-new" = "novelties";
+"filters-news-message-actors" = "events_about_the_actors";
+"filters-news-drawing" = "contest";
+"filters-news-free" = "free_cinema_session";
+
+//News
+"news-title-text" = "Новость";
+"news-message-placeholder" = "Написать комментарий";
+
+//Rewards
+"rewards-title-text" = "Награды";
+"rewards-reviews-title" = "За просмотры";
+"rewards-location-title" = "По геолокации";
+
+//Profile
+"profile-title-text" = "Профиль";
+"profile-name-placeholder" = "Аноним";
+"profile-editing-profile" = "Редактировать";
+"profile-watch-text" = "Смотрел";
+"profile-rewards-text" = "Награды";
+"profile-friend-text" = "Друзья";
+"profile-did-watch" = "Просмотренные";
+
+//EditingProfile
+"editingProfile-title-text" = "Редактирование";
+"editingProfile-change-photo" = "Сменить фото профиля";
+"editingProfile-change-name" = "Ваше имя";
+"editingProfile-old-password" = "Старый пароль";
+"editingProfile-new-password" = "Новый пароль";
+"editingProfile-save-button" = "Сохранить";
+
+//Settings
+"settings-title-text" = "Настройки";
+"settings-location-place" = "Определить место положение";
+"settings-night-theme" = "Ночная тема";
+"settings-push-message" = "Push - уведомления";
+"settings-rate-app" = "Оценить приложение";
+"settings-tell-friends" = "Рассказать друзьям";
+"settings-exit-button" = "Выйти";
+
+//Actor(Person)
+"person-was-born" = "Родился(-ась):";
+"person-adwards-text" = "Награды и премии";
+"person-films-text" = "Фильмография";
+"persons-actors-producers" = "Актеры и режиссеры:";
+"persons-years-text" = " г.";
+
+//Reviews
+"reviews-title-text" = "Отзывы";
+"reviews-like-text" = "Понравилось";
+"reviews-dislike-text" = "Не понравилось";
+
+//Friends
+"friends-title-text" = "Друзья";
+"friends-list-title" = "Список";
+"friends-recomendation-title" = "Рекомендации";
+"friends-news-title" = "Новости";
+"friends-will-see" = "Будет смотреть";
+"friends-search-title" = "Поиск";
+"friends-add-button" = "Добавить";
+
+//AwardsResponse
+"awards-response-exclusive" = "awards_exclusive";
+"awards-response-geo" = "awards_geo";
+"awards-response-exclusive-ru" = "Экслюзивные награды";
+"awards-response-geo-ru" = "Геолокационные награды";
+
+//Tickets
+"chats-title-text" = "Чат";
+
+//Chats
+"tickets-title-text" = "Билеты";
+
+//StubsVIew
+"stubs-title-text" = "Данный функционал находится в разработке";

@@ -21,7 +21,42 @@ class MainInteractor {
 extension MainInteractor: MainInteractorInput {
 
     func getData() {
-        getTrailers()
+        getProfile()
+    }
+
+    func getProfile() {
+        provider.requestModel(.profile)
+            .subscribe { [unowned self] (response: Event<ProfileModel>) in
+                switch response {
+                case let .next(model):
+                    self.mainData.profile = model
+                    self.getTrailers()
+                case let .error(error as ProviderError):
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func postLocation(lat: Double, log: Double) {
+        provider.requestModel(.postAdwardsGeo(lat: lat, log: log))
+            .subscribe { [unowned self] (response: Event<GeoResponse>) in
+                switch response {
+                case let .next(model):
+                    print(model)
+                case let .error(error as ProviderError):
+                    print(error)
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
     }
 
     func getTrailers() {
@@ -30,7 +65,7 @@ extension MainInteractor: MainInteractorInput {
                 switch response {
                 case let .next(model):
                     self.mainData.trailers = model.trailers
-                    self.getNow() 
+                    self.getNow()
                 case let .error(error as ProviderError):
                     if error.status == 403 {
                         self.output.tokenError()
@@ -52,7 +87,11 @@ extension MainInteractor: MainInteractorInput {
                     self.mainData.now = model.now
                     self.getRecommendations()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -66,9 +105,53 @@ extension MainInteractor: MainInteractorInput {
                 switch response {
                 case let .next(model):
                     self.mainData.recomend = model.recommendations
+                    self.getNews()
+                case let .error(error as ProviderError):
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getNews() {
+        provider.requestModel(.news)
+            .subscribe { [unowned self] (response: Event<NewsResponse>) in
+                switch response {
+                case let .next(model):
+                    self.mainData.news = model.news
                     self.output.getData(mainData: self.mainData)
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getNewsWithFilters(filters: [String]) {
+        provider.requestModel(.newsFiltred(filters: filters))
+            .subscribe { [unowned self] (response: Event<NewsResponse>) in
+                switch response {
+                case let .next(model):
+                    self.mainData.news = model.news
+                    self.output.getNews(mainData: self.mainData)
+                case let .error(error as ProviderError):
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }

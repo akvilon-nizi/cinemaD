@@ -14,7 +14,7 @@ class WatchedResponse: ImmutableMappable {
     let genres: [String]
     let years: [Int]
 
-    private let watchedKey = "watched"
+    private let watchedKey = "films"
     private let genresKey = "genres"
     private let yearsKey = "years"
 

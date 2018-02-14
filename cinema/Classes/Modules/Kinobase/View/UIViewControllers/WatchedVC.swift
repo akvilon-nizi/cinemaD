@@ -24,7 +24,7 @@ class WatchedVC: ParentViewController {
 
     let refreshControl = UIRefreshControl()
 
-    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    let tableView = UITableView(frame: CGRect.zero, style: .plain)
 
     let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
@@ -37,15 +37,31 @@ class WatchedVC: ParentViewController {
     var collections: [Collection] = []
     var selectedIndex: Int?
 
-//    let sectionHeaers: [HeaderSectionStruct] = [
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        HeaderSectionStruct(view: UIView(), height: 0.0),
-//        ]
+    var heightLayout: NSLayoutConstraint?
+
+    var searchHeightLayout: NSLayoutConstraint?
+
+    var widthLayout: NSLayoutConstraint?
+
+    var currentHeight: CGFloat = 0
+
+    var fixHeight: CGFloat = 0
+
+    var heightFilmGroup: CGFloat = 0
+
+    var stackView = UIStackView()
+
+    let searchFilmGroup = FilmGroup()
+
+    var tableSizeHeight: CGFloat = 0
+
+    var query: String = ""
+
+    let headerSearchView = SearchCommonView()
+
+    var isRefresh = false
+
+//    var isFirstStart = true
 
     weak var delegate: WatchedFilmDelegate?
 
@@ -62,30 +78,94 @@ class WatchedVC: ParentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = .white
-        tableView.delegate = self
-        tableView.dataSource = self
-
         view.addSubview(tableView.prepareForAutoLayout())
         tableView.topAnchor ~= view.topAnchor
         tableView.leadingAnchor ~= view.leadingAnchor
         tableView.trailingAnchor ~= view.trailingAnchor
         tableView.bottomAnchor ~= view.bottomAnchor
-        tableView.separatorStyle = .none
-        tableView.allowsMultipleSelection = false
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
 
         tableView.register(CollectionCell.self, forCellReuseIdentifier: CollectionCell.reuseIdentifier)
+
+        tableView.backgroundColor = .white
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.separatorStyle = .none
+
+    }
+
+    func setHeaderView() {
+
+        let headerViewTitle = HeaderViewTitle()
+
+        let fullListFilms = FullListFilms()
+
+        let filmGroup = FilmGroup()
+
+        heightFilmGroup = windowWidth / 4 * 3 - 53.5
+
+        headerViewTitle.title = "Фильмы"
+        headerViewTitle.heightAnchor ~= 44
+
+        fullListFilms.delegate = self
+        fullListFilms.heightAnchor ~= 35
+
+        searchFilmGroup.delegate = self
+        searchHeightLayout = searchFilmGroup.heightAnchor.constraint(equalToConstant: 0)
+        searchHeightLayout?.isActive = true
+
+        filmGroup.delegate = self
+        filmGroup.heightAnchor ~= heightFilmGroup
+        filmGroup.films = films
+
+        headerSearchView.delegate = self
+        headerSearchView.heightAnchor ~= 48
+
+        let view = HeaderViewTitle()
+        view.title = "Коллекции"
+
+        var viewArray: [UIView] = []
+
+        if films.isEmpty {
+            currentHeight = 92 - 22
+            viewArray = [headerSearchView, searchFilmGroup, view]
+            view.heightAnchor ~= 44
+        } else {
+            view.heightAnchor ~= 30
+            currentHeight = windowWidth / 4 * 3 + 103.5 - 22
+            viewArray = [headerSearchView, searchFilmGroup, headerViewTitle, fullListFilms, filmGroup, view]
+        }
+
+        fixHeight = currentHeight
+
+        stackView = createStackView(.vertical, .fill, .fill, 0, with: viewArray)
+        widthLayout = stackView.widthAnchor.constraint(equalToConstant: UIWindow(frame: UIScreen.main.bounds).bounds.width)
+        widthLayout?.isActive = true
+
+        heightLayout = stackView.heightAnchor.constraint(equalToConstant: currentHeight)
+        heightLayout?.isActive = true
+        tableView.tableHeaderView = stackView
+        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
+
+        tableSizeHeight = tableView.contentSize.height
     }
 
     func setFilmsAndCol(_ films: [Film], col: [Collection]) {
-        self.films = films
+        if isRefresh {
+            searchFilmGroup.films = []
+            headerSearchView.removeQuery()
+           // headerSearchView.hiddenActivityVC()
+        }
+        self.films = films.reversed()
         self.collections = col
         colFilms = []
         selectedIndex = nil
+        setHeaderView()
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 
     func openCollection(_ collection: Collection) {
@@ -93,14 +173,17 @@ class WatchedVC: ParentViewController {
         colFilms = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
-                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+                var rate: Int = 0
+                if let rating = filmColW.rate {
+                    rate = Int(rating)
+                }
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Double(rate))
                 colFilms.append(film)
             }
         }
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 6...7), with: UITableViewRowAnimation.none)
+        tableView.reloadSections(IndexSet(integersIn: 0...2), with: UITableViewRowAnimation.none)
         tableView.endUpdates()
         UIView.setAnimationsEnabled(true)
 
@@ -110,16 +193,51 @@ class WatchedVC: ParentViewController {
     }
 
     func refresh() {
+        isRefresh = true
         delegate?.refresh()
     }
 
     func getSearch(_ films: [Film]) {
-        self.films = films
-        UIView.setAnimationsEnabled(false)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integersIn: 3...3), with: UITableViewRowAnimation.none)
-        tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+
+        headerSearchView.hiddenActivityVC()
+
+        if searchFilmGroup.films.isEmpty && !films.isEmpty {
+            searchHeightLayout?.constant = heightFilmGroup
+            UIView.animate(withDuration: 0) {
+                self.searchFilmGroup.layoutIfNeeded()
+            }
+            currentHeight += heightFilmGroup
+            setStackViewHeight()
+        }
+
+        if !searchFilmGroup.films.isEmpty && films.isEmpty {
+            searchHeightLayout?.constant = 0
+            UIView.animate(withDuration: 0) {
+                 self.searchFilmGroup.layoutIfNeeded()
+            }
+            currentHeight = fixHeight + 20
+            setStackViewHeight()
+        }
+
+        searchFilmGroup.films = films
+        searchFilmGroup.gotoStart()
+
+        if isRefresh {
+            isRefresh = false
+        } else {
+            tableView.reloadData()
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        }
+    }
+
+    func setStackViewHeight() {
+        heightLayout?.constant = currentHeight
+        //tableView.tableHeaderView = stackView
+        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: UIWindow(frame: UIScreen.main.bounds).bounds.width, height: currentHeight)
+       // UIView.animate(withDuration: 0) {
+//            tableView.layoutSubviews()
+//            tableView.layoutIfNeeded()
+      //  }
     }
 }
 
@@ -128,7 +246,7 @@ class WatchedVC: ParentViewController {
 extension WatchedVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 5 {
+        if section == 0 {
             return collections.count
         }
         return 0
@@ -136,52 +254,31 @@ extension WatchedVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if indexPath.section == 5 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CollectionCell.reuseIdentifier, for: indexPath)
             if let collCel = cell as? CollectionCell {
                 collCel.indexPath = indexPath.row
                 collCel.title = collections[indexPath.row].name
                 collCel.delegate = self
-//                if let index = selectedIndex, index == indexPath.row {
-//                    collCel.isSelected = true
-//                }
             }
             return cell
         }
 
         let cell = UITableViewCell()
 
-        //        cell.setData(products[indexPath.row])
-        //        cell.delegate = self
-
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let collectionCell = tableView.cellForRow(at: indexPath) as? CollectionCell, selectedIndex != indexPath.row {
+        if ((tableView.cellForRow(at: indexPath) as? CollectionCell) != nil), selectedIndex != indexPath.row {
             selectedIndex = indexPath.row
             delegate?.openCollectionFromId(id: collections[indexPath.row].id)
         }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 3
     }
-
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == UITableViewCellEditingStyle.delete {
-//            delegate?.removeCollectionFromId(id: collections[indexPath.row].id)
-//            collections.remove(at: indexPath.row)
-//            if selectedIndex == indexPath.row {
-//                colFilms = []
-//            }
-//            tableView.reloadData()
-//        }
-//    }
 
 }
 
@@ -190,7 +287,7 @@ extension WatchedVC: UITableViewDataSource {
 extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 5 {
+        if indexPath.section == 0 {
             return 44
         }
         return 0
@@ -198,108 +295,56 @@ extension WatchedVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
-        case 4:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Коллекции"
-            return view
-        case 5:
-            if films.isEmpty {
-                return nil
-            }
+        case 0:
             let view = MakeNewCollections()
             view.delegate = self
             return view
-        case 6:
+        case 1:
             if colFilms.isEmpty {
-                return nil
+                return UIView()
             }
             let view = HeaderViewTitle()
             view.title = colHeaderTitle
             view.withoutLine()
             return view
-        case 7:
-            if colFilms.isEmpty {
-                return nil
-            }
+        case 2:
+//            if colFilms.count < 1 {
+//                return UIView()
+//            }
             let view = FilmGroup()
             view.films = colFilms
             view.delegate = self
             return view
-        case 0:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderViewTitle()
-            view.title = "Фильмы"
-            return view
-        case 1:
-            if films.isEmpty {
-                return nil
-            }
-            let view = FullListFilms()
-            view.delegate = self
-            return view
-        case 3:
-            if films.isEmpty {
-                return nil
-            }
-            let view = FilmGroup()
-            view.films = films
-            view.delegate = self
-            return view
-        case 2:
-            if films.isEmpty {
-                return nil
-            }
-            let view = HeaderSearchView()
-            view.delegate = self
-            return view
         default:
-            return nil
+            return UIView()
         }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 4:
-            return 22
-        case 5:
-            return 55
-        case 6:
-            if colFilms.isEmpty {
-                return 0
-            }
-            return 22
-        case 7:
-            if colFilms.isEmpty {
-                return 0
-            }
-            return windowWidth / 4 * 3 - 80
         case 0:
-            if films.isEmpty {
-                return 0
-            }
-            return 22
+            return 55
         case 1:
-            return 22
+            if colFilms.isEmpty {
+                return 1
+            }
+            return 44
         case 2:
-            return 33
-        case 3:
-            if films.isEmpty {
-                return 0
+            if colFilms.count < 1 {
+                return 1
             }
             return windowWidth / 4 * 3 - 80
-
         default:
-            return 0
+            return 1
         }
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 }
 
@@ -320,6 +365,10 @@ extension WatchedVC: FilmGroupDelegate {
     func openFilmID(_ filmID: String, name: String) {
         delegate?.openFilmID(filmID, name: name)
     }
+
+    func changeStatusFilm(_ film: Film, isAdd: Bool) {
+
+    }
 }
 
 extension WatchedVC: CollectionCellDelegate {
@@ -328,13 +377,27 @@ extension WatchedVC: CollectionCellDelegate {
     }
 }
 
-// MARK: - FilmGroupDelegate
+// MARK: - SearchCommonDelegate
 
-extension WatchedVC: HeaderSearchDelegate {
+extension WatchedVC: SearchCommonDelegate {
     func changeText(_ text: String) {
-        delegate?.getQueryWatched(text)
+        if text.count >= 1 {
+            if text == query {
+                return
+            }
+            delegate?.getQueryWatched(text)
+        } else {
+            delegate?.getQueryWatched(text)
+            if searchFilmGroup.films.isEmpty && query.isEmpty {
+
+            } else {
+                getSearch([])
+            }
+        }
+        self.query = text
     }
+
     func tapFilter() {
-        delegate?.tapFilterWatched()
+//        delegate?.tapFilter()
     }
 }

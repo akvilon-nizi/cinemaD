@@ -22,6 +22,18 @@ class FilmPresenter {
 
 extension FilmPresenter: FilmViewOutput {
 
+    func tokenError() {
+        router.openStart()
+    }
+
+    func tapReviews(_ film: FullFilm) {
+        router.rewiewsFrom(film)
+    }
+
+    func homeTap() {
+        router.home()
+    }
+
     func viewIsReady() {
         log.verbose("Film is ready")
         interactor.getInfoFilm(videoID: videoID)
@@ -45,6 +57,10 @@ extension FilmPresenter: FilmViewOutput {
 
     func watchedTapDelete() {
         interactor.filmWatchedDelete(videoID: videoID)
+    }
+
+    func openPersonID(_ personID: String, name: String, role: String, persons: [PersonFromFilm]) {
+        router.openPersonID(personID, name: name, role: role, persons: persons)
     }
 }
 

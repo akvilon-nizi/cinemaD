@@ -102,7 +102,7 @@ class SlidesViewController: ParentViewController {
             let currentPage = slidePageControl.currentPage + 1
             slidePageControl.setSlide(currentPage)
             let x = CGFloat(currentPage) * scrollView.frame.size.width
-            scrollView.setContentOffset(CGPoint(x: x, y :0), animated: true)
+            scrollView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
         } else {
             output.nextActions()
         }

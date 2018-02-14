@@ -15,18 +15,13 @@ struct AlertControllerData {
 enum AppRouterDestination {
     case systemAlert(data: AlertControllerData)
     case slides
-    case start
-    case authCinema
-    case registration
-    case newPassword
-    case helpAuth
-    case confirmation(phone: String, uid: String, isRestore: Bool)
-    case phone(phone: String, uid: String)
+    case start(isError: Bool)
     case films(films: [Film])
-    case actors
+    case actors(id: String, name: String, role: String, persons: [PersonFromFilm])
     case film(videoID: String, name: String)
     case kinobase
     case main
+    case rewards
     case newCollections(output: NewCollectionsModuleOutput, id: String, name: String, watched: [Film])
     case filter(output: FilterModuleOutput,
         genres: [String],
@@ -34,6 +29,15 @@ enum AppRouterDestination {
         filterParameters: FilterParameters,
         isWatched: Bool
     )
+    case news(newsID: String)
+    case profile(mainView: MainTabView)
+    case editingProfile(nameUser: String, avatar: String, output: EditingProfileModuleOutput)
+    case settings
+    case reviews(film: FullFilm)
+    case friends
+    case chats
+    case tickets
+    case adminCollection(id: String, name: String)
 
     var isPresent: Bool {
         switch self {
@@ -46,6 +50,17 @@ enum AppRouterDestination {
         }
     }
 
+    var isTabView: Bool {
+        switch self {
+        case .kinobase:
+            return true
+            //        case let .authCode(_, needToDismiss):
+        //            return needToDismiss
+        default:
+            return false
+        }
+    }
+
     fileprivate func constructModule(in factory: DependencyContainer) -> UIViewController {
         do {
             switch self {
@@ -53,24 +68,12 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: Containers.ViewControllerType.systemAlert, arguments: data)
             case .slides:
                 return try factory.resolve(tag: SlidesConfigurator.tag)
-            case .start:
-                return try factory.resolve(tag: StartConfigurator.tag)
-            case .authCinema:
-                return try factory.resolve(tag: AuthCinemaConfigurator.tag)
-            case .registration:
-                return try factory.resolve(tag: RegistrationConfigurator.tag)
-            case .newPassword:
-                return try factory.resolve(tag: NewPasswordConfigurator.tag)
-            case .helpAuth:
-                return try factory.resolve(tag: HelpAuthConfigurator.tag)
-            case let .confirmation(phone, uid, isRestore):
-                return try factory.resolve(tag: ConfirmationConfigurator.tag, arguments: phone, uid, isRestore)
-            case let .phone(phone, uid):
-                return try factory.resolve(tag: PhoneConfigurator.tag, arguments: phone, uid)
+            case let .start(isError):
+                return try factory.resolve(tag: StartConfigurator.tag, arguments: isError)
             case let .films(films):
                 return try factory.resolve(tag: FilmsConfigurator.tag, arguments: films)
-            case .actors:
-                return try factory.resolve(tag: ActorsConfigurator.tag)
+            case let .actors(id, name, role, persons):
+                return try factory.resolve(tag: ActorsConfigurator.tag, arguments: id, name, role, persons)
             case let .film(videoID, name):
                 return try factory.resolve(tag: FilmConfigurator.tag, arguments: videoID, name)
             case let .newCollections(output, id, name, watched):
@@ -81,6 +84,26 @@ enum AppRouterDestination {
                 return try factory.resolve(tag: MainConfigurator.tag)
             case let .filter(output, genres, years, filterParameters, isWatched):
                 return try factory.resolve(tag: FilterConfigurator.tag, arguments: output, genres, years, filterParameters, isWatched)
+            case let .news(newsID):
+                return try factory.resolve(tag: NewsConfigurator.tag, arguments: newsID)
+            case .rewards:
+                return try factory.resolve(tag: RewardsConfigurator.tag)
+            case .friends:
+                return try factory.resolve(tag: FriendsConfigurator.tag)
+            case let .profile(mainView):
+                return try factory.resolve(tag: ProfileConfigurator.tag, arguments: mainView)
+            case let .editingProfile(nameUser, avatar, output):
+                return try factory.resolve(tag: EditingProfileConfigurator.tag, arguments: nameUser, avatar, output)
+            case .settings:
+                return try factory.resolve(tag: SettingsConfigurator.tag)
+            case .chats:
+                return try factory.resolve(tag: ChatsConfigurator.tag)
+            case .tickets:
+                return try factory.resolve(tag: TicketsConfigurator.tag)
+            case let .reviews(film):
+                return try factory.resolve(tag: ReviewsConfigurator.tag, arguments: film)
+            case let .adminCollection(id, name):
+                return try factory.resolve(tag: AdminCollectionConfigurator.tag, arguments: id, name)
             }
         } catch {
             fatalError("can't resolve module from factory")
@@ -99,11 +122,15 @@ protocol AppRouterProtocol {
 
     func openSideMenu()
 
-    func dropAll()
+    func backToMain()
+
+    func dropAll(isError: Bool)
 
     func mainView()
 
     func starting()
+
+    func setRootViewController(viewControler: UINavigationController)
 }
 
 protocol AppRouterFlowControllerDataSource: class {
@@ -161,6 +188,10 @@ class AppRouter: AppRouterProtocol {
             flowController.present(childFlowController: childFlowController, animated: true)
                 .subscribe()
                 .addDisposableTo(disposeBag)
+        } else if destination.isTabView {
+            flowController.performTransitionFromMain(to: viewController, animated: true)
+                .subscribe()
+                .addDisposableTo(disposeBag)
         } else {
             flowController.performTransition(to: viewController, animated: true)
                 .subscribe()
@@ -168,21 +199,34 @@ class AppRouter: AppRouterProtocol {
         }
     }
 
+    func backToMain() {
+        guard let flowController = dataSource?.flowControllerForTransition() else {
+            log.warning("can't receive flow controller for transition")
+            return
+        }
+        flowController.performTransitionToMain(animated: true)
+            .subscribe()
+            .addDisposableTo(disposeBag)
+    }
+
     func openSideMenu() {
     }
 
-    func dropAll() {
+    func dropAll(isError: Bool = true) {
 
-        let authViewController = moduleCreator.createModule(for: .authCinema)
+        let authViewController = moduleCreator.createModule(for: .start(isError: isError))
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
 
-        application.keyWindow?.rootViewController = flowController.rootViewController
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+            appDelegate.window?.rootViewController = flowController.rootViewController
+        }
     }
 
     func starting() {
 
-        let authViewController = moduleCreator.createModule(for: .start)
+        let authViewController = moduleCreator.createModule(for: .start(isError: false))
 
         let flowController = moduleCreator.createNavigationFlowController(viewController: authViewController)
 
@@ -224,6 +268,19 @@ class AppRouter: AppRouterProtocol {
         flowController.dismissChildFlowController(animated: true)
             .subscribe()
             .addDisposableTo(disposeBag)
+    }
+
+    func setRootViewController(viewControler: UINavigationController) {
+        guard let flowController = dataSource?.flowControllerForTransition() else {
+            log.warning("can't receive flow controller for transition")
+            return
+        }
+//        let navigationController = UINavigationController(rootViewController: viewControler)
+        flowController.rootViewController = viewControler
+
+        if let appDelegate = application.delegate as? AppDelegate {
+            appDelegate.rootFlowController = flowController
+        }
     }
 }
 

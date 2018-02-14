@@ -13,7 +13,7 @@ class KinobaseInteractor {
     var provider: RxMoyaProvider<FoodleTarget>!
     fileprivate var disposeBag = DisposeBag()
     var kbData = KinobaseData()
-
+    var query = ""
 }
 
 // MARK: - KinobaseInteractorInput
@@ -30,7 +30,11 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     self.kbData.yearsWatched = model.years
                     self.getWillWatch()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -47,7 +51,11 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                     self.kbData.yearsWillWatch = model.years
                     self.getCollections()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -61,9 +69,13 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 switch response {
                 case let .next(model):
                     self.kbData.collections = model.collections
-                    self.output.getData(self.kbData)
+                    self.getAdminCollections()
                 case let .error(error as ProviderError):
-                    self.output.getError()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
                 default:
                     break
                 }
@@ -78,6 +90,7 @@ extension KinobaseInteractor: KinobaseInteractorInput {
                 case let .next(model):
                     self.output.getCollection(model)
                 case let .error(error as ProviderError):
+                    print(error)
                     self.output.getError()
                 default:
                     break
@@ -91,9 +104,30 @@ extension KinobaseInteractor: KinobaseInteractorInput {
             .subscribe { [unowned self] (response: Event<FilmResponse>) in
                 switch response {
                 case let .next(model):
-                    print()
+                    print(model)
                 case let .error(error as ProviderError):
-                    print()
+                    if error.status == 403 {
+                        self.output.tokenError()
+                    } else {
+                        self.output.getError()
+                    }
+                default:
+                    break
+                }
+            }
+            .addDisposableTo(disposeBag)
+    }
+
+    func getAdminCollections() {
+        provider.requestModel(.getAdminCollections)
+            .subscribe { [unowned self] (response: Event<GetColResponse>) in
+                switch response {
+                case let .next(model):
+                    self.kbData.adminCollections = model.collections
+                    self.output.getData(self.kbData)
+                case let .error(error as ProviderError):
+                    print(error)
+                    self.output.getError()
                 default:
                     break
                 }
@@ -102,35 +136,35 @@ extension KinobaseInteractor: KinobaseInteractorInput {
     }
 
     func searchFilms(query: String, genres: [String], years: [Int], isWatched: Bool) {
-        if isWatched {
-            provider.requestModel(.filmWatchedPost(query: query, genres: genres, years: years))
-                .subscribe { [unowned self] (response: Event<WatchedResponse>) in
+         self.query = query
+//        provider.manager.session.getAllTasks { tasks in
+//            tasks.forEach { $0.cancel() }
+//            self.disposeBag = DisposeBag()
+//        }
+        if query.count >= 1 {
+            provider.requestModel(.globalSearch(query: query))
+                .subscribe { [unowned self] (response: Event<AllFilms>) in
                     switch response {
                     case let .next(model):
-                        self.kbData.watched = model.watched
-                        self.output.getSearch(self.kbData, isWatched: true)
+                        if self.query == query {
+                            self.kbData.filmsSearch = model.films
+                            self.output.getSearch(self.kbData, isWatched: isWatched)
+                        }
                     case let .error(error as ProviderError):
-                        self.output.getError()
+                        if error.status == 403 {
+                            self.output.tokenError()
+                        } else if error.status == 504 {
+                            self.searchFilms(query: query, genres: genres, years: years, isWatched: isWatched)
+                        } else {
+                            self.output.getError()
+                        }
                     default:
                         break
                     }
                 }
                 .addDisposableTo(disposeBag)
         } else {
-            provider.requestModel(.filmWillWatchPost(query: query, genres: genres, years: years))
-                .subscribe { [unowned self] (response: Event<WillWatchResponse>) in
-                    switch response {
-                    case let .next(model):
-                        self.kbData.willWatched = model.willWatch
-                        self.output.getSearch(self.kbData, isWatched: false)
-                    case let .error(error as ProviderError):
-                        self.output.getError()
-                    default:
-                        break
-                    }
-                }
-                .addDisposableTo(disposeBag)
+            disposeBag = DisposeBag()
         }
-
     }
 }

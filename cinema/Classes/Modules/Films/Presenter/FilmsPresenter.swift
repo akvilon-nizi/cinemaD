@@ -17,6 +17,9 @@ class FilmsPresenter {
 // MARK: - FilmsViewOutput
 
 extension FilmsPresenter: FilmsViewOutput {
+    func homeButtonTap() {
+        router.home()
+    }
 
     func viewIsReady() {
         log.verbose("Films is ready")
@@ -35,10 +38,13 @@ extension FilmsPresenter: FilmsViewOutput {
 // MARK: - FilmsInteractorOutput
 
 extension FilmsPresenter: FilmsInteractorOutput {
+    func tokenError() {
+        router.openStart()
+    }
+
     func getError() {
 
     }
     func getFilms(films: [Film]) {
-//        view.setupInitialState(films)
     }
 }

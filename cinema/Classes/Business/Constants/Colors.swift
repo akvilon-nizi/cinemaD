@@ -78,6 +78,10 @@ extension UIColor {
         return UIColor(red: 83.0 / 255.0, green: 162.0 / 255.0, blue: 228.0 / 255.0, alpha: 1.0)
     }
 
+    class var cnmBlue: UIColor {
+        return UIColor(red: 64.0 / 255.0, green: 104.0 / 255.0, blue: 152.0 / 255.0, alpha: 1.0)
+    }
+
     class var cnmMainOrange: UIColor {
         return UIColor(red: 250.0 / 255.0, green: 177.0 / 255.0, blue: 61.0 / 255.0, alpha: 1.0)
     }
@@ -112,5 +116,9 @@ extension UIColor {
 
     class var cnmAfafaf: UIColor {
         return UIColor(red: 175.0 / 255.0, green: 175.0 / 255.0, blue: 175.0 / 255.0, alpha: 1.0)
+    }
+
+    class func setColorGray(white: CGFloat, alpha: CGFloat = 1) -> UIColor {
+         return UIColor(white: white / 255.0, alpha: alpha)
     }
 }

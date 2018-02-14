@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: - WillWatch
+// MARK: - SearchView
 
 class SearchView: UIView {
 
@@ -57,15 +57,6 @@ class SearchView: UIView {
 
         titleField.leftView = leftView
         titleField.leftViewMode = .always
-
-        let rightButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
-        rightButton.setImage(Asset.Search.type.image, for: .normal)
-        rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
-        let rightView = UIView()
-        rightView.frame = CGRect(x: 0, y: 0, width: 68, height: 20)
-        rightView.addSubview(rightButton)
-        titleField.rightView = rightView
-        titleField.rightViewMode = .always
 
         if let stackView = buttonsStack {
             let mainStack = createStackView(.vertical, .fill, .fill, 20.0, with: [titleField, stackView])

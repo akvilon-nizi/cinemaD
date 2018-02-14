@@ -16,6 +16,12 @@ class StartConfigurator {
 
     var authTokenManager: AuthTokenManagerProtocol!
 
+    let isError: Bool 
+
+    init(isError: Bool) {
+        self.isError = isError
+    }
+
     func configureModule() -> UIViewController {
 
         authTokenManager.removeApiToken()
@@ -23,11 +29,13 @@ class StartConfigurator {
         let router = StartRouter()
         router.appRouter = appRouter
 
-        let presenter = StartPresenter()
+        let presenter = StartPresenter(isError: isError)
         presenter.router = router
 
         let interactor = StartInteractor()
         interactor.output = presenter
+        interactor.provider = provider
+        interactor.authTokenManager = authTokenManager
 
         let viewController = StartViewController()
         viewController.output = presenter

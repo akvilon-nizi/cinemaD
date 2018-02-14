@@ -69,6 +69,16 @@ class KinobaseViewController: ParentViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
@@ -79,7 +89,7 @@ class KinobaseViewController: ParentViewController {
         let backButton = UIButton()
         backButton.setImage(Asset.NavBar.navBarArrowBack.image, for: .normal)
         backButton.addTarget(self, action: #selector(didTapLeftButton), for: .touchUpInside)
-        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         var frame = backButton.frame
         frame.size = CGSize(width: 30, height: 100)
         backButton.frame = frame
@@ -116,12 +126,9 @@ class KinobaseViewController: ParentViewController {
         buttonsStack.topAnchor ~= view.topAnchor + 40
 
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-//        pageViewController.dataSource = self
-//        pageViewController.delegate = self
 
         container = pageViewController.view
-//        container = SearchView()
-//        container.setInfo(placeholder: "assa", titles: ["assa", "assa1", "asdadsa"])
+
         view.addSubview(container.prepareForAutoLayout())
         container.topAnchor ~= buttonsStack.bottomAnchor + 10
         container.leadingAnchor ~= view.leadingAnchor
@@ -222,16 +229,15 @@ extension KinobaseViewController: KinobaseViewInput {
             let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
             willWatch.append(film)
         }
-        willWatchVC.setFilms(willWatch)
+        willWatchVC.setFilms(willWatch, collections: kbData.adminCollections)
 
         watched = []
 
         for filmColW in kbData.watched {
             let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
-            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+            let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Double(rate))
             watched.append(film)
         }
-        watchedVC.refreshControl.endRefreshing()
         watchedVC.setFilmsAndCol(watched, col: kbData.collections)
 
         activityVC.isHidden = true
@@ -253,20 +259,20 @@ extension KinobaseViewController: KinobaseViewInput {
         activityVC.stopAnimating()
         self.kbData = kbData
         if isWatched {
-            watched = []
-            for filmColW in kbData.watched {
-                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
-                watched.append(film)
-            }
-            watchedVC.getSearch(watched)
+//            watched = []
+//            for filmColW in kbData.watched {
+//                let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
+//                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+//                watched.append(film)
+//            }
+            watchedVC.getSearch(kbData.filmsSearch)
         } else {
-            var willWatch: [Film] = []
-            for filmCol in kbData.willWatched {
-                let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
-                willWatch.append(film)
-            }
-            willWatchVC.getSearch(willWatch)
+//            var willWatch: [Film] = []
+//            for filmCol in kbData.willWatched {
+//                let film = Film(id: filmCol.id, name: filmCol.name, imageUrl: filmCol.imageUrl)
+//                willWatch.append(film)
+//            }
+            willWatchVC.getSearch(kbData.filmsSearch)
         }
     }
 
@@ -286,6 +292,16 @@ extension KinobaseViewController: WillWatchVCDelegate {
     }
     func tapFilter() {
         output?.tapFilter(isWatched: false, genres: kbData.genresWillWatch, years: kbData.yearsWillWatch)
+    }
+
+    func openCollection(id: String, name: String) {
+        output?.openAdminCollection(id: id, name: name)
+    }
+
+    func refreshes() {
+        activityVC.isHidden = false
+        activityVC.startAnimating()
+        output?.refresh()
     }
 }
 

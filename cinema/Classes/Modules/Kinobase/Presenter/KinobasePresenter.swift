@@ -26,6 +26,13 @@ class KinobasePresenter {
 // MARK: - KinobaseViewOutput
 
 extension KinobasePresenter: KinobaseViewOutput {
+    func tokenError() {
+        router.openStart()
+    }
+
+    func openAdminCollection(id: String, name: String) {
+        router.openAdminCollection(id: id, name: name)
+    }
 
     func viewIsReady() {
         log.verbose("Kinobase is ready")
@@ -57,9 +64,6 @@ extension KinobasePresenter: KinobaseViewOutput {
     }
 
     func searchWithText(_ query: String, isWatched: Bool) {
-//        if query.isEmpty {
-//            return
-//        }
         var genres: [String] = []
         var years: [Int] = []
         if isWatched {
@@ -155,13 +159,13 @@ extension KinobasePresenter: FilterModuleOutput {
             if !genresInds.isEmpty {
                 filterParameters.willWatchGenresIndex = genresInds
                 for ind in genresInds {
-                    genres.append(kbData.genresWatched[ind])
+                    genres.append(kbData.genresWillWatch[ind])
                 }
             }
             if !yearsInds.isEmpty {
                 filterParameters.willWatchYears = yearsInds
                 for ind in yearsInds {
-                    years.append(kbData.yearsWatched[ind])
+                    years.append(kbData.yearsWillWatch[ind])
                 }
             }
         }

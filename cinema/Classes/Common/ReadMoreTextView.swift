@@ -22,6 +22,8 @@ public class ReadMoreTextView: UITextView {
         setupDefaults()
     }
 
+    var isFirst = true
+
     public convenience init(frame: CGRect) {
         self.init(frame: frame, textContainer: nil)
     }
@@ -237,7 +239,7 @@ public class ReadMoreTextView: UITextView {
     
     private func attributedStringWithDefaultAttributes(from text: String) -> NSAttributedString {
         let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.justified
+        style.alignment = NSTextAlignment.left
         return NSAttributedString(string: text, attributes: [
             NSFontAttributeName: UIFont.cnmFutura(size: 14),
             NSForegroundColorAttributeName: UIColor.cnmGreyLight,
@@ -260,11 +262,17 @@ public class ReadMoreTextView: UITextView {
 
         if let text = attributedReadMoreText {
             let range = rangeToReplaceWithReadMoreText()
-            guard range.location != NSNotFound else { return }
-
+            guard range.location != NSNotFound else {
+                if isFirst {
+                    isFirst = false
+                    invalidateIntrinsicContentSize()
+                    invokeOnSizeChangeIfNeeded()
+                }
+                return
+            }
             textStorage.replaceCharacters(in: range, with: text)
         }
-        
+
         invalidateIntrinsicContentSize()
         invokeOnSizeChangeIfNeeded()
 
@@ -285,7 +293,7 @@ public class ReadMoreTextView: UITextView {
             }
             textStorage.replaceCharacters(in: range, with: originalAttributedText)
         }
-        
+
         invalidateIntrinsicContentSize()
         invokeOnSizeChangeIfNeeded()
     }
@@ -367,6 +375,6 @@ public class ReadMoreTextView: UITextView {
 
 extension String {
     var length: Int {
-        return characters.count
+        return count
     }
 }

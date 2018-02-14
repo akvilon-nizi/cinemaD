@@ -43,10 +43,6 @@ class MakeNewCollections: UITableViewHeaderFooterView {
         separatorView.heightAnchor ~= 1
 
         contentView.backgroundColor = .white
-//        let separatorView = UIView()
-//        separatorView.heightAnchor ~= 1
-//        separatorView.topAnchor ~= button.bottomAnchor + 13
-        //ASSA
     }
 
     func tapButton() {

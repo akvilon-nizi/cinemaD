@@ -32,7 +32,7 @@ class FilmsCollectionCell: UICollectionViewCell {
     var isCheck: Bool = false {
         didSet {
             if isCheck {
-                actionsImage.image = isAdd ? Asset.Kinobase.check28.image : Asset.Kinobase.remove28.image
+                actionsImage.image = isAdd ? Asset.Kinobase.check28.image : Asset.Kinobase.close.image
             } else {
                 actionsImage.image = nil
             }
@@ -91,6 +91,10 @@ class FilmsCollectionCell: UICollectionViewCell {
     func setRating(_ rate: Int) {
         titleLabel.text = String(rate)
         rateView.isHidden = false
+    }
+
+    func delRating() {
+        rateView.isHidden = true
     }
 
     static var reuseIdentifier: String {

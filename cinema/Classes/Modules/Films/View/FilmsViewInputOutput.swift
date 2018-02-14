@@ -16,5 +16,7 @@ protocol FilmsViewOutput {
 
     func backButtonTap()
 
+    func homeButtonTap()
+
     func openFilmID(_ filmId: String, name: String)
 }

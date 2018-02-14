@@ -17,10 +17,12 @@ class NewCollectionsPresenter {
 // MARK: - NewCollectionsViewOutput
 
 extension NewCollectionsPresenter: NewCollectionsViewOutput {
+    func getQuery(_ text: String) {
+        interactor.getFilms(text)
+    }
 
     func viewIsReady() {
         log.verbose("NewCollections is ready")
-//        interactor.putNewColWithFilm(name: "Советские", filmsID: ["sd", "a"])
         if id.isEmpty {
             view.setCollections(collections: [])
         } else {
@@ -34,10 +36,6 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
 
     func addNewFilm(name: String, films: [Film]) {
         interactor.putNewColWithFilm(name: name, films: films)
-    }
-
-    func putDeleteFilms(filmsAdd: [Film], filmsDelete: [Film]) {
-        interactor.putDeleteFilms(idCol: id, filmsAdd: filmsAdd, filmsDelete: filmsDelete)
     }
 
     func patchCollections(name: String, films: [Film]) {
@@ -56,12 +54,20 @@ extension NewCollectionsPresenter: NewCollectionsViewOutput {
 // MARK: - NewCollectionsInteractorOutput
 
 extension NewCollectionsPresenter: NewCollectionsInteractorOutput {
+    func tokenError() {
+        router.openStart()
+    }
+
+    func getFilms(_ films: [Film]) {
+        view.getSearch(films)
+    }
+
     func getCollection(collection: Collection) {
         var colFilms: [Film] = []
         if let colFilmsArray = collection.films {
             for filmColW in colFilmsArray {
                 let rate = filmColW.rate != nil ? Int(filmColW.rate!) : 0
-                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: rate)
+                let film = Film(id: filmColW.id, name: filmColW.name, imageUrl: filmColW.imageUrl, rate: Double(rate))
                 colFilms.append(film)
             }
         }

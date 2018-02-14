@@ -25,6 +25,8 @@ class HeaderSearchView: UITableViewHeaderFooterView {
 
     fileprivate let windowWidth = UIWindow(frame: UIScreen.main.bounds).bounds.width - 60
 
+    fileprivate let rightButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
+
     weak var delegate: HeaderSearchDelegate?
 
     override init(reuseIdentifier: String?) {
@@ -46,28 +48,23 @@ class HeaderSearchView: UITableViewHeaderFooterView {
         titleField.leftView = leftView
         titleField.leftViewMode = .always
 
-        let rightButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
-        rightButton.setImage(Asset.Search.type.image, for: .normal)
-        rightButton.addTarget(self, action: #selector(typeButtonTap), for: .touchUpInside)
-        let rightView = UIView()
-        rightView.frame = CGRect(x: 0, y: 0, width: 68, height: 20)
-        rightView.addSubview(rightButton)
-        titleField.rightView = rightView
-        titleField.rightViewMode = .always
-
         titleField.rx.text.orEmpty
             .skip(1)
-            .throttle(3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
+            .throttle(1.0, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] query in
                 self?.getVideoID(query)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
 
         let separatorView = UIView()
         separatorView.backgroundColor = .cnmDadada
         contentView.addSubview(separatorView.prepareForAutoLayout())
-        separatorView.bottomAnchor ~= bottomAnchor
+        separatorView.bottomAnchor ~= bottomAnchor - 20
         separatorView.trailingAnchor ~= trailingAnchor - 24
         separatorView.leadingAnchor ~= leadingAnchor + 24
         separatorView.heightAnchor ~= 1
+    }
+
+    func hiddenRightButton() {
+        rightButton.isHidden = true
     }
 
     func typeButtonTap() {

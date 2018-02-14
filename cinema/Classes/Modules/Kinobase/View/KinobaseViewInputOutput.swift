@@ -38,4 +38,6 @@ protocol KinobaseViewOutput {
     func tapFilter(isWatched: Bool, genres: [String], years: [Int])
 
     func deleteCollections(id: String)
+
+    func openAdminCollection(id: String, name: String)
 }
