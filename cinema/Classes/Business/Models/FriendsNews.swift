@@ -15,10 +15,10 @@ class FriendsNews: Creator {
     let todayWatched: [Film]
     let todayWillWatch: [Film]
 
-    private let todayAwardsKey = "today_awards"
-    private let todayFriendsKey = "today_friends"
-    private let todayWatchedKey = "today_watched"
-    private let todayWillWatchKey = "today_will_watch"
+    private let todayAwardsKey = "two_weeks_awards"
+    private let todayFriendsKey = "two_weeks_friends"
+    private let todayWatchedKey = "two_weeks_watched"
+    private let todayWillWatchKey = "two_weeks_will_watch"
 
     required init(map: Map) throws {
         todayAwards = try map.value(todayAwardsKey)

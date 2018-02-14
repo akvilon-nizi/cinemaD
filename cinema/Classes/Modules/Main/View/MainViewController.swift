@@ -137,7 +137,7 @@ class MainViewController: ParentViewController {
         navController.view.frame = contentView.bounds
         childController.view.backgroundColor = .red
         contentView.addSubview(navController.view)
-        addChildViewController(navController)
+        //addChildViewController(navController)
         navController.didMove(toParentViewController: self)
         navController.navigationBar.isHidden = true
         let decorator = WhiteNavigationBarDecorator()
